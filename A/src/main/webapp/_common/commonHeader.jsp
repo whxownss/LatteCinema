@@ -77,7 +77,7 @@
             </ul>
           </li>
           
-          <li class="dropdown"><a href="#"><span>영화관</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href="../_cinema/cinema.jsp"><span>영화관</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li class="dropdown"><a href="#"><span>서울</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                 <ul>
