@@ -44,6 +44,15 @@
 	
 	<link rel="stylesheet" href="../_assets/css/overbg.css">
 	
+	
+	<!-- 	//_member 정기원-->
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./login10.css">
+	<!-- 	//_member 정기원-->
+    <link rel="stylesheet" href="../_assets/css/signup3.css">
+    <link rel="stylesheet" href="../_assets/css/signup4.css">
+	
 </head>
 
 <body>
