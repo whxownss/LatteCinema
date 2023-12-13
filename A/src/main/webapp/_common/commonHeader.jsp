@@ -166,7 +166,7 @@
           </li>
 
           
-          <li class="dropdown"><a href="../store/store.jsp"><span>스토어</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href="../_store/store.jsp"><span>스토어</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="store.jsp#store1">베스트</a></li>
               <li><a href="store.jsp#store2">관람권</a></li>
