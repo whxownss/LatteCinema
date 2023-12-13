@@ -31,6 +31,7 @@
   <link href="../assets/css/variables.css" rel="stylesheet">
   <link href="../assets/css/main.css" rel="stylesheet">
   
+
   <!-- =======================================================
   * Template Name: ZenBlog
   * Updated: Sep 18 2023 with Bootstrap v5.3.2
@@ -71,6 +72,10 @@
     
     
     
+	<!-- 나혜 cinema.css-->
+	 <link rel="stylesheet" href="../_assets/css/cinema.css">
+ 	<script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+	
 </head>
 
 <body>
