@@ -30,7 +30,9 @@
   <!-- Template Main CSS Files -->
   <link href="../assets/css/variables.css" rel="stylesheet">
   <link href="../assets/css/main.css" rel="stylesheet">
-
+  <!--cs_*.css추가 HJW  -->
+  <link href="../_assets/css/cs_center.css" rel="stylesheet">
+  <link href="../_assets/css/cs_member.css" rel="stylesheet">
   <!-- =======================================================
   * Template Name: ZenBlog
   * Updated: Sep 18 2023 with Bootstrap v5.3.2
