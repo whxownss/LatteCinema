@@ -26,10 +26,10 @@
 				    <div class="col-md-6 offset-md-3">
 				      <div class="bg-light">
 				        <ul class="d-flex flex-wrap justify-content-between list-unstyled">
-				          <li><a href="cs_center.jsp">공지사항</a></li>
+				          <li><a href="../_cs/cs_center.jsp">공지사항</a></li>
 				          <li><a href="#">자주찾는질문</a></li>
-				          <li><a href="cs_qna.jsp">1:1문의</a></li>
-				          <li><a href="cs_lost.jsp">분실물</a></li>
+				          <li><a href="../_cs/cs_qna.jsp">1:1문의</a></li>
+				          <li><a href="../_cs/cs_lost.jsp">분실물</a></li>
 				        </ul>
 				      </div>
 				    </div>
