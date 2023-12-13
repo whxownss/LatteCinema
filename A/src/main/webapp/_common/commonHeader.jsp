@@ -30,6 +30,7 @@
   <!-- Template Main CSS Files -->
   <link href="../assets/css/variables.css" rel="stylesheet">
   <link href="../assets/css/main.css" rel="stylesheet">
+  
 
   <!-- =======================================================
   * Template Name: ZenBlog
@@ -43,6 +44,37 @@
 	<link rel="stylesheet" href="../owlcarousel/owl.theme.default.min.css">	
 	
 	<link rel="stylesheet" href="../_assets/css/overbg.css">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--  개인 css  -->
+	
+	<!-- 하정우  -->
+  	<link href="../_assets/css/cs_center.css" rel="stylesheet">
+  	<link href="../_assets/css/cs_member.css" rel="stylesheet">
+  	
+  	
+	<!-- 정기원  -->
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./login10.css">
+    <link rel="stylesheet" href="../_assets/css/signup3.css">
+    <link rel="stylesheet" href="../_assets/css/signup4.css">
+    
+    
+    
+    
+    
+	<!-- 나혜 cinema.css-->
+	 <link rel="stylesheet" href="../_assets/css/cinema.css">
+ 	<script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
 	
 </head>
 
@@ -60,7 +92,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li class="dropdown"><a href="main.jsp"><span>예매</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href="../_a/main.jsp"><span>예매</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="search-result.html">예매하기</a></li>
               <li><a href="#">상영시간표</a></li>
@@ -68,12 +100,12 @@
             </ul>
           </li>
           
-          <li class="dropdown"><a href="movie_home.jsp"><span>영화</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href="../_a/movie_home.jsp"><span>영화</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="movie_home.jsp">홈</a></li>
-              <li><a href="movie_now.jsp">현재상영작</a></li>
-              <li><a href="movie_will.jsp">상영예정작</a></li>
-              <li><a href="movie_latte.jsp">옛날영화</a></li>
+              <li><a href="../_a/movie_home.jsp">홈</a></li>
+              <li><a href="../_a/movie_now.jsp">현재상영작</a></li>
+              <li><a href="../_a/movie_will.jsp">상영예정작</a></li>
+              <li><a href="../_a/movie_latte.jsp">옛날영화</a></li>
             </ul>
           </li>
           

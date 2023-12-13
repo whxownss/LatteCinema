@@ -1,0 +1,47 @@
+@charset "UTF-8";
+/* social_login start*/
+.social_login {float:right;width:240px;height:100%;box-sizing:border-box;}
+.social_login ul {padding:78px 0px 78px 57px}
+.social_login ul.kr {padding: 10px 0 10px 57px;}
+.social_login ul.ww,
+.social_login ul.vn {padding: 57px 0 57px 57px;}
+.social_login ul.th,
+.social_login ul.id {padding: 37px 0 25px 57px;}
+.social_login ul li {position:relative;margin-bottom:15px;}
+.social_login ul li.other_facebook {background-color:#3b589c;}
+.social_login ul li.other_facebook a img {width:8px;}
+.social_login ul li.other_kakaotalk {background-color:#ffc000;}
+.social_login ul li.other_kakaotalk a img {width:19px;}
+.social_login ul li.other_naver {background-color:#2db400;}
+.social_login ul li.other_naver a img {width:13px;}
+.social_login ul li.other_google {background-color:#dd4b39;}
+.social_login ul li.other_google a img {width:13px;}
+.social_login ul li.other_line {background-color:#28c72a;}
+.social_login ul li.other_line a img {width:18px;}
+.social_login ul li a {display:block;padding-left:17px;color:#fff;font-size:12px;line-height:40px;}
+.social_login ul li a .other_icon {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width:40px;
+	height:40px;
+	border-radius: 0 10px 10px 0;
+	text-align: center;
+	-webkit-transition: width .3s cubic-bezier(0,0,.2,1);
+	transition: width .3s cubic-bezier(0,0,.2,1);
+}
+.social_login ul li.other_facebook a .other_icon {background-color:#2d4984;}
+.social_login ul li.other_kakaotalk a .other_icon {background-color:#ffae00;}
+.social_login ul li.other_naver a .other_icon {background-color:#2ba901;}
+.social_login ul li.other_google a .other_icon {background-color:#c74130;}
+.social_login ul li.other_line a .other_icon {background-color:#21b523;}
+.social_login ul li a .other_icon img {vertical-align: middle;}
+.design_social {width:183px;height: 40px;border-radius:5px;}
+.design_social:hover .other_icon {
+	width: 100%;
+	border-radius: 10px;
+	-webkit-transition: width .3s cubic-bezier(0,0,.2,1);
+	transition: width .3s cubic-bezier(0,0,.2,1);
+}
+/*social_login end*/
