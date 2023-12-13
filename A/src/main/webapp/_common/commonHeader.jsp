@@ -60,7 +60,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li class="dropdown"><a href="main.jsp"><span>예매</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href="../_a/main.jsp"><span>예매</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="search-result.html">예매하기</a></li>
               <li><a href="#">상영시간표</a></li>
@@ -68,12 +68,12 @@
             </ul>
           </li>
           
-          <li class="dropdown"><a href="movie_home.jsp"><span>영화</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href="../_a/movie_home.jsp"><span>영화</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="movie_home.jsp">홈</a></li>
-              <li><a href="movie_now.jsp">현재상영작</a></li>
-              <li><a href="movie_will.jsp">상영예정작</a></li>
-              <li><a href="movie_latte.jsp">옛날영화</a></li>
+              <li><a href="../_a/movie_home.jsp">홈</a></li>
+              <li><a href="../_a/movie_now.jsp">현재상영작</a></li>
+              <li><a href="../_a/movie_will.jsp">상영예정작</a></li>
+              <li><a href="../_a/movie_latte.jsp">옛날영화</a></li>
             </ul>
           </li>
           
