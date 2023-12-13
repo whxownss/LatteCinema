@@ -187,7 +187,7 @@
       <div class="position-relative">
         <a href="#" class="mx-2 js-search-open"></a>	<!-- **의미없음. 오류 없애기 위한 태그일 뿐 -->
         <a href="../_member/login.jsp" class="mx-2">로그인</a>  				<!-- **로그인 세션 있으면 로그아웃으로 변경 -->
-        <a href="#" class="mx-2">회원가입</a> 				<!-- **로그인 세션 있으면 마이페이지로 변경 -->
+        <a href="../_member/signup3.jsp" class="mx-2">회원가입</a> 				<!-- **로그인 세션 있으면 마이페이지로 변경 -->
         
         <i class="bi bi-list mobile-nav-toggle"></i>
 
