@@ -30,9 +30,8 @@
   <!-- Template Main CSS Files -->
   <link href="../assets/css/variables.css" rel="stylesheet">
   <link href="../assets/css/main.css" rel="stylesheet">
-  <!--cs_*.css추가 HJW  -->
-  <link href="../_assets/css/cs_center.css" rel="stylesheet">
-  <link href="../_assets/css/cs_member.css" rel="stylesheet">
+  
+
   <!-- =======================================================
   * Template Name: ZenBlog
   * Updated: Sep 18 2023 with Bootstrap v5.3.2
@@ -45,6 +44,37 @@
 	<link rel="stylesheet" href="../owlcarousel/owl.theme.default.min.css">	
 	
 	<link rel="stylesheet" href="../_assets/css/overbg.css">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--  개인 css  -->
+	
+	<!-- 하정우  -->
+  	<link href="../_assets/css/cs_center.css" rel="stylesheet">
+<!--   	<link href="../_assets/css/cs_member.css" rel="stylesheet"> -->
+  	
+  	
+	<!-- 정기원  -->
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./login10.css">
+    <link rel="stylesheet" href="../_assets/css/signup3.css">
+    <link rel="stylesheet" href="../_assets/css/signup4.css">
+    
+    
+    
+    
+    
+	<!-- 나혜 cinema.css-->
+	 <link rel="stylesheet" href="../_assets/css/cinema.css">
+ 	<script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
 	
 </head>
 

@@ -79,7 +79,7 @@
 				  <div class="col-md-3">
 				    <div class="input-group mb-3">
 				      <input type="text" class="form-control" placeholder="검색어를 입력해주세요." aria-label="input-search" aria-describedby="button-addon2">
-				      <button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
+				      <button class="button-lost" type="button" id="button-addon2">검색</button>
 				    </div>
 				  </div>
 				</div>
