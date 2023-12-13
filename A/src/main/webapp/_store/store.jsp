@@ -23,13 +23,13 @@
 			<div class="container text-center">
 				<div class="row">
 					<div class="col">
-						<a href="#store1" class="#store1">베스트</a>
+						<a href="#store1" class="store01">베스트</a>
 					</div>
 					<div class="col">
-						<a href="#store2" class="#store2">관람권</a>
+						<a href="#store2" class="store02">관람권</a>
 					</div>
 					<div class="col">
-						<a href="#store3" class="#store3">스낵음료</a>
+						<a href="#store3" class="store03">스낵음료</a>
 					</div>
 				</div>
 			</div>
@@ -39,7 +39,7 @@
 	<!-- 베스트 -->
 
 	<section class="category-section">
-		<div class="container" id="#store1" data-aos="fade-up">
+		<div class="container" id="store1" data-aos="fade-up">
 			<div
 				class="section-header d-flex justify-content-between align-items-center mb-5">
 				<h2>베스트</h2>
@@ -102,7 +102,7 @@
 	<!-- 관람권 -->
 
 	<section class="category-section">
-		<div class="container" id="#store2" data-aos="fade-up">
+		<div class="container" id="store2" data-aos="fade-up">
 			<div
 				class="section-header d-flex justify-content-between align-items-center mb-5">
 				<h2>관람권</h2>
@@ -184,7 +184,7 @@
 	<!-- 스낵음료 -->
 
 	<section class="category-section">
-		<div class="container" id="#store3" data-aos="fade-up">
+		<div class="container" id="store3" data-aos="fade-up">
 			<div
 				class="section-header d-flex justify-content-between align-items-center mb-5">
 				<h2>스낵음료</h2>
