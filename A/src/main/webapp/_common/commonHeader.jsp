@@ -56,9 +56,6 @@
 	
 	<!--  개인 css  -->
 	
-	<!-- 하정우  -->
-  	<link href="../_assets/css/cs_center.css" rel="stylesheet">
-  	<link href="../_assets/css/cs_member.css" rel="stylesheet">
   	
   	
 	<!-- 정기원  -->

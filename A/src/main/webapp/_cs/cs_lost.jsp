@@ -11,7 +11,7 @@
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 					<h2>분실물 문의</h2>
 					<div>
-						<a href="#" class="more " style="font-size: 18px;">
+						<a href="cs_lost_write.jsp" class="more " style="font-size: 18px;">
 							분실물 문의하기
 						</a>
 					</div>

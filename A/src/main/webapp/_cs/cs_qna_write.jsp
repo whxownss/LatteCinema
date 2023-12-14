@@ -47,17 +47,15 @@
 			          <div class="form-group mb-3">
 			            <label for="agreement"></label>
 			            <div>
-				            <textarea class="form-control" id="agreement" style="overflow: auto; height: 200px;" placeholder="내용을 입력해주세요.">
-				            
-				            </textarea>
+				            <textarea class="form-control" id="agreement" style="overflow: auto; height: 200px;" placeholder="내용을 입력해주세요."></textarea>
 			            </div>
 			          </div>
-			          <div class="row d-flex">
+			          <div class="d-flex justify-content-around">
 						  <div class="form-group mb-3 mr-auto">
-						    <button type="submit" class="btn btn-primary">작성</button>
+						    <button type="submit" class="button-lost">작성</button>
 						  </div>
 						  <div class="form-group mb-3 ml-auto">
-						    <button type="submit" class="btn btn-primary">작성</button>
+						    <button type="reset" class="button-lost">취소</button>
 						  </div>
 					</div>
 
