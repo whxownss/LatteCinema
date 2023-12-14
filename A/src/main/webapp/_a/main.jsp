@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>
+	<link rel="stylesheet" href="../_assets/css/hover.css">
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 
@@ -19,41 +20,102 @@
 		
 	      <div class="container" data-aos="fade-up">
 			<div class="owl-carousel owl-theme">
-		        <div class="item">
+			
+		        <div class="item position-relative" id="wrap">
 		          <img src="../assets/img/post1.jpg" >
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
 		        </div>
-		        <div class="item">
-		          <img src="../assets/img/post2.jpg">
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post2.jpg" >
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
 		        </div>
-		        <div class="item">
-		          <img src="../assets/img/post3.jpg">
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post3.jpg" >
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
 		        </div>
-		        <div class="item">
-		          <img src="../assets/img/post4.jpg">
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post4.jpg" >
+					<div class="titleee">>
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
 		        </div>
-		        <div class="item">
-		          <img src="../assets/img/post5.jpg">
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post5.jpg" >
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
 		        </div>
-		        <div class="item">
-		          <img src="../assets/img/post6.jpg">
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post6.jpg" >
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
 		        </div>
-		        <div class="item">
-		          <img src="../assets/img/post7.jpg">
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post7.jpg" >
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
 		        </div>
-		        <div class="item">
-		          <img src="../assets/img/post8.jpg">
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post8.jpg" >
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
 		        </div>
-		        <div class="item">
-		          <img src="../assets/img/post9.jpg">
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post9.jpg" >
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
 		        </div>
-		        <div class="item">
-		          <img src="../assets/img/post10.jpg">
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post10.jpg" >
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
 		        </div>
-		        <div class="item">
-		          <img src="../assets/img/post11.jpg">
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post11.jpg" >
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
 		        </div>
-		        <div class="item">
-		          <img src="../assets/img/post12.jpg">
+		        
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post12.jpg" >
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
 		        </div>
 		     </div>
 	       </div>
@@ -72,26 +134,64 @@
         </div>
 
         <div class="row g-5">
+        
 	          <div class="col-lg-4">
 	            <div class="post-entry-1 lg">
-              <a href="single-post.html"><img src="../assets/img/post20.jpg" alt="" class="img-fluid" style="width: 100%;"></a>
-              <div class="post-meta"><span class="date">영화제목1</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '97</span></div>
-            </div>
-          </div>
-
+	            	<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post20.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">예매하기</a>
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
+<!-- 	              <img src="../assets/img/post20.jpg" alt="" class="img-fluid" style="width: 100%;"> -->
+	              <div class="post-meta"><span class="date">영화제목1</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '97</span></div>
+            	</div>
+          	  </div>
+          
           <div class="col-lg-4">
             <div class="post-entry-1 lg">
-              <a href="single-post.html"><img src="../assets/img/post21.jpg" alt="" class="img-fluid" style="width: 100%;"></a>
+              <div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post21.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">예매하기</a>
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        </div>
+<!--               <img src="../assets/img/post21.jpg" alt="" class="img-fluid" style="width: 100%;"> -->
               <div class="post-meta"><span class="date">영화제목2</span> <span class="mx-1">&bullet;</span> <span>Jan 15th '99</span></div>
             </div>
           </div>
           
           <div class="col-lg-4">
             <div class="post-entry-1 lg">
-              <a href="single-post.html"><img src="../assets/img/post22.jpg" alt="" class="img-fluid" style="width: 100%;"></a>
+            	<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post22.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">예매하기</a>
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        </div>
+            
+            
+<!--               <img src="../assets/img/post22.jpg" alt="" class="img-fluid" style="width: 100%;"> -->
               <div class="post-meta"><span class="date">영화제목3</span> <span class="mx-1">&bullet;</span> <span>Feb 7th '02</span></div>
             </div>
           </div>
+
+<!--           <div class="col-lg-4"> -->
+<!--             <div class="post-entry-1 lg"> -->
+<!--               <a href="single-post.html"><img src="../assets/img/post21.jpg" alt="" class="img-fluid" style="width: 100%;"></a> -->
+<!--               <div class="post-meta"><span class="date">영화제목2</span> <span class="mx-1">&bullet;</span> <span>Jan 15th '99</span></div> -->
+<!--             </div> -->
+<!--           </div> -->
+          
+<!--           <div class="col-lg-4"> -->
+<!--             <div class="post-entry-1 lg"> -->
+<!--               <a href="single-post.html"><img src="../assets/img/post22.jpg" alt="" class="img-fluid" style="width: 100%;"></a> -->
+<!--               <div class="post-meta"><span class="date">영화제목3</span> <span class="mx-1">&bullet;</span> <span>Feb 7th '02</span></div> -->
+<!--             </div> -->
+<!--           </div> -->
 
         </div> <!-- End .row -->
       </div>
@@ -134,7 +234,6 @@
     </section><!-- End Lifestyle Category Section -->
 
 	 
-	
   </main><!-- End #main -->
 
 
