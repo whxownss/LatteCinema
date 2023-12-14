@@ -14,6 +14,7 @@
 				alt="팝콘&amp;음료, 스낵에서 영화 티켓까지 한번에!">
 		</div>
 	</div>
+	<!-- 상단 이미지 -->
 
 	<!-- 메인	 -->
 
@@ -23,18 +24,19 @@
 			<div class="container text-center">
 				<div class="row">
 					<div class="col">
-						<a href="#store1" class="store01">베스트</a>
+						<a href="#store1" class="#store1">베스트</a>
 					</div>
 					<div class="col">
-						<a href="#store2" class="store02">관람권</a>
+						<a href="#store2" class="#store2">관람권</a>
 					</div>
 					<div class="col">
-						<a href="#store3" class="store03">스낵음료</a>
+						<a href="#store3" class="#store3">스낵음료</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	<!-- 메인	 -->
 
 	<!-- 베스트 -->
 
@@ -98,6 +100,7 @@
 						</div></a>
 				</div>
 	</section>
+	<!-- 베스트 -->
 
 	<!-- 관람권 -->
 
@@ -107,7 +110,7 @@
 				class="section-header d-flex justify-content-between align-items-center mb-5">
 				<h2>관람권</h2>
 			</div>
-			
+
 			<div class="row g-5">
 				<div class="col-lg-3">
 					<a href="#none" class="lc_itm"><div class="itm_img">
@@ -180,6 +183,7 @@
 			</div>
 		</div>
 	</section>
+	<!-- 관람권 -->
 
 	<!-- 스낵음료 -->
 
@@ -330,7 +334,7 @@
 							</div></a>
 					</div>
 				</div>
-				
+
 				<div class="row g-5">
 					<div class="col-lg-3">
 						<a href="#none" class="lc_itm"><div class="itm_img">
@@ -386,6 +390,7 @@
 
 				</div>
 	</section>
+	<!-- 스낵음료 -->
 
 </main>
 
