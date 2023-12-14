@@ -28,7 +28,7 @@
 				      <div class="bg-light">
 				        <ul class="d-flex flex-wrap justify-content-between list-unstyled">
 				          <li><a href="../_cs/cs_center.jsp">공지사항</a></li>
-				          <li><a href="#">자주찾는질문</a></li>
+				          <li><a href="../_cs/cs_exque.jsp">자주찾는질문</a></li>
 				          <li><a href="../_cs/cs_qna.jsp">1:1문의</a></li>
 				          <li><a href="../_cs/cs_lost.jsp">분실물</a></li>
 				        </ul>
@@ -53,7 +53,7 @@
 				    <tr>
 				      <th scope="row">1</th>
 				      <td>전체글</td>
-				      <td><a href="#">겨울왕국1 교환 안내</a></td>
+				      <td><a href="cs_center_content.jsp">임시 겨울왕국1 교환 안내</a></td>
 				      <td>23.12.01</td>
 				    </tr>
 				    <tr>
