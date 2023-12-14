@@ -67,15 +67,6 @@
     <link rel="stylesheet" href="./login10.css">
     <link rel="stylesheet" href="../_assets/css/signup3.css">
     <link rel="stylesheet" href="../_assets/css/signup4.css">
-    
-    
-    
-    
-    
-	<!-- 나혜 cinema.css-->
-	 <link rel="stylesheet" href="../_assets/css/cinema.css">
- 	<script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
-	
 </head>
 
 <body>
