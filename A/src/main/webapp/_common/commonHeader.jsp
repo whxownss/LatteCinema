@@ -44,29 +44,6 @@
 	<link rel="stylesheet" href="../owlcarousel/owl.theme.default.min.css">	
 	
 	<link rel="stylesheet" href="../_assets/css/overbg.css">
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<!--  개인 css  -->
-	
-	<!-- 하정우  -->
-  	<link href="../_assets/css/cs_center.css" rel="stylesheet">
-  	<link href="../_assets/css/cs_member.css" rel="stylesheet">
-  	
-  	
-	<!-- 정기원  -->
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./login10.css">
-    <link rel="stylesheet" href="../_assets/css/signup3.css">
-    <link rel="stylesheet" href="../_assets/css/signup4.css">
 </head>
 
 <body>
