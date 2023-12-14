@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@include file ="../_common/commonHeader.jsp" %>
+<%@include file ="../_common/commonHeaderStart.jsp" %>
+<%@include file ="../_common/commonHeaderEnd.jsp" %>ader.jsp" %>
 
 	<main id="main">
 	

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@include file ="../_common/commonHeader.jsp" %>
+<%@include file ="../_common/commonHeaderStart.jsp" %>
+<%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 <%-- 현재 JSP 파일에만 해당하는 스타일시트 링크 추가 --%>
 <script>
