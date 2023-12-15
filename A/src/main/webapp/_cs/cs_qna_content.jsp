@@ -10,9 +10,9 @@
 			<div class="container" data-aos="fade-up">
 				<!-- 이곳에 코드작성 -->
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
-					<h2>고객센터</h2>
+					<h2>1:1 문의</h2>
 					<div>
-						<a href="cs_center.jsp" class="more" style="font-size: 17px;">
+						<a href="../_cs/cs_qna.jsp" class="more" style="font-size: 17px;">
 							나가기
 						</a>
 					</div>
@@ -44,53 +44,55 @@
 				  <thead>
 				    <tr class="table-secondary">
 				      <th scope="col">#</th>
-				      <th scope="col">영화관</th>
+				      <th scope="col">카테고리</th>
 				      <th scope="col">제목</th>
-				      <th scope="col">등록일</th>
+				      <th scope="col">글쓴이</th>
+				      <th scope="col"></th>
 				    </tr>
 				  </thead>
 				  <tbody>
 				    <tr>
 				      <th scope="row">1</th>
-				      <td>전체</td>
-				      <td>겨울왕국1 교환 안내</td>
-				      <td>23.12.01</td>
+				      <td>기타</td>
+				      <td>비밀글입니다.</td>
+				      <td>차*****</td>
+				      <td></td>
 				    </tr>
 				    <tr>
-				    	<td colspan="4">
+				    	<td colspan="5">
 				    		<pre style="text-align: center;">
-안녕하세요, 씨네Q입니다.
-
-먼저 씨네Q를 이용해주시는 고객님들께 항상 깊은 감사 드립니다.
-
- 
-
-<겨울왕국 1> 포스터 재입고 완료되어 교환 진행중에 있습니다. 
-
-* 포스터 지참하여 방문시 교환 가능
-
-* 교환 가능 기한 : ~12/31(일)
-
- 
-
-가능 기한 초과시 교환이 어려울 수 있는 점 양해 부탁드립니다.
-
- 
-
-감사합니다.
-
-씨네Q 드림
+분명히 쿠폰을 적용했는데 적용 안된 금액으로 결제가 되었습니다.
+빨리 확인해주시고 환불해주세요. 급합니다!
 				    		</pre>
 				   		</td>
 				    </tr>
 				    <tr>
-				    	<td colspan="4">
-				    		<div class="d-flex justify-content-around">
-					            <button class="btn btn-dark" type="button" onclick="location.href='../_cs/cs_center_write.jsp'">수정</button>
-					            <button class="btn btn-outline-secondary" type="button">삭제</button>
-					        </div>
-				    	</td>
+				    	<td><input type="text" value="관리자" readonly>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="#">수정</a>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="cs_lost_content.jsp">삭제</a><p class="mb-0">2023-12-15 09:05</p></td>
+				    	<td colspan="4"></td>
 				    </tr>
+				    <tr>
+				    	<td colspan="5"><textarea class="form-control" readonly>
+*** 고객님, 안녕하세요. 라떼 시네마 입니다. 결제를 확인해보니 쿠폰 오류로 인해 발생한 일입니다.
+금일 내로 처리하겠습니다. 정말 죄송합니다. 라떼 시네마 : 010-1111-1111
+				    	</textarea></td>
+				    </tr>
+				    
+				    <tr>
+				    	<td>아이디<input type="text" value="" readonly></td>
+				    	<td>비밀번호<input type="password"></td>
+				    </tr>
+				    
+				    <tr>
+					    <td colspan="5">
+					        <div class="input-group">
+					            <textarea class="form-control"></textarea>
+					            <div class="input-group-append">
+					                <button class="btn btn-outline-secondary" type="button" style="height: 100%;">댓글 쓰기</button>
+					            </div>
+					        </div>
+					    </td>
+					</tr>
+				    
 				  </tbody>
 				</table>
 			</div>

@@ -12,7 +12,7 @@
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 					<h2>고객센터</h2>
 					<div>
-						<a href="cs_center.jsp" class="more" style="font-size: 17px;">
+						<a href="cs_center_content.jsp" class="more" style="font-size: 17px;">
 							나가기
 						</a>
 					</div>
@@ -40,6 +40,12 @@
 		
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
+				<select class="form-select" aria-label="Default select example">
+				  <option selected>영화관</option>
+				  <option value="1">전체</option>
+				  <option value="2">서면</option>
+				  <option value="3">강남</option>
+				</select>
 				<table class="table">
 				  <thead>
 				    <tr class="table-secondary">
@@ -52,13 +58,13 @@
 				  <tbody>
 				    <tr>
 				      <th scope="row">1</th>
-				      <td>전체</td>
-				      <td>겨울왕국1 교환 안내</td>
+				      <td><input type="text" value="전체" readonly></td>
+				      <td><input type="text" value="겨울왕국1 교환 안내"></td>
 				      <td>23.12.01</td>
 				    </tr>
 				    <tr>
 				    	<td colspan="4">
-				    		<pre style="text-align: center;">
+				    		<textarea class="form-control" style="text-align: center; box-sizing: border-box; resize: none; height: 500px;">
 안녕하세요, 씨네Q입니다.
 
 먼저 씨네Q를 이용해주시는 고객님들께 항상 깊은 감사 드립니다.
@@ -80,14 +86,13 @@
 감사합니다.
 
 씨네Q 드림
-				    		</pre>
+				    		</textarea>
 				   		</td>
 				    </tr>
 				    <tr>
 				    	<td colspan="4">
 				    		<div class="d-flex justify-content-around">
-					            <button class="btn btn-dark" type="button" onclick="location.href='../_cs/cs_center_write.jsp'">수정</button>
-					            <button class="btn btn-outline-secondary" type="button">삭제</button>
+					            <button class="btn btn-dark" type="button" onclick="location.href='../_cs/cs_center_content.jsp'">작성하기</button>
 					        </div>
 				    	</td>
 				    </tr>

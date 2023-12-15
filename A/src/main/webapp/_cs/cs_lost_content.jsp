@@ -10,9 +10,9 @@
 			<div class="container" data-aos="fade-up">
 				<!-- 이곳에 코드작성 -->
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
-					<h2>고객센터</h2>
+					<h2>분실물 문의</h2>
 					<div>
-						<a href="cs_center.jsp" class="more" style="font-size: 17px;">
+						<a href="../_cs/cs_lost.jsp" class="more" style="font-size: 17px;">
 							나가기
 						</a>
 					</div>
@@ -46,51 +46,53 @@
 				      <th scope="col">#</th>
 				      <th scope="col">영화관</th>
 				      <th scope="col">제목</th>
+				      <th scope="col">접수상태</th>
 				      <th scope="col">등록일</th>
 				    </tr>
 				  </thead>
 				  <tbody>
 				    <tr>
 				      <th scope="row">1</th>
-				      <td>전체</td>
-				      <td>겨울왕국1 교환 안내</td>
+				      <td>부산대</td>
+				      <td>책갈피 분실물 있나요?</td>
+				      <td>답변완료</td>
 				      <td>23.12.01</td>
 				    </tr>
 				    <tr>
-				    	<td colspan="4">
+				    	<td colspan="5">
 				    		<pre style="text-align: center;">
-안녕하세요, 씨네Q입니다.
-
-먼저 씨네Q를 이용해주시는 고객님들께 항상 깊은 감사 드립니다.
-
- 
-
-<겨울왕국 1> 포스터 재입고 완료되어 교환 진행중에 있습니다. 
-
-* 포스터 지참하여 방문시 교환 가능
-
-* 교환 가능 기한 : ~12/31(일)
-
- 
-
-가능 기한 초과시 교환이 어려울 수 있는 점 양해 부탁드립니다.
-
- 
-
-감사합니다.
-
-씨네Q 드림
+어제 1관에서 책갈피를 잃어 버렸어요. 저에게 중요한 책갈피 입니다.
+꼭 찾아주세요. 나비 모양이고 책갈피라 크기가 좀 작아요.
 				    		</pre>
 				   		</td>
 				    </tr>
 				    <tr>
-				    	<td colspan="4">
-				    		<div class="d-flex justify-content-around">
-					            <button class="btn btn-dark" type="button" onclick="location.href='../_cs/cs_center_write.jsp'">수정</button>
-					            <button class="btn btn-outline-secondary" type="button">삭제</button>
-					        </div>
-				    	</td>
+				    	<td><input type="text" value="관리자" readonly>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="#">수정</a>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="cs_lost_content.jsp">삭제</a><p class="mb-0">2023-12-15 09:05</p></td>
+				    	<td colspan="4"></td>
 				    </tr>
+				    <tr>
+				    	<td colspan="5"><textarea class="form-control" readonly>
+*** 고객님, 안녕하세요. 라떼 시네마 입니다. 고객님께서 찾으시던 책갈피를 찾아서 보관 중입니다.
+라떼 시네마에 오셔서 고객센터로 찾아와 주세요. 라떼 시네마 : 010-1111-1111
+				    	</textarea></td>
+				    </tr>
+				    
+				    <tr>
+				    	<td>아이디<input type="text" value="" readonly></td>
+				    	<td>비밀번호<input type="password"></td>
+				    </tr>
+				    
+				    <tr>
+					    <td colspan="5">
+					        <div class="input-group">
+					            <textarea class="form-control"></textarea>
+					            <div class="input-group-append">
+					                <button class="btn btn-outline-secondary" type="button" style="height: 100%;">댓글 쓰기</button>
+					            </div>
+					        </div>
+					    </td>
+					</tr>
+				    
 				  </tbody>
 				</table>
 			</div>

@@ -76,7 +76,7 @@
 				    <tr>
 				      <th scope="row">1</th>
 				      <td>기타</td>
-				      <td><a href="#"> 비밀글입니다. </a></td>
+				      <td><a href="cs_qna_content.jsp"> 비밀글입니다. </a></td>
 				      <td>차*****</td>
 				    </tr>
 				    <tr>
