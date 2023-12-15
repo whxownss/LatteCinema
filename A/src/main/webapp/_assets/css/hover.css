@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+#wrap {
+	margin:0 auto; 
+	text-align:center; 
+}
+.titlee, .titleee, .titleeee {
+/*	line-height:1; */
+	color:red; 
+	position:absolute; 
+	left:50%; 
+	transform:translateX(-50%); 
+/*	height:120px;*/
+	width: 100%;
+	
+/*	flex-direction : column;*/
+	
+}
+.moree {
+	display:block; 
+	font-size:18x; 
+	color:#fff; 
+	
+	border: 1px solid white;
+	border-radius: 2px 2px 2px 2px / 3px 3px 3px 3px;
+	
+	line-height:2em; 
+	width: 75%;
+	height: 25%;
+	opacity:0; 
+	
+	margin: 0 auto;
+}
+.moree:nth-child(2) {
+	 margin-top:10px; 
+}
+
+#wrap:hover .moree {
+	opacity:1;
+}
+#wrap:hover .titlee {
+	top:40%;
+}
+#wrap:hover .titleee {
+	top:36%	;
+}
+#wrap:hover .titleeee {
+	top:34%	;
+}
+#wrap:hover img {
+	filter: brightness(50%);
+}
+#wrap .moree:hover {
+	color:#fff; 
+}

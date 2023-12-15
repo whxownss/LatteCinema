@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@include file ="../_common/commonHeader.jsp" %>
+<%@include file ="../_common/commonHeaderStart.jsp" %>
+	<link rel="stylesheet" href="../_assets/css/hover.css">
+<%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
 			
@@ -20,8 +22,12 @@
 			<div class="row g-5">
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post1.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post1.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목1</span> <span class="mx-1">&bullet;</span>
 							<span>Jul 5th '97</span>
@@ -30,8 +36,12 @@
 				</div>
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post2.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post2.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목2</span> <span class="mx-1">&bullet;</span>
 							<span>Jan 15th '99</span>
@@ -40,8 +50,12 @@
 				</div>
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post3.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post3.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목3</span> <span class="mx-1">&bullet;</span>
 							<span>Feb 7th '02</span>
@@ -50,8 +64,12 @@
 				</div>
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post4.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post4.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목1</span> <span class="mx-1">&bullet;</span>
 							<span>Jul 5th '97</span>
@@ -60,8 +78,12 @@
 				</div>
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post5.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post5.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목1</span> <span class="mx-1">&bullet;</span>
 							<span>Jul 5th '97</span>
@@ -73,8 +95,12 @@
 			<div class="row g-5">
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post1.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post1.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목1</span> <span class="mx-1">&bullet;</span>
 							<span>Jul 5th '97</span>
@@ -83,8 +109,12 @@
 				</div>
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post2.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post2.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목2</span> <span class="mx-1">&bullet;</span>
 							<span>Jan 15th '99</span>
@@ -93,8 +123,12 @@
 				</div>
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post3.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post3.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목3</span> <span class="mx-1">&bullet;</span>
 							<span>Feb 7th '02</span>
@@ -103,8 +137,12 @@
 				</div>
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post4.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post4.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목1</span> <span class="mx-1">&bullet;</span>
 							<span>Jul 5th '97</span>
@@ -113,8 +151,12 @@
 				</div>
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post5.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post5.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목1</span> <span class="mx-1">&bullet;</span>
 							<span>Jul 5th '97</span>
@@ -126,8 +168,12 @@
 			<div class="row g-5">
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post1.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post1.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목1</span> <span class="mx-1">&bullet;</span>
 							<span>Jul 5th '97</span>
@@ -136,8 +182,12 @@
 				</div>
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post2.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post2.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목2</span> <span class="mx-1">&bullet;</span>
 							<span>Jan 15th '99</span>
@@ -146,8 +196,12 @@
 				</div>
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post3.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post3.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목3</span> <span class="mx-1">&bullet;</span>
 							<span>Feb 7th '02</span>
@@ -156,8 +210,12 @@
 				</div>
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post4.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post4.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목1</span> <span class="mx-1">&bullet;</span>
 							<span>Jul 5th '97</span>
@@ -166,8 +224,12 @@
 				</div>
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post5.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post5.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목1</span> <span class="mx-1">&bullet;</span>
 							<span>Jul 5th '97</span>
@@ -179,8 +241,12 @@
 			<div class="row g-5">
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post1.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post1.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목1</span> <span class="mx-1">&bullet;</span>
 							<span>Jul 5th '97</span>
@@ -189,8 +255,12 @@
 				</div>
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post2.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post2.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목2</span> <span class="mx-1">&bullet;</span>
 							<span>Jan 15th '99</span>
@@ -199,8 +269,12 @@
 				</div>
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
-						<a href="single-post.html"><img src="../assets/img/post3.jpg"
-							alt="" class="img-fluid" style="width: 100%;"></a>
+						<div class="item position-relative" id="wrap">
+			          <img src="../assets/img/post3.jpg" style="width: 100%;">
+						<div class="titlee">
+							<a href="" class="moree">상세정보</a>
+						</div>
+		        	</div>
 						<div class="post-meta">
 							<span class="date">영화제목3</span> <span class="mx-1">&bullet;</span>
 							<span>Feb 7th '02</span>
