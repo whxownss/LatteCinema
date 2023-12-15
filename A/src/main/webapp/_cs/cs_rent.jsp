@@ -12,8 +12,8 @@
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 					<h5>라떼시네마 단체관람/프라이빗 대관 안내</h5>
 					<div>
-						<a href="#" class="more">
-							"2023.12.11 기준"
+						<a href="cs_center.jsp" class="more" style="font-size: 16px;">
+							나가기
 						</a>
 					</div>
 				</div>
@@ -254,10 +254,14 @@ IP주소, 쿠키, MAC주소, 서비스 이용기록, 방문기록, 불량 이용
 								<span>개인정보 수집 및 이용에 동의합니다.</span>
 							</label>
 					  </div>
-			          <div class="form-group mb-3 d-flex justify-content-center">
-						  <button type="submit" class="btn btn-primary">작성</button>
-					  </div>
-			          	
+					  <div class="d-flex justify-content-around">
+				          <div class="form-group mb-3 d-flex justify-content-center">
+							  <button type="submit" class="btn btn-primary">작성</button>
+						  </div>
+						   <div class="form-group mb-3 d-flex justify-content-center">
+							  <button type="reset" class="btn btn-outline-secondary">취소</button>
+						  </div>
+			          </div>	
 			        </form>
 			      </div>
 				
