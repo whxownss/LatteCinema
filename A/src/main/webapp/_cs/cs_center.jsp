@@ -53,7 +53,7 @@
 				    <tr>
 				      <th scope="row">1</th>
 				      <td>전체글</td>
-				      <td><a href="#">겨울왕국1 교환 안내</a></td>
+				      <td><a href="cs_center_content.jsp">임시 겨울왕국1 교환 안내</a></td>
 				      <td>23.12.01</td>
 				    </tr>
 				    <tr>
