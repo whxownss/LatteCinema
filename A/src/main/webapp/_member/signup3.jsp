@@ -3,7 +3,7 @@
 
 <%@include file="../_common/commonHeaderStart.jsp"%>
 	
-	<link rel="stylesheet" href="../_assets/css/signup4copy.css">
+	<link rel="stylesheet" href="../_assets/css/signup4.css">
 	<style>
 		li{
    			list-style:none;
