@@ -1,13 +1,18 @@
 @charset "UTF-8";
-/* social_login start*/
-.social_login {float:right;width:240px;height:100%;box-sizing:border-box;}
-.social_login ul {padding:78px 0px 78px 57px}
+ social_login start
+.social_login { width:300px;height:100%;box-sizing:border-box; }
+ 
+.social_login ul {padding:50px 0px 78px 0px}
 .social_login ul.kr {padding: 10px 0 10px 57px;}
 .social_login ul.ww,
 .social_login ul.vn {padding: 57px 0 57px 57px;}
 .social_login ul.th,
 .social_login ul.id {padding: 37px 0 25px 57px;}
-.social_login ul li {position:relative;margin-bottom:15px;}
+.social_login ul li {
+	position:relative;
+	margin: 0px auto;
+	margin-bottom:15px;
+}
 .social_login ul li.other_facebook {background-color:#3b589c;}
 .social_login ul li.other_facebook a img {width:8px;}
 .social_login ul li.other_kakaotalk {background-color:#ffc000;}
@@ -24,7 +29,7 @@
 	position: absolute;
 	top: 0;
 	right: 0;
-	width:40px;
+	width:30px;
 	height:40px;
 	border-radius: 0 10px 10px 0;
 	text-align: center;
@@ -44,4 +49,3 @@
 	-webkit-transition: width .3s cubic-bezier(0,0,.2,1);
 	transition: width .3s cubic-bezier(0,0,.2,1);
 }
-/*social_login end*/
