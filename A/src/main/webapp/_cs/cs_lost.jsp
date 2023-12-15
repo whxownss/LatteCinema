@@ -100,7 +100,7 @@
 				    <tr>
 				      <th scope="row">1</th>
 				      <td>부산대</td>
-				      <td><a href="#">책갈피 분실물 있나요?</a></td>
+				      <td><a href="cs_lost_content.jsp">책갈피 분실물 있나요?</a></td>
 				      <td>답변완료</td>
 				      <td>23.12.01</td>
 				    </tr>
