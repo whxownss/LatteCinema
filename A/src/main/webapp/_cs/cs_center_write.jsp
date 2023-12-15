@@ -40,6 +40,12 @@
 		
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
+				<select class="form-select" aria-label="Default select example">
+				  <option selected>영화관</option>
+				  <option value="1">전체</option>
+				  <option value="2">서면</option>
+				  <option value="3">강남</option>
+				</select>
 				<table class="table">
 				  <thead>
 				    <tr class="table-secondary">
@@ -52,8 +58,8 @@
 				  <tbody>
 				    <tr>
 				      <th scope="row">1</th>
-				      <td>전체</td>
-				      <td>겨울왕국1 교환 안내</td>
+				      <td><input type="text" value="전체" readonly></td>
+				      <td><input type="text" value="겨울왕국1 교환 안내"></td>
 				      <td>23.12.01</td>
 				    </tr>
 				    <tr>
