@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
     <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+  <footer id="footer" class="footer mt-auto">
 
 <!--    <div class="footer-content">-->
 <!--      <div class="container">-->

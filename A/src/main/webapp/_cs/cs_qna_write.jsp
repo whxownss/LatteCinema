@@ -12,9 +12,9 @@
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 					<h5>1:1문의 글 작성</h5>
 					<div>
-<!-- 						<a href="#" class="more"> -->
-<!-- 							"2023.12.11 기준" -->
-<!-- 						</a> -->
+						<a href="../_cs/cs_qna.jsp" class="more" style="font-size: 17px;">
+							나가기
+						</a>
 					</div>
 				</div>
 			</div>
@@ -48,19 +48,17 @@
 			          <div class="form-group mb-3">
 			            <label for="agreement"></label>
 			            <div>
-				            <textarea class="form-control" id="agreement" style="overflow: auto; height: 200px;" placeholder="내용을 입력해주세요.">
-				            
-				            </textarea>
+				            <textarea class="form-control" id="agreement" style="overflow: auto; height: 200px;" placeholder="내용을 입력해주세요."></textarea>
 			            </div>
 			          </div>
-			          <div class="row d-flex">
-						  <div class="form-group mb-3 mr-auto">
-						    <button type="submit" class="btn btn-primary">작성</button>
+			          <div class="d-flex justify-content-around">
+				          <div class="form-group mb-3 d-flex justify-content-center">
+							  <button type="submit" class="btn btn-primary">작성</button>
 						  </div>
-						  <div class="form-group mb-3 ml-auto">
-						    <button type="submit" class="btn btn-primary">작성</button>
+						   <div class="form-group mb-3 d-flex justify-content-center">
+							  <button type="reset" class="btn btn-outline-secondary">취소</button>
 						  </div>
-					</div>
+			          </div>	
 
 			        </form>
 			      </div>

@@ -50,7 +50,7 @@
 						<a href="#" class="btn-top more">위로 이동</a>
 					</div>
 				</div>
-				<div class="content indent">
+				<div class="content" style="padding-left: 20px;">
 					멤버십 가입하기<br>
 					CINE Q(씨네큐) 웹/모바일 홈페이지 또는 앱에서 회원가입 후 멤버십 바코드를 발급받으세요.
 					<br>
@@ -87,7 +87,7 @@
 						<a href="#" class="btn-top more">위로 이동</a>
 					</div>
 				</div>
-				<div class="content indent">
+				<div class="content" style="padding-left: 20px;">
 					멤버십 포인트 적립<br>
 					적립되는 멤버십 포인트는 ‘구매 포인트’와 ‘이벤트 포인트’의 두 종류로 구분되며 유효기간이 적용됩니다.<br>
 					회원 약관에 따라 씨네Q 제휴 작은 영화관은 포인트 적립 사용이 불가합니다.
@@ -106,9 +106,9 @@
 						<a href="#" class="btn-top more">위로 이동</a>
 					</div>
 				</div>
-				<div class="content indent">
-					멤버십 포인트 사용<br>
+				<div class="content" style="padding-left: 20px;">
 					<ul>
+						<li>멤버십 포인트 사용</li>
 						<li>멤버십 포인트 상품 중 영화 교환권은 평일/주말 관계 없이 사용할 수 있습니다</li>
 						<li>멤버십 포인트 사용 시에는 보유 포인트 한도 내에서 상품 사용 및 쿠폰으로 교환 가능하며 수령한 상품에 대해서
 							교환 및 반품은 불가합니다.</li>
@@ -132,7 +132,7 @@
 						<a href="#" class="btn-top more">위로 이동</a>
 					</div>
 				</div>
-				<div class="content indent">
+				<div class="content" style="padding-left: 20px;">
 					멤버십 추가혜택<br>
 					회원이 되시면 포인트 적립 외에 다양한 멤버십 혜택을 받으실 수 있습니다.
 					<br>
@@ -173,7 +173,7 @@
 						<a href="#" class="btn-top more">위로 이동</a>
 					</div>
 				</div>
-				<div class="content indent">
+				<div class="content" style="padding-left: 20px;">
 					VIP 안내<br>
 					‘CINE MATE’란, VIP가 아니어도 영화 관람 편수에 따라, 3개월에 한번씩 혜택을 지급해 드리는 씨네Q 멤버십 등급입니다.
 					<br>

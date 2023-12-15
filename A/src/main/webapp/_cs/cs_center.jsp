@@ -28,7 +28,7 @@
 				      <div class="bg-light">
 				        <ul class="d-flex flex-wrap justify-content-between list-unstyled">
 				          <li><a href="../_cs/cs_center.jsp">공지사항</a></li>
-				          <li><a href="#">자주찾는질문</a></li>
+				          <li><a href="../_cs/cs_exque.jsp">자주찾는질문</a></li>
 				          <li><a href="../_cs/cs_qna.jsp">1:1문의</a></li>
 				          <li><a href="../_cs/cs_lost.jsp">분실물</a></li>
 				        </ul>
@@ -53,7 +53,7 @@
 				    <tr>
 				      <th scope="row">1</th>
 				      <td>전체글</td>
-				      <td><a href="#">겨울왕국1 교환 안내</a></td>
+				      <td><a href="cs_center_content.jsp">임시 겨울왕국1 교환 안내</a></td>
 				      <td>23.12.01</td>
 				    </tr>
 				    <tr>
@@ -119,20 +119,20 @@
 				<div class="pagination-container d-flex justify-content-center">
 				  <ul class="pagination">
 				    <li class="page-item disabled">
-				      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
+				      <a class="page-link text-secondary" href="#" tabindex="-1" aria-disabled="true">이전</a>
 				    </li>
-				    <li class="page-item active" aria-current="page">
-				      <a class="page-link" href="#">1</a>
-				    </li>
-				    <li class="page-item">
-				      <a class="page-link" href="#">2</a>
+				    <li class="page-item" aria-current="page">
+				      <a class="page-link text-secondary" href="#">1</a>
 				    </li>
 				    <li class="page-item">
-				      <a class="page-link" href="#">3</a>
+				      <a class="page-link text-secondary" href="#">2</a>
+				    </li>
+				    <li class="page-item">
+				      <a class="page-link text-secondary" href="#">3</a>
 				    </li>
 				    <!-- 나머지 페이지 번호 추가 -->
 				    <li class="page-item">
-				      <a class="page-link" href="#">다음</a>
+				      <a class="page-link text-secondary" href="#">다음</a>
 				    </li>
 				  </ul>
 				</div>
