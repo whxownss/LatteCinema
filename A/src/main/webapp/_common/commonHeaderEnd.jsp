@@ -3,7 +3,7 @@
 
     </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
   <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">
@@ -17,9 +17,9 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li class="dropdown"><a href="../_a/main.jsp"><span>예매</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href="../_reservation/res1.jsp"><span>예매</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="search-result.html">예매하기</a></li>
+              <li><a href="../_reservation/res1.jsp">예매하기</a></li>
               <li><a href="#">상영시간표</a></li>
               <li><a href="#">할인안내</a></li>
             </ul>
