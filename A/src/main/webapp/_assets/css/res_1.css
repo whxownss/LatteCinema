@@ -6,3 +6,9 @@
     border-color: #dc3545;
 }
 
+.hErrorP {
+	overflow: hidden;
+}
+.hErrorC {
+	height: 100%;
+}
