@@ -125,9 +125,9 @@
           
           <li class="dropdown"><a href="../_store/store.jsp"><span>스토어</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="store.jsp#store1">베스트</a></li>
-              <li><a href="store.jsp#store2">관람권</a></li>
-              <li><a href="store.jsp#store3">스낵음료</a></li>
+              <li><a href="../_store/store.jsp#store1">베스트</a></li>
+              <li><a href="../_store/store.jsp#store2">관람권</a></li>
+              <li><a href="../_store/store.jsp#store3">스낵음료</a></li>
             </ul>
           </li>
           
