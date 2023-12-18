@@ -84,7 +84,7 @@
                 <ul class="nav side-menu">
                   <li><a href="../../_cs/cs_center.jsp"><i class="fa fa-bullhorn"></i> 공지사항</a></li>
                   <li><a href="../../_cs/cs_exque.jsp"><i class="fa fa-question"></i> 자주찾는질문</a></li>
-                  <li><a href="../../_cs/cs_qna.jsp"><i class="fa fa-comments"></i> 1:1문의</a></li>
+                  <li><a href="adm_cs_qna.jsp"><i class="fa fa-comments"></i> 1:1문의</a></li>
                   <li><a href="../../_cs/cs_lost.jsp"><i class="fa fa-search"></i> 분실물 문의</a></li>                     
                 </ul>
               </div>

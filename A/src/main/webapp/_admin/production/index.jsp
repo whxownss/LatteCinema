@@ -147,7 +147,7 @@
 <!--                     </ul> -->
                   </li>   
                   
-                  <li><a href="../../_cs/cs_qna.jsp"><i class="fa fa-comments"></i> 1:1문의</a>
+                  <li><a href="adm_cs_qna.jsp"><i class="fa fa-comments"></i> 1:1문의</a>
 <!--                     <ul class="nav child_menu"> -->
 <!--                       <li><a href="e_commerce.html">E-commerce</a></li> -->
 <!--                       <li><a href="projects.html">Projects</a></li> -->

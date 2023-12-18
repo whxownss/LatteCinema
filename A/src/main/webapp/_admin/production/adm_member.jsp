@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>DataTables | Gentelella</title>
+    <title>Latte Cinema</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -36,7 +36,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+              <a href="index.html" class="site_title"><i class="fa fa-desktop"></i> <span>Latte Cinema!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -74,7 +74,7 @@
                 <ul class="nav side-menu">
                   <li><a href="../../_cs/cs_center.jsp"><i class="fa fa-bullhorn"></i> 공지사항</a></li>
                   <li><a href="../../_cs/cs_exque.jsp"><i class="fa fa-question"></i> 자주찾는질문</a></li>
-                  <li><a href="../../_cs/cs_qna.jsp"><i class="fa fa-comments"></i> 1:1문의</a></li>
+                  <li><a href="adm_cs_qna.jsp"><i class="fa fa-comments"></i> 1:1문의</a></li>
                   <li><a href="../../_cs/cs_lost.jsp"><i class="fa fa-search"></i> 분실물 문의</a></li>                     
                 </ul>
               </div>
@@ -164,8 +164,8 @@
                           <td>t.nixon@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -180,8 +180,8 @@
                           <td>g.winters@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -196,8 +196,8 @@
                           <td>a.cox@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -212,8 +212,8 @@
                           <td>c.kelly@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -228,8 +228,8 @@
                           <td>a.satou@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -244,8 +244,8 @@
                           <td>b.williamson@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -260,8 +260,8 @@
                           <td>h.chandler@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -276,8 +276,8 @@
                           <td>r.davidson@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -292,8 +292,8 @@
                           <td>c.hurst@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -308,8 +308,8 @@
                           <td>s.frost@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -324,8 +324,8 @@
                           <td>j.gaines@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -340,8 +340,8 @@
                           <td>q.flynn@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -356,8 +356,8 @@
                           <td>c.marshall@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -372,8 +372,8 @@
                           <td>h.kennedy@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -388,8 +388,8 @@
                           <td>t.fitzpatrick@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -404,8 +404,8 @@
                           <td>m.silva@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -420,8 +420,8 @@
                           <td>p.byrd@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -436,8 +436,8 @@
                           <td>g.little@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -452,8 +452,8 @@
                           <td>b.greer@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -468,8 +468,8 @@
                           <td>d.rios@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -484,8 +484,8 @@
                           <td>j.caldwell@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -500,8 +500,8 @@
                           <td>y.berry@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -516,8 +516,8 @@
                           <td>c.vance@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -532,8 +532,8 @@
                           <td>d.wilder@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -548,8 +548,8 @@
                           <td>a.ramos@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -564,8 +564,8 @@
                           <td>g.joyce@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -580,8 +580,8 @@
                           <td>j.chang@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -596,8 +596,8 @@
                           <td>b.wagner@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -612,8 +612,8 @@
                           <td>f.green@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -628,8 +628,8 @@
                           <td>s.itou@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -644,8 +644,8 @@
                           <td>m.house@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -660,8 +660,8 @@
                           <td>s.burks@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -676,8 +676,8 @@
                           <td>p.bartlett@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -692,8 +692,8 @@
                           <td>g.cortez@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -708,8 +708,8 @@
                           <td>m.mccray@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -724,8 +724,8 @@
                           <td>u.butler@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -740,8 +740,8 @@
                           <td>h.hatfield@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -756,8 +756,8 @@
                           <td>h.fuentes@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -772,8 +772,8 @@
                           <td>v.harrell@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -788,8 +788,8 @@
                           <td>t.mooney@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -804,8 +804,8 @@
                           <td>j.bradshaw@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -820,8 +820,8 @@
                           <td>o.liang@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -836,8 +836,8 @@
                           <td>b.nash@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -852,8 +852,8 @@
                           <td>s.yamamoto@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -868,8 +868,8 @@
                           <td>t.walton@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -884,8 +884,8 @@
                           <td>f.camacho@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -900,8 +900,8 @@
                           <td>s.baldwin@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -916,8 +916,8 @@
                           <td>z.frank@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -932,8 +932,8 @@
                           <td>z.serrano@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -948,8 +948,8 @@
                           <td>j.acosta@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -964,8 +964,8 @@
                           <td>c.stevens@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -980,8 +980,8 @@
                           <td>h.butler@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -996,8 +996,8 @@
                           <td>l.greer@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -1012,8 +1012,8 @@
                           <td>j.alexander@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -1028,8 +1028,8 @@
                           <td>s.decker@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -1044,8 +1044,8 @@
                           <td>m.bruce@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -1060,8 +1060,8 @@
                           <td>d.snider@datatables.net</td>
                           <td>
 							<select>
-								<option>Y</option>
 								<option>N</option>
+								<option>Y</option>
 							</select>
 						  </td>
                         </tr>
