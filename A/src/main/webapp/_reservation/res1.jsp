@@ -123,15 +123,13 @@
 			
 			// 날짜 표시
 			var date = new Date();
-// 			alert(date);
-			var minDate = date;
-			var maxDate = new Date(minDate).setDate(minDate.getDate() + 5);
-			alert(maxDate);
-			var dateFormat = date.getFullYear() + "-" + date.getMonth()+1 + "-" + date.getDate();
-			$("#myCalendar").prop("min", "2023-12-18");
-			$("#myCalendar").prop("max", "2023-12-30"); // new Date(date).setDate(date.getDate() + 5)
+			// 맨처음 달력에 날짜 표시
 			$("#myCalendar").val(date.toISOString().substring(0, 10));
+			// 맨처음 상단에 날짜 표시
 			writeDate(date);
+			// 당일 날짜 기준으로 범위 설정
+			setDateRange(date);
+			// 달력에서 선택 후 날짜 표시
 			$("#myCalendar").on("change", function(){
 				date = new Date($("#myCalendar").val());
 				writeDate(date);
@@ -145,7 +143,18 @@
 		var days = ["일", "월", "화", "수", "목", "금", "토"];
 		var writeDate = function(date){
 			$("#selectedDate").text($("#myCalendar").val() + " (" + days[date.getDay()] + ")");
-		}
+		};
+		var dateFormat = function(date){
+			var year  = date.getFullYear();
+			var month = (date.getMonth()+1) < 10 ? "0" + (date.getMonth()+1) : (date.getMonth()+1); 
+			var date  = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+
+			return year + "-" + month + "-" + date;
+		};
+		var setDateRange = function(date){
+			$("#myCalendar").prop("min", dateFormat(date));
+			$("#myCalendar").prop("max", dateFormat(new Date(date.setDate(date.getDate() + 4))));
+		};
 	</script>
 <%@include file="../_common/commonHeaderEnd.jsp"%>
 

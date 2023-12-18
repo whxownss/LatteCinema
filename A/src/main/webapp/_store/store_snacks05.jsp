@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@include file ="../_common/commonHeaderStart.jsp" %>
-<%@include file ="../_common/commonHeaderEnd.jsp" %>
+<%@include file="../_common/commonHeaderStart.jsp"%>
+<%@include file="../_common/commonHeaderEnd.jsp"%>
 
 <main id="main">
 
@@ -14,61 +14,59 @@
 			<section class="contents d-flex">
 				<div class="col-6">
 					<div class="position-relative">
-						<img
-							class="position-absolute top-0 end-0"
+						<img class="position-absolute top-0 end-0"
 							src="https://cf.lottecinema.co.kr//Media/WebAdmin/596615fa5efe4470bdeaf4c290412f53.jpg"
 							alt="사이다 M">
 					</div>
 				</div>
 				<article class="col-6">
-						<table class="pd_table" summary="상품 상세설명에 대한 표입니다">
-							<colgroup>
-								<col style="width: 40%;">
-								<col style="width: auto;">
-							</colgroup>
-							<thead>
-								<tr>
-									<th scope="row" class="badge_wrap" colspan="2"></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th scope="row" class="text-center" colspan="6">
-									<h3>사이다 M</h3></th>
-								</tr>
-								<tr>
-								</tr>
-								<tr>
-									<th scope="row">구성품</th>
-									<td>사이다 M</td>
-								</tr>
-								<tr>
-									<th scope="row">구매제한</th>
-									<td>제한없음</td>
-								</tr>
-								<tr>
-									<th scope="row">유효기간</th>
-									<td>24 개월</td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="input-group mb-3"
-							style="width: 400px; text-align: center;">
-							<button class="btn btn-outline-primary">-</button>
-							<label class="input-group-text" for="inputGroupFile01"
-								style="
-									  text-align: center;
-									  padding-left: 80px;
-									  padding-right: 80px;">1</label>
-							<button class="btn btn-outline-primary">+</button>
-						</div>
-						<div class="txt_price_wrap">
-							총 상품금액 <strong class="txt_price_str"> 3,000 <em>원</em></strong>
-						</div>
-						<div class="btn_wrap">
-							<button class="btn btn-secondary btn-lg">선물하기</button>
-							<button class="btn btn-warning btn-lg">구매하기</button>
-						</div>
+					<table class="pd_table fs-5" summary="상품 상세설명에 대한 표입니다">
+						<colgroup>
+							<col style="width: 60%;">
+							<col style="width: auto;">
+						</colgroup>
+						<thead>
+							<tr>
+								<th scope="row" class="badge_wrap" colspan="2"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row" class="text-center" colspan="6">
+									<h3 class="fw-bold">사이다 M</h3>
+								</th>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<th scope="row">구성품</th>
+								<td>사이다 M</td>
+							</tr>
+							<tr>
+								<th scope="row">구매제한</th>
+								<td>제한없음</td>
+							</tr>
+							<tr>
+								<th scope="row">유효기간</th>
+								<td>24 개월</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="input-group mb-3"
+						style="width: 400px; text-align: center;">
+						<button class="btn btn-outline-secondary">-</button>
+						<label class="input-group-text" for="inputGroupFile01"
+							style="text-align: center; padding-left: 80px; padding-right: 80px;">1</label>
+						<button class="btn btn-outline-secondary">+</button>
+					</div>
+					<div class="txt_price_wrap">
+						총 상품금액 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong
+							class="txt_price_str fs-3"> 3,000 <em>원</em></strong>
+					</div>
+					<div class="btn_wrap">
+						<button class="btn btn-secondary btn-lg">선물하기</button>
+						<button class="btn btn-warning btn-lg">구매하기</button>
+					</div>
 		</div>
 		</article>
 
@@ -84,7 +82,7 @@
 			<div class="accordion" id="accordionExample">
 				<div class="accordion-item">
 					<h2 class="accordion-header" id="headingOne">
-						<button class="accordion-button collapsed" type="button"
+						<button class="accordion-button collapsed fw-bold" type="button"
 							data-bs-toggle="collapse" data-bs-target="#collapseOne"
 							aria-expanded="false" aria-controls="collapseOne">
 							<font style="vertical-align: inherit;">사용방법 </font>
@@ -100,7 +98,6 @@
 							</div>
 
 							<div class="tab_con">
-								<h5 class="sec_tit">사용방법</h5>
 								<ul class="list_txt">
 									<p>
 										- 스토어 상품은 회원만 구매할 수 있습니다.<br>- 일반관람권의 경우 2D 일반영화에 사용
@@ -120,7 +117,7 @@
 				</div>
 				<div class="accordion-item">
 					<h2 class="accordion-header" id="headingTwo">
-						<button class="accordion-button collapsed" type="button"
+						<button class="accordion-button collapsed fw-bold" type="button"
 							data-bs-toggle="collapse" data-bs-target="#collapseTwo"
 							aria-expanded="false" aria-controls="collapseTwo">
 							<font style="vertical-align: inherit;"> 유의사항 </font>
@@ -137,7 +134,7 @@
 							</div>
 
 							<div class="tab_con">
-								<h5 class="sec_tit">취소/환불</h5>
+								<h5 class="sec_tit fw-bold">취소/환불</h5>
 								<ul class="list_txt">
 									<p>
 										- 스토어 상품의 취소기한은 구매일로부터 70일 입니다.<br>- 구매취소는 취소기한 내 마이시네마
@@ -146,7 +143,7 @@
 										있을 때는 환불 불가합니다.
 									</p>
 								</ul>
-								<h5 class="sec_tit">기타</h5>
+								<h5 class="sec_tit fw-bold">기타</h5>
 								<ul class="list_txt ">
 									<p>
 										- 본 관람권은 기재된 유효기간까지 (관람일 기준) 사용할 수 있습니다. <br>- 유효기간 만료 시
