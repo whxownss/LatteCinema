@@ -39,11 +39,11 @@
 			</div>
 		</section>
 		
-		<section class="category-section" id="">
+		<section class="category-section" id="h2" style="padding-top:70px;">
 			<div class="container" data-aos="fade-up">
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 				<!-- 이곳에 코드작성 -->
-					<h3 id="h2">
+					<h3>
 						L. 멤버십 가입하기
 					</h3>
 					<div>
@@ -76,11 +76,11 @@
 			</div>
 		</section>
 		
-		<section class="category-section" id="">
+		<section class="category-section" id="h3" style="padding-top:70px;">
 			<div class="container" data-aos="fade-up">
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 				<!-- 이곳에 코드작성 -->
-					<h3 id="h3">
+					<h3>
 						L. 멤버십 포인트 적립
 					</h3>
 					<div>
@@ -95,11 +95,11 @@
 			</div>
 		</section>
 		
-		<section class="category-section" id="">
+		<section class="category-section" id="h4" style="padding-top:70px;">
 			<div class="container" data-aos="fade-up">
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 				<!-- 이곳에 코드작성 -->
-					<h3 id="h4">
+					<h3>
 						L. 멤버십 포인트 사용
 					</h3>
 					<div>
@@ -121,11 +121,11 @@
 			</div>
 		</section>
 		
-		<section class="category-section" id="">
+		<section class="category-section pb-0" id="h5" style="padding-top:70px;">
 			<div class="container" data-aos="fade-up">
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 				<!-- 이곳에 코드작성 -->
-					<h3 id="h5">
+					<h3>
 						L. 멤버십 추가혜택
 					</h3>
 					<div>
@@ -162,11 +162,11 @@
 			</div>
 		</section>
 		
-		<section class="category-section" id="">
+		<section class="category-section pt-0" id="h6">
 			<div class="container" data-aos="fade-up">
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 				<!-- 이곳에 코드작성 -->
-					<h3 id="h6">
+					<h3>
 						L. VIP 안내
 					</h3>
 					<div>
