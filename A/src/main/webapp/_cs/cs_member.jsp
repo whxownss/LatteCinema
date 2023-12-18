@@ -121,7 +121,7 @@
 			</div>
 		</section>
 		
-		<section class="category-section pb-0" id="h5" style="padding-top:70px;">
+		<section class="category-section" id="h5" style="padding-top:70px;">
 			<div class="container" data-aos="fade-up">
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 				<!-- 이곳에 코드작성 -->
@@ -162,7 +162,7 @@
 			</div>
 		</section>
 		
-		<section class="category-section pt-0" id="h6">
+		<section class="category-section" id="h6">
 			<div class="container" data-aos="fade-up">
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 				<!-- 이곳에 코드작성 -->
