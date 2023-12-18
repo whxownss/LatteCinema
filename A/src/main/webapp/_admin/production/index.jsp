@@ -61,6 +61,7 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
+                  	
                   <li><a href="index.jsp"><i class="fa fa-home"></i> Home</a>
 <!--                     <ul class="nav child_menu"> -->
 <!--                       <li><a href="index.html">Dashboard</a></li> -->
@@ -68,6 +69,7 @@
 <!--                       <li><a href="index3.html">Dashboard3</a></li> -->
 <!--                     </ul> -->
                   </li>
+                  <li><a href="adm_member.jsp"><i class="fa fa-user"></i> 회원관리</a></li>
                   <li><a href="adm_mv_inout.jsp"><i class="fa fa-edit"></i>영화 통합 추가/제거</a>
 <!--                     <ul class="nav child_menu"> -->
 <!--                       <li><a href="form.html">General Form</a></li> -->
