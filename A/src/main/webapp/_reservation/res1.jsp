@@ -32,6 +32,8 @@
 					$(".showLocations").append("<li class='list-group-item border border-0 myMouse' id='cinema" + (i+1) + "'>" + e + "</li>");
 				});
 				
+				
+				
 				// 다른 지역 선택하고 오면 체크 없어지는거 해결
 				if($("#selectedCinema").text() != "지역 및 영화관"){
 					var list = $("[id*=cinema]").text();
@@ -39,14 +41,52 @@
 					if(list.includes(text)){
 						
 						$(".myMouse:contains(" + text + ")").append("<span class='position-absolute top-50 end-0 translate-middle-y me-2 bi bi-check-lg' style='color: red;'></span>")
-													  .removeClass("border border-0")
-													  .css("border", "1px red solid");
+													  		.removeClass("border border-0")
+													  		.css("border", "1px red solid");
 						
 // 						debugger;
 					}
 				}
 			}); // 지역 선택 끝
 
+			// 영화 종류 선택
+			$(".myMovie").click(function(e){
+				// 배경색 변경
+				$(".myMovie").addClass("bg-body-secondary");
+				$(this).removeClass("bg-body-secondary");
+				$(this).css("background", "white");
+				
+				// 목록 나타내기
+				var movies = {
+						mo1: ["옛날영화제목1", "옛날영화제목2", "옛날영화제목3", "옛날영화제목4", "옛날영화제목5", "옛날영화제목6", "옛날영화제목7"],						  
+						mo2: ["최신영화제목1", "최신영화제목2", "최신영화제목3", "최신영화제목4", "최신영화제목5", "최신영화제목6", "최신영화제목7", 
+							  "최신영화제목8", "최신영화제목9", "최신영화제목10", "최신영화제목11", "최신영화제목12"]
+				};
+				var mo = $(this).attr("id");
+				var content = movies[$(this).attr("id")];
+				$(".showMovies").empty();
+				$.each(content, (i, e) => {
+					$(".showMovies").append("<li class='list-group-item border border-0 myMouse' id='movie" + (i+1) + "'>" + e + "</li>");
+				});
+				
+				
+				
+				// 다른 지역 선택하고 오면 체크 없어지는거 해결
+				if($("#selectedMovie").text() != "영화"){
+					var list = $("[id*=movie]").text();
+					var text = $("#selectedMovie").text()
+					if(list.includes(text)){
+						
+						$(".myMouse:contains(" + text + ")").append("<span class='position-absolute top-50 end-0 translate-middle-y me-2 bi bi-check-lg' style='color: red;'></span>")
+													  		.removeClass("border border-0")
+													  		.css("border", "1px red solid");
+						
+// 						debugger;
+					}
+				}
+			}); // 영화 종류 선택 끝
+			
+			
 			
 			// 영화관 및 영화 선택 (동적으로 생긴 태그에 대해선 이렇게 해야함)
 			$(document).on("click", "[id*=cinema], [id*=movie]", function(e){
@@ -80,8 +120,32 @@
 				$(this).append("<span class='position-absolute top-50 end-0 translate-middle-y me-2 bi bi-check-lg' style='color: red;'></span>");
 			});
 			
+			
+			// 날짜 표시
+			var date = new Date();
+// 			alert(date);
+			var minDate = date;
+			var maxDate = new Date(minDate).setDate(minDate.getDate() + 5);
+			alert(maxDate);
+			var dateFormat = date.getFullYear() + "-" + date.getMonth()+1 + "-" + date.getDate();
+			$("#myCalendar").prop("min", "2023-12-18");
+			$("#myCalendar").prop("max", "2023-12-30"); // new Date(date).setDate(date.getDate() + 5)
+			$("#myCalendar").val(date.toISOString().substring(0, 10));
+			writeDate(date);
+			$("#myCalendar").on("change", function(){
+				date = new Date($("#myCalendar").val());
+				writeDate(date);
+			});
 		});
-	
+
+
+		
+		
+		// 필요 변수 및 함수
+		var days = ["일", "월", "화", "수", "목", "금", "토"];
+		var writeDate = function(date){
+			$("#selectedDate").text($("#myCalendar").val() + " (" + days[date.getDay()] + ")");
+		}
 	</script>
 <%@include file="../_common/commonHeaderEnd.jsp"%>
 
@@ -148,23 +212,16 @@
 								<div class="row">
 									<div class="col p-2 bg-black text-white" id="selectedMovie">영화</div>
 								</div>
-								<div class="row ">
-									<div class="col p-0">
+								<div class="row" style="">
+									<div class="col p-0 bg-body-secondary">
 										<ul class="list-group text-start mb-0 ps-0 rounded-0">
-											<li class="list-group-item border border-0 bg-body-secondary myMouse" id="movie1">영화제목1</li>
-											<li class="list-group-item border border-0 bg-body-secondary myMouse" id="movie2">영화제목2</li>
-											<li class="list-group-item border border-0 bg-body-secondary myMouse" id="movie3">영화제목3</li>
-											<li class="list-group-item border border-0 bg-body-secondary myMouse" id="movie4">영화제목4</li>
-											<li class="list-group-item border border-0 bg-body-secondary myMouse" id="movie5">영화제목5</li>
-											<li class="list-group-item border border-0 bg-body-secondary myMouse" id="movie6">영화제목6</li>
-											<li class="list-group-item border border-0 bg-body-secondary myMouse" id="movie7">영화제목7</li>
-											<li class="list-group-item border border-0 bg-body-secondary myMouse" id="movie8">영화제목8</li>
-											<li class="list-group-item border border-0 bg-body-secondary myMouse" id="movie9">영화제목9</li>
-											<li class="list-group-item border border-0 bg-body-secondary myMouse" id="movie10">영화제목10</li>
-											<li class="list-group-item border border-0 bg-body-secondary myMouse" id="movie11">영화제목11</li>
-											<li class="list-group-item border border-0 bg-body-secondary myMouse" id="movie12">영화제목12</li>
+											<li class="list-group-item border border-0 bg-body-secondary myMovie myMouse" id="mo1">옛날영화</li>
+											<li class="list-group-item border border-0 bg-body-secondary myMovie myMouse" id="mo2">최신영화</li>
 										</ul>
-									
+									</div>
+									<div class="col p-0">
+										<ul class="list-group border border-0 text-start mb-0 ps-0 rounded-0 showMovies scrollable" style="height: 450px; overflow: auto;">
+										</ul>
 									</div>
 								</div>
 							</div>
@@ -172,10 +229,12 @@
 							<!-- 날짜 및 시간 -->
 							<div class="col border border-secondary">
 								<div class="row">
-									<div class="col p-2 bg-black text-white">날짜 및 시간</div>
+									<div class="col p-2 bg-black text-white" id="selectedDate">날짜 및 시간</div>
 								</div>
 								<div class="row">
-									<div class="col"></div>
+									<div class="col p-0">
+										<input type='date' name='date' value="날짜" min="" max="" id="myCalendar" class="w-100 text-center border border-0 bg-body-secondary"/>
+									</div>
 								</div>
 							</div>
 						</div>
