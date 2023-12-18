@@ -67,31 +67,31 @@
 				   		</td>
 				    </tr>
 				    <tr>
-				    	<td><input type="text" value="관리자" readonly>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="#">수정</a>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="cs_lost_content.jsp">삭제</a><p class="mb-0">2023-12-15 09:05</p></td>
+				    	<td><span>관리자</span>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="#">수정</a>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="cs_lost_content.jsp">삭제</a><p class="mb-0">2023-12-15 09:05</p></td>
 				    	<td colspan="4"></td>
 				    </tr>
 				    <tr>
 				    	<td colspan="5"><textarea class="form-control" readonly>
 *** 고객님, 안녕하세요. 라떼 시네마 입니다. 결제를 확인해보니 쿠폰 오류로 인해 발생한 일입니다.
-금일 내로 처리하겠습니다. 정말 죄송합니다. 라떼 시네마 : 010-1111-1111
+금일 내로 처리하겠습니다. 정말 죄송합니다. 라떼 시네마 : 010-1111-1111. 재문의를 하시려면 새 문의글을 작성해주세요.
 				    	</textarea></td>
 				    </tr>
 				    
-				    <tr>
-				    	<td>아이디<input type="text" value="" readonly></td>
-				    	<td>비밀번호<input type="password"></td>
-				    </tr>
+<!-- 				    <tr> -->
+<!-- 				    	<td>아이디<input type="text" value="" readonly></td> -->
+<!-- 				    	<td>비밀번호<input type="password"></td> -->
+<!-- 				    </tr> -->
 				    
-				    <tr>
-					    <td colspan="5">
-					        <div class="input-group">
-					            <textarea class="form-control"></textarea>
-					            <div class="input-group-append">
-					                <button class="btn btn-outline-secondary" type="button" style="height: 100%;">댓글 쓰기</button>
-					            </div>
-					        </div>
-					    </td>
-					</tr>
+<!-- 				    <tr> -->
+<!-- 					    <td colspan="5"> -->
+<!-- 					        <div class="input-group"> -->
+<!-- 					            <textarea class="form-control"></textarea> -->
+<!-- 					            <div class="input-group-append"> -->
+<!-- 					                <button class="btn btn-outline-secondary" type="button" style="height: 100%;">댓글 쓰기</button> -->
+<!-- 					            </div> -->
+<!-- 					        </div> -->
+<!-- 					    </td> -->
+<!-- 					</tr> -->
 				    
 				  </tbody>
 				</table>

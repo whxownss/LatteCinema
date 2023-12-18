@@ -47,7 +47,7 @@
 						L. 멤버십 가입하기
 					</h3>
 					<div>
-						<a href="#" class="btn-top more">위로 이동</a>
+<!-- 						<a href="#" class="btn-top more">위로 이동</a> -->
 					</div>
 				</div>
 				<div class="content" style="padding-left: 20px;">
@@ -84,7 +84,7 @@
 						L. 멤버십 포인트 적립
 					</h3>
 					<div>
-						<a href="#" class="btn-top more">위로 이동</a>
+<!-- 						<a href="#" class="btn-top more">위로 이동</a> -->
 					</div>
 				</div>
 				<div class="content" style="padding-left: 20px;">
@@ -103,7 +103,7 @@
 						L. 멤버십 포인트 사용
 					</h3>
 					<div>
-						<a href="#" class="btn-top more">위로 이동</a>
+<!-- 						<a href="#" class="btn-top more">위로 이동</a> -->
 					</div>
 				</div>
 				<div class="content" style="padding-left: 20px;">
@@ -129,7 +129,7 @@
 						L. 멤버십 추가혜택
 					</h3>
 					<div>
-						<a href="#" class="btn-top more">위로 이동</a>
+<!-- 						<a href="#" class="btn-top more">위로 이동</a> -->
 					</div>
 				</div>
 				<div class="content" style="padding-left: 20px;">
@@ -170,7 +170,7 @@
 						L. VIP 안내
 					</h3>
 					<div>
-						<a href="#" class="btn-top more">위로 이동</a>
+<!-- 						<a href="#" class="btn-top more">위로 이동</a> -->
 					</div>
 				</div>
 				<div class="content" style="padding-left: 20px;">
