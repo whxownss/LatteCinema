@@ -1,45 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@include file ="../_common/commonHeaderStart.jsp" %>
-<%@include file ="../_common/commonHeaderEnd.jsp" %>
+<%@include file="../_common/commonHeaderStart.jsp"%>
+<%@include file="../_common/commonHeaderEnd.jsp"%>
 
-	<!-- 상단 이미지 -->
+<!-- 상단 이미지 -->
 
 <main id="main">
 	<div id="visual_top" class="visual_top visual_mall"
-		style="margin-top: 120px;">
+		style="margin-top: 80px;">
 		<div class="inner">
-				<img
-					src="https://cf.lottecinema.co.kr//Media/WebAdmin/f04df114813f45b18e63e06308211d0f.jpg"
-					alt="팝콘&amp;음료, 스낵에서 영화 티켓까지 한번에!"
-					width="100%" height="300">
-			</div>
-	</div>	<!-- 상단 이미지 -->
-	<br>
-	<br>
-	<br>
-		<div class="container" data-aos="fade-up">
+			<img
+				src="https://cf.lottecinema.co.kr//Media/WebAdmin/f04df114813f45b18e63e06308211d0f.jpg"
+				alt="팝콘&amp;음료, 스낵에서 영화 티켓까지 한번에!" width="100%" height="300">
+		</div>
+	</div>
+	<!-- 상단 이미지 -->
+	<br> <br> <br>
+	<div class="container" data-aos="fade-up">
 
-			<div class="container text-center">
-				<div class="row">
-					<div class="col">
-						<a href="#store1" class="more fs-2">베스트</a>
-					</div>
-					<div class="col">
-						<a href="#store2" class="more fs-2">관람권</a>
-					</div>
-					<div class="col">
-						<a href="#store3" class="more fs-2">스낵음료</a>
-					</div>
+		<div class="container text-center">
+			<div class="row">
+				<div class="col">
+					<a href="#store1" class="more fs-2">베스트</a>
+				</div>
+				<div class="col">
+					<a href="#store2" class="more fs-2">관람권</a>
+				</div>
+				<div class="col">
+					<a href="#store3" class="more fs-2">스낵음료</a>
 				</div>
 			</div>
 		</div>
-	</section>	<!-- 메인	 -->
+	</div>
+	</section>
+	<!-- 메인	 -->
 
 	<!-- 베스트 -->
 
-	<section class="category-section" id="store1">
+	<section class="category-section fs-5" id="store1">
 		<div class="container" data-aos="fade-up">
 			<div
 				class="section-header d-flex justify-content-between align-items-center mb-5">
@@ -65,10 +64,11 @@
 						</div></a>
 				</div>
 				<div class="col-lg-4">
-					<a href="store_best2.jsp" class="text-center"><div class="itm_img">
+					<a href="store_best2.jsp" class="text-center"><div
+							class="itm_img">
 							<img
-								src="https://cf.lottecinema.co.kr//Media/WebAdmin/862160d3ebea4cb6bfbffa6f08ad37ab.jpg"
-								alt="일반 관람권">
+								src="https://img.megabox.co.kr/SharedImg/store/2020/12/29/M8qiScDr6orSchgFPCRCcCtLPVenv6tm_280.png"
+								alt="더 부티크 스위트 전용관람권" onerror="noImg(this);">
 						</div>
 						<div class="itm_cont">
 							<div class="badge_wrap"></div>
@@ -82,7 +82,8 @@
 						</div></a>
 				</div>
 				<div class="col-lg-4">
-					<a href="store_best3.jsp" class="text-center"><div class="itm_img">
+					<a href="store_best3.jsp" class="text-center"><div
+							class="itm_img">
 							<img
 								src="https://cf.lottecinema.co.kr//Media/WebAdmin/828d9b97f9cf43379b0b453929aa6274.jpg"
 								alt="콜라 M">
@@ -98,23 +99,25 @@
 							</div>
 						</div></a>
 				</div>
-	</section>	<!-- 베스트 -->
+	</section>
+	<!-- 베스트 -->
 
 	<!-- 관람권 -->
 
-	<section class="category-section" id="store2">
+	<section class="category-section fs-5" id="store2">
 		<div class="container" data-aos="fade-up">
 			<div
 				class="section-header d-flex justify-content-between align-items-center mb-5">
 				<h2>관람권</h2>
 			</div>
-			
+
 			<div class="row g-5">
 				<div class="col-lg-3">
-					<a href="store_ticket1.jsp" class="text-center"><div class="itm_img">
+					<a href="store_ticket1.jsp" class="text-center"><div
+							class="itm_img">
 							<img
-								src="https://cf.lottecinema.co.kr//Media/WebAdmin/862160d3ebea4cb6bfbffa6f08ad37ab.jpg"
-								alt="일반 관람권">
+								src="https://img.megabox.co.kr/SharedImg/store/2020/12/29/M8qiScDr6orSchgFPCRCcCtLPVenv6tm_280.png"
+								alt="더 부티크 스위트 전용관람권" onerror="noImg(this);">
 						</div>
 						<div class="itm_cont">
 							<div class="badge_wrap"></div>
@@ -128,10 +131,11 @@
 						</div></a>
 				</div>
 				<div class="col-lg-3">
-					<a href="store_ticket2.jsp" class="text-center"><div class="itm_img">
+					<a href="store_ticket2.jsp" class="text-center"><div
+							class="itm_img">
 							<img
-								src="https://cf.lottecinema.co.kr//Media/WebAdmin/862160d3ebea4cb6bfbffa6f08ad37ab.jpg"
-								alt="일반 관람권">
+								src="https://img.megabox.co.kr/SharedImg/store/2020/12/29/M8qiScDr6orSchgFPCRCcCtLPVenv6tm_280.png"
+								alt="더 부티크 스위트 전용관람권" onerror="noImg(this);">
 						</div>
 						<div class="itm_cont">
 							<div class="badge_wrap"></div>
@@ -145,10 +149,11 @@
 						</div></a>
 				</div>
 				<div class="col-lg-3">
-					<a href="store_ticket3.jsp" class="text-center"><div class="itm_img">
+					<a href="store_ticket3.jsp" class="text-center"><div
+							class="itm_img">
 							<img
-								src="https://cf.lottecinema.co.kr//Media/WebAdmin/862160d3ebea4cb6bfbffa6f08ad37ab.jpg"
-								alt="일반 관람권">
+								src="https://img.megabox.co.kr/SharedImg/store/2020/12/29/M8qiScDr6orSchgFPCRCcCtLPVenv6tm_280.png"
+								alt="더 부티크 스위트 전용관람권" onerror="noImg(this);">
 						</div>
 						<div class="itm_cont">
 							<div class="badge_wrap"></div>
@@ -162,10 +167,11 @@
 						</div></a>
 				</div>
 				<div class="col-lg-3">
-					<a href="store_ticket4.jsp" class="text-center"><div class="itm_img">
+					<a href="store_ticket4.jsp" class="text-center"><div
+							class="itm_img">
 							<img
-								src="https://cf.lottecinema.co.kr//Media/WebAdmin/862160d3ebea4cb6bfbffa6f08ad37ab.jpg"
-								alt="일반 관람권">
+								src="https://img.megabox.co.kr/SharedImg/store/2020/12/29/M8qiScDr6orSchgFPCRCcCtLPVenv6tm_280.png"
+								alt="더 부티크 스위트 전용관람권" onerror="noImg(this);">
 						</div>
 						<div class="itm_cont">
 							<div class="badge_wrap"></div>
@@ -180,11 +186,12 @@
 				</div>
 			</div>
 		</div>
-	</section>	<!-- 관람권 -->
+	</section>
+	<!-- 관람권 -->
 
 	<!-- 스낵음료 -->
 
-	<section class="category-section" id="store3">
+	<section class="category-section fs-5" id="store3">
 		<div class="container" data-aos="fade-up">
 			<div
 				class="section-header d-flex justify-content-between align-items-center mb-5">
@@ -193,7 +200,8 @@
 
 			<div class="row g-5">
 				<div class="col-lg-3">
-					<a href="store_snacks01.jsp" class="text-center"><div class="itm_img">
+					<a href="store_snacks01.jsp" class="text-center"><div
+							class="itm_img">
 							<img
 								src="https://cf.lottecinema.co.kr//Media/WebAdmin/113c4f562c6e4c9d94e973b590f594ab.jpg"
 								alt="스위트콤보 상품이미지">
@@ -210,7 +218,8 @@
 						</div></a>
 				</div>
 				<div class="col-lg-3">
-					<a href="store_snacks02.jsp" class="text-center"><div class="itm_img">
+					<a href="store_snacks02.jsp" class="text-center"><div
+							class="itm_img">
 							<img
 								src="https://cf.lottecinema.co.kr//Media/WebAdmin/16a8de961e454d09901de45a61385c33.jpg"
 								alt="더블콤보">
@@ -227,7 +236,8 @@
 						</div></a>
 				</div>
 				<div class="col-lg-3">
-					<a href="store_snacks03.jsp" class="text-center"><div class="itm_img">
+					<a href="store_snacks03.jsp" class="text-center"><div
+							class="itm_img">
 							<img
 								src="https://cf.lottecinema.co.kr//Media/WebAdmin/828d9b97f9cf43379b0b453929aa6274.jpg"
 								alt="콜라 M">
@@ -244,7 +254,8 @@
 						</div></a>
 				</div>
 				<div class="col-lg-3">
-					<a href="store_snacks04.jsp" class="text-center"><div class="itm_img">
+					<a href="store_snacks04.jsp" class="text-center"><div
+							class="itm_img">
 							<img
 								src="https://cf.lottecinema.co.kr//Media/WebAdmin/ffcf5bb49ef142a88958e871a8d34e04.jpg"
 								alt="콜라 L">
@@ -263,7 +274,8 @@
 
 				<div class="row g-5">
 					<div class="col-lg-3">
-						<a href="store_snacks05.jsp" class="text-center"><div class="itm_img">
+						<a href="store_snacks05.jsp" class="text-center"><div
+								class="itm_img">
 								<img
 									src="https://cf.lottecinema.co.kr//Media/WebAdmin/596615fa5efe4470bdeaf4c290412f53.jpg"
 									alt="사이다 M">
@@ -280,7 +292,8 @@
 							</div></a>
 					</div>
 					<div class="col-lg-3">
-						<a href="store_snacks06.jsp" class="text-center"><div class="itm_img">
+						<a href="store_snacks06.jsp" class="text-center"><div
+								class="itm_img">
 								<img
 									src="https://cf.lottecinema.co.kr//Media/WebAdmin/cf3b8b1895294c7f9285f6ff54c35ea4.jpg"
 									alt="사이다 L">
@@ -297,7 +310,8 @@
 							</div></a>
 					</div>
 					<div class="col-lg-3">
-						<a href="store_snacks07.jsp" class="text-center"><div class="itm_img">
+						<a href="store_snacks07.jsp" class="text-center"><div
+								class="itm_img">
 								<img
 									src="https://cf.lottecinema.co.kr//Media/WebAdmin/52703a86875f4e589879094bf68162aa.jpg"
 									alt="오리지널팝콘(M)">
@@ -314,7 +328,8 @@
 							</div></a>
 					</div>
 					<div class="col-lg-3">
-						<a href="store_snacks08.jsp" class="text-center"><div class="itm_img">
+						<a href="store_snacks08.jsp" class="text-center"><div
+								class="itm_img">
 								<img
 									src="https://cf.lottecinema.co.kr//Media/WebAdmin/3c27318663cf4813a386589a46f4780c.jpg"
 									alt="오리지널팝콘(L)">
@@ -331,10 +346,11 @@
 							</div></a>
 					</div>
 				</div>
-				
+
 				<div class="row g-5">
 					<div class="col-lg-3">
-						<a href="store_snacks09.jsp" class="text-center"><div class="itm_img">
+						<a href="store_snacks09.jsp" class="text-center"><div
+								class="itm_img">
 								<img
 									src="https://cf.lottecinema.co.kr//Media/WebAdmin/7b47806ac4564aacb98dde81efac9306.jpg"
 									alt="카라멜팝콘 (M)">
@@ -351,7 +367,8 @@
 							</div></a>
 					</div>
 					<div class="col-lg-3">
-						<a href="store_snacks10.jsp" class="text-center"><div class="itm_img">
+						<a href="store_snacks10.jsp" class="text-center"><div
+								class="itm_img">
 								<img
 									src="https://cf.lottecinema.co.kr//Media/WebAdmin/a69f6de1970d4c6e957111477ebbb8b3.jpg"
 									alt="카라멜팝콘(L)">
@@ -368,7 +385,8 @@
 							</div></a>
 					</div>
 					<div class="col-lg-3">
-						<a href="store_snacks11.jsp" class="text-center"><div class="itm_img">
+						<a href="store_snacks11.jsp" class="text-center"><div
+								class="itm_img">
 								<img
 									src="https://cf.lottecinema.co.kr//Media/WebAdmin/94cd7a50f3214776a802d88bdab75c70.jpg"
 									alt="(오리지널+카라멜) L">
@@ -386,7 +404,8 @@
 					</div>
 
 				</div>
-	</section>	<!-- 스낵음료 -->
+	</section>
+	<!-- 스낵음료 -->
 
 </main>
 
