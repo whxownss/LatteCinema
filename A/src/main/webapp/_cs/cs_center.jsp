@@ -10,7 +10,7 @@
 			<div class="container" data-aos="fade-up">
 				<!-- 이곳에 코드작성 -->
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
-					<h2>고객센터</h2>
+					<h2>공지사항</h2>
 					<div>
 						<a href="#" class="more">
 							"2023.12.11 기준"

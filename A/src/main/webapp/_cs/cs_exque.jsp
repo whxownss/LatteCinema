@@ -12,9 +12,9 @@
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 					<h2>자주찾는질문</h2>
 					<div>
-						<a href="#" class="more">
-							"2023.12.11 기준"
-						</a>
+<!-- 						<a href="#" class="more"> -->
+<!-- 							"2023.12.11 기준" -->
+<!-- 						</a> -->
 					</div>
 				</div>
 			</div>
