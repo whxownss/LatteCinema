@@ -117,15 +117,6 @@
               <div class="menu_section">
                 <h3>메인 페이지 관리</h3>
                 <ul class="nav side-menu">
-                  <li><a href="../../_cs/cs_qna.jsp"><i class="fa fa-comments"></i> 1:1문의</a>
-<!--                     <ul class="nav child_menu"> -->
-<!--                       <li><a href="e_commerce.html">E-commerce</a></li> -->
-<!--                       <li><a href="projects.html">Projects</a></li> -->
-<!--                       <li><a href="project_detail.html">Project Detail</a></li> -->
-<!--                       <li><a href="contacts.html">Contacts</a></li> -->
-<!--                       <li><a href="profile.html">Profile</a></li> -->
-<!--                     </ul> -->
-                  </li>
                   <li><a href="../../_cs/cs_center.jsp"><i class="fa fa-bullhorn"></i> 공지사항</a>
 <!--                     <ul class="nav child_menu"> -->
 <!--                       <li><a href="page_403.html">403 Error</a></li> -->
@@ -153,6 +144,18 @@
 <!--                         </li> -->
 <!--                     </ul> -->
                   </li>   
+                  
+                  <li><a href="../../_cs/cs_qna.jsp"><i class="fa fa-comments"></i> 1:1문의</a>
+<!--                     <ul class="nav child_menu"> -->
+<!--                       <li><a href="e_commerce.html">E-commerce</a></li> -->
+<!--                       <li><a href="projects.html">Projects</a></li> -->
+<!--                       <li><a href="project_detail.html">Project Detail</a></li> -->
+<!--                       <li><a href="contacts.html">Contacts</a></li> -->
+<!--                       <li><a href="profile.html">Profile</a></li> -->
+<!--                     </ul> -->
+                  </li>
+                  
+                  
                   <li><a href="../../_cs/cs_lost.jsp"><i class="fa fa-search"></i> 분실물 문의</a></li>               
                 </ul>
               </div>
