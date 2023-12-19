@@ -12,64 +12,56 @@
 			<!-- 메인 -->
 
 			<section class="contents d-flex">
-				<div class="col-6">
-					<div class="position-relative">
-						<img class="position-absolute top-0 end-0"
-							src="https://cf.lottecinema.co.kr//Media/WebAdmin/113c4f562c6e4c9d94e973b590f594ab.jpg"
-							alt="스위트콤보 상품이미지">
-					</div>
+				<div class="col-6" style="display: flex; justify-content: center;">
+					<img src="https://cf.lottecinema.co.kr//Media/WebAdmin/113c4f562c6e4c9d94e973b590f594ab.jpg"
+						 alt="스위트콤보 상품이미지">
 				</div>
-				<article class="col-6">
-					<table class="pd_table fs-5" summary="상품 상세설명에 대한 표입니다">
+				<article class="col-4">
+					<table class="pd_table fs-5 table table-sm">
 						<colgroup>
 							<col style="width: 35%;">
 							<col style="width: auto;">
 						</colgroup>
 						<thead>
 							<tr>
-								<th scope="row" class="badge_wrap" colspan="2"></th>
+								<th scope="row" class="text-center" colspan="6">
+									<h3 class="fs-1">스위트콤보</h3>
+								</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<th scope="row" class="text-center" colspan="6">
-									<h3 class="fw-bold">스위트콤보</h3>
-								</th>
-							</tr>
-							<tr>
-							</tr>
-							<tr>
 								<th scope="row">구성품</th>
-								<td>오리지널L + 탄산음료M2</td>
+								<td class="text-end">오리지널L + 탄산음료M2</td>
 							</tr>
 							<tr>
 								<th scope="row">구매제한</th>
-								<td>제한없음</td>
+								<td class="text-end">제한없음</td>
 							</tr>
 							<tr>
 								<th scope="row">유효기간</th>
-								<td>24 개월</td>
+								<td class="text-end">24 개월</td>
+							</tr>
+							<tr>
+								<th scope="col" style="padding-top: 3%">총 상품금액</th>
+								<td class="text-end fs-2"> 10,000 <em>원</em></td>
 							</tr>
 						</tbody>
 					</table>
-					<div class="input-group mb-3"
+					<div class="input-group mb-3 container"
 						style="width: 400px; text-align: center;">
 						<button class="btn btn-outline-secondary">-</button>
 						<label class="input-group-text" for="inputGroupFile01"
-							style="text-align: center; padding-left: 80px; padding-right: 80px;">1</label>
+							style="text-align: center; padding-left: 150px; padding-right: 150px;">1</label>
 						<button class="btn btn-outline-secondary">+</button>
 					</div>
-					<div class="txt_price_wrap">
-						총 상품금액 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong
-							class="txt_price_str fs-3"> 10,000 <em>원</em></strong>
-					</div>
 					<div class="btn_wrap">
-						<button class="btn btn-secondary btn-lg">선물하기</button>
-						<button class="btn btn-warning btn-lg">구매하기</button>
+						<button class="btn btn-secondary btn-lg"
+							style="text-align: center; padding-left: 66px; padding-right: 66px;">선물하기</button>
+						<button class="btn btn-danger btn-lg"
+							style="text-align: center; padding-left: 66px; padding-right: 66px;">구매하기</button>
 					</div>
-		</div>
-		</article>
-
+				</article>
 		</div>
 	</section>
 	<!-- 메인 -->
