@@ -9,6 +9,9 @@
 .hErrorP {
 	overflow: hidden;
 }
+.hErrorPS {
+	overflow: auto;
+}
 .hErrorC {
 	height: 100%;
 }
