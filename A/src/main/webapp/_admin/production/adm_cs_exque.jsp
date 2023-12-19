@@ -150,14 +150,53 @@
 				        </form>
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				        <button type="button" class="btn btn-primary">Send message</button>
+				      	<button type="button" class="btn btn-danger">삭제</button>
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">나가기</button>
+				        <button type="button" class="btn btn-primary">수정</button>
 				      </div>
 			    </div>
 			  </div>
 			  
 			</div>
-          	<!-- 임시  -->
+          	<!-- //임시  -->
+			  <div class="modal fade" id="myModal2" role="dialog">
+			    <div class="modal-dialog">
+<!-- 			    <button type="button" class="btn-close" aria-label="Close"></button> -->
+			      <!-- Modal content-->
+			      <div class="modal-content">
+				      <div class="modal-header">
+				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				        <h5 class="modal-title" id="exampleModalLabel">자주찾는질문</h5>
+				        <select>
+				        	<option value="">구분선택</option>
+				        	<option value="예매">예매</option>
+				        	<option value="관람권">관람권</option>
+				        	<option value="멤버십">멤버십</option>
+				        	<option value="할인혜택">할인혜택</option>
+				        	<option value="영화관이용">영화관이용</option>
+				        </select>
+				      </div>
+				      <div class="modal-body">
+				        <form>
+				          <div class="mb-3">
+				            <label for="recipient-name" class="col-form-label">질문</label>
+				            <input type="text" class="form-control" id="recipient-name" value="">
+				          </div>
+				          <div class="mb-3">
+				            <label for="message-text" class="col-form-label">글내용</label>
+				            <textarea class="form-control" id="message-text"></textarea>
+				          </div>
+				        </form>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">나가기</button>
+				        <button type="button" class="btn btn-primary">추가</button>
+				      </div>
+			    </div>
+			  </div>
+			  
+			</div>
+          	<!-- //임시  -->          	
             <div class="page-title">
               <div class="title_left">
               </div>
@@ -168,7 +207,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>자주 찾는 질문</h2>
+                    <h2>자주 찾는 질문<small><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal2">추가</button></small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -178,7 +217,6 @@
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30">
                     </p>
-					
                     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr>
@@ -193,7 +231,7 @@
                         <tr>
                           <td>1</td>
                           <td>멤버십</td>
-                          <td><a data-toggle="modal" data-target="#myModal" data-bs-whatever="@mdo">적립한 포인트를 다 써도 VIP가 될 수 있나요?</a></td>
+                          <td><a data-toggle="modal" data-target="#myModal">적립한 포인트를 다 써도 VIP가 될 수 있나요?</a></td>
                           <td>2011/04/25</td>
                           <td>2011/06/25</td>
                         </tr>
