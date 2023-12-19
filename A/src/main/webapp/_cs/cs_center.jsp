@@ -12,8 +12,8 @@
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 					<h2>공지사항</h2>
 					<div>
-						<a href="#" class="more">
-							"2023.12.11 기준"
+						<a href="../_cs/cs_center_write.jsp" class="more" style="font-size: 17px;">
+							공지사항 작성
 						</a>
 					</div>
 				</div>

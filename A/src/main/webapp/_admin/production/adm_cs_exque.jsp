@@ -122,10 +122,11 @@
 			  <!-- Modal -->
 			  <div class="modal fade" id="myModal" role="dialog">
 			    <div class="modal-dialog">
-			    
+<!-- 			    <button type="button" class="btn-close" aria-label="Close"></button> -->
 			      <!-- Modal content-->
 			      <div class="modal-content">
 				      <div class="modal-header">
+				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				        <h5 class="modal-title" id="exampleModalLabel">자주찾는질문</h5>
 				        <select>
 				        	<option value="">구분선택</option>
@@ -149,7 +150,7 @@
 				        </form>
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				        <button type="button" class="btn btn-primary">Send message</button>
 				      </div>
 			    </div>
