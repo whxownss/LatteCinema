@@ -142,8 +142,8 @@
 				lo8: ["서귀포", "제주아라", "제주연동"]															  // 제주
 		};
 		var movies = {
-				mo1: ["옛날영화제목1", "옛날영화제목2", "옛날영화제목3", "옛날영화제목4", "옛날영화제목5", "옛날영화제목6", "옛날영화제목7"],						  
-				mo2: ["최신영화제목1", "최신영화제목2", "최신영화제목3", "최신영화제목4", "최신영화제목5", "최신영화제목6", "최신영화제목7", 
+				lMT: ["옛날영화제목1", "옛날영화제목2", "옛날영화제목3", "옛날영화제목4", "옛날영화제목5", "옛날영화제목6", "옛날영화제목7"],						  
+				nMT: ["최신영화제목1", "최신영화제목2", "최신영화제목3", "최신영화제목4", "최신영화제목5", "최신영화제목6", "최신영화제목7", 
 					  "최신영화제목8", "최신영화제목9", "최신영화제목10", "최신영화제목11", "최신영화제목12"]
 		};
 		var mo1Infos = {
@@ -201,21 +201,24 @@
 		// 상영 시간표 출력
 		var showTimeTable = function(){
 			
-			$("#showTimeTable").append("<div class='text-start' id='mo1'>옛날 영화</div>" + 
-									   "<div class='text-start mt-3' id='mo2'>최신 영화</div>");
+			$("#showTimeTable").append("<div class='text-start' id='mT1'>옛날 영화</div>" + 
+									   "<div class='text-start mt-3' id='mT2'>최신 영화</div>");
 			
 			// 영화 종류별
-			$.each(movies, (i, e1) => {
+			$.each(movies, function(key, value){
 				// 영화별
-				$.each(e1, (i, e2) => {
-					$("#" + e1).append();
-				});
+				$.each(value, function(i, v){
+					$("#" + key).append("<div class='text-start'>" + v + "</div>");	
+				})
 			});
 			
-// 			$("#mo1").append()
-// 			$("#mo2").append()
+			
 			
 			debugger;
+			
+
+			
+			
 		};
 		
 	</script>
@@ -309,7 +312,7 @@
 									</div>
 								</div>
 								<div class="row" >
-									<div class="col" id="showTimeTable">								
+									<div class="col" id="showTimeTable" style="height: 450px; overflow: auto;">								
 									</div>
 								</div>
 							</div>
