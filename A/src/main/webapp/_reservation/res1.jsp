@@ -146,41 +146,117 @@
 				mo2: ["최신영화제목1", "최신영화제목2", "최신영화제목3", "최신영화제목4", "최신영화제목5", "최신영화제목6", "최신영화제목7", 
 					  "최신영화제목8", "최신영화제목9", "최신영화제목10", "최신영화제목11", "최신영화제목12"]
 		};
-		var mo1Infos = {
-				info1: [{time: "10:00",seat: "40/50",cine: "1관"},
-						{time: "11:00",seat: "40/50",cine: "1관"},
-						{time: "12:00",seat: "40/50",cine: "1관"},
-						{time: "13:00",seat: "40/50",cine: "1관"},
-						{time: "14:00",seat: "40/50",cine: "1관"},
-						{time: "15:00",seat: "40/50",cine: "1관"},
-						{time: "16:00",seat: "40/50",cine: "1관"},
-						{time: "17:00",seat: "40/50",cine: "1관"},],
+		var lInfos = {
+				info1: [{time: "10:00",seat: "40/50",cine: "1관"}],
 				info2: [{time: "10:00",seat: "40/50",cine: "2관"},
-						{time: "11:00",seat: "40/50",cine: "2관"},
-						{time: "12:00",seat: "40/50",cine: "2관"},
-						{time: "13:00",seat: "40/50",cine: "2관"},
-						{time: "14:00",seat: "40/50",cine: "2관"},
-						{time: "15:00",seat: "40/50",cine: "2관"},
-						{time: "16:00",seat: "40/50",cine: "2관"}]
+						{time: "11:00",seat: "40/50",cine: "2관"}],
+				info3: [{time: "10:00",seat: "40/50",cine: "3관"},
+						{time: "11:00",seat: "40/50",cine: "3관"},
+						{time: "12:00",seat: "40/50",cine: "3관"}],
+				info4: [{time: "10:00",seat: "40/50",cine: "4관"},
+						{time: "11:00",seat: "40/50",cine: "4관"},
+						{time: "12:00",seat: "40/50",cine: "4관"},
+						{time: "13:00",seat: "40/50",cine: "4관"}],
+				info5: [{time: "10:00",seat: "40/50",cine: "5관"},
+						{time: "11:00",seat: "40/50",cine: "5관"},
+						{time: "12:00",seat: "40/50",cine: "5관"},
+						{time: "13:00",seat: "40/50",cine: "5관"},
+						{time: "14:00",seat: "40/50",cine: "5관"}],
+				info6: [{time: "10:00",seat: "40/50",cine: "6관"},
+						{time: "11:00",seat: "40/50",cine: "6관"},
+						{time: "12:00",seat: "40/50",cine: "6관"},
+						{time: "13:00",seat: "40/50",cine: "6관"},
+						{time: "14:00",seat: "40/50",cine: "6관"},
+						{time: "15:00",seat: "40/50",cine: "6관"}],
+				info7: [{time: "10:00",seat: "40/50",cine: "7관"},
+						{time: "11:00",seat: "40/50",cine: "7관"},
+						{time: "12:00",seat: "40/50",cine: "7관"},
+						{time: "13:00",seat: "40/50",cine: "7관"},
+						{time: "14:00",seat: "40/50",cine: "7관"},
+						{time: "15:00",seat: "40/50",cine: "7관"},
+						{time: "16:00",seat: "40/50",cine: "7관"}]
 		};
-		var mo2Infos = {
-				info1: [{time: "10:00",seat: "40/50",cine: "1관"},
-						{time: "11:00",seat: "40/50",cine: "1관"},
-						{time: "12:00",seat: "40/50",cine: "1관"},
-						{time: "13:00",seat: "40/50",cine: "1관"},
-						{time: "14:00",seat: "40/50",cine: "1관"},
-						{time: "15:00",seat: "40/50",cine: "1관"},
-						{time: "16:00",seat: "40/50",cine: "1관"},
-						{time: "17:00",seat: "40/50",cine: "1관"},],
-				info2: [{time: "10:00",seat: "40/50",cine: "2관"},
-						{time: "11:00",seat: "40/50",cine: "2관"},
-						{time: "12:00",seat: "40/50",cine: "2관"},
-						{time: "13:00",seat: "40/50",cine: "2관"},
-						{time: "14:00",seat: "40/50",cine: "2관"},
-						{time: "15:00",seat: "40/50",cine: "2관"},
-						{time: "16:00",seat: "40/50",cine: "2관"}]
+		var nInfos = {
+				info1: [{time: "10:30",seat: "40/50",cine: "1관"}],
+				info2: [{time: "10:30",seat: "40/50",cine: "2관"},
+						{time: "11:30",seat: "40/50",cine: "2관"}],
+				info3: [{time: "10:30",seat: "40/50",cine: "3관"},
+						{time: "11:30",seat: "40/50",cine: "3관"},
+						{time: "12:30",seat: "40/50",cine: "3관"}],
+				info4: [{time: "10:30",seat: "40/50",cine: "4관"},
+						{time: "11:30",seat: "40/50",cine: "4관"},
+						{time: "12:30",seat: "40/50",cine: "4관"},
+						{time: "13:30",seat: "40/50",cine: "4관"}],
+				info5: [{time: "10:30",seat: "40/50",cine: "5관"},
+						{time: "11:30",seat: "40/50",cine: "5관"},
+						{time: "12:30",seat: "40/50",cine: "5관"},
+						{time: "13:30",seat: "40/50",cine: "5관"},
+						{time: "14:30",seat: "40/50",cine: "5관"}],
+				info6: [{time: "10:30",seat: "40/50",cine: "6관"},
+						{time: "11:30",seat: "40/50",cine: "6관"},
+						{time: "12:30",seat: "40/50",cine: "6관"},
+						{time: "13:30",seat: "40/50",cine: "6관"},
+						{time: "14:30",seat: "40/50",cine: "6관"},
+						{time: "15:30",seat: "40/50",cine: "6관"}],
+				info7: [{time: "10:30",seat: "40/50",cine: "7관"},
+						{time: "11:30",seat: "40/50",cine: "7관"},
+						{time: "12:30",seat: "40/50",cine: "7관"},
+						{time: "13:30",seat: "40/50",cine: "7관"},
+						{time: "14:30",seat: "40/50",cine: "7관"},
+						{time: "15:30",seat: "40/50",cine: "7관"},
+						{time: "16:30",seat: "40/50",cine: "7관"}],
+				info8: [{time: "10:30",seat: "40/50",cine: "8관"},
+						{time: "11:30",seat: "40/50",cine: "8관"},
+						{time: "12:30",seat: "40/50",cine: "8관"},
+						{time: "13:30",seat: "40/50",cine: "8관"},
+						{time: "14:30",seat: "40/50",cine: "8관"},
+						{time: "15:30",seat: "40/50",cine: "8관"},
+						{time: "16:30",seat: "40/50",cine: "8관"},
+						{time: "17:30",seat: "40/50",cine: "8관"}],
+				info9: [{time: "10:30",seat: "40/50",cine: "9관"},
+						{time: "11:30",seat: "40/50",cine: "9관"},
+						{time: "12:30",seat: "40/50",cine: "9관"},
+						{time: "13:30",seat: "40/50",cine: "9관"},
+						{time: "14:30",seat: "40/50",cine: "9관"},
+						{time: "15:30",seat: "40/50",cine: "9관"},
+						{time: "16:30",seat: "40/50",cine: "9관"},
+						{time: "17:30",seat: "40/50",cine: "9관"},
+						{time: "18:30",seat: "40/50",cine: "9관"}],
+				info10: [{time: "10:30",seat: "40/50",cine: "10관"},
+						 {time: "11:30",seat: "40/50",cine: "10관"},
+						 {time: "12:30",seat: "40/50",cine: "10관"},
+						 {time: "13:30",seat: "40/50",cine: "10관"},
+						 {time: "14:30",seat: "40/50",cine: "10관"},
+						 {time: "15:30",seat: "40/50",cine: "10관"},
+						 {time: "16:30",seat: "40/50",cine: "10관"},
+						 {time: "17:30",seat: "40/50",cine: "10관"},
+						 {time: "18:30",seat: "40/50",cine: "10관"},
+						 {time: "19:30",seat: "40/50",cine: "10관"}],
+				info11: [{time: "10:30",seat: "40/50",cine: "11관"},
+						 {time: "11:30",seat: "40/50",cine: "11관"},
+						 {time: "12:30",seat: "40/50",cine: "11관"},
+						 {time: "13:30",seat: "40/50",cine: "11관"},
+						 {time: "14:30",seat: "40/50",cine: "11관"},
+						 {time: "15:30",seat: "40/50",cine: "11관"},
+						 {time: "16:30",seat: "40/50",cine: "11관"},
+						 {time: "17:30",seat: "40/50",cine: "11관"},
+						 {time: "18:30",seat: "40/50",cine: "11관"},
+						 {time: "19:30",seat: "40/50",cine: "11관"},
+						 {time: "20:30",seat: "40/50",cine: "11관"}],
+				info12: [{time: "10:30",seat: "40/50",cine: "12관"},
+						 {time: "11:30",seat: "40/50",cine: "12관"},
+						 {time: "12:30",seat: "40/50",cine: "12관"},
+						 {time: "13:30",seat: "40/50",cine: "12관"},
+						 {time: "14:30",seat: "40/50",cine: "12관"},
+						 {time: "15:30",seat: "40/50",cine: "12관"},
+						 {time: "16:30",seat: "40/50",cine: "12관"},
+						 {time: "17:30",seat: "40/50",cine: "12관"},
+						 {time: "18:30",seat: "40/50",cine: "12관"},
+						 {time: "19:30",seat: "40/50",cine: "12관"},
+						 {time: "20:30",seat: "40/50",cine: "12관"},
+						 {time: "21:30",seat: "40/50",cine: "12관"}]
 		};
-		var moInfos = [mo1Infos, mo2Infos];
+		var moInfos = [lInfos, nInfos];
 		var days = ["일", "월", "화", "수", "목", "금", "토"];
 		// 맨처음 상단에 날짜 표시
 		var writeDate = function(date){
@@ -201,21 +277,40 @@
 		// 상영 시간표 출력
 		var showTimeTable = function(){
 			
-			$("#showTimeTable").append("<div class='text-start' id='mo1'>옛날 영화</div>" + 
-									   "<div class='text-start mt-3' id='mo2'>최신 영화</div>");
+			$("#showTimeTable").append("<div class='text-start' id='lMT'>옛날 영화</div>" + 
+									   "<div class='text-start mt-3' id='nMT'>최신 영화</div>");
 			
 			// 영화 종류별
-			$.each(movies, (i, e1) => {
+			$.each(movies, function(key, value){
+				var k = key.endsWith("1") ? "lMT" : "nMT";
 				// 영화별
-				$.each(e1, (i, e2) => {
-					$("#" + e1).append();
-				});
+				$.each(value, function(idx, val){
+					var id = k + (idx+1)
+					$("#" + k).append("<div class='text-start' id='" + id + "'>" + val + "</div>");
+					// 영화별 시간 담을 div
+					$("#" + id).append("<div class='text-start'><ul class='text-start list-time'></ul></div>");
+					// 시간표 
+					$.each(moInfos, function(i, v){ // v : lInfos, nInfos 의 값 -> json
+						check1 = (i == 0) ? "l" : "n";
+						check2 = id.substr(0, 1);
+						if(check1 != check2) return;
+						$.each(v, function(ki, vel){ // ki : info1, info2, info3, ...
+							check3 = id.substr(3);
+							check4 = ki.substr(4);
+// 							debugger;
+							if(check3 != check4) return;
+							$.each(vel, function(ii, vv){ // vv : 영화별 시간
+								var tmp = vv.time + " | " + vv.seat + " | " + vv.cine;
+								$("#" + id).find(".list-time").append("<a class='btn btn-light' href='#' role='button'>" + tmp + "</a>");
+							});
+						});
+					});
+				})
 			});
 			
-// 			$("#mo1").append()
-// 			$("#mo2").append()
 			
-			debugger;
+			
+				
 		};
 		
 	</script>
@@ -309,7 +404,7 @@
 									</div>
 								</div>
 								<div class="row" >
-									<div class="col" id="showTimeTable">								
+									<div class="col" id="showTimeTable" style="height: 450px; overflow: auto;">								
 									</div>
 								</div>
 							</div>
