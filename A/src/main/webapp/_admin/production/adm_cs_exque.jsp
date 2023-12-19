@@ -36,7 +36,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-desktop"></i> <span>Latte Cinema!</span></a>
+              <a href="index.jsp" class="site_title"><i class="fa fa-desktop"></i> <span>Latte Cinema!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -116,7 +116,47 @@
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
-          
+          	<!-- 임시  -->
+			<div class="container">
+			  <h2>Modal Example</h2>
+			  <!-- Modal -->
+			  <div class="modal fade" id="myModal" role="dialog">
+			    <div class="modal-dialog">
+			    
+			      <!-- Modal content-->
+			      <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">자주찾는질문</h5>
+				        <select>
+				        	<option value="">구분선택</option>
+				        	<option value="예매">예매</option>
+				        	<option value="관람권">관람권</option>
+				        	<option value="멤버십">멤버십</option>
+				        	<option value="할인혜택">할인혜택</option>
+				        	<option value="영화관이용">영화관이용</option>
+				        </select>
+				      </div>
+				      <div class="modal-body">
+				        <form>
+				          <div class="mb-3">
+				            <label for="recipient-name" class="col-form-label">질문</label>
+				            <input type="text" class="form-control" id="recipient-name" value="적립한 포인트를 다 써도 VIP가 될 수 있나요?">
+				          </div>
+				          <div class="mb-3">
+				            <label for="message-text" class="col-form-label">글내용</label>
+				            <textarea class="form-control" id="message-text">Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.</textarea>
+				          </div>
+				        </form>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary">Send message</button>
+				      </div>
+			    </div>
+			  </div>
+			  
+			</div>
+          	<!-- 임시  -->
             <div class="page-title">
               <div class="title_left">
               </div>
@@ -152,7 +192,7 @@
                         <tr>
                           <td>1</td>
                           <td>멤버십</td>
-                          <td><a href="../../_cs/cs_exque.jsp">적립한 포인트를 다 써도 VIP가 될 수 있나요?</a></td>
+                          <td><a data-toggle="modal" data-target="#myModal" data-bs-whatever="@mdo">적립한 포인트를 다 써도 VIP가 될 수 있나요?</a></td>
                           <td>2011/04/25</td>
                           <td>2011/06/25</td>
                         </tr>

@@ -36,7 +36,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-desktop"></i> <span>Latte Cinema!</span></a>
+              <a href="index.jsp" class="site_title"><i class="fa fa-desktop"></i> <span>Latte Cinema!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -73,7 +73,7 @@
                 <h3>메인 페이지 관리</h3>
                 <ul class="nav side-menu">
                   <li><a href="adm_cs_center.jsp"><i class="fa fa-bullhorn"></i> 공지사항</a></li>
-                  <li><a href="../../_cs/cs_exque.jsp"><i class="fa fa-question"></i> 자주찾는질문</a></li>
+                  <li><a href="adm_cs_exque.jsp"><i class="fa fa-question"></i> 자주찾는질문</a></li>
                   <li><a href="adm_cs_qna.jsp"><i class="fa fa-comments"></i> 1:1문의</a></li>
                   <li><a href="adm_cs_lost.jsp"><i class="fa fa-search"></i> 분실물 문의</a></li>                     
                 </ul>
