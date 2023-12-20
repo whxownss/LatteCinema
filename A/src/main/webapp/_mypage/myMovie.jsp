@@ -4,10 +4,12 @@
 <head>
   <jsp:include page="../_common/meta.jsp"></jsp:include>
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
-  <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <jsp:include page="../_common/header.jsp"></jsp:include>
+
 </head>
 <body>
-<jsp:include page="../_common/header.jsp"></jsp:include>
+
 
 <main id="main">
   <section class="category-section">
