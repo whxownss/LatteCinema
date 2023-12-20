@@ -2,68 +2,259 @@
 	pageEncoding="UTF-8"%>
 
 <%@include file="../_common/commonHeaderStart.jsp"%>
-	<link rel="stylesheet" href="../_assets/css/signup4.css">
+	
+<link rel="stylesheet" href="../_assets/css/signup4.css">
+<script src="../jQuery/jquery-3.6.0.js"></script>
+<script>
+// 회원가입 정규식
+var lengthRegexID = /^[A-Za-z0-9!@#$%]{5,16}$/; // 영문 대소문자 숫자 특수문자 8~16자 규칙(아이디)
+var lengthRegexPass = /^[A-Za-z0-9!@#$%]{8,16}$/; // 영문 대소문자 숫자 특수문자 8~16자 규칙(패스워드)
+var engUpperRegex = /[A-Z]/; //대문자 규칙 (비밀번호)
+var engLowerRegex = /[a-z]/;  //소문자 규칙 (비밀번호)
+var numRegex = /[0-9]/;	// 숫자 0~9 규칙 (비밀번호)
+var specRegex = /[!@#$%]/;	// 특수문자 규칙 (비밀번호)
+var nameRegex = /^[가-힣]{2,5}$/; // 한글 2~5자 규칙 (이름)
+var phoneRegex =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/; // 모든 전화번호 규칙 (연락처)
+var birthRegex1 = /^\d{4}\d{2}\d{2}$/; //? YYYYMMDD 형식의 정규식 (생년월일)
+var birthRegex2 = /^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/; //YYYYMMDD 각 자리에 유효한 생년월일인지 확인 (생년월일)
+var emailRegex =  /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/; // 이메일형식 규칙(이메일)
+
+// 변수저장
+// var id = $("#id").val();
+// var passwd = $("#passwd").val();
+// var passwd2 = $("#passwd2").val();
+
+
+
+// 아이디 유효성 
+function checkIdLength(){
+	var id = $("#id").val();
+	var text = ' ** 아이디 입력 필수 **';
+	var color = "red";
+	if(id != ""){
+		
+		text = " **영문 대소문자,숫자 5~16자리로 입력해주세요";
+		
+		if(lengthRegexID.test(id)){
+			text = " ** 사용가능";
+			color = "green";
+		}
+	}
+
+	$("#CheckId").text(text).css("color", color);
+};
+
+// 비밀번호 유효성
+function checkPassLength(){
+	var passwd = $("#passwd").val();
+	var text =' ** 비밀번호 입력 필수 **';
+	var color='red';
+	var count = 0;
+	
+	if(passwd != ""){
+		
+		if(lengthRegexPass.test(passwd)){
+			
+			
+			if(engUpperRegex.test(passwd))	count ++;
+			if(engLowerRegex.test(passwd))	count ++;
+			if(numRegex.test(passwd)) 		count ++;
+			if(specRegex.test(passwd))		count ++;
+			
+			switch(count){
+				case 4: text = ' **사용 가능 : 안전**';
+						color = 'green'; break;
+				case 3: text = ' **사용 가능 : 보통**';
+						color = 'blue'; break;
+				case 2: text = ' **사용 가능 : 위험**';
+						color = 'orange'; break;
+				default: text = ' **영문자, 숫자, 특수문자 중 2가지 이상 조합 필수!**';
+						color = 'red'; break;
+			}
+		} else{
+			text ='영문 대소문자 숫자 특수문자 8~16자 입력'
+		}
+		
+		
+	}
+	$("#CheckPassword1").text(text).css("color", color);
+};
+
+// 비밀번호 확인 유효성		
+function checkConfirmPasswd() {
+	var passwd = $("#passwd").val();
+	var passwd2 = $("#passwd2").val();
+	var text = '**비밀번호 불일치**';
+	var color = 'red';
+	if( passwd == passwd2 ){
+		text='**비밀번호 일치**';
+		color='green';
+	}
+	$("#CheckPassword2").text(text).css("color", color);
+}		
+
+// 이름 정규식 유효성
+function checkName() {
+	var name = $("#name").val();
+	var text = "** 이름 입력 필수! **";
+	var color = "red";
+	
+	if(name != ""){
+		text = "** 2~5자 이상 한글이름 입력!**";
+		if(nameRegex.test(name)){
+			text = "** 사용가능 **";
+			color = "green";
+		}
+	}
+	$("#CheckName").text(text).css("color",color);
+}
+
+// 연락처 정규식 유효성
+function checkPhone() {
+	var phone = $("#phone").val();
+	var text = "** 연락처 입력 필수! **"
+	var color = "red";
+	
+	if(phone != ""){
+		text = "** '-'생략가능 **";
+		
+		if(phoneRegex.test(phone)){
+			text = "** 알맞은 연락처 형식! ** ";
+			color = "green";
+		}
+	}
+	$("#CheckPhone").text(text).css("color",color);
+}
+
+// 생년월일 8자 정규식 유효성
+function checkBirth() {
+	var birth = $("#birth").val();
+	var text = "** 생년월일 필수 입력! **";
+	var color = "red";
+	
+	if(birth != "" || !birthRegex1.test(birth)){
+		text = "** YYYYMMDD 형식의 유효한 생년월일 입력!";
+		
+		if(birthRegex2.test(birth)){
+			text = "** 유효한 생년월일 **";
+			color = "green";
+		}
+	}
+	$("#CheckBirth").text(text).css("color", color);	
+}
+
+// 이메일 정규식 유효성
+function checkEmail() {
+	var email = $("#email").val();
+	var text = "** 본인인증 이메일 필수 입력! **";
+	var color= "red";
+	
+	if(email != ""){
+		text = "** name@example.com 형식에 맞게 입력! **";
+		
+		if(emailRegex.test(email)){
+			text = "** 유효한 이메일 ** ";
+			color = "green";
+		}
+	}
+	
+	$("#CheckEmail").text(text).css("color" , color);
+}
+		
+</script>
+	
 <%@include file="../_common/commonHeaderEnd.jsp"%>
 
 <main id="main">
 
 	<section class="category-section">
-		<div class="container" data-aos="fade-up">
+		<div class="container col-5" data-aos="fade-up">
 			<div class="section-header d-flex justify-content-between align-items-center mb-5">
 				<h2>회원가입</h2>
-				<div>
-					<a href="category.html" class="more">2023.12.11 기준</a>
-				</div>
 			</div>
 			<div class="container">
-					<form>
+					<form  class=""  onsubmit="checkSubmit()" >
 						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="InputID" placeholder="ID"> 
-							<label for="InputID">ID</label>
+							<input type="text" class="form-control" id="id" placeholder="5자 이상" minlength="5" required 
+									onblur="checkIdLength()"> 
+							<label for="id">아이디<span id="CheckId"></span></label>
+	
 						</div>
 						<div class="form-floating mb-3">
-							<input type="password" class="form-control" id="inputValid" placeholder="비밀번호">
-							<label  for="inputValid">비밀번호</label> 
-							<div class="valid-feedback"></div>
+							<input type="password" class="form-control" id="passwd" placeholder="비밀번호" required
+									onblur="checkPassLength()">
+							<label  for="passwd">비밀번호<span id="CheckPassword1"></span></label> 
+	
 						</div>
 						<div class="form-floating mb-3">
-							<input type="password" class="form-control" id="inputInvalid" placeholder="비밀번호 확인">
-							<label for="inputInvalid">비밀번호 확인</label>
-							<div class="invalid-feedback">비밀번호가 일치하지 않습니다</div>
+							<input type="password" class="form-control" id="passwd2" placeholder="비밀번호 확인" required
+									onchange="checkConfirmPasswd()">
+							<label for="passwd2">비밀번호 확인<span id="CheckPassword2"></span></label>
+	
 						</div>
 						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="UserName" placeholder="이름">
-							<label for="UserName">이름</label>
+							<input type="text" class="form-control" id="name" placeholder="이름" required
+									onblur="checkName()">
+							<label for="name">이름<span id="CheckName"></span></label>
 						</div>
 						<div class="form-floating mb-3">
-							<input type="tel" class="form-control" id="UserPhoneNumber" placeholder="연락처">
-							<label for="UserPhoneNumber">연락처</label>
+							<input type="tel" class="form-control" id="phone" placeholder="연락처" required
+									onblur="checkPhone()">
+							<label for="phone">연락처<span id="CheckPhone"></span></label>
 						</div>
-						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="Userbirth" placeholder="생년월일8자" maxlength="10	">
-							<label for="Userbirth">생년월일 8자리</label>
-						</div>						
-						<div class="row g-2">
-							<div class="col-md">
+						<div class="form-floating mb-3 row g-2">
+							<div class="col-5">
 								<div class="form-floating">
-									<input type="email" class="form-control" id="floatingInputGrid" placeholder="name@example.com" >
-									<label for="floatingInputGrid">본인확인 이메일</label>
-								</div>							
+									<input type="text" class="form-control" id="address1" placeholder="우편번호" >
+									<label for="address1">우편번호</label>
+								</div>	
+							</div>	
+							<div class="col-3">	
+								<button class="btn btn-danger btn-lg" type="button" style="height:58px;">우편번호 검색</button>
 							</div>
-							<div class="col-md">
-								<div class="form-floating">
-									<select class="form-select" id="floatingSelectGrid">
-										<option selected value="naver.com">@naver.com</option>
-										<option value="naver.com">@google.com</option>
-										<option value="nate.com">@nate.com</option>
-										<option value="hanmail.net">@hanmail.net</option>
-									</select>
-									<label for="floatingSelectGrid">@domain</label>
-								</div>
-							</div>							
+						</div>
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="address2" placeholder="주소" required>
+							<label for="address2">주소</label>
+						</div>	
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="address3" placeholder="상세주소 입력" required>
+							<label for="address3">상세주소 입력</label>
+						</div>	
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="birth" placeholder="생년월일8자" maxlength="10" required
+									onblur="checkBirth()">
+							<label for="birth">생년월일 8자리<span id="CheckBirth"></span></label>
+						</div>
+						
+												
+						<div class="row">
+							<div class="col-9">
+								<div class="form-floating mb-3">
+									<input type="email" class="form-control" id="email" placeholder="name@example.com" required
+											onblur="checkEmail()">
+									<label for="email">이메일<span id="CheckEmail"></span></label>
+								</div>	
+							</div>	
+							<div class="col-3">	
+								<button class="btn btn-danger btn-lg" type="button" style="height:58px;">인증번호 발송</button>
+							</div>
+						</div>
+						
+						
+						<div class="row justify-content-md-center">
+							<div class="col-4">
+								<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="emailCheck" placeholder="인증번호 입력" >
+									<label for="emailCheck">인증번호 입력</label>
+								</div>	
+							</div>	
+							<div class="col-3">	
+								<button class="btn btn-danger btn-lg" type="button" style="height:58px;">인증하기</button>
+							</div>
 						</div>
 						<div class="d-grid gap-2" style="margin-top: 50px">
-							<button class="btn btn-outline-primary btn-lg" type="submit">가입</button>
+							<button class="btn btn-danger btn-lg" type="submit">가입</button>
 						</div>
 					</form>
 				
