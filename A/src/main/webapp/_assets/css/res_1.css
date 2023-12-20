@@ -20,3 +20,64 @@
 .hErrorC {
 	height: 100%;
 }
+
+.count-wrap {
+	position: relative;
+	padding: 0 30px;
+	border: 1px solid #ddd;
+	overflow: hidden;
+	width: 90px;
+	height: 30px;
+}
+.count-wrap > button {
+	border: 0;
+	background: #ddd;
+	color: #000;
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 0;
+	font-size: 15px;
+	
+	
+}
+.count-wrap > button.minus {
+	left: 0;
+}
+.count-wrap > button.plus {
+	right: 0;
+}
+.count-wrap .inpp {
+	padding-top: 2px;
+	border: 0;
+	height: 30px;
+	text-align: center;
+	display: block;
+	width: 100%;
+	color: #000;
+	font-size: 15px;
+}
+
+.mca {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
