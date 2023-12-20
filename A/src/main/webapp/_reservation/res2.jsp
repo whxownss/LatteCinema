@@ -67,7 +67,7 @@
 				var p4 = parseInt($("#pCase4").text());
 		    	var pSum = p1 + p2 + p3 + p4;
 				
-				
+		    	if(pSum == 0) return;
 				
 				if($(this).hasClass("selectedSeat")){
 					$(this).removeClass("btn-danger");
@@ -77,17 +77,19 @@
 					$(this).removeClass("btn-light");
 					$(this).addClass("btn-danger");
 					$(this).addClass("selectedSeat");
-					
-					var selectedSeatCNT = $(".selectedSeat").length;
-					if(selectedSeatCNT >= pSum){
-						$(".seat").not(".selectedSeat")
-								  .removeClass("btn-light")
-								  .addClass("btn-secondary")
-								  .prop("disabled", true);
-// 						debugger;
-						return;
-					}
-// 					debugger;			
+				}
+				
+				var selectedSeatCNT = $(".selectedSeat").length;
+				if(selectedSeatCNT >= pSum){
+					$(".seat").not(".selectedSeat")
+							  .removeClass("btn-light")
+							  .addClass("btn-secondary")
+							  .prop("disabled", true);
+				} else{
+					$(".seat").not(".selectedSeat")
+					  		  .removeClass("btn-secondary")
+					  		  .addClass("btn-light")
+					  		  .prop("disabled", false);
 				}
 			});
 			
