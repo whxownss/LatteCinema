@@ -26,6 +26,12 @@
     <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -37,7 +43,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.jsp" class="site_title"><i class="fa fa-desktop"></i> <span>Latte Cinema!</span></a>
+              <a href="adm_home.jsp" class="site_title"><i class="fa fa-desktop"></i> <span>Latte Cinema!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -62,7 +68,7 @@
                 <h3>General</h3>
                 <ul class="nav side-menu">
                   	
-                  <li><a href="index.jsp"><i class="fa fa-home"></i> Home</a>
+                  <li><a href="adm_home.jsp"><i class="fa fa-home"></i> Home</a>
 <!--                     <ul class="nav child_menu"> -->
 <!--                       <li><a href="index.html">Dashboard</a></li> -->
 <!--                       <li><a href="index2.html">Dashboard2</a></li> -->
@@ -288,32 +294,32 @@
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> 총 회원수</span>
               <div class="count">10000</div>
-              <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+              <span class="count_bottom"><i class="green">4% </i> From last Month</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-clock-o"></i> 월별 관객수</span>
               <div class="count">123.50</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Month</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> 남성 회원</span>
               <div class="count green">2,500</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Month</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> 여성 회원</span>
               <div class="count">4,567</div>
-              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
+              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Month</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> 월별 매출</span>
               <div class="count">2,315</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Month</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
               <div class="count">7,325</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Month</span>
             </div>
           </div>
           <!-- /top tiles -->
@@ -390,6 +396,793 @@
           <br />
 
           <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>예매 관리</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <p class="text-muted font-13 m-b-30">
+                    </p>
+					
+                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                      <thead>
+                        <tr>
+                          <th>예매번호</th>	
+                          <th>회원명</th>
+                          <th>영화명</th>
+                          <th>가격</th>
+                          <th>예매일</th>
+                          <th>취소일</th>
+                          <th>핸드폰 번호</th>
+                          <th>E-mail</th>
+                          <th>예매상태</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      	<tr>
+                      		<td>1</td>
+                      		<td>강동원</td>
+                      		<td>부산의봄</td>
+                      		<td>20000</td>
+                      		<td>2023/04/25</td>
+                      		<td></td>
+                      		<td>010 1111 1111</td>
+                      		<td>won@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                        <tr>
+                      		<td>2</td>
+                      		<td>홍길동</td>
+                      		<td>부산의봄</td>
+                      		<td>25000</td>
+                      		<td>2023/05/25</td>
+                      		<td>2023/05/26</td>
+                      		<td>010 2222 2222</td>
+                      		<td>dong@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option selected>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>3</td>
+                      		<td>김길동</td>
+                      		<td>부산의봄</td>
+                      		<td>10000</td>
+                      		<td>2023/06/25</td>
+                      		<td></td>
+                      		<td>010 3333 3333</td>
+                      		<td>dong3@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>4</td>
+                      		<td>부산의봄</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/07/25</td>
+                      		<td></td>
+                      		<td>010 3334 3333</td>
+                      		<td>dong3@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>라이언킹</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>라이언킹</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>라이언킹</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>라이언킹</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr><tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr><tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr><tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>팝콘</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
+                      	
+                      </tbody>
+                    </table>
+					
+					
+                  </div>
+                </div>
+              </div>
           </div>
 
         </div>
@@ -443,6 +1236,22 @@
     <!-- bootstrap-daterangepicker -->
     <script src="../vendors/moment/min/moment.min.js"></script>
     <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- Datatables -->
+    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="../vendors/jszip/dist/jszip.min.js"></script>
+    <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
