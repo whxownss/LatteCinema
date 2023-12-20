@@ -61,6 +61,7 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
+                  	
                   <li><a href="index.jsp"><i class="fa fa-home"></i> Home</a>
 <!--                     <ul class="nav child_menu"> -->
 <!--                       <li><a href="index.html">Dashboard</a></li> -->
@@ -68,6 +69,7 @@
 <!--                       <li><a href="index3.html">Dashboard3</a></li> -->
 <!--                     </ul> -->
                   </li>
+                  <li><a href="adm_member.jsp"><i class="fa fa-user"></i> 회원관리</a></li>
                   <li><a href="adm_mv_inout.jsp"><i class="fa fa-edit"></i>영화 통합 추가/제거</a>
 <!--                     <ul class="nav child_menu"> -->
 <!--                       <li><a href="form.html">General Form</a></li> -->
@@ -117,16 +119,7 @@
               <div class="menu_section">
                 <h3>메인 페이지 관리</h3>
                 <ul class="nav side-menu">
-                  <li><a href="../../_cs/cs_qna.jsp"><i class="fa fa-comments"></i> 1:1문의</a>
-<!--                     <ul class="nav child_menu"> -->
-<!--                       <li><a href="e_commerce.html">E-commerce</a></li> -->
-<!--                       <li><a href="projects.html">Projects</a></li> -->
-<!--                       <li><a href="project_detail.html">Project Detail</a></li> -->
-<!--                       <li><a href="contacts.html">Contacts</a></li> -->
-<!--                       <li><a href="profile.html">Profile</a></li> -->
-<!--                     </ul> -->
-                  </li>
-                  <li><a href="../../_cs/cs_center.jsp"><i class="fa fa-bullhorn"></i> 공지사항</a>
+                  <li><a href="adm_cs_center.jsp"><i class="fa fa-bullhorn"></i> 공지사항</a>
 <!--                     <ul class="nav child_menu"> -->
 <!--                       <li><a href="page_403.html">403 Error</a></li> -->
 <!--                       <li><a href="page_404.html">404 Error</a></li> -->
@@ -136,7 +129,7 @@
 <!--                       <li><a href="pricing_tables.html">Pricing Tables</a></li> -->
 <!--                     </ul> -->
                   </li>
-                  <li><a href="../../_cs/cs_exque.jsp"><i class="fa fa-question"></i> 자주찾는질문</a>
+                  <li><a href="adm_cs_exque.jsp"><i class="fa fa-question"></i> 자주찾는질문</a>
 <!--                     <ul class="nav child_menu"> -->
 <!--                         <li><a href="#level1_1">Level One</a> -->
 <!--                         <li><a>Level One<span class="fa fa-chevron-down"></span></a> -->
@@ -153,7 +146,19 @@
 <!--                         </li> -->
 <!--                     </ul> -->
                   </li>   
-                  <li><a href="../../_cs/cs_lost.jsp"><i class="fa fa-search"></i> 분실물 문의</a></li>               
+                  
+                  <li><a href="adm_cs_qna.jsp"><i class="fa fa-comments"></i> 1:1문의</a>
+<!--                     <ul class="nav child_menu"> -->
+<!--                       <li><a href="e_commerce.html">E-commerce</a></li> -->
+<!--                       <li><a href="projects.html">Projects</a></li> -->
+<!--                       <li><a href="project_detail.html">Project Detail</a></li> -->
+<!--                       <li><a href="contacts.html">Contacts</a></li> -->
+<!--                       <li><a href="profile.html">Profile</a></li> -->
+<!--                     </ul> -->
+                  </li>
+                  
+                  
+                  <li><a href="adm_cs_lost.jsp"><i class="fa fa-search"></i> 분실물 문의</a></li>               
                 </ul>
               </div>
 

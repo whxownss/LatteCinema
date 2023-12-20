@@ -40,7 +40,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.jsp" class="site_title"><i class="fa fa-desktop"></i> <span>Latte Cinema!</span></a>
+              <a href="adm_home.jsp" class="site_title"><i class="fa fa-desktop"></i> <span>Latte Cinema!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -64,7 +64,8 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="index.jsp"><i class="fa fa-home"></i> Home</a></li>
+                  <li><a href="adm_home.jsp"><i class="fa fa-home"></i> Home</a></li>
+                  <li><a href="adm_member.jsp"><i class="fa fa-user"></i> 회원관리</a></li>
                   <li><a href="adm_mv_inout.jsp"><i class="fa fa-edit"></i>영화 통합 추가/제거</a></li>
                   <li><a href="adm_store.jsp"><i class="fa fa-beer"></i>스토어 관리</a></li>
                   <li><a><i class="fa fa-table"></i> Tables</a></li>
@@ -75,10 +76,10 @@
               <div class="menu_section">
                 <h3>메인 페이지 관리</h3>
                 <ul class="nav side-menu">
-                  <li><a href="../../_cs/cs_qna.jsp"><i class="fa fa-comments"></i> 1:1문의</a></li>
-                  <li><a href="../../_cs/cs_center.jsp"><i class="fa fa-bullhorn"></i> 공지사항</a></li>
-                  <li><a href="../../_cs/cs_exque.jsp"><i class="fa fa-question"></i> 자주찾는질문</a></li>
-                  <li><a href="../../_cs/cs_lost.jsp"><i class="fa fa-search"></i> 분실물 문의</a></li>                     
+                  <li><a href="adm_cs_center.jsp"><i class="fa fa-bullhorn"></i> 공지사항</a></li>
+                  <li><a href="adm_cs/cs_exque.jsp"><i class="fa fa-question"></i> 자주찾는질문</a></li>
+                  <li><a href="adm_cs_qna.jsp"><i class="fa fa-comments"></i> 1:1문의</a></li>
+                  <li><a href="adm_cs_lost.jsp"><i class="fa fa-search"></i> 분실물 문의</a></li>                     
                 </ul>
               </div>
 
@@ -103,7 +104,7 @@
             <!-- /menu footer buttons -->
           </div>
         </div>
-
+	</div>
         <!-- top navigation -->
         <div class="top_nav">
           <div class="nav_menu">
@@ -140,7 +141,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>영화저장<small>different form elements</small></h2>
+                    <h2>Save Movie</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -214,7 +215,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>영화관 저장<small>different form elements</small></h2>
+                    <h2>Save Movie House</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -294,7 +295,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>영화 통합 저장<small>different form elements</small></h2>
+                    <h2>Save Movie Screening</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -359,28 +360,28 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-startDate">상영시작일<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                        	<input type="text" id="movie-startDate" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 230921">
+                        	<input type="date" id="movie-startDate" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 230921">
                         </div> 
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-endDate">상영종료일<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                        	<input type="text" id="movie-endDate" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 231021">
+                        	<input type="date" id="movie-endDate" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 231021">
                         </div> 
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-startTime">시작시간<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-						    <input type="text" id="movie-startTime" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 09:00">
+						    <input type="time" id="movie-startTime" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 09:00">
 						</div> 
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-endTime">종료시간<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-						    <input type="text" id="movie-endTime" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 13:00">
+						    <input type="time" id="movie-endTime" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 13:00">
 						</div> 
                       </div>
                       
@@ -412,6 +413,7 @@
         <!-- /footer content -->
       </div>
     </div>
+   </div> 
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
