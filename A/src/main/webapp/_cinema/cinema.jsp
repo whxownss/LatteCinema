@@ -9,7 +9,7 @@
 <%-- 현재 JSP 파일에만 해당하는 스타일시트 링크 추가 --%>
 <script>
 
-<!-- test -->
+<!-- test!!!!!  -->
 
 $(function(){
 	$('.sel-city').on('click', function() {
