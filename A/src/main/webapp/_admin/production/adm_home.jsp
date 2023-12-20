@@ -43,7 +43,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="adm_home.jsp" class="site_title"><i class="fa fa-desktop"></i> <span>Latte Cinema!</span></a>
+              <a href="adm_home.jsp" class="site_title"><i class="fa fa-film"></i> <span>Latte Cinema!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -301,16 +301,16 @@
               <div class="count">123.50</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Month</span>
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> 남성 회원</span>
-              <div class="count green">2,500</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Month</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> 여성 회원</span>
-              <div class="count">4,567</div>
-              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Month</span>
-            </div>
+<!--             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count"> -->
+<!--               <span class="count_top"><i class="fa fa-user"></i> 남성 회원</span> -->
+<!--               <div class="count green">2,500</div> -->
+<!--               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Month</span> -->
+<!--             </div> -->
+<!--             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count"> -->
+<!--               <span class="count_top"><i class="fa fa-user"></i> 여성 회원</span> -->
+<!--               <div class="count">4,567</div> -->
+<!--               <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Month</span> -->
+<!--             </div> -->
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> 월별 매출</span>
               <div class="count">2,315</div>
@@ -343,50 +343,50 @@
                 <div class="col-md-9 col-sm-9 col-xs-12">
                   <div id="chart_plot_01" class="demo-placeholder"></div>
                 </div>
-                <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
-                  <div class="x_title">
-                    <h2>Top Campaign Performance</h2>
-                    <div class="clearfix"></div>
-                  </div>
+<!--                 <div class="col-md-3 col-sm-3 col-xs-12 bg-white"> -->
+<!--                   <div class="x_title"> -->
+<!--                     <h2>Top Campaign Performance</h2> -->
+<!--                     <div class="clearfix"></div> -->
+<!--                   </div> -->
 
-                  <div class="col-md-12 col-sm-12 col-xs-6">
-                    <div>
-                      <p>Facebook Campaign</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <p>Twitter Campaign</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-12 col-sm-12 col-xs-6">
-                    <div>
-                      <p>Conventional Media</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <p>Bill boards</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+<!--                   <div class="col-md-12 col-sm-12 col-xs-6"> -->
+<!--                     <div> -->
+<!--                       <p>Facebook Campaign</p> -->
+<!--                       <div class=""> -->
+<!--                         <div class="progress progress_sm" style="width: 76%;"> -->
+<!--                           <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div> -->
+<!--                         </div> -->
+<!--                       </div> -->
+<!--                     </div> -->
+<!--                     <div> -->
+<!--                       <p>Twitter Campaign</p> -->
+<!--                       <div class=""> -->
+<!--                         <div class="progress progress_sm" style="width: 76%;"> -->
+<!--                           <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div> -->
+<!--                         </div> -->
+<!--                       </div> -->
+<!--                     </div> -->
+<!--                   </div> -->
+<!--                   <div class="col-md-12 col-sm-12 col-xs-6"> -->
+<!--                     <div> -->
+<!--                       <p>Conventional Media</p> -->
+<!--                       <div class=""> -->
+<!--                         <div class="progress progress_sm" style="width: 76%;"> -->
+<!--                           <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div> -->
+<!--                         </div> -->
+<!--                       </div> -->
+<!--                     </div> -->
+<!--                     <div> -->
+<!--                       <p>Bill boards</p> -->
+<!--                       <div class=""> -->
+<!--                         <div class="progress progress_sm" style="width: 76%;"> -->
+<!--                           <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div> -->
+<!--                         </div> -->
+<!--                       </div> -->
+<!--                     </div> -->
+<!--                   </div> -->
 
-                </div>
+<!--                 </div> -->
 
                 <div class="clearfix"></div>
               </div>
@@ -408,6 +408,18 @@
                   </div>
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30">
+                    <!-- 임시  -->
+<!--                     	<select class="input-sm"> -->
+<!--                     			<option>지역선택</option> -->
+<!--                     			<option>부산</option> -->
+<!--                     			<option>서울</option> -->
+<!--                     		</select> -->
+<!--                     	<select class="input-sm"> -->
+<!--                     			<option>영화관 선택</option> -->
+<!--                     			<option>서면</option> -->
+<!--                     			<option>부산대</option> -->
+<!--                     		</select> -->
+                     <!-- //임시  -->		
                     </p>
 					
                     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
@@ -415,6 +427,8 @@
                         <tr>
                           <th>예매번호</th>	
                           <th>회원명</th>
+                          <th>지역</th>
+                          <th>영화관</th>
                           <th>영화명</th>
                           <th>가격</th>
                           <th>예매일</th>
@@ -428,6 +442,8 @@
                       	<tr>
                       		<td>1</td>
                       		<td>강동원</td>
+                      		<td>부산</td>
+                          	<td>서면점</td>
                       		<td>부산의봄</td>
                       		<td>20000</td>
                       		<td>2023/04/25</td>
@@ -444,6 +460,8 @@
                         <tr>
                       		<td>2</td>
                       		<td>홍길동</td>
+                      		<td>부산</td>
+                          	<td>서면점</td>
                       		<td>부산의봄</td>
                       		<td>25000</td>
                       		<td>2023/05/25</td>
@@ -460,6 +478,8 @@
                       	<tr>
                       		<td>3</td>
                       		<td>김길동</td>
+            		        <td>부산</td>
+                          	<td>서면점</td>
                       		<td>부산의봄</td>
                       		<td>10000</td>
                       		<td>2023/06/25</td>
@@ -475,8 +495,10 @@
                       	</tr>
                       	<tr>
                       		<td>4</td>
+                      		<td>이길동</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
                       		<td>부산의봄</td>
-                      		<td>팝콘</td>
                       		<td>10000</td>
                       		<td>2023/07/25</td>
                       		<td></td>
@@ -492,6 +514,8 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
                       		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
@@ -508,6 +532,8 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
                       		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
@@ -524,6 +550,8 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
                       		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
@@ -540,6 +568,8 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
                       		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
@@ -556,7 +586,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -572,7 +604,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -588,7 +622,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -604,7 +640,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -620,7 +658,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -636,7 +676,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -652,7 +694,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -668,22 +712,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr><tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -699,7 +730,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -715,7 +748,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -731,7 +766,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -747,7 +784,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -763,7 +802,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -779,7 +820,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -795,22 +838,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr><tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -826,7 +856,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -842,7 +874,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -858,7 +892,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -874,7 +910,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -890,7 +928,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -906,22 +946,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr><tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
@@ -937,232 +964,9 @@
                       	<tr>
                       		<td>5</td>
                       		<td>이길동</td>
-                      		<td>팝콘</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>팝콘</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>팝콘</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>팝콘</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>팝콘</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>팝콘</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>팝콘</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>팝콘</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>팝콘</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>팝콘</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>팝콘</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>팝콘</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>팝콘</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>팝콘</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>팝콘</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
                       		<td>10000</td>
                       		<td>2023/08/25</td>
                       		<td></td>
