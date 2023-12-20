@@ -328,65 +328,25 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="dashboard_graph">
 
-                <div class="row x_title">
-                  <div class="col-md-6">
-                    <h3>Network Activities <small>Graph title sub-title</small></h3>
-                  </div>
-                  <div class="col-md-6">
-                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                      <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-9 col-sm-9 col-xs-12">
-                  <div id="chart_plot_01" class="demo-placeholder"></div>
-                </div>
-<!--                 <div class="col-md-3 col-sm-3 col-xs-12 bg-white"> -->
-<!--                   <div class="x_title"> -->
-<!--                     <h2>Top Campaign Performance</h2> -->
-<!--                     <div class="clearfix"></div> -->
+<!--                 <div class="row x_title"> -->
+<!--                   <div class="col-md-6"> -->
+<!--                     <h3>Network Activities <small>Graph title sub-title</small></h3> -->
 <!--                   </div> -->
-
-<!--                   <div class="col-md-12 col-sm-12 col-xs-6"> -->
-<!--                     <div> -->
-<!--                       <p>Facebook Campaign</p> -->
-<!--                       <div class=""> -->
-<!--                         <div class="progress progress_sm" style="width: 76%;"> -->
-<!--                           <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div> -->
-<!--                         </div> -->
-<!--                       </div> -->
-<!--                     </div> -->
-<!--                     <div> -->
-<!--                       <p>Twitter Campaign</p> -->
-<!--                       <div class=""> -->
-<!--                         <div class="progress progress_sm" style="width: 76%;"> -->
-<!--                           <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div> -->
-<!--                         </div> -->
-<!--                       </div> -->
+<!--                   <div class="col-md-6"> -->
+<!--                     <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc"> -->
+<!--                       <i class="glyphicon glyphicon-calendar fa fa-calendar"></i> -->
+<!--                       <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b> -->
 <!--                     </div> -->
 <!--                   </div> -->
-<!--                   <div class="col-md-12 col-sm-12 col-xs-6"> -->
-<!--                     <div> -->
-<!--                       <p>Conventional Media</p> -->
-<!--                       <div class=""> -->
-<!--                         <div class="progress progress_sm" style="width: 76%;"> -->
-<!--                           <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div> -->
-<!--                         </div> -->
-<!--                       </div> -->
-<!--                     </div> -->
-<!--                     <div> -->
-<!--                       <p>Bill boards</p> -->
-<!--                       <div class=""> -->
-<!--                         <div class="progress progress_sm" style="width: 76%;"> -->
-<!--                           <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div> -->
-<!--                         </div> -->
-<!--                       </div> -->
-<!--                     </div> -->
-<!--                   </div> -->
-
 <!--                 </div> -->
+
+<!--                 <div class="col-md-9 col-sm-9 col-xs-12"> -->
+<!--                   <div id="chart_plot_01" class="demo-placeholder"></div> -->
+<!--                 </div> -->
+           
+				<div class="chart-size" style="width: 700px; height: 800px;">
+				  <canvas id="myChart"></canvas>
+				</div>
 
                 <div class="clearfix"></div>
               </div>
@@ -1059,6 +1019,31 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    
+<!--     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+      datasets: [{
+        label: 'total of Month',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
 	
   </body>
 </html>
