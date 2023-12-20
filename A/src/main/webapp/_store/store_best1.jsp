@@ -5,7 +5,57 @@
 <%@include file="../_common/commonHeaderEnd.jsp"%>
 
 <main id="main">
+<script src="../jQuery/jquery-3.6.0.js"></script>
 
+   <script>
+      $(function(){
+         
+         //수량 옵션
+         $('._count :button').on({
+             'click' : function(e){
+
+                 e.preventDefault();
+                 var count = $(this).parent('._count').find('.inpp').text();
+                 var now = parseInt(count);
+                 var min = 1;
+                 var max = 5;
+                 var num = now;
+                 if($(this).hasClass('minus')){
+                     var type = 'm';
+                 }else{
+                     var type = 'p';
+                 }
+                 if(type=='m'){
+                     if(now>min){
+                         num = now - 1;
+                     }
+                 }else{
+                     if(now<max){
+                         num = now + 1;
+                     }
+                 }
+                 if(num != now){
+                     $(this).parent('._count').find('.inpp').text(num);
+                 }
+             }
+         });
+         
+     	//1.가격정보 가져온다.
+ 		const priceTag = document.querySelector('#priceSpan').innerText;//선택한 태그의 innerText 가격값을 가져온다.
+ 		//alert(priceTag.innerText);
+ 		
+ 		//2.수량정보 가져온다.
+ 		const putCnt = document.querySelector('input[type="number"]').value;
+ 		
+ 		//3.수량과 가격을 곱한다.
+ 		const result = priceTag * putCnt;
+ 		
+ 		//4.총가격의 값을 바꾼다.
+ 		 document.querySelector('#totalPriceSpan').innerText = result;
+         
+      });
+   </script>
+   
 	<section class="category-section">
 		<div class="container" data-aos="fade-up">
 
@@ -24,7 +74,7 @@
 						</colgroup>
 						<thead>
 							<tr>
-								<th scope="row" class="text-center" colspan="6">
+								<th scope="row" class="text-center" colspan="4">
 									<h3 class="fs-1">스위트콤보</h3>
 								</th>
 							</tr>
@@ -44,23 +94,30 @@
 							</tr>
 							<tr>
 								<th scope="col" style="padding-top: 3%">총 상품금액</th>
-								<td class="text-end fs-2"> 10,000 <em>원</em></td>
+								<td class="text-end fs-2" 
+									style="font-weight: bold; color: #FF243E;"> 10,000 <em>원</em></td>
+							</tr>
+							<tr class="border border-bottom-0 border-white">
+								<td scope="row" class="text-center" colspan="4">
+									<div class="input-group mb-3 container _count"
+									style="width: 400px; padding-top: 4%; text-align: center;">
+									<button class="minus btn btn-outline-secondary">-</button> <label
+									class="inpp input-group-text" for="inputGroupFile01"
+									style="text-align: center; padding-left: 150px; padding-right: 150px;">1</label>
+									<button class="plus btn btn-outline-secondary">+</button>
+									</div>
+								</td>
+							</tr>
+							<tr class="border border-0 border-white">
+								<td scope="row" class="text-center" colspan="4">
+									<button class="btn btn-secondary btn-lg"
+										style="text-align: center; padding-left: 60px; padding-right: 60px;">선물하기</button>
+									<button class="btn btn-danger btn-lg"
+										style="text-align: center; padding-left: 60px; padding-right: 60px;">구매하기</button>
+								</td>
 							</tr>
 						</tbody>
 					</table>
-					<div class="input-group mb-3 container"
-						style="width: 400px; text-align: center;">
-						<button class="btn btn-outline-secondary">-</button>
-						<label class="input-group-text" for="inputGroupFile01"
-							style="text-align: center; padding-left: 150px; padding-right: 150px;">1</label>
-						<button class="btn btn-outline-secondary">+</button>
-					</div>
-					<div class="btn_wrap">
-						<button class="btn btn-secondary btn-lg"
-							style="text-align: center; padding-left: 66px; padding-right: 66px;">선물하기</button>
-						<button class="btn btn-danger btn-lg"
-							style="text-align: center; padding-left: 66px; padding-right: 66px;">구매하기</button>
-					</div>
 				</article>
 		</div>
 	</section>
