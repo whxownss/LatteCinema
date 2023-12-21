@@ -10,7 +10,14 @@
 			//수량 옵션
 			$('._count :button').on({
 			    'click' : function(e){
-
+			    	var p1 = parseInt($("#pCase1").text());
+					var p2 = parseInt($("#pCase2").text());
+					var p3 = parseInt($("#pCase3").text());
+					var p4 = parseInt($("#pCase4").text());
+			    	var pSum = p1 + p2 + p3 + p4;
+					
+			    	if(pSum >= 8 && $(this).hasClass('plus')) return;
+			    	
 			        e.preventDefault();
 			        var count = $(this).parent('._count').find('.inpp').text();
 			        var now = parseInt(count);
@@ -37,8 +44,58 @@
 			    }
 			});
 			
-			// 호버시 마우서 커서 모양 변경 (*******질문하기, 이 방법밖에 없나?)
+			// 호버시 마우서 커서 모양 변경
 			$(".myMouse").css("cursor","pointer");
+			
+			
+			$(".cntPerson").on("DOMSubtreeModified", function(){
+				// 좌석 선택 다 해야 뜨는걸로
+				var p1 = parseInt($("#pCase1").text());
+				var p2 = parseInt($("#pCase2").text());
+				var p3 = parseInt($("#pCase3").text());
+				var p4 = parseInt($("#pCase4").text());
+				
+				var sum = p1 * 12000 + p2 * 7000 + p3 * 5000 + p4 * 4000;
+				
+				$("#mPrice").text(sum);
+			});
+			
+			$(".seat").on("click", function(){
+				var p1 = parseInt($("#pCase1").text());
+				var p2 = parseInt($("#pCase2").text());
+				var p3 = parseInt($("#pCase3").text());
+				var p4 = parseInt($("#pCase4").text());
+		    	var pSum = p1 + p2 + p3 + p4;
+				
+		    	if(pSum == 0) {
+		    		alert("인원을 선택해 주십시오.");
+		    		return;
+		    	}
+				
+				if($(this).hasClass("selectedSeat")){
+					$(this).removeClass("btn-danger");
+					$(this).addClass("btn-light");
+					$(this).removeClass("selectedSeat");	
+				} else {
+					$(this).removeClass("btn-light");
+					$(this).addClass("btn-danger");
+					$(this).addClass("selectedSeat");
+				}
+				
+				var selectedSeatCNT = $(".selectedSeat").length;
+				if(selectedSeatCNT >= pSum){
+					$(".seat").not(".selectedSeat")
+							  .removeClass("btn-light")
+							  .addClass("btn-secondary")
+							  .prop("disabled", true);
+				} else{
+					$(".seat").not(".selectedSeat")
+					  		  .removeClass("btn-secondary")
+					  		  .addClass("btn-light")
+					  		  .prop("disabled", false);
+				}
+			});
+			
 			
 		});
 	</script>
@@ -90,33 +147,33 @@
 									<li class="d-flex flex-row ms-3">
 										<span class="me-1 d-flex align-items-center">성인 </span>
 										<div class="count-wrap _count">
-										    <button type="button" class="minus d-flex justify-content-center">-</button>
-										    <span class="inpp align-middle">0</span>
-										    <button type="button" class="plus d-flex justify-content-center">+</button>
+										    <button type="button" class="minus d-flex justify-content-center pmBtn">-</button>
+										    <span class="inpp align-middle cntPerson" id="pCase1">0</span>
+										    <button type="button" class="plus d-flex justify-content-center pmBtn">+</button>
 										</div>
 									</li>
 									<li class="d-flex flex-row ms-3">
 										<span class="me-1 d-flex align-items-center">청소년 </span>
 										<div class="count-wrap _count">
-										    <button type="button" class="minus d-flex justify-content-center">-</button>
-										    <span class="inpp align-middle">0</span>
-										    <button type="button" class="plus d-flex justify-content-center">+</button>
+										    <button type="button" class="minus d-flex justify-content-center pmBtn">-</button>
+										    <span class="inpp align-middle cntPerson" id="pCase2">0</span>
+										    <button type="button" class="plus d-flex justify-content-center pmBtn">+</button>
 										</div>
 									</li>
 									<li class="d-flex flex-row ms-3">
 										<span class="me-1 d-flex align-items-center">경로 </span>
 										<div class="count-wrap _count">
-										    <button type="button" class="minus d-flex justify-content-center">-</button>
-										    <span class="inpp align-middle">0</span>
-										    <button type="button" class="plus d-flex justify-content-center">+</button>
+										    <button type="button" class="minus d-flex justify-content-center pmBtn">-</button>
+										    <span class="inpp align-middle cntPerson" id="pCase3">0</span>
+										    <button type="button" class="plus d-flex justify-content-center pmBtn">+</button>
 										</div>
 									</li>
 									<li class="d-flex flex-row ms-3">
 										<span class="me-1 d-flex align-items-center">장애인 </span>
 										<div class="count-wrap _count">
-										    <button type="button" class="minus d-flex justify-content-center">-</button>
-										    <span class="inpp align-middle">0</span>
-										    <button type="button" class="plus d-flex justify-content-center">+</button>
+										    <button type="button" class="minus d-flex justify-content-center pmBtn">-</button>
+										    <span class="inpp align-middle cntPerson" id="pCase4">0</span>
+										    <button type="button" class="plus d-flex justify-content-center pmBtn">+</button>
 										</div>
 									</li>
 								</ul>
@@ -128,27 +185,64 @@
 						
 						<div class="row bg-black text-white">
 							<div class="" style="height:700px">
-								<div class="bg-secondary mt-3">S C R E E N</div>
-								<div class="mt-5 border">
-								<button type="button" class="btn btn-light">1</button>
-								<button type="button" class="btn btn-light">2</button>
-								<button type="button" class="btn btn-light">3</button>
-								<button type="button" class="btn btn-light">4</button>
-								<button type="button" class="btn btn-light">5</button>
-								
-								<button type="button" class="btn btn-light">6</button>
-								<button type="button" class="btn btn-light">7</button>
-								<button type="button" class="btn btn-light">8</button>
-								<button type="button" class="btn btn-light">9</button>
-								<button type="button" class="btn btn-light">10</button>
-								
+								<div class="bg-secondary mt-3 mb-5 fs-5">S C R E E N</div>
+								<div class="mb-1  d-flex justify-content-between">
+									<div class="text-end vca" style="width:300px">A</div>
+									<div>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">1</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">2</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">3</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">4</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">5</span></button>
+										<span class="me-5"></span>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">6</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">7</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">8</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">9</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">10</span></button>
+									</div>
+									<div style="width:300px"></div>
+								</div>
+								<div class="mb-1  d-flex justify-content-between">
+									<div class="text-end vca" style="width:300px">B</div>
+									<div>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">1</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">2</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">3</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">4</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">5</span></button>
+										<span class="me-5"></span>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">6</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">7</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">8</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">9</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">10</span></button>
+									</div>
+									<div style="width:300px"></div>
+								</div>
+								<div class="mb-1  d-flex justify-content-between">
+									<div class="text-end vca" style="width:300px">C</div>
+									<div>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">1</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">2</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">3</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">4</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">5</span></button>
+										<span class="me-5"></span>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">6</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">7</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">8</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">9</span></button>
+										<button type="button" class="btn btn-light seat" style="width:40px"><span class="mca">10</span></button>
+									</div>
+									<div style="width:300px"></div>
 								</div>
 							</div>
 							
 							
 						</div>
 						<div class="row">
-							<div class="col bg-secondary text-white p-4 text-start fs-4">총 합계 0원</div>
+							<div class="col bg-secondary text-white p-4 text-start fs-4">총 합계 <span class="fs-1" id="mPrice">0</span>원</div>
 							<div class="col-2 bg-danger text-white p-4 fs-6 mca myMouse">결제하기</div>
 						</div>
 					</div>
