@@ -40,7 +40,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="adm_home.jsp" class="site_title"><i class="fa fa-desktop"></i> <span>Latte Cinema!</span></a>
+              <a href="adm_home.jsp" class="site_title"><i class="fa fa-film"></i> <span>Latte Cinema!</span></a>
             </div>
 
             <div class="clearfix"></div>
