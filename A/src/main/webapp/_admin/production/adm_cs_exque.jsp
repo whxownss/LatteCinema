@@ -192,7 +192,7 @@
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">나가기</button>
-				        <button type="button" class="btn btn-primary">추가</button>
+				        <button type="button" id="insertRow" class="btn btn-primary">추가</button>
 				      </div>
 			    </div>
 			  </div>
@@ -681,7 +681,19 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-	<script type="text/javascript">
+<script type="text/javascript">
+	// 테이블의 각 행에 클릭 이벤트를 추가
+	$("table tbody tr").on("click", function () {
+	    // 클릭한 행에서 첫 번째 <td> 요소의 내용을 가져옴
+	    var clickedNumber = $(this).find("td:first").text();
+
+	    // 가져온 숫자 값을 출력하거나 다른 작업 수행
+	    console.log("Clicked Number:", clickedNumber);
+
+	    // 또는 다른 작업을 수행할 수 있습니다.
+	    // 예를 들어, 모달을 열거나 다른 페이지로 이동할 수 있습니다.
+	});
+	
 	 // <a> 태그가 클릭되었을 때 실행할 함수
 	 // #openModal 대신 "tr:eq(1) td:eq(2)" 사용해보자
 	    $("tr:eq(1) td:eq(2)").click(function() {
@@ -719,8 +731,32 @@
 	 	    // 모달을 숨깁니다.
 	 	    $("#myModal").modal('hide');
 	 	});
-	 
+	 	
+	 	// 추가 버튼 누르면 새로운 행 추가 하기
+	 	$("#insertRow").on("click", function () {
+	 	    // 새로운 행을 생성
+	 	    var newRow = $("<tr></tr>");
+
+	 	    // 각 열에 대한 데이터를 가져와서 새로운 셀을 생성하여 행에 추가
+	 	    var selectValue = $("#myModal2 select").val();
+	 	    var question = $("#myModal2 #recipient-name").val();
+	 	    var content = $("#myModal2 #message-text").val();
+
+	 	    // 이 예제에서는 각 열에 데이터를 추가하고 있습니다.
+	 	    newRow.append("<td>" + 11 + "</td>");
+	 	    newRow.append("<td>" + selectValue + "</td>");
+	 	    newRow.append("<td>" + question + "</td>");
+// 	 	    newRow.append("<td>" + content + "</td>");
+			newRow.append("<td>" + "</td>");
+			newRow.append("<td>" + "</td>");
+
+	 	    // 테이블의 맨 위에 행을 추가
+	 	    $("table tbody").prepend(newRow);
+
+	 	    // 모달 닫기
+	 	    $("#myModal2").modal("hide");
+	 	});
 	
-	</script>
+</script>
   </body>
 </html>
