@@ -28,9 +28,15 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+
   </head>
 
   <body class="nav-md">
+ <%
+ 	String select = "멤버십";
+ 	String subject = "제목 데이터를 받자";
+ 	String content = "내용 데이터를 받자";
+ %>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -124,7 +130,7 @@
 				      <div class="modal-header">
 				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				        <h5 class="modal-title" id="exampleModalLabel">자주찾는질문</h5>
-				        <select>
+				        <select id="modalSelect">
 				        	<option value="">구분선택</option>
 				        	<option value="예매">예매</option>
 				        	<option value="관람권">관람권</option>
@@ -137,18 +143,18 @@
 				        <form>
 				          <div class="mb-3">
 				            <label for="recipient-name" class="col-form-label">질문</label>
-				            <input type="text" class="form-control" id="recipient-name" value="적립한 포인트를 다 써도 VIP가 될 수 있나요?">
+				            <input type="text" class="form-control" id="recipient-name" value="">
 				          </div>
 				          <div class="mb-3">
 				            <label for="message-text" class="col-form-label">글내용</label>
-				            <textarea class="form-control" id="message-text">Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.</textarea>
+				            <textarea class="form-control" id="message-text"></textarea>
 				          </div>
 				        </form>
 				      </div>
 				      <div class="modal-footer">
 				      	<button type="button" class="btn btn-danger">삭제</button>
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">나가기</button>
-				        <button type="button" class="btn btn-primary">수정</button>
+				        <button type="button" id="modalRewrite" class="btn btn-primary">수정</button>
 				      </div>
 			    </div>
 			  </div>
@@ -226,8 +232,8 @@
                       <tbody>
                         <tr>
                           <td>1</td>
-                          <td>멤버십</td>
-                          <td><a data-toggle="modal" data-target="#myModal">적립한 포인트를 다 써도 VIP가 될 수 있나요?</a></td>
+                          <td><%=select %></td>
+                          <td><a data-toggle="modal" data-target="#myModal" data-info='{"key1": "<%=subject%>", "key2": "<%=content%>", "key3": "<%=select%>"}'><%=subject %></a></td>
                           <td>2011/04/25</td>
                           <td>2011/06/25</td>
                         </tr>
@@ -675,6 +681,46 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+	<script type="text/javascript">
+	 // <a> 태그가 클릭되었을 때 실행할 함수
+	 // #openModal 대신 "tr:eq(1) td:eq(2)" 사용해보자
+	    $("tr:eq(1) td:eq(2)").click(function() {
+	    	alert("이벤트 연결 성공");
+	        // 현재 클릭된 td 요소에 있는 a 태그에서 data-info 속성 가져오기
+	        var infoData = $(this).find("a").data("info");
 
+	        if (infoData) {
+	            // 필요한 정보 추출
+	            $("#modalSelect").val(infoData.key3); // select 옵션 선택 받기
+	            $("#recipient-name").val(infoData.key1); // a 태그에서 가져온 정보
+	            $("#message-text").text(infoData.key2); // a 태그에서 가져온 정보
+	        } else {
+	            console.log("data-info not found");
+	        }
+	    });
+	 	//수정 모달 수정 버튼 클릭
+	 	$("#modalRewrite").on("click",function(){
+	 		alert("이벤트 연결 성공");
+	 	// 실제 값으로 subject, content, select 값을 대체하세요
+	 	    var subject = '<%=subject %>';
+	 	    var content = '<%=content %>';
+	 	    var select = '<%=select %>';
+
+	 	    // anchorString을 생성합니다.
+// 	 	    var anchorString = '<a data-toggle="modal" data-target="#myModal" data-info=\'{"key1": "' + subject + '", "key2": "' + content + '", "key3": "' + select + '"}\'>';
+	 	    var anchorString = '<a data-toggle="modal" data-target="#myModal" data-info=\'{"key1": "' + $("#recipient-name").val() + '", "key2": "' + content + '", "key3": "' + $("#modalSelect").val() + '"}\'>';
+
+	 	    console.log(anchorString);
+
+	 	    // <td> 요소의 내용을 설정합니다.
+	 	    $("tr:eq(1) td:eq(1)").text($("#modalSelect").val());
+	 	    $("tr:eq(1) td:eq(2)").html(anchorString + $("#recipient-name").val() + '</a>');
+
+	 	    // 모달을 숨깁니다.
+	 	    $("#myModal").modal('hide');
+	 	});
+	 
+	
+	</script>
   </body>
 </html>

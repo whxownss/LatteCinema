@@ -58,8 +58,8 @@
 				  <tbody>
 				    <tr>
 				      <th scope="row">1</th>
-				      <td><input type="text" value="전체" readonly></td>
-				      <td><input type="text" value="겨울왕국1 교환 안내"></td>
+				      <td style="width: 50px;"><input type="text" value="전체" readonly></td>
+				      <td><input type="text" style="width: 90%;" value="겨울왕국1 교환 안내"></td>
 				      <td>23.12.01</td>
 				    </tr>
 				    <tr>
