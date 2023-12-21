@@ -7,11 +7,25 @@
 	<script>
 	
 		$(function(){
+
+			// 할인받기전 금액 합
+			var sumP = parseInt($("#pTP1").text()) + parseInt($("#pTP2").text()) + parseInt($("#pTP3").text());
+			$("#sumPrice").text(sumP.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+			// 처음에 총 금액
+			$("#salePrice").text(0);
+			$("#rsPrice").text($("#sumPrice").text());
+			
+			// 호버시 마우서 커서 모양 변경
+			$(".myMouse").css({
+				"cursor": "pointer"
+			});
+			
 			
 			$("#inputPoint").on("keydown", function(e){
 				var iPoint = parseInt($("#inputPoint").val().replace(/[^\d]+/g, ""));
 				var nPoint = parseInt($("#nowPoint").text().replace(/[^\d]+/g, ""));
-				
+// 				e.key == 'Enter' 일단보류
 				if(e.key == 'Delete'     ||
 				   e.key == 'ArrowLeft'  ||
 				   e.key == 'Backspace'  || 
@@ -28,15 +42,28 @@
 				
 				iTmp = parseInt(tmp.replace(/[^\d]+/g, ""));
 				var nTmp = parseInt($("#nowPoint").text().replace(/[^\d]+/g, ""));
-				
+
 				$("#resultPoint").text("사용하실 포인트를 다시 입력해주세요.");
-				if(iTmp <= nTmp){
-					var rs = (nTmp - iTmp).toString().replace(/[^\d]+/g, ""));
-					debugger;
-					$("#resultPoint").text(rs);
-				}
 				
+				if(isNaN(iTmp)) iTmp = 0;
+				
+				// 굿
+				if(!(iTmp <= nTmp)) return;
+				var rs = (nTmp - iTmp).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+				$("#resultPoint").text(rs);
+				
+				$("#salePrice").text(iTmp);
+				
+				// 총금액 합
+				var sP = sumP - iTmp; 
+				$("#rsPrice").text(sP.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			});
+			$("#inputPoint").on("focus", function(){
+				$("#inputPoint").val($("#inputPoint").val().replace(/[^\d]+/g, ""));
+			});
+			
+			
+			
 			
 			
 		});
@@ -147,9 +174,76 @@
 							<!-- 날짜 및 시간 -->
 							<div class="col border border-secondary">
 								<div class="row">
-									<div class="col p-2 bg-black text-white" id="selectedDate">결제하기</div>
+									<div class="col p-2 bg-black text-white" id="selectedMovie">결제하기</div>
 								</div>
-								<div class="row">
+								
+								<div class="row bg-body-secondary">
+								
+									<div class="col" style="height:700px;">
+									
+										<div class="row border-bottom border-dark-subtle" style="height:350px;">
+												<div class="text-start mt-2" style="height:20px;">금액</div>
+												<div class="mt-2 border-bottom border-dark-subtle"  style="height:155px;">
+													<table class="w-100">
+														<tr>
+															<td class="text-start" style="width: 15%">성인</td>
+															<td><span style="width: 1%">2</span></td>
+															<td class="text-start">명</td>
+															<td class="text-end"><span id="pTP1">28000</span></td>
+														</tr>
+														
+														<tr>
+															<td class="text-start">청소년</td>
+															<td><span>3</span></td>
+															<td class="text-start">명</td>
+															<td class="text-end"><span id="pTP2">21000</span></td>
+														</tr>
+														
+														<tr>
+															<td class="text-start">경로</td>
+															<td><span>0</span></td>
+															<td class="text-start">명</td>
+															<td class="text-end"><span id="pTP3">0</span></td>
+														</tr>
+														
+														<tr>
+															<th class="text-start" colspan="3">합계</th>
+															<th class="text-end"><span id="sumPrice"></span>원</th>
+														</tr>
+													</table>
+												</div>
+											<div style="height: 175px">
+												<div class="text-start">할인금액</div>
+												<div class="text-danger text-start">-<span id="salePrice"></span>원</div>
+											</div>
+											
+										</div>
+									
+										<div class="row" style="height:350px;">
+											
+											<div class="text-start mt-2 fw-bold" style="height:200px;">
+<!-- 												총 결제금액<span class="fs-4" id="rsPrice" style="margin-left: 160px"></span>원 -->
+												<table class="w-100">
+													<tr>
+														<th>총 결제금액</th>
+<!-- 														<th class="text-end" id="rsPrice" style=""></th> -->
+														<th class="text-end"><span id="rsPrice"></span>원</th>
+													
+													</tr>
+													
+													
+												
+												
+												
+												</table>
+											
+											</div>
+											
+											<div id="lastPay" class="mca myMouse" style="heigth:40px;">결제하기</div>
+										</div>
+										
+										
+									</div>
 									
 								</div>
 							</div>

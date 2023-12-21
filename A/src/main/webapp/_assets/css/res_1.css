@@ -76,7 +76,7 @@
 
 .payType {
 	width: 150px;
-	height: 100px;
+	height: 70px;
 }
 
 .mba  {
@@ -85,7 +85,13 @@
 }
 
 
-
+#lastPay {
+	color: white;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    
+    
+}
 
 
 
