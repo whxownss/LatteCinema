@@ -68,7 +68,7 @@
 		    	var pSum = p1 + p2 + p3 + p4;
 				
 		    	if(pSum == 0) {
-		    		alert("인원을 선택해 주십시오.");
+		    		alert('인원을 선택해 주십시오.');
 		    		return;
 		    	}
 				
