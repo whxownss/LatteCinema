@@ -40,6 +40,8 @@
 
 	<section class="category-section fs-5" id="store1">
 		<div class="container" data-aos="fade-up">
+		<span class="anchor" id="store1"
+		style="display: block; height: 20px; margin-top: 20px; visibility: hidden;"></span>
 			<div
 				class="section-header d-flex justify-content-between align-items-center mb-5">
 				<h2>베스트</h2>
@@ -106,6 +108,8 @@
 
 	<section class="category-section fs-5" id="store2">
 		<div class="container" data-aos="fade-up">
+		<span class="anchor" id="store2"
+		style="display: block; height: 20px; margin-top: 20px; visibility: hidden;"></span>
 			<div
 				class="section-header d-flex justify-content-between align-items-center mb-5">
 				<h2>관람권</h2>
@@ -193,6 +197,8 @@
 
 	<section class="category-section fs-5" id="store3">
 		<div class="container" data-aos="fade-up">
+		<span class="anchor" id="store3"
+		style="display: block; height: 20px; margin-top: 20px; visibility: hidden;"></span>
 			<div
 				class="section-header d-flex justify-content-between align-items-center mb-5">
 				<h2>스낵음료</h2>

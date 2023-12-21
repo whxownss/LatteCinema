@@ -10,7 +10,7 @@
    <script>
       $(function(){
          
-         //수량 옵션
+         // 수량 옵션
          $('._count :button').on({
              'click' : function(e){
 
@@ -20,6 +20,7 @@
                  var min = 1;
                  var max = 5;
                  var num = now;
+                 
                  if($(this).hasClass('minus')){
                      var type = 'm';
                  }else{
@@ -40,22 +41,28 @@
              }
          });
          
-     	//1.가격정보 가져온다.
- 		const priceTag = document.querySelector('#priceSpan').innerText;//선택한 태그의 innerText 가격값을 가져온다.
- 		//alert(priceTag.innerText);
- 		
- 		//2.수량정보 가져온다.
- 		const putCnt = document.querySelector('input[type="number"]').value;
- 		
- 		//3.수량과 가격을 곱한다.
- 		const result = priceTag * putCnt;
- 		
- 		//4.총가격의 값을 바꾼다.
- 		 document.querySelector('#totalPriceSpan').innerText = result;
+         // 상품금액
+         $(".inpp").on("DOMSubtreeModified", function(){
+				// 좌석 선택 다 해야 뜨는걸로
+				var p1 = parseInt($("#price").text().replace(/[^\d]+/g, ""));
+				var p2 = parseInt($(".inpp").text());
+				
+				var sum = p1 * p2;
+				
+				var sPrice = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+				
+				$("#sPrice").text(sPrice);
+				
+			});
+		
+         // 3자리 콤마
+         var price = $('#price').text();
+         var money = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+         $('#price').text(money);
          
       });
    </script>
-   
+
 	<section class="category-section">
 		<div class="container" data-aos="fade-up">
 
@@ -63,8 +70,9 @@
 
 			<section class="contents d-flex">
 				<div class="col-6" style="display: flex; justify-content: center;">
-					<img src="https://cf.lottecinema.co.kr//Media/WebAdmin/113c4f562c6e4c9d94e973b590f594ab.jpg"
-						 alt="스위트콤보 상품이미지">
+					<img
+						src="https://cf.lottecinema.co.kr//Media/WebAdmin/113c4f562c6e4c9d94e973b590f594ab.jpg"
+						alt="스위트콤보 상품이미지">
 				</div>
 				<article class="col-4">
 					<table class="pd_table fs-5 table table-sm">
@@ -74,12 +82,18 @@
 						</colgroup>
 						<thead>
 							<tr>
-								<th scope="row" class="text-center" colspan="4">
-									<h3 class="fs-1">스위트콤보</h3>
+								<th scope="row" class="text-center border-bottom-0" colspan="4">
+									<h3 class="section-header fs-1">
+										<i>스위트콤보</i>
+									</h3>
 								</th>
 							</tr>
 						</thead>
 						<tbody>
+							<tr>
+								<th colspan="2" scope="row" class="text-center"><span
+									class="fs-3" id="price">10000</span>원</th>
+							</tr>
 							<tr>
 								<th scope="row">구성품</th>
 								<td class="text-end">오리지널L + 탄산음료M2</td>
@@ -94,17 +108,20 @@
 							</tr>
 							<tr>
 								<th scope="col" style="padding-top: 3%">총 상품금액</th>
-								<td class="text-end fs-2" 
-									style="font-weight: bold; color: #FF243E;"> 10,000 <em>원</em></td>
+								<td class="text-end" style="font-weight: bold; color: #FF243E;">
+									<span class="fs-2" id="sPrice">10,000</span>원
+								</td>
 							</tr>
 							<tr class="border border-bottom-0 border-white">
 								<td scope="row" class="text-center" colspan="4">
 									<div class="input-group mb-3 container _count"
-									style="width: 400px; padding-top: 4%; text-align: center;">
-									<button class="minus btn btn-outline-secondary">-</button> <label
-									class="inpp input-group-text" for="inputGroupFile01"
-									style="text-align: center; padding-left: 150px; padding-right: 150px;">1</label>
-									<button class="plus btn btn-outline-secondary">+</button>
+										style="width: 400px; padding-top: 4%; text-align: center;">
+										<button class="minus btn btn-outline-secondary"
+										style="text-align: center; padding-left: 20px; padding-right: 20px;">-</button>
+										<label class="inpp input-group-text border border-secondary fs-5" for="inputGroupFile01"
+											style="text-align: center; padding-left: 133px; padding-right: 133px;">1</label>
+										<button class="plus btn btn-outline-secondary"
+										style="text-align: center; padding-left: 20px; padding-right: 20px;">+</button>
 									</div>
 								</td>
 							</tr>
@@ -134,7 +151,7 @@
 						<button class="accordion-button collapsed fw-bold" type="button"
 							data-bs-toggle="collapse" data-bs-target="#collapseOne"
 							aria-expanded="false" aria-controls="collapseOne">
-							<font style="vertical-align: inherit;">사용방법 </font>
+							<font style="vertical-align: inherit;"><h3>사용방법</h3></font>
 						</button>
 					</h2>
 					<div id="collapseOne" class="accordion-collapse collapse"
@@ -169,7 +186,7 @@
 						<button class="accordion-button collapsed fw-bold" type="button"
 							data-bs-toggle="collapse" data-bs-target="#collapseTwo"
 							aria-expanded="false" aria-controls="collapseTwo">
-							<font style="vertical-align: inherit;"> 유의사항 </font>
+							<font style="vertical-align: inherit;"><h3>유의사항</h3></font>
 						</button>
 					</h2>
 					<div id="collapseTwo" class="accordion-collapse collapse"
@@ -204,7 +221,6 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 	</section>
 	<!-- 정보	 -->
