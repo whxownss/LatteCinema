@@ -22,7 +22,7 @@ header,footer,section,article,aside,nav,hgroup,details,menu,figure,figcaption{di
 legend{display:block;overflow:hidden;position:absolute;width:1px;height:1px;font-size:1px;line-height:0;text-indent:-999em;white-space:nowrap; }
 fieldset,img,table,caption,tbody,tfoot,thead,tr,th,td,button,hr{border:0 none}
 img{vertical-align:middle; }
-body li{*vertical-align:top}
+body li{*vertical-align:top} /* 지우면 이상해짐 */
 ul, li, ol{list-style:none; padding:0; margin:0;}
 table{border-collapse:collapse}
 caption{visibility:hidden;overflow:hidden;width:0;height:0;font-size:0;line-height:0;}
@@ -147,9 +147,9 @@ html { font-size:10px; }
 button,select,input,textarea { outline: none; }
 
 .btn-more-list { width:342px; height: 50px; margin: 0 auto; display: block; font-size:14px; border: 1px solid #e1e1e1; text-align: center; }
-.btn-more-list:after { content: ''; display: inline-block; vertical-align: middle; width:6px; height: 6px; border-left: 2px solid #dc3545; border-bottom: 2px solid #dc3545; transform: rotate(-45deg); margin:-6px 0 0 12px;}
+.btn-more-list:after { content: ''; display: inline-block; vertical-align: middle; width:6px; height: 6px; border-left: 2px solid #41dfd0; border-bottom: 2px solid #41dfd0; transform: rotate(-45deg); margin:-6px 0 0 12px;}
 .btn-more-list2 { width:210px; height: 50px; margin: 0 auto; display: block; font-size:16px; border: 1px solid #e1e1e1; text-align: center; }
-.btn-more-list2:after { content: ''; display: inline-block; vertical-align: middle; width:6px; height: 6px; border-left: 2px solid #dc3545; border-bottom: 2px solid #dc3545; transform: rotate(-45deg); margin:-6px 0 0 12px;}
+.btn-more-list2:after { content: ''; display: inline-block; vertical-align: middle; width:6px; height: 6px; border-left: 2px solid #41dfd0; border-bottom: 2px solid #41dfd0; transform: rotate(-45deg); margin:-6px 0 0 12px;}
 .btn-type0 { display: inline-block; width:100%; height: 48px; line-height: 46px; border-radius:4px; text-align: center; background: #dc3545; font-size:16px; font-weight: 600; }
 .btn-type1 { display: inline-block; padding:0 20px; height: 48px; line-height: 45px;border-radius:4px; text-align: center; background: #fff; font-size:16px; font-weight: 400; border: 1px solid #e4e9f2; color: #000; }
 .btn-type2 { display: inline-block; padding:0 20px; height: 48px; line-height: 47px; border-radius:4px; text-align: center; background: #e4e9f2; font-size:16px; font-weight: 400; color: #000; }
@@ -247,7 +247,7 @@ button,select,input,textarea { outline: none; }
 
 .inner { max-width:1140px; margin: 0 auto; padding:0 20px; }
 .inner2 { max-width:1200px; margin: 0 auto; }
-#header { height: 80px; border-bottom: 1px solid #e1e1e1;  }
+/*#header { height: 80px; border-bottom: 1px solid #e1e1e1;  }
 #header.main { margin-bottom: 30px;  }
 #header.border-none { border-bottom: 0; }
 #header h1 { float:left; padding-top:26px; }
@@ -257,14 +257,14 @@ button,select,input,textarea { outline: none; }
 #header.single h1 { padding-top:0; }
 #header.single h1 a { height: 79px; width:250px; background-position: 0 50%; background-size:contain; }
 #header .menus { float:right; }
-#header .menus:after { display: block; content: ''; clear: both; }
+#header .menus:after { display: block; content: ''; clear: both; }*/
 #gnb { float:left; }
 #gnb nav ul:after { display: block; content: ''; clear: both; }
 #gnb nav ul li { float:left; }
 #gnb nav ul li a { display:block; line-height: 80px; font-size:19px;  padding:0 45px;position: relative; }
 #gnb nav ul li.active a { font-weight: 700; }
 #gnb nav ul li.active a:before { content: ''; position: absolute;left: 45px; right:45px; bottom:0; height: 4px; background: #dc3545; }
-#header .etc { float:left; margin:0 34px; padding-top:29px;  }
+/*#header .etc { float:left; margin:0 34px; padding-top:29px;  }
 #header .etc a { display: inline-block; vertical-align: middle; font-size:16px; color: #909090; line-height: 1; }
 #header .etc a + a { margin-left: 12px; padding-left: 12px; position: relative; }
 #header .etc a + a:before { content: ''; position: absolute; left: 0; top:2px; bottom:1px; width:1px; background: #909090; }
@@ -272,10 +272,10 @@ button,select,input,textarea { outline: none; }
 #header .btn-reser:before { content: ''; display: inline-block; vertical-align: middle; width:24px; height: 24px; margin:-3px 8px 0 0; background: url(../img/common/ico_cal.png) no-repeat 0 0; }
 #header .btn-home { display: inline-block; vertical-align: middle; padding:0 20px; background: #2b2b2b; font-size:14px; color: #fff; border-radius:4px; line-height: 40px;  margin-top:20px; }
 #header .btn-home:after { content: ''; display: inline-block; vertical-align: middle; width:25px; height: 24px; margin:-3px 0 0 8px; background: url(../img/common/ico_home.png) no-repeat 50% 50%; }
-#header .btn-root { display: inline-block; vertical-align: middle; padding:0 20px; background: #dc3545; border: 1px solid #dc3545;  font-size:14px; color: #000; border-radius:4px; line-height: 40px;  margin-top:20px; margin-right:5px;}
+#header .btn-root { display: inline-block; vertical-align: middle; padding:0 20px; background: #dc3545; border: 1px solid #34c1b4;  font-size:14px; color: #000; border-radius:4px; line-height: 40px;  margin-top:20px; margin-right:5px;}
 #header .btn-root:after { content: ''; display: inline-block; vertical-align: middle; width:25px; height: 24px; margin:-3px 0 0 8px; background: url(../img/common/ico_reser_arr_black.svg) no-repeat 50% 50%; }
 #header .btn-m,
-#header .m-menu { display: none; }
+#header .m-menu { display: none; }*/
 
 .fixed-nav { display: none; }
 
@@ -352,7 +352,7 @@ body.aside-on .aside { opacity:1;transform: translateX(0); }
 body.cinema-on { overflow: hidden; }
 body.cinema-on:after { content: ''; position: fixed; left: 0; right:0; top:80px; bottom:0; background: rgba(0,0,0,0.7); z-index:10;}
 
-/*#footer { padding: 45px 0; background: #fafafa; border-top:1px solid #e2e2e2; margin-top:65px; }
+#footer { background: #fafafa; border-top:1px solid #e2e2e2; margin-top:65px; }
 #footer .inner .head { margin-bottom: 44px;  overflow: hidden;}
 #footer .inner .head .logo { float:left; }
 #footer .inner .head .etc { float:right; padding-top:10px  }
@@ -363,7 +363,7 @@ body.cinema-on:after { content: ''; position: fixed; left: 0; right:0; top:80px;
 #footer .inner .body .family { position: absolute; right:10px; bottom:0; }
 #footer.partner-type .head { margin-bottom: -16px; position: relative; padding-top: 20px; }
 #footer.partner-type .head .etc { float:none; padding: 0; position: absolute; right:0; left: 0; text-align: right; top:0; z-index: 1; }
-#footer .inner .btn-box { display: none; }*/
+#footer .inner .btn-box { display: none; }
 
 
 /* 메인동영상 팝업 */
@@ -727,7 +727,7 @@ body.cinema-on:after { content: ''; position: fixed; left: 0; right:0; top:80px;
 /****************************************************************************************************************************************
   영화주요정보
 ****************************************************************************************************************************************/
-.mv-info-wrap {margin-top: 70px;}
+.mv-info-wrap {}
 .mv-info-wrap .inner { padding-left:285px; position: relative; }
 .mv-info-wrap .info1 { position: relative;}
 .mv-info-wrap .info1 .float-info { position: absolute;left: 15px; top:50px;  z-index:40; width:222px;}
@@ -1020,7 +1020,7 @@ button { border: 0; outline: none; background: none;  text-align: left; }
 .reservation-pc .head .right { float:right; }
 .reservation-pc .head .right > a { float:left; height: 58px; line-height: 57px; font-size:14px;  }
 .reservation-pc .head .right .btn-link { text-decoration: underline; color: #000; font-weight: 600; margin-right:40px;  text-decoration: underline !important;}
-.reservation-pc .head .right .btn-refresh { padding:0 20px; background: #dc3545; color: #fff; }
+.reservation-pc .head .right .btn-refresh { padding:0 20px; background: #35baad; color: #fff; }
 .reservation-pc .head .right .btn-refresh:before { content: ''; display: inline-block; vertical-align: middle; background: url(../img/reservation_pc/ico_refresh.png) no-repeat 0 0; width:20px; height: 20px; margin:-4px 7px 0 0;}
 .reservation-pc .head .right .btn-close { width:58px; background:#000 url(../img/reservation_pc/ico_layer_close.png) no-repeat  50% 50%; }
 .reservation-pc .body { height: 630px; position: relative; }

@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="kor">
+<html lang="ko">
+
+
+<%@include file ="../_common/commonHeaderStart.jsp" %>
+
 <link href="../_assets/css/view.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -11,10 +15,10 @@
 <script type="text/javascript" src="../_assets/js/front.js"></script>
 <script type="text/javascript" src="../_assets/js/app.js"></script>
 
-
-
-<%@include file ="../_common/commonHeaderStart.jsp" %>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
+
+
+<body>
 
 <%
  String movieNm = "노량: 죽음의 바다";
@@ -28,7 +32,7 @@
 %>
 
 <!-- // 영화관찾기 레이어 -->
-<div class="mv-info-wrap">
+<div class="mv-info-wrap" style="margin-top:70px;">
   <div class="info1">
     <div class="inner">
       <div class="info-box">
@@ -221,9 +225,7 @@
     </div>
   </div>
 </div>
-
-
-  <jsp:include page="../_common/commonFooter.jsp"></jsp:include>
+</body>
 <script type="text/javascript">
   var galleryThumbs = new Swiper(".gallery-thumbs .swiper-container", {
     spaceBetween: 10,
@@ -315,4 +317,8 @@
     });
   });
 </script>
+
+<%@include file ="../_common/commonFooter.jsp" %>
+
+
 </html>
