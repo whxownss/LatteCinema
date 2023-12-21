@@ -64,9 +64,6 @@
                   <li><a href="adm_member.jsp"><i class="fa fa-user"></i> 회원관리</a></li>
                   <li><a href="adm_mv_inout.jsp"><i class="fa fa-edit"></i>영화 통합 추가/제거</a></li>
                   <li><a href="adm_store.jsp"><i class="fa fa-beer"></i>스토어 관리</a></li>
-                  <li><a><i class="fa fa-table"></i> Tables</a></li>
-                  <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation</a></li>
-                  <li><a><i class="fa fa-clone"></i>Layouts</a></li>
                 </ul>
               </div>
               <div class="menu_section">

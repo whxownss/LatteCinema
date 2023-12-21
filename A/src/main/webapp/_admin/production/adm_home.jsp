@@ -48,6 +48,10 @@
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
   </head>
+<%
+	int totalCount = 10000;
+	int monthlyAudi = 120;
+%>
 
   <body class="nav-md">
     <div class="container body">
@@ -111,27 +115,7 @@
 <!--                       <li><a href="calendar.html">Calendar</a></li> -->
 <!--                     </ul> -->
                   </li>
-                  <li><a><i class="fa fa-table"></i> Tables</a>
-<!--                     <ul class="nav child_menu"> -->
-<!--                       <li><a href="tables.html">Tables</a></li> -->
-<!--                       <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
-<!--                     </ul> -->
-                  </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation</a>
-<!--                     <ul class="nav child_menu"> -->
-<!--                       <li><a href="chartjs.html">Chart JS</a></li> -->
-<!--                       <li><a href="chartjs2.html">Chart JS2</a></li> -->
-<!--                       <li><a href="morisjs.html">Moris JS</a></li> -->
-<!--                       <li><a href="echarts.html">ECharts</a></li> -->
-<!--                       <li><a href="other_charts.html">Other Charts</a></li> -->
-<!--                     </ul> -->
-                  </li>
-                  <li><a><i class="fa fa-clone"></i>Layouts</a>
-<!--                     <ul class="nav child_menu"> -->
-<!--                       <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li> -->
-<!--                       <li><a href="fixed_footer.html">Fixed Footer</a></li> -->
-<!--                     </ul> -->
-                  </li>
+                 
                 </ul>
               </div>
               <div class="menu_section">
@@ -220,12 +204,12 @@
           <div class="row tile_count">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> 총 회원수</span>
-              <div class="count">10000</div>
+              <div class="count"><%=totalCount %></div>
               <span class="count_bottom"><i class="green">4% </i> From last Month</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-clock-o"></i> 월별 관객수</span>
-              <div class="count">123.50</div>
+              <span class="count_top"><i class="fa fa-user"></i> 월별 관객수</span>
+              <div class="count"><%=monthlyAudi %></div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Month</span>
             </div>
 <!--             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count"> -->
@@ -244,15 +228,15 @@
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Month</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
-              <div class="count">7,325</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Month</span>
+<!--               <span class="count_top"><i class="fa fa-user"></i> Total Connections</span> -->
+<!--               <div class="count">7,325</div> -->
+<!--               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Month</span> -->
             </div>
           </div>
           <!-- /top tiles -->
 
           <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="col-md-8 col-sm-8 col-xs-8">
               <div class="dashboard_graph">
 
 <!--                 <div class="row x_title"> -->
@@ -970,6 +954,9 @@
 		// 월 및 랜덤 데이터를 담을 배열들
 		var MONTHS = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
 		
+        // 월별 매출액
+        var MONTHSALES = [150,200,350,330,400,460,370,380,290,100,50];
+        
 		// 랜덤한 스케일링 요소 생성하는 함수
 		var randomScalingFactor = function() {
 		    return Math.round(Math.random() * 100);
@@ -989,12 +976,12 @@
 		var config = {
 		    type: 'line',
 		    data: {
-		        labels: ["1월", "2월", "3월", "4월", "5월", "6월", "7월","8월","9월","10월","11월","12월"],
+				labels: MONTHS,
 		        datasets: [
 		            // 첫 번째 데이터셋
 		            {
-		                label: "첫 번째 데이터셋",
-		                data: [10,20,30,40,50,60,70,80,90,100],
+		                label: "월별 매출(원)",
+		                data: MONTHSALES,
 		                fill: false,
 		                borderDash: [0],
 		                borderColor: "red",
@@ -1005,7 +992,7 @@
 		        responsive: true,
 		        title: {
 		            display: true,
-		            text: 'Chart.js Line Chart'
+		            text: '월별 매출액'
 		        },
 		        tooltips: {
 		            mode: 'label',
@@ -1029,8 +1016,8 @@
 		                    labelString: 'Value'
 		                },
 		                ticks: {
-		                    suggestedMin: -10,
-		                    suggestedMax: 250,
+		                    suggestedMin: 0,
+		                    suggestedMax: 500,
 		                    // y축 최대값 변경
 		                    // suggestedMax를 원하는 최대값으로 수정합니다.
 		                }
