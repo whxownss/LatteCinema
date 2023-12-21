@@ -174,7 +174,7 @@ function checkPhone() {
 	var color = "red";
 	
 	if(phone != ""){
-		text = "** '-'생략가능 **";
+		text = "** 알맞은 연락처 형식으로 입력! '-' 생략가능!! **";
 		
 		if(phoneRegex.test(phone)){
 			text = "** 알맞은 연락처 형식! ** ";
