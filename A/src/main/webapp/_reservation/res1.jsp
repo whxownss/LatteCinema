@@ -416,7 +416,7 @@
 			</div>
 
 			<div><button id="forTest" style="margin-left: 100%;">TEST</button></div>
-			<div><a href="res2.jsp" style="margin-left: 100%;">res2</a></div>
+			<div ><a href="res2.jsp" style="margin-left: 100%;"><button>res2 이동</button></a></div>
 
 		</div>
 	</section>

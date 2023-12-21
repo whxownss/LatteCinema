@@ -58,6 +58,10 @@
 	font-size: 15px;
 }
 
+.ppa{
+	position: relative;
+}
+
 .mca {
 	display: flex;
     justify-content: center;
@@ -69,6 +73,16 @@
     align-items: center;
 }
 
+
+.payType {
+	width: 150px;
+	height: 100px;
+}
+
+.mba  {
+	position: absolute;
+	bottom: 0%;
+}
 
 
 
