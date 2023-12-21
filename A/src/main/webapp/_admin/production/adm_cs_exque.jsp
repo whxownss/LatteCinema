@@ -36,6 +36,7 @@
  	String select = "멤버십";
  	String subject = "제목 데이터를 받자";
  	String content = "내용 데이터를 받자";
+ 	int exqNum = 1; //글번호도 받아와야할듯
  %>
     <div class="container body">
       <div class="main_container">
@@ -623,9 +624,9 @@
                           <td>2011/05/25</td>
                         </tr>
                         <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
+                          <td>11</td>
+                          <td><%=select %></td>
+                          <td><a data-toggle="modal" data-target="#myModal" data-info='{"key1": "<%=subject%>", "key2": "<%=content%>", "key3": "<%=select%>"}'><%=subject %></a></td>
                           <td>2011/04/25</td>
                           <td>2011/05/25</td>
                         </tr>
@@ -693,14 +694,21 @@
 	    // 또는 다른 작업을 수행할 수 있습니다.
 	    // 예를 들어, 모달을 열거나 다른 페이지로 이동할 수 있습니다.
 	});
-	
-	 // <a> 태그가 클릭되었을 때 실행할 함수
-	 // #openModal 대신 "tr:eq(1) td:eq(2)" 사용해보자
-	    $("tr:eq(1) td:eq(2)").click(function() {
-	    	alert("이벤트 연결 성공");
-	        // 현재 클릭된 td 요소에 있는 a 태그에서 data-info 속성 가져오기
-	        var infoData = $(this).find("a").data("info");
-
+		
+		$("tr a[data-toggle='modal']").on("click", function () {
+		    // data-info 속성에서 JSON 데이터 가져오기
+		    var infoData = $(this).data("info");
+		
+		    // 필요한 정보 추출
+		    var key1 = infoData.key1;
+		    var key2 = infoData.key2;
+		    var key3 = infoData.key3;
+		
+		    // 추출한 정보를 출력하거나 다른 작업 수행
+		    console.log("Key1:", key1);
+		    console.log("Key2:", key2);
+		    console.log("Key3:", key3);
+		
 	        if (infoData) {
 	            // 필요한 정보 추출
 	            $("#modalSelect").val(infoData.key3); // select 옵션 선택 받기
@@ -709,7 +717,26 @@
 	        } else {
 	            console.log("data-info not found");
 	        }
-	    });
+		    // 또는 다른 작업을 수행할 수 있습니다.
+		    // 예를 들어, 모달을 열거나 다른 페이지로 이동할 수 있습니다.
+		});
+	
+	 // <a> 태그가 클릭되었을 때 실행할 함수
+	 // #openModal 대신 "tr:eq(1) td:eq(2)" 사용해보자
+// 	    $("tr:eq(1) td:eq(2)").click(function() {
+// 	    	alert("이벤트 연결 성공");
+// 	        // 현재 클릭된 td 요소에 있는 a 태그에서 data-info 속성 가져오기
+// 	        var infoData = $(this).find("a").data("info");
+
+// 	        if (infoData) {
+// 	            // 필요한 정보 추출
+// 	            $("#modalSelect").val(infoData.key3); // select 옵션 선택 받기
+// 	            $("#recipient-name").val(infoData.key1); // a 태그에서 가져온 정보
+// 	            $("#message-text").text(infoData.key2); // a 태그에서 가져온 정보
+// 	        } else {
+// 	            console.log("data-info not found");
+// 	        }
+// 	    });
 	 	//수정 모달 수정 버튼 클릭
 	 	$("#modalRewrite").on("click",function(){
 	 		alert("이벤트 연결 성공");
@@ -734,6 +761,30 @@
 	 	
 	 	// 추가 버튼 누르면 새로운 행 추가 하기
 	 	$("#insertRow").on("click", function () {
+// 	 	    // 새로운 행을 생성
+// 	 	    var newRow = $("<tr></tr>");
+
+// 	 	    // 각 열에 대한 데이터를 가져와서 새로운 셀을 생성하여 행에 추가
+// 	 	    var selectValue = $("#myModal2 select").val();
+// 	 	    var question = $("#myModal2 #recipient-name").val();
+// 	 	    var content = $("#myModal2 #message-text").val();
+
+// 	 	    // 이 예제에서는 각 열에 데이터를 추가하고 있습니다.
+// 	 	    newRow.append("<td>" + 11 + "</td>");
+// 	 	    newRow.append("<td>" + selectValue + "</td>");
+// 	 	    newRow.append("<td>" + question + "</td>");
+// // 	 	    newRow.append("<td>" + content + "</td>");
+// 			newRow.append("<td>" + "</td>");
+// 			newRow.append("<td>" + "</td>");
+
+// 	 	    // 테이블의 맨 위에 행을 추가
+// 	 	    $("table tbody").prepend(newRow);
+
+// 	 	    // 모달 닫기
+// 	 	    $("#myModal2").modal("hide");
+	 	// 현재 테이블에 있는 행의 개수를 가져옴=>나중엔 DB에서 맥스넘버 + 1로 해야함.
+	 	    var rowCount = $("table tbody tr").length;
+
 	 	    // 새로운 행을 생성
 	 	    var newRow = $("<tr></tr>");
 
@@ -742,13 +793,12 @@
 	 	    var question = $("#myModal2 #recipient-name").val();
 	 	    var content = $("#myModal2 #message-text").val();
 
-	 	    // 이 예제에서는 각 열에 데이터를 추가하고 있습니다.
-	 	    newRow.append("<td>" + 11 + "</td>");
+	 	    // 새로운 행을 추가할 때는 현재 행의 개수를 기반으로 하여 숫자를 설정
+	 	    newRow.append("<td>" + (rowCount + 1) + "</td>");
 	 	    newRow.append("<td>" + selectValue + "</td>");
 	 	    newRow.append("<td>" + question + "</td>");
-// 	 	    newRow.append("<td>" + content + "</td>");
-			newRow.append("<td>" + "</td>");
-			newRow.append("<td>" + "</td>");
+	 	    newRow.append("<td></td>");
+	 	    newRow.append("<td></td>");
 
 	 	    // 테이블의 맨 위에 행을 추가
 	 	    $("table tbody").prepend(newRow);
