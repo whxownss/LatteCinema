@@ -1,15 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<script src="../jQuery/jquery-3.6.0.js"></script>
+<script>
+$(function(){
+	
+	
+// 	$("#wm100").width($("body").width());
+// 	debugger;
+	
+});
+
+</script>
 
 <!-- ======= Hero Slider Section ======= -->
-<section id="hero-slider" class="hero-slider">
-	<div class="container-md" data-aos="fade-in">
+<!-- <section id="hero-slider" class="hero-slider"> -->
+	<div class="" data-aos="fade-in">
 		<div class="row">
 			<div class="col-12">
 				<div class="swiper sliderFeaturedPosts">
 					<div class="swiper-wrapper">
-						<div class="swiper-slide">
+						<div class="swiper-slide" style="height: 100%">
 							<a href="single-post.html" class="img-bg d-flex align-items-end"
 								style="background-image: url('../assets/img/post-slide-1.jpg');">
 								<div class="img-bg-inner">
@@ -69,5 +80,5 @@
 			</div>
 		</div>
 	</div>
-</section>
+<!-- </section> -->
 <!-- End Hero Slider Section -->
