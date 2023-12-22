@@ -99,7 +99,7 @@ function checkIdLength(){
 		}
 	}
 
-	$("#CheckId").text(text).css("color", color);
+	$("#CheckId").text(text).css("color", color).css("font-size", "15px");
 };
 
 // 비밀번호 유효성
@@ -135,7 +135,7 @@ function checkPassLength(){
 		
 		
 	}
-	$("#CheckPassword1").text(text).css("color", color);
+	$("#CheckPassword1").text(text).css("color", color).css("font-size", "15px");
 };
 
 // 비밀번호 확인 유효성		
@@ -148,7 +148,7 @@ function checkConfirmPasswd() {
 		text='**비밀번호 일치**';
 		color='green';
 	}
-	$("#CheckPassword2").text(text).css("color", color);
+	$("#CheckPassword2").text(text).css("color", color).css("font-size", "15px");
 }		
 
 // 이름 정규식 유효성
@@ -164,7 +164,7 @@ function checkName() {
 			color = "green";
 		}
 	}
-	$("#CheckName").text(text).css("color",color);
+	$("#CheckName").text(text).css("color",color).css("font-size", "15px");
 }
 
 // 연락처 정규식 유효성
@@ -174,14 +174,14 @@ function checkPhone() {
 	var color = "red";
 	
 	if(phone != ""){
-		text = "** '-'생략가능 **";
+		text = "** 알맞은 연락처 형식으로 입력! '-' 생략가능!! **";
 		
 		if(phoneRegex.test(phone)){
 			text = "** 알맞은 연락처 형식! ** ";
 			color = "green";
 		}
 	}
-	$("#CheckPhone").text(text).css("color",color);
+	$("#CheckPhone").text(text).css("color",color).css("font-size", "15px");
 }
 
 // 생년월일 8자 정규식 유효성
@@ -198,7 +198,7 @@ function checkBirth() {
 			color = "green";
 		}
 	}
-	$("#CheckBirth").text(text).css("color", color);	
+	$("#CheckBirth").text(text).css("color", color).css("font-size", "15px");
 }
 
 // 이메일 정규식 유효성
@@ -216,7 +216,7 @@ function checkEmail() {
 		}
 	}
 	
-	$("#CheckEmail").text(text).css("color" , color);
+	$("#CheckEmail").text(text).css("color" , color).css("font-size", "15px");
 }
 		
 </script>
@@ -316,27 +316,6 @@ function checkEmail() {
 							<button class="btn btn-danger btn-lg" type="submit">가입</button>
 						</div>
 					</form>
-				
-				
-				<div>
-					<h3 style="text-align: center; margin-top: 50px;">간편 가입</h3>
-				</div>
-			<div class="social_login"  >
-                <ul style="list-style: none; ">
-
-                    <li class="other_kakaotalk design_social">
-                        <a href="javascript:;">카카오톡 계정으로 가입
-                            <span class="other_icon"><img src="../assets/img/icon_kakaotalk.png" alt="카카오톡 아이콘"></span>
-                        </a>
-                    </li>
-                    <li class="other_naver design_social">
-                        <a href="javascript:;">네이버 계정으로 가입
-                            <span class="other_icon"><img src="../assets/img/icon_naver.png" alt="네이버 아이콘"></span>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>					
 			</div>
 		</div>
 	</section>

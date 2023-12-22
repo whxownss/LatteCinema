@@ -2,6 +2,39 @@
     pageEncoding="UTF-8"%>
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>
+<script src="../jQuery/jquery-3.6.0.js"></script>
+<script>
+$(() => {
+	
+	$("#login1").submit(function() {
+		if($("#id").val() == ""){
+			if(!$("#idCheck").length){
+				$("#pwdCheck").remove();
+				$("#formCheck").append("<span id='idCheck'>아이디를 입력하세요.</span>");
+				$("#idCheck").css("color", "red");
+			}
+			return false;	
+		}
+		
+		if ($("#pwd").val() == "") {
+			if(!$("#pwdCheck").length){
+				$("#idCheck").remove();
+				$("#formCheck").append("<span id='pwdCheck'>비밀번호를 입력하세오.</span>");
+				$("#pwdCheck").css("color","red");
+			}
+			return false;
+		}
+		
+		return true;
+	})
+	
+	
+});
+
+
+
+</script>
+
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
@@ -17,15 +50,18 @@
 <!-- 						<div class="layer-con" style="height: 400px;"> -->
 <!-- 							<div class="post-entry-1 lg"> -->
 							<div>
-								<form action="loginPro.jsp" method="post">
-									<div class="form-floating mb-3">
+								<form action="loginPro.jsp" method="post" id="login1">
+									<div class="form-floating mb-3" id="idTest">
 										<input class="form-control" type="text" name="UserId" placeholder="아이디" id="id" style="width: 100%;">
-										<label class="form-label" for="UserId">아이디</label> 
+										<label class="form-label" for="UserId">아이디</label>
 									</div>
 									<div class="form-floating mb-3">
 										<input class="form-control" type="password" name="pwd" placeholder="비밀번호" id="pwd" style="width: 100%;">
 										<label class="form-label" for="pwd">비밀번호</label>
 									</div>
+									
+									<div id="formCheck"></div>
+									
 									<div>
 										<button class="btn btn-secondary btn-lg" type="submit" style="width: 100%;">로그인</button>
 									</div>
