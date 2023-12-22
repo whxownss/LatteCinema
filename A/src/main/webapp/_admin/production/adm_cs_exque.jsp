@@ -28,9 +28,16 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+
   </head>
 
   <body class="nav-md">
+ <%
+ 	String select = "멤버십";
+ 	String subject = "제목 데이터를 받자";
+ 	String content = "내용 데이터를 받자";
+ 	int exqNum = 1; //글번호도 받아와야할듯
+ %>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -64,9 +71,6 @@
                   <li><a href="adm_member.jsp"><i class="fa fa-user"></i> 회원관리</a></li>
                   <li><a href="adm_mv_inout.jsp"><i class="fa fa-edit"></i>영화 통합 추가/제거</a></li>
                   <li><a href="adm_store.jsp"><i class="fa fa-beer"></i>스토어 관리</a></li>
-                  <li><a><i class="fa fa-table"></i> Tables</a></li>
-                  <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation</a></li>
-                  <li><a><i class="fa fa-clone"></i>Layouts</a></li>
                 </ul>
               </div>
               <div class="menu_section">
@@ -119,6 +123,7 @@
           	<!-- 임시  -->
 			<div class="container">
 			  <!-- Modal -->
+			 <form action="#" method="get" name="frChange"> 
 			  <div class="modal fade" id="myModal" role="dialog">
 			    <div class="modal-dialog">
 <!-- 			    <button type="button" class="btn-close" aria-label="Close"></button> -->
@@ -127,7 +132,7 @@
 				      <div class="modal-header">
 				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				        <h5 class="modal-title" id="exampleModalLabel">자주찾는질문</h5>
-				        <select>
+				        <select id="modalSelect" name="changeSelect">
 				        	<option value="">구분선택</option>
 				        	<option value="예매">예매</option>
 				        	<option value="관람권">관람권</option>
@@ -137,27 +142,29 @@
 				        </select>
 				      </div>
 				      <div class="modal-body">
-				        <form>
+<!-- 				        <form> -->
 				          <div class="mb-3">
 				            <label for="recipient-name" class="col-form-label">질문</label>
-				            <input type="text" class="form-control" id="recipient-name" value="적립한 포인트를 다 써도 VIP가 될 수 있나요?">
+				            <input type="text" class="form-control" id="recipient-name" name="changeQue" value="">
 				          </div>
 				          <div class="mb-3">
 				            <label for="message-text" class="col-form-label">글내용</label>
-				            <textarea class="form-control" id="message-text">Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.</textarea>
+				            <textarea class="form-control" id="message-text" name="changeContent"></textarea>
 				          </div>
-				        </form>
+<!-- 				        </form> -->
 				      </div>
 				      <div class="modal-footer">
 				      	<button type="button" class="btn btn-danger">삭제</button>
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">나가기</button>
-				        <button type="button" class="btn btn-primary">수정</button>
+				        <button type="submit" id="modalRewrite" class="btn btn-primary">수정</button>
 				      </div>
 			    </div>
 			  </div>
 			  
 			</div>
+		 </form>	
           	<!-- //임시  -->
+          	<form action="#" method="get" name="frAdd"> <!-- form태그로 submit 버튼  -->
 			  <div class="modal fade" id="myModal2" role="dialog">
 			    <div class="modal-dialog">
 <!-- 			    <button type="button" class="btn-close" aria-label="Close"></button> -->
@@ -166,7 +173,7 @@
 				      <div class="modal-header">
 				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				        <h5 class="modal-title" id="exampleModalLabel">자주찾는질문</h5>
-				        <select>
+				        <select name="newSelect">
 				        	<option value="">구분선택</option>
 				        	<option value="예매">예매</option>
 				        	<option value="관람권">관람권</option>
@@ -176,25 +183,26 @@
 				        </select>
 				      </div>
 				      <div class="modal-body">
-				        <form>
+<!-- 				        <form> -->
 				          <div class="mb-3">
 				            <label for="recipient-name" class="col-form-label">질문</label>
-				            <input type="text" class="form-control" id="recipient-name" value="">
+				            <input type="text" class="form-control" id="recipient-name" name="newQue" value="">
 				          </div>
 				          <div class="mb-3">
 				            <label for="message-text" class="col-form-label">글내용</label>
-				            <textarea class="form-control" id="message-text"></textarea>
+				            <textarea class="form-control" id="message-text" name="newContent"></textarea>
 				          </div>
-				        </form>
+<!-- 				        </form> -->
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">나가기</button>
-				        <button type="button" class="btn btn-primary">추가</button>
+				        <button type="submit" id="insertRow" class="btn btn-primary">추가</button>
 				      </div>
 			    </div>
 			  </div>
 			  
 			</div>
+		</form>
           	<!-- //임시  -->          	
             <div class="page-title">
               <div class="title_left">
@@ -229,8 +237,8 @@
                       <tbody>
                         <tr>
                           <td>1</td>
-                          <td>멤버십</td>
-                          <td><a data-toggle="modal" data-target="#myModal">적립한 포인트를 다 써도 VIP가 될 수 있나요?</a></td>
+                          <td><%=select %></td>
+                          <td><a data-toggle="modal" data-target="#myModal" data-info='{"key1": "<%=subject%>", "key2": "<%=content%>", "key3": "<%=select%>"}'><%=subject %></a></td>
                           <td>2011/04/25</td>
                           <td>2011/06/25</td>
                         </tr>
@@ -620,9 +628,9 @@
                           <td>2011/05/25</td>
                         </tr>
                         <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
+                          <td>11</td>
+                          <td><%=select %></td>
+                          <td><a data-toggle="modal" data-target="#myModal" data-info='{"key1": "<%=subject%>", "key2": "<%=content%>", "key3": "<%=select%>"}'><%=subject %></a></td>
                           <td>2011/04/25</td>
                           <td>2011/05/25</td>
                         </tr>
@@ -678,6 +686,131 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+<script type="text/javascript">
+	// 테이블의 각 행에 클릭 이벤트를 추가
+	$("table tbody tr").on("click", function () {
+	    // 클릭한 행에서 첫 번째 <td> 요소의 내용을 가져옴
+	    var clickedNumber = $(this).find("td:first").text();
 
+	    // 가져온 숫자 값을 출력하거나 다른 작업 수행
+	    console.log("Clicked Number:", clickedNumber);
+
+	    // 또는 다른 작업을 수행
+	    // 예를 들어, 모달을 열거나 다른 페이지로 이동
+	});
+		
+		$("tr a[data-toggle='modal']").on("click", function () {
+		    // data-info 속성에서 JSON 데이터 가져오기
+		    var infoData = $(this).data("info");
+		
+		    // 필요한 정보 추출
+		    var key1 = infoData.key1;
+		    var key2 = infoData.key2;
+		    var key3 = infoData.key3;
+		
+		    // 추출한 정보를 출력하거나 다른 작업 수행
+		    console.log("Key1:", key1);
+		    console.log("Key2:", key2);
+		    console.log("Key3:", key3);
+		
+	        if (infoData) {
+	            // 필요한 정보 추출
+	            $("#modalSelect").val(infoData.key3); // select 옵션 선택 받기
+	            $("#recipient-name").val(infoData.key1); // a 태그에서 가져온 정보
+	            $("#message-text").text(infoData.key2); // a 태그에서 가져온 정보
+	        } else {
+	            console.log("data-info not found");
+	        }
+		    // 또는 다른 작업을 수행
+		    // 예를 들어, 모달을 열거나 다른 페이지로 이동
+		});
+	
+	 // <a> 태그가 클릭되었을 때 실행할 함수
+	 // #openModal 대신 "tr:eq(1) td:eq(2)" 사용해보자
+// 	    $("tr:eq(1) td:eq(2)").click(function() {
+// 	    	alert("이벤트 연결 성공");
+// 	        // 현재 클릭된 td 요소에 있는 a 태그에서 data-info 속성 가져오기
+// 	        var infoData = $(this).find("a").data("info");
+
+// 	        if (infoData) {
+// 	            // 필요한 정보 추출
+// 	            $("#modalSelect").val(infoData.key3); // select 옵션 선택 받기
+// 	            $("#recipient-name").val(infoData.key1); // a 태그에서 가져온 정보
+// 	            $("#message-text").text(infoData.key2); // a 태그에서 가져온 정보
+// 	        } else {
+// 	            console.log("data-info not found");
+// 	        }
+// 	    });
+	 	//수정 모달 수정 버튼 클릭
+	 	$("#modalRewrite").on("click",function(){
+	 		alert("이벤트 연결 성공");
+	 	// 실제 값으로 subject, content, select 값을 대체하세요
+	 	    var subject = '<%=subject %>';
+	 	    var content = '<%=content %>';
+	 	    var select = '<%=select %>';
+
+	 	    // anchorString을 생성합니다.
+// 	 	    var anchorString = '<a data-toggle="modal" data-target="#myModal" data-info=\'{"key1": "' + subject + '", "key2": "' + content + '", "key3": "' + select + '"}\'>';
+	 	    var anchorString = '<a data-toggle="modal" data-target="#myModal" data-info=\'{"key1": "' + $("#recipient-name").val() + '", "key2": "' + content + '", "key3": "' + $("#modalSelect").val() + '"}\'>';
+
+	 	    console.log(anchorString);
+
+	 	    // <td> 요소의 내용을 설정합니다.
+	 	    $("tr:eq(1) td:eq(1)").text($("#modalSelect").val());
+	 	    $("tr:eq(1) td:eq(2)").html(anchorString + $("#recipient-name").val() + '</a>');
+
+	 	    // 모달을 숨깁니다.
+	 	    $("#myModal").modal('hide');
+	 	});
+	 	
+	 	// 추가 버튼 누르면 새로운 행 추가 하기
+	 	$("#insertRow").on("click", function () {
+// 	 	    // 새로운 행을 생성
+// 	 	    var newRow = $("<tr></tr>");
+
+// 	 	    // 각 열에 대한 데이터를 가져와서 새로운 셀을 생성하여 행에 추가
+// 	 	    var selectValue = $("#myModal2 select").val();
+// 	 	    var question = $("#myModal2 #recipient-name").val();
+// 	 	    var content = $("#myModal2 #message-text").val();
+
+// 	 	    // 이 예제에서는 각 열에 데이터를 추가하고 있습니다.
+// 	 	    newRow.append("<td>" + 11 + "</td>");
+// 	 	    newRow.append("<td>" + selectValue + "</td>");
+// 	 	    newRow.append("<td>" + question + "</td>");
+// // 	 	    newRow.append("<td>" + content + "</td>");
+// 			newRow.append("<td>" + "</td>");
+// 			newRow.append("<td>" + "</td>");
+
+// 	 	    // 테이블의 맨 위에 행을 추가
+// 	 	    $("table tbody").prepend(newRow);
+
+// 	 	    // 모달 닫기
+// 	 	    $("#myModal2").modal("hide");
+	 	// 현재 테이블에 있는 행의 개수를 가져옴=>나중엔 DB에서 맥스넘버 + 1로 해야함.
+	 	    var rowCount = $("table tbody tr").length;
+
+	 	    // 새로운 행을 생성
+	 	    var newRow = $("<tr></tr>");
+
+	 	    // 각 열에 대한 데이터를 가져와서 새로운 셀을 생성하여 행에 추가
+	 	    var selectValue = $("#myModal2 select").val();
+	 	    var question = $("#myModal2 #recipient-name").val();
+	 	    var content = $("#myModal2 #message-text").val();
+
+	 	    // 새로운 행을 추가할 때는 현재 행의 개수를 기반으로 하여 숫자를 설정
+	 	    newRow.append("<td>" + (rowCount + 1) + "</td>");
+	 	    newRow.append("<td>" + selectValue + "</td>");
+	 	    newRow.append("<td>" + question + "</td>");
+	 	    newRow.append("<td></td>");
+	 	    newRow.append("<td></td>");
+
+	 	    // 테이블의 맨 위에 행을 추가
+	 	    $("table tbody").prepend(newRow);
+
+	 	    // 모달 닫기
+	 	    $("#myModal2").modal("hide");
+	 	});
+	
+</script>
   </body>
 </html>

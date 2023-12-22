@@ -33,9 +33,25 @@
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
+	<!-- Chart.js 및 jQuery 스크립트 불러오기 -->
+    <script src="../dist/Chart.bundle.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!-- 캔버스 스타일 지정 -->
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
+    
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
   </head>
+<%
+	int totalCount = 10000;
+	int monthlyAudi = 120;
+%>
 
   <body class="nav-md">
     <div class="container body">
@@ -99,27 +115,7 @@
 <!--                       <li><a href="calendar.html">Calendar</a></li> -->
 <!--                     </ul> -->
                   </li>
-                  <li><a><i class="fa fa-table"></i> Tables</a>
-<!--                     <ul class="nav child_menu"> -->
-<!--                       <li><a href="tables.html">Tables</a></li> -->
-<!--                       <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
-<!--                     </ul> -->
-                  </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation</a>
-<!--                     <ul class="nav child_menu"> -->
-<!--                       <li><a href="chartjs.html">Chart JS</a></li> -->
-<!--                       <li><a href="chartjs2.html">Chart JS2</a></li> -->
-<!--                       <li><a href="morisjs.html">Moris JS</a></li> -->
-<!--                       <li><a href="echarts.html">ECharts</a></li> -->
-<!--                       <li><a href="other_charts.html">Other Charts</a></li> -->
-<!--                     </ul> -->
-                  </li>
-                  <li><a><i class="fa fa-clone"></i>Layouts</a>
-<!--                     <ul class="nav child_menu"> -->
-<!--                       <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li> -->
-<!--                       <li><a href="fixed_footer.html">Fixed Footer</a></li> -->
-<!--                     </ul> -->
-                  </li>
+                 
                 </ul>
               </div>
               <div class="menu_section">
@@ -197,91 +193,6 @@
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
-
-<!--               <ul class="nav navbar-nav navbar-right"> -->
-<!--                 <li class=""> -->
-<!--                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> -->
-<!--                     <img src="images/img.jpg" alt="">John Doe -->
-<!--                     <span class=" fa fa-angle-down"></span> -->
-<!--                   </a> -->
-<!--                   <ul class="dropdown-menu dropdown-usermenu pull-right"> -->
-<!--                     <li><a href="javascript:;"> Profile</a></li> -->
-<!--                     <li> -->
-<!--                       <a href="javascript:;"> -->
-<!--                         <span class="badge bg-red pull-right">50%</span> -->
-<!--                         <span>Settings</span> -->
-<!--                       </a> -->
-<!--                     </li> -->
-<!--                     <li><a href="javascript:;">Help</a></li> -->
-<!--                     <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li> -->
-<!--                   </ul> -->
-<!--                 </li> -->
-
-<!--                 <li role="presentation" class="dropdown"> -->
-<!--                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false"> -->
-<!--                     <i class="fa fa-envelope-o"></i> -->
-<!--                     <span class="badge bg-green">6</span> -->
-<!--                   </a> -->
-<!--                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu"> -->
-<!--                     <li> -->
-<!--                       <a> -->
-<!--                         <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span> -->
-<!--                         <span> -->
-<!--                           <span>John Smith</span> -->
-<!--                           <span class="time">3 mins ago</span> -->
-<!--                         </span> -->
-<!--                         <span class="message"> -->
-<!--                           Film festivals used to be do-or-die moments for movie makers. They were where... -->
-<!--                         </span> -->
-<!--                       </a> -->
-<!--                     </li> -->
-<!--                     <li> -->
-<!--                       <a> -->
-<!--                         <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span> -->
-<!--                         <span> -->
-<!--                           <span>John Smith</span> -->
-<!--                           <span class="time">3 mins ago</span> -->
-<!--                         </span> -->
-<!--                         <span class="message"> -->
-<!--                           Film festivals used to be do-or-die moments for movie makers. They were where... -->
-<!--                         </span> -->
-<!--                       </a> -->
-<!--                     </li> -->
-<!--                     <li> -->
-<!--                       <a> -->
-<!--                         <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span> -->
-<!--                         <span> -->
-<!--                           <span>John Smith</span> -->
-<!--                           <span class="time">3 mins ago</span> -->
-<!--                         </span> -->
-<!--                         <span class="message"> -->
-<!--                           Film festivals used to be do-or-die moments for movie makers. They were where... -->
-<!--                         </span> -->
-<!--                       </a> -->
-<!--                     </li> -->
-<!--                     <li> -->
-<!--                       <a> -->
-<!--                         <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span> -->
-<!--                         <span> -->
-<!--                           <span>John Smith</span> -->
-<!--                           <span class="time">3 mins ago</span> -->
-<!--                         </span> -->
-<!--                         <span class="message"> -->
-<!--                           Film festivals used to be do-or-die moments for movie makers. They were where... -->
-<!--                         </span> -->
-<!--                       </a> -->
-<!--                     </li> -->
-<!--                     <li> -->
-<!--                       <div class="text-center"> -->
-<!--                         <a> -->
-<!--                           <strong>See All Alerts</strong> -->
-<!--                           <i class="fa fa-angle-right"></i> -->
-<!--                         </a> -->
-<!--                       </div> -->
-<!--                     </li> -->
-<!--                   </ul> -->
-<!--                 </li> -->
-<!--               </ul> -->
             </nav>
           </div>
         </div>
@@ -293,12 +204,12 @@
           <div class="row tile_count">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> 총 회원수</span>
-              <div class="count">10000</div>
+              <div class="count"><%=totalCount %></div>
               <span class="count_bottom"><i class="green">4% </i> From last Month</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-clock-o"></i> 월별 관객수</span>
-              <div class="count">123.50</div>
+              <span class="count_top"><i class="fa fa-user"></i> 월별 관객수</span>
+              <div class="count"><%=monthlyAudi %></div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Month</span>
             </div>
 <!--             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count"> -->
@@ -317,15 +228,15 @@
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Month</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
-              <div class="count">7,325</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Month</span>
+<!--               <span class="count_top"><i class="fa fa-user"></i> Total Connections</span> -->
+<!--               <div class="count">7,325</div> -->
+<!--               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Month</span> -->
             </div>
           </div>
           <!-- /top tiles -->
 
           <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-8 col-sm-8 col-xs-8">
               <div class="dashboard_graph">
 
 <!--                 <div class="row x_title"> -->
@@ -343,11 +254,9 @@
 <!--                 <div class="col-md-9 col-sm-9 col-xs-12"> -->
 <!--                   <div id="chart_plot_01" class="demo-placeholder"></div> -->
 <!--                 </div> -->
-           
-				<div class="chart-size" style="width: 700px; height: 800px;">
-				  <canvas id="myChart"></canvas>
-				</div>
-
+				    <div style="width:75%;">
+				        <canvas id="canvas"></canvas>
+				    </div>
                 <div class="clearfix"></div>
               </div>
             </div>
@@ -939,7 +848,24 @@
 								</select>
 							</td>
                       	</tr>
-                      	
+                      	<tr>
+                      		<td>5</td>
+                      		<td>이길동</td>
+                      		<td>부산</td>
+                      		<td>부산대점</td>
+                      		<td>라이언킹</td>
+                      		<td>10000</td>
+                      		<td>2023/08/25</td>
+                      		<td></td>
+                      		<td>010 3353 3333</td>
+                      		<td>dong5@itwillbs.co.kr</td>
+                      		<td>
+								<select>
+									<option>Y</option>
+									<option>N</option>
+								</select>
+							</td>
+                      	</tr>
                       </tbody>
                     </table>
 					
@@ -1020,30 +946,118 @@
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
     
-<!--     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+        <!-- JavaScript 코드 -->
+    <script>
+        // JavaScript 코드는 여기에 작성됩니다.
+		// 라인 차트를 생성하고 조작하기 위한 JavaScript 코드
+		
+		// 월 및 랜덤 데이터를 담을 배열들
+		var MONTHS = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
+		
+        // 월별 매출액
+        var MONTHSALES = [150,200,350,330,400,460,370,380,290,100,50];
+        
+		// 랜덤한 스케일링 요소 생성하는 함수
+		var randomScalingFactor = function() {
+		    return Math.round(Math.random() * 100);
+		};
+		
+		// 랜덤한 컬러 요소 생성하는 함수
+		var randomColorFactor = function() {
+		    return Math.round(Math.random() * 255);
+		};
+		
+		// 랜덤한 컬러를 생성하는 함수 (투명도 옵션 가능)
+		var randomColor = function(opacity) {
+		    return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
+		};
+		
+		// 차트의 설정 객체
+		var config = {
+		    type: 'line',
+		    data: {
+				labels: MONTHS,
+		        datasets: [
+		            // 첫 번째 데이터셋
+		            {
+		                label: "월별 매출(원)",
+		                data: MONTHSALES,
+		                fill: false,
+		                borderDash: [0],
+		                borderColor: "red",
+		            }
+		        ]
+		    },
+		    options: {
+		        responsive: true,
+		        title: {
+		            display: true,
+		            text: '월별 매출액'
+		        },
+		        tooltips: {
+		            mode: 'label',
+		            // tooltips 설정은 여기에 추가할 수 있습니다.
+		        },
+		        hover: {
+		            mode: 'dataset'
+		        },
+		        scales: {
+		            xAxes: [{
+		                display: true,
+		                scaleLabel: {
+		                    show: true,
+		                    labelString: 'Month'
+		                }
+		            }],
+		            yAxes: [{
+		                display: true,
+		                scaleLabel: {
+		                    show: true,
+		                    labelString: 'Value'
+		                },
+		                ticks: {
+		                    suggestedMin: 0,
+		                    suggestedMax: 500,
+		                    // y축 최대값 변경
+		                    // suggestedMax를 원하는 최대값으로 수정합니다.
+		                }
+		            }]
+		        }
+		    }
+		};
+		
+		// 각 데이터셋에 랜덤한 컬러 적용
+		/* $.each(config.data.datasets, function(i, dataset) {
+		    dataset.borderColor = randomColor(0.4);
+		    dataset.backgroundColor = randomColor(0.5);
+		    dataset.pointBorderColor = randomColor(0.7);
+		    dataset.pointBackgroundColor = randomColor(0.5);
+		    dataset.pointBorderWidth = 1;
+		}); */
+		
+		// 창이 로드될 때 차트 초기화
+		window.onload = function() {
+		    var ctx = document.getElementById("canvas").getContext("2d");
+		    window.myLine = new Chart(ctx, config);
+		};
+		
+		// 차트와 상호작용을 위한 버튼 클릭 이벤트 핸들러들
+		$('#randomizeData').click(function() {
+		    // 모든 데이터셋에 대해 데이터 랜덤화
+		    $.each(config.data.datasets, function(i, dataset) {
+		        dataset.data = dataset.data.map(function() {
+		            return randomScalingFactor();
+		        });
+		    });
+		
+		    // 차트 업데이트
+		    window.myLine.update();
+		});
+		
+		// 데이터 변경, 데이터셋 추가/삭제 등 다른 버튼 클릭 이벤트 핸들러들은 여기에 작성됩니다...
 
-<script>
-  const ctx = document.getElementById('myChart');
-
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-      datasets: [{
-        label: 'total of Month',
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-</script>
-	
+        
+    </script>
+    
   </body>
 </html>
