@@ -5,6 +5,64 @@
 	
 <link rel="stylesheet" href="../_assets/css/signup4.css">
 <script src="../jQuery/jquery-3.6.0.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 주소 api  -->
+<script>
+	
+	$(function(){
+		
+		
+		$("#find_button").on('click', function() {
+		    new daum.Postcode({
+		        oncomplete: function(data) {
+		        	console.log(data);
+		            
+		        	// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+		            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+		            var fullAddr= '';
+		            var extraAddr='';
+		            
+		            if(data.userSelectoredType === 'R'){
+		            	fullAddr = data.roadAddress;
+		            } else{
+		            	fullAddr = data.jibunAddress;
+		            }
+		            
+		            // extraAddr 
+	                if(data.userSelectedType === 'R'){
+	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                        extraAddr += data.bname;
+	                    }
+	                }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }	                    
+                    // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }		            
+                    // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+                    if(fullAddr !== ''){
+                        fullAddr += extraAddr;
+                    }                    
+                    
+		            $("#postcode").val(data.zonecode); 
+		            $("#address1").val(fullAddr);
+		            $("#address2").focus();
+		            
+		        }
+		    }).open();
+		});
+		
+		
+		
+		
+		
+	});
+
+</script>
 <script>
 // 회원가입 정규식
 var lengthRegexID = /^[A-Za-z0-9!@#$%]{5,16}$/; // 영문 대소문자 숫자 특수문자 8~16자 규칙(아이디)
@@ -41,7 +99,7 @@ function checkIdLength(){
 		}
 	}
 
-	$("#CheckId").text(text).css("color", color);
+	$("#CheckId").text(text).css("color", color).css("font-size", "15px");
 };
 
 // 비밀번호 유효성
@@ -77,7 +135,7 @@ function checkPassLength(){
 		
 		
 	}
-	$("#CheckPassword1").text(text).css("color", color);
+	$("#CheckPassword1").text(text).css("color", color).css("font-size", "15px");
 };
 
 // 비밀번호 확인 유효성		
@@ -90,7 +148,7 @@ function checkConfirmPasswd() {
 		text='**비밀번호 일치**';
 		color='green';
 	}
-	$("#CheckPassword2").text(text).css("color", color);
+	$("#CheckPassword2").text(text).css("color", color).css("font-size", "15px");
 }		
 
 // 이름 정규식 유효성
@@ -106,7 +164,7 @@ function checkName() {
 			color = "green";
 		}
 	}
-	$("#CheckName").text(text).css("color",color);
+	$("#CheckName").text(text).css("color",color).css("font-size", "15px");
 }
 
 // 연락처 정규식 유효성
@@ -116,14 +174,14 @@ function checkPhone() {
 	var color = "red";
 	
 	if(phone != ""){
-		text = "** '-'생략가능 **";
+		text = "** 알맞은 연락처 형식으로 입력! '-' 생략가능!! **";
 		
 		if(phoneRegex.test(phone)){
 			text = "** 알맞은 연락처 형식! ** ";
 			color = "green";
 		}
 	}
-	$("#CheckPhone").text(text).css("color",color);
+	$("#CheckPhone").text(text).css("color",color).css("font-size", "15px");
 }
 
 // 생년월일 8자 정규식 유효성
@@ -140,7 +198,7 @@ function checkBirth() {
 			color = "green";
 		}
 	}
-	$("#CheckBirth").text(text).css("color", color);	
+	$("#CheckBirth").text(text).css("color", color).css("font-size", "15px");
 }
 
 // 이메일 정규식 유효성
@@ -158,7 +216,7 @@ function checkEmail() {
 		}
 	}
 	
-	$("#CheckEmail").text(text).css("color" , color);
+	$("#CheckEmail").text(text).css("color" , color).css("font-size", "15px");
 }
 		
 </script>
@@ -205,21 +263,22 @@ function checkEmail() {
 						<div class="form-floating mb-3 row g-2">
 							<div class="col-5">
 								<div class="form-floating">
-									<input type="text" class="form-control" id="address1" placeholder="우편번호" >
+									<input type="text" class="form-control" id="postcode" placeholder="우편번호" readonly >
 									<label for="address1">우편번호</label>
 								</div>	
 							</div>	
 							<div class="col-3">	
-								<button class="btn btn-danger btn-lg" type="button" style="height:58px;">우편번호 검색</button>
+								<input type="button" class="btn btn-danger btn-lg" type="button" style="height:58px;"
+										id="find_button" value="우편번호 찾기">
 							</div>
 						</div>
 						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="address2" placeholder="주소" required>
-							<label for="address2">주소</label>
+							<input type="text" class="form-control" id="address1" placeholder="주소" required readonly>
+							<label for="address1">주소</label>
 						</div>	
 						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="address3" placeholder="상세주소 입력" required>
-							<label for="address3">상세주소 입력</label>
+							<input type="text" class="form-control" id="address2" placeholder="상세주소 입력" required>
+							<label for="address2">상세주소 입력</label>
 						</div>	
 						<div class="form-floating mb-3">
 							<input type="text" class="form-control" id="birth" placeholder="생년월일8자" maxlength="10" required
@@ -257,27 +316,6 @@ function checkEmail() {
 							<button class="btn btn-danger btn-lg" type="submit">가입</button>
 						</div>
 					</form>
-				
-				
-				<div>
-					<h3 style="text-align: center; margin-top: 50px;">간편 가입</h3>
-				</div>
-			<div class="social_login"  >
-                <ul style="list-style: none; ">
-
-                    <li class="other_kakaotalk design_social">
-                        <a href="javascript:;">카카오톡 계정으로 가입
-                            <span class="other_icon"><img src="../assets/img/icon_kakaotalk.png" alt="카카오톡 아이콘"></span>
-                        </a>
-                    </li>
-                    <li class="other_naver design_social">
-                        <a href="javascript:;">네이버 계정으로 가입
-                            <span class="other_icon"><img src="../assets/img/icon_naver.png" alt="네이버 아이콘"></span>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>					
 			</div>
 		</div>
 	</section>

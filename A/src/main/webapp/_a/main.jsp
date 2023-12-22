@@ -11,116 +11,7 @@
 
     <%@include file="../_common/commonMovieSlide.jsp"%>
 
-	<section class="category-section">
-		<div class="container" data-aos="fade-up">
-		  <div class="section-header d-flex justify-content-between align-items-center mb-5">
-	        <h2>박스오피스</h2>
-	        <div><a href="movie_now.jsp" class="more">2023.12.11 기준</a></div>
-	      </div>
-		
-	      <div class="container" data-aos="fade-up">
-			<div class="owl-carousel owl-theme">
-			
-		        <div class="item position-relative" id="wrap">
-		          <img src="../assets/img/post1.jpg" >
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="../assets/img/post2.jpg" >
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="../assets/img/post3.jpg" >
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="../assets/img/post4.jpg" >
-					<div class="titleee">>
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="../assets/img/post5.jpg" >
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="../assets/img/post6.jpg" >
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="../assets/img/post7.jpg" >
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="../assets/img/post8.jpg" >
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="../assets/img/post9.jpg" >
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="../assets/img/post10.jpg" >
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="../assets/img/post11.jpg" >
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="../assets/img/post12.jpg" >
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		     </div>
-	       </div>
-       </div>
-     </section>
+	
 	    
     
 
@@ -201,7 +92,133 @@
 
     
 
-    <!-- ======= Lifestyle Category Section ======= -->
+    
+	
+	<section class="category-section">
+		<div class="container" data-aos="fade-up">
+		  <div class="section-header d-flex justify-content-between align-items-center mb-5">
+	        <h2>박스오피스</h2>
+	        <div><a href="movie_now.jsp" class="more">2023.12.11 기준</a></div>
+	      </div>
+		
+	      <div class="container" data-aos="fade-up">
+			<div class="owl-carousel owl-theme">
+			
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post1.jpg" >
+		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">1</em>
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
+		        </div>
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post2.jpg" >
+		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">2</em>
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
+		        </div>
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post3.jpg" >
+		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">3</em>
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
+		        </div>
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post4.jpg" >
+		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">4</em>
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
+		        </div>
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post5.jpg" >
+		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">5</em>
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
+		        </div>
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post6.jpg" >
+		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">6</em>
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
+		        </div>
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post7.jpg">
+		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">7</em>
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
+		        </div>
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post8.jpg" >
+		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">8</em>
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
+		        </div>
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post9.jpg" >
+		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">9</em>
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
+		        </div>
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post10.jpg" >
+		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">10</em>
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
+		        </div>
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post11.jpg" >
+		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">11</em>
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
+		        </div>
+		        
+		        
+		        <div class="item position-relative" id="wrap">
+		          <img src="../assets/img/post12.jpg" >
+		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">12</em>
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="" class="moree">상세정보</a>
+					</div>
+		        </div>
+		     </div>
+	       </div>
+       </div>
+     </section>
+     
+     
+     <!-- ======= Lifestyle Category Section ======= -->
     <section class="category-section">
       <div class="container" data-aos="fade-up">
 
@@ -232,7 +249,6 @@
         </div> <!-- End .row -->
       </div>
     </section><!-- End Lifestyle Category Section -->
-
 	 
   </main><!-- End #main -->
 
