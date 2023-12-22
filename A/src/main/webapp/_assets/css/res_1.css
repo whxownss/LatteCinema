@@ -73,6 +73,10 @@
     align-items: center;
 }
 
+.hca {
+	display: flex;
+    justify-content: center;
+}
 
 .payType {
 	width: 150px;
