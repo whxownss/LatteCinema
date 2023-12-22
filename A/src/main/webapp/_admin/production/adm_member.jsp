@@ -134,7 +134,7 @@
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30">
                     </p>
-					
+				<form action="#" id="memManage" name="memManage" method="post">	
                     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr>
@@ -160,9 +160,9 @@
                           <td>$320,800</td>
                           <td>t.nixon@datatables.net</td>
                           <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
+							<select id="memSelect" name="memSelect">
+								<option value="N">N</option>
+								<option value="Y">Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -1064,7 +1064,7 @@
                         </tr>
                       </tbody>
                     </table>
-					
+				</form>	
 					
                   </div>
                 </div>
@@ -1114,6 +1114,16 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+		  // 셀렉트박스의 onchange 이벤트 핸들러
+		  $('select[name="memSelect"]').on('change', function() {
+			 alert("이벤트 연결");
+		    $('#memManage').submit(); // 폼 제출
+		  });
+	});
+    
+    </script>
 
   </body>
 </html>

@@ -123,6 +123,7 @@
           	<!-- 임시  -->
 			<div class="container">
 			  <!-- Modal -->
+			 <form action="#" method="get" name="frChange"> 
 			  <div class="modal fade" id="myModal" role="dialog">
 			    <div class="modal-dialog">
 <!-- 			    <button type="button" class="btn-close" aria-label="Close"></button> -->
@@ -131,7 +132,7 @@
 				      <div class="modal-header">
 				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				        <h5 class="modal-title" id="exampleModalLabel">자주찾는질문</h5>
-				        <select id="modalSelect">
+				        <select id="modalSelect" name="changeSelect">
 				        	<option value="">구분선택</option>
 				        	<option value="예매">예매</option>
 				        	<option value="관람권">관람권</option>
@@ -141,27 +142,29 @@
 				        </select>
 				      </div>
 				      <div class="modal-body">
-				        <form>
+<!-- 				        <form> -->
 				          <div class="mb-3">
 				            <label for="recipient-name" class="col-form-label">질문</label>
-				            <input type="text" class="form-control" id="recipient-name" value="">
+				            <input type="text" class="form-control" id="recipient-name" name="changeQue" value="">
 				          </div>
 				          <div class="mb-3">
 				            <label for="message-text" class="col-form-label">글내용</label>
-				            <textarea class="form-control" id="message-text"></textarea>
+				            <textarea class="form-control" id="message-text" name="changeContent"></textarea>
 				          </div>
-				        </form>
+<!-- 				        </form> -->
 				      </div>
 				      <div class="modal-footer">
 				      	<button type="button" class="btn btn-danger">삭제</button>
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">나가기</button>
-				        <button type="button" id="modalRewrite" class="btn btn-primary">수정</button>
+				        <button type="submit" id="modalRewrite" class="btn btn-primary">수정</button>
 				      </div>
 			    </div>
 			  </div>
 			  
 			</div>
+		 </form>	
           	<!-- //임시  -->
+          	<form action="#" method="get" name="frAdd"> <!-- form태그로 submit 버튼  -->
 			  <div class="modal fade" id="myModal2" role="dialog">
 			    <div class="modal-dialog">
 <!-- 			    <button type="button" class="btn-close" aria-label="Close"></button> -->
@@ -170,7 +173,7 @@
 				      <div class="modal-header">
 				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				        <h5 class="modal-title" id="exampleModalLabel">자주찾는질문</h5>
-				        <select>
+				        <select name="newSelect">
 				        	<option value="">구분선택</option>
 				        	<option value="예매">예매</option>
 				        	<option value="관람권">관람권</option>
@@ -180,25 +183,26 @@
 				        </select>
 				      </div>
 				      <div class="modal-body">
-				        <form>
+<!-- 				        <form> -->
 				          <div class="mb-3">
 				            <label for="recipient-name" class="col-form-label">질문</label>
-				            <input type="text" class="form-control" id="recipient-name" value="">
+				            <input type="text" class="form-control" id="recipient-name" name="newQue" value="">
 				          </div>
 				          <div class="mb-3">
 				            <label for="message-text" class="col-form-label">글내용</label>
-				            <textarea class="form-control" id="message-text"></textarea>
+				            <textarea class="form-control" id="message-text" name="newContent"></textarea>
 				          </div>
-				        </form>
+<!-- 				        </form> -->
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">나가기</button>
-				        <button type="button" id="insertRow" class="btn btn-primary">추가</button>
+				        <button type="submit" id="insertRow" class="btn btn-primary">추가</button>
 				      </div>
 			    </div>
 			  </div>
 			  
 			</div>
+		</form>
           	<!-- //임시  -->          	
             <div class="page-title">
               <div class="title_left">
@@ -691,8 +695,8 @@
 	    // 가져온 숫자 값을 출력하거나 다른 작업 수행
 	    console.log("Clicked Number:", clickedNumber);
 
-	    // 또는 다른 작업을 수행할 수 있습니다.
-	    // 예를 들어, 모달을 열거나 다른 페이지로 이동할 수 있습니다.
+	    // 또는 다른 작업을 수행
+	    // 예를 들어, 모달을 열거나 다른 페이지로 이동
 	});
 		
 		$("tr a[data-toggle='modal']").on("click", function () {
@@ -717,8 +721,8 @@
 	        } else {
 	            console.log("data-info not found");
 	        }
-		    // 또는 다른 작업을 수행할 수 있습니다.
-		    // 예를 들어, 모달을 열거나 다른 페이지로 이동할 수 있습니다.
+		    // 또는 다른 작업을 수행
+		    // 예를 들어, 모달을 열거나 다른 페이지로 이동
 		});
 	
 	 // <a> 태그가 클릭되었을 때 실행할 함수

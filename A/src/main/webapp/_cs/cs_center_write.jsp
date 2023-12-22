@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>
+<script src="../jQuery/jquery-3.6.0.js"></script>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
@@ -40,11 +41,11 @@
 		
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
-				<select class="form-select" aria-label="Default select example">
+				<select id="movieSelect" class="form-select" aria-label="Default select example">
 				  <option selected>영화관</option>
-				  <option value="1">전체</option>
-				  <option value="2">서면</option>
-				  <option value="3">강남</option>
+				  <option value="전체">전체</option>
+				  <option value="서면">서면</option>
+				  <option value="강남">강남</option>
 				</select>
 				<table class="table">
 				  <thead>
@@ -58,34 +59,14 @@
 				  <tbody>
 				    <tr>
 				      <th scope="row">1</th>
-				      <td style="width: 50px;"><input type="text" value="전체" readonly></td>
-				      <td><input type="text" style="width: 90%;" value="겨울왕국1 교환 안내"></td>
-				      <td>23.12.01</td>
+				      <td style="width: 100px;"><span id="textSpan">영화관</span></td>
+				      <td><input type="text" style="width: 90%;" value="제목 입력하세요."></td>
+				      <td><span>오늘날짜들어가야함.</span></td>
 				    </tr>
 				    <tr>
 				    	<td colspan="4">
 				    		<textarea class="form-control" style="text-align: center; box-sizing: border-box; resize: none; height: 500px;">
-안녕하세요, 씨네Q입니다.
-
-먼저 씨네Q를 이용해주시는 고객님들께 항상 깊은 감사 드립니다.
-
- 
-
-<겨울왕국 1> 포스터 재입고 완료되어 교환 진행중에 있습니다. 
-
-* 포스터 지참하여 방문시 교환 가능
-
-* 교환 가능 기한 : ~12/31(일)
-
- 
-
-가능 기한 초과시 교환이 어려울 수 있는 점 양해 부탁드립니다.
-
- 
-
-감사합니다.
-
-씨네Q 드림
+내용을 입력해주세요.
 				    		</textarea>
 				   		</td>
 				    </tr>
@@ -101,6 +82,17 @@
 			</div>
 		</section>
 		
+		
 	</main>
-	
+<script type="text/javascript">
+//셀렉트 박스 값이 변경될 때 이벤트 리스너를 추가합니다.
+// 셀렉트 박스 값이 변경될 때 이벤트 리스너를 추가합니다.
+$('#movieSelect').change(function() {
+    // 선택한 옵션의 값을 가져와서 span 태그의 텍스트 내용으로 설정합니다.
+    const selectedValue = $(this).val();
+    $('#textSpan').text(selectedValue);
+});
+
+
+</script>	
 <%@include file ="../_common/commonFooter.jsp" %>
