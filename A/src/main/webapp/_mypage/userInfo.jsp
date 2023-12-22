@@ -535,24 +535,13 @@ $(function(){
                 </colgroup>
                 <tbody>
                   <tr>
-                    <th scope="row">프로필 사진</th>
-                    <td>
-                      <div class="profile-photo">
-                        <form name="fileForm">
-                          <input type="file" id="profileTarget" name="file" style="display: none;">
-                        </form>
-                        <div class="profile-img">
-                          <img src="../../../static/pc/images/mypage/bg-profile.png" alt="프로필 사진 샘플">
-                        </div>
-                        <button type="button" class="button small gray-line" id="addProfileImgBtn">이미지 등록</button>
-                        <a href="/mypage/goodbye-megabox" class="button small member-out" title="회원탈퇴">회원탈퇴</a>
-                      </div>
-                      <p style="font-size:0.8em; color:#999; margin-top:10px; padding:0; text-align:left; position:absolute; top:22px; left:194px;">※ 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
-                    </td>
+                   
                   </tr>
                   <tr>
                     <th scope="row">아이디</th>
-                    <td><%="아이디" %></td>
+                  		
+                    <td><%="아이디" %></td> 
+                    <td><a href="delete.jsp" class="button small member-out" title="회원탈퇴">회원탈퇴</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -665,7 +654,7 @@ $(function(){
                         <em class="font-orange">*</em>
                       </th>
                       <td>
-                        <a href="/on/oh/ohh/Mypage/userPwdChangePage.do" class="button small gray-line" title="비밀번호 변경">비밀번호 변경</a> 마지막 비밀번호 변경: <%="50" %>일전에 함 <%="(2023-10-29 08:59:15)"%></td>
+                        <a href="changepw.jsp" class="button small gray-line" title="비밀번호 변경">비밀번호 변경</a></td>
                     </tr>
                     <tr>
                       <th scope="row">주소</th>
@@ -679,40 +668,7 @@ $(function(){
                 </table>
               </div>
             </form>
-            <h3 class="tit">간편로그인 계정연동</h3>
-            <div class="table-wrap mb40">
-              <table class="board-list">
-                <caption>구분, 연동정보, 연결 항목응ㄹ 가진 간편 로그인 계정연동 표</caption>
-                <colgroup>
-                  <col style="width:130px;">
-                    <col>
-                      <col style="width:110px;">
-                </colgroup>
-                <thead>
-                  <tr>
-                    <th scope="col">구분</th>
-                    <th scope="col">연동정보</th>
-                    <th scope="col">연결</th>
-                  </tr>
-                </thead>
-                <tbody id="lnkgInfoTbody">
-                  <tr>
-                    <th scope="row" class="a-c">네이버</th>
-                    <td class="a-l">연결된 계정정보가 없습니다.</td>
-                    <td>
-                      <button type="button" class="button small gray" lnkgty="NAVER" connty="conn">연동</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="a-c">카카오</th>
-                    <td class="a-l">연결된 계정정보가 없습니다.</td>
-                    <td>
-                      <button type="button" class="button small gray" lnkgty="KAKAO" connty="conn">연동</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+
             <div class="btn-group mt40">
               <button class="button large" id="cancelBtn">취소</button>
               <button class="button purple large" id="updateBtn">등록</button>
