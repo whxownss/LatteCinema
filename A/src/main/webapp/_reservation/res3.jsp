@@ -254,6 +254,7 @@
 				</div>
 			</div>
 				
+			<div ><a href="res4.jsp" style="margin-left: 100%;"><button>res4 이동</button></a></div>
 			</div>
 		</section>
 	
