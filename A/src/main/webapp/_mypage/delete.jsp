@@ -56,68 +56,12 @@
 					<li>라떼시네마 멤버십 포인트 및 적립/차감 내역</li>
 					<li>관람권 및 쿠폰</li>
 					<li>영화 관람 내역</li>
-					<li>간편 로그인 연동 정보</li>
+					
 				</ul>
 			</li>
-			<li>
-				<p class="txt">4. 고객님께서 불편하셨던 점, 아쉬웠던 점을 알려주시면 앞으로 더 나은 모습으로 찾아 뵙겠습니다.</p>
 
-				<ul class="reason">
-					
-						<li>
-							<input type="radio" name="useroutcheck" id="userout01" value="서비스 장애가 잦아서">
-							<label for="userout01">서비스 장애가 잦아서</label>
-							
-						</li>
-					
-						<li>
-							<input type="radio" name="useroutcheck" id="userout02" value="이벤트 및 무료서비스 혜택이 적어서">
-							<label for="userout02">이벤트 및 무료서비스 혜택이 적어서</label>
-							
-						</li>
-					
-						<li>
-							<input type="radio" name="useroutcheck" id="userout03" value="불만 및 불편사항에 대한 고객응대가 나빠서">
-							<label for="userout03">불만 및 불편사항에 대한 고객응대가 나빠서</label>
-							
-						</li>
-					
-						<li>
-							<input type="radio" name="useroutcheck" id="userout04" value="영화관람시 시설 및 가격등의 불만 때문에">
-							<label for="userout04">영화관람시 시설 및 가격등의 불만 때문에</label>
-							
-						</li>
-					
-						<li>
-							<input type="radio" name="useroutcheck" id="userout05" value="이용빈도가 낮고 개인정보 유출이 우려되어">
-							<label for="userout05">이용빈도가 낮고 개인정보 유출이 우려되어</label>
-							
-						</li>
-					
-						<li>
-							<input type="radio" name="useroutcheck" id="userout06" value="탈퇴 후 재가입을 위해">
-							<label for="userout06">탈퇴 후 재가입을 위해</label>
-							
-						</li>
-					
-						<li>
-							<input type="radio" name="useroutcheck" id="userout07" value="기타">
-							<label for="userout07">기타</label>
-							
-								<input type="text" class="input-text w600px ml10" title="기타 입력" id="etcText">
-							
-						</li>
-					
-						<li>
-							<input type="radio" name="useroutcheck" id="userout08" value="휴면계정 만료">
-							<label for="userout08">휴면계정 만료</label>
-							
-						</li>
-					
-				</ul>
-			</li>
 			<li>
-				<p class="txt">5. 회원님의 비밀번호를 입력하시고 [탈퇴] 버튼을 클릭해주세요.</p>
+				<p class="txt">4. 회원님의 비밀번호를 입력하시고 [탈퇴] 버튼을 클릭해주세요.</p>
 
 				<div class="table-wrap">
 					<table class="board-form">
@@ -137,30 +81,6 @@
 							</tr>
 							<input id="ibxSchPwdLoginId" type="hidden" value="goodtime555"><!--아이디-->
 							<input id="ibxSchPwdMbNm" type="hidden" value="정기원"><!--이름-->
-							<tr>
-								<th scope="row"><label for="ibxSchPwdMblpTelno">휴대폰 번호<!--휴대폰 번호--></label></th>
-								<td>
-									<input type="text" id="ibxSchPwdMblpTelno" maxlength="11" placeholder="'-' 없이 입력" class="input-text w230px"><!--'-' 없이 입력-->
-									<button id="btnSchPwdMbCertNoSend" type="button" class="button gray w100px ml08 disabled" disabled="disabled">인증요청<!--인증요청--></button>
-								</td>
-							</tr>
-							<tr id="schPwdMblpCertRow">
-								<th scope="row"><label for="ibxSchPwdMblpCharCertNo">인증번호<!--인증번호--></label></th>
-								<td>
-									<div class="chk-num">
-										<div class="line">
-											<input maxlength="4" type="text" id="ibxSchPwdMblpCharCertNo" class="input-text w180px" title="인증번호 입력" disabled="disabled"><!--인증번호 입력-->
-
-											<div class="time-limit" id="schPwdtimer">
-												3:00
-											</div>
-										</div>
-									</div>
-
-									<button id="btnSchPwdMblpCharCert" type="button" class="button gray-line w100px ml08 disabled" disabled="disabled">인증확인<!--인증확인--></button>
-									<div id="schPwdMblpNo-error-text" class="alert"></div>
-								</td>
-							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -170,7 +90,7 @@
 
 	<div class="btn-group">
 		<button class="button large" id="cancelBtn">취소</button>
-		<button class="button purple large" id="submitBtn" disabled="">탈퇴</button>
+		<button class="button purple large" id="submitBtn" >탈퇴</button>
 	</div>
 </div>
         </form>
