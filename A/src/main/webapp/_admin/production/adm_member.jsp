@@ -25,7 +25,7 @@
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-
+	 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
   </head>
@@ -160,7 +160,7 @@
                           <td>$320,800</td>
                           <td>t.nixon@datatables.net</td>
                           <td>
-							<select id="memSelect" name="memSelect">
+							<select>
 								<option value="N">N</option>
 								<option value="Y">Y</option>
 							</select>
@@ -224,9 +224,9 @@
                           <td>$162,700</td>
                           <td>a.satou@datatables.net</td>
                           <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
+							<select id="memSelect" name="memSelect">
+								<option value="N">N</option>
+								<option value="Y">Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -1083,7 +1083,6 @@
         </footer>
         <!-- /footer content -->
       </div>
-    </div>
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
@@ -1114,15 +1113,16 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-		  // 셀렉트박스의 onchange 이벤트 핸들러
-		  $('select[name="memSelect"]').on('change', function() {
-			 alert("이벤트 연결");
-		    $('#memManage').submit(); // 폼 제출
-		  });
-	});
     
+    <script type="text/javascript">
+		$(() => {
+			// 셀렉트박스의 onchange 이벤트 핸들러
+			debugger;
+			$('select[name="memSelect"]').on('change', function() {
+			alert("이벤트 연결");
+			  	$('#memManage').submit(); // 폼 제출
+			});	   
+	  	}) 
     </script>
 
   </body>
