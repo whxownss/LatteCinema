@@ -1,28 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <header id="header" class="header d-flex align-items-center fixed-top">
   <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-    <a href="../_a/main.jsp" class="logo d-flex align-items-center">
+    <a href="main.me" class="logo d-flex align-items-center">
       <!-- <img src="assets/img/logo.png" alt=""> -->
       <h1>LATTE CINEMA</h1>
     </a>
     <nav id="navbar" class="navbar">
       <ul>
-        <li class="dropdown"><a href="../_a/main.jsp"><span>예매</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+        <li class="dropdown"><a href="res1.re"><span>예매</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
           <ul>
-            <li><a href="search-result.html">예매하기</a></li>
-            <li><a href="#">상영시간표</a></li>
-            <li><a href="#">할인안내</a></li>
+            <li><a href="res1.re">예매하기</a></li>
+            <li><a href="res2.re">상영시간표</a></li>
+            <li><a href="res3.re">할인안내</a></li>
           </ul>
         </li>
-        <li class="dropdown"><a href="../_a/movie_home.jsp"><span>영화</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+        <li class="dropdown"><a href="movie_home.mo"><span>영화</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
           <ul>
-            <li><a href="../_a/movie_home.jsp">홈</a></li>
-            <li><a href="../_a/movie_now.jsp">현재상영작</a></li>
-            <li><a href="../_a/movie_will.jsp">상영예정작</a></li>
-            <li><a href="../_a/movie_latte.jsp">옛날영화</a></li>
+            <li><a href="movie_home.mo">홈</a></li>
+            <li><a href="movie_now.mo">현재상영작</a></li>
+            <li><a href="movie_will.mo">상영예정작</a></li>
+            <li><a href="movie_latte.mo">옛날영화</a></li>
           </ul>
         </li>
-        <li class="dropdown"><a href="../_cinema/cinema.jsp"><span>영화관</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+        <li class="dropdown"><a href="#"><span>영화관</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
           <ul>
             <li class="dropdown"><a href="#"><span>서울</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
@@ -85,7 +85,7 @@
                 <li><a href="#">마산</a></li>
                 <li><a href="#">부산명지</a></li>
                 <li><a href="#">부산본점</a></li>
-                <li><a href="cinema_seomyeon">서면</a></li>
+                <li><a href="cinema.ci">서면</a></li>
                 <li><a href="#">센텀시티</a></li>
                 <li><a href="#">울산</a></li>
                 <li><a href="#">진해</a></li>
@@ -109,26 +109,26 @@
             </li>
           </ul>
         </li>
-        <li class="dropdown"><a href="../_store/store.jsp"><span>스토어</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+        <li class="dropdown"><a href="store.st"><span>스토어</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
           <ul>
-            <li><a href="store.jsp#store1">베스트</a></li>
-            <li><a href="store.jsp#store2">관람권</a></li>
-            <li><a href="store.jsp#store3">스낵음료</a></li>
+            <li><a href="store.st#store1">베스트</a></li>
+            <li><a href="store.st#store2">관람권</a></li>
+            <li><a href="store.st#store3">스낵음료</a></li>
           </ul>
         </li>
         <li class="dropdown"><a href="#"><span>고객지원</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
           <ul>
-            <li><a href="../_cs/cs_member.jsp">멤버십</a></li>
-            <li><a href="../_cs/cs_center.jsp">고객센터</a></li>
-            <li><a href="../_cs/cs_rent.jsp">단체관람/대관문의</a></li>
+            <li><a href="cs_member.cs">멤버십</a></li>
+            <li><a href="cs_center.cs">고객센터</a></li>
+            <li><a href="cs_rent.cs">단체관람/대관문의</a></li>
           </ul>
         </li>
       </ul>
     </nav><!-- .navbar -->
     <div class="position-relative">
       <a href="#" class="mx-2 js-search-open"></a>  <!-- **의미없음. 오류 없애기 위한 태그일 뿐 -->
-      <a href="../_member/login.jsp" class="mx-2">로그인</a>         <!-- **로그인 세션 있으면 로그아웃으로 변경 -->
-      <a href="../_member/signup3.jsp" class="mx-2">회원가입</a>        <!-- **로그인 세션 있으면 마이페이지로 변경 -->
+      <a href="login.me" class="mx-2">로그인</a>         <!-- **로그인 세션 있으면 로그아웃으로 변경 -->
+      <a href="signup3.me" class="mx-2">회원가입</a>        <!-- **로그인 세션 있으면 마이페이지로 변경 -->
       <i class="bi bi-list mobile-nav-toggle"></i>
 <!--         ======= Search Form ======= -->
       <div class="search-form-wrap js-search-form-wrap">
