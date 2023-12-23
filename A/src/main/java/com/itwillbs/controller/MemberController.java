@@ -28,7 +28,8 @@ public class MemberController extends HttpServlet {
 		if(sPath.equals("/main.me")) {
 			dispatcher = request.getRequestDispatcher("_a/main.jsp");
 			dispatcher.forward(request, response);
-		}//
+		}
+		
 		
 		// 로그인 페이지 이동
 		if(sPath.equals("/login.me")) {

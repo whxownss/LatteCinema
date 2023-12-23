@@ -5,7 +5,7 @@
 <%@include file="../_common/commonHeaderEnd.jsp"%>
 
 <main id="main">
-<script src="../jQuery/jquery-3.6.0.js"></script>
+<script src="jQuery/jquery-3.6.0.js"></script>
 
    <script>
       $(function(){

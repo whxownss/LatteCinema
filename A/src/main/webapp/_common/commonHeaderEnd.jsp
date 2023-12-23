@@ -126,8 +126,8 @@
           <li class="dropdown"><a href="store.st"><span>스토어</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="store.st#store1">베스트</a></li>
-              <li><a href="store.st#store2">관람권</a></li>
-              <li><a href="store.st#store3">스낵음료</a></li>
+              <li><a href="store.st#store2">스낵음료</a></li>
+              <li><a href="store.st#store3">관람권</a></li>
             </ul>
           </li>
           
@@ -146,7 +146,7 @@
         <a href="login.me" class="mx-2">로그인</a>  				<!-- **로그인 세션 있으면 로그아웃으로 변경 -->
         <a href="signup3.me" class="mx-2">회원가입</a> 				<!-- **로그인 세션 있으면 마이페이지로 변경 -->
         <a href="myPage.me" class="mx-2">마이페이지</a>
-        <a href="logout.me" class="mx-2">로그아웃</a>
+        <a href="adm_home.ad" class="mx-2">관리자</a>
         
         <i class="bi bi-list mobile-nav-toggle"></i>
 
