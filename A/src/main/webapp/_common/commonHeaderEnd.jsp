@@ -97,7 +97,7 @@
                   <li><a href="#">마산</a></li>
                   <li><a href="#">부산명지</a></li>
                   <li><a href="#">부산본점</a></li>
-                  <li><a href="cinema_seomyeon.ci">서면</a></li>
+                  <li><a href="cinema.ci">서면</a></li>
                   <li><a href="#">센텀시티</a></li>
                   <li><a href="#">울산</a></li>
                   <li><a href="#">진해</a></li>
