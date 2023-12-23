@@ -28,7 +28,46 @@ public class MemberController extends HttpServlet {
 		if(sPath.equals("/main.me")) {
 			dispatcher = request.getRequestDispatcher("_a/main.jsp");
 			dispatcher.forward(request, response);
-		}
+		}//
+		
+		// 로그인 페이지 이동
+		if(sPath.equals("/login.me")) {
+			dispatcher = request.getRequestDispatcher("_member/login.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
+		// 회원가입 페이지 이동
+		if(sPath.equals("/signup3.me")) {
+			dispatcher = request.getRequestDispatcher("_member/signup3.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
+		////////////////////////////////////////////////////////////////////////////////////
+		
+		// 마이페이지 (마이페이지 기본메인화면) 이동
+		if(sPath.equals("/myPage.me")) {
+			dispatcher = request.getRequestDispatcher("_mypage/myPage.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
+		// 마이페이지  myInfo(정보수정 전 비밀번호 인증페이지) 이동
+		if(sPath.equals("/myInfo.me")) {
+			dispatcher = request.getRequestDispatcher("_mypage/myInfo.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
+		// 마이페이지 userInfo(정보수정 페이지) 이동
+		if(sPath.equals("/userInfo.me")) {
+			dispatcher = request.getRequestDispatcher("_mypage/userInfo.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
+		// 마이페이지 myMovie(무비스토리) 이동
+		if(sPath.equals("/myMovie.me")) {
+			dispatcher = request.getRequestDispatcher("_mypage/myMovie.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
 	}
 	
 }
