@@ -541,7 +541,7 @@ $(function(){
                     <th scope="row">아이디</th>
                   		
                     <td><%="아이디" %></td> 
-                    <td><a href="delete.jsp" class="button small member-out" title="회원탈퇴">회원탈퇴</a></td>
+                    <td><a href="delete.me" class="button small member-out" title="회원탈퇴">회원탈퇴</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -654,7 +654,7 @@ $(function(){
                         <em class="font-orange">*</em>
                       </th>
                       <td>
-                        <a href="changepw.jsp" class="button small gray-line" title="비밀번호 변경">비밀번호 변경</a></td>
+                        <a href="changepw.me" class="button small gray-line" title="비밀번호 변경">비밀번호 변경</a></td>
                     </tr>
                     <tr>
                       <th scope="row">주소</th>
