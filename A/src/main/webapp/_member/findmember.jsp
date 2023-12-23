@@ -65,9 +65,12 @@
 						</td>
 					</tr>
 					<tr>
-			          <div class="btn-member-bottom v1">
-			            <button id="btnSchId" type="button" class="button purple large" disabled="disabled">아이디 찾기</button>
-			          </div>						
+						<th cope="row"></th>
+						<td>
+			        	  	<div class="btn-member-bottom v1">
+			            		<button id="btnSchId" type="button" class="button purple large" >아이디 찾기</button>
+			          		</div>
+			          	</td>						
 					</tr>
 				</tbody>      
 				
@@ -102,7 +105,7 @@
 						<th scope="row"><label for="ibxSchPwdMblpTelno">휴대폰 번호<!--휴대폰 번호--></label></th>
 						<td>
 							<input type="text" id="ibxSchPwdMblpTelno" maxlength="11" placeholder="'-' 없이 입력" class="input-text w230px"><!--'-' 없이 입력-->
-							<button id="btnSchPwdMbCertNoSend" type="button" class="button gray w75px ml08 disabled" disabled="disabled">인증요청<!--인증요청--></button>
+							<button id="btnSchPwdMbCertNoSend" type="button" class="button gray w100px ml08 disabled" >인증요청<!--인증요청--></button>
 						</td>
 					</tr>
 					<tr id="schPwdMblpCertRow">
@@ -118,14 +121,17 @@
 								</div>
 							</div>
 
-							<button id="btnSchPwdMblpCharCert" type="button" class="button gray-line w75px ml08 disabled" disabled="disabled">인증확인<!--인증확인--></button>
+							<button id="btnSchPwdMblpCharCert" type="button" class="button gray-line w100px ml08 disabled" disabled="disabled">인증확인<!--인증확인--></button>
 							<div id="schPwdMblpNo-error-text" class="alert"></div>
 						</td>
 					</tr>
 					<tr>
-			          <div class="btn-member-bottom v1">
-			            <button id="btnSchId" type="button" class="button purple large" disabled="disabled">비밀번호 찾기</button>
-			          </div>						
+					<th cope="row"></th>
+						<td>
+			          		<div class="btn-member-bottom v1">
+			            		<button id="btnSchId" type="button" class="button purple large" >비밀번호 찾기</button>
+			          		</div>
+			          	</td>						
 					</tr>
 				</tbody>    
 				
