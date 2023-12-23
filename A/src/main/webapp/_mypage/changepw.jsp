@@ -47,16 +47,14 @@
 							<tr>
 								<th scope="row"><label for="pwnew">새 비밀번호</label></th>
 								<td>
-									<input type="password" id="pwnew" class="input-text w150px">
-									<span class="tooltiptext">비밀번호 설정 시 사용가능한 특수문자는 ~ ! @ # $ % ^ &amp; * + = - ? _  입니다.</span>
-									<span class="ml10 font-size-14">※ 영문, 숫자, 특수문자 중 2가지 이상 조합하여 10자리 이상으로 입력 해 주세요.</span>
+									<input type="password" id="pwnew" class="input-text w150px"><br>
+									<span class="ml10 font-size-14">※ 영문, 숫자, 특수문자 중 2가지 이상 조합하여 8~16자리 이상으로 입력 해 주세요.</span>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row"><label for="repwnew">새 비밀번호 재입력</label></th>
 								<td>
-									<input type="password" id="repwnew" class="input-text w150px">
-									<span class="tooltiptext">비밀번호 설정 시 사용가능한 특수문자는 ~ ! @ # $ % ^ &amp; * + = - ? _  입니다.</span>
+									<input type="password" id="repwnew" class="input-text w150px"><br>
 									<span class="ml10 font-size-14">※ 비밀번호 확인을 위해 한 번 더 입력해 주시기 바랍니다.</span>
 								</td>
 							</tr>
@@ -68,7 +66,6 @@
 					<li>생년월일, 전화번호 등 개인 정보와 관련된 숫자, 연속된 숫자와 같이 쉬운 비밀번호는 다른 사람이 쉽게 알아낼 수 있으니 사용을 자제해 주세요.</li>
 					<li>비밀번호는 3-6개월마다 꼭 바꿔 주세요.</li>
 					<li>비밀번호 변경시 모바일 기기와 홈페이지에서 모두 로그아웃됩니다. 변경한 비밀번호로 다시 로그인해주세요.</li>
-					<li>비밀번호 설정 시 사용가능한 특수문자는 ~ ! @ # $ % ^ &amp; * + = - ? _  입니다.</li>
 				</ul>
 			
 				<div class="btn-group pt40">
