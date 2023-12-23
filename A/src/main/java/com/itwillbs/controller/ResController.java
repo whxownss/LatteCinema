@@ -50,5 +50,7 @@ public class ResController extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("_reservation/res4.jsp");
 			dispatcher.forward(request, response);
 		}
+		
+		
 	}
 }

@@ -29,6 +29,8 @@ public class MemberController extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("_a/main.jsp");
 			dispatcher.forward(request, response);
 		}
+		
+		
 	}
 	
 }
