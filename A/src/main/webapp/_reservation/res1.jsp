@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 <%@include file="../_common/commonHeaderStart.jsp"%>
-	<link rel="stylesheet" href="../_assets/css/res_1.css">
-	<script src="../jQuery/jquery-3.6.0.js"></script>
+	<link rel="stylesheet" href="_assets/css/res_1.css">
+	<script src="jQuery/jquery-3.6.0.js"></script>
 	<script>
 		
 		$(function(){
@@ -416,7 +416,7 @@
 			</div>
 
 			<div><button id="forTest" style="margin-left: 100%;">TEST</button></div>
-			<div ><a href="res2.jsp" style="margin-left: 100%;"><button>res2 이동</button></a></div>
+			<div ><a href="res2.re" style="margin-left: 100%;"><button>res2 이동</button></a></div>
 
 		</div>
 	</section>

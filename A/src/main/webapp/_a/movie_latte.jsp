@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>>
-	<link rel="stylesheet" href="../_assets/css/hover.css">
+	<link rel="stylesheet" href="_assets/css/hover.css">
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 <main id="main">
@@ -21,7 +21,7 @@
 	          <div class="col-lg-4">
 	            <div class="post-entry-1 lg">
               <div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post20.jpg" style="width: 100%;">
+			          <img src="assets/img/post20.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -34,7 +34,7 @@
           <div class="col-lg-4">
             <div class="post-entry-1 lg">
               <div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post21.jpg" style="width: 100%;">
+			          <img src="assets/img/post21.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -47,7 +47,7 @@
           <div class="col-lg-4">
             <div class="post-entry-1 lg">
               <div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post22.jpg" style="width: 100%;">
+			          <img src="assets/img/post22.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -80,7 +80,7 @@
 							<input type="radio" id="vote-1" name="vote">
 							<label for="vote-1"><span class="date">후보 1</span></label>
 						</div>
-						<label for="vote-1"><img src="../assets/img/post6.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
+						<label for="vote-1"><img src="assets/img/post6.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
 						<div><label for="vote-1"><span>말하고싶은 비밀</span> <span>&bullet;</span> <span>홍길동</span></label></div>
 					</div>
 				</div>
@@ -90,7 +90,7 @@
 							<input type="radio" id="vote-2" name="vote">
 							<label for="vote-2"><span class="date">후보 2</span></label>
 						</div>
-						<label for="vote-2"><img src="../assets/img/post7.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
+						<label for="vote-2"><img src="assets/img/post7.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
 						<div><label for="vote-2"><span>괴물</span> <span>&bullet;</span> <span>홍길동</span></label></div>
 					</div>
 				</div>
@@ -100,7 +100,7 @@
 							<input type="radio" id="vote-3" name="vote">
 							<label for="vote-3"><span class="date">후보 3</span></label>
 						</div>
-						<label for="vote-3"><img src="../assets/img/post8.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
+						<label for="vote-3"><img src="assets/img/post8.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
 						<div><label for="vote-3"><span>쏘우</span> <span>&bullet;</span> <span>제임스완</span></label></div>
 					</div>
 				</div>
@@ -110,7 +110,7 @@
 							<input type="radio" id="vote-4" name="vote">
 							<label for="vote-4"><span class="date">후보 4</span></label>
 						</div>
-						<label for="vote-4"><img src="../assets/img/post9.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
+						<label for="vote-4"><img src="assets/img/post9.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
 						<div><label for="vote-4"><span>싱글인서울</span> <span>&bullet;</span> <span>홍길동</span></label></div>
 					</div>
 				</div>
@@ -120,7 +120,7 @@
 							<input type="radio" id="vote-5" name="vote">
 							<label for="vote-5"><span class="date">후보 5</span></label>
 						</div>
-						<label for="vote-5"><img src="../assets/img/post10.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
+						<label for="vote-5"><img src="assets/img/post10.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
 						<div><label for="vote-5"><span>나폴레옹</span> <span>&bullet;</span> <span>홍길동</span></label></div>
 					</div>
 				</div>

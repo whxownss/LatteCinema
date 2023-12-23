@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>
-	<link rel="stylesheet" href="../_assets/css/hover.css">
+	<link rel="stylesheet" href="_assets/css/hover.css">
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
@@ -15,7 +15,7 @@
 				class="section-header d-flex justify-content-between align-items-center mb-5">
 				<h3>상영 예정작</h3>
 				<div>
-					<a href="movie_now.jsp" class="more">현재 상영작 &gt;</a>
+					<a href="movie_now.mo" class="more">현재 상영작 &gt;</a>
 				</div>
 			</div>
 
@@ -23,7 +23,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post1.jpg" style="width: 100%;">
+			          <img src="assets/img/post1.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
@@ -37,7 +37,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post2.jpg" style="width: 100%;">
+			          <img src="assets/img/post2.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
@@ -51,7 +51,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post3.jpg" style="width: 100%;">
+			          <img src="assets/img/post3.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
@@ -65,7 +65,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post4.jpg" style="width: 100%;">
+			          <img src="assets/img/post4.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
@@ -79,7 +79,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post5.jpg" style="width: 100%;">
+			          <img src="assets/img/post5.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
@@ -96,7 +96,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post1.jpg" style="width: 100%;">
+			          <img src="assets/img/post1.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
@@ -110,7 +110,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post2.jpg" style="width: 100%;">
+			          <img src="assets/img/post2.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
@@ -124,7 +124,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post3.jpg" style="width: 100%;">
+			          <img src="assets/img/post3.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
@@ -138,7 +138,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post4.jpg" style="width: 100%;">
+			          <img src="assets/img/post4.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
@@ -152,7 +152,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post5.jpg" style="width: 100%;">
+			          <img src="assets/img/post5.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
@@ -169,7 +169,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post1.jpg" style="width: 100%;">
+			          <img src="assets/img/post1.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
@@ -183,7 +183,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post2.jpg" style="width: 100%;">
+			          <img src="assets/img/post2.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
@@ -197,7 +197,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post3.jpg" style="width: 100%;">
+			          <img src="assets/img/post3.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
@@ -211,7 +211,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post4.jpg" style="width: 100%;">
+			          <img src="assets/img/post4.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
@@ -225,7 +225,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post5.jpg" style="width: 100%;">
+			          <img src="assets/img/post5.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
@@ -242,7 +242,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post1.jpg" style="width: 100%;">
+			          <img src="assets/img/post1.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
@@ -256,7 +256,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post2.jpg" style="width: 100%;">
+			          <img src="assets/img/post2.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
@@ -270,7 +270,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post3.jpg" style="width: 100%;">
+			          <img src="assets/img/post3.jpg" style="width: 100%;">
 						<div class="titlee">
 							<a href="" class="moree">상세정보</a>
 						</div>
