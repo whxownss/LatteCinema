@@ -64,11 +64,14 @@
 							<div id="schIdMblpNo-error-text" class="alert"></div>
 						</td>
 					</tr>
+					<tr>
+			          <div class="btn-member-bottom v1">
+			            <button id="btnSchId" type="button" class="button purple large" disabled="disabled">아이디 찾기</button>
+			          </div>						
+					</tr>
 				</tbody>      
 				
-		          <div class="btn-member-bottom v1">
-		            <button id="btnSchId" type="button" class="button purple large" disabled="disabled">아이디 찾기</button>
-		          </div>				
+			
 				        
             </table>
           </div>
@@ -119,24 +122,20 @@
 							<div id="schPwdMblpNo-error-text" class="alert"></div>
 						</td>
 					</tr>
-
+					<tr>
+			          <div class="btn-member-bottom v1">
+			            <button id="btnSchId" type="button" class="button purple large" disabled="disabled">비밀번호 찾기</button>
+			          </div>						
+					</tr>
 				</tbody>    
 				
-		          <div class="btn-member-bottom v1">
-		            <button id="btnSchId" type="button" class="button purple large" disabled="disabled">비밀번호 찾기</button>
-		          </div>					
 				
 				          
             </table>
           </div>
 
-          <div class="mt20 font-size-14">
-            ※ 휴대폰 번호가 변경된 경우 본인인증 찾기를 통하여 아이디찾기를 진행해주시기 바랍니다.
-          </div>
 
-          <div class="btn-member-bottom v1">
-            <button id="btnSchId" type="button" class="button purple large" disabled="disabled">아이디 찾기</button>
-          </div>
+
         </div>
       </div>
     </div>
