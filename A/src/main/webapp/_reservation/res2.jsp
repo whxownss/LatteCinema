@@ -250,6 +250,7 @@
 					
 				</div>
 			</div>
+			<div ><a href="res3.jsp" style="margin-left: 100%;"><button>res3 이동</button></a></div>
 			</div>
 		</section>
 	

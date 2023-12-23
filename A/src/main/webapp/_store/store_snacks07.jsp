@@ -5,6 +5,63 @@
 <%@include file="../_common/commonHeaderEnd.jsp"%>
 
 <main id="main">
+<script src="../jQuery/jquery-3.6.0.js"></script>
+
+   <script>
+      $(function(){
+         
+         // 수량 옵션
+         $('._count :button').on({
+             'click' : function(e){
+
+                 e.preventDefault();
+                 var count = $(this).parent('._count').find('.inpp').text();
+                 var now = parseInt(count);
+                 var min = 1;
+                 var max = 5;
+                 var num = now;
+                 
+                 if($(this).hasClass('minus')){
+                     var type = 'm';
+                 }else{
+                     var type = 'p';
+                 }
+                 if(type=='m'){
+                     if(now>min){
+                         num = now - 1;
+                     }
+                 }else{
+                     if(now<max){
+                         num = now + 1;
+                     }
+                 }
+                 if(num != now){
+                     $(this).parent('._count').find('.inpp').text(num);
+                 }
+             }
+         });
+         
+         // 상품금액
+         $(".inpp").on("DOMSubtreeModified", function(){
+				// 좌석 선택 다 해야 뜨는걸로
+				var p1 = parseInt($("#price").text().replace(/[^\d]+/g, ""));
+				var p2 = parseInt($(".inpp").text());
+				
+				var sum = p1 * p2;
+				
+				var sPrice = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+				
+				$("#sPrice").text(sPrice);
+				
+			});
+		
+         // 3자리 콤마
+         var price = $('#price').text();
+         var money = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+         $('#price').text(money);
+         
+      });
+   </script>
 
 	<section class="category-section">
 		<div class="container" data-aos="fade-up">
@@ -12,64 +69,73 @@
 			<!-- 메인 -->
 
 			<section class="contents d-flex">
-				<div class="col-6">
-					<div class="position-relative">
-						<img class="position-absolute top-0 end-0"
-							src="https://cf.lottecinema.co.kr//Media/WebAdmin/52703a86875f4e589879094bf68162aa.jpg"
-							alt="오리지널팝콘(M)">
-					</div>
+				<div class="col-6" style="display: flex; justify-content: center;">
+					<img
+						src="https://cf.lottecinema.co.kr//Media/WebAdmin/52703a86875f4e589879094bf68162aa.jpg"
+						alt="오리지널팝콘(M)">
 				</div>
-				<article class="col-6">
-					<table class="pd_table fs-5" summary="상품 상세설명에 대한 표입니다">
+				<article class="col-4">
+					<table class="pd_table fs-5 table table-sm">
 						<colgroup>
-							<col style="width: 45%;">
+							<col style="width: 35%;">
 							<col style="width: auto;">
 						</colgroup>
 						<thead>
 							<tr>
-								<th scope="row" class="badge_wrap" colspan="2"></th>
+								<th scope="row" class="text-center border-bottom-0" colspan="4">
+									<h3 class="section-header fs-1">
+										<i>오리지널팝콘 (M)</i>
+									</h3>
+								</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<th scope="row" class="text-center" colspan="6">
-									<h3 class="fw-bold">오리지널팝콘 (M)</h3>
-								</th>
-							</tr>
-							<tr>
+								<th colspan="2" scope="row" class="text-center"><span
+									class="fs-3" id="price">5000</span>원</th>
 							</tr>
 							<tr>
 								<th scope="row">구성품</th>
-								<td>오리지널팝콘 (M)</td>
+								<td class="text-end">오리지널팝콘 (M)</td>
 							</tr>
 							<tr>
 								<th scope="row">구매제한</th>
-								<td>제한없음</td>
+								<td class="text-end">제한없음</td>
 							</tr>
 							<tr>
 								<th scope="row">유효기간</th>
-								<td>24 개월</td>
+								<td class="text-end">24 개월</td>
+							</tr>
+							<tr>
+								<th scope="col" style="padding-top: 3%">총 상품금액</th>
+								<td class="text-end" style="font-weight: bold; color: #FF243E;">
+									<span class="fs-2" id="sPrice">5,000</span>원
+								</td>
+							</tr>
+							<tr class="border border-bottom-0 border-white">
+								<td scope="row" class="text-center" colspan="4">
+									<div class="input-group mb-3 container _count"
+										style="width: 400px; padding-top: 4%; text-align: center;">
+										<button class="minus btn btn-outline-secondary"
+										style="text-align: center; padding-left: 20px; padding-right: 20px;">-</button>
+										<label class="inpp input-group-text border border-secondary fs-5" for="inputGroupFile01"
+											style="text-align: center; padding-left: 133px; padding-right: 133px;">1</label>
+										<button class="plus btn btn-outline-secondary"
+										style="text-align: center; padding-left: 20px; padding-right: 20px;">+</button>
+									</div>
+								</td>
+							</tr>
+							<tr class="border border-0 border-white">
+								<td scope="row" class="text-center" colspan="4">
+									<button class="btn btn-secondary btn-lg"
+										style="text-align: center; padding-left: 60px; padding-right: 60px;">선물하기</button>
+									<button class="btn btn-danger btn-lg"
+										style="text-align: center; padding-left: 60px; padding-right: 60px;">구매하기</button>
+								</td>
 							</tr>
 						</tbody>
 					</table>
-					<div class="input-group mb-3"
-						style="width: 400px; text-align: center;">
-						<button class="btn btn-outline-secondary">-</button>
-						<label class="input-group-text" for="inputGroupFile01"
-							style="text-align: center; padding-left: 80px; padding-right: 80px;">1</label>
-						<button class="btn btn-outline-secondary">+</button>
-					</div>
-					<div class="txt_price_wrap">
-						총 상품금액 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong
-							class="txt_price_str fs-3"> 5,000 <em>원</em></strong>
-					</div>
-					<div class="btn_wrap">
-						<button class="btn btn-secondary btn-lg">선물하기</button>
-						<button class="btn btn-warning btn-lg">구매하기</button>
-					</div>
-		</div>
-		</article>
-
+				</article>
 		</div>
 	</section>
 	<!-- 메인 -->
@@ -85,7 +151,7 @@
 						<button class="accordion-button collapsed fw-bold" type="button"
 							data-bs-toggle="collapse" data-bs-target="#collapseOne"
 							aria-expanded="false" aria-controls="collapseOne">
-							<font style="vertical-align: inherit;">사용방법 </font>
+							<font style="vertical-align: inherit;"><h3>사용방법</h3></font>
 						</button>
 					</h2>
 					<div id="collapseOne" class="accordion-collapse collapse"
@@ -120,7 +186,7 @@
 						<button class="accordion-button collapsed fw-bold" type="button"
 							data-bs-toggle="collapse" data-bs-target="#collapseTwo"
 							aria-expanded="false" aria-controls="collapseTwo">
-							<font style="vertical-align: inherit;"> 유의사항 </font>
+							<font style="vertical-align: inherit;"><h3>유의사항</h3></font>
 						</button>
 					</h2>
 					<div id="collapseTwo" class="accordion-collapse collapse"
@@ -155,7 +221,6 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 	</section>
 	<!-- 정보	 -->

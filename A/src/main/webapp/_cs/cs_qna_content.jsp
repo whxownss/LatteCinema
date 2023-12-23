@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
@@ -40,6 +41,7 @@
 		
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
+			<form id="editForm">
 				<table class="table">
 				  <thead>
 				    <tr class="table-secondary">
@@ -66,12 +68,13 @@
 				    		</pre>
 				   		</td>
 				    </tr>
+				    
 				    <tr>
-				    	<td><span>관리자</span>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="#">수정</a>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="cs_lost_content.jsp">삭제</a><p class="mb-0">2023-12-15 09:05</p></td>
+				    	<td><span>관리자</span>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="#" id="editLink">수정</a>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="cs_lost_content.jsp">삭제</a><p class="mb-0">2023-12-15 09:05</p></td>
 				    	<td colspan="4"></td>
 				    </tr>
 				    <tr>
-				    	<td colspan="5"><textarea class="form-control" readonly>
+				    	<td colspan="5"><textarea class="form-control" id="editableTextArea" readonly="">
 *** 고객님, 안녕하세요. 라떼 시네마 입니다. 결제를 확인해보니 쿠폰 오류로 인해 발생한 일입니다.
 금일 내로 처리하겠습니다. 정말 죄송합니다. 라떼 시네마 : 010-1111-1111. 재문의를 하시려면 새 문의글을 작성해주세요.
 				    	</textarea></td>
@@ -95,9 +98,30 @@
 				    
 				  </tbody>
 				</table>
+				<button type="submit">저장</button>
+			</form>	
 			</div>
 		</section>
 		
 	</main>
-	
+<script>
+    $(document).ready(function() {
+        // 수정 링크 클릭 시 이벤트 처리
+        $("#editLink").click(function() {
+            // readonly 속성 제거하여 편집 가능 상태로 변경
+            $("#editableTextArea").removeAttr("readonly");
+        });
+        
+     	// 폼 제출 시 이벤트 처리
+        $("#editForm").submit(function(event) {
+            // 폼이 실제로 제출되지 않도록 막음
+            event.preventDefault();
+
+            // 수정한 내용을 서버로 전송하는 로직을 추가
+            var editedContent = $("#editableTextArea").val();
+            console.log("수정된 내용:", editedContent);
+            // 이후에 서버로 데이터를 전송하거나 다른 작업을 수행할 수 있음
+        });
+    });
+</script>	
 <%@include file ="../_common/commonFooter.jsp" %>
