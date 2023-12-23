@@ -12,7 +12,7 @@
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 					<h5>1:1문의 글 작성</h5>
 					<div>
-						<a href="../_cs/cs_qna.jsp" class="more" style="font-size: 17px;">
+						<a href="cs_qna.cs" class="more" style="font-size: 17px;">
 							나가기
 						</a>
 					</div>

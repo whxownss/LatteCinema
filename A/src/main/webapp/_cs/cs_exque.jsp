@@ -27,10 +27,10 @@
 				    <div class="col-md-6 offset-md-3">
 				      <div class="bg-light">
 				        <ul class="d-flex flex-wrap justify-content-between list-unstyled">
-				          <li><a href="../_cs/cs_center.jsp">공지사항</a></li>
-				          <li><a href="../_cs/cs_exque.jsp">자주찾는질문</a></li>
-				          <li><a href="../_cs/cs_qna.jsp">1:1문의</a></li>
-				          <li><a href="../_cs/cs_lost.jsp">분실물</a></li>
+				          <li><a href="cs_center.cs">공지사항</a></li>
+				          <li><a href="cs_exque.cs">자주찾는질문</a></li>
+				          <li><a href="cs_qna.cs">1:1문의</a></li>
+				          <li><a href="cs_lost.cs">분실물</a></li>
 				        </ul>
 				      </div>
 				    </div>
@@ -44,11 +44,11 @@
 				  <div class="col-2">
 				    <select class="form-select" id="inputGroupSelect01" style="text-align: center;">
 				      <option selected class="text-muted">구분 선택</option>
-				      <option value="1">예매</option>
-				      <option value="2">관람권</option>
-				      <option value="3">멤버십</option>
-				      <option value="4">할인혜택</option>
-				      <option value="5">영화관이용</option>
+				      <option value="예매">예매</option>
+				      <option value="관람권">관람권</option>
+				      <option value="멤버십">멤버십</option>
+				      <option value="할인혜택">할인혜택</option>
+				      <option value="영화관이용">영화관이용</option>
 				    </select>
 				  </div>
 				</div> 		

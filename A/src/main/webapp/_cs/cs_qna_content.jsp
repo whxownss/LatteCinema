@@ -13,7 +13,7 @@
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 					<h2>1:1 문의</h2>
 					<div>
-						<a href="../_cs/cs_qna.jsp" class="more" style="font-size: 17px;">
+						<a href="cs_qna.cs" class="more" style="font-size: 17px;">
 							나가기
 						</a>
 					</div>
@@ -28,10 +28,10 @@
 				    <div class="col-md-6 offset-md-3">
 				      <div class="bg-light">
 				        <ul class="d-flex flex-wrap justify-content-between list-unstyled">
-				          <li><a href="../_cs/cs_center.jsp">공지사항</a></li>
-				          <li><a href="../_cs/cs_exque.jsp">자주찾는질문</a></li>
-				          <li><a href="../_cs/cs_qna.jsp">1:1문의</a></li>
-				          <li><a href="../_cs/cs_lost.jsp">분실물</a></li>
+				          <li><a href="cs_center.cs">공지사항</a></li>
+				          <li><a href="cs_exque.cs">자주찾는질문</a></li>
+				          <li><a href="cs_qna.cs">1:1문의</a></li>
+				          <li><a href="cs_lost.cs">분실물</a></li>
 				        </ul>
 				      </div>
 				    </div>

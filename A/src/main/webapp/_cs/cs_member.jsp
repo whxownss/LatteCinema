@@ -11,11 +11,11 @@
 				<!-- 이곳에 코드작성 -->
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 					<h2>멤버십</h2>
-					<!-- <div>
-						<a href="#" class="more">
-							"2023.12.11 기준"
+					<div>
+						<a href="cs_center.cs" class="more" style="font-size: 16px;">
+							나가기
 						</a>
-					</div> -->
+					</div>
 				</div>
 			</div>
 		</section>

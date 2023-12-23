@@ -12,7 +12,7 @@
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 					<h5>라떼시네마 단체관람/프라이빗 대관 안내</h5>
 					<div>
-						<a href="cs_center.jsp" class="more" style="font-size: 16px;">
+						<a href="cs_center.cs" class="more" style="font-size: 16px;">
 							나가기
 						</a>
 					</div>

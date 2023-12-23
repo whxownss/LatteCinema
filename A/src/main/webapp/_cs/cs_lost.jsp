@@ -12,7 +12,7 @@
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 					<h2>분실물 문의</h2>
 					<div>
-						<a href="cs_lost_write.jsp" class="more " style="font-size: 18px;">
+						<a href="cs_lost_write.cs" class="more " style="font-size: 18px;">
 							분실물 문의하기
 						</a>
 					</div>
@@ -27,10 +27,10 @@
 				    <div class="col-md-6 offset-md-3">
 				      <div class="bg-light">
 				        <ul class="d-flex flex-wrap justify-content-between list-unstyled">
-				          <li><a href="../_cs/cs_center.jsp">공지사항</a></li>
-				          <li><a href="../_cs/cs_exque.jsp">자주찾는질문</a></li>
-				          <li><a href="../_cs/cs_qna.jsp">1:1문의</a></li>
-				          <li><a href="../_cs/cs_lost.jsp">분실물</a></li>
+				          <li><a href="cs_center.cs">공지사항</a></li>
+				          <li><a href="cs_exque.cs">자주찾는질문</a></li>
+				          <li><a href="cs_qna.cs">1:1문의</a></li>
+				          <li><a href="cs_lost.cs">분실물</a></li>
 				        </ul>
 				      </div>
 				    </div>
@@ -100,7 +100,7 @@
 				    <tr>
 				      <th scope="row">1</th>
 				      <td>부산대</td>
-				      <td><a href="cs_lost_content.jsp">책갈피 분실물 있나요?</a></td>
+				      <td><a href="cs_lost_content.cs">책갈피 분실물 있나요?</a></td>
 				      <td>답변완료</td>
 				      <td>23.12.01</td>
 				    </tr>

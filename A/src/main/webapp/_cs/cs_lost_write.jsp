@@ -12,7 +12,7 @@
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 					<h2>분실물 문의</h2>
 					<div>
-						<a href="cs_lost.jsp" class="more" style="font-size: 17px;">
+						<a href="cs_lost.cs" class="more" style="font-size: 17px;">
 							나가기
 						</a>
 					</div>
@@ -30,17 +30,17 @@
 					      <td>
 						      <select class="form-select" id="inputGroupSelect01">
 						        <option selected class="text-muted">지역 선택</option>
-						        <option value="1">서울</option>
-						        <option value="2">부산</option>
-						        <option value="3">제주도</option>
+						        <option value="서울">서울</option>
+						        <option value="부산">부산</option>
+						        <option value="제주도">제주도</option>
 						      </select>		
 					      </td>
 					      <td>
 					      	<select class="form-select" id="inputGroupSelect02">
 					        	<option selected class="text-muted">영화관 선택</option>
-					        	<option value="1">부산대</option>
-					        	<option value="2">강남</option>
-					        	<option value="3">서귀포</option>
+					        	<option value="부산대">부산대</option>
+					        	<option value="강남">강남</option>
+					        	<option value="서귀포">서귀포</option>
 					      	</select>
 					      </td>
 					      <td></td>
