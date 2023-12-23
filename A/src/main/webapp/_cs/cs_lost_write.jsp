@@ -19,7 +19,7 @@
 				</div>
 			</div>
 		</section>
-		
+		  
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up" style="width: 50%;">
 				<form action="#">

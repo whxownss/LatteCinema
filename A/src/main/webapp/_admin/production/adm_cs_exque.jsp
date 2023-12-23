@@ -657,7 +657,7 @@
       </div>
     </div>
 
-    <!-- jQuery -->
+    <!-- jQuery -->  
     <script src="_admin/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="_admin/vendors/bootstrap/dist/js/bootstrap.min.js"></script>

@@ -151,7 +151,7 @@
                       <tbody>
                         <tr>
                           <td>1</td>
-                          <td>기타</td>
+                          <td>기타</td>  
                           <td><a href="cs_qna_content.cs">쿠폰 왜이럼?</a></td>
                           <td>강동원</td>
                           <td>2011/04/25</td>

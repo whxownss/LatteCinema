@@ -147,7 +147,7 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td>1</td>
+                          <td>1</td>  
                           <td>전체</td>
                           <td><a href="cs_center_content.cs">겨울왕국1 교환 안내</a></td>
                           <td>2011/04/25</td>

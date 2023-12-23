@@ -1106,7 +1106,7 @@
     <script src="_admin/vendors/select2/dist/js/select2.full.min.js"></script>
     <!-- Parsley -->
     <script src="_admin/vendors/parsleyjs/dist/parsley.min.js"></script>
-    <!-- Autosize -->
+    <!-- Autosize -->  
     <script src="_admin/vendors/autosize/dist/autosize.min.js"></script>
     <!-- jQuery autocomplete -->
     <script src="_admin/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
