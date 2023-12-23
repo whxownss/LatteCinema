@@ -25,7 +25,7 @@
     <link href="_admin/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="_admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="_admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <!-- Custom Theme Style -->
     <link href="_admin/build/css/custom.min.css" rel="stylesheet">
   </head>
@@ -160,7 +160,7 @@
                           <td>$320,800</td>
                           <td>t.nixon@datatables.net</td>
                           <td>
-							<select id="memSelect" name="memSelect">
+							<select>
 								<option value="N">N</option>
 								<option value="Y">Y</option>
 							</select>
@@ -224,9 +224,9 @@
                           <td>$162,700</td>
                           <td>a.satou@datatables.net</td>
                           <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
+							<select id="memSelect" name="memSelect">
+								<option value="N">N</option>
+								<option value="Y">Y</option>
 							</select>
 						  </td>
                         </tr>
@@ -1083,7 +1083,6 @@
         </footer>
         <!-- /footer content -->
       </div>
-    </div>
 
     <!-- jQuery -->
     <script src="_admin/vendors/jquery/dist/jquery.min.js"></script>
@@ -1113,6 +1112,7 @@
     <script src="_admin/vendors/pdfmake/build/vfs_fonts.js"></script>
 
     <!-- Custom Theme Scripts -->
+
     <script src="_admin/build/js/custom.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
@@ -1122,7 +1122,7 @@
 		    $('#memManage').submit(); // 폼 제출
 		  });
 	});
-    
+
     </script>
 
   </body>
