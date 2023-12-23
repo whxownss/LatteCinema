@@ -90,7 +90,7 @@
                 <li><a href="#">울산</a></li>
                 <li><a href="#">진해</a></li>
                 <li><a href="#">창원</a></li>
-              </ul>
+              </ul> 
             </li>
             <li class="dropdown"><a href="#"><span>강원</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
