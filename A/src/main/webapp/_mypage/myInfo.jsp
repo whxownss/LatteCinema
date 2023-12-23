@@ -65,7 +65,7 @@
                   </div>
                   <div class="btn-group">
                     <button class="button large" id="cancelBtn" title="취소">취소</button>
-                    <button class="button large purple" id="ckBtn" data-url="/mypage/userinfo" title="확인" disabled="">확인</button>
+                    <button class="button large purple" id="ckBtn" data-url="userInfo.me" title="확인" >확인</button>
                   </div>
                     <div class="member-wrap" id="niceCert">
                       <strong>휴대폰 번호로 인증이 안되시나요?</strong><br><br>
