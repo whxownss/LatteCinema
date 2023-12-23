@@ -22,7 +22,7 @@
       <!-- 이곳에 코드작성 -->
       <div class="inner-wrap">
         <jsp:include page="lnb.jsp"></jsp:include>
-        <form id="moveFrm" method="post">
+        <form id="moveFrm" method="post" action="userInfo.me">
 			<div id="contents">
 				<h2 class="tit">비밀번호 변경</h2>
 			

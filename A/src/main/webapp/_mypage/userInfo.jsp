@@ -661,7 +661,9 @@ $(function(){
                       <td>
                         <span><%="44025"%></span>
                         <a href="#none" id="addrBtn" class="button small gray-line ml10" title="우편번호 검색">우편번호 검색</a>
-                        <p class="reset mt10"><%="울산광역시 동구 울산동 울산순환도로 999 울산아파트 201동"%></p>
+                        <p class="reset mt10"><%="울산광역시 동구 울산동 울산순환도로 999 울산아파트 201동"%></p><br>
+                        <input type="text" id="addr2" placeholder="상세주소 입력" required>
+                        
                       </td>
                     </tr>
                   </tbody>
