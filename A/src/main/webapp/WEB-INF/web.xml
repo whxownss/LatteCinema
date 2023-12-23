@@ -81,4 +81,14 @@
   </servlet>
   
   
+  <!-- 관리자 관련 -->
+  <servlet-mapping>
+  	<servlet-name>AdminController</servlet-name>
+  	<url-pattern>*.ad</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>AdminController</servlet-name>
+  	<servlet-class>com.itwillbs.controller.AdminController</servlet-class>
+  </servlet>
+  
 </web-app>

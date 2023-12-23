@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class MemberController extends HttpServlet {
+public class MovieController extends HttpServlet {
 	RequestDispatcher dispatcher = null;
 	
 	@Override
@@ -24,11 +24,31 @@ public class MemberController extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String sPath = request.getServletPath();
 		
-		// 메인 페이지 이동
-		if(sPath.equals("/main.me")) {
-			dispatcher = request.getRequestDispatcher("_a/main.jsp");
+		// 영화홈 페이지 이동
+		if(sPath.equals("/movie_home.mo")) {
+			dispatcher = request.getRequestDispatcher("_a/movie_home.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+
+		// 현재상영작 페이지 이동
+		if(sPath.equals("/movie_now.mo")) {
+			dispatcher = request.getRequestDispatcher("_a/movie_now.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+
+		// 상영예정작 페이지 이동
+		if(sPath.equals("/movie_will.mo")) {
+			dispatcher = request.getRequestDispatcher("_a/movie_will.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+
+		// 옛날영화 페이지 이동
+		if(sPath.equals("/movie_latte.mo")) {
+			dispatcher = request.getRequestDispatcher("_a/movie_latte.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
-	
 }

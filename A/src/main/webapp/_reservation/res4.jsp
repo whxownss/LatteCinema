@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>
-	<link rel="stylesheet" href="../_assets/css/res_1.css">
-	<script src="../jQuery/jquery-3.6.0.js"></script>
+	<link rel="stylesheet" href="_assets/css/res_1.css">
+	<script src="jQuery/jquery-3.6.0.js"></script>
 	<script>
 	</script>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
@@ -41,7 +41,7 @@
 						
 						
 						<div class="row text-center pt-3">
-							<img src="../_assets/img/payOK.png" class="" style="width:120px; height:100px; margin: 0 auto;"> 
+							<img src="_assets/img/payOK.png" class="" style="width:120px; height:100px; margin: 0 auto;"> 
 							<div class="pt-3">차동원 회원님, 결제가 성공적으로 완료되었습니다.</div>
 						</div>
 						
@@ -50,7 +50,7 @@
 							<div  style="margin-top: 4%; margin-bottom: 4%;">
 								<div class="d-flex justify-content-center">
 								  <div class="p-2">
-								  	<img src="../assets/img/post1.jpg" style="height: 200px">
+								  	<img src="assets/img/post1.jpg" style="height: 200px">
 								  </div>
 								  <div class="p-2">
 										<table class="h-100">
