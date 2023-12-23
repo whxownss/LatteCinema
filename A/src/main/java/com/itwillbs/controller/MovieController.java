@@ -50,5 +50,11 @@ public class MovieController extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("_a/movie_latte.jsp");
 			dispatcher.forward(request, response);
 		}
+			
+		if(sPath.equals("/movie_view.mo")) {
+			dispatcher = request.getRequestDispatcher("_movie/movie_view.jsp");
+			dispatcher.forward(request, response);	
+			
+		}
 	}
 }
