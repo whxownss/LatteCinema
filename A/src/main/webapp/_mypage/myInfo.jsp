@@ -4,6 +4,7 @@
 <head>
   <jsp:include page="../_common/meta.jsp"></jsp:include>
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
+	<link href="_assets/js/myInfo.js">
 </head>
 <body>
 <jsp:include page="../_common/header.jsp"></jsp:include>
@@ -16,14 +17,13 @@
   String phone_number = "010-1234-5678";
 %>
 
-<link href="../_assets/js/myInfo.js">
 	<main id="main">
 		<section class="category-section">
     		<div class="container has-lnb" data-aos="fade-up">
     			<!-- 이곳에 코드작성 -->
             <div class="inner-wrap">
               <jsp:include page="lnb.jsp"></jsp:include>
-              <form id="moveFrm" method="post">
+              <form id="moveFrm" action="userInfo.me" method="post">
                 <div id="contents">
                 <h2 class="tit">회원정보</h2>
                 <div class="member-wrap">
@@ -52,7 +52,7 @@
                   </div>
                   <div class="btn-group">
                     <button class="button large" id="cancelBtn" title="취소">취소</button>
-                    <button class="button large purple" id="ckBtn" data-url="/_mypage/userinfo.jsp" title="확인" >확인</button>
+                    <button class="button large purple" id="ckBtn" data-url="userInfo.me" title="확인" >확인</button>
                   </div>
                     
                   </div>
