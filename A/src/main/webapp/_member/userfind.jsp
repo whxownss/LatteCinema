@@ -7,18 +7,6 @@
     <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
   <jsp:include page="../_common/header.jsp"></jsp:include>
 <script>
-// $(function () {
-	
-// 	$('ul.tab li').click(function () {
-// 		var Tab = $(this).attr('data-tab');
-// 		$('ul.tab li').removeClass('on');
-// 		debugger;
-// 		$('.table-wrap').removeClass('on');
-// 		$(this).addClass('on');
-// 		$('#' + Tab).addClass('on');
-// 	})
-	
-// });
 
 
 </script>
