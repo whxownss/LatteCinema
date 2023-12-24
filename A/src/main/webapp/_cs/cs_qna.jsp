@@ -12,14 +12,14 @@
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 					<h2>1:1문의</h2>
 					<div>
-						<a href="cs_qna_write.jsp" class="more " style="font-size: 18px;">
+						<a href="cs_qna_write.cs" class="more " style="font-size: 18px;">
 							1:1문의 글쓰기
 						</a>
 					</div>
 				</div>
 			</div>
 		</section>
-		
+		  
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
 				<!-- 이곳에 코드작성 -->
@@ -27,10 +27,10 @@
 				    <div class="col-md-6 offset-md-3">
 				      <div class="bg-light">
 				        <ul class="d-flex flex-wrap justify-content-between list-unstyled">
-				          <li><a href="../_cs/cs_center.jsp">공지사항</a></li>
-				          <li><a href="../_cs/cs_exque.jsp">자주찾는질문</a></li>
-				          <li><a href="../_cs/cs_qna.jsp">1:1문의</a></li>
-				          <li><a href="../_cs/cs_lost.jsp">분실물</a></li>
+				          <li><a href="cs_center.cs">공지사항</a></li>
+				          <li><a href="cs_exque.cs">자주찾는질문</a></li>
+				          <li><a href="cs_qna.cs">1:1문의</a></li>
+				          <li><a href="cs_lost.cs">분실물</a></li>
 				        </ul>
 				      </div>
 				    </div>
@@ -45,9 +45,9 @@
 					<div class="input-group mb-3">
 					  <select class="form-select" id="inputGroupSelect02">
 						<option selected class="text-muted">카테고리</option>
-						<option value="1">상영작</option>
-						<option value="2">예매</option>
-						<option value="3">기타</option>
+						<option value="상영작">상영작</option>
+						<option value="예매">예매</option>
+						<option value="기타">기타</option>
 					  </select>
 					</div>
 				  </div>
@@ -76,7 +76,7 @@
 				    <tr>
 				      <th scope="row">1</th>
 				      <td>기타</td>
-				      <td><a href="cs_qna_content.jsp"> 비밀글입니다. </a></td>
+				      <td><a href="cs_qna_content.cs"> 비밀글입니다. </a></td>
 				      <td>차*****</td>
 				    </tr>
 				    <tr>

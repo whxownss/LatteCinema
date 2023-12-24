@@ -69,6 +69,18 @@ public class MemberController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}//
 		
+		// 마이페이지 delete(회원탈퇴) 이동 (userInfo > delete.jsp)
+		if(sPath.equals("/delete.me")) {
+			dispatcher = request.getRequestDispatcher("_mypage/delete.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
+		// 마이페이지 비밀번호 변경(비밀번호변경) 이동 (userInfo > changepw.jsp)
+		if(sPath.equals("/changepw.me")) {
+			dispatcher = request.getRequestDispatcher("_mypage/changepw.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
 	}
 	
 }
