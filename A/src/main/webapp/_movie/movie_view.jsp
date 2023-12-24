@@ -14,8 +14,8 @@
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/app.js"></script>
 
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
-
-
+ 
+  
 <main>
 
 <%
@@ -63,7 +63,7 @@
       
       <div class="float-info ">
         <div class="sticky">
-          <div class="img"><img src="https://img.dtryx.com/poster/2023/12/5E0206A2-7177-4466-A25F-2B6726844F6A.small.jpg" style="width: 100%;" onerror="this.src='/resources/img/common/no-poster.png';"/></div>
+          <div class="img"><img src="https://img.dtryx.com/poster/2023/12/5E0206A2-7177-4466-A25F-2B6726844F6A.small.jpg" style="width: 80%;" onerror="this.src='/resources/img/common/no-poster.png';"/></div>
           <div class="info">
             <i class="age12"></i>
             <h3 class="h3"><%=movieNm %></h3>
