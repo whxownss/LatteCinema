@@ -101,7 +101,7 @@
                     <div class="myInq">
                       <div class="tit-util mt70">
                         <h2 class="tit small">문의내역</h2>
-                        <a href="#" class="more" title="문의내역 더보기">더보기 <i class="iconset ico-arr-right-gray"></i></a>
+                        <a href="myinquiry.me" class="more" title="문의내역 더보기">더보기 <i class="iconset ico-arr-right-gray"></i></a>
                       </div>
                       <div class="brd-list">
                         <ul>

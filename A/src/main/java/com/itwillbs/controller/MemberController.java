@@ -99,6 +99,12 @@ public class MemberController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}//
 		
+		// 마이페이지 myinquiry(문의내역) 이동
+		if(sPath.equals("/myinquiry.me")) {
+			dispatcher = request.getRequestDispatcher("_mypage/myinquiry.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
 	}
 	
 }
