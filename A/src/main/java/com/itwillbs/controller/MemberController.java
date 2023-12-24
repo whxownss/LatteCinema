@@ -105,6 +105,12 @@ public class MemberController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}//
 		
+		// 마이페이지 bookinglist(예매내역) 이동
+		if(sPath.equals("/bookinglist.me")) {
+			dispatcher = request.getRequestDispatcher("_mypage/bookinglist.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
 	}
 	
 }
