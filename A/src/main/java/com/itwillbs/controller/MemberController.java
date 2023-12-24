@@ -49,6 +49,18 @@ public class MemberController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}//
 		
+		// 아이디 찾기 페이지 이동
+		if(sPath.equals("/userfind.me")) {
+			dispatcher = request.getRequestDispatcher("_member/userfind.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
+		// 비밀번호 찾기 페이지 이동
+		if(sPath.equals("/passfind.me")) {
+			dispatcher = request.getRequestDispatcher("_member/passfind.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
 		////////////////////////////////////////////////////////////////////////////////////
 		
 		// 마이페이지 (마이페이지 기본메인화면) 이동
