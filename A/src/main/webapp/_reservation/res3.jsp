@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>
-	<link rel="stylesheet" href="../_assets/css/res_1.css">
-	<script src="../jQuery/jquery-3.6.0.js"></script>
+	<link rel="stylesheet" href="_assets/css/res_1.css">
+	<script src="jQuery/jquery-3.6.0.js"></script>
 	<script>
 	
 		$(function(){
@@ -111,7 +111,7 @@
 								<div class="row hErrorC">  <!-- hErrorC --> 
 									<div class="d-flex flex-column">
 									  <div class="p-2">
-									  	<img src="../assets/img/post1.jpg" style="height: 200px">
+									  	<img src="assets/img/post1.jpg" style="height: 200px">
 									  </div>
 									  <div class="p-2 d-flex flex-column text-start">
 										<span class="fs-4 fw-bold">서울의 봄</span>
@@ -254,7 +254,7 @@
 				</div>
 			</div>
 				
-			<div ><a href="res4.jsp" style="margin-left: 100%;"><button>res4 이동</button></a></div>
+			<div ><a href="res4.re" style="margin-left: 100%;"><button>res4 이동</button></a></div>
 			</div>
 		</section>
 	

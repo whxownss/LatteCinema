@@ -51,7 +51,7 @@
 
 			<div class="row g-5">
 				<div class="col-lg-4">
-					<a href="store_best1.jsp" class="lc_itm"><div class="itm_img">
+					<a href="store_best1.st" class="lc_itm"><div class="itm_img">
 							<img
 								src="https://cf.lottecinema.co.kr//Media/WebAdmin/113c4f562c6e4c9d94e973b590f594ab.jpg"
 								alt="스위트콤보 상품이미지">
@@ -69,7 +69,7 @@
 						</div></a>
 				</div>
 				<div class="col-lg-4">
-					<a href="store_best2.jsp" class="text-center"><div
+					<a href="store_best2.st" class="text-center"><div
 							class="itm_img">
 							<img
 								src="https://img.megabox.co.kr/SharedImg/store/2020/12/29/M8qiScDr6orSchgFPCRCcCtLPVenv6tm_280.png"
@@ -88,7 +88,7 @@
 						</div></a>
 				</div>
 				<div class="col-lg-4">
-					<a href="store_best3.jsp" class="text-center"><div
+					<a href="store_best3.st" class="text-center"><div
 							class="itm_img">
 							<img
 								src="https://cf.lottecinema.co.kr//Media/WebAdmin/828d9b97f9cf43379b0b453929aa6274.jpg"
@@ -122,7 +122,7 @@
 
 			<div class="row g-5">
 				<div class="col-lg-3">
-					<a href="store_snacks01.jsp" class="text-center"><div
+					<a href="store_snacks01.st" class="text-center"><div
 							class="itm_img">
 							<img
 								src="https://cf.lottecinema.co.kr//Media/WebAdmin/113c4f562c6e4c9d94e973b590f594ab.jpg"
@@ -141,7 +141,7 @@
 						</div></a>
 				</div>
 				<div class="col-lg-3">
-					<a href="store_snacks02.jsp" class="text-center"><div
+					<a href="store_snacks02.st" class="text-center"><div
 							class="itm_img">
 							<img
 								src="https://cf.lottecinema.co.kr//Media/WebAdmin/16a8de961e454d09901de45a61385c33.jpg"
@@ -160,7 +160,7 @@
 						</div></a>
 				</div>
 				<div class="col-lg-3">
-					<a href="store_snacks03.jsp" class="text-center"><div
+					<a href="store_snacks03.st" class="text-center"><div
 							class="itm_img">
 							<img
 								src="https://cf.lottecinema.co.kr//Media/WebAdmin/828d9b97f9cf43379b0b453929aa6274.jpg"
@@ -179,7 +179,7 @@
 						</div></a>
 				</div>
 				<div class="col-lg-3">
-					<a href="store_snacks04.jsp" class="text-center"><div
+					<a href="store_snacks04.st" class="text-center"><div
 							class="itm_img">
 							<img
 								src="https://cf.lottecinema.co.kr//Media/WebAdmin/ffcf5bb49ef142a88958e871a8d34e04.jpg"
@@ -200,7 +200,7 @@
 
 				<div class="row g-5">
 					<div class="col-lg-3">
-						<a href="store_snacks05.jsp" class="text-center"><div
+						<a href="store_snacks05.st" class="text-center"><div
 								class="itm_img">
 								<img
 									src="https://cf.lottecinema.co.kr//Media/WebAdmin/596615fa5efe4470bdeaf4c290412f53.jpg"
@@ -219,7 +219,7 @@
 							</div></a>
 					</div>
 					<div class="col-lg-3">
-						<a href="store_snacks06.jsp" class="text-center"><div
+						<a href="store_snacks06.st" class="text-center"><div
 								class="itm_img">
 								<img
 									src="https://cf.lottecinema.co.kr//Media/WebAdmin/cf3b8b1895294c7f9285f6ff54c35ea4.jpg"
@@ -238,7 +238,7 @@
 							</div></a>
 					</div>
 					<div class="col-lg-3">
-						<a href="store_snacks07.jsp" class="text-center"><div
+						<a href="store_snacks07.st" class="text-center"><div
 								class="itm_img">
 								<img
 									src="https://cf.lottecinema.co.kr//Media/WebAdmin/52703a86875f4e589879094bf68162aa.jpg"
@@ -257,7 +257,7 @@
 							</div></a>
 					</div>
 					<div class="col-lg-3">
-						<a href="store_snacks08.jsp" class="text-center"><div
+						<a href="store_snacks08.st" class="text-center"><div
 								class="itm_img">
 								<img
 									src="https://cf.lottecinema.co.kr//Media/WebAdmin/3c27318663cf4813a386589a46f4780c.jpg"
@@ -279,7 +279,7 @@
 
 				<div class="row g-5">
 					<div class="col-lg-3">
-						<a href="store_snacks09.jsp" class="text-center"><div
+						<a href="store_snacks09.st" class="text-center"><div
 								class="itm_img">
 								<img
 									src="https://cf.lottecinema.co.kr//Media/WebAdmin/7b47806ac4564aacb98dde81efac9306.jpg"
@@ -298,7 +298,7 @@
 							</div></a>
 					</div>
 					<div class="col-lg-3">
-						<a href="store_snacks10.jsp" class="text-center"><div
+						<a href="store_snacks10.st" class="text-center"><div
 								class="itm_img">
 								<img
 									src="https://cf.lottecinema.co.kr//Media/WebAdmin/a69f6de1970d4c6e957111477ebbb8b3.jpg"
@@ -317,7 +317,7 @@
 							</div></a>
 					</div>
 					<div class="col-lg-3">
-						<a href="store_snacks11.jsp" class="text-center"><div
+						<a href="store_snacks11.st" class="text-center"><div
 								class="itm_img">
 								<img
 									src="https://cf.lottecinema.co.kr//Media/WebAdmin/94cd7a50f3214776a802d88bdab75c70.jpg"
@@ -353,7 +353,7 @@
 
 			<div class="row g-5">
 				<div class="col-lg-3">
-					<a href="store_ticket1.jsp" class="text-center"><div
+					<a href="store_ticket1.st" class="text-center"><div
 							class="itm_img">
 							<img
 								src="https://img.megabox.co.kr/SharedImg/store/2020/12/29/M8qiScDr6orSchgFPCRCcCtLPVenv6tm_280.png"
@@ -372,7 +372,7 @@
 						</div></a>
 				</div>
 				<div class="col-lg-3">
-					<a href="store_ticket2.jsp" class="text-center"><div
+					<a href="store_ticket2.st" class="text-center"><div
 							class="itm_img">
 							<img
 								src="https://img.megabox.co.kr/SharedImg/store/2020/12/29/M8qiScDr6orSchgFPCRCcCtLPVenv6tm_280.png"
@@ -391,7 +391,7 @@
 						</div></a>
 				</div>
 				<div class="col-lg-3">
-					<a href="store_ticket3.jsp" class="text-center"><div
+					<a href="store_ticket3.st" class="text-center"><div
 							class="itm_img">
 							<img
 								src="https://img.megabox.co.kr/SharedImg/store/2020/12/29/M8qiScDr6orSchgFPCRCcCtLPVenv6tm_280.png"
@@ -410,7 +410,7 @@
 						</div></a>
 				</div>
 				<div class="col-lg-3">
-					<a href="store_ticket4.jsp" class="text-center"><div
+					<a href="store_ticket4.st" class="text-center"><div
 							class="itm_img">
 							<img
 								src="https://img.megabox.co.kr/SharedImg/store/2020/12/29/M8qiScDr6orSchgFPCRCcCtLPVenv6tm_280.png"

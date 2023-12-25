@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>
-<script src="../jQuery/jquery-3.6.0.js"></script>
+<script src="jQuery/jquery-3.6.0.js"></script>
 <script>
 $(() => {
 	
@@ -69,7 +69,7 @@ $(() => {
 							</div>	
 									<div class="row ">
 										<div class="col-6" style=" text-align: left;">
-											<a href="signup.jsp">회원가입</a>
+											<a href="signup3.me">회원가입</a>
 										</div>
 										<div class="col-6" style=" text-align: right;">
 											<a href="">아이디/비밀번호 찾기</a>
@@ -81,11 +81,11 @@ $(() => {
 									<div class="sns-login">
 							
 										<div class="">
-											<a href="javaScript:void(0)" lnkgty="NAVER" title="네이버로 로그인 선택"><img src="../assets/img/btnG_완성형.png" alt="네이버" style="width: 100%; height: 70px;">
+											<a href="javaScript:void(0)" lnkgty="NAVER" title="네이버로 로그인 선택"><img src="assets/img/btnG_완성형.png" alt="네이버" style="width: 100%; height: 70px;">
 											<!--네이버--> <!--네이버로 로그인--></a>
 										</div>
 										<div class="mt-2">
-											<a href="javaScript:void(0)" lnkgty="KAKAO" title="카카오톡으로 로그인 선택"><img src="../assets/img/kakao_login_medium_narrow.png" alt="카카오톡" style="width: 100%; height: 70px;">
+											<a href="javaScript:void(0)" lnkgty="KAKAO" title="카카오톡으로 로그인 선택"><img src="assets/img/kakao_login_medium_narrow.png" alt="카카오톡" style="width: 100%; height: 70px;">
 											<!--카카오톡--> <!--카카오톡으로 로그인--></a>
 										</div>
 									</div>
@@ -97,8 +97,8 @@ $(() => {
 					</div>
 					<div class="col-4">
 						<div class="login-ad" id="영화포스터">
-							<a href="../_a/main.jsp" target="_blank">
-								<img id="해당영화포스타" src="../assets/img/post20.jpg" alt="영화포스터" clickthrough="" style="height: 450px">
+							<a href="main.me" target="_blank">
+								<img id="해당영화포스타" src="assets/img/post20.jpg" alt="영화포스터" clickthrough="" style="height: 450px">
 							</a>
 						</div>					
 					</div>

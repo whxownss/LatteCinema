@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>
-	<link rel="stylesheet" href="../_assets/css/res_1.css">
-	<script src="../jQuery/jquery-3.6.0.js"></script>
+	<link rel="stylesheet" href="_assets/css/res_1.css">
+	<script src="jQuery/jquery-3.6.0.js"></script>
 	<script>
 		$(function(){
 			
@@ -135,7 +135,7 @@
 						</div>
 						<div class="d-flex justify-content-between">  
 							<div class="p-2 flex-shrink-2 d-flex">
-								<div><img src="../assets/img/post1.jpg" style="height: 100px"></div>
+								<div><img src="assets/img/post1.jpg" style="height: 100px"></div>
 								<div class="d-flex flex-column p-2 text-start">
 									<span>영화제목1111111111111111</span>
 									<span>날짜 시간222222222222</span>
@@ -250,7 +250,7 @@
 					
 				</div>
 			</div>
-			<div ><a href="res3.jsp" style="margin-left: 100%;"><button>res3 이동</button></a></div>
+			<div ><a href="res3.re" style="margin-left: 100%;"><button>res3 이동</button></a></div>
 			</div>
 		</section>
 	

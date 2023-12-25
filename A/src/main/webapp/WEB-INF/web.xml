@@ -9,4 +9,86 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  
+  
+  
+  <!-- 메인, 로그인, 회원가입, 마이페이지 등 -->
+  <servlet-mapping>
+  	<servlet-name>MemberController</servlet-name>
+  	<url-pattern>*.me</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>MemberController</servlet-name>
+  	<servlet-class>com.itwillbs.controller.MemberController</servlet-class>
+  </servlet>
+  
+  
+  <!-- 예약 관련 -->
+  <servlet-mapping>
+  	<servlet-name>ResController</servlet-name>
+  	<url-pattern>*.re</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>ResController</servlet-name>
+  	<servlet-class>com.itwillbs.controller.ResController</servlet-class>
+  </servlet>
+  
+  
+  <!-- 영화 관련 -->
+  <servlet-mapping>
+  	<servlet-name>MovieController</servlet-name>
+  	<url-pattern>*.mo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>MovieController</servlet-name>
+  	<servlet-class>com.itwillbs.controller.MovieController</servlet-class>
+  </servlet>
+  
+  
+  
+  <!-- 영화관 관련 -->
+  <servlet-mapping>
+  	<servlet-name>CinemaController</servlet-name>
+  	<url-pattern>*.ci</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>CinemaController</servlet-name>
+  	<servlet-class>com.itwillbs.controller.CinemaController</servlet-class>
+  </servlet>
+  
+  
+  
+  <!-- 스토어 관련 -->
+  <servlet-mapping>
+  	<servlet-name>StoreController</servlet-name>
+  	<url-pattern>*.st</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>StoreController</servlet-name>
+  	<servlet-class>com.itwillbs.controller.StoreController</servlet-class>
+  </servlet>
+  
+  
+  <!-- 고객지원 관련 -->
+  <servlet-mapping>
+  	<servlet-name>CSController</servlet-name>
+  	<url-pattern>*.cs</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>CSController</servlet-name>
+  	<servlet-class>com.itwillbs.controller.CSController</servlet-class>
+  </servlet>
+  
+  
+  <!-- 관리자 관련 -->
+  <servlet-mapping>
+  	<servlet-name>AdminController</servlet-name>
+  	<url-pattern>*.ad</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>AdminController</servlet-name>
+  	<servlet-class>com.itwillbs.controller.AdminController</servlet-class>
+  </servlet>
+  
 </web-app>

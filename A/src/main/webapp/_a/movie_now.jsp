@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>
-	<link rel="stylesheet" href="../_assets/css/hover.css">
+	<link rel="stylesheet" href="_assets/css/hover.css">
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
@@ -15,7 +15,7 @@
 				class="section-header d-flex justify-content-between align-items-center mb-5">
 				<h3>현재 상영작</h3>
 				<div>
-					<a href="movie_will.jsp" class="more">상영 예정작 &gt;</a>
+					<a href="movie_will.mo" class="more">상영 예정작 &gt;</a>
 				</div>
 			</div>
 
@@ -23,7 +23,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post1.jpg" style="width: 100%;">
+			          <img src="assets/img/post1.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -38,7 +38,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post2.jpg" style="width: 100%;">
+			          <img src="assets/img/post2.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -53,7 +53,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post3.jpg" style="width: 100%;">
+			          <img src="assets/img/post3.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -68,7 +68,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post4.jpg" style="width: 100%;">
+			          <img src="assets/img/post4.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -83,7 +83,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post5.jpg" style="width: 100%;">
+			          <img src="assets/img/post5.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -101,7 +101,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post1.jpg" style="width: 100%;">
+			          <img src="assets/img/post1.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -116,7 +116,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post2.jpg" style="width: 100%;">
+			          <img src="assets/img/post2.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -131,7 +131,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post3.jpg" style="width: 100%;">
+			          <img src="assets/img/post3.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -146,7 +146,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post4.jpg" style="width: 100%;">
+			          <img src="assets/img/post4.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -161,7 +161,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post5.jpg" style="width: 100%;">
+			          <img src="assets/img/post5.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -179,7 +179,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post1.jpg" style="width: 100%;">
+			          <img src="assets/img/post1.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -194,7 +194,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post2.jpg" style="width: 100%;">
+			          <img src="assets/img/post2.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -209,7 +209,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post3.jpg" style="width: 100%;">
+			          <img src="assets/img/post3.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -224,7 +224,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post4.jpg" style="width: 100%;">
+			          <img src="assets/img/post4.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -239,7 +239,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post5.jpg" style="width: 100%;">
+			          <img src="assets/img/post5.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -257,7 +257,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post1.jpg" style="width: 100%;">
+			          <img src="assets/img/post1.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -272,7 +272,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post2.jpg" style="width: 100%;">
+			          <img src="assets/img/post2.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -287,7 +287,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post3.jpg" style="width: 100%;">
+			          <img src="assets/img/post3.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
@@ -302,7 +302,7 @@
 				<div class="col-lg">
 					<div class="post-entry-1 lg">
 						<div class="item position-relative" id="wrap">
-			          <img src="../assets/img/post4.jpg" style="width: 100%;">
+			          <img src="assets/img/post4.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
 							<a href="" class="moree">상세정보</a>
