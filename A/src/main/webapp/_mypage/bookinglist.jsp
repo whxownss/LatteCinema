@@ -3,22 +3,690 @@
 <html lang="ko">
 <head>
   <jsp:include page="../_common/meta.jsp"></jsp:include>
-  <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/bookinglist.css">
-<!--   <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js?autoload=false"></script> -->
-  <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/bookinglist.css">
+
+  <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
+  <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js?autoload=false"></script>
+   <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
  
 </head>
 <body>
- <jsp:include page="../_common/header.jsp"></jsp:include>
+
+<jsp:include page="../_common/header.jsp"></jsp:include>
+<main id="main">
+  <section class="category-section">
+    <div class="container has-lnb" data-aos="fade-up">
+      <!-- 이곳에 코드작성 -->
+      <div class="inner-wrap">
+<script type="text/javascript">
+$(function(){
+	var url = location.pathname + location.search;
+    $("div.lnb-area > nav#lnb a").filter(function(i,o) { return $(o).attr("href") == url;}).last().parent().addClass("on");
+
+	$.get('/on/oh/ohh/MyScnBoard/selectCponMbNoCount.do')
+			.done(function (data) {
+				if (data.todayPubOthcomCponCnt > 0) {
+					var i = $('<span>메가박스/제휴쿠폰 </span><i class="iconset ico-theater-new"></i>');
+
+					$('#discountCoupon')
+							.empty()
+							.append(i);
+				} else {
+					// do nothing
+				}
+			});
+});
+</script>      
+        <jsp:include page="lnb.jsp"></jsp:include>
 <script type="text/javascript">
 
-</script>
-<script src="/js/megabox-simpleBokd.js"></script>
+	var cancelParam = {};
 
-	<main id="main">
-  <section class="category-section">
-      <script type="text/javascript">
+	//========================================================================================
+	//공통
+	//========================================================================================
+
+	// 접근 설정
+	fn_com_setAccType = function(accType) {
+		cancelParam.accType = accType;
+	};
+
+	// obj 객체 조회
+	fn_com_getObj = function(obj, type) {
+		return $(obj).closest(type);
+	};
+
+	// 예매 교환권
+	fn_com_bokdInfoPop = function($obj) {
+
+		if (cancelParam.accType == 'MY' && !sessionAllow( {sessionAt:true} )) return;
+
+		var reqUrl = fn_getUrl('/MyBokdTicketChbndPopup.do?sellTranNo='+ $obj.attr('sell-tran-no'));
+
+		window.open(reqUrl, '_blank', 'width=750,height=810,resizable=no');
+	};
+
+	// 결제내역
+	fn_com_payInfoPop = function($obj, locale) {
+
+		var paramData = {'tranNo' : $obj.attr('sell-tran-no')};
+
+		if (locale != undefined) paramData.localeCode = locale;
+
+		gfn_divLayPopUp({
+			url       : fn_getUrl('/MyBokdPayInfoPopup.do'),
+			params    : paramData,
+			height    : '600',
+			width     : '600',
+			target_id : 'layer_payment_history',
+			btn_id    : 'btn_paymentHistory'
+		});
+	};
+
+	// 굿즈 수령내역
+	fn_com_goodsAcptInfoPop = function($obj, locale) {
+
+		var paramData = {'sellTranNo' : $obj.attr('sell-tran-no')};
+		if (locale != undefined) paramData.localeCode = locale;
+
+		gfn_divLayPopUp({
+			url       : '/on/oh/ohh/MyBokdPurc/MyGoodsAcptListPopup.do',
+			params    : paramData,
+			height    : '500',
+			width     : '490',
+			target_id : 'layer_chk_theater',
+			btn_id    : 'btn_chkTheater'
+		});
+	};
+
+	// OK캐쉬백 적립
+	fn_com_okCasRecPop = function(confirmFn, $obj) {
+
+		var paramData = {'transNo' : $obj.attr('sell-tran-no')};
+		var initParam = {callbackFn : confirmFn};
+
+		gfn_divLayPopUp({
+			url       : fn_getUrl('/MyBokdCashRecPopup.do'),
+			params    : paramData,
+			height    : '450',
+			width     : '600',
+			target_id : 'layer_okcash_after',
+			btn_id    : 'btn_okcashAfter',
+			initFn    : 'savePointRecInit',
+			initParam : initParam,
+		});
+	};
+
+	// 예매목록 조회
+	fn_com_makeHtmlForBokdList = function(paramData) {
+
+		// 값 조회
+		$.ajaxMegaBox({
+			url      : fn_getUrl('/selectBokdList.do'),
+			data     : JSON.stringify(paramData),
+			success  : function (data, textStatus, jqXHR) {
+
+				fn_makeHtmlForBokdList(paramData, data);
+			}
+		});
+	};
+
+	// 구분에 따른 URL 생성
+	function fn_getUrl(url) {
+
+		switch(cancelParam.accType) {
+		case 'NON' : return '/on/non/NonMbBokd'     + url;  break;
+		default    : return '/on/oh/ohh/MyBokdPurc' + url;
+		}
+	}
+
+	// 예매목록 생성
+	function fn_makeHtmlForBokdList(paramData, data) {
+
+		var $li, html;
+
+		var arr = [];
+
+		if (data.list.length == 0) {
+
+			html  = '';
+			html += '<div class="no-history-reservation mt20">';
+			html += '	예매 내역이 없습니다. ';
+			html += '</div>';
+
+			$('#bokdList').html(html);
+
+			return;
+		}
+
+		$.each(data.list, function(i, param) {
+
+			var privPackList = '';
+
+			arr.push($li = $(getBokdHtml()));
+
+			// 버튼노출 스위치용
+			param.buttonCd = (paramData.divCd == 'E' || param.playAt == 'N')? 'ETC' : param.hotdealStatCd;
+
+			// 이미지 여부
+			$li.find('a:first').attr({'href' : '/movie-detail?rpstMovieNo='+ param.rpstMovieNo, 'title' : param.movieNm +' '});
+			$li.find('a:first').html('<img src="'+ data.imgSvrUrl + param.imgPath +'" alt="'+ param.movieNm +'" onerror="noImg(this)">');
+
+			// 핫딜상태코드
+			switch(param.hotdealStatCd) {
+			case 'HDS01' : //핫딜진행
+				param.bokdTitle    = '거래번호';  
+				param.bokdNoFormat = param.sellTranNo;          //거래번호로 변경
+				break;
+			default      :
+				param.bokdTitle    = '예매번호';  
+				param.bokdNoFormat = (param.bokdNo || '').bokdFormat();
+			}
+
+			// 버튼 노출 변경
+			switch(param.buttonCd) {
+			case 'HDS01' : //핫딜진행
+				$li.find('div.btn-group a.purple').remove();     //교환권출력 삭제
+				break;
+			case 'HDS02' : //핫딜성공
+				$li.find('div.btn-group a.gray').remove();       //예매취소 삭제
+				break;
+			case 'ETC'   : //추가조건
+				$li.find('div.btn-group a.purple').remove();     //교환권출력 삭제
+				$li.find('div.btn-group a.gray').remove();       //예매취소 삭제
+				break;
+			}
+
+			// OK캐시백 적립 버튼
+			if (Number(nvl(param.okSaveAmt)) > 0) {
+				$li.find('div.btn-group').prepend('<a href="" name="btnOkCashRec" class="button">제휴포인트 추후 적립</a>');
+			}
+
+			// 식음료 신청정보
+			if('Y' == param.drnkAddStatCd && param.theabKindCd.indexOf('TBP') > -1){
+				if(param.privPackList != null){
+					var parivPackSplitList = param.privPackList.split(',');
+					// 내용 생성
+					$.each(parivPackSplitList, function(i, param) {
+						privPackList += '<dd>' + param +'</dd>';
+					});
+					privPackList +='<dt>' + '총 ' + parivPackSplitList.length +'건'+'</dt>';
+				}
+
+			} else if(param.theabKindCd.indexOf('TBP') == -1){
+				param.title = '관람좌석';         
+				param.noti  = param.seatNm;
+			}
+
+			// 값 설정
+			$li.attr({'sell-tran-no' : param.sellTranNo});
+
+			//************************
+			// 관람정보
+			//************************
+			html  = '';
+			html += '<tr>';
+			html += '	<th scope="row" class="a-r">'+ param.bokdTitle +'</th>';
+			html += '	<td colspan="3">';
+			html += '		<em class="num">'+ param.bokdNoFormat +'</em>';
+			if(param.goodsAcptChk == 'Y') { //굿즈 수령완료
+				html += '	<span class="goodsGet">굿즈 수령 완료</span>';
+            }
+			html += '	</td>';
+			html += '</tr>';
+			html += '<tr>';
+			html += '	<th scope="row" class="a-r">영화명</th>';
+			html += '	<td colspan="3">';
+			html += '		<p class="tit-movie">';
+			html += '			<span>'+ param.movieNm     +'</span>';
+			html += '			<span>'+ param.movieKindNm +'</span>';
+			html += '		</p>';
+			html += '	</td>';
+			html += '</tr>';
+			html += '<tr>';
+			html += '	<th scope="row" class="a-r">극장/상영관</th>';
+			html += '	<td>'+ param.brchNm +'/'+ param.theabNm +'</td>';
+			html += '	<th scope="row">관람인원</th>';
+			html += '	<td>'+ param.admisPcnt +'</td>';
+			html += '</tr>';
+			html += '<tr>';
+			html += '<th scope="row" class="a-r">관람일시</th>';
+			html += '	<td>'+ param.playDt.megaFormat('kr') +' ('+ param.playSeq +'회차)</td>';
+
+			if(param.theabKindCd.indexOf('TBP') == -1){		// 부티크가 아닌경우만
+
+				html += '	<th scope="row">'+ param.title +'</th>';
+				html += '	<td>'+ param.noti +'</td>';
+			}
+			html += '</tr>';
+			if(param.goodsAcptChk == 'Y') {//굿즈 수령완료
+				html += '<tr>';
+				html += '<th>굿즈 수령</th>';
+				html += '<td>';
+				// html += '<a href="#" onclick="fn_goodsGetListDtl(\''+param.sellTranNo+'\')" class="goodsGetView" data-gn="'+param.sellTranNo+'">굿즈수령내역 확인</a>';
+				html += '<a href="#" class="goodsGetView" name="goodsGetView" data-gn="'+param.sellTranNo+'">굿즈수령내역 확인</a>';
+				html += '</td>';
+				html += '</tr>';
+			}
+
+			if(privPackList.length > 0){
+				html += '<th scope="row" class="a-r va-t" style="padding-top:8px;">패키지 신청</th>';
+				html += '	<td class="newTd"><dl class="dot_list">'+ privPackList +'</dl></td>';
+				html += '</tr>';
+			}
+
+
+			$li.find('table:eq(0) tbody').html(html);
+
+			//************************
+			// 결제정보
+			//************************
+			param.point = {title : '', value : ''}; //ie디자인오류로 빈값으로변경
+
+			if (paramData.divCd == 'B' && cancelParam.accType != 'NON' && param.resvrPoint != '0') {
+				param.point = {title : '적립예정 포인트', value : param.resvrPoint.format() + ' P'};
+			}
+
+			html  = '';
+			html += '<tr>';
+			html += '	<th scope="row" class="a-r">결제일시</th>';
+			html += '	<td>'+ (param.payDe || '').maskDate();
+			html += '		<a href="#" class="button gray-line x-small" title="결제정보">결제정보</a>';
+			html += '	</td>';
+			html += '	<th scope="row">'+ param.point.title +'</th>';
+			html += '	<td>'+ param.point.value +'</td>';
+			html += '</tr>';
+
+			$li.find('table:eq(1) tbody').html(html);
+		});
+
+		//************************
+		// 기본 구조
+		//************************
+		html  = '';
+		html += '<div class="board-list-util">';
+		html += '	<p class="result-count pt00">';
+		html += '		<strong>';
+		html += '			총';
+		html += '			<b class="font-gblue">'+ data.list[0].totCnt +'</b>건';
+		html += '		</strong>';
+		html += '	</p>';
+		html += '</div>';
+		html += '<div class="history-reservation">';
+		html += '	<ul></ul>';
+		html += '</div>';
+
+		$('#bokdList').html(html);
+
+		$('#bokdList ul').html(arr);
+
+	}
+
+	// html 기본 틀
+	function getBokdHtml() {
+
+		var html = '';
+
+		html += '<li>';
+		html += '	<div class="round">';
+		html += '		<a href="#" class="img" title="예매목록"></a>';
+		html += '		<table class="table">';
+		html += '			<colgroup>';
+		html += '				<col style="width:75px;">';
+		html += '				<col style="width:230px;">';
+		html += '				<col style="width:80px;">';
+		html += '				<col>';
+		html += '			</colgroup>';
+		html += '			<tbody>';
+		html += '			</tbody>';
+		html += '		</table>';
+		html += '		<div class="bg-round">';
+		html += '			<table class="table">';
+		html += '				<colgroup>';
+		html += '					<col style="width:75px;">';
+		html += '					<col style="width:230px;">';
+		html += '					<col style="width:100px;">';
+		html += '					<col>';
+		html += '				</colgroup>';
+		html += '				<tbody>';
+		html += '				</tbody>';
+		html += '			</table>';
+		html += '		</div>';
+		html += '		<div class="btn-group">';
+		html += '			<a href="" title="" class="button purple" name="btnTicketChbnd">교환권출력</a>';
+		html += '			<a href="" class="button gray" name="btnCancelBokd" title="예매취소">예매취소</a>';
+		html += '		</div>';
+		html += '	</div>';
+		html += '</li>';
+
+		return html;
+	}
+
+	// 취소된 예매 리스트 생성
+	fn_com_makeHtmlforCancelBokdList = function() {
+
+		var options = {};
+
+		// 네이게이션 ID
+		options.navId = '#navBokd';
+
+		// 호출 URL
+		options.url = fn_getUrl('/selectCancelBokdList.do');
+
+		options.paramData = {'localeCode' : 'kr'};
+
+		// 그리기
+		options.successCallBack = function( data, textStatus, jqXHR ) {
+
+			var html = '';
+
+			// 기본값
+			if (data.list.length == 0) {
+				html = '<tr><td colspan="5" class="a-c">취소내역이 없습니다.</td></tr>';
+			}
+
+			// 내용 생성
+			$.each(data.list, function(i, param) {
+
+				if (param.playDt    == null) param.playDt    = '';
+				if (param.rfndDe    == null) param.rfndDe    = '';
+				if (param.sellEndDe == null) param.sellEndDe = '';
+
+				html += '<tr>';
+				html += '	<td>'+ (param.rfndDt || '').payDtFormat() +'</td>';
+				html += '	<th scope="row">'+ param.movieNm +'</th>';
+				html += '	<td>'+ param.brchNm +'</td>';
+				html += '	<td>'+ param.playDt.megaFormat('kr') +'</td>';
+				html += '	<td class="a-r">';
+				html += '		<span class="font-red">'+ param.prdtAmt.format() +'원</span>';
+				html += '	</td>';
+				html += '</tr>';
+			});
+
+			// html 설정
+			$(options.navId).prev().find('tbody').html(html);
+		};
+
+		// page 이벤트 연결
+		gfn_setPage(options);
+
+	};
+
+	//========================================================================================
+	//기프트카드 선물취소 체크
+	//========================================================================================
+	fn_giftcard_cancel_chk = function(confirmFn, $obj){
+		cancelParam.confirmFn = confirmFn;
+
+		var paramData = {'transNo' : $obj.attr('sell-tran-no')};
+
+		if($obj.attr('sell-prdt-kind-cd') == 'SPD61'){
+
+			// 로딩생성
+			gfn_logdingModal();
+
+			$.ajaxMegaBox({
+				url      : '/on/oh/ohz/PayStore/giftCardCancelChk.do',
+				data     : JSON.stringify(paramData),
+				clickLmtChk: true, //중복클릭 방지 실행
+				success  : function (data, textStatus, jqXHR) {
+
+					// 로딩삭제
+					gfn_logdingModal();
+
+					var totCnt = parseInt(data.returnMap.totCnt);
+					var sgntCnt = parseInt(data.returnMap.sgntCnt);
+
+					if(totCnt > 0 && sgntCnt > 0){
+						gfn_alertMsgBox('선물하신 기프트카드가 등록되어 구매취소가 불가합니다.');
+						return;
+					} else {
+						fn_com_cancelPurc(confirmFn, $obj);
+					}
+				},
+				complete: function(xhr){
+					clearLmt(); //중복제한 초기화
+				}
+			});
+		} else {
+			fn_com_cancelPurc(confirmFn, $obj);
+		}
+	}
+
+	//========================================================================================
+	//구매취소
+	//========================================================================================
+	fn_com_cancelPurc = function(confirmFn, $obj) {
+
+		cancelParam.confirmFn = confirmFn;
+
+		gfn_confirmMsgBox('취소 시 유효기간 경과된 포인트는 복구되지 않습니다.\n구매취소 하시겠습니까?', function() {
+			var paramData = {'transNo' : $obj.attr('sell-tran-no')};
+			// 로딩생성
+			gfn_logdingModal();
+
+			$.ajaxMegaBox({
+				url      : '/on/oh/ohz/PayStore/cancelStorePayment.do',
+				data     : JSON.stringify(paramData),
+				clickLmtChk: true, //중복클릭 방지 실행
+				success  : function (data, textStatus, jqXHR) {
+
+					// 로딩삭제
+					gfn_logdingModal();
+
+					if (data.statCd == 0) {
+						gfn_alertMsgBox('구매취소 되었습니다.', function() {
+							if (cancelParam.confirmFn != null) cancelParam.confirmFn();
+						});
+					} else {
+						gfn_alertMsgBox(data.msg);
+					}
+				},
+		        complete: function(xhr){
+		         	clearLmt(); //중복제한 초기화
+		        }
+			});
+		});
+	};
+
+	//========================================================================================
+	//환불수수료 결제 - 예매
+	//========================================================================================
+	// 예매 - 환불수수료 확인
+	fn_com_cancelBokd = function(confirmFn, $obj) {
+
+		cancelParam.confirmFn = confirmFn;
+		cancelParam.paramData = { 'sellChnlCd' : ''
+								, 'transNo'    : $obj.attr('sell-tran-no')
+								, 'sellTranNo' : $obj.attr('sell-tran-no')};
+
+		// 수수료 확인
+		$.ajaxMegaBox({
+			url     : fn_getUrl('/selectMyBokdRfndFee.do'),
+			data    : JSON.stringify(cancelParam.paramData),
+			clickLmtChk: true, //중복클릭 방지 실행
+			success : function (data, textStatus, jqXHR) {
+
+				// 환불정보
+				cancelParam.info = data.info;
+				var nonData = {'callUrl': data.info.callUrl
+						, 'cancelAt'   : data.info.cancelAt
+						, 'refundAmt'  : data.info.refundAmt
+						, 'transNo'    : $obj.attr('sell-tran-no')
+						, 'sellTranNo' : $obj.attr('sell-tran-no')};
+
+				switch(data.info.cancelAt) {
+				case 'N' : //예매취소 불가
+					if (data.info.rtnMsg != '') gfn_alertMsgBoxSize(data.info.rtnMsg, 400);
+					break;
+				case 'Y' : //예매취소 가능
+					gfn_confirmMsgBox('취소 시 유효기간 경과된 관람권, 쿠폰, 포인트는 복구되지 않습니다.\n예매취소 하시겠습니까?', function(){ fn_nextCancelBokd()});
+					break;
+				case 'P' : //환불수수료 팝업
+					gfn_divLayPopUp({
+						url       : '/on/oh/ohz/PayBooking/MyBokdRfndFeePopup.do',
+						height    : '380',
+						width     : '600',
+						params    : nonData,
+						initFn    : 'myBokdRfndFeeInit',
+						initParam : {callbackFn : function() {
+
+								// 환불수수료
+								cancelParam.paramData.refundAmt = cancelParam.info.refundAmt;
+								// 환불수수료 선결제처리
+								fn_preRefund();
+							}
+						}
+					});
+				}
+			},
+	        complete: function(xhr){
+	         	clearLmt(); //중복제한 초기화
+	        }
+		});
+	};
+
+	// 환불수수료 선결제처리
+	function fn_preRefund(){
+
+		$.ajaxMegaBox({
+			contentType  : 'application/json;charset=UTF-8',
+			url          : '/on/oh/ohz/PayBooking/prepareRefund.do',
+			data         : JSON.stringify(cancelParam.paramData),
+			success      : function (data, textStatus, jqXHR) {
+				if (data.statCd != 0) {
+					gfn_alertMsgBox(data.msg);
+					return;
+				}
+
+				//fdk 결제 팝업 생성
+				fdkPayProc(cancelParam.paramData.transNo);
+			},
+			error: function(xhr,status,error){
+				var err = JSON.parse(xhr.responseText);
+				gfn_alertMsgBox(err.msg);
+			}
+		});
+	}
+
+	// 예매취소
+	function fn_nextCancelBokd() {
+
+		// 로딩생성
+		gfn_logdingModal();
+
+		$.ajaxMegaBox({
+			url     : cancelParam.info.callUrl,
+			data    : JSON.stringify(cancelParam.paramData),
+			success : function (data, textStatus, jqXHR) {
+
+				// 로딩삭제
+				gfn_logdingModal();
+
+				if (data.returnMap.statCd == '0') {
+					gfn_alertMsgBox('예매가 취소되었습니다.', function() {
+						if (cancelParam.confirmFn != null) cancelParam.confirmFn();
+					});
+				} else {
+					gfn_alertMsgBox(data.returnMap.msg);
+				}
+			}
+		});
+	}
+
+	// FDK호출
+	function fdkPayProc(transNo) {
+
+		//FDK 결제 창 호출 페이지로 프레임 영역 변경
+		FD_PAY_FRAME.location.href = '/on/oh/ohz/PayBooking/applyRefundCreditCard.do?transNo='+transNo;
+
+		//"FD_PAY_FRAME" 프레임을 가지고 있는 DIV 영역의 ID를 입력(sample 이용 시 : id="fdpayWin")
+		layer_open('fdpayWin');
+	}
+
+	// 레이어 팝업 호출 시 처리
+	function layer_open(el){
+		wrapWindowByMask();         //레이어 팝업 활성화 시 하단 MASKING 처리를 위한 함수
+
+		var fdlayer = $('#' + el);  //레이어의 id를 fdlayer변수에 저장
+		fdlayer.fadeIn();           //레이어 실행
+
+		// 화면의 중앙에 레이어를 띄운다.
+		fdlayer.css('margin-top' , '-'+fdlayer.outerHeight()/2+'px');
+		fdlayer.css('margin-left', '-'+fdlayer.outerWidth() /2+'px');
+		fdlayer.center();
+		fdlayer.find('a.closeBtn').click(function(e){
+			fdlayer.fadeOut();                                          //'Close'버튼을 클릭하면 레이어가 사라진다.
+			e.preventDefault();
+			document.getElementById('mask').style.display = 'none';     //레이어 팝업 비활성화 시 하단 MASKING 표시 해제
+			FD_PAY_FRAME.location.href = '/on/oh/ohz/PayBooking/blank.do'; //빈 페이지로 프레임 영역 변경
+		});
+	}
+
+	//레이어 팝업 하단 영역 마스킹 처리(레이어 팝업 호출 시 사용)
+	function wrapWindowByMask(){
+		//화면의 높이와 너비를 구한다.
+		var maskHeight = $(document).height();
+		var maskWidth  = $(window).width();
+
+		//마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+		$('#mask').css({'width':maskWidth,'height':maskHeight});
+
+		//애니메이션 효과
+		$('#mask').fadeIn(1000);
+		$('#mask').fadeTo('slow',0.6);
+	}
+
+	// 최종결제
+	function fdkAuthResult(fdkResultData) {
+
+		//오류시 alert 메시지 팝업 후 레이어 닫기
+		if (fdkResultData.Code != '0000') {
+			gfn_alertMsgBox({ msg: fdkResultData.Msg });
+			$('#fdpayWin').find('a.closeBtn').click();
+			return false;
+		} else {
+			//승인요청중 close버턴클릭문제 (승인요청전 레이어만 사라지게 처리한다)
+			$('#fdpayWin').fadeOut();
+		}
+		var transNo = cancelParam.paramData.transNo;
+
+		var paramData = {transNo:transNo, Code:fdkResultData.Code, Msg:fdkResultData.Msg , FDTid:fdkResultData.FDTid };
+		$.ajax({
+			url        : '/on/oh/ohz/PayBooking/execRefundPayment.do',
+			type       : 'POST',
+			contentType: 'application/json;charset=UTF-8',
+			dataType   : 'json',
+			data       : JSON.stringify(paramData),
+			success    : function (data, textStatus, jqXHR) {
+				//최종 결제 테스트
+				if (data.statCd != '0') {
+					gfn_alertMsgBox({ msg: data.msg });
+				} else {
+					//예매취소
+					fn_nextCancelBokd();
+				}
+				$('#fdpayWin').find('a.closeBtn').click();
+
+			},
+			error       : function(xhr,status,error){
+				gfn_logdingModal();
+				var err = JSON.parse(xhr.responseText);
+				//err.statCd 에 따라서 이전화면으로 리턴 가능토록
+				gfn_alertMsgBox({ msg: err.msg });
+				$('#fdpayWin').find('a.closeBtn').click();
+			}
+		});
+	}
+
+	jQuery.fn.center = function () {
+		this.css('position','absolute');
+		this.css('top', Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + 350 + 'px');
+		return this;
+	}
+
+</script>		
+<script type="text/javascript">
 
 	// Tab Index
 	var tabIdx = 01 -1;
@@ -99,10 +767,10 @@
 		// 구매Tab > 조회기간 > 기간 버튼
 		$('#myPurcArea .btn-period button').click(function() {
 
-			var dateFormat = {'diffSe' : this.value[0], 'diffVal' : '-'+ this.value[1], 'stanDate' : '20231222'.maskDate()};
+			var dateFormat = {'diffSe' : this.value[0], 'diffVal' : '-'+ this.value[1], 'stanDate' : '20231225'.maskDate()};
 
 			$('#myPurcArea .date-calendar:eq(0)').val(dateDiffFormat(dateFormat,'yy.mm.dd'));
-			$('#myPurcArea .date-calendar:eq(1)').val('20231222'.maskDate());
+			$('#myPurcArea .date-calendar:eq(1)').val('20231225'.maskDate());
 
 			$(this).addClass('on').siblings().removeClass('on');
 		});
@@ -244,20 +912,23 @@
 		gfn_setPage(options);
 	}
 </script>
-	
-    <div class="container has-lnb" data-aos="fade-up">
-      <!-- 이곳에 코드작성 -->
-      <div class="inner-wrap">
-		
-        <jsp:include page="lnb.jsp"></jsp:include>
-        <form id="moveFrm" method="post">
+
+			<div id="myLoactionInfo" style="display: none;">
+				<div class="location">
+					<span>Home</span>
+					<a href="/mypage" title="나의 메가박스 페이지로 이동">나의 메가박스</a>
+					<a href="/mypage/bookinglist?tab=01" title="예매/구매내역 페이지로 이동">예매/구매내역</a>
+				</div>
+			</div>			
+			
+			
 			<div id="contents">
 				<h2 class="tit">예매/구매 내역</h2>
 			
 				<div class="tab-block tab-layer">
 					<ul>
-						<li data-url="/_mypage/bookinglist?tab=01" data-tit="예매내역" title="예매내역 탭으로 이동" class="on"><a href="#myBokdArea" class="btn">예매 </a></li>
-						<li data-url="/_mypage/bookinglist?tab=02" data-tit="구매내역" title="구매내역 탭으로 이동" class=""><a href="#myPurcArea" class="btn">구매 </a></li>
+						<li data-url="/mypage/bookinglist?tab=01" data-tit="예매내역" title="예매내역 탭으로 이동" class="on"><a href="#myBokdArea" class="btn">예매 </a></li>
+						<li data-url="/mypage/bookinglist?tab=02" data-tit="구매내역" title="구매내역 탭으로 이동"><a href="#myPurcArea" class="btn">구매 </a></li>
 					</ul>
 				</div>
 				<div class="tab-cont-wrap">
@@ -348,11 +1019,11 @@
 										<th scope="col">취소금액</th>
 									</tr>
 								</thead>
-								<tbody><tr><td colspan="5" class="a-c">취소내역이 없습니다.</td></tr></tbody>
+								<tbody><tr>	<td>2023.12.23 (14:29)</td>	<th scope="row">서울의 봄</th>	<td>양산</td>	<td>2023.12.24 (일) 13:25</td>	<td class="a-r">		<span class="font-red">42,000원</span>	</td></tr></tbody>
 							</table>
 						</div>
 			
-						<nav class="pagination" id="navBokd"></nav>
+						<nav class="pagination" id="navBokd"><strong class="active">1</strong> </nav>
 			
 						<!-- 예매 안내상황  -->
 						<div class="box-pulldown mt30">
@@ -394,7 +1065,7 @@
 					</div>
 			
 					<!-- 구매내역 영역 -->
-					<div id="myPurcArea" class="tab-cont"><a href="" class="ir">구매  탭 화면 입니다.</a>
+					<div id="myPurcArea" class="tab-cont"><a href="" class="ir"></a>
 			
 						<!-- 구매 조회 조건 -->
 						<div class="board-list-search mt20">
@@ -431,9 +1102,9 @@
 												<button type="button" class="btn" value="M6">6개월</button>
 											</div>
 											<div class="date">
-												<input type="text" title="조회기간 시작 날짜 입력" placeholder="yyyy.mm.dd" class="date-calendar v2 hasDatepicker" id="dp1703216257122"><button type="button" class="ui-datepicker-trigger">날짜 선택</button>
+												<input type="text" title="조회기간 시작 날짜 입력" placeholder="yyyy.mm.dd" class="date-calendar v2 hasDatepicker" id="dp1703435331895"><button type="button" class="ui-datepicker-trigger">날짜 선택</button>
 												<span>~</span>
-												<input type="text" title="조회기간 마지막 날짜 입력" placeholder="yyyy.mm.dd" class="date-calendar v2 hasDatepicker" id="dp1703216257123"><button type="button" class="ui-datepicker-trigger">날짜 선택</button>
+												<input type="text" title="조회기간 마지막 날짜 입력" placeholder="yyyy.mm.dd" class="date-calendar v2 hasDatepicker" id="dp1703435331896"><button type="button" class="ui-datepicker-trigger">날짜 선택</button>
 												<button type="button" class="button gray-line" name="search">
 													<i class="iconset ico-search-gray"></i> 조회
 												</button>
@@ -471,7 +1142,7 @@
 										<th scope="col">상태</th>
 									</tr>
 								</thead>
-								<tbody><tr><td colspan="5" class="a-c">결제내역이 없습니다.</td></tr></tbody>
+								<tbody></tbody>
 							</table>
 						</div>
 			
@@ -504,7 +1175,7 @@
 					</div>
 				</div>
 			</div>
-        </form>
+>>>>>>> branch 'Kiwon_home' of https://github.com/whxownss/movieTest.git
       </div>
     </div>
   </section>

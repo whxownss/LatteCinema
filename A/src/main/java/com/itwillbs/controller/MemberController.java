@@ -43,6 +43,24 @@ public class MemberController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}//
 		
+		// 아이디/비밀번호 찾기 페이지 이동
+		if(sPath.equals("/findmember.me")) {
+			dispatcher = request.getRequestDispatcher("_member/findmember.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
+		// 아이디 찾기 페이지 이동
+		if(sPath.equals("/userfind.me")) {
+			dispatcher = request.getRequestDispatcher("_member/userfind.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
+		// 비밀번호 찾기 페이지 이동
+		if(sPath.equals("/passfind.me")) {
+			dispatcher = request.getRequestDispatcher("_member/passfind.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
 		////////////////////////////////////////////////////////////////////////////////////
 		
 		// 마이페이지 (마이페이지 기본메인화면) 이동
@@ -78,6 +96,18 @@ public class MemberController extends HttpServlet {
 		// 마이페이지 비밀번호 변경(비밀번호변경) 이동 (userInfo > changepw.jsp)
 		if(sPath.equals("/changepw.me")) {
 			dispatcher = request.getRequestDispatcher("_mypage/changepw.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
+		// 마이페이지 myinquiry(문의내역) 이동
+		if(sPath.equals("/myinquiry.me")) {
+			dispatcher = request.getRequestDispatcher("_mypage/myinquiry.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
+		// 마이페이지 bookinglist(예매내역) 이동
+		if(sPath.equals("/bookinglist.me")) {
+			dispatcher = request.getRequestDispatcher("_mypage/bookinglist.jsp");
 			dispatcher.forward(request, response);
 		}//
 		
