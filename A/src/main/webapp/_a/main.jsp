@@ -6,11 +6,10 @@
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 
-
   <main id="main">
 
     <%@include file="../_common/commonMovieSlide.jsp"%>
-
+	
 	
 	    
     
