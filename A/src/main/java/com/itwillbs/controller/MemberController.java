@@ -38,17 +38,12 @@ public class MemberController extends HttpServlet {
 		}//
 		
 		// 회원가입 페이지 이동
-		if(sPath.equals("/signup3.me")) {
-			dispatcher = request.getRequestDispatcher("_member/signup3.jsp");
+		if(sPath.equals("/join.me")) {
+			dispatcher = request.getRequestDispatcher("_member/join.jsp");
 			dispatcher.forward(request, response);
 		}//
 		
-		// 아이디/비밀번호 찾기 페이지 이동
-		if(sPath.equals("/findmember.me")) {
-			dispatcher = request.getRequestDispatcher("_member/findmember.jsp");
-			dispatcher.forward(request, response);
-		}//
-		
+	
 		// 아이디 찾기 페이지 이동
 		if(sPath.equals("/userfind.me")) {
 			dispatcher = request.getRequestDispatcher("_member/userfind.jsp");
