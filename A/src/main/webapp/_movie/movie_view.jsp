@@ -2,23 +2,21 @@
 <!DOCTYPE html>
 <html lang="ko">
 
-
 <%@include file ="../_common/commonHeaderStart.jsp" %>
-
-<link href="../_assets/css/view.css" rel="stylesheet">
+<link href="${pageContext.servletContext.contextPath }/_assets/css/view.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
 <!-- <script type="text/javascript" src="../_assets/js/jquery.number.min.js"></script> -->
 <!-- <script type="text/javascript" src="../_assets/js/jquery.cookie.min.js"></script> -->
-<script type="text/javascript" src="../_assets/js/scrollbar.js"></script>
-<script type="text/javascript" src="../_assets/js/swiper.min.js"></script>
-<script type="text/javascript" src="../_assets/js/front.js"></script>
-<script type="text/javascript" src="../_assets/js/app.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/scrollbar.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/swiper.min.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/front.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/app.js"></script>
 
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
-
-
-<body>
+ 
+  
+<main>
 
 <%
  String movieNm = "노량: 죽음의 바다";
@@ -37,7 +35,7 @@
     <div class="inner">
       <div class="info-box">
         <div class="btns only-pc">
-          <a href="javascript:goLink('/reserve/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기 <img src="../_assets/img/sub/ico_reser.png"></a>
+          <a href="javascript:goLink('/reserve/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기</a>
           <a href="#" class="btn-type1 movie-open" data-poster="https://img.dtryx.com/poster/2023/12/D3ED4691-3003-4A40-BA15-E029AC980BEF.small.jpg" data-source="https://img.dtryx.com/video/2023/12/45030FA5-DC2D-4702-A4B8-731108559CBA.mp4">예고편 보기</a></div>
         <div class="poster">
           <img src="https://img.dtryx.com/poster/2023/12/5E0206A2-7177-4466-A25F-2B6726844F6A.small.jpg" onerror="this.src='/resources/img/common/no-poster.png';">
@@ -59,19 +57,19 @@
           예매율<strong><%=reserve %></strong>
         </div>
         <div class="btns only-m">
-          <a href="javascript:goLink('/reserve/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기 <img src="../_assets/img/sub/ico_reser.png"></a>
+          <a href="javascript:goLink('/reserve/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기</a>
           <a href="#" class="btn-type1 movie-open" data-poster="https://img.dtryx.com/poster/2023/12/D3ED4691-3003-4A40-BA15-E029AC980BEF.small.jpg" data-source="https://img.dtryx.com/video/2023/12/45030FA5-DC2D-4702-A4B8-731108559CBA.mp4">예고편 보기</a></div>
       </div>
       
       <div class="float-info ">
         <div class="sticky">
-          <div class="img"><img src="https://img.dtryx.com/poster/2023/12/5E0206A2-7177-4466-A25F-2B6726844F6A.small.jpg" style="width: 100%;" onerror="this.src='/resources/img/common/no-poster.png';"/></div>
+          <div class="img"><img src="https://img.dtryx.com/poster/2023/12/5E0206A2-7177-4466-A25F-2B6726844F6A.small.jpg" style="width: 80%;" onerror="this.src='/resources/img/common/no-poster.png';"/></div>
           <div class="info">
             <i class="age12"></i>
             <h3 class="h3"><%=movieNm %></h3>
             <h4 class="h4"><%=movieEngNm %></h4>
             <div class="btns">
-              <a href="javascript:goLink('/reserve/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기 <img src="../_assets/img/sub/ico_reser.png"></a>
+              <a href="javascript:goLink('/reserve/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기</a>
               <a href="#" class="btn-type1 movie-open" data-poster="https://img.dtryx.com/poster/2023/12/D3ED4691-3003-4A40-BA15-E029AC980BEF.small.jpg" data-source="https://img.dtryx.com/video/2023/12/45030FA5-DC2D-4702-A4B8-731108559CBA.mp4">예고편 보기</a></div>
           </div>
         </div>
@@ -225,7 +223,9 @@
     </div>
   </div>
 </div>
-</body>
+
+</main>
+
 <script type="text/javascript">
   var galleryThumbs = new Swiper(".gallery-thumbs .swiper-container", {
     spaceBetween: 10,
@@ -317,7 +317,7 @@
     });
   });
 </script>
-
+	
 <%@include file ="../_common/commonFooter.jsp" %>
 
 

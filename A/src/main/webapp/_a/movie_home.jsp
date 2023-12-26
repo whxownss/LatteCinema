@@ -28,7 +28,7 @@
 			          <img src="assets/img/post1.jpg" style="width: 100%;">
 						<div class="titleeee">
 							<a href="" class="moree">예매하기</a>
-							<a href="" class="moree">상세정보</a>
+							<a href="movie_view.mo" class="moree">상세정보</a>
 						</div>
 		        	</div>
 						<div class="post-meta">

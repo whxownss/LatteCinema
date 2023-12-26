@@ -68,8 +68,12 @@
 				var tmp = $(this).attr("id");
 				var id = (tmp.startsWith("c")) ? "selectedCinema" : "selectedMovie";
 				$("#" + id).text(this.textContent);
+				
+				
+				// showTimeTable()
 				if($("#selectedDate").text() != "날짜 및 시간") {
-// 					showTimeTable();
+					if($("#selectedMovie").text() != "영화" && $("#selectedCinema").text() == "지역 및 영화관") return;
+					showTimeTable();
 				}
 			});
 			
@@ -117,12 +121,15 @@
 			$("#myCalendar").on("change", function(){
 				date = new Date($("#myCalendar").val());
 				writeDate(date);
-// 				showTimeTable();
+				
+				if($("#selectedCinema").text() != "지역 및 영화관"){
+					showTimeTable();
+				}
 			}); // 날짜 표시 끝
 			
 			
 			$("#forTest").click(function(){
-				showTimeTable();
+// 				showTimeTable();
 			});
 		});
 
@@ -276,7 +283,8 @@
 		};
 		// 상영 시간표 출력
 		var showTimeTable = function(){
-			
+
+			$("#showTimeTable").empty();
 			$("#showTimeTable").append("<div class='text-start' id='lMT'>옛날 영화</div>" + 
 									   "<div class='text-start mt-3' id='nMT'>최신 영화</div>");
 			
@@ -375,11 +383,11 @@
 							</div>
 							
 							<!-- 영화 -->
-							<div class="col border border-secondary">
+							<div class="col border border-secondary hErrorP">
 								<div class="row">
 									<div class="col p-2 bg-black text-white" id="selectedMovie">영화</div>
 								</div>
-								<div class="row" style="">
+								<div class="row hErrorC" style="">
 									<div class="col p-0 bg-body-secondary">
 										<ul class="list-group text-start mb-0 ps-0 rounded-0">
 											<li class="list-group-item border border-0 bg-body-secondary myMovie myMouse" id="mo1">옛날영화</li>

@@ -2,14 +2,15 @@
     pageEncoding="UTF-8"%>
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>
-	<link rel="stylesheet" href="../_assets/css/cinema.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/cinema.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/cinema.css">
 	<script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 <%-- 현재 JSP 파일에만 해당하는 스타일시트 링크 추가 --%>
 <script>
 
-<!-- test!!!!!  -->
+<!-- test!!!!!  -->                                    
 
 $(function(){
 	$('.sel-city').on('click', function() {
