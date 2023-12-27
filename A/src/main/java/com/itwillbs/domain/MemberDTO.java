@@ -12,6 +12,8 @@ public class MemberDTO {
 	private String memBirthD;
 	private String memEmail;
 	private Timestamp memJoinD;
+	
+	
 	public String getMemIdx() {
 		return memIdx;
 	}

@@ -52,7 +52,7 @@ public class MemberController extends HttpServlet {
 		if(sPath.equals("/joinPro.me")) {
 			memberService = new MemberService();
 			
-//			memberService.insertMember(request);
+			memberService.insertMember(request);
 			// 주소변경 login.me 이동
 			response.sendRedirect("login.me");
 		}//
