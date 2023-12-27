@@ -52,7 +52,7 @@ public class MemberController extends HttpServlet {
 		if(sPath.equals("/joinPro.me")) {
 			memberService = new MemberService();
 			
-			memberService.insertMember(request);
+//			memberService.insertMember(request);
 			// 주소변경 login.me 이동
 			response.sendRedirect("login.me");
 		}//
@@ -70,7 +70,7 @@ public class MemberController extends HttpServlet {
 				// 로그인 표시 => 세션객체생성 => 세션 저장 (자바에서는 세션객체 먼저 생성 해야함)
 				HttpSession session = request.getSession();
 //				session.setAttribute("id", request.getParameter("id"));
-				session.setAttribute("id", memberDTO.getId());
+				session.setAttribute("id", memberDTO.getMemId());
 				// main.me 이동
 				response.sendRedirect("main.me");
 				

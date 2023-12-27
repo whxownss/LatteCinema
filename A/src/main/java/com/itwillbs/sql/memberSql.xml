@@ -49,22 +49,21 @@
 				(SELECT *
 				  FROM (SELECT IFNULL(MAX(CAST(MEM_IDX as unsigned)), 0) + 1
 						  FROM MEMBERS) A)
-			 , #{id}
-			 , #{pass}
-			 , #{name}
-			 , #{phone}
-			 , #{date}
-			 , #{eMail}
-			 , #{birth}
-			 , #{address})
+			 , #{memId}
+			 , #{memPass}
+			 , #{memName}
+			 , #{memPhone}
+			 , #{memJoinD}
+			 , #{memEmail}
+			 , #{memBirthD}
+			 , #{memAddress})
 	</insert>
 	
 	<select id="userCheck" parameterType="MemberDTO" resultType="MemberDTO">
-		SELECT ID
-			, PASS
+		SELECT *
 		FROM MEMBERS
-		WHERE ID = #{id}
-		AND   PASS = #{pass}	
+		WHERE MEM_ID = #{memId}
+		AND   MEM_PASS = #{memPass}	
 		
 	</select>
 	

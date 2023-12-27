@@ -27,6 +27,7 @@ public class MemberDAO {
 		SqlSession session = sqlSessionFactory.openSession();
 //		List userCheckResult = session.selectList("Member.userCheck", memberDTO);
 		memberDTO = session.selectOne("Member.userCheck", memberDTO);
+		System.out.println(memberDTO);
 		int userCheckResult = 0;
 		if(memberDTO != null) {
 			userCheckResult = 1;

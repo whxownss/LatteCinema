@@ -52,11 +52,11 @@ $(() => {
 							<div>
 								<form action="loginPro.me" method="post" id="login" name="fr">
 									<div class="form-floating mb-3" id="idTest">
-										<input class="form-control" type="text" name="UserId" placeholder="아이디" id="id" style="width: 100%;">
+										<input class="form-control" type="text" name="id" placeholder="아이디" id="id" style="width: 100%;">
 										<label class="form-label" for="UserId">아이디</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input class="form-control" type="password" name="pwd" placeholder="비밀번호" id="pwd" style="width: 100%;">
+										<input class="form-control" type="password" name="pass" placeholder="비밀번호" id="pwd" style="width: 100%;">
 										<label class="form-label" for="pwd">비밀번호</label>
 									</div>
 									

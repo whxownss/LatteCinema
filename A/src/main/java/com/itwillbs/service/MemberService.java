@@ -26,15 +26,15 @@ public class MemberService {
 			Timestamp date = new Timestamp(System.currentTimeMillis());
 			
 			MemberDTO memberDTO = new MemberDTO();
-			memberDTO.setIdx(idx);
-			memberDTO.setId(id);
-			memberDTO.setPass(pass);
-			memberDTO.setName(name);
-			memberDTO.setPhone(phone);
-			memberDTO.setAddress(address);
-			memberDTO.setBirth(birth);
-			memberDTO.seteMail(email);
-			memberDTO.setDate(date);
+			memberDTO.setMemIdx(idx);
+			memberDTO.setMemId(id);
+			memberDTO.setMemPass(pass);
+			memberDTO.setMemName(name);
+			memberDTO.setMemPhone(phone);
+			memberDTO.setMemAddress(address);
+			memberDTO.setMemBirthD(birth);
+			memberDTO.setMemEmail(email);
+			memberDTO.setMemJoinD(date);
 			
 			System.out.println(memberDTO);
 			
@@ -59,8 +59,8 @@ public class MemberService {
 			memberDAO = new MemberDAO();
 			
 			memberDTO = new MemberDTO();
-			memberDTO.setId(id);
-			memberDTO.setPass(pass);
+			memberDTO.setMemId(id);
+			memberDTO.setMemPass(pass);
 			
 			// memberDTO = userCheck(id,pass) 메서드 호출
 			userCheckResult = memberDAO.userCheck(memberDTO);

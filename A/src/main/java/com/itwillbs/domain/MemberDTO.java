@@ -3,100 +3,81 @@ package com.itwillbs.domain;
 import java.sql.Timestamp;
 
 public class MemberDTO {
-	private String idx;
-	private String id;
-	private String pass;
-	private String name;
-	private String phone;
-	private String address;
-	private String birth;
-	private String eMail;
-	private Timestamp date;
-	
-	
-	
-	
-	
-	
+	private String memIdx;
+	private String memId;
+	private String memPass;
+	private String memName;
+	private String memPhone;
+	private String memAddress;
+	private String memBirthD;
+	private String memEmail;
+	private Timestamp memJoinD;
+	public String getMemIdx() {
+		return memIdx;
+	}
+	public void setMemIdx(String memIdx) {
+		this.memIdx = memIdx;
+	}
+	public String getMemId() {
+		return memId;
+	}
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
+	public String getMemPass() {
+		return memPass;
+	}
+	public void setMemPass(String memPass) {
+		this.memPass = memPass;
+	}
+	public String getMemName() {
+		return memName;
+	}
+	public void setMemName(String memName) {
+		this.memName = memName;
+	}
+	public String getMemPhone() {
+		return memPhone;
+	}
+	public void setMemPhone(String memPhone) {
+		this.memPhone = memPhone;
+	}
+	public String getMemAddress() {
+		return memAddress;
+	}
+	public void setMemAddress(String memAddress) {
+		this.memAddress = memAddress;
+	}
+	public String getMemBirthD() {
+		return memBirthD;
+	}
+	public void setMemBirthD(String memBirthD) {
+		this.memBirthD = memBirthD;
+	}
+	public String getMemEmail() {
+		return memEmail;
+	}
+	public void setMemEmail(String memEmail) {
+		this.memEmail = memEmail;
+	}
+	public Timestamp getMemJoinD() {
+		return memJoinD;
+	}
+	public void setMemJoinD(Timestamp memJoinD) {
+		this.memJoinD = memJoinD;
+	}
 	@Override
 	public String toString() {
-		return "MemberDTO [idx=" + idx + ", id=" + id + ", pass=" + pass + ", name=" + name + ", phone=" + phone
-				+ ", address=" + address + ", birth=" + birth + ", eMail=" + eMail + ", date=" + date + "]";
+		return "MemberDTO [memIdx=" + memIdx + ", memId=" + memId + ", memPass=" + memPass + ", memName=" + memName
+				+ ", memPhone=" + memPhone + ", memAddress=" + memAddress + ", memBirthD=" + memBirthD + ", memEmail="
+				+ memEmail + ", memJoinD=" + memJoinD + "]";
 	}
-
-	public Timestamp getDate() {
-		return date;
-	}
-
-	public void setDate(Timestamp date) {
-		this.date = date;
-	}
-
-
-	public String getIdx() {
-		return idx;
-	}
-
-	public void setIdx(String idx) {
-		this.idx = idx;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getPass() {
-		return pass;
-	}
-
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getBirth() {
-		return birth;
-	}
-
-	public void setBirth(String birth) {
-		this.birth = birth;
-	}
-
-	public String geteMail() {
-		return eMail;
-	}
-
-	public void seteMail(String eMail) {
-		this.eMail = eMail;
-	}
-
+	
+	
+	
+	
+	
+	
 
 	
 		
