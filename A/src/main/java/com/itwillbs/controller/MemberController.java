@@ -114,7 +114,7 @@ public class MemberController extends HttpServlet {
 		if (sPath.equals("/test.me")) {
 
 			CustomerDTO dto = new CustomerDTO();
-			dto.setName("테스트1");
+			dto.setName("하정우");
 			dto.setAge("21");
 			dto.seteMail("test@test.com");
 			dto.setJumin("9912124591");
