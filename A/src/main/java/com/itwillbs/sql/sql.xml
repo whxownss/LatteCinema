@@ -4,7 +4,7 @@
 
 <mapper namespace="Customer">
 	
-	<insert id="insert" parameterType="com.itwillbs.domain.CustomerDTO">
+	<insert id="insert" parameterType="CustomerDTO">
 		INSERT INTO TEST
 			( IDX
 			, NAME
