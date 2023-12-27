@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>member/msg.jsp</title>
+<script src="jQuery/jquery-3.6.0.js"></script>
 </head>
 <body>
 		<script type="text/javascript">

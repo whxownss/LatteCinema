@@ -81,11 +81,6 @@ public class MemberController extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 			
-			
-			
-			
-			
-			response.sendRedirect("main.me");
 		}//
 		
 		
