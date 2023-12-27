@@ -231,7 +231,7 @@ function checkEmail() {
 				<h2>회원가입</h2>
 			</div>
 			<div class="container">
-					<form  class=""  onsubmit="checkSubmit()" >
+					<form  class=""  onsubmit="checkSubmit()" action="joinPro.me">
 						<div class="form-floating mb-3">
 							<input type="text" class="form-control" id="id" placeholder="5자 이상" minlength="5" required 
 									onblur="checkIdLength()"> 
