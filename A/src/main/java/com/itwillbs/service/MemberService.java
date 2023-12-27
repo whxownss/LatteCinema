@@ -62,7 +62,7 @@ public class MemberService {
 			memberDTO.setMemId(id);
 			memberDTO.setMemPass(pass);
 			
-			// memberDTO = userCheck(id,pass) 메서드 호출
+			
 			userCheckResult = memberDAO.userCheck(memberDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
