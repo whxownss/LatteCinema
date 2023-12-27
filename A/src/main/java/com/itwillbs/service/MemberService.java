@@ -48,6 +48,29 @@ public class MemberService {
 		
 	}// insertMember()
 
+	public boolean userCheck(HttpServletRequest request) {
+		MemberDTO memberDTO = null;
+		boolean userCheckResult = false;
+		try {
+			// request에서 id,pass 값을 가져와서 변수 저장
+			String id = request.getParameter("id");
+			String pass = request.getParameter("pass");
+			// MemberDAO 객체생성
+			memberDAO = new MemberDAO();
+			
+			memberDTO = new MemberDTO();
+			memberDTO.setId(id);
+			memberDTO.setPass(pass);
+			
+			// memberDTO = userCheck(id,pass) 메서드 호출
+			userCheckResult = memberDAO.userCheck(memberDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return userCheckResult;
+		
+	}// usercheck()
+
 	
 	
 }

@@ -6,7 +6,7 @@
 <script>
 $(() => {
 	
-	$("#login1").submit(function() {
+	$("#login").submit(function() {
 		if($("#id").val() == ""){
 			if(!$("#idCheck").length){
 				$("#pwdCheck").remove();
@@ -50,7 +50,7 @@ $(() => {
 <!-- 						<div class="layer-con" style="height: 400px;"> -->
 <!-- 							<div class="post-entry-1 lg"> -->
 							<div>
-								<form action="loginPro.jsp" method="post" id="login1">
+								<form action="loginPro.me" method="post" id="login" name="fr">
 									<div class="form-floating mb-3" id="idTest">
 										<input class="form-control" type="text" name="UserId" placeholder="아이디" id="id" style="width: 100%;">
 										<label class="form-label" for="UserId">아이디</label>

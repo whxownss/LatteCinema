@@ -9,7 +9,6 @@
 	</settings>
 	
 	 <typeAliases>
-       
         <typeAlias type="com.itwillbs.domain.MemberDTO" alias="MemberDTO"/>
     </typeAliases>
 
@@ -26,7 +25,7 @@
 	</environments>
 	
 	<mappers>
-		<mapper resource="com/itwillbs/sql/sql.xml"/>
+		<mapper resource="com/itwillbs/sql/memberSql.xml"/>
 	</mappers>
 
     

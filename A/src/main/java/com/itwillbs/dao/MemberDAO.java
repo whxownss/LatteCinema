@@ -2,6 +2,8 @@ package com.itwillbs.dao;
 
 
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -20,8 +22,27 @@ public class MemberDAO {
 		return insertResult > 0 ? true : false;
 		
 	}
+
+	public boolean userCheck(MemberDTO memberDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+//		List userCheckResult = session.selectList("Member.userCheck", memberDTO);
+		memberDTO = session.selectOne("Member.userCheck", memberDTO);
+		int userCheckResult = 0;
+		if(memberDTO != null) {
+			userCheckResult = 1;
+		}
+		
+		session.close();
+		
+		return userCheckResult > 0 ? true : false;
+	}
+	
+	
+	
 	
 }
+
+
 
 //public boolean insert(CustomerDTO dto) {
 //	SqlSession session = sqlSessionFactory.openSession();
