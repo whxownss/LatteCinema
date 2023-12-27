@@ -8,11 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.itwillbs.dao.CustomerDAO;
-import com.itwillbs.domain.CustomerDTO;
+import com.itwillbs.service.MemberService;
+
 
 public class MemberController extends HttpServlet {
 	RequestDispatcher dispatcher = null;
+	MemberService memberService = null;
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -45,6 +46,16 @@ public class MemberController extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("_member/join.jsp");
 			dispatcher.forward(request, response);
 		}//
+		
+		// 회원가입 joinPro.me
+		if(sPath.equals("/joinPro.me")) {
+			memberService = new MemberService();
+			
+			memberService.insertMember(request);
+			// 주소변경 login.me 이동
+			response.sendRedirect("login.me");
+		}//
+		
 		
 	
 		// 아이디 찾기 페이지 이동
@@ -111,17 +122,7 @@ public class MemberController extends HttpServlet {
 
 		
 		
-		if (sPath.equals("/test.me")) {
-
-			CustomerDTO dto = new CustomerDTO();
-			dto.setName("정기원");
-			dto.setAge("31");
-			dto.seteMail("test@test.com");
-			dto.setJumin("9912124591");
-
-			CustomerDAO dao = new CustomerDAO();
-			boolean isSuccess = dao.insert(dto);
-		}
+		
 	}
 	
 }
