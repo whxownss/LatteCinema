@@ -290,7 +290,7 @@
 <!--                     		</select> -->
                      <!-- //임시  -->		
                     </p>
-					
+					<form action="#" id="bookStatus" name="bookStatus" method="post">
                     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr>
@@ -320,9 +320,9 @@
                       		<td>010 1111 1111</td>
                       		<td>won@itwillbs.co.kr</td>
                       		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
+								<select name="bookSelect">
+									<option value="Y">Y</option>
+									<option value="N">N</option>
 								</select>
 							</td>
                       	</tr>
@@ -868,7 +868,7 @@
                       	</tr>
                       </tbody>
                     </table>
-					
+				</form>
 					
                   </div>
                 </div>
@@ -1055,7 +1055,13 @@
 		});
 		
 		// 데이터 변경, 데이터셋 추가/삭제 등 다른 버튼 클릭 이벤트 핸들러들은 여기에 작성됩니다...
-
+		$(document).ready(function() {
+		  // 셀렉트박스의 onchange 이벤트 핸들러
+		  $('select[name="bookSelect"]').on('change', function() {
+			 console.log("이벤트 연결");
+		    $('#bookStatus').submit(); // 폼 제출
+		  });
+		});
         
     </script>
     
