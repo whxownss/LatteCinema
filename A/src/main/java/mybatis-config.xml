@@ -9,7 +9,7 @@
 	</settings>
 	
 	 <typeAliases>
-        <typeAlias type="com.itwillbs.domain.CustomerDTO" alias="CustomerDTO"/>
+       
         <typeAlias type="com.itwillbs.domain.MemberDTO" alias="MemberDTO"/>
     </typeAliases>
 
