@@ -36,6 +36,8 @@ public class MemberService {
 			memberDTO.seteMail(email);
 			memberDTO.setDate(date);
 			
+			System.out.println(memberDTO);
+			
 			memberDAO = new MemberDAO();
 			
 			memberDAO.insertMember(memberDTO);
