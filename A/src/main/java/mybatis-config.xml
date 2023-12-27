@@ -7,6 +7,10 @@
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
+	
+	 <typeAliases>
+        <typeAlias type="com.itwillbs.domain.CustomerDTO" alias="CustomerDTO"/>
+    </typeAliases>
 
 	<environments default="development">
 		<environment id="development">
@@ -24,4 +28,6 @@
 		<mapper resource="com/itwillbs/sql/sql.xml"/>
 	</mappers>
 
+    
+    
 </configuration>
