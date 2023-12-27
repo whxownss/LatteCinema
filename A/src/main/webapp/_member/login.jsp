@@ -69,10 +69,10 @@ $(() => {
 							</div>	
 									<div class="row ">
 										<div class="col-6" style=" text-align: left;">
-											<a href="signup3.me">회원가입</a>
+											<a href="join.me">회원가입</a>
 										</div>
 										<div class="col-6" style=" text-align: right;">
-											<a href="">아이디/비밀번호 찾기</a>
+											<a href="userfind.me">아이디/비밀번호 찾기</a>
 										</div>
 									</div>
 							<div class="position-absolute bottom-0 start-50 translate-middle-x w-50">	
