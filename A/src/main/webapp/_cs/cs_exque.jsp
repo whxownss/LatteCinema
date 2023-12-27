@@ -1,11 +1,17 @@
+<%@page import="com.itwillbs.domain.ExqBoardDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.itwillbs.domain.PageDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
-			
+<%
+ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribute("exqBoardList");
+PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");	
+%>			
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
 				<!-- 이곳에 코드작성 -->
@@ -60,127 +66,21 @@
 				      <th scope="col" colspan="2">질문</th>
 				    </tr>
 				  </thead>
-				  <tbody>
-				    <tr class="table-secondary">
-				      <td scope="col">1</td>
-				      <td scope="col">멤버십</td>
-				      <td scope="col" colspan="2"><a data-bs-toggle="collapse" href="#collapseEx1" role="button" aria-expanded="false" aria-controls="collapseEx1">적립한 포인트를 다 써도 VIP가 될 수 있나요?</a></td>
-				    </tr>
-				    <tr class="collapse" id="collapseEx1">
-				      <td colspan="4">
-				      	  <div class="card card-body">
-						    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-						  </div>
-				      </td>
-				    </tr>
-				    <tr class="table-secondary">
-				      <td scope="col">2</td>
-				      <td scope="col">멤버십</td>
-				      <td scope="col" colspan="2"><a data-bs-toggle="collapse" href="#collapseEx2" role="button" aria-expanded="false" aria-controls="collapseEx2">포인트 소멸은 어떻게 이루어 지나요?</a></td>
-				    </tr>
-				    <tr class="collapse" id="collapseEx2">
-				      <td colspan="4">
-				      	  <div class="card card-body">
-						    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-						  </div>
-				      </td>
-				    </tr>
-				    <tr class="table-secondary">
-				      <td scope="col">3</td>
-				      <td scope="col">멤버십</td>
-				      <td scope="col" colspan="2"><a data-bs-toggle="collapse" href="#collapseEx3" role="button" aria-expanded="false" aria-controls="collapseEx3">VIP 선정 기준이 어떻게 되나요?</a></td>
-				    </tr>
-				    <tr class="collapse" id="collapseEx3">
-				      <td colspan="4">
-				      	  <div class="card card-body">
-						    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-						  </div>
-				      </td>
-				    </tr>
-				    <tr class="table-secondary">
-				      <td scope="col">4</td>
-				      <td scope="col">관람권</td>
-				      <td scope="col" colspan="2"><a data-bs-toggle="collapse" href="#collapseEx4" role="button" aria-expanded="false" aria-controls="collapseEx4">특별한 전용 관람권이 따로 있나요?</a></td>
-				    </tr>
-				    <tr class="collapse" id="collapseEx4">
-				      <td colspan="4">
-				      	  <div class="card card-body">
-						    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-						  </div>
-				      </td>
-				    </tr>
-				    <tr class="table-secondary">
-				      <td scope="col">5</td>
-				      <td scope="col">영화관이용</td>
-				      <td scope="col" colspan="2"><a data-bs-toggle="collapse" href="#collapseEx5" role="button" aria-expanded="false" aria-controls="collapseEx5">주차가 가능한가요?</a></td>
-				    </tr>
-				    <tr class="collapse" id="collapseEx5">
-				      <td colspan="4">
-				      	  <div class="card card-body">
-						    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-						  </div>
-				      </td>
-				    </tr>
-				    <tr class="table-secondary">
-				      <td scope="col">6</td>
-				      <td scope="col">영화관이용</td>
-				      <td scope="col" colspan="2"><a data-bs-toggle="collapse" href="#collapseEx6" role="button" aria-expanded="false" aria-controls="collapseEx6">관람등급에 대해 알고 싶습니다.</a></td>
-				    </tr>
-				    <tr class="collapse" id="collapseEx6">
-				      <td colspan="4">
-				      	  <div class="card card-body">
-						    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-						  </div>
-				      </td>
-				    </tr>
-				    <tr class="table-secondary">
-				      <td scope="col">7</td>
-				      <td scope="col">영화관이용</td>
-				      <td scope="col" colspan="2"><a data-bs-toggle="collapse" href="#collapseEx7" role="button" aria-expanded="false" aria-controls="collapseEx7">상영관 내 다른 음식물의 반입이 되나요?</a></td>
-				    </tr>
-				    <tr class="collapse" id="collapseEx7">
-				      <td colspan="4">
-				      	  <div class="card card-body">
-						    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-						  </div>
-				      </td>
-				    </tr>
-				    <tr class="table-secondary">
-				      <td scope="col">8</td>
-				      <td scope="col">할인혜택</td>
-				      <td scope="col" colspan="2"><a data-bs-toggle="collapse" href="#collapseEx8" role="button" aria-expanded="false" aria-controls="collapseEx8">장애인, 경로 등 우대 할인에 대해 알고 싶습니다.</a></td>
-				    </tr>
-				    <tr class="collapse" id="collapseEx8">
-				      <td colspan="4">
-				      	  <div class="card card-body">
-						    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-						  </div>
-				      </td>
-				    </tr>
-				    <tr class="table-secondary">
-				      <td scope="col">9</td>
-				      <td scope="col">예매</td>
-				      <td scope="col" colspan="2"><a data-bs-toggle="collapse" href="#collapseEx9" role="button" aria-expanded="false" aria-controls="collapseEx9">예매는 몇 장까지 가능한가요?</a></td>
-				    </tr>
-				    <tr class="collapse" id="collapseEx9">
-				      <td colspan="4">
-				      	  <div class="card card-body">
-						    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-						  </div>
-				      </td>
-				    </tr>
-				    <tr class="table-secondary">
-				      <td scope="col">10</td>
-				      <td scope="col">예매</td>
-				      <td scope="col" colspan="2"><a data-bs-toggle="collapse" href="#collapseEx10" role="button" aria-expanded="false" aria-controls="collapseEx10">예매 취소를 하였는데 환불이 안된것 같아요?</a></td>
-				    </tr>
-				    <tr class="collapse" id="collapseEx10">
-				      <td colspan="4">
-				      	  <div class="card card-body">
-						    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-						  </div>
-				      </td>
-				    </tr>
+				  	<tbody>
+					  	<c:forEach var="exqBoardDTO" items="${exqBoardList }">
+					  		<tr class="table-secondary">
+						      <td scope="col">${exqBoardDTO.rn }</td>
+						      <td scope="col">${exqBoardDTO.exqSelect }</td>
+						      <td scope="col" colspan="2"><a data-bs-toggle="collapse" href="#collapseEx${exqBoardDTO.rn }" role="button" aria-expanded="false" aria-controls="collapseEx1">${exqBoardDTO.exqSubject }</a></td>
+						    </tr>
+						    <tr class="collapse" id="collapseEx${exqBoardDTO.rn }">
+						      <td colspan="4">
+						      	  <div class="card card-body">
+								    ${exqBoardDTO.exqContent }
+								  </div>
+						      </td>
+						    </tr>
+					  	</c:forEach>
 				  </tbody>
 				</table>
 			</div>
@@ -189,22 +89,21 @@
 			<div class="container" data-aos="fade-up">
 				<div class="pagination-container d-flex justify-content-center">
 				  <ul class="pagination">
-				    <li class="page-item disabled">
-				      <a class="page-link text-secondary" href="#" tabindex="-1" aria-disabled="true">이전</a>
-				    </li>
-				    <li class="page-item" aria-current="page">
-				      <a class="page-link text-secondary" href="#">1</a>
-				    </li>
-				    <li class="page-item">
-				      <a class="page-link text-secondary" href="#">2</a>
-				    </li>
-				    <li class="page-item">
-				      <a class="page-link text-secondary" href="#">3</a>
-				    </li>
-				    <!-- 나머지 페이지 번호 추가 -->
-				    <li class="page-item">
-				      <a class="page-link text-secondary" href="#">다음</a>
-				    </li>
+					<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+					    <li class="page-item disabled">
+					      <a class="page-link text-secondary" href="cs_exque.cs?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
+					    </li>
+				    </c:if>	
+				    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+					    <li class="page-item" aria-current="page">
+					      <a class="page-link text-secondary" href="cs_exque.cs?pageNum=${i }">${i }</a>
+					    </li>
+				    </c:forEach>
+		    		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+					    <li class="page-item">
+					      <a class="page-link text-secondary" href="cs_exque.cs?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
+					    </li>
+				    </c:if>	
 				  </ul>
 				</div>
 			</div>
