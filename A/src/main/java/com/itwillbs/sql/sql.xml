@@ -5,7 +5,7 @@
 <mapper namespace="Customer">
 	
 	<insert id="insert" parameterType="com.itwillbs.domain.CustomerDTO">
-		INSERT INTO CUSTOMER
+		INSERT INTO TEST
 			( IDX
 			, NAME
 			, AGE
@@ -14,7 +14,7 @@
 		VALUES(
 			  (SELECT *
 				FROM (SELECT IFNULL(MAX(CAST(IDX as unsigned)), 0) + 1
-						FROM CUSTOMER) A)
+						FROM TEST) A)
 			, #{name}
 			, #{age}
 			, #{eMail}
