@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.itwillbs.dao.CustomerDAO;
+import com.itwillbs.domain.CustomerDTO;
+
 public class MemberController extends HttpServlet {
 	RequestDispatcher dispatcher = null;
 	
@@ -80,6 +83,19 @@ public class MemberController extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("_mypage/changepw.jsp");
 			dispatcher.forward(request, response);
 		}//
+		
+		
+		if (sPath.equals("/test.me")) {
+
+			CustomerDTO dto = new CustomerDTO();
+			dto.setName("테스트1");
+			dto.setAge("21");
+			dto.seteMail("test@test.com");
+			dto.setJumin("9912124591");
+
+			CustomerDAO dao = new CustomerDAO();
+			boolean isSuccess = dao.insert(dto);
+		}
 		
 	}
 	
