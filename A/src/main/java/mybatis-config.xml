@@ -13,6 +13,7 @@
         <typeAlias type="com.itwillbs.domain.ExqBoardDTO" alias="ExqBoardDTO"/>
         <typeAlias type="com.itwillbs.domain.PageDTO" alias="PageDTO"/>
         <typeAlias type="com.itwillbs.domain.CenterBoardDTO" alias="CenterBoardDTO"/>
+        <typeAlias type="com.itwillbs.domain.MemberDTO" alias="MemberDTO"/>
     </typeAliases>
 
 	<environments default="development">
@@ -30,6 +31,7 @@
 	<mappers>
 		<mapper resource="com/itwillbs/sql/sql.xml"/>
 		<mapper resource="com/itwillbs/sql/csSql.xml"/>
+		<mapper resource="com/itwillbs/sql/memberSql.xml"/>
 	</mappers>
 
     
