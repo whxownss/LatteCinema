@@ -60,18 +60,19 @@ public class MemberController extends HttpServlet {
 		//  로그인 loginPro.me 이동
 		if(sPath.equals("/loginPro.me")) {
 			memberService = new MemberService();
-			MemberDTO memberDTO = new MemberDTO();
-			boolean userCheckResult = memberService.userCheck(request);
+			MemberDTO memberDTO = memberService.userCheck(request);
 			
 			//리턴받은 값이 null 아니면 => 아이디 비밀번호 일치
 			//리턴받은 값이 null 이면 => 아이디 비밀번호 틀림
-			if(userCheckResult) {
+			if(memberDTO != null) {
 				System.out.println("아이디 비밀번호 일치");
 				// 로그인 표시 => 세션객체생성 => 세션 저장 (자바에서는 세션객체 먼저 생성 해야함)
 				HttpSession session = request.getSession();
 //				session.setAttribute("id", request.getParameter("id"));
-				session.setAttribute("id", memberDTO.getMemId());
-				// main.me 이동
+				session.setAttribute("sIdx", memberDTO.getMemIdx());
+				session.setAttribute("sId", memberDTO.getMemId());
+				session.setAttribute("sName", memberDTO.getMemName());
+				
 				response.sendRedirect("main.me");
 				
 			}else {
@@ -83,11 +84,6 @@ public class MemberController extends HttpServlet {
 			
 		}//
 		
-		
-		
-		
-		
-	
 		// 아이디 찾기 페이지 이동
 		if(sPath.equals("/userfind.me")) {
 			dispatcher = request.getRequestDispatcher("_member/userfind.jsp");

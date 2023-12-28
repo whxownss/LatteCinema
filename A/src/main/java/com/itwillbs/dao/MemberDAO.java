@@ -23,19 +23,11 @@ public class MemberDAO {
 		
 	}
 
-	public boolean userCheck(MemberDTO memberDTO) {
+	public MemberDTO userCheck(MemberDTO memberDTO) {
 		SqlSession session = sqlSessionFactory.openSession();
-//		List userCheckResult = session.selectList("Member.userCheck", memberDTO);
 		memberDTO = session.selectOne("Member.userCheck", memberDTO);
-		System.out.println(memberDTO);
-		int userCheckResult = 0;
-		if(memberDTO != null) {
-			userCheckResult = 1;
-		}
 		
-		session.close();
-		
-		return userCheckResult > 0 ? true : false;
+		return memberDTO;
 	}
 	
 	
