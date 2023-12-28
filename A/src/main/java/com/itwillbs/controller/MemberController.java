@@ -77,7 +77,7 @@ public class MemberController extends HttpServlet {
 			}else {
 				System.out.println("아이디 비밀번호 틀림");
 				// 1. member/msg.jsp이동 (jsp이동)
-			    dispatcher = request.getRequestDispatcher("member/msg.jsp");
+			    dispatcher = request.getRequestDispatcher("_member/msg.jsp");
 				dispatcher.forward(request, response);
 			}
 			
