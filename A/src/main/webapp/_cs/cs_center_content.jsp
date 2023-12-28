@@ -40,6 +40,30 @@ $(document).ready(function() {
             });
         }
     });
+    $('#deleteButton').click(function(){
+        // 사용자에게 확인을 요청합니다.
+        if(confirm("정말 삭제하시겠습니까?")) {
+            // 사용자가 '확인'을 클릭한 경우, AJAX 요청을 시작합니다.
+            $.ajax({
+                url: 'deleteCenterContent.cs',
+                type: 'POST',
+                data: {
+                    'createDate': '${centerBoardDTO.createDate}',
+                    'createUser': '${centerBoardDTO.createUser}'
+                },
+                success: function(response) {
+                    alert("삭제되었습니다!");
+                },
+                error: function() {
+                    alert("삭제 중 오류가 발생했습니다.");
+                }
+            });
+        } else {
+            // 사용자가 '취소'를 클릭한 경우, 아무것도 하지 않습니다.
+            alert("삭제가 취소되었습니다.");
+        }
+    });
+
 });
 </script>	
 <%
@@ -108,7 +132,7 @@ ${centerBoardDTO.centerContent }
 				    	<td colspan="4">
 				    		<div class="d-flex justify-content-around">
 					            <button id="editButton" class="btn btn-dark" type="button">수정</button>
-					            <button class="btn btn-outline-secondary" type="button">삭제</button>
+					            <button id="deleteButton" class="btn btn-outline-secondary" type="button">삭제</button>
 					        </div>
 				    	</td>
 				    </tr>
