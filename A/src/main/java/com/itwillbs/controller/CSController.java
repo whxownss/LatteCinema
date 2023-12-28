@@ -1,6 +1,7 @@
 package com.itwillbs.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -103,8 +104,25 @@ public class CSController extends HttpServlet  {
 		}
 		// 공지사항 글내용 페이지 이동
 		if(sPath.equals("/cs_center_content.cs")) {
+			System.out.println("주소비교 /cs_center_content.cs 일치");
+			String createUser = request.getParameter("createUser");
+			String createDate = request.getParameter("createDate");
+			
+			csBoardService = new CSBoardService();
+			CenterBoardDTO centerBoardDTO = csBoardService.getCenterBoard(createUser,createDate);
+			request.setAttribute("centerBoardDTO", centerBoardDTO);
+			
 			dispatcher = request.getRequestDispatcher("_cs/cs_center_content.jsp");
 			dispatcher.forward(request, response);
+		}
+		// 공지사항 글내용 페이지 업데이트 
+		if(sPath.equals("/saveCenterContent.cs")) {
+			System.out.println("주소비교 /saveCenterContent.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			csBoardService.updateCenterContent(request);
+//			response.sendRedirect(""); //ajax를 써서 굳이 주소 적을 필요 없다.
 		}
 		// 공지사항 글쓰기 페이지 이동
 		if(sPath.equals("/cs_center_write.cs")) {

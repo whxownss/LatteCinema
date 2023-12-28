@@ -61,7 +61,7 @@
 				  	<tr>
 				      <th scope="row">${centerBoardDTO.rn }</th>
 				      <td>${centerBoardDTO.ciName }</td>
-				      <td><a href="cs_center_content.cs?num=${centerBoardDTO.rn }">${centerBoardDTO.centerSubject }</a></td>
+				      <td><a href="cs_center_content.cs?createUser=${centerBoardDTO.createUser }&createDate=${centerBoardDTO.createDate}">${centerBoardDTO.centerSubject }</a></td>
 				      <td><fmt:formatDate value="${centerBoardDTO.createDate }" pattern="yyyy-MM-dd"/></td>
 				    </tr>
 				  </c:forEach>

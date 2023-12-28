@@ -1,6 +1,11 @@
 package com.itwillbs.service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.itwillbs.dao.CSBoardDAO;
 import com.itwillbs.domain.CenterBoardDTO;
@@ -72,5 +77,42 @@ public class CSBoardService {
 		}
 		return count;
 	}//getCenterBoardCount()
+
+	public CenterBoardDTO getCenterBoard(String createUser, String createDate) {
+		System.out.println("CSBoardService getCenterBoard()");
+		CenterBoardDTO centerBoardDTO = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			centerBoardDTO = csBoardDAO.getCenterBoard(createUser,createDate);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return centerBoardDTO;
+	}//getCenterBoard()
+
+	public void updateCenterContent(HttpServletRequest request) {
+		System.out.println("CSBoardService updateCenterContent()");
+		try {
+			CenterBoardDTO centerBoardDTO = new CenterBoardDTO();
+			String centerSubject = request.getParameter("centerSubject");
+			String centerContent = request.getParameter("centerContent");
+			String createUser = request.getParameter("createUser");
+			String createDate = request.getParameter("createDate");
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
+			Timestamp createTime = Timestamp.valueOf(dateTime);
+			
+			centerBoardDTO.setCenterSubject(centerSubject);
+			centerBoardDTO.setCenterContent(centerContent);
+			centerBoardDTO.setCreateUser(createUser);
+			centerBoardDTO.setCreateDate(createTime);
+			
+			csBoardDAO = new CSBoardDAO();
+			csBoardDAO.updateCenterContent(centerBoardDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}//updateCenterContent()
 	
 }//클래스

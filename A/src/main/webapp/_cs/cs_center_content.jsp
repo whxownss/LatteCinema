@@ -1,10 +1,51 @@
+<%@page import="com.itwillbs.domain.CenterBoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file ="../_common/commonHeaderStart.jsp" %>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
+<script type="text/javascript">
+$(document).ready(function() {
+    // 편집 버튼을 클릭했을 때 실행되는 함수
+    $("#editButton").click(function() {
+    	 var contentArea = $("#contentArea");
+         var titleArea = $("#titleArea");
+         var isEditable = contentArea.attr("contenteditable") == "true";
+         
+         // 제목과 내용을 편집 가능하게 만들거나, 편집을 중지
+         contentArea.attr("contenteditable", !isEditable);
+         titleArea.attr("contenteditable", !isEditable);
+         $(this).text(isEditable ? "수정" : "저장");
+
+         if (isEditable) {
+            // AJAX 요청을 통해 서버에 데이터를 저장
+            $.ajax({
+                url: 'saveCenterContent.cs',
+                type: 'POST',
+                data: {
+                    'centerSubject': titleArea.text(), // 수정된 제목
+                    'centerContent': contentArea.html(), // 수정된 내용
+                    'createDate': ${centerBoardDTO.createDate},
+                    'createUser': ${centerBoardDTO.createUser}
+                },
+                success: function(response) {
+                    alert("저장되었습니다!");
+                },
+                error: function() {
+                    alert("저장 중 오류가 발생했습니다.");
+                }
+            });
+        }
+    });
+});
+</script>	
+<%
+CenterBoardDTO centerBoardDTO = (CenterBoardDTO)request.getAttribute("centerBoardDTO");
+%>
+
 			  
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
@@ -43,7 +84,7 @@
 				<table class="table">
 				  <thead>
 				    <tr class="table-secondary">
-				      <th scope="col">#</th>
+<!-- 				      <th scope="col">#</th> -->
 				      <th scope="col">영화관</th>
 				      <th scope="col">제목</th>
 				      <th scope="col">등록일</th>
@@ -51,42 +92,22 @@
 				  </thead>
 				  <tbody>
 				    <tr>
-				      <th scope="row">1</th>
-				      <td>전체</td>
-				      <td>겨울왕국1 교환 안내</td>
-				      <td>23.12.01</td>
+<!-- 				      <th scope="row">1</th> -->
+				      <td>${centerBoardDTO.ciName }</td>
+				      <td><div id="titleArea">${centerBoardDTO.centerSubject }</div></td>
+				      <td><fmt:formatDate value="${centerBoardDTO.createDate }" pattern="yyyy-MM-dd"/></td>
 				    </tr>
 				    <tr>
 				    	<td colspan="4">
-				    		<pre style="text-align: center;">
-안녕하세요, 씨네Q입니다.
-
-먼저 씨네Q를 이용해주시는 고객님들께 항상 깊은 감사 드립니다.
-
- 
-
-<겨울왕국 1> 포스터 재입고 완료되어 교환 진행중에 있습니다. 
-
-* 포스터 지참하여 방문시 교환 가능
-
-* 교환 가능 기한 : ~12/31(일)
-
- 
-
-가능 기한 초과시 교환이 어려울 수 있는 점 양해 부탁드립니다.
-
- 
-
-감사합니다.
-
-씨네Q 드림
+				    		<pre id="contentArea" style="text-align: center;">
+${centerBoardDTO.centerContent }
 				    		</pre>
 				   		</td>
 				    </tr>
 				    <tr>
 				    	<td colspan="4">
 				    		<div class="d-flex justify-content-around">
-					            <button class="btn btn-dark" type="button" onclick="location.href='cs_center_write.cs'">수정</button>
+					            <button id="editButton" class="btn btn-dark" type="button">수정</button>
 					            <button class="btn btn-outline-secondary" type="button">삭제</button>
 					        </div>
 				    	</td>

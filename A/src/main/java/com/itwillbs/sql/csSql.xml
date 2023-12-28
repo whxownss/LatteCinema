@@ -29,4 +29,15 @@
 		SELECT COUNT(*) 
 		  FROM CENTERBOARD
 	</select>
+	<select id="getCenterBoard" resultType="CenterBoardDTO" parameterType="map">
+		 SELECT *,
+		       (SELECT C.CI_NAME
+		          FROM CINEMA AS C
+		         WHERE C.LO_IDX = CENTER.LO_IDX AND C.CI_IDX = CENTER.CI_IDX) AS 'CI_NAME'
+		  FROM CENTERBOARD AS CENTER
+		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</select>
+	<update id="saveCenterContent" parameterType="centerBoardDTO">
+		
+	</update>
 </mapper>
