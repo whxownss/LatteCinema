@@ -12,6 +12,7 @@
         <typeAlias type="com.itwillbs.domain.CustomerDTO" alias="CustomerDTO"/>
         <typeAlias type="com.itwillbs.domain.ExqBoardDTO" alias="ExqBoardDTO"/>
         <typeAlias type="com.itwillbs.domain.PageDTO" alias="PageDTO"/>
+        <typeAlias type="com.itwillbs.domain.CenterBoardDTO" alias="CenterBoardDTO"/>
     </typeAliases>
 
 	<environments default="development">

@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.ExqBoardDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.service.CSBoardService;
 
 public class CSController extends HttpServlet  {
 	RequestDispatcher dispatcher = null;
+	CSBoardService csBoardService = null;
 	
 	@Override   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,6 +44,60 @@ public class CSController extends HttpServlet  {
 				
 		// 공지사항 페이지 이동(고객센터 쪽에서 제일 먼저 보이는 페이지)
 		if(sPath.equals("/cs_center.cs")) {
+			System.out.println("주소비교 /cs_center.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			// cs_center.cs
+			// cs_center.cs?pageNum=2
+			// 한 화면에 보여줄 글개수 설정
+			int pageSize = 10;
+			// 현 페이지 번호
+			String pageNum = request.getParameter("pageNum");
+			//페이지 번호가 없으면 1로 페이지 설정
+			if(pageNum == null) {
+				pageNum = "1";
+			}
+			// pageNum => 정수형 변경
+			int currentPage = Integer.parseInt(pageNum);
+			
+			// PageDTO 객체생성 
+			PageDTO pageDTO = new PageDTO();
+			// set메서드 호출해서 값을 저장
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			
+			csBoardService = new CSBoardService();
+
+			ArrayList<CenterBoardDTO> centerBoardList = csBoardService.getCenterBoardList(pageDTO);
+			// 페이징 작업
+			// int 리턴할 형 getBoardCount() 메서드 정의
+			// int count = getBoardCount() 메서드 호출
+			int count = csBoardService.getCenterBoardCount();
+			// 한 화면에 보여줄 페이지 개수 설정
+			int pageBlock = 10;
+			// 시작하는 페이지 번호 구하기
+			int startPage = (currentPage-1)/pageBlock*pageBlock+1;
+			// 끝나는 페이지 번호 구하기
+			int endPage = startPage + pageBlock -1;
+			// 전체 페이지 수 구하기
+			int pageCount = count / pageSize + (count % pageSize == 0?0:1);
+			if(endPage > pageCount) {
+				endPage = pageCount;
+			}
+			
+			//pageDTO에 페이징 관련값 저장
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
+			System.out.println("!@#!@#");
+			System.out.println(centerBoardList);
+			
+			request.setAttribute("pageDTO", pageDTO);			
+			request.setAttribute("centerBoardList",centerBoardList);
+		
 			dispatcher = request.getRequestDispatcher("_cs/cs_center.jsp");
 			dispatcher.forward(request, response);
 		}

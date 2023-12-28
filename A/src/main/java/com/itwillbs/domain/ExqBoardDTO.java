@@ -7,11 +7,12 @@ public class ExqBoardDTO {
 	private String exqSubject;
 	private String exqContent;
 	private String exqSelect;
-	private String create_user;
-	private Timestamp create_date;
-	private String update_user;
-	private Timestamp update_date;
+	private String createUser;
+	private Timestamp createDate;
+	private String updateUser;
+	private Timestamp updateDate;
 	private int rn;
+	
 	public int getExqIdx() {
 		return exqIdx;
 	}
@@ -36,29 +37,29 @@ public class ExqBoardDTO {
 	public void setExqSelect(String exqSelect) {
 		this.exqSelect = exqSelect;
 	}
-	public String getCreate_user() {
-		return create_user;
+	public String getCreateUser() {
+		return createUser;
 	}
-	public void setCreate_user(String create_user) {
-		this.create_user = create_user;
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
 	}
-	public Timestamp getCreate_date() {
-		return create_date;
+	public Timestamp getCreateDate() {
+		return createDate;
 	}
-	public void setCreate_date(Timestamp create_date) {
-		this.create_date = create_date;
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
 	}
-	public String getUpdate_user() {
-		return update_user;
+	public String getUpdateUser() {
+		return updateUser;
 	}
-	public void setUpdate_user(String update_user) {
-		this.update_user = update_user;
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
 	}
-	public Timestamp getUpdate_date() {
-		return update_date;
+	public Timestamp getUpdateDate() {
+		return updateDate;
 	}
-	public void setUpdate_date(Timestamp update_date) {
-		this.update_date = update_date;
+	public void setUpdateDate(Timestamp updateDate) {
+		this.updateDate = updateDate;
 	}
 	public int getRn() {
 		return rn;
@@ -69,8 +70,8 @@ public class ExqBoardDTO {
 	@Override
 	public String toString() {
 		return "ExqBoardDTO [exqIdx=" + exqIdx + ", exqSubject=" + exqSubject + ", exqContent=" + exqContent
-				+ ", exqSelect=" + exqSelect + ", create_user=" + create_user + ", create_date=" + create_date
-				+ ", update_user=" + update_user + ", update_date=" + update_date + ", rn=" + rn + "]";
+				+ ", exqSelect=" + exqSelect + ", createUser=" + createUser + ", createDate=" + createDate
+				+ ", updateUser=" + updateUser + ", updateDate=" + updateDate + ", rn=" + rn + "]";
 	}
 	
 	
