@@ -103,9 +103,10 @@ public class CSBoardDAO {
 
 	public int updateCenterContent(CenterBoardDTO centerBoardDTO) {
 		System.out.println("CSBoardDAO updateCenterContent()");
+		int updateSuccess = 0;
 		try {
 			session = sqlSessionFactory.openSession();
-			session.update("CsAdmin.saveCenterContent",centerBoardDTO);
+			updateSuccess = session.update("CsAdmin.saveCenterContent",centerBoardDTO);
 			
 			session.commit();
 		} catch (Exception e) {
@@ -115,7 +116,7 @@ public class CSBoardDAO {
 	            session.close();
 	        }
 		}
-		return session.update(null);
+		return updateSuccess;
 	}//updateCenterContent()
 	
 	

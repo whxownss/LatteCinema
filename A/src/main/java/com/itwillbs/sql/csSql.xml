@@ -38,6 +38,8 @@
 		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
 	</select>
 	<update id="saveCenterContent" parameterType="centerBoardDTO">
-		
+		UPDATE CENTERBOARD 
+		   SET CENTERSUBJECT = #{centerSubject}, CENTERCONTENT = #{centerContent}
+		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
 	</update>
 </mapper>

@@ -121,7 +121,12 @@ public class CSController extends HttpServlet  {
 			request.setCharacterEncoding("utf-8");
 			
 			csBoardService = new CSBoardService();
-			csBoardService.updateCenterContent(request);
+			String msg = "update fail";
+			if(csBoardService.updateCenterContent(request)) {
+				System.out.println("update success");
+			} else {
+				System.out.println("update fail");
+			}
 //			response.sendRedirect(""); //ajax를 써서 굳이 주소 적을 필요 없다.
 		}
 		// 공지사항 글쓰기 페이지 이동

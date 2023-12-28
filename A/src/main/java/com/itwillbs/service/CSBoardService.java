@@ -3,6 +3,7 @@ package com.itwillbs.service;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -90,29 +91,44 @@ public class CSBoardService {
 		return centerBoardDTO;
 	}//getCenterBoard()
 
-	public void updateCenterContent(HttpServletRequest request) {
-		System.out.println("CSBoardService updateCenterContent()");
-		try {
-			CenterBoardDTO centerBoardDTO = new CenterBoardDTO();
-			String centerSubject = request.getParameter("centerSubject");
-			String centerContent = request.getParameter("centerContent");
-			String createUser = request.getParameter("createUser");
-			String createDate = request.getParameter("createDate");
-			
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-			LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
-			Timestamp createTime = Timestamp.valueOf(dateTime);
-			
-			centerBoardDTO.setCenterSubject(centerSubject);
-			centerBoardDTO.setCenterContent(centerContent);
-			centerBoardDTO.setCreateUser(createUser);
-			centerBoardDTO.setCreateDate(createTime);
-			
-			csBoardDAO = new CSBoardDAO();
-			csBoardDAO.updateCenterContent(centerBoardDTO);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public boolean updateCenterContent(HttpServletRequest request) {
+	    System.out.println("CSBoardService updateCenterContent()");
+	    int updateSuccess = 0;
+	    try {
+	        CenterBoardDTO centerBoardDTO = new CenterBoardDTO();
+	        String centerSubject = request.getParameter("centerSubject");
+	        String centerContent = request.getParameter("centerContent");
+	        String createUser = request.getParameter("createUser");
+	        String createDate = preprocessDate(request.getParameter("createDate"));
+	        
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+	        LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
+	        Timestamp createTime = Timestamp.valueOf(dateTime);
+	        
+	        centerBoardDTO.setCenterSubject(centerSubject);
+	        centerBoardDTO.setCenterContent(centerContent);
+	        centerBoardDTO.setCreateUser(createUser);
+	        centerBoardDTO.setCreateDate(createTime);
+	        
+	        csBoardDAO = new CSBoardDAO();
+	        updateSuccess = csBoardDAO.updateCenterContent(centerBoardDTO);
+	    } catch (DateTimeParseException dtpe) {
+	        System.err.println("Date parsing failed: " + dtpe.getMessage());
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return updateSuccess > 0;
+	}
+
+	private String preprocessDate(String createDate) {
+	    // 밀리초가 한 자리만 있는 경우 세 자리로 만들어줍니다.
+	    if (createDate.matches(".+\\.\\d$")) {
+	        return createDate + "00";
+	    } else if (createDate.matches(".+\\.\\d\\d$")) {
+	        return createDate + "0";
+	    }
+	    return createDate;
 	}//updateCenterContent()
+
 	
 }//클래스

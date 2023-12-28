@@ -28,8 +28,8 @@ $(document).ready(function() {
                 data: {
                     'centerSubject': titleArea.text(), // 수정된 제목
                     'centerContent': contentArea.html(), // 수정된 내용
-                    'createDate': ${centerBoardDTO.createDate},
-                    'createUser': ${centerBoardDTO.createUser}
+                    'createDate': '${centerBoardDTO.createDate}',
+                    'createUser': '${centerBoardDTO.createUser}'
                 },
                 success: function(response) {
                     alert("저장되었습니다!");
