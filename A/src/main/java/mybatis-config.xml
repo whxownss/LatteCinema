@@ -12,6 +12,7 @@
         <typeAlias type="com.itwillbs.domain.CustomerDTO" alias="CustomerDTO"/>
         <typeAlias type="com.itwillbs.domain.ExqBoardDTO" alias="ExqBoardDTO"/>
         <typeAlias type="com.itwillbs.domain.PageDTO" alias="PageDTO"/>
+        <typeAlias type="com.itwillbs.domain.MemberDTO" alias="MemberDTO"/>
     </typeAliases>
 
 	<environments default="development">
@@ -27,8 +28,12 @@
 	</environments>
 	
 	<mappers>
+<<<<<<< HEAD
 		<mapper resource="com/itwillbs/sql/sql.xml"/>
 		<mapper resource="com/itwillbs/sql/csSql.xml"/>
+=======
+		<mapper resource="com/itwillbs/sql/memberSql.xml"/>
+>>>>>>> branch 'JKW' of https://github.com/whxownss/movieTest.git
 	</mappers>
 
     
