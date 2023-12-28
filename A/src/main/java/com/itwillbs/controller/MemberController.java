@@ -42,6 +42,17 @@ public class MemberController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}//
 		
+		// 로그아웃 session값 제거
+		if(sPath.equals("/logout.me")) {
+			System.out.println("주소비교 /logout.me 일치");
+			// 세션객체생성
+			HttpSession session = request.getSession();
+			// 세션초기화
+			session.invalidate();
+			// main.me 이동
+			response.sendRedirect("main.me");
+		}//
+		
 		// 회원가입 페이지 이동
 		if(sPath.equals("/join.me")) {
 			dispatcher = request.getRequestDispatcher("_member/join.jsp");
