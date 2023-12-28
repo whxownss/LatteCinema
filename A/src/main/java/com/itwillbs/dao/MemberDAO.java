@@ -30,6 +30,14 @@ public class MemberDAO {
 		return memberDTO;
 	}
 	
+	public boolean deleteMember(MemberDTO memberDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int deleteResult = session.delete("Member.deleteMember", memberDTO);
+		session.commit();
+		session.close();
+		
+		return deleteResult > 0 ? true : false;
+	}
 	
 	
 	

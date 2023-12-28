@@ -67,6 +67,24 @@ public class MemberService {
 		return memberDTO;
 	}// userCheck()
 
-	
+	public void deleteMember(HttpServletRequest request) {
+		System.out.println("MemberService deleteMember()");
+		try {
+			request.setCharacterEncoding("UTF-8");
+			
+			// requset 값을 가져와서 변수에 저장
+			String id = request.getParameter("id");
+			
+			MemberDTO memberDTO = new MemberDTO();
+			memberDTO.setMemId(id);
+			
+			// MemberDAO 객체 생성
+			memberDAO = new MemberDAO();
+			// deleteMember() 호출
+			memberDAO.deleteMember(memberDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}// deleteMember()	
 	
 }

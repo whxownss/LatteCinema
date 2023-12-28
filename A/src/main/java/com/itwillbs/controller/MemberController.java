@@ -139,6 +139,31 @@ public class MemberController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}//
 		
+		// 마이페이지 deletePro(회원탈퇴) 
+		if(sPath.equals("/deletePro.me")) {
+			
+			memberService = new MemberService();
+			MemberDTO memberDTO = memberService.userCheck(request);
+			
+			if(memberDTO != null) {
+				//리턴받은 값이 null 아니면 => 아이디 비밀번호 일치
+				System.out.println("아이디 비밀번호 일치");
+			//  리턴값 없음 deleteMember(request) 메서드 호출
+				memberService.deleteMember(request);
+				//세션 초기화(전체기억장소 삭제)
+				HttpSession session = request.getSession();
+				session.invalidate();
+//				주소변경하면서 main.me 이동
+				response.sendRedirect("main.me");
+			}else {
+				System.out.println("아이디 비밀번호 틀림");
+				dispatcher = request.getRequestDispatcher("_member/msg.jsp");
+				dispatcher.forward(request, response);
+			}
+			
+		}//
+		
+		
 		// 마이페이지 비밀번호 변경(비밀번호변경) 이동 (userInfo > changepw.jsp)
 		if(sPath.equals("/changepw.me")) {
 			dispatcher = request.getRequestDispatcher("_mypage/changepw.jsp");
