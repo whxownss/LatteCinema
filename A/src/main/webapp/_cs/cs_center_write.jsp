@@ -43,9 +43,9 @@
 			<div class="container" data-aos="fade-up">
 				<select id="locationSelect" class="form-select" aria-label="Default select example">
 					<option selected>지역</option>
-					<option value="서울">서울</option>
-					<option value="경기/인천">경기/인천</option>
-					<option value="경남/부산/울산">경남/부산/울산</option>
+					<option value="1">서울</option>
+					<option value="2">경기/인천</option>
+					<option value="3">경남/부산/울산</option>
 				</select>
 				<select id="movieSelect" class="form-select" aria-label="Default select example">
 				  <option selected>영화관</option>
@@ -99,10 +99,11 @@ $(document).ready(function() {
 });
 
 const theatersByRegion = {
-		  "서울": ["강남", "여의도", "종로"], // db값을 어떻게 받을까?
-		  "경기/인천": ["수원", "인천", "부천"],
-		  "경남/부산/울산": ["서면", "해운대", "울산"]
+	    "1": [{value: "1", text: "강남"}, {value: "2", text: "여의도"}, {value: "3", text: "종로"}], // 서울
+	    "2": [{value: "1", text: "수원"}, {value: "2", text: "인천"}, {value: "3", text: "부천"}], // 경기/인천
+	    "3": [{value: "1", text: "서면"}, {value: "2", text: "해운대"}, {value: "3", text: "울산"}]  // 경남/부산/울산
 };
+
 $('#locationSelect').change(function() {
 	  var selectedRegion = $(this).val();
 	  if(selectedRegion == '지역'){
@@ -110,30 +111,34 @@ $('#locationSelect').change(function() {
 	  }
 	  updateMovieSelect(selectedRegion);
 });
-function updateMovieSelect(region) {
-	  var movieSelect = $('#movieSelect');
-	  movieSelect.empty(); // 기존 옵션 제거
 
-	  if (theatersByRegion[region]) {
-	    theatersByRegion[region].forEach(function(theater) {
-	      movieSelect.append($('<option>', {
-	        value: theater,
-	        text: theater
-	      }));
-	    });
-	  } else {
-	    movieSelect.append($('<option>', {
-	      text: '전체'
-	    }));
-	  }
+function updateMovieSelect(regionNumber) {
+    var movieSelect = $('#movieSelect');
+    movieSelect.empty(); // 기존 옵션 제거
+
+    if (theatersByRegion[regionNumber]) {
+        theatersByRegion[regionNumber].forEach(function(theater) {
+            movieSelect.append($('<option>', {
+                value: theater.value, // 숫자를 value로 설정
+                text: theater.text    // 영화관 이름을 텍스트로 설정
+            }));
+        });
+//         debugger; //theatersByRegion[1][1] -> 서울의 강남이 나오는 듯 다시 확인 필요
+    } else {
+        movieSelect.append($('<option>', {
+            value: '0',
+            text: '전체'
+        }));
+    }
 }
+
 
 //셀렉트 박스 값이 변경될 때 이벤트 리스너를 추가합니다.
 // 셀렉트 박스 값이 변경될 때 이벤트 리스너를 추가합니다.
 $('#movieSelect').change(function() {
-    // 선택한 옵션의 값을 가져와서 span 태그의 텍스트 내용으로 설정합니다.
-    const selectedValue = $(this).val();
-    $('#textSpan').text(selectedValue);
+    const selectedText = $(this).find('option:selected').text(); // 선택된 영화관의 이름
+    $('#textSpan').text(selectedText);  // 이름을 텍스트로 표시
+    debugger;
 });
 
 
