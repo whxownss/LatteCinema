@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="StoreItem">
+	<insert id="insert" parameterType="StoreItemDTO">
+		INSERT INTO STORE_ITEM
+			( ITEM_IDX
+			, ITEM_NAME
+			, ITEM_DATAIL
+			, ITEM_PRICE
+			, ITEM_IMAGE
+			, ITEM_NUMBER
+			, ITEM_DATE
+			, CREATE_USER
+			, CREATE_DATE
+			, UPDATE_USER
+			, UPDATE_DATE)
+		VALUES(
+			  (SELECT *
+				 FROM (SELECT IFNULL(MAX(CAST(ITEM_IDX as unsigned)), 0) + 1
+						 FROM STORE_ITEM) A)
+			, #{itemName}
+			, #{itemDatail}
+			, #{itemPrice}
+			, #{itemImage}
+			, #{itemNumber}
+			, #{itemDate}
+			, #{createUser}
+			, #{createDate}
+			, #{updateUser}
+			, #{updateDate})
+	</insert>
+	
+</mapper>

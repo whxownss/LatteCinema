@@ -7,6 +7,45 @@
 <main id="main">
 <script src="jQuery/jquery-3.6.0.js"></script>
 
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<script type="text/javascript">
+	const IMP = window.IMP;
+	IMP.init("imp67011510");
+	
+	var today = new Date();   
+    var hours = today.getHours(); // 시
+    var minutes = today.getMinutes();  // 분
+    var seconds = today.getSeconds();  // 초
+    var milliseconds = today.getMilliseconds();
+    var makeMerchantUid = hours +  minutes + seconds + milliseconds;
+    
+    function requestPay() {
+        IMP.request_pay({
+            pg : 'kcp',
+            pay_method : 'card',
+            merchant_uid: "IMP"+makeMerchantUid, 
+            name : '스위트콤보',
+            amount : 10000,
+            buyer_email : 'Iamport@chai.finance',
+            buyer_name : '아임포트 기술지원팀',
+            buyer_tel : '010-1234-5678',
+            buyer_addr : '서울특별시 강남구 삼성동',
+            buyer_postcode : '123-456'
+        }, function (rsp) { // callback
+            if (rsp.success) {
+                console.log(rsp);
+            } else {
+                console.log(rsp);
+            }
+        });
+    }
+
+</script>
+
    <script>
       $(function(){
          
@@ -129,7 +168,7 @@
 								<td scope="row" class="text-center" colspan="4">
 									<button class="btn btn-secondary btn-lg"
 										style="text-align: center; padding-left: 60px; padding-right: 60px;">선물하기</button>
-									<button class="btn btn-danger btn-lg"
+									<button class="btn btn-danger btn-lg" onclick="requestPay()"
 										style="text-align: center; padding-left: 60px; padding-right: 60px;">구매하기</button>
 								</td>
 							</tr>

@@ -8,6 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.itwillbs.dao.CustomerDAO;
+import com.itwillbs.dao.StoreItemDAO;
+import com.itwillbs.domain.CustomerDTO;
+import com.itwillbs.domain.StoreItemDTO;
+
 public class StoreController extends HttpServlet{
 	RequestDispatcher dispatcher = null;
 	
@@ -159,6 +164,21 @@ public class StoreController extends HttpServlet{
 			dispatcher = request.getRequestDispatcher("_store/store_ticket4.jsp");
 			dispatcher.forward(request, response);
 		} // store_ticket4
+		
+		if (sPath.equals("/test123.st")) {
+			StoreItemDTO sidto = new StoreItemDTO();
+			sidto.setItemName("스위트콤보");
+			sidto.setItemDatail("오리지널L + 탄산음료M2");
+			sidto.setItemPrice("10000");
+			sidto.setItemImage("https://cf.lottecinema.co.kr//Media/WebAdmin/113c4f562c6e4c9d94e973b590f594ab.jpg");
+			sidto.setItemNumber("1");
+			sidto.setItemDate(null);
+			sidto.setCreateUser("ADMIN1365");
+			sidto.setCreateDate(null);
+
+			StoreItemDAO dao = new StoreItemDAO();
+			boolean isSuccess = dao.insert(sidto);
+		} //
 		
 	} // doProcess
 	

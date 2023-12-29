@@ -10,6 +10,7 @@
 	
 	 <typeAliases>
         <typeAlias type="com.itwillbs.domain.CustomerDTO" alias="CustomerDTO"/>
+        <typeAlias type="com.itwillbs.domain.StoreItemDTO" alias="StoreItemDTO"/>
     </typeAliases>
 
 	<environments default="development">
@@ -26,6 +27,7 @@
 	
 	<mappers>
 		<mapper resource="com/itwillbs/sql/sql.xml"/>
+		<mapper resource="com/itwillbs/sql/storeItemSql.xml"/>
 	</mappers>
 
     

@@ -16,7 +16,6 @@ public class SqlMapClient {
 		try {
 			String resource = "mybatis-config.xml";
 			Reader reader = Resources.getResourceAsReader(resource);
-			System.out.println(reader);
 			if(sqlSessionFactory == null) {
 				sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 			}
