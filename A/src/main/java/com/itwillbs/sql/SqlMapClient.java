@@ -21,9 +21,7 @@ public class SqlMapClient {
 				sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 			}
 		} catch (IOException e) {
-			System.out.println("try");
 			e.printStackTrace();
-			System.out.println("catch");
 		}
 	}
 	
