@@ -1,5 +1,7 @@
+<%@page import="com.itwillbs.domain.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%MemberDTO memberDTO = (MemberDTO)request.getAttribute("memberDTO"); %>
 <html lang="ko">
 <head>
   <jsp:include page="../_common/meta.jsp"></jsp:include>
@@ -11,7 +13,6 @@
 </head>
 <body>
 
-
 <jsp:include page="../_common/header.jsp"></jsp:include>
 <main id="main">
   <section class="category-section">
@@ -19,7 +20,7 @@
       <!-- 이곳에 코드작성 -->
       <div class="inner-wrap">
         <jsp:include page="lnb.jsp"></jsp:include>
-        <form id="moveFrm" method="post">
+        <form id="moveFrm" method="post" action="userInfoPro.me">
           <div id="contents" class="">
             <h2 class="tit">개인정보 수정</h2>
             <ul class="dot-list mb10">
@@ -39,7 +40,7 @@
                   <tr>
                     <th scope="row">아이디</th>
                   		
-                    <td><%="아이디" %></td> 
+                    <td><span name="id" > ${memberDTO.memId }</span></td> 
                     <td><a href="delete.me" class="button small member-out" title="회원탈퇴">회원탈퇴</a></td>
                   </tr>
                 </tbody>
@@ -57,13 +58,17 @@
             <!--  일단 하드 코딩한 곳 / DB 연결 필요함-->
             
             
-            <form name="mbInfoForm">
-              <input type="hidden" name="mbNo" value="3487839">
-              <input type="hidden" name="phoneNo" value="010-3333-3333">
-              <input type="hidden" name="zipcd" value="33333">
-              <input type="hidden" name="mbAddr" value="울산광역시 동구 울산동 울산순환도로 999 울산아파트 201동">
-              <input type="hidden" name="mbProfilFileNo" value="0">
-              <input type="hidden" id="mbByymmdd" value="19930918">
+<!--             <form name="mbInfoForm" method="post"  > -->
+            
+            	<input type="" name="id" value="${memberDTO.memId }">
+            	<input type="" name="pass" value="${memberDTO.memPass }">
+            	
+<!--               <input type="hidden" name="mbNo" value="3487839"> -->
+<!--               <input type="hidden" name="phoneNo" value="010-3333-3333"> -->
+<!--               <input type="hidden" name="zipcd" value="33333"> -->
+<!--               <input type="hidden" name="mbAddr" value="울산광역시 동구 울산동 울산순환도로 999 울산아파트 201동"> -->
+<!--               <input type="hidden" name="mbProfilFileNo" value="0"> -->
+<!--               <input type="hidden" id="mbByymmdd" value="19930918"> -->
               <div class="table-wrap mb40">
                 <table class="board-form">
                   <caption>이름, 생년월일, 휴대폰, 이메일, 비밀번호, 주소 항목을 가진 기본정보 표</caption>
@@ -77,36 +82,41 @@
                         <em class="font-orange">*</em>
                       </th>
                       <td>
-                        <span class="mbNmClass"><%="김나혜" %></span>
-                        <a href="#layer_name" class="button small gray-line ml10 mr10 btn-modal-open" w-data="600" h-data="350" title="이름변경">이름변경</a>※ 개명으로 이름이 변경된 경우, 회원정보의 이름을 변경하실 수 있습니다.
-                        <section id="layer_name" class="modal-layer">
-                          <a href="" class="focus">레이어로 포커스 이동 됨</a>
-                          <div class="wrap">
-                            <header class="layer-header">
-                              <h3 class="tit">본인확인 수단 선택</h3>
-                            </header>
-                            <div class="layer-con">
-                              <p class="reset">이름을 변경하기 위한 본인 확인 수단을 선택해 주세요.
-                                <br>(단, 개명된 이름으로 가입된 본인명의의 휴대전화 또는 아이핀으로만 가능함)</p>
-                              <div class="box-gray v1 mt20 a-c">
-                                <a href="#" target="_blank" class="button" id="ipinBtn" title="I-PIN 인증">I-PIN 인증</a>
-                                <a href="#" target="_blank" class="button ml10" id="phoneBtn" title="휴대폰 인증">휴대폰 인증</a>
-                              </div>
-                              <ul class="dash-list mt20">
-                                <li>신용평가기관에 개명된 이름이 먼저 등록되어 있어야 합니다.</li>
-                                <li>본인인증을 위해 입력하신 정보는 해당 인증기관에서 직접 수집하며 인증 이외의 용도로 이용 또는 저장되지 않습니다.</li>
-                              </ul>
-                            </div>
-                            <button type="button" class="btn-modal-close">레이어 닫기</button>
-                          </div>
-                        </section>
+                        <span class="mbNmClass" name="name" >${memberDTO.memName }</span>
+                        
+<!--                         <a href="#layer_name" class="button small gray-line ml10 mr10 btn-modal-open" w-data="600" h-data="350" title="이름변경">이름변경</a> -->
+
+                       	<span style="font-size: 10px;"> ※ 개명으로 이름이 변경된 경우 문의사항에 남겨주세요 </span>
+                        
+<!--                         <section id="layer_name" class="modal-layer"> -->
+<!--                           <a href="" class="focus">레이어로 포커스 이동 됨</a> -->
+<!--                           <div class="wrap"> -->
+<!--                             <header class="layer-header"> -->
+<!--                               <h3 class="tit">본인확인 수단 선택</h3> -->
+<!--                             </header> -->
+<!--                             <div class="layer-con"> -->
+<!--                               <p class="reset">이름을 변경하기 위한 본인 확인 수단을 선택해 주세요. -->
+<!--                                 <br>(단, 개명된 이름으로 가입된 본인명의의 휴대전화 또는 아이핀으로만 가능함)</p> -->
+<!--                               <div class="box-gray v1 mt20 a-c"> -->
+<!--                                 <a href="#" target="_blank" class="button" id="ipinBtn" title="I-PIN 인증">I-PIN 인증</a> -->
+<!--                                 <a href="#" target="_blank" class="button ml10" id="phoneBtn" title="휴대폰 인증">휴대폰 인증</a> -->
+<!--                               </div> -->
+<!--                               <ul class="dash-list mt20"> -->
+<!--                                 <li>신용평가기관에 개명된 이름이 먼저 등록되어 있어야 합니다.</li> -->
+<!--                                 <li>본인인증을 위해 입력하신 정보는 해당 인증기관에서 직접 수집하며 인증 이외의 용도로 이용 또는 저장되지 않습니다.</li> -->
+<!--                               </ul> -->
+<!--                             </div> -->
+<!--                             <button type="button" class="btn-modal-close">레이어 닫기</button> -->
+<!--                           </div> -->
+<!--                         </section> -->
+
                       </td>
                     </tr>
                     <tr>
                       <th scope="row">생년월일
                         <em class="font-orange">*</em>
                       </th>
-                      <td><%="1993년 09월 18일" %></td>
+                      <td><span name="birth" >${memberDTO.memBirthD}</span></td>
                     </tr>
                     <tr>
                       <th scope="row">
@@ -115,7 +125,7 @@
                       </th>
                       <td>
                         <div class="clearfix">
-                          <p class="reset float-l w170px lh32 changeVal" data-name="phoneNo"><%="010-3333-3333"%></p>
+                          <p class="reset float-l w170px lh32 changeVal" name="phone" data-name="phoneNo">${memberDTO.memPhone }</p>
                           <div class="float-l">
                             <button type="button" class="button small gray-line change-phone-num" id="phoneChgBtn" title="휴대폰번호 변경">휴대폰번호 변경</button>
                           </div>
@@ -145,7 +155,7 @@
                         <em class="font-orange">*</em>
                       </th>
                       <td>
-                        <input type="text" id="email" name="mbEmail" class="input-text w500px" value="<%="dasda@naver.com"%>">
+                        <input type="email" id="email"  name="email" class="input-text w500px" value="${memberDTO.memEmail }">
                       </td>
                     </tr>
                     <tr>
@@ -158,17 +168,17 @@
                     <tr>
                       <th scope="row">주소</th>
                       <td>
-                        <span><%="44025"%></span>
+                        <span name="postcode">${memberDTO.memAddress.split("/")[0]}</span>
                         <a href="#none" id="addrBtn" class="button small gray-line ml10" title="우편번호 검색">우편번호 검색</a>
-                        <p class="reset mt10"><%="울산광역시 동구 울산동 울산순환도로 999 울산아파트 201동"%></p><br>
-                        <input type="text" id="addr2" placeholder="상세주소 입력" required>
+                        <p class="reset mt10" id="addr1" name="addr1">${memberDTO.memAddress.split("/")[1]}</p><br>
+                        <input type="text" id="addr2" name="addr2" value="${memberDTO.memAddress.split('/')[2]}" placeholder="상세주소 입력" required>
                         
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-            </form>
+<!--             </form> -->
 
             <div class="btn-group mt40">
               <button class="button large" id="cancelBtn">취소</button>
@@ -198,9 +208,9 @@
         // 주소검색 버튼
         $('#addrBtn').on('click', function(e) {
             e.preventDefault();
-
+          
             var target = $(this);
-
+			
             // 다음 주소 API 호출
             daum.postcode.load(function() {
                 new daum.Postcode({
@@ -228,6 +238,12 @@
                 }).open();
             });
         });
+        
+        // 주소변경시 상세주소 change
+        $('#addr1').on('DOMSubtreeModified', function (e) {
+            $('#addr2').val('');
+        	
+		});
 
         // IPIN 인증
         $('#ipinBtn').on('click', function(e) {

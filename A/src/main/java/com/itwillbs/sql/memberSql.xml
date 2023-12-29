@@ -67,12 +67,28 @@
 		
 	</select>
 	
-	
+	<select id="getMember" parameterType="String" resultType="MemberDTO">
+		SELECT *
+		FROM MEMBERS
+		WHERE MEM_ID = #{value}
+		
+	</select>	
+
 	<delete id="deleteMember" parameterType="MemberDTO">
 		DELETE FROM MEMBERS
 		 WHERE MEM_ID = #{memId}
 	</delete>
 	
+	
+	<update id="updateMember" parameterType="MemberDTO">
+		UPDATE MEMBERS
+		SET 
+			MEM_PASS = #{memPass}
+		  , MEM_PHONE = #{memPhone}
+		  , MEM_EMAIL = #{memEmail}
+		  , MEM_ADDRESS = #{memAddress}
+		WHERE MEM_ID = #{memId}
+	</update>
 	
 	
 <!-- 	<delete id="delete"> -->

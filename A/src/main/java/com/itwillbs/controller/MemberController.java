@@ -121,10 +121,52 @@ public class MemberController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}//
 		
+		if(sPath.equals("/myInfoPro.me")) {
+			memberService = new MemberService();
+			MemberDTO memberDTO = memberService.userCheck(request);
+			System.out.println("---------");
+			System.out.println(memberDTO);
+			System.out.println("---------");
+			
+			//리턴받은 값이 null 아니면 => 아이디 비밀번호 일치
+			//리턴받은 값이 null 이면 => 아이디 비밀번호 틀림
+			if(memberDTO != null) {
+				System.out.println("비밀번호 일치");
+				request.setAttribute("memberDTO", memberDTO);
+				response.sendRedirect("userInfo.me");
+				
+			}else {
+				System.out.println("비밀번호 틀림");
+				dispatcher = request.getRequestDispatcher("_mypage/msg.jsp");
+				dispatcher.forward(request, response);
+			}
+		}//
+		
+		
 		// 마이페이지 userInfo(정보수정 페이지) 이동
 		if(sPath.equals("/userInfo.me")) {
+			
+			HttpSession session = request.getSession();
+			
+			String id = (String)session.getAttribute("sId");
+			
+			memberService = new MemberService();
+			MemberDTO memberDTO = memberService.getMember(id);
+			
+			request.setAttribute("memberDTO", memberDTO);
+			
 			dispatcher = request.getRequestDispatcher("_mypage/userInfo.jsp");
 			dispatcher.forward(request, response);
+
+		}//
+		
+		// 마이페이지 userInfoPro(정보수정)
+		if(sPath.equals("/userInfoPro.me")) {
+			
+			request.setCharacterEncoding("utf-8");
+			memberService = new MemberService();
+			memberService.updateMember(request);
+			response.sendRedirect("userInfo.me");
 		}//
 		
 		// 마이페이지 myMovie(무비스토리) 이동

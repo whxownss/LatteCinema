@@ -39,7 +39,28 @@ public class MemberDAO {
 		return deleteResult > 0 ? true : false;
 	}
 	
+	public boolean updateMember(MemberDTO memberDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int updateResult = session.update("Member.updateMember", memberDTO);
+		session.commit();
+		session.close();
+		
+		return updateResult > 0 ? true : false;
+		
+	}
 	
+	
+	public MemberDTO getMember(String id) {
+		SqlSession session = sqlSessionFactory.openSession();
+		MemberDTO memberDTO = session.selectOne("Member.getMember", id);
+		
+		System.out.println("=============");
+		System.out.println(memberDTO);
+		System.out.println("=============");
+		session.close();
+		
+		return memberDTO;
+	}
 	
 }
 

@@ -54,10 +54,21 @@ public class MemberService {
 		try {
 			String id = request.getParameter("id");
 			String pass = request.getParameter("pass");
+			String name = request.getParameter("name");
+			String phone = request.getParameter("phone");
+			String address = request.getParameter("postcode") + "/" + request.getParameter("address1") + "/" + request.getParameter("address2");
+			String birth = request.getParameter("birth");
+			String email = request.getParameter("email");
+			
 			
 			memberDAO = new MemberDAO();
 			memberDTO.setMemId(id);
 			memberDTO.setMemPass(pass);
+			memberDTO.setMemName(name);
+			memberDTO.setMemPhone(phone);
+			memberDTO.setMemAddress(address);
+			memberDTO.setMemBirthD(birth);
+			memberDTO.setMemEmail(email);
 			memberDTO = memberDAO.userCheck(memberDTO);
 			
 		} catch (Exception e) {
@@ -86,5 +97,42 @@ public class MemberService {
 			e.printStackTrace();
 		}
 	}// deleteMember()	
+	
+	public void updateMember(HttpServletRequest request) {
+		System.out.println("MemberService updateMember()");
+		try {
+			MemberDTO memberDTO = new MemberDTO();
+			memberDTO.setMemId(request.getParameter("id"));
+			memberDTO.setMemPass(request.getParameter("pass"));
+			memberDTO.setMemName(request.getParameter("name"));
+			memberDTO.setMemPhone(request.getParameter("phone"));
+			memberDTO.setMemAddress(request.getParameter("postcode") + "/" + request.getParameter("addr1") + "/" + request.getParameter("addr2"));
+			memberDTO.setMemEmail(request.getParameter("email"));
+			
+			System.out.println(memberDTO);
+			memberDAO = new MemberDAO();
+			
+			memberDAO.updateMember(memberDTO);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}// updateMember()
+	
+	public MemberDTO getMember(String id) {
+		System.out.println("MemberService getMember()");
+		MemberDTO memberDTO = null;
+		try {
+			
+			memberDAO = new MemberDAO();
+			
+			memberDTO = memberDAO.getMember(id);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return memberDTO;
+	}// getMember()
+	
 	
 }
