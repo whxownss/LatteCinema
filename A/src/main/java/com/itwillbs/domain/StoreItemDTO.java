@@ -81,5 +81,12 @@ public class StoreItemDTO {
 	public void setUpdateDate(Timestamp updateDate) {
 		this.updateDate = updateDate;
 	}
+	@Override
+	public String toString() {
+		return "StoreItemDTO [itemIdx=" + itemIdx + ", itemName=" + itemName + ", itemDatail=" + itemDatail
+				+ ", itemPrice=" + itemPrice + ", itemImage=" + itemImage + ", itemNumber=" + itemNumber + ", itemDate="
+				+ itemDate + ", createUser=" + createUser + ", createDate=" + createDate + ", updateUser=" + updateUser
+				+ ", updateDate=" + updateDate + "]";
+	}
 	
 }

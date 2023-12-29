@@ -5,102 +5,6 @@
 <%@include file="../_common/commonHeaderEnd.jsp"%>
 
 <main id="main">
-<script src="jQuery/jquery-3.6.0.js"></script>
-
-<!-- jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-<!-- iamport.payment.js -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-
-<script type="text/javascript">
-	const IMP = window.IMP;
-	IMP.init("imp67011510");
-	
-	var today = new Date();   
-    var hours = today.getHours(); // 시
-    var minutes = today.getMinutes();  // 분
-    var seconds = today.getSeconds();  // 초
-    var milliseconds = today.getMilliseconds();
-    var makeMerchantUid = hours +  minutes + seconds + milliseconds;
-    
-    function requestPay() {
-        IMP.request_pay({
-            pg : 'kcp',
-            pay_method : 'card',
-            merchant_uid: "IMP"+makeMerchantUid, 
-            name : '스위트콤보',
-            amount : 10000,
-            buyer_email : 'Iamport@chai.finance',
-            buyer_name : '아임포트 기술지원팀',
-            buyer_tel : '010-1234-5678',
-            buyer_addr : '서울특별시 강남구 삼성동',
-            buyer_postcode : '123-456'
-        }, function (rsp) { // callback
-            if (rsp.success) {
-                console.log(rsp);
-            } else {
-                console.log(rsp);
-            }
-        });
-    }
-
-</script>
-
-   <script>
-      $(function(){
-         
-         // 수량 옵션
-         $('._count :button').on({
-             'click' : function(e){
-
-                 e.preventDefault();
-                 var count = $(this).parent('._count').find('.inpp').text();
-                 var now = parseInt(count);
-                 var min = 1;
-                 var max = 5;
-                 var num = now;
-                 
-                 if($(this).hasClass('minus')){
-                     var type = 'm';
-                 }else{
-                     var type = 'p';
-                 }
-                 if(type=='m'){
-                     if(now>min){
-                         num = now - 1;
-                     }
-                 }else{
-                     if(now<max){
-                         num = now + 1;
-                     }
-                 }
-                 if(num != now){
-                     $(this).parent('._count').find('.inpp').text(num);
-                 }
-             }
-         });
-         
-         // 상품금액
-         $(".inpp").on("DOMSubtreeModified", function(){
-				// 좌석 선택 다 해야 뜨는걸로
-				var p1 = parseInt($("#price").text().replace(/[^\d]+/g, ""));
-				var p2 = parseInt($(".inpp").text());
-				
-				var sum = p1 * p2;
-				
-				var sPrice = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-				
-				$("#sPrice").text(sPrice);
-				
-			});
-		
-         // 3자리 콤마
-         var price = $('#price').text();
-         var money = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-         $('#price').text(money);
-         
-      });
-   </script>
 
 	<section class="category-section">
 		<div class="container" data-aos="fade-up">
@@ -265,4 +169,105 @@
 	<!-- 정보	 -->
 </main>
 
-<%@include file="../_common/commonFooter.jsp"%>
+<!-- ///// 자바스크립트 ///// -->
+
+<%@include file="../_common/commonFooterStart.jsp"%>
+
+<script src="jQuery/jquery-3.6.0.js"></script>
+
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<script type="text/javascript">
+	const IMP = window.IMP;
+	IMP.init("imp67011510");
+	
+	var today = new Date();   
+    var hours = today.getHours(); // 시
+    var minutes = today.getMinutes();  // 분
+    var seconds = today.getSeconds();  // 초
+    var milliseconds = today.getMilliseconds();
+    var makeMerchantUid = hours +  minutes + seconds + milliseconds;
+    
+    function requestPay() {
+        IMP.request_pay({
+            pg : 'kcp',
+            pay_method : 'card',
+            merchant_uid: "IMP"+makeMerchantUid, 
+            name : '스위트콤보',
+            amount : 10000,
+            buyer_email : 'Iamport@chai.finance',
+            buyer_name : '아임포트 기술지원팀',
+            buyer_tel : '010-1234-5678',
+            buyer_addr : '서울특별시 강남구 삼성동',
+            buyer_postcode : '123-456'
+        }, function (rsp) { // callback
+            if (rsp.success) {
+                console.log(rsp);
+            } else {
+                console.log(rsp);
+            }
+        });
+    }
+
+</script>
+
+   <script>
+      $(function(){
+         
+         // 수량 옵션
+         $('._count :button').on({
+             'click' : function(e){
+
+                 e.preventDefault();
+                 var count = $(this).parent('._count').find('.inpp').text();
+                 var now = parseInt(count);
+                 var min = 1;
+                 var max = 5;
+                 var num = now;
+                 
+                 if($(this).hasClass('minus')){
+                     var type = 'm';
+                 }else{
+                     var type = 'p';
+                 }
+                 if(type=='m'){
+                     if(now>min){
+                         num = now - 1;
+                     }
+                 }else{
+                     if(now<max){
+                         num = now + 1;
+                     }
+                 }
+                 if(num != now){
+                     $(this).parent('._count').find('.inpp').text(num);
+                 }
+             }
+         });
+         
+         // 상품금액
+         $(".inpp").on("DOMSubtreeModified", function(){
+				// 좌석 선택 다 해야 뜨는걸로
+				var p1 = parseInt($("#price").text().replace(/[^\d]+/g, ""));
+				var p2 = parseInt($(".inpp").text());
+				
+				var sum = p1 * p2;
+				
+				var sPrice = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+				
+				$("#sPrice").text(sPrice);
+				
+			});
+		
+         // 3자리 콤마
+         var price = $('#price').text();
+         var money = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+         $('#price').text(money);
+         
+      });
+   </script>
+
+<%@include file="../_common/commonFooterEnd.jsp"%>

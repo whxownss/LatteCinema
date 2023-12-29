@@ -9,7 +9,6 @@
 	</settings>
 	
 	 <typeAliases>
-        <typeAlias type="com.itwillbs.domain.CustomerDTO" alias="CustomerDTO"/>
         <typeAlias type="com.itwillbs.domain.StoreItemDTO" alias="StoreItemDTO"/>
         <typeAlias type="com.itwillbs.domain.ExqBoardDTO" alias="ExqBoardDTO"/>
         <typeAlias type="com.itwillbs.domain.PageDTO" alias="PageDTO"/>
@@ -31,7 +30,6 @@
 	</environments>
 	
 	<mappers>
-		<mapper resource="com/itwillbs/sql/sql.xml"/>
 		<mapper resource="com/itwillbs/sql/storeItemSql.xml"/>
 		<mapper resource="com/itwillbs/sql/csSql.xml"/>
 		<mapper resource="com/itwillbs/sql/memberSql.xml"/>
