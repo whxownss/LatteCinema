@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Schedule">
+
+	<select id="select" resultType="scheduleDTO">
+		SELECT LO_IDX
+			 , CI_IDX
+			 , SCH_IDX
+			 , SCH_DATE
+			 , SCH_MOV_TYPE
+			 , SCH_MOV_IDX
+			 , SCH_TIME
+			 , SCH_RUN
+			 , SCR_IDX
+			 , SCR_SEAT_AVAIL
+		  FROM SCHEDULE
+		 WHERE 1=1
+	</select>
+
+</mapper>

@@ -1,26 +1,41 @@
 package com.itwillbs.service;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import com.google.gson.Gson;
 import com.itwillbs.dao.ResDAO;
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.LocationDTO;
+import com.itwillbs.domain.ScheduleDTO;
 
 public class ResService {
 	ResDAO resDAO = null;
 	
-	public ArrayList<LocationDTO> getLocations() {
+	public List<LocationDTO> getLocations() {
 		resDAO = new ResDAO();
-		ArrayList<LocationDTO> locationList = resDAO.selectLocation();
+		List<LocationDTO> locationList = resDAO.selectLocation();
 		
 		return locationList;
 	}
 
-	public ArrayList<CinemaDTO> getCinemas() {
+	public String getCinemas() {
 		resDAO = new ResDAO();
-		ArrayList<CinemaDTO> cinemaList = resDAO.selectCinema();
+		List<CinemaDTO> cinemaList = resDAO.selectCinema();
 		
-		return cinemaList;
+		Gson gson = new Gson();
+		String cinemaListJson = gson.toJson(cinemaList);
+		
+		return cinemaListJson;
+	}
+
+	public String getSchedules() {
+		resDAO = new ResDAO();
+		List<ScheduleDTO> scheduleList = resDAO.selectSchedule();
+		
+		Gson gson = new Gson();
+		String scheduleListJson = gson.toJson(scheduleList);
+		
+		return scheduleListJson;
 	}
 
 }

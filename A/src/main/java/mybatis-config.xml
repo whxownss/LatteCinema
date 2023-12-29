@@ -14,6 +14,7 @@
         <typeAlias type="com.itwillbs.domain.MemberDTO" alias="MemberDTO"/>
         <typeAlias type="com.itwillbs.domain.LocationDTO" alias="LocationDTO"/>
         <typeAlias type="com.itwillbs.domain.CinemaDTO" alias="CinemaDTO"/>
+        <typeAlias type="com.itwillbs.domain.ScheduleDTO" alias="ScheduleDTO"/>
     </typeAliases>
 
 	<environments default="development">
@@ -33,6 +34,7 @@
 		<mapper resource="com/itwillbs/sql/memberSql.xml"/>
 		<mapper resource="com/itwillbs/sql/cinemaSql.xml"/>
 		<mapper resource="com/itwillbs/sql/locationSql.xml"/>
+		<mapper resource="com/itwillbs/sql/scheduleSql.xml"/>
 	</mappers>
 
     

@@ -1,7 +1,7 @@
 package com.itwillbs.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.LocationDTO;
+import com.itwillbs.domain.ScheduleDTO;
 import com.itwillbs.service.ResService;
 
 public class ResController extends HttpServlet {
@@ -34,11 +35,13 @@ public class ResController extends HttpServlet {
 		if(sPath.equals("/res1.re")) {
 			
 			resService = new ResService();
-			ArrayList<LocationDTO> locationList = resService.getLocations();
-			ArrayList<CinemaDTO> cinemaList = resService.getCinemas();
+			List<LocationDTO> locationList = resService.getLocations();
+			String cinemaListJson = resService.getCinemas();
+			String scheduleListJson = resService.getSchedules();
 			
 			request.setAttribute("locationList", locationList);
-			request.setAttribute("cinemaList", cinemaList);
+			request.setAttribute("cinemaListJson", cinemaListJson);
+			request.setAttribute("scheduleListJson", scheduleListJson);
 			
 			dispatcher = request.getRequestDispatcher("_reservation/res1.jsp");
 			dispatcher.forward(request, response);

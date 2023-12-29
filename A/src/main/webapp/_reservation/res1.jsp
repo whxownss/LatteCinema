@@ -1,3 +1,7 @@
+<%@page import="com.google.gson.Gson"%>
+<%@page import="java.util.List"%>
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
+<%@page import="com.itwillbs.domain.ScheduleDTO"%>
 <%@page import="com.itwillbs.domain.CinemaDTO"%>
 <%@page import="com.itwillbs.domain.LocationDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -8,10 +12,10 @@
 	<link rel="stylesheet" href="_assets/css/res_1.css">
 <%@include file="../_common/commonHeaderEnd.jsp"%>
 
-<%
-ArrayList<LocationDTO> locationList = (ArrayList<LocationDTO>)request.getAttribute("locationList");
-ArrayList<CinemaDTO> cinemaList = (ArrayList<CinemaDTO>)request.getAttribute("cinemaList");
-%>
+<c:set var="locationList" value="${requestScope.locationList}" />
+<c:set var="cinemaListJson" value="${requestScope.cinemaListJson}" />
+<c:set var="scheduleListJson" value="${requestScope.scheduleListJson}" />
+
 <main id="main">
 
 	<section class="category-section">
@@ -115,15 +119,10 @@ ArrayList<CinemaDTO> cinemaList = (ArrayList<CinemaDTO>)request.getAttribute("ci
 <%@include file="../_common/commonFooterStart.jsp"%>
 <script src="jQuery/jquery-3.6.0.js"></script>
 <script>
-// ArrayList<CinemaDTO> cinemaList를 json 배열로
-var cinemaList = [
-	<c:forEach items="${cinemaList}" var="cinema" varStatus="status">
- 	{	'loIdx' : '${cinema.loIdx}'
- 	  , 'ciIdx' : '${cinema.ciIdx}'
- 	  , 'ciName' : '${cinema.ciName}'
- 	} ${not status.last ? ',' : ''}
-	</c:forEach>
-];
+
+var cinemaList = ${cinemaListJson};
+var scheduleList = ${scheduleListJson};
+
 var movies = {
 		mo1: ["옛날영화제목1", "옛날영화제목2", "옛날영화제목3", "옛날영화제목4", "옛날영화제목5", "옛날영화제목6", "옛날영화제목7"],						  
 		mo2: ["최신영화제목1", "최신영화제목2", "최신영화제목3", "최신영화제목4", "최신영화제목5", "최신영화제목6", "최신영화제목7", 
@@ -257,6 +256,25 @@ var setDateRange = function(date){
 	$("#myCalendar").prop("min", dateFormat(date));
 	$("#myCalendar").prop("max", dateFormat(new Date(date.setDate(date.getDate() + 4))));
 };
+
+
+
+//상영 시간표 출력2222222
+var showSchedule = function(){
+	$("#showTimeTable").empty();
+	$("#showTimeTable").append("<div class='text-start' id='oldSch'>옛날 영화</div>" + 
+							   "<div class='text-start mt-3' id='nowSch'>최신 영화</div>");
+	
+	
+}
+
+
+
+
+
+
+
+
 //상영 시간표 출력
 var showTimeTable = function(){
 
