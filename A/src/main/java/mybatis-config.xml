@@ -11,6 +11,11 @@
 	 <typeAliases>
         <typeAlias type="com.itwillbs.domain.CustomerDTO" alias="CustomerDTO"/>
         <typeAlias type="com.itwillbs.domain.StoreItemDTO" alias="StoreItemDTO"/>
+        <typeAlias type="com.itwillbs.domain.ExqBoardDTO" alias="ExqBoardDTO"/>
+        <typeAlias type="com.itwillbs.domain.PageDTO" alias="PageDTO"/>
+        <typeAlias type="com.itwillbs.domain.MemberDTO" alias="MemberDTO"/>
+        <typeAlias type="com.itwillbs.domain.LocationDTO" alias="LocationDTO"/>
+        <typeAlias type="com.itwillbs.domain.CinemaDTO" alias="CinemaDTO"/>
     </typeAliases>
 
 	<environments default="development">
@@ -28,6 +33,10 @@
 	<mappers>
 		<mapper resource="com/itwillbs/sql/sql.xml"/>
 		<mapper resource="com/itwillbs/sql/storeItemSql.xml"/>
+		<mapper resource="com/itwillbs/sql/csSql.xml"/>
+		<mapper resource="com/itwillbs/sql/memberSql.xml"/>
+		<mapper resource="com/itwillbs/sql/cinemaSql.xml"/>
+		<mapper resource="com/itwillbs/sql/locationSql.xml"/>
 	</mappers>
 
     

@@ -231,16 +231,16 @@ function checkEmail() {
 				<h2>회원가입</h2>
 			</div>
 			<div class="container">
-					<form  class=""  onsubmit="checkSubmit()" >
+					<form  class=""  onsubmit="checkSubmit()" action="joinPro.me">
 						<div class="form-floating mb-3">
 							<input type="text" class="form-control" id="id" placeholder="5자 이상" minlength="5" required 
-									onblur="checkIdLength()"> 
+									onblur="checkIdLength()" name="id"> 
 							<label for="id">아이디<span id="CheckId"></span></label>
 	
 						</div>
 						<div class="form-floating mb-3">
 							<input type="password" class="form-control" id="passwd" placeholder="비밀번호" required
-									onblur="checkPassLength()">
+									onblur="checkPassLength()" name="pass">
 							<label  for="passwd">비밀번호<span id="CheckPassword1"></span></label> 
 	
 						</div>
@@ -252,18 +252,18 @@ function checkEmail() {
 						</div>
 						<div class="form-floating mb-3">
 							<input type="text" class="form-control" id="name" placeholder="이름" required
-									onblur="checkName()">
+									onblur="checkName()" name="name">
 							<label for="name">이름<span id="CheckName"></span></label>
 						</div>
 						<div class="form-floating mb-3">
 							<input type="tel" class="form-control" id="phone" placeholder="연락처" required
-									onblur="checkPhone()">
+									onblur="checkPhone()" name="phone">
 							<label for="phone">연락처<span id="CheckPhone"></span></label>
 						</div>
 						<div class="form-floating mb-3 row g-2">
 							<div class="col-5">
 								<div class="form-floating">
-									<input type="text" class="form-control" id="postcode" placeholder="우편번호" readonly >
+									<input type="text" class="form-control" id="postcode" placeholder="우편번호" readonly name="postcode" >
 									<label for="address1">우편번호</label>
 								</div>	
 							</div>	
@@ -273,16 +273,16 @@ function checkEmail() {
 							</div>
 						</div>
 						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="address1" placeholder="주소" required readonly>
+							<input type="text" class="form-control" id="address1" placeholder="주소" required readonly name="address1">
 							<label for="address1">주소</label>
 						</div>	
 						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="address2" placeholder="상세주소 입력" required>
+							<input type="text" class="form-control" id="address2" placeholder="상세주소 입력" required name="address2">
 							<label for="address2">상세주소 입력</label>
 						</div>	
 						<div class="form-floating mb-3">
 							<input type="text" class="form-control" id="birth" placeholder="생년월일8자" maxlength="10" required
-									onblur="checkBirth()">
+									onblur="checkBirth()" name="birth">
 							<label for="birth">생년월일 8자리<span id="CheckBirth"></span></label>
 						</div>
 						
@@ -291,7 +291,7 @@ function checkEmail() {
 							<div class="col-9">
 								<div class="form-floating mb-3">
 									<input type="email" class="form-control" id="email" placeholder="name@example.com" required
-											onblur="checkEmail()">
+											onblur="checkEmail()" name="email">
 									<label for="email">이메일<span id="CheckEmail"></span></label>
 								</div>	
 							</div>	

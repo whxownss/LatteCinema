@@ -1,12 +1,17 @@
 package com.itwillbs.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.itwillbs.domain.ExqBoardDTO;
+import com.itwillbs.domain.PageDTO;
+import com.itwillbs.service.CSBoardService;
 
 public class CSController extends HttpServlet  {
 	RequestDispatcher dispatcher = null;
@@ -53,6 +58,57 @@ public class CSController extends HttpServlet  {
 		
 		// 자주찾는질문 페이지 이동
 		if(sPath.equals("/cs_exque.cs")) {
+			System.out.println("주소비교 /cs_exque.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			// cs_exque.cs
+			// cs_exque.cs?pageNum=2
+			// 한 화면에 보여줄 글개수 설정
+			int pageSize = 10;
+			// 현 페이지 번호
+			String pageNum = request.getParameter("pageNum");
+			//페이지 번호가 없으면 1로 페이지 설정
+			if(pageNum == null) {
+				pageNum = "1";
+			}
+			// pageNum => 정수형 변경
+			int currentPage = Integer.parseInt(pageNum);
+			
+			// PageDTO 객체생성 
+			PageDTO pageDTO = new PageDTO();
+			// set메서드 호출해서 값을 저장
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			
+			CSBoardService csBoardService = new CSBoardService();
+
+			ArrayList<ExqBoardDTO> exqBoardList = csBoardService.getExqBoardList(pageDTO);
+			// 페이징 작업
+			// int 리턴할 형 getBoardCount() 메서드 정의
+			// int count = getBoardCount() 메서드 호출
+			int count = csBoardService.getExqBoardCount();
+			// 한 화면에 보여줄 페이지 개수 설정
+			int pageBlock = 10;
+			// 시작하는 페이지 번호 구하기
+			int startPage = (currentPage-1)/pageBlock*pageBlock+1;
+			// 끝나는 페이지 번호 구하기
+			int endPage = startPage + pageBlock -1;
+			// 전체 페이지 수 구하기
+			int pageCount = count / pageSize + (count % pageSize == 0?0:1);
+			if(endPage > pageCount) {
+				endPage = pageCount;
+			}
+			
+			//pageDTO에 페이징 관련값 저장
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
+			request.setAttribute("pageDTO", pageDTO);			
+			request.setAttribute("exqBoardList",exqBoardList);
+			
 			dispatcher = request.getRequestDispatcher("_cs/cs_exque.jsp");
 			dispatcher.forward(request, response);
 		}		

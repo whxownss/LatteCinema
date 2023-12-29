@@ -7,12 +7,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.itwillbs.dao.CustomerDAO;
-import com.itwillbs.domain.CustomerDTO;
+import com.itwillbs.domain.MemberDTO;
+import com.itwillbs.service.MemberService;
+
 
 public class MemberController extends HttpServlet {
 	RequestDispatcher dispatcher = null;
+	MemberService memberService = null;
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,8 +34,7 @@ public class MemberController extends HttpServlet {
 		if(sPath.equals("/main.me")) {
 			dispatcher = request.getRequestDispatcher("_a/main.jsp");
 			dispatcher.forward(request, response);
-		}
-		
+		}//
 		
 		// 로그인 페이지 이동
 		if(sPath.equals("/login.me")) {
@@ -45,6 +47,45 @@ public class MemberController extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("_member/join.jsp");
 			dispatcher.forward(request, response);
 		}//
+		
+		// 회원가입 joinPro.me
+		if(sPath.equals("/joinPro.me")) {
+			memberService = new MemberService();
+			
+			memberService.insertMember(request);
+			// 주소변경 login.me 이동
+			response.sendRedirect("login.me");
+		}//
+		
+		//  로그인 loginPro.me 이동
+		if(sPath.equals("/loginPro.me")) {
+			memberService = new MemberService();
+			MemberDTO memberDTO = new MemberDTO();
+			boolean userCheckResult = memberService.userCheck(request);
+			
+			//리턴받은 값이 null 아니면 => 아이디 비밀번호 일치
+			//리턴받은 값이 null 이면 => 아이디 비밀번호 틀림
+			if(userCheckResult) {
+				System.out.println("아이디 비밀번호 일치");
+				// 로그인 표시 => 세션객체생성 => 세션 저장 (자바에서는 세션객체 먼저 생성 해야함)
+				HttpSession session = request.getSession();
+//				session.setAttribute("id", request.getParameter("id"));
+				session.setAttribute("id", memberDTO.getMemId());
+				// main.me 이동
+				response.sendRedirect("main.me");
+				
+			}else {
+				System.out.println("아이디 비밀번호 틀림");
+				// 1. member/msg.jsp이동 (jsp이동)
+			    dispatcher = request.getRequestDispatcher("member/msg.jsp");
+				dispatcher.forward(request, response);
+			}
+			
+		}//
+		
+		
+		
+		
 		
 	
 		// 아이디 찾기 페이지 이동
@@ -111,17 +152,6 @@ public class MemberController extends HttpServlet {
 
 		
 		
-		if (sPath.equals("/test.me")) {
-
-			CustomerDTO dto = new CustomerDTO();
-			dto.setName("테스트1");
-			dto.setAge("21");
-			dto.seteMail("test@test.com");
-			dto.setJumin("9912124591");
-
-			CustomerDAO dao = new CustomerDAO();
-			boolean isSuccess = dao.insert(dto);
-		}
 	}
 	
 }
