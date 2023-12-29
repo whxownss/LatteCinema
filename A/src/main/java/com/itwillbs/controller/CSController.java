@@ -123,12 +123,20 @@ public class CSController extends HttpServlet  {
 			csBoardService = new CSBoardService();
 			String msg = "update fail";
 			if(csBoardService.updateCenterContent(request)) {
-				System.out.println("update success");
-			} else {
-				System.out.println("update fail");
+				msg = "update success";
 			}
+			System.out.println(msg);
 //			response.sendRedirect(""); //ajax를 써서 굳이 주소 적을 필요 없다.
 		}
+		// 공지사항 삭제 하기
+		if(sPath.equals("/deleteCenterContent")) {
+			System.out.println("주소비교 /saveCenterContent.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			
+		}
+		
 		// 공지사항 글쓰기 페이지 이동
 		if(sPath.equals("/cs_center_write.cs")) {
 			dispatcher = request.getRequestDispatcher("_cs/cs_center_write.jsp");
