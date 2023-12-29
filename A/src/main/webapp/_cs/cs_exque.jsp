@@ -111,4 +111,5 @@ PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
 		</section>	
 	</main>
 	
-<%@include file ="../_common/commonFooter.jsp" %>
+<%@include file="../_common/commonFooterStart.jsp"%>
+<%@include file="../_common/commonFooterEnd.jsp"%>

@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.itwillbs.dao.CSBoardDAO;
 import com.itwillbs.domain.CenterBoardDTO;
+import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ExqBoardDTO;
+import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.PageDTO;
 
 public class CSBoardService {
@@ -99,6 +101,7 @@ public class CSBoardService {
 	        String centerSubject = request.getParameter("centerSubject");
 	        String centerContent = request.getParameter("centerContent");
 	        String createUser = request.getParameter("createUser");
+	        String updateUser = request.getParameter("updateUser");
 	        String createDate = preprocessDate(request.getParameter("createDate"));
 	        
 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
@@ -109,6 +112,7 @@ public class CSBoardService {
 	        centerBoardDTO.setCenterContent(centerContent);
 	        centerBoardDTO.setCreateUser(createUser);
 	        centerBoardDTO.setCreateDate(createTime);
+	        centerBoardDTO.setUpdateUser(updateUser);
 	        
 	        csBoardDAO = new CSBoardDAO();
 	        updateSuccess = csBoardDAO.updateCenterContent(centerBoardDTO);
@@ -118,8 +122,7 @@ public class CSBoardService {
 	        e.printStackTrace();
 	    }
 	    return updateSuccess > 0;
-	}
-
+	}//updateCenterContent()
 	private String preprocessDate(String createDate) {
 	    // 밀리초가 한 자리만 있는 경우 세 자리로 만들어줍니다.
 	    if (createDate.matches(".+\\.\\d$")) {
@@ -128,7 +131,81 @@ public class CSBoardService {
 	        return createDate + "0";
 	    }
 	    return createDate;
-	}//updateCenterContent()
+	}// 날짜 포맷 밀리초 변환
+
+	public boolean deleteCenterContent(HttpServletRequest request) {
+		System.out.println("CSBoardService deleteCenterContent()");
+		int deleteSuccess = 0;
+		try {
+			CenterBoardDTO centerBoardDTO = new CenterBoardDTO();
+	        String createUser = request.getParameter("createUser");
+	        String createDate = preprocessDate(request.getParameter("createDate"));
+	        
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+	        LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
+	        Timestamp createTime = Timestamp.valueOf(dateTime);
+	        
+	        centerBoardDTO.setCreateUser(createUser);
+	        centerBoardDTO.setCreateDate(createTime);
+	        
+	        csBoardDAO = new CSBoardDAO();
+	        deleteSuccess = csBoardDAO.deleteCenterContent(centerBoardDTO);
+	    } catch (DateTimeParseException dtpe) {
+	        System.err.println("Date parsing failed: " + dtpe.getMessage());
+	    } catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deleteSuccess > 0;
+	}//deleteCenterContent()
+
+	public ArrayList<LocationDTO> getRegionList() {
+		System.out.println("CSBoardService getRegionList()");
+		ArrayList<LocationDTO> regionList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			regionList = csBoardDAO.getRegionList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return regionList;
+	}//getRegionList()
+
+	public ArrayList<CinemaDTO> getCinemaList(String loIdx) {
+		System.out.println("CSBoardService getCinemaList()");
+		ArrayList<CinemaDTO> cinemaList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			cinemaList = csBoardDAO.getCinemaList(loIdx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cinemaList;
+	}//getCinemaList()
+
+	public boolean insertCenterWrite(HttpServletRequest request) {
+		System.out.println("CSBoardService insertCenterWrite()");
+		int insertSuccess = 0;
+		try {
+			String centerSubject = request.getParameter("centerSubject");
+			String centerContent = request.getParameter("centerContent");
+			String createUser = request.getParameter("createUser");
+			String loIdx = request.getParameter("loIdx");
+			String ciIdx = request.getParameter("ciIdx");
+			
+			CenterBoardDTO centerBoardDTO = new CenterBoardDTO();
+			centerBoardDTO.setLoIdx(Integer.parseInt(loIdx));
+			centerBoardDTO.setCiIdx(Integer.parseInt(ciIdx));
+			centerBoardDTO.setCenterSubject(centerSubject);
+			centerBoardDTO.setCenterContent(centerContent);
+			centerBoardDTO.setCreateUser(createUser);
+			csBoardDAO = new CSBoardDAO();
+			insertSuccess = csBoardDAO.insertCenterWrite(centerBoardDTO);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return insertSuccess > 0;
+	}//insertCenterWrite();
 
 	
 }//클래스

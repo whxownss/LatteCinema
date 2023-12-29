@@ -8,7 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.itwillbs.domain.CenterBoardDTO;
+import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ExqBoardDTO;
+import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.sql.SqlMapClient;
 
@@ -118,6 +120,74 @@ public class CSBoardDAO {
 		}
 		return updateSuccess;
 	}//updateCenterContent()
+
+	public int deleteCenterContent(CenterBoardDTO centerBoardDTO) {
+		System.out.println("CSBoardDAO deleteCenterContent()");
+		int deleteSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			deleteSuccess = session.delete("CsAdmin.deleteCenterContent", centerBoardDTO);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		
+		return deleteSuccess;
+	}//deleteCenterContent()
+
+	public ArrayList<LocationDTO> getRegionList() {
+		System.out.println("CSBoardDAO getRegionList()");
+		ArrayList<LocationDTO> regionList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			regionList = new ArrayList<LocationDTO>(session.selectList("CsAdmin.getRegionList"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		
+		return regionList;
+	}//getRegionList()
+
+	public ArrayList<CinemaDTO> getCinemaList(String loIdx) {
+		System.out.println("CSBoardDAO getCinemaList()");
+		ArrayList<CinemaDTO> cinemaList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			cinemaList = new ArrayList<CinemaDTO>(session.selectList("CsAdmin.getCinemaList", loIdx));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return cinemaList;
+	}//getCinemaList()
+
+	public int insertCenterWrite(CenterBoardDTO centerBoardDTO) {
+		System.out.println("CSBoardDAO insertCenterWrite()");
+		int insertSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			insertSuccess = session.insert("CsAdmin.insertCenterWrite", centerBoardDTO);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return insertSuccess;
+	}//insertCenterWrite()
 	
 	
 	

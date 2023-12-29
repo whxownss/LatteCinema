@@ -1,3 +1,5 @@
+<%@page import="com.itwillbs.domain.LocationDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -6,6 +8,10 @@
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
+<%
+ArrayList<LocationDTO> regionList = (ArrayList<LocationDTO>)request.getAttribute("regionList");
+String user = "ADMIN2477";
+%>	
 			
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
@@ -40,18 +46,19 @@
 		</section>
 		
 		<section class="category-section" id="">
+		<form action="insertCenterWrite.cs" method="post" name="fr">
+		<input type="hidden" name="createUser" value=<%=user %>>
 			<div class="container" data-aos="fade-up">
-				<select id="locationSelect" class="form-select" aria-label="Default select example">
+				<select id="locationSelect" name="loIdx" class="form-select" aria-label="Default select example">
 					<option selected>지역</option>
-					<option value="1">서울</option>
-					<option value="2">경기/인천</option>
-					<option value="3">경남/부산/울산</option>
+<!-- 					<option value="1">서울</option> -->
+<!-- 					<option value="2">경기/인천</option> -->
+<!-- 					<option value="3">경남/부산/울산</option> -->
 				</select>
-				<select id="movieSelect" class="form-select" aria-label="Default select example">
+				<select id="cinemaSelect" name="ciIdx" class="form-select" aria-label="Default select example">
 				  <option selected>영화관</option>
 				  <option value="전체">전체</option>
-				  <option value="서면">서면</option>
-				  <option value="강남">강남</option>
+
 				</select>
 				<table class="table">
 				  <thead>
@@ -66,12 +73,12 @@
 				    <tr>
 				      <th scope="row">max+1</th>
 				      <td style="width: 100px;"><span id="textSpan">전체</span></td>
-				      <td><input type="text" style="width: 90%;" value="제목 입력하세요."></td>
+				      <td><input type="text" name="centerSubject" style="width: 90%;" value="제목 입력하세요."></td>
 				      <td><span>오늘날짜들어가야함.</span></td>
 				    </tr>
 				    <tr>
 				    	<td colspan="4">
-				    		<textarea class="form-control" style="text-align: center; box-sizing: border-box; resize: none; height: 500px;">
+				    		<textarea class="form-control" name="centerContent" style="text-align: center; box-sizing: border-box; resize: none; height: 500px;">
 내용을 입력해주세요.
 				    		</textarea>
 				   		</td>
@@ -79,68 +86,74 @@
 				    <tr>
 				    	<td colspan="4">
 				    		<div class="d-flex justify-content-around">
-					            <button class="btn btn-dark" type="button" onclick="location.href='cs_center_content.cs'">작성하기</button>
+					            <button class="btn btn-dark" type="button" onclick="check()">작성하기</button>
 					        </div>
 				    	</td>
 				    </tr>
 				  </tbody>
 				</table>
 			</div>
+			</form>
 		</section>
 		
 		
 	</main>
+
+<%@include file="../_common/commonFooterStart.jsp"%>
 <script type="text/javascript">
 $(document).ready(function() {
-	  updateMovieSelect($('#locationSelect').val());
-	  
-      const selectedValue = $('#movieSelect').val();
-      $('#textSpan').text(selectedValue);
-});
-
-const theatersByRegion = {
-	    "1": [{value: "1", text: "강남"}, {value: "2", text: "여의도"}, {value: "3", text: "종로"}], // 서울
-	    "2": [{value: "1", text: "수원"}, {value: "2", text: "인천"}, {value: "3", text: "부천"}], // 경기/인천
-	    "3": [{value: "1", text: "서면"}, {value: "2", text: "해운대"}, {value: "3", text: "울산"}]  // 경남/부산/울산
-};
+      // 지역명 불러오기.
+      $.ajax({
+  	    url: 'getRegionList.cs',  // 서버의 URL을 입력
+  	    type: 'GET',  // 요청 유형을 'GET'으로 설정
+  	    success: function(response) {
+//   	    	debugger;
+  	        // 서버로부터 응답을 성공적으로 받았을 때 실행될 코드
+  	        // 예: 받은 데이터를 페이지에 표시
+  	        var regions = response;
+  	        regions.forEach(function(region) {
+  	            // 각 지역에 대한 새로운 <option> 요소를 생성하고 <select>에 추가
+  	            // 'region' 객체의 구조에 따라 'region.value'와 'region.name'를 적절히 조정
+  	            $('#locationSelect').append($('<option></option>').val(region.loIdx).text(region.loName));
+  	        });
+  	    },
+  	    error: function() {
+  	        // 요청 처리 중 오류가 발생했을 때 실행될 코드
+  	        alert("요청 중 오류가 발생했습니다.");
+  	    }
+  	});
+});//
 
 $('#locationSelect').change(function() {
-	  var selectedRegion = $(this).val();
-	  if(selectedRegion == '지역'){
-		  $('#textSpan').text('전체');
-	  }
-	  updateMovieSelect(selectedRegion);
+		 $.ajax({
+	  	    url: 'getCinemaList.cs',  // 서버의 URL을 입력
+	  	    type: 'GET',  // 요청 유형을 'GET'으로 설정
+	  	    data: {'loIdx': $('#locationSelect').val()},
+	  	    success: function(response) {
+//	   	    	debugger;
+	  	        // 서버로부터 응답을 성공적으로 받았을 때 실행될 코드
+	  	        // 예: 받은 데이터를 페이지에 표시
+	  	        var cinemas = response;
+	  	        $('#cinemaSelect').empty();
+	  	        $('#cinemaSelect').append($('<option>전체</option>'));
+	  	        cinemas.forEach(function(cinema) {
+// 	  	        	debugger;
+	  	            $('#cinemaSelect').append($('<option></option>').val(cinema.ciIdx).text(cinema.ciName));
+	  	        });
+	  	    },
+	  	    error: function() {
+	  	        // 요청 처리 중 오류가 발생했을 때 실행될 코드
+	  	        alert("요청 중 오류가 발생했습니다.");
+	  	    }
+	  	});
+
 });
-
-function updateMovieSelect(regionNumber) {
-    var movieSelect = $('#movieSelect');
-    movieSelect.empty(); // 기존 옵션 제거
-
-    if (theatersByRegion[regionNumber]) {
-        theatersByRegion[regionNumber].forEach(function(theater) {
-            movieSelect.append($('<option>', {
-                value: theater.value, // 숫자를 value로 설정
-                text: theater.text    // 영화관 이름을 텍스트로 설정
-            }));
-        });
-//         debugger; //theatersByRegion[1][1] -> 서울의 강남이 나오는 듯 다시 확인 필요
-    } else {
-        movieSelect.append($('<option>', {
-            value: '0',
-            text: '전체'
-        }));
-    }
+$('#cinemaSelect').change(function(){
+	var cinemaName = $('#cinemaSelect').find('option:selected').text();
+	$('#textSpan').text(cinemaName);
+});
+function check(){
+	document.fr.submit();
 }
-
-
-//셀렉트 박스 값이 변경될 때 이벤트 리스너를 추가합니다.
-// 셀렉트 박스 값이 변경될 때 이벤트 리스너를 추가합니다.
-$('#movieSelect').change(function() {
-    const selectedText = $(this).find('option:selected').text(); // 선택된 영화관의 이름
-    $('#textSpan').text(selectedText);  // 이름을 텍스트로 표시
-    debugger;
-});
-
-
 </script>	
-<%@include file ="../_common/commonFooter.jsp" %>
+<%@include file="../_common/commonFooterEnd.jsp"%>

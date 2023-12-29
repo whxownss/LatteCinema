@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.itwillbs.domain.CenterBoardDTO;
+import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ExqBoardDTO;
+import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.service.CSBoardService;
 
@@ -129,19 +132,74 @@ public class CSController extends HttpServlet  {
 //			response.sendRedirect(""); //ajax를 써서 굳이 주소 적을 필요 없다.
 		}
 		// 공지사항 삭제 하기
-		if(sPath.equals("/deleteCenterContent")) {
-			System.out.println("주소비교 /saveCenterContent.cs 일치");
+		if(sPath.equals("/deleteCenterContent.cs")) {
+			System.out.println("주소비교 /deleteCenterContent.cs 일치");
 			request.setCharacterEncoding("utf-8");
 			
 			csBoardService = new CSBoardService();
-			
+			String msg = "delete fail";
+			if(csBoardService.deleteCenterContent(request)) {
+				msg = "delete success";
+			}
+			System.out.println(msg);
+			//response.sendRedirect("cs_center.cs");
 		}
 		
 		// 공지사항 글쓰기 페이지 이동
 		if(sPath.equals("/cs_center_write.cs")) {
+			System.out.println("주소비교 /cs_center_write.cs 일치");
 			dispatcher = request.getRequestDispatcher("_cs/cs_center_write.jsp");
 			dispatcher.forward(request, response);
-		}	
+		}
+		// 공지사항 글쓰기 페이지 지역 선택
+		if(sPath.equals("/getRegionList.cs")) {
+			System.out.println("주소비교 /getRegionList.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			ArrayList<LocationDTO> regionList = csBoardService.getRegionList();
+//			request.setAttribute("regionList",regionList);
+			// Gson 라이브러리를 사용하여 JSON으로 변환
+		    String json = new Gson().toJson(regionList);
+
+		    // 컨텐츠 타입 설정
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("utf-8");
+
+		    // JSON 문자열을 응답으로 작성
+		    response.getWriter().write(json);
+		}
+		// 공지사항 글쓰기 페이지 지역 선택 후 영화관설정
+		if(sPath.equals("/getCinemaList.cs")) {
+			System.out.println("주소비교 /getCinemaList.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			csBoardService = new CSBoardService();
+			String loIdx = request.getParameter("loIdx");
+			ArrayList<CinemaDTO> cinemaList = csBoardService.getCinemaList(loIdx);
+			// Gson 라이브러리를 사용하여 JSON으로 변환
+		    String json = new Gson().toJson(cinemaList);
+
+		    // 컨텐츠 타입 설정
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("utf-8");
+
+		    // JSON 문자열을 응답으로 작성
+		    response.getWriter().write(json);
+		}
+		// 공지사항 글쓰기 하기
+		if(sPath.equals("/insertCenterWrite.cs")) {
+			System.out.println("주소비교 /insertCenterWrite.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "insert fail";
+			if(csBoardService.insertCenterWrite(request)) {
+				msg = "insert success";
+			}
+			System.out.println(msg);
+			
+			response.sendRedirect("cs_center.cs");
+		}
 		
 		// 자주찾는질문 페이지 이동
 		if(sPath.equals("/cs_exque.cs")) {

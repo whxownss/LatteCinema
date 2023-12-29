@@ -39,7 +39,34 @@
 	</select>
 	<update id="saveCenterContent" parameterType="centerBoardDTO">
 		UPDATE CENTERBOARD 
-		   SET CENTERSUBJECT = #{centerSubject}, CENTERCONTENT = #{centerContent}
+		   SET CENTERSUBJECT = #{centerSubject}, CENTERCONTENT = #{centerContent}, UPDATE_USER = #{updateUser}, UPDATE_DATE = SYSDATE()
 		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
 	</update>
+	<delete id="deleteCenterContent" parameterType="centerBoardDTO">
+		DELETE FROM CENTERBOARD
+ 		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</delete>
+	<select id="getRegionList" resultType="LocationDTO">
+		SELECT * 
+		  FROM LOCATION
+	</select>
+	<select id="getCinemaList" resultType="CinemaDTO" parameterType="String">
+		SELECT CI_IDX,CI_NAME
+		  FROM CINEMA
+		 WHERE LO_IDX = #{loIdx};
+	</select>
+	<insert id="insertCenterWrite" parameterType="CenterBoardDTO">
+		INSERT INTO CENTERBOARD (LO_IDX,CI_IDX,CENTERSUBJECT,CENTERCONTENT,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE)
+		VALUES
+		(
+		 #{loIdx}
+		,#{ciIdx}
+		,#{centerSubject}
+		,#{centerContent}
+		,#{createUser}
+		,sysdate()
+		,NULL
+		,NULL
+		)
+	</insert>
 </mapper>
