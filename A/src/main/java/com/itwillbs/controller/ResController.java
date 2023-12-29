@@ -1,6 +1,7 @@
 package com.itwillbs.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,8 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.itwillbs.domain.CinemaDTO;
+import com.itwillbs.domain.LocationDTO;
+import com.itwillbs.service.ResService;
+
 public class ResController extends HttpServlet {
 	RequestDispatcher dispatcher = null;
+	ResService resService = null;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,6 +32,14 @@ public class ResController extends HttpServlet {
 		
 		// 예약1 페이지 이동
 		if(sPath.equals("/res1.re")) {
+			
+			resService = new ResService();
+			ArrayList<LocationDTO> locationList = resService.getLocations();
+			ArrayList<CinemaDTO> cinemaList = resService.getCinemas();
+			
+			request.setAttribute("locationList", locationList);
+			request.setAttribute("cinemaList", cinemaList);
+			
 			dispatcher = request.getRequestDispatcher("_reservation/res1.jsp");
 			dispatcher.forward(request, response);
 		}

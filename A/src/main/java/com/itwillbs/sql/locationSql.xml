@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Location">
+
+	<select id="select" resultType="LocationDTO">
+		SELECT LO_IDX
+			 , LO_NAME
+		  FROM LOCATION
+		 WHERE 1=1
+	</select>
+
+<!-- 	<insert id="insertMember" parameterType="MemberDTO"> -->
+<!-- 		INSERT INTO MEMBERS -->
+<!-- 		 	 ( MEM_IDX -->
+<!-- 		 	 , MEM_ID -->
+<!-- 		 	 , MEM_PASS -->
+<!-- 		 	 , MEM_NAME -->
+<!-- 		 	 , MEM_PHONE -->
+<!-- 		 	 , MEM_JOIN_D -->
+<!-- 		 	 , MEM_EMAIL   -->
+<!-- 		 	 , MEM_BIRTH_D -->
+<!-- 		 	 , MEM_ADDRESS) -->
+<!-- 		VALUES ( -->
+<!-- 				(SELECT * -->
+<!-- 				  FROM (SELECT IFNULL(MAX(CAST(MEM_IDX as unsigned)), 0) + 1 -->
+<!-- 						  FROM MEMBERS) A) -->
+<!-- 			 , #{id} -->
+<!-- 			 , #{pass} -->
+<!-- 			 , #{name} -->
+<!-- 			 , #{phone} -->
+<!-- 			 , #{date} -->
+<!-- 			 , #{eMail} -->
+<!-- 			 , #{birth} -->
+<!-- 			 , #{address}) -->
+<!-- 	</insert> -->
+	
+<!-- 	<delete id="delete"> -->
+<!-- 		DELETE FROM MEMBERS -->
+<!-- 		 WHERE IDX = #{idx} -->
+<!-- 	</delete> -->
+	
+	
+	
+	
+	
+	
+	
+</mapper>
