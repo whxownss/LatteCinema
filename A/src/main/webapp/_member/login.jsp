@@ -3,37 +3,7 @@
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 <script src="jQuery/jquery-3.6.0.js"></script>
-<script>
-$(() => {
-	
-	$("#login").submit(function() {
-		if($("#id").val() == ""){
-			if(!$("#idCheck").length){
-				$("#pwdCheck").remove();
-				$("#formCheck").append("<span id='idCheck'>아이디를 입력하세요.</span>");
-				$("#idCheck").css("color", "red");
-			}
-			return false;	
-		}
-		
-		if ($("#pwd").val() == "") {
-			if(!$("#pwdCheck").length){
-				$("#idCheck").remove();
-				$("#formCheck").append("<span id='pwdCheck'>비밀번호를 입력하세오.</span>");
-				$("#pwdCheck").css("color","red");
-			}
-			return false;
-		}
-		
-		return true;
-	})
-	
-	
-});
 
-
-
-</script>
 
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
@@ -111,4 +81,36 @@ $(() => {
 	
 	</main>
 	
-<%@include file ="../_common/commonFooter.jsp" %>
+<%@include file ="../_common/commonFooterStart.jsp" %>
+<script>
+$(() => {
+	
+	$("#login").submit(function() {
+		if($("#id").val() == ""){
+			if(!$("#idCheck").length){
+				$("#pwdCheck").remove();
+				$("#formCheck").append("<span id='idCheck'>아이디를 입력하세요.</span>");
+				$("#idCheck").css("color", "red");
+			}
+			return false;	
+		}
+		
+		if ($("#pwd").val() == "") {
+			if(!$("#pwdCheck").length){
+				$("#idCheck").remove();
+				$("#formCheck").append("<span id='pwdCheck'>비밀번호를 입력하세오.</span>");
+				$("#pwdCheck").css("color","red");
+			}
+			return false;
+		}
+		
+		return true;
+	})
+	
+	
+});
+
+
+
+</script>
+<%@include file ="../_common/commonFooterEnd.jsp" %>

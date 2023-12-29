@@ -62,6 +62,6 @@
         </div>
     </section>
 	</main>
-  <jsp:include page="../_common/footer.jsp" ></jsp:include>
-</body>
-</html>
+<%@include file ="../_common/commonFooterStart.jsp" %>
+
+<%@include file ="../_common/commonFooterEnd.jsp" %>

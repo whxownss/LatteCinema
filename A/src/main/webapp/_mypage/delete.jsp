@@ -11,10 +11,7 @@
 </head>
 
 <body>
-<script type="text/javascript">
 
-
-</script>
 
 <jsp:include page="../_common/header.jsp"></jsp:include>
 <main id="main">
@@ -99,6 +96,6 @@
     </div>
   </section>
 </main>
-<jsp:include page="../_common/footer.jsp"></jsp:include>
-</body>
-</html>
+<%@include file ="../_common/commonFooterStart.jsp" %>
+
+<%@include file ="../_common/commonFooterEnd.jsp" %>
