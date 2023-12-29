@@ -257,6 +257,7 @@
 	<script src="owlcarousel/owl.carousel.min.js"></script>	
 	<script>
             $(document).ready(function() {
+            	// 템플릿에 잇던거
               var owl = $('.owl-carousel');
               owl.owlCarousel({
                 loop: true,
@@ -285,6 +286,11 @@
                 }
                 e.preventDefault();
               });
+              // -----------------------------------
+              $.ajax({
+             
+              })
+              
             })
           </script>
 
