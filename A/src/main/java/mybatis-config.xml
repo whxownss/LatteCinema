@@ -15,6 +15,7 @@
         <typeAlias type="com.itwillbs.domain.MemberDTO" alias="MemberDTO"/>
         <typeAlias type="com.itwillbs.domain.LocationDTO" alias="LocationDTO"/>
         <typeAlias type="com.itwillbs.domain.CinemaDTO" alias="CinemaDTO"/>
+        <typeAlias type="com.itwillbs.domain.QnaBoardDTO" alias="QnaBoardDTO"/>
     </typeAliases>
 
 	<environments default="development">

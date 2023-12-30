@@ -1,5 +1,6 @@
 package com.itwillbs.service;
 
+import java.io.BufferedReader;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,12 +9,14 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.gson.Gson;
 import com.itwillbs.dao.CSBoardDAO;
 import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ExqBoardDTO;
 import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.PageDTO;
+import com.itwillbs.domain.QnaBoardDTO;
 
 public class CSBoardService {
 	CSBoardDAO csBoardDAO = null;
@@ -206,6 +209,123 @@ public class CSBoardService {
 		}
 		return insertSuccess > 0;
 	}//insertCenterWrite();
+
+	public ArrayList<QnaBoardDTO> getQnaBoardList(PageDTO pageDTO) {
+		System.out.println("CSBoardService getQnaBoardList()");
+		ArrayList<QnaBoardDTO> qnaBoardList = null;
+		
+		try {
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			qnaBoardList = csBoardDAO.getQnaBoardList(pageDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return qnaBoardList;
+	}//getQnaBoardList()
+
+	public int getQnaBoardCount() {
+		System.out.println("CSBoardService getQnaBoardCount()");
+		int count = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getQnaBoardCount();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getQnaBoardCount()
+
+	public QnaBoardDTO getQnaBoard(String createUser, String createDate) {
+		System.out.println("CSBoardService getQnaBoard()");
+		QnaBoardDTO qnaBoardDTO = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			qnaBoardDTO = csBoardDAO.getQnaBoard(createUser,createDate);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return qnaBoardDTO;
+	}//getQnaBoard()
+
+	public boolean updateQnaBoard(HttpServletRequest request) {
+		System.out.println("CSBoardService updateQnaBoard()");
+		int qnaUpdateSuccess = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+	        // 요청으로부터 JSON 데이터 읽기
+	        StringBuilder jsonBuffer = new StringBuilder();
+	        String line;
+	        BufferedReader reader = request.getReader();
+	        while ((line = reader.readLine()) != null) {
+	            jsonBuffer.append(line);
+	        }
+	        String jsonStr = jsonBuffer.toString();
+
+	        // Gson 객체 생성
+	        Gson gson = new Gson();
+
+	        // JSON 문자열을 Java 객체로 변환
+	        QnaBoardDTO qnaBoardDTO = gson.fromJson(jsonStr, QnaBoardDTO.class);
+
+//	        // 데이터 사용
+//	        String qnaResponse = qnaBoardDTO.getQnaResponse();
+//	        String responseUser = qnaBoardDTO.getResponseUser();
+//	        String createUser = qnaBoardDTO.getCreateUser();
+//	        String createDate = qnaBoardDTO.getCreateDate();
+	        qnaUpdateSuccess = csBoardDAO.updateQnaBoard(qnaBoardDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return qnaUpdateSuccess > 0;
+	}//updateQnaBoard()
+
+	public boolean qnaBoardInsert(HttpServletRequest request) {
+		System.out.println("CSBoardService qnaBoardInsert()");
+		int insertSuccess = 0;
+		try {
+			String qnaCategory = request.getParameter("qnaCategory");
+			String createUser = request.getParameter("createUser");
+			String qnaContent = request.getParameter("qnaContent");
+			
+			QnaBoardDTO qnaBoardDTO = new QnaBoardDTO();
+			qnaBoardDTO.setQnaCategory(qnaCategory);
+			qnaBoardDTO.setCreateUser(createUser);
+			qnaBoardDTO.setQnaContent(qnaContent);
+			csBoardDAO = new CSBoardDAO();
+			insertSuccess = csBoardDAO.qnaBoardInsert(qnaBoardDTO);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return insertSuccess > 0;
+	}//qnaBoardInsert()
+
+	public ArrayList<QnaBoardDTO> getQnaBoardList(PageDTO pageDTO, String qnaCategory) {
+		System.out.println("CSBoardService getQnaBoardList() search");
+		ArrayList<QnaBoardDTO> qnaBoardList = null;
+		try {
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			qnaBoardList = csBoardDAO.getQnaBoardList(pageDTO,qnaCategory);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return qnaBoardList;
+	}//
 
 	
 }//클래스

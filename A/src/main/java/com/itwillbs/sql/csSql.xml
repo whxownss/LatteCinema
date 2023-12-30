@@ -69,4 +69,47 @@
 		,NULL
 		)
 	</insert>
+	
+	<select id="getQnaBoardList" resultType="QnaBoardDTO" parameterType="PageDTO">
+		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
+	  	  FROM QNABOARD
+ 		 ORDER BY CREATE_DATE  DESC 
+ 		 LIMIT #{startRow}, #{pageSize}
+	</select>
+	<select id="getQnaBoardCount" resultType="int">
+		SELECT COUNT(*) 
+	 	  FROM QNABOARD
+	</select>
+	<select id="searchQnaBoardList" resultType="QnaBoardDTO" parameterType="map">
+		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
+	  	  FROM QNABOARD
+	  	 WHERE QNACATEGORY = #{qnaCategory}
+ 		 ORDER BY CREATE_DATE  DESC 
+ 		 LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
+	</select>
+	<select id="getQnaBoard" resultType="QnaBoardDTO" parameterType="map">
+		 SELECT *
+		   FROM QNABOARD
+		  WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate};
+	</select>
+	<update id="updateQnaBoard" parameterType="QnaBoardDTO">
+		UPDATE QNABOARD
+		   SET QNARESPONSE = #{qnaResponse}, RESPONSE_USER = #{responseUser}, RESPONSE_DATE = SYSDATE()
+		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</update>
+	<insert id="qnaBoardInsert" parameterType="QnaBoardDTO">
+		INSERT INTO QNABOARD
+		VALUES ((SELECT *
+		   FROM (SELECT IFNULL(MAX(CAST(QNAIDX as unsigned)), 0) + 1
+				   FROM QNABOARD) Q)
+		,#{qnaCategory}
+		,'비밀글입니다'
+		,#{qnaContent}
+		,NULL
+		,#{createUser}
+		,SYSDATE()
+		,NULL
+		,NULL
+		);
+	</insert>
 </mapper>

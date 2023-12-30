@@ -106,7 +106,7 @@ $(document).ready(function() {
       $.ajax({
   	    url: 'getRegionList.cs',  // 서버의 URL을 입력
   	    type: 'GET',  // 요청 유형을 'GET'으로 설정
-  	    success: function(response) {
+  	    success: function(response) { //response에 내가 가져온 json값이 있음.
 //   	    	debugger;
   	        // 서버로부터 응답을 성공적으로 받았을 때 실행될 코드
   	        // 예: 받은 데이터를 페이지에 표시
