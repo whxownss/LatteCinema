@@ -166,7 +166,7 @@ public class MemberController extends HttpServlet {
 			request.setCharacterEncoding("utf-8");
 			memberService = new MemberService();
 			memberService.updateMember(request);
-			response.sendRedirect("userInfo.me");
+			response.sendRedirect("myPage.me");
 		}//
 		
 		// 마이페이지 myMovie(무비스토리) 이동

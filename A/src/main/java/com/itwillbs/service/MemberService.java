@@ -20,7 +20,7 @@ public class MemberService {
 			String pass = request.getParameter("pass");
 			String name = request.getParameter("name");
 			String phone = request.getParameter("phone");
-			String address = request.getParameter("postcode") + request.getParameter("address1") + request.getParameter("address2");
+			String address = request.getParameter("postcode") + "/" + request.getParameter("address1") + "/" + request.getParameter("address2");
 			String birth = request.getParameter("birth");
 			String email = request.getParameter("email");
 			Timestamp date = new Timestamp(System.currentTimeMillis());
@@ -54,21 +54,21 @@ public class MemberService {
 		try {
 			String id = request.getParameter("id");
 			String pass = request.getParameter("pass");
-			String name = request.getParameter("name");
-			String phone = request.getParameter("phone");
-			String address = request.getParameter("postcode") + "/" + request.getParameter("address1") + "/" + request.getParameter("address2");
-			String birth = request.getParameter("birth");
-			String email = request.getParameter("email");
+//			String name = request.getParameter("name");
+//			String phone = request.getParameter("phone");
+//			String address = request.getParameter("postcode") + "/" + request.getParameter("address1") + "/" + request.getParameter("address2");
+//			String birth = request.getParameter("birth");
+//			String email = request.getParameter("email");
 			
 			
 			memberDAO = new MemberDAO();
 			memberDTO.setMemId(id);
 			memberDTO.setMemPass(pass);
-			memberDTO.setMemName(name);
-			memberDTO.setMemPhone(phone);
-			memberDTO.setMemAddress(address);
-			memberDTO.setMemBirthD(birth);
-			memberDTO.setMemEmail(email);
+//			memberDTO.setMemName(name);
+//			memberDTO.setMemPhone(phone);
+//			memberDTO.setMemAddress(address);
+//			memberDTO.setMemBirthD(birth);
+//			memberDTO.setMemEmail(email);
 			memberDTO = memberDAO.userCheck(memberDTO);
 			
 		} catch (Exception e) {

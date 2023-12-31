@@ -60,8 +60,8 @@
             
 <!--             <form name="mbInfoForm" method="post"  > -->
             
-            	<input type="" name="id" value="${memberDTO.memId }">
-            	<input type="" name="pass" value="${memberDTO.memPass }">
+            	<input type="hidden" name="id" value="${memberDTO.memId }">
+            	<input type="hidden" name="pass" value="${memberDTO.memPass }">
             	
 <!--               <input type="hidden" name="mbNo" value="3487839"> -->
 <!--               <input type="hidden" name="phoneNo" value="010-3333-3333"> -->
@@ -168,9 +168,11 @@
                     <tr>
                       <th scope="row">주소</th>
                       <td>
-                        <span name="postcode">${memberDTO.memAddress.split("/")[0]}</span>
-                        <a href="#none" id="addrBtn" class="button small gray-line ml10" title="우편번호 검색">우편번호 검색</a>
-                        <p class="reset mt10" id="addr1" name="addr1">${memberDTO.memAddress.split("/")[1]}</p><br>
+                      	<input type="text" id="postcode" name="postcode" value="${memberDTO.memAddress.split("/")[0]}">
+<%--                         <span name="postcode">${memberDTO.memAddress.split("/")[0]}</span> --%>
+                        <a href="#none" id="addrBtn" class="button small gray-line ml10" title="우편번호 검색">우편번호 검색</a><br>
+<%--                         <p class="reset mt10" id="addr1" name="addr1">${memberDTO.memAddress.split("/")[1]}</p><br> --%>
+						<input class="reset mt10" id="addr1" name="addr1" value="${memberDTO.memAddress.split("/")[1]}">
                         <input type="text" id="addr2" name="addr2" value="${memberDTO.memAddress.split('/')[2]}" placeholder="상세주소 입력" required>
                         
                       </td>
@@ -232,18 +234,24 @@
                         target.prev().html(d.zonecode);
                         target.next().html(d.address+extraAddr);
 
-                        $('[name=zipcd]').val(d.zonecode);
-                        $('[name=mbAddr]').val(d.address+extraAddr);
+                        $('[name=postcode]').val(d.zonecode);
+                        $('[name=addr1]').val(d.address+extraAddr);
                     }
                 }).open();
             });
         });
         
         // 주소변경시 상세주소 change
-        $('#addr1').on('DOMSubtreeModified', function (e) {
+        $('#addr1').on('change', function (e) {
             $('#addr2').val('');
         	
 		});
+        
+//         $('#addr1').on('DOMSubtreeModified', function (e) {
+//             $('#addr2').val('');
+        	
+// 		});
+
 
         // IPIN 인증
         $('#ipinBtn').on('click', function(e) {
