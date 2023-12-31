@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -287,6 +289,7 @@ public class CSController extends HttpServlet  {
 			
 			//추가한 부분
 			String qnaCategory = request.getParameter("qnaCategory");
+			System.out.println("@@@@->" + qnaCategory);
 			if(qnaCategory == null) {
 				qnaCategory = "";
 			}
@@ -324,19 +327,23 @@ public class CSController extends HttpServlet  {
 			request.setAttribute("pageDTO", pageDTO);			
 			request.setAttribute("qnaBoardList",qnaBoardList);
 			if(!qnaCategory.equals("")) {
-//				System.out.println("@@@" + qnaBoardList.toString());
-				// Gson 라이브러리를 사용하여 JSON으로 변환
-				String json = new Gson().toJson(qnaBoardList);
-//				System.out.println(json);
-				// 컨텐츠 타입 설정
-				response.setContentType("application/json");
-				response.setCharacterEncoding("utf-8");
 				
-				// JSON 문자열을 응답으로 작성
-				response.getWriter().write(json);
-				return;
+			    // 리스트와 PageDTO를 모두 포함할 Map 또는 사용자 정의 객체 생성
+			    Map<String, Object> responseData = new HashMap<>();
+			    responseData.put("qnaBoardList", qnaBoardList);
+			    responseData.put("pageDTO", pageDTO);
+
+			    // Map 또는 사용자 정의 객체 직렬화
+			    String json = new Gson().toJson(responseData);
+
+			    // 컨텐츠 타입과 인코딩 설정
+			    response.setContentType("application/json");
+			    response.setCharacterEncoding("utf-8");
+			    
+			    // JSON 문자열을 응답으로 작성
+			    response.getWriter().write(json);
+			    return;
 			}
-//		    System.out.println("if문 넘어가나?");
 			dispatcher = request.getRequestDispatcher("_cs/cs_qna.jsp");
 			dispatcher.forward(request, response);
 		}

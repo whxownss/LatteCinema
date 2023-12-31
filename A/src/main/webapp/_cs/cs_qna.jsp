@@ -51,7 +51,7 @@
 				  <div class="col-md-2">
 					<div class="input-group mb-3">
 					  <select class="form-select" id="qnaCategory" name="qnaCategory">
-						<option selected class="text-muted">카테고리</option>
+						<option selected class="text-muted" value="">카테고리</option>
 						<option value="상영작">상영작</option>
 						<option value="예매">예매</option>
 						<option value="기타">기타</option>
@@ -127,11 +127,18 @@ $('#qnaCategory').change(function() {
  	    type: 'GET',  // 요청 유형을 'GET'으로 설정
  	    data: {'qnaCategory': $('#qnaCategory').val()},
  	    success: function(response) {
-// 			alert("검색 성공");
-			var searches = response;
+ 	    	if($('#qnaCategory').val() == ''){
+ 	    		window.location.href = 'cs_qna.cs';
+ 	    		return;
+ 	    	}
+	// 'response' 객체에서 'qnaBoardList'와 'pageDTO' 데이터 추출
+	        var qnaBoardList = response.qnaBoardList;
+	        var pageDTO = response.pageDTO;
+	        debugger;
+// 			var searches = response;
 			$('#tbody').empty();
   	       
-			searches.forEach(function(search) {
+			qnaBoardList.forEach(function(search) {
                 // 새로운 행(<tr>)을 생성하고 각 칼럼(<td>)에 데이터 추가
                 var newRow = $('<tr></tr>');
                 newRow.append($('<td></td>').text(search.rn));  
