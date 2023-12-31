@@ -325,7 +325,19 @@ public class CSBoardService {
 			e.printStackTrace();
 		}
 		return qnaBoardList;
-	}//
+	}// qnaCategory로 검색
+
+	public int getQnaBoardCount(String qnaCategory) {
+		System.out.println("CSBoardService getQnaBoardCount() search");
+		int count = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getQnaBoardCount(qnaCategory);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}// qnaCategory로 검색 페이징 처리를 위한 count
 
 	
 }//클래스

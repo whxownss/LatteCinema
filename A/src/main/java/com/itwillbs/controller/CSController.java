@@ -294,9 +294,12 @@ public class CSController extends HttpServlet  {
 				qnaCategory = "";
 			}
 			
+			int count = csBoardService.getQnaBoardCount();
 			ArrayList<QnaBoardDTO> qnaBoardList = csBoardService.getQnaBoardList(pageDTO);
 			if(!qnaCategory.equals("")) {
+				System.out.println("@@@@@@@@@@ cs_qna서치페이징");
 				qnaBoardList = csBoardService.getQnaBoardList(pageDTO,qnaCategory);
+				count = csBoardService.getQnaBoardCount(qnaCategory);
 			}
 			//추가한 부분
 
@@ -304,7 +307,7 @@ public class CSController extends HttpServlet  {
 			// 페이징 작업
 			// int 리턴할 형 getBoardCount() 메서드 정의
 			// int count = getBoardCount() 메서드 호출
-			int count = csBoardService.getQnaBoardCount();
+//			int count = csBoardService.getQnaBoardCount();
 			// 한 화면에 보여줄 페이지 개수 설정
 			int pageBlock = 10;
 			// 시작하는 페이지 번호 구하기
@@ -350,7 +353,64 @@ public class CSController extends HttpServlet  {
 		// 1:1문의 글 검색 이거 말고 다르게 해보자.
 		if(sPath.equals("/cs_qnaSearch.cs")) {
 			System.out.println("주소비교 /cs_qnaSearch.cs 일치");
-		}
+			String pageNum = request.getParameter("pageNum");
+			String qnaCategory = request.getParameter("qnaCategory");
+			// cs_exque.cs
+			// cs_exque.cs?pageNum=2
+			// 한 화면에 보여줄 글개수 설정
+			int pageSize = 10;
+			// 현 페이지 번호
+//			String pageNum = request.getParameter("pageNum");
+			
+			// pageNum => 정수형 변경
+			int currentPage = Integer.parseInt(pageNum);
+			
+			// PageDTO 객체생성 
+			PageDTO pageDTO = new PageDTO();
+			// set메서드 호출해서 값을 저장
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			
+			CSBoardService csBoardService = new CSBoardService();
+			
+			System.out.println("@@@@->" + qnaCategory);
+			
+			int count = 0;
+			ArrayList<QnaBoardDTO> qnaBoardList = null;
+			if(!qnaCategory.equals("")) {
+				System.out.println("@@@@@@@@@@ cs_qna서치페이징");
+				qnaBoardList = csBoardService.getQnaBoardList(pageDTO,qnaCategory);
+				count = csBoardService.getQnaBoardCount(qnaCategory);
+			}
+//						ArrayList<QnaBoardDTO> qnaBoardList = csBoardService.getQnaBoardList(pageDTO);
+			// 페이징 작업
+			// int 리턴할 형 getBoardCount() 메서드 정의
+			// int count = getBoardCount() 메서드 호출
+//						int count = csBoardService.getQnaBoardCount();
+			// 한 화면에 보여줄 페이지 개수 설정
+			int pageBlock = 10;
+			// 시작하는 페이지 번호 구하기
+			int startPage = (currentPage-1)/pageBlock*pageBlock+1;
+			// 끝나는 페이지 번호 구하기
+			int endPage = startPage + pageBlock -1;
+			// 전체 페이지 수 구하기
+			int pageCount = count / pageSize + (count % pageSize == 0?0:1);
+			if(endPage > pageCount) {
+				endPage = pageCount;
+			}
+			//pageDTO에 페이징 관련값 저장
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
+			request.setAttribute("pageDTO", pageDTO);			
+			request.setAttribute("qnaBoardList",qnaBoardList);
+			dispatcher = request.getRequestDispatcher("_cs/cs_qna.jsp");
+			dispatcher.forward(request, response);
+		}//
 		// 1:1문의 글내용 페이지 이동
 		if(sPath.equals("/cs_qna_content.cs")) {
 			System.out.println("주소비교 /cs_qna_content.cs 일치");

@@ -96,7 +96,7 @@
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
 				<div class="pagination-container d-flex justify-content-center">
-				  <ul class="pagination">
+				  <ul class="pagination" id="searchPaging">
 					<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
 					    <li class="page-item disabled">
 					      <a class="page-link text-secondary" href="cs_qna.cs?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
@@ -134,10 +134,12 @@ $('#qnaCategory').change(function() {
 	// 'response' 객체에서 'qnaBoardList'와 'pageDTO' 데이터 추출
 	        var qnaBoardList = response.qnaBoardList;
 	        var pageDTO = response.pageDTO;
-	        debugger;
-// 			var searches = response;
+// 	        debugger;
+			var qnaCategories = qnaBoardList.map(function(item) {
+			    return item.qnaCategory;
+			});
+			debugger;
 			$('#tbody').empty();
-  	       
 			qnaBoardList.forEach(function(search) {
                 // 새로운 행(<tr>)을 생성하고 각 칼럼(<td>)에 데이터 추가
                 var newRow = $('<tr></tr>');
@@ -149,6 +151,33 @@ $('#qnaCategory').change(function() {
                 // 완성된 행을 tbody에 추가
                 $('#tbody').append(newRow);
             });
+			$('#searchPaging').empty();  // 페이지네이션 영역 비우기
+			    // '이전' 버튼
+			    if(pageDTO.startPage > pageDTO.pageBlock) {
+			        $('#searchPaging').append(
+			            '<li class="page-item disabled">' +
+			            '<a class="page-link text-secondary" href="cs_qna.cs?pageNum=' + (pageDTO.startPage - pageDTO.pageBlock) + '" tabindex="-1" aria-disabled="true">이전</a>' +
+			            '</li>'
+			        );
+			    }
+			    // 페이지 번호 버튼
+			    for(var i = pageDTO.startPage; i <= pageDTO.endPage; i++) {
+			        $('#searchPaging').append(
+			            '<li class="page-item" aria-current="page">' +
+// 			            '<a class="page-link text-secondary" href="cs_qna.cs?pageNum=' + i + '&qnaCategory=' +encodeURIComponent(qnaCategories) + '">' + i + '</a>' +
+// 			            '<a class="page-link text-secondary" href="cs_qna.cs?pageNum=' + i + '&qnaCategory=' + encodeURIComponent($('#qnaCategory').val()) + '">' + i + '</a>' +		
+			            '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + i + ', \'' + $('#qnaCategory').val() + '\'); return false;">' + i + '</a>' +
+			            '</li>'
+			        );
+			    }
+			    // '다음' 버튼
+			    if(pageDTO.endPage < pageDTO.pageCount) {
+			        $('#searchPaging').append(
+			            '<li class="page-item">' +
+			            '<a class="page-link text-secondary" href="cs_qna.cs?pageNum=' + (pageDTO.startPage + pageDTO.pageBlock) + '">다음</a>' +
+			            '</li>'
+			        );
+			    }
   	    },
  	    error: function() {
  	        // 요청 처리 중 오류가 발생했을 때 실행될 코드
@@ -156,5 +185,14 @@ $('#qnaCategory').change(function() {
  	    }
  	});
 });
+function searchPageNm(pageNum, qnaCategory){
+    // URL 구성
+    var url = 'cs_qnaSearch.cs?pageNum=' + pageNum + '&qnaCategory=' + encodeURIComponent(qnaCategory);
+    
+    // 사용자를 생성된 URL로 리다이렉트
+    window.location.href = url;
+}
+
+
 </script>
 <%@include file="../_common/commonFooterEnd.jsp"%>

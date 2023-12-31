@@ -112,4 +112,9 @@
 		,NULL
 		);
 	</insert>
+	<select id="searchQnaBoardCount" resultType="int" parameterType="String">
+		SELECT COUNT(*) 
+		  FROM QNABOARD 
+		 WHERE QNACATEGORY = #{qnaCategory};
+	</select>
 </mapper>

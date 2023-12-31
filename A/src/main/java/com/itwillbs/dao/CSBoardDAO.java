@@ -296,7 +296,22 @@ public class CSBoardDAO {
 	        }
 		}
 		return qnaBoardList;
-	}//
+	}// qnaCategory로 검색 getQnaBoardList()
+
+	public int getQnaBoardCount(String qnaCategory) {
+		int count = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			count = session.selectOne("CsAdmin.searchQnaBoardCount",qnaCategory);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return count;
+	}// qnaCategory로 검색 getQnaBoardCount()
 	
 	
 	
