@@ -211,6 +211,18 @@ public class MemberController extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("_mypage/changepw.jsp");
 			dispatcher.forward(request, response);
 		}//
+		
+		// 비밀번호 변경 changepwPro
+		if(sPath.equals("/changepwPro.me")) {
+			
+			
+			
+			
+			
+			response.sendRedirect("myPage.me");
+		}//
+		
+		
 		// 마이페이지 myinquiry(문의내역) 이동
 		if(sPath.equals("/myinquiry.me")) {
 			dispatcher = request.getRequestDispatcher("_mypage/myinquiry.jsp");

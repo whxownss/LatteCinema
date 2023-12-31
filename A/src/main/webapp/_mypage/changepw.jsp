@@ -19,7 +19,7 @@
       <!-- 이곳에 코드작성 -->
       <div class="inner-wrap">
         <jsp:include page="lnb.jsp"></jsp:include>
-        <form id="moveFrm" method="post" action="userInfo.me">
+        <form id="moveFrm" method="post" action="changepwPro.me">
 			<div id="contents">
 				<h2 class="tit">비밀번호 변경</h2>
 			
@@ -76,5 +76,12 @@
   </section>
 </main>
 <%@include file ="../_common/commonFooterStart.jsp" %>
+<script>
+// 비밀번호 정규식
+var lengthRegexPass = /^[A-Za-z0-9!@#$%]{8,16}$/; // 영문 대소문자 숫자 특수문자 8~16자 규칙(패스워드)
+// 비밀번호 확인 유효성 (새 비밀번호 > 새 비밀번호 재입력 확인 유효성)
 
+
+
+</script>
 <%@include file ="../_common/commonFooterEnd.jsp" %>
