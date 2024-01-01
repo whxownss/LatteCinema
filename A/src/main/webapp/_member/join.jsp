@@ -168,8 +168,12 @@
 </script>
 
 <script>
+// $("form").submit(function () {
+
+
 // 회원가입 정규식
-var lengthRegexID = /^[A-Za-z0-9!@#$%]{5,16}$/; // 영문 대소문자 숫자 특수문자 8~16자 규칙(아이디)
+var empJ = /\s/g; // 공백 정규식
+var lengthRegexID = /^[A-Za-z0-9!@#$%]{5,16}$/; // 영문 대소문자 숫자 특수문자 5~16자 규칙(아이디)
 var lengthRegexPass = /^[A-Za-z0-9!@#$%]{8,16}$/; // 영문 대소문자 숫자 특수문자 8~16자 규칙(패스워드)
 var engUpperRegex = /[A-Z]/; //대문자 규칙 (비밀번호)
 var engLowerRegex = /[a-z]/;  //소문자 규칙 (비밀번호)
@@ -322,6 +326,8 @@ function checkEmail() {
 	
 	$("#CheckEmail").text(text).css("color" , color).css("font-size", "15px");
 }
-		
+	
+// });
+
 </script>
 <%@include file="../_common/commonFooterEnd.jsp"%>
