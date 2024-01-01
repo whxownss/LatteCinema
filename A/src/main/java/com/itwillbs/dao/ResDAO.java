@@ -1,6 +1,7 @@
 package com.itwillbs.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -29,12 +30,29 @@ public class ResDAO {
 		return cinemaList;
 	}
 
-	public List<ScheduleDTO> selectSchedule() {
+	public List<ScheduleDTO> selectSchedule(Map<String, String> map) {
 		SqlSession session = sqlSessionFactory.openSession();
-		List<ScheduleDTO> scheduleList = session.selectList("Schedule.select");
+		List<ScheduleDTO> scheduleList = session.selectList("Schedule.select", map);
 		session.close();
 		
 		return scheduleList;
+	}
+
+	public List<CinemaDTO> selectOpenCinema() {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<CinemaDTO> openCinemaList = session.selectList("Cinema.selectOpenCinema");
+		session.close();
+		
+		return openCinemaList;
+	}
+
+	public List<ScheduleDTO> selectMovieList(String cinema) {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<ScheduleDTO> movieList = session.selectList("Schedule.selectMovieList", cinema);
+		
+		
+		
+		return movieList;
 	}
 	
 	

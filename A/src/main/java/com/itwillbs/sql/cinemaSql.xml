@@ -15,36 +15,15 @@
 		 WHERE 1=1
 	</select>
 
-<!-- 	<insert id="insertMember" parameterType="MemberDTO"> -->
-<!-- 		INSERT INTO MEMBERS -->
-<!-- 		 	 ( MEM_IDX -->
-<!-- 		 	 , MEM_ID -->
-<!-- 		 	 , MEM_PASS -->
-<!-- 		 	 , MEM_NAME -->
-<!-- 		 	 , MEM_PHONE -->
-<!-- 		 	 , MEM_JOIN_D -->
-<!-- 		 	 , MEM_EMAIL   -->
-<!-- 		 	 , MEM_BIRTH_D -->
-<!-- 		 	 , MEM_ADDRESS) -->
-<!-- 		VALUES ( -->
-<!-- 				(SELECT * -->
-<!-- 				  FROM (SELECT IFNULL(MAX(CAST(MEM_IDX as unsigned)), 0) + 1 -->
-<!-- 						  FROM MEMBERS) A) -->
-<!-- 			 , #{id} -->
-<!-- 			 , #{pass} -->
-<!-- 			 , #{name} -->
-<!-- 			 , #{phone} -->
-<!-- 			 , #{date} -->
-<!-- 			 , #{eMail} -->
-<!-- 			 , #{birth} -->
-<!-- 			 , #{address}) -->
-<!-- 	</insert> -->
-	
-<!-- 	<delete id="delete"> -->
-<!-- 		DELETE FROM MEMBERS -->
-<!-- 		 WHERE IDX = #{idx} -->
-<!-- 	</delete> -->
-	
+	<select id="selectOpenCinema" resultType="CinemaDTO">
+		SELECT L.LO_NAME "LO_NAME"
+			 , C.CI_NAME "CI_NAME"
+		  FROM CINEMA C
+		  JOIN LOCATION L
+		    ON C.LO_IDX = L.LO_IDX 
+		 WHERE 1=1
+		   AND C.CI_OC = "Y"
+	</select>	
 	
 	
 	
