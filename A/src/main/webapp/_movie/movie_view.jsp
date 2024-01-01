@@ -317,6 +317,33 @@
     });
   });
 </script>
+
+
+	<!-- kmdb 줄거리 등 이용해야함 -->
+  <!-- <script type="text/javascript">
+	$(function(){
+		$.ajax({
+			url : 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json',
+			type : 'GET',
+			data : {
+					key : "ee9ed756bb3f15468dceccf766e69e7b",
+					targetDt : "20190900"                         //날짜형식이 틀리면 최신날짜를 보여주는걸로 알고있음
+			},
+			async : false,                              //비동기식인 ajax를 동기식으로 만들어줌 만약 출력해야될 결과가 많거나 제대로 출력되지 않을때, 이 옵션을 사용
+			success : function(data) {                        //data에 들어오는 값들은 앞에서 출력되던 예시와 같음
+				var html = '';
+				html += '<option value="">영화이름 선택</option>';                      
+				 for (var i = 0; i < data.boxOfficeResult.dailyBoxOfficeList.length; i++) {
+					html += '<option value="'+ data.boxOfficeResult.dailyBoxOfficeList[i].movieNm
+								 +'"movieCd="'+ data.boxOfficeResult.dailyBoxOfficeList[i].movieCd
+								 +'"openDt= "'+data.boxOfficeResult.dailyBoxOfficeList[i].openDt
+								 		+'">'+ data.boxOfficeResult.dailyBoxOfficeList[i].movieNm + '</option>';
+				}
+				$('#movie-names').html(html);
+			}
+		});
+	});
+	</script -->>
 	
 <%@include file ="../_common/commonFooter.jsp" %>
 

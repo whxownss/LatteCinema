@@ -7,7 +7,6 @@
 
 <main id="main">
 	
-	
 	<%@include file="../_common/commonMovieSlide.jsp"%>
 
 	<section class="category-section">
