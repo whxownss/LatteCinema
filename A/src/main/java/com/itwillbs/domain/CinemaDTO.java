@@ -8,6 +8,8 @@ public class CinemaDTO {
 	private String ciAddr;
 	private String ciSNum;
 	
+	private String loName;
+	
 	public String getLoIdx() {
 		return loIdx;
 	}
@@ -44,11 +46,20 @@ public class CinemaDTO {
 	public void setCiSNum(String ciSNum) {
 		this.ciSNum = ciSNum;
 	}
+	
+	public String getLoName() {
+		return loName;
+	}
+	public void setLoName(String loName) {
+		this.loName = loName;
+	}
 	@Override
 	public String toString() {
 		return "CinemaDTO [loIdx=" + loIdx + ", ciIdx=" + ciIdx + ", ciName=" + ciName + ", ciOc=" + ciOc + ", ciAddr="
-				+ ciAddr + ", ciSNum=" + ciSNum + "]";
+				+ ciAddr + ", ciSNum=" + ciSNum + ", loName=" + loName + "]";
 	}
+
+	
 	
 	
 }
