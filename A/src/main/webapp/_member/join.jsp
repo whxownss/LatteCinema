@@ -20,7 +20,7 @@
 					<form  class=""  onsubmit="checkSubmit()" action="joinPro.me">
 						<div class="form-floating mb-3">
 							<input type="text" class="form-control" id="id" placeholder="5자 이상" minlength="5" required 
-									onblur="checkIdLength()" name="id"> 
+									onblur="checkId()" name="id"> 
 							<label for="id">아이디<span id="CheckId"></span></label>
 	
 						</div>
@@ -160,16 +160,13 @@
 		});
 		
 		
-		
-		
-		
 	});
 
 </script>
 
 <script>
-// $("form").submit(function () {
 
+$(function () {
 
 // 회원가입 정규식
 var empJ = /\s/g; // 공백 정규식
@@ -191,9 +188,20 @@ var emailRegex =  /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2
 // var passwd2 = $("#passwd2").val();
 
 
+// 아이디 중복확인
+// function checkId() {
+// 	var id = $("#id").val();
+// 	$.ajax({
+// 		url : "join.jsp",
+// 		type : 'get',
+// 		data : memId
+// 	})
+// }
+
+
 
 // 아이디 유효성 
-function checkIdLength(){
+function checkId(){
 	var id = $("#id").val();
 	var text = ' ** 아이디 입력 필수 **';
 	var color = "red";
@@ -326,8 +334,10 @@ function checkEmail() {
 	
 	$("#CheckEmail").text(text).css("color" , color).css("font-size", "15px");
 }
-	
-// });
+
+
+
+// }); // 유효성검사
 
 </script>
 <%@include file="../_common/commonFooterEnd.jsp"%>
