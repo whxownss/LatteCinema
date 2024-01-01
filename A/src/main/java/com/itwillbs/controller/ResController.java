@@ -1,7 +1,7 @@
 package com.itwillbs.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.LocationDTO;
+import com.itwillbs.domain.ScheduleDTO;
 import com.itwillbs.service.ResService;
 
 public class ResController extends HttpServlet {
@@ -32,19 +33,57 @@ public class ResController extends HttpServlet {
 		
 		// 예약1 페이지 이동
 		if(sPath.equals("/res1.re")) {
-			
 			resService = new ResService();
-			ArrayList<LocationDTO> locationList = resService.getLocations();
-			ArrayList<CinemaDTO> cinemaList = resService.getCinemas();
+			List<LocationDTO> locationList = resService.getLocations();
+			String cinemaListJson = resService.getCinemas();
+//			String scheduleListJson = resService.getSchedules();
 			
 			request.setAttribute("locationList", locationList);
-			request.setAttribute("cinemaList", cinemaList);
+			request.setAttribute("cinemaListJson", cinemaListJson);
+//			request.setAttribute("scheduleListJson", scheduleListJson);
 			
 			dispatcher = request.getRequestDispatcher("_reservation/res1.jsp");
 			dispatcher.forward(request, response);
 		}
-		
+		// 스케줄 정보 비동기로 가져오기
+		if(sPath.equals("/res1Pro.re")) {
+			resService = new ResService();
+			String cinema = request.getParameter("cinema");
+			String param = request.getParameter("param");
+			String scheduleListJson = resService.getSchedules(cinema, param);
+			
+			response.setContentType("application/json");
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(scheduleListJson);
+		}
+		// 영업중인 지점 가져오기
+		if(sPath.equals("/res1ProOc.re")) {
+			resService = new ResService();
+			String openCinemaListJson = resService.getOpenCinemas();
+			
+			response.setContentType("application/json");
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(openCinemaListJson);
+		}
+		// 영화관에서 상영중인 영화 목록 가져오기
+		if(sPath.equals("/res1ProML.re")) {
+			resService = new ResService();
+			String cinema = request.getParameter("cinema");
+//			String movType = request.getParameter("movType");
+//			String movieListJson = resService.getMovieList(cinema, movType);
+			String movieListJson = resService.getMovieList(cinema);
+			
+			response.setContentType("application/json");
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(movieListJson);
+		}
 
+		
+		
+		
+		
+		
+		
 		// 예약2 페이지 이동
 		if(sPath.equals("/res2.re")) {
 			dispatcher = request.getRequestDispatcher("_reservation/res2.jsp");
