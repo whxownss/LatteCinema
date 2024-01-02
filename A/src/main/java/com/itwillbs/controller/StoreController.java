@@ -1,6 +1,7 @@
 package com.itwillbs.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,8 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.itwillbs.dao.StoreDAO;
+import com.itwillbs.domain.StoreItemDTO;
+import com.itwillbs.service.StoreService;
+
 public class StoreController extends HttpServlet{
 	RequestDispatcher dispatcher = null;
+	StoreService storeService = new StoreService();
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,7 +32,11 @@ public class StoreController extends HttpServlet{
 		
 		// store 페이지 이동
 		if(sPath.equals("/store.st")) {
-			
+			request.setAttribute("storeItemList", storeService.storeList());
+			request.setAttribute("storeItemListB", storeService.storeListB());
+			request.setAttribute("storeItemListS", storeService.storeListS());
+			request.setAttribute("storeItemListT", storeService.storeListT());
+		
 			dispatcher = request.getRequestDispatcher("_store/store.jsp");
 			dispatcher.forward(request, response);
 		} // store

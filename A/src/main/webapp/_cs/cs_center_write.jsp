@@ -1,11 +1,17 @@
+<%@page import="com.itwillbs.domain.LocationDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 <script src="./jQuery/jquery-3.6.0.js"></script>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
+<%
+ArrayList<LocationDTO> regionList = (ArrayList<LocationDTO>)request.getAttribute("regionList");
+String user = "ADMIN2477";
+%>	
 			
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
@@ -40,12 +46,19 @@
 		</section>
 		
 		<section class="category-section" id="">
+		<form action="insertCenterWrite.cs" method="post" name="fr">
+		<input type="hidden" name="createUser" value=<%=user %>>
 			<div class="container" data-aos="fade-up">
-				<select id="movieSelect" class="form-select" aria-label="Default select example">
+				<select id="locationSelect" name="loIdx" class="form-select" aria-label="Default select example">
+					<option selected>지역</option>
+<!-- 					<option value="1">서울</option> -->
+<!-- 					<option value="2">경기/인천</option> -->
+<!-- 					<option value="3">경남/부산/울산</option> -->
+				</select>
+				<select id="cinemaSelect" name="ciIdx" class="form-select" aria-label="Default select example">
 				  <option selected>영화관</option>
 				  <option value="전체">전체</option>
-				  <option value="서면">서면</option>
-				  <option value="강남">강남</option>
+
 				</select>
 				<table class="table">
 				  <thead>
@@ -58,14 +71,14 @@
 				  </thead>
 				  <tbody>
 				    <tr>
-				      <th scope="row">1</th>
-				      <td style="width: 100px;"><span id="textSpan">영화관</span></td>
-				      <td><input type="text" style="width: 90%;" value="제목 입력하세요."></td>
+				      <th scope="row">max+1</th>
+				      <td style="width: 100px;"><span id="textSpan">전체</span></td>
+				      <td><input type="text" name="centerSubject" style="width: 90%;" value="제목 입력하세요."></td>
 				      <td><span>오늘날짜들어가야함.</span></td>
 				    </tr>
 				    <tr>
 				    	<td colspan="4">
-				    		<textarea class="form-control" style="text-align: center; box-sizing: border-box; resize: none; height: 500px;">
+				    		<textarea class="form-control" name="centerContent" style="text-align: center; box-sizing: border-box; resize: none; height: 500px;">
 내용을 입력해주세요.
 				    		</textarea>
 				   		</td>
@@ -73,26 +86,74 @@
 				    <tr>
 				    	<td colspan="4">
 				    		<div class="d-flex justify-content-around">
-					            <button class="btn btn-dark" type="button" onclick="location.href='cs_center_content.cs'">작성하기</button>
+					            <button class="btn btn-dark" type="button" onclick="check()">작성하기</button>
 					        </div>
 				    	</td>
 				    </tr>
 				  </tbody>
 				</table>
 			</div>
+			</form>
 		</section>
 		
 		
 	</main>
+
+<%@include file="../_common/commonFooterStart.jsp"%>
 <script type="text/javascript">
-//셀렉트 박스 값이 변경될 때 이벤트 리스너를 추가합니다.
-// 셀렉트 박스 값이 변경될 때 이벤트 리스너를 추가합니다.
-$('#movieSelect').change(function() {
-    // 선택한 옵션의 값을 가져와서 span 태그의 텍스트 내용으로 설정합니다.
-    const selectedValue = $(this).val();
-    $('#textSpan').text(selectedValue);
+$(document).ready(function() {
+      // 지역명 불러오기.
+      $.ajax({
+  	    url: 'getRegionList.cs',  // 서버의 URL을 입력
+  	    type: 'GET',  // 요청 유형을 'GET'으로 설정
+  	    success: function(response) { //response에 내가 가져온 json값이 있음.
+//   	    	debugger;
+  	        // 서버로부터 응답을 성공적으로 받았을 때 실행될 코드
+  	        // 예: 받은 데이터를 페이지에 표시
+  	        var regions = response;
+  	        regions.forEach(function(region) {
+  	            // 각 지역에 대한 새로운 <option> 요소를 생성하고 <select>에 추가
+  	            // 'region' 객체의 구조에 따라 'region.value'와 'region.name'를 적절히 조정
+  	            $('#locationSelect').append($('<option></option>').val(region.loIdx).text(region.loName));
+  	        });
+  	    },
+  	    error: function() {
+  	        // 요청 처리 중 오류가 발생했을 때 실행될 코드
+  	        alert("요청 중 오류가 발생했습니다.");
+  	    }
+  	});
+});//
+
+$('#locationSelect').change(function() {
+		 $.ajax({
+	  	    url: 'getCinemaList.cs',  // 서버의 URL을 입력
+	  	    type: 'GET',  // 요청 유형을 'GET'으로 설정
+	  	    data: {'loIdx': $('#locationSelect').val()},
+	  	    success: function(response) {
+//	   	    	debugger;
+	  	        // 서버로부터 응답을 성공적으로 받았을 때 실행될 코드
+	  	        // 예: 받은 데이터를 페이지에 표시
+	  	        var cinemas = response;
+	  	        $('#cinemaSelect').empty();
+	  	        $('#cinemaSelect').append($('<option>전체</option>'));
+	  	        cinemas.forEach(function(cinema) {
+// 	  	        	debugger;
+	  	            $('#cinemaSelect').append($('<option></option>').val(cinema.ciIdx).text(cinema.ciName));
+	  	        });
+	  	    },
+	  	    error: function() {
+	  	        // 요청 처리 중 오류가 발생했을 때 실행될 코드
+	  	        alert("요청 중 오류가 발생했습니다.");
+	  	    }
+	  	});
+
 });
-
-
+$('#cinemaSelect').change(function(){
+	var cinemaName = $('#cinemaSelect').find('option:selected').text();
+	$('#textSpan').text(cinemaName);
+});
+function check(){
+	document.fr.submit();
+}
 </script>	
-<%@include file ="../_common/commonFooter.jsp" %>
+<%@include file="../_common/commonFooterEnd.jsp"%>

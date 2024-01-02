@@ -1,10 +1,17 @@
+<%@page import="com.itwillbs.domain.PageDTO"%>
+<%@page import="com.itwillbs.domain.QnaBoardDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
+<%
+	ArrayList<QnaBoardDTO> qnaBoardList = (ArrayList<QnaBoardDTO>)request.getAttribute("qnaBoardList");
+	PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
+%>	
 			
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
@@ -43,8 +50,8 @@
 				<div class="d-flex justify-content-between">
 				  <div class="col-md-2">
 					<div class="input-group mb-3">
-					  <select class="form-select" id="inputGroupSelect02">
-						<option selected class="text-muted">카테고리</option>
+					  <select class="form-select" id="qnaCategory" name="qnaCategory">
+						<option selected class="text-muted" value="">카테고리</option>
 						<option value="상영작">상영작</option>
 						<option value="예매">예매</option>
 						<option value="기타">기타</option>
@@ -53,8 +60,8 @@
 				  </div>
 				  <div class="col-md-3">
 				    <div class="input-group mb-3">
-				      <input type="text" class="form-control" placeholder="검색어를 입력해주세요." aria-label="input-search" aria-describedby="button-addon2">
-				      <button class="btn btn-secondary" type="button" id="button-addon2">검색</button>
+<!-- 				      <input type="text" class="form-control" placeholder="검색어를 입력해주세요." aria-label="input-search" aria-describedby="button-addon2"> -->
+<!-- 				      <button class="btn btn-secondary" type="button" id="button-addon2">검색</button> -->
 				    </div>
 				  </div>
 				</div>
@@ -72,67 +79,16 @@
 				      <th scope="col">글쓴이</th>
 				    </tr>
 				  </thead>
-				  <tbody>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>기타</td>
-				      <td><a href="cs_qna_content.cs"> 비밀글입니다. </a></td>
-				      <td>차*****</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">2</th>
-				      <td>상영작</td>
-				      <td><a href="#"> 비밀글입니다. </a></td>
-				      <td>차*****</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>예매</td>
-				      <td><a href="#"> 비밀글입니다. </a></td>
-				      <td>차*****</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">4</th>
-				      <td>기타</td>
-				      <td><a href="#"> 비밀글입니다. </a></td>
-				      <td>차*****</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">5</th>
-				      <td>상영작</td>
-				      <td><a href="#"> 비밀글입니다. </a></td>
-				      <td>차*****</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">6</th>
-				      <td>예매</td>
-				      <td><a href="#"> 비밀글입니다. </a></td>
-				      <td>차*****</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">7</th>
-				      <td>기타</td>
-				      <td><a href="#"> 비밀글입니다. </a></td>
-				      <td>차*****</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">8</th>
-				      <td>상영작</td>
-				      <td><a href="#"> 비밀글입니다. </a></td>
-				      <td>차*****</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">9</th>
-				      <td>예매</td>
-				      <td><a href="#"> 비밀글입니다. </a></td>
-				      <td>차*****</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">10</th>
-				      <td>기타</td>
-				      <td><a href="#"> 비밀글입니다. </a></td>
-				      <td>차*****</td>
-				    </tr>
+				  <tbody id="tbody">
+				  	<c:forEach var="qnaBoardDTO" items="${qnaBoardList }">
+				  	 <tr> 
+				  		<th scope="row">${qnaBoardDTO.rn }</th>
+				  		<td>${qnaBoardDTO.qnaCategory }</td><!-- 이 글을 클릭 가능하게 하는 것은 운영자와 당사자만 가능하게 하자.  -->
+				        <td><a href="cs_qna_content.cs?createUser=${qnaBoardDTO.createUser }&createDate=${qnaBoardDTO.createDate}"> ${qnaBoardDTO.qnaSubject } </a></td>
+				        <td>${qnaBoardDTO.createUser }</td>
+				  	 </tr>
+				  	</c:forEach>
+				    
 				  </tbody>
 				</table>
 			</div>
@@ -140,27 +96,103 @@
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
 				<div class="pagination-container d-flex justify-content-center">
-				  <ul class="pagination">
-				    <li class="page-item disabled">
-				      <a class="page-link text-secondary" href="#" tabindex="-1" aria-disabled="true">이전</a>
-				    </li>
-				    <li class="page-item" aria-current="page">
-				      <a class="page-link text-secondary" href="#">1</a>
-				    </li>
-				    <li class="page-item">
-				      <a class="page-link text-secondary" href="#">2</a>
-				    </li>
-				    <li class="page-item">
-				      <a class="page-link text-secondary" href="#">3</a>
-				    </li>
-				    <!-- 나머지 페이지 번호 추가 -->
-				    <li class="page-item">
-				      <a class="page-link text-secondary" href="#">다음</a>
-				    </li>
+				  <ul class="pagination" id="searchPaging">
+					<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+					    <li class="page-item disabled">
+					      <a class="page-link text-secondary" href="cs_qna.cs?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
+					    </li>
+				    </c:if>	
+				    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+					    <li class="page-item" aria-current="page">
+					      <a class="page-link text-secondary" href="cs_qna.cs?pageNum=${i }">${i }</a>
+					    </li>
+				    </c:forEach>
+		    		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+					    <li class="page-item">
+					      <a class="page-link text-secondary" href="cs_qna.cs?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
+					    </li>
+				    </c:if>
 				  </ul>
 				</div>
 			</div>
 		</section>
 	</main>
 	
-<%@include file ="../_common/commonFooter.jsp" %>
+<%@include file="../_common/commonFooterStart.jsp"%>
+<script src="./jQuery/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+$('#qnaCategory').change(function() {
+	 $.ajax({
+ 	    url: 'cs_qna.cs',  // 서버의 URL을 입력
+ 	    type: 'GET',  // 요청 유형을 'GET'으로 설정
+ 	    data: {'qnaCategory': $('#qnaCategory').val()},
+ 	    success: function(response) {
+ 	    	if($('#qnaCategory').val() == ''){
+ 	    		window.location.href = 'cs_qna.cs';
+ 	    		return;
+ 	    	}
+	// 'response' 객체에서 'qnaBoardList'와 'pageDTO' 데이터 추출
+	        var qnaBoardList = response.qnaBoardList;
+	        var pageDTO = response.pageDTO;
+// 	        debugger;
+			var qnaCategories = qnaBoardList.map(function(item) {
+			    return item.qnaCategory;
+			});
+			debugger;
+			$('#tbody').empty();
+			qnaBoardList.forEach(function(search) {
+                // 새로운 행(<tr>)을 생성하고 각 칼럼(<td>)에 데이터 추가
+                var newRow = $('<tr></tr>');
+                newRow.append($('<td></td>').text(search.rn));  
+                newRow.append($('<td></td>').text(search.qnaCategory));  
+                newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + search.qnaSubject + '</a>'));
+                newRow.append($('<td></td>').text(search.createUser));
+
+                // 완성된 행을 tbody에 추가
+                $('#tbody').append(newRow);
+            });
+			$('#searchPaging').empty();  // 페이지네이션 영역 비우기
+			    // '이전' 버튼
+			    if(pageDTO.startPage > pageDTO.pageBlock) {
+			        $('#searchPaging').append(
+			            '<li class="page-item disabled">' +
+			            '<a class="page-link text-secondary" href="cs_qna.cs?pageNum=' + (pageDTO.startPage - pageDTO.pageBlock) + '" tabindex="-1" aria-disabled="true">이전</a>' +
+			            '</li>'
+			        );
+			    }
+			    // 페이지 번호 버튼
+			    for(var i = pageDTO.startPage; i <= pageDTO.endPage; i++) {
+			        $('#searchPaging').append(
+			            '<li class="page-item" aria-current="page">' +
+// 			            '<a class="page-link text-secondary" href="cs_qna.cs?pageNum=' + i + '&qnaCategory=' +encodeURIComponent(qnaCategories) + '">' + i + '</a>' +
+// 			            '<a class="page-link text-secondary" href="cs_qna.cs?pageNum=' + i + '&qnaCategory=' + encodeURIComponent($('#qnaCategory').val()) + '">' + i + '</a>' +		
+			            '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + i + ', \'' + $('#qnaCategory').val() + '\'); return false;">' + i + '</a>' +
+			            '</li>'
+			        );
+			    }
+			    // '다음' 버튼
+			    if(pageDTO.endPage < pageDTO.pageCount) {
+			        $('#searchPaging').append(
+			            '<li class="page-item">' +
+			            '<a class="page-link text-secondary" href="cs_qna.cs?pageNum=' + (pageDTO.startPage + pageDTO.pageBlock) + '">다음</a>' +
+			            '</li>'
+			        );
+			    }
+  	    },
+ 	    error: function() {
+ 	        // 요청 처리 중 오류가 발생했을 때 실행될 코드
+ 	        alert("요청 중 오류가 발생했습니다.");
+ 	    }
+ 	});
+});
+function searchPageNm(pageNum, qnaCategory){
+    // URL 구성
+    var url = 'cs_qnaSearch.cs?pageNum=' + pageNum + '&qnaCategory=' + encodeURIComponent(qnaCategory);
+    
+    // 사용자를 생성된 URL로 리다이렉트
+    window.location.href = url;
+}
+
+
+</script>
+<%@include file="../_common/commonFooterEnd.jsp"%>

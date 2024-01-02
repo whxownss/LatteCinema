@@ -1,11 +1,18 @@
+<%@page import="com.itwillbs.domain.PageDTO"%>
+<%@page import="com.itwillbs.domain.CenterBoardDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
-			
+<%
+	ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.getAttribute("centerBoardList");
+	PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
+%>			
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
 				<!-- 이곳에 코드작성 -->
@@ -50,66 +57,14 @@
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>전체글</td>
-				      <td><a href="cs_center_content.cs">임시 겨울왕국1 교환 안내</a></td>
-				      <td>23.12.01</td>
+				  <c:forEach var="centerBoardDTO" items="${centerBoardList }">
+				  	<tr>
+				      <th scope="row">${centerBoardDTO.rn }</th>
+				      <td>${centerBoardDTO.ciName }</td>
+				      <td><a href="cs_center_content.cs?createUser=${centerBoardDTO.createUser }&createDate=${centerBoardDTO.createDate}">${centerBoardDTO.centerSubject }</a></td>
+				      <td><fmt:formatDate value="${centerBoardDTO.createDate }" pattern="yyyy-MM-dd"/></td>
 				    </tr>
-				    <tr>
-				      <th scope="row">2</th>
-				      <td>전체글</td>
-				      <td><a href="#">씨네큐 영화관람료 소득공제 제도 시행</a></td>
-				      <td>23.06.26</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>부산서면점</td>
-				      <td><a href="#">부산서면점 휴무일 안내</a></td>
-				      <td>23.05.26</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">4</th>
-				      <td>부산서면점</td>
-				      <td><a href="#">부산서면점 휴무일 안내</a></td>
-				      <td>23.05.26</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">5</th>
-				      <td>부산서면점</td>
-				      <td><a href="#">부산서면점 휴무일 안내</a></td>
-				      <td>23.05.26</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">6</th>
-				      <td>부산서면점</td>
-				      <td><a href="#">부산서면점 휴무일 안내</a></td>
-				      <td>23.05.26</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">7</th>
-				      <td>부산서면점</td>
-				      <td><a href="#">부산서면점 휴무일 안내</a></td>
-				      <td>23.05.26</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">8</th>
-				      <td>부산서면점</td>
-				      <td><a href="#">부산서면점 휴무일 안내</a></td>
-				      <td>23.05.26</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">9</th>
-				      <td>부산서면점</td>
-				      <td><a href="#">부산서면점 휴무일 안내</a></td>
-				      <td>23.05.26</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">10</th>
-				      <td>부산서면점</td>
-				      <td><a href="#">부산서면점 휴무일 안내</a></td>
-				      <td>23.05.26</td>
-				    </tr>
+				  </c:forEach>
 				  </tbody>
 				</table>
 			</div>
@@ -118,26 +73,26 @@
 			<div class="container" data-aos="fade-up">
 				<div class="pagination-container d-flex justify-content-center">
 				  <ul class="pagination">
-				    <li class="page-item disabled">
-				      <a class="page-link text-secondary" href="#" tabindex="-1" aria-disabled="true">이전</a>
-				    </li>
-				    <li class="page-item" aria-current="page">
-				      <a class="page-link text-secondary" href="#">1</a>
-				    </li>
-				    <li class="page-item">
-				      <a class="page-link text-secondary" href="#">2</a>
-				    </li>
-				    <li class="page-item">
-				      <a class="page-link text-secondary" href="#">3</a>
-				    </li>
-				    <!-- 나머지 페이지 번호 추가 -->
-				    <li class="page-item">
-				      <a class="page-link text-secondary" href="#">다음</a>
-				    </li>
+					<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+					    <li class="page-item disabled">
+					      <a class="page-link text-secondary" href="cs_center.cs?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
+					    </li>
+				    </c:if>	
+				    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+					    <li class="page-item" aria-current="page">
+					      <a class="page-link text-secondary" href="cs_center.cs?pageNum=${i }">${i }</a>
+					    </li>
+				    </c:forEach>
+		    		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+					    <li class="page-item">
+					      <a class="page-link text-secondary" href="cs_center.cs?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
+					    </li>
+				    </c:if>
 				  </ul>
 				</div>
 			</div>
 		</section>	
 	</main>
 	
-<%@include file ="../_common/commonFooter.jsp" %>
+<%@include file="../_common/commonFooterStart.jsp"%>
+<%@include file="../_common/commonFooterEnd.jsp"%>
