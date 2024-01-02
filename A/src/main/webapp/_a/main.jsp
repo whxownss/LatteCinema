@@ -91,7 +91,7 @@
 
     
 
-    
+    <!-- 일별 박스오피스 -->
 	
 	<section class="category-section">
 		<div class="container" data-aos="fade-up">
@@ -102,116 +102,16 @@
 		
 	      <div class="container" data-aos="fade-up">
 			<div class="owl-carousel owl-theme">
-			
 		        <div class="item position-relative" id="wrap">
-		          <img src="assets/img/post1.jpg" >
+		          <img src="assets/img/post1.jpg" > <!-- img kmdb 들어올 곳 -->
 		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">1</em>
 					<div class="titleee">
 						<a href="" class="moree">예매하기</a>
 						<a href="" class="moree">상세정보</a>
 					</div>
 		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="assets/img/post2.jpg" >
-		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">2</em>
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="assets/img/post3.jpg" >
-		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">3</em>
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="assets/img/post4.jpg" >
-		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">4</em>
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="assets/img/post5.jpg" >
-		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">5</em>
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="assets/img/post6.jpg" >
-		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">6</em>
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="assets/img/post7.jpg">
-		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">7</em>
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="assets/img/post8.jpg" >
-		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">8</em>
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="assets/img/post9.jpg" >
-		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">9</em>
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="assets/img/post10.jpg" >
-		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">10</em>
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="assets/img/post11.jpg" >
-		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">11</em>
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
-		        
-		        
-		        <div class="item position-relative" id="wrap">
-		          <img src="assets/img/post12.jpg" >
-		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">12</em>
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
-					</div>
-		        </div>
 		     </div>
+		        <div id="movie-names">영화제목자리</div>
 	       </div>
        </div>
      </section>
@@ -257,7 +157,6 @@
 	<script src="owlcarousel/owl.carousel.min.js"></script>	
 	<script>
             $(document).ready(function() {
-            	// 템플릿에 잇던거
               var owl = $('.owl-carousel');
               owl.owlCarousel({
                 loop: true,
@@ -286,14 +185,30 @@
                 }
                 e.preventDefault();
               });
-              // -----------------------------------
-              $.ajax({
-             
-              })
-              
             })
           </script>
 
-  
+			<!-- 일별 박스오피스 순위 1~10위  -->
+		    <script type="text/javascript">
+			$(function(){
+				$.ajax({
+					url : 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json',
+					type : 'GET',
+					data : {
+							key : "ee9ed756bb3f15468dceccf766e69e7b",
+							targetDt : "20190900"                         //날짜형식이 틀리면 최신날짜를 보여주는걸로 알고있음
+					},
+					async : false,                              //비동기식인 ajax를 동기식으로 만들어줌 만약 출력해야될 결과가 많거나 제대로 출력되지 않을때, 이 옵션을 사용
+					success : function(data) {                        //data에 들어오는 값들은 앞에서 출력되던 예시와 같음
+						  var text = '';
+			                for (var i = 0; i < data.boxOfficeResult.dailyBoxOfficeList.length; i++) {
+			                    text += data.boxOfficeResult.dailyBoxOfficeList[i].movieNm + '<br>';
+			                }
+			                $('#movie-names').html(text);
+					}
+				});
+			});
+			</script>	
+			
 
 <%@include file ="../_common/commonFooter.jsp" %>
