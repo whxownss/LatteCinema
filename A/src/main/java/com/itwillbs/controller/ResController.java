@@ -70,9 +70,10 @@ public class ResController extends HttpServlet {
 		if(sPath.equals("/res1ProML.re")) {
 			resService = new ResService();
 			String cinema = request.getParameter("cinema");
+			String date = request.getParameter("date");
 //			String movType = request.getParameter("movType");
 //			String movieListJson = resService.getMovieList(cinema, movType);
-			String movieListJson = resService.getMovieList(cinema);
+			String movieListJson = resService.getMovieList(cinema, date);
 			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("utf-8");

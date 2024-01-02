@@ -294,7 +294,8 @@ $(function(){
 							$.ajax({
 								type: "GET",
 								url: "res1ProML.re",
-								data: {cinema: cinema},
+								data: {cinema: cinema,
+									   date: $("#myCalendar").val()},
 								dataType: "json"  
 							})
 							.done(function(data){
@@ -357,6 +358,37 @@ $(function(){
 			$("#myCalendar").on("change", function(){
 				date = new Date($("#myCalendar").val());
 				writeDate(date);
+				
+				
+				
+				
+				//////////////////////////////////////////////////////////// 이 부분도 꽤 많이 쓰임
+				$(".showMovies").empty();
+				$(".myMovie").removeClass("bg-body-secondary");
+				$(".myMovie").addClass("bg-body-secondary");
+				////////////////////////////////////////////////////////////
+				// 이 부분 중복 ---------- 지역 선택시 영화 목록 가져오는 거랑
+				var cinema = $("#selectedCinema").text();
+				if(!($("#selectedCinema").text() == "지역 및 영화관" || $("#selectedCinema").text().includes("(준비중)"))){
+					$.ajax({
+						type: "GET",
+						url: "res1ProML.re",
+						data: {cinema: cinema,
+							   date: $("#myCalendar").val()},
+						dataType: "json"  
+					})
+					.done(function(data){
+						movieList = data;
+					})
+					.fail(function(){
+					})
+				}
+				// -------------------------------------------------
+				
+				
+				
+				
+				
 				
 				// showSchedule()
 				if($("#selectedMovie").text() != "영화" && $("#selectedCinema").text() == "지역 및 영화관") return;

@@ -62,12 +62,13 @@ public class ResService {
 		return (openCinemaListJson.equals("[]") ? "" : openCinemaListJson);
 	}
 
-	public String getMovieList(String cinema) {
+	public String getMovieList(String cinema, String date) {
 		resDAO = new ResDAO();
-		Map<String, String> param = new HashMap<String, String>();
-		param.put("cinema", cinema);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("CINEMA", cinema);
+		map.put("DATE", date);
 //		param.put("movType", movType);
-		List<ScheduleDTO> movieList = resDAO.selectMovieList(cinema);
+		List<ScheduleDTO> movieList = resDAO.selectMovieList(map);
 		
 		Gson gson = new Gson();
 		String movieListJson = gson.toJson(movieList);
