@@ -29,10 +29,14 @@
 		   AND (S.LO_IDX, S.CI_IDX) = (SELECT LO_IDX, CI_IDX
 		   								 FROM CINEMA
 		   								WHERE CI_NAME = #{CINEMA})
+		   <![CDATA[
+		   AND M.START_DATE <= #{DATE}
+		   AND M.END_DATE > #{DATE}
+		   ]]>
 		<if test="!PARAM.equals('all')">
 		   AND M.TITLE = #{PARAM} 
 		</if>
-		ORDER BY DATE_FORMAT(S.SCH_TIME, "%H:%i")
+		ORDER BY CAST(S.SCH_IDX AS UNSIGNED), DATE_FORMAT(S.SCH_TIME, "%H:%i")
 	</select>
 	
 	

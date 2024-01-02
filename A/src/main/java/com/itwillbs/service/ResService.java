@@ -1,5 +1,6 @@
 package com.itwillbs.service;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,11 +31,18 @@ public class ResService {
 		return cinemaListJson;
 	}
 
-	public String getSchedules(String cinema, String param) {
+	public String getSchedules(String cinema, String param, String date) {
 		resDAO = new ResDAO();
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("CINEMA", cinema);
 		map.put("PARAM", param);
+
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println(date + " 00:00:00");
+		System.out.println(Timestamp.valueOf((date + " 00:00:00")));
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
+		map.put("DATE", date);
 		List<ScheduleDTO> scheduleList = resDAO.selectSchedule(map);
 		
 		Gson gson = new Gson();

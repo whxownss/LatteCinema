@@ -142,13 +142,14 @@ var setDateRange = function(date){
 };
 
 //상영 시간표 출력
-var showSchedule = function(param){
+var showSchedule = function(param, date){
 	$("#showTimeTable").empty();
 	$.ajax({
 		type: "GET",
 		url: "res1Pro.re",
 		data: {cinema: $("#selectedCinema").text(),
-			   param: param},
+			   param: param,
+			   date: $("#myCalendar").val()},
 		dataType: "json"  // fail 기준 질문하기. 결과값 [] 여도 done -> 왜??
 	})
 	.done(function(data){
@@ -191,6 +192,11 @@ var showSchedule = function(param){
 			dataType: "json" 
 		})
 		.done(function(data){
+			// 영업중인 곳 선택한 상태에서 다른 곳 선택하면 영화 목록 그대로인거 해결
+			$(".showMovies").empty();
+			$(".myMovie").removeClass("bg-body-secondary");
+			$(".myMovie").addClass("bg-body-secondary");
+			
 			var msg = "";
 			
 			for(var i = 0; i < data.length; i++){
@@ -300,16 +306,15 @@ $(function(){
 					}
 				}
 				
-				// showTimeTable()
-				if($("#selectedDate").text() != "날짜 및 시간") {
-					if($("#selectedMovie").text() != "영화" && $("#selectedCinema").text() == "지역 및 영화관") return;
-					// 특정 영화의 시간표만 보여주기 위함
-					var param = "all";
-					if($(this).attr("id").includes("movie")){
-						param = $(this).text();
-					}
-					showSchedule(param);
+				// showSchedule()   (젤 바같에 날짜 != "날짜 및 시간" 조건 뺏음)
+				if($("#selectedMovie").text() != "영화" && $("#selectedCinema").text() == "지역 및 영화관") return;
+				// 특정 영화의 시간표만 보여주기 위함
+				var param = "all";
+				// find(".bi-check-lg") 체크 해제 시 다시 전체 시간표로 나오기 위한 조건
+				if($(this).find(".bi-check-lg").length == 0 && $(this).attr("id").includes("movie")){
+					param = $(this).text();
 				}
+				showSchedule(param);
 			});
 				
 				
@@ -321,6 +326,14 @@ $(function(){
 				if(id == "[id*=movie]" && $(this).children("span").length){
 					$(this).addClass("border border-0");
 					$(this).children("span").remove();
+					$("#selectedMovie").text("영화")
+					return;
+				}
+				// 같은 영화관 선택시 처리
+				if(id == "[id*=cinema]" && $(this).children("span").length){
+					$(".showMovies").empty();
+					$(".myMovie").removeClass("bg-body-secondary");
+					$(".myMovie").addClass("bg-body-secondary");
 					$("#selectedMovie").text("영화")
 					return;
 				}
@@ -345,10 +358,17 @@ $(function(){
 				date = new Date($("#myCalendar").val());
 				writeDate(date);
 				
-				if($("#selectedCinema").text() != "지역 및 영화관"){
-// 					showTimeTable();
-					showSchedule();
+				// showSchedule()
+				if($("#selectedMovie").text() != "영화" && $("#selectedCinema").text() == "지역 및 영화관") return;
+				// 특정 영화의 시간표만 보여주기 위함
+				var param = "all";
+				// find(".bi-check-lg") 체크 해제 시 다시 전체 시간표로 나오기 위한 조건
+				if($(this).find(".bi-check-lg").length == 0 && $(this).attr("id").includes("movie")){
+					param = $(this).text();
 				}
+				showSchedule(param);
+				
+				
 			}); // 날짜 표시 끝
 			
 
