@@ -17,7 +17,7 @@
 				<h2>회원가입</h2>
 			</div>
 			<div class="container">
-					<form  class=""  onsubmit="checkSubmit()" action="joinPro.me">
+					<form  class=""  onsubmit="return checkSubmit()" action="joinPro.me" id="fr">
 						<div class="form-floating mb-3">
 							<input type="text" class="form-control" id="id" placeholder="5자 이상" minlength="5" required 
 									onblur="checkId()" name="id"> 
@@ -99,7 +99,7 @@
 							</div>
 						</div>
 						<div class="d-grid gap-2" style="margin-top: 50px">
-							<button class="btn btn-danger btn-lg" type="submit">가입</button>
+							<button class="btn btn-danger btn-lg" type="submit" id="joinbtn">가입</button>
 						</div>
 					</form>
 			</div>
@@ -165,8 +165,7 @@
 </script>
 
 <script>
-
-// $(function () {
+// function checkSubmit() {
 
 // 회원가입 정규식
 var empJ = /\s/g; // 공백 정규식
@@ -191,14 +190,14 @@ var emailRegex =  /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2
 // 아이디 유효성 및 중복체크
 function checkId() {
 	var id = $("#id").val();
-	debugger;
+// 	debugger;
 	if(id==""){
 		$("#CheckId").text("아이디를 입력하세요").css("color", "red");
 		return false;			
 	}else if(!RegexID.test(id)){
 		$("#CheckId").text("영문 대소문자,숫자 5~16자리 아이디 입력 ").css("color", "red");
 		return false;
-	}else if(!numRegex.test(id)){
+	}else if(numRegex.test(id)){
 		$("#CheckId").text("영문 대소문자,숫자 5~16자리 아이디 입력 ").css("color", "red");
 		return false;
 	}else{
@@ -209,19 +208,19 @@ function checkId() {
 			url : "checkjoin.me", 
 			dataType: "text",
 			success:function(data){
-				debugger;
+// 				debugger;
 				if(data == '1'){
 					$("#CheckId").text("사용중인 아이디입니다.").css("color", "red");
-					
+					return false;
 				}else if(data == '0'){
 					$("#CheckId").text("사용가능한 아이디입니다.").css("color", "green");
+					return true;
 				 }		
 			},
 			error: function(){
 			}
 		});
-}
-
+	}
 
 
 }
@@ -245,6 +244,16 @@ function checkId() {
 
 // 	$("#CheckId").text(text).css("color", color);
 // };
+
+// 비밀번호 유효성
+// function checkPass() {
+// 	var passwd = $("#passwd").val();
+// 	if(passwd == "" || passwd == null){
+// 		$("#CheckPassword1").text("** 비밀번호를 입력를 입력해주세요 **").css("color", "red").css("font-size", "15px");
+// 		return false;
+// 	}
+	
+// }
 
 // 비밀번호 유효성
 function checkPass(){
@@ -273,6 +282,7 @@ function checkPass(){
 				default: text = ' **영문자, 숫자, 특수문자 중 2가지 이상 조합 필수!**';
 						color = 'red'; break;
 			}
+
 		} else{
 			text ='영문 대소문자 숫자 특수문자 8~16자 입력'
 		}
@@ -291,6 +301,7 @@ function checkConfirmPasswd() {
 	if( passwd == passwd2 ){
 		text='**비밀번호 일치**';
 		color='green';
+		
 	}
 	$("#CheckPassword2").text(text).css("color", color).css("font-size", "15px");
 }		
@@ -363,9 +374,28 @@ function checkEmail() {
 	$("#CheckEmail").text(text).css("color" , color).css("font-size", "15px");
 }
 
+// }
+// 유효성 체크 후 submit
+function checkSubmit() {
+	
+	var color = $('#fr span');
+	
+	var flag = 1;
+	
+	$.each(color, function(i, v){
+		if(this.style.color == "red") {
+			flag = 0;
+			alert("회원가입 양식을 확인해 주세요.")
+			return false;
+		}
+	});
+	
+	return ((flag == 0) ? false : true);
+}	
 
 
-// }); // 유효성검사
+
+
 
 </script>
 <%@include file="../_common/commonFooterEnd.jsp"%>
