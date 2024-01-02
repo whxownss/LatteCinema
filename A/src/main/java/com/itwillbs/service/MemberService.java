@@ -11,6 +11,7 @@ public class MemberService {
 
 	MemberDAO memberDAO = null;
 	
+	
 	public void insertMember(HttpServletRequest request) {
 		
 		try {
@@ -71,7 +72,7 @@ public class MemberService {
 //			memberDTO.setMemEmail(email);
 			memberDTO = memberDAO.userCheck(memberDTO);
 			
-		} catch (Exception e) {
+			} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -133,6 +134,23 @@ public class MemberService {
 		}
 		return memberDTO;
 	}// getMember()
+
+	public int checkId(HttpServletRequest request) {
+		System.out.println("MemberService checkId()");
+		MemberDTO memberDTO = new MemberDTO();
+		int result = 0;
+		try {
+			String id = request.getParameter("memId");
+			memberDAO = new MemberDAO();
+			result = memberDAO.checkId(id);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result; 
+		
+	}//checkId()
 	
 	
 }

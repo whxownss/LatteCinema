@@ -21,12 +21,12 @@
 						<div class="form-floating mb-3">
 							<input type="text" class="form-control" id="id" placeholder="5자 이상" minlength="5" required 
 									onblur="checkId()" name="id"> 
-							<label for="id">아이디<span id="CheckId"></span></label>
+							<label for="id">아이디<span id="CheckId" style="font-size: 15px;"></span></label>
 	
 						</div>
 						<div class="form-floating mb-3">
 							<input type="password" class="form-control" id="passwd" placeholder="비밀번호" required
-									onblur="checkPassLength()" name="pass">
+									onblur="checkPassLength(); checkConfirmPasswd();" name="pass">
 							<label  for="passwd">비밀번호<span id="CheckPassword1"></span></label> 
 	
 						</div>
@@ -166,11 +166,11 @@
 
 <script>
 
-$(function () {
+// $(function () {
 
 // 회원가입 정규식
 var empJ = /\s/g; // 공백 정규식
-var lengthRegexID = /^[A-Za-z0-9!@#$%]{5,16}$/; // 영문 대소문자 숫자 특수문자 5~16자 규칙(아이디)
+var RegexID = /^[A-Za-z0-9!@#$%]{5,16}$/; // 영문 대소문자 숫자 특수문자 5~16자 규칙(아이디)
 var lengthRegexPass = /^[A-Za-z0-9!@#$%]{8,16}$/; // 영문 대소문자 숫자 특수문자 8~16자 규칙(패스워드)
 var engUpperRegex = /[A-Z]/; //대문자 규칙 (비밀번호)
 var engLowerRegex = /[a-z]/;  //소문자 규칙 (비밀번호)
@@ -188,35 +188,63 @@ var emailRegex =  /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2
 // var passwd2 = $("#passwd2").val();
 
 
-// 아이디 중복확인
-// function checkId() {
-// 	var id = $("#id").val();
-// 	$.ajax({
-// 		url : "join.jsp",
-// 		type : 'get',
-// 		data : memId
-// 	})
-// }
+// 아이디 유효성 및 중복체크
+function checkId() {
+	var id = $("#id").val();
+// 	debugger;
+	if(id==""){
+		$("#CheckId").text("아이디를 입력하세요").css("color", "red");
+		return false;			
+	}else if(!RegexID.test(id)){
+		$("#CheckId").text("영문 대소문자,숫자 5~16자리 아이디 입력 ").css("color", "red");
+		return false;
+	}else if(!numRegex.text(id)){
+		$("#CheckId").text("영문 대소문자,숫자 5~16자리 아이디 입력 ").css("color", "red");
+		return false;
+	}else{
+		$.ajax({
+			type : "post",
+			
+			data : {memId : id}, //입력한 값 변수에 담기
+			url : "checkjoin.me", 
+			dataType: "text",
+			success:function(data){
+// 				debugger;
+				if(data == '1'){
+					$("#CheckId").text("사용중인 아이디입니다.").css("color", "red");
+					
+				}else if(data == '0'){
+					$("#CheckId").text("사용가능한 아이디입니다.").css("color", "green");
+				 }		
+			},
+			error: function(){
+			}
+		});
+}
+
+
+
+}
 
 
 
 // 아이디 유효성 
-function checkId(){
-	var id = $("#id").val();
-	var text = ' ** 아이디 입력 필수 **';
-	var color = "red";
-	if(id != ""){
+// function checkId(){
+// 	var id = $("#id").val();
+// 	var text = ' ** 아이디 입력 필수 **';
+// 	var color = "red";
+// 	if(id != ""){
 		
-		text = " **영문 대소문자,숫자 5~16자리로 입력해주세요";
+// 		text = " **영문 대소문자,숫자 5~16자리로 입력해주세요";
 		
-		if(lengthRegexID.test(id)){
-			text = " ** 사용가능";
-			color = "green";
-		}
-	}
+// 		if(RegexID.test(id)){
+// 			text = " ** 사용가능";
+// 			color = "green";
+// 		}
+// 	}
 
-	$("#CheckId").text(text).css("color", color).css("font-size", "15px");
-};
+// 	$("#CheckId").text(text).css("color", color);
+// };
 
 // 비밀번호 유효성
 function checkPassLength(){

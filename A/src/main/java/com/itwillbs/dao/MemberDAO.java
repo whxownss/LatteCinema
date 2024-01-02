@@ -4,6 +4,8 @@ package com.itwillbs.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -23,6 +25,14 @@ public class MemberDAO {
 		
 	}
 
+	public int checkId(String id) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int result = session.selectOne("Member.checkId", id);
+		session.close();
+		return result;
+		
+	}
+	
 	public MemberDTO userCheck(MemberDTO memberDTO) {
 		SqlSession session = sqlSessionFactory.openSession();
 		memberDTO = session.selectOne("Member.userCheck", memberDTO);
@@ -54,9 +64,7 @@ public class MemberDAO {
 		SqlSession session = sqlSessionFactory.openSession();
 		MemberDTO memberDTO = session.selectOne("Member.getMember", id);
 		
-		System.out.println("=============");
 		System.out.println(memberDTO);
-		System.out.println("=============");
 		session.close();
 		
 		return memberDTO;

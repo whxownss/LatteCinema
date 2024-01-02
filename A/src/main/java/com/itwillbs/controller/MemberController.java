@@ -68,6 +68,19 @@ public class MemberController extends HttpServlet {
 			response.sendRedirect("login.me");
 		}//
 		
+		// 회원가입 아이디 중복체크  checkjoin.me
+		if(sPath.equals("/checkjoin.me")) {
+			memberService = new MemberService();
+			
+			int result = memberService.checkId(request);
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result + "");
+			// 주소변경 login.me 이동
+//			response.sendRedirect("login.me");
+		}//
+		
+		
 		//  로그인 loginPro.me 이동
 		if(sPath.equals("/loginPro.me")) {
 			memberService = new MemberService();
