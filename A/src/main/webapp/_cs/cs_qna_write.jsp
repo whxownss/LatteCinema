@@ -28,7 +28,7 @@ String createUser = "MEMBER2477";
 				<div class="row justify-content-center">
 			      <div class="col-lg-4 col-md-8 col-sm-10">
 <!-- 			        <h2 class="text-center">신청</h2> -->
-			        <form action="qnaBoardInsert.cs" method="post">
+			        <form action="qnaBoardInsert.cs" method="post" id="insertForm">
 			        <select class="form-select" id="qnaCategory" name="qnaCategory">
 						<option selected class="text-muted">카테고리</option>
 						<option value="상영작">상영작</option>
@@ -79,7 +79,15 @@ String createUser = "MEMBER2477";
 <%@include file="../_common/commonFooterStart.jsp"%>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script type="text/javascript">
-
+$(document).ready(function() {
+	
+	$("#insertForm").on("submit", function (e) { 
+		  if($("#qnaCategory").val() == '카테고리'){
+		    e.preventDefault();
+		    alert('카테고리를 선택해주세요.')
+		  }  
+	});
+});
 
 </script>
 <%@include file="../_common/commonFooterEnd.jsp"%>

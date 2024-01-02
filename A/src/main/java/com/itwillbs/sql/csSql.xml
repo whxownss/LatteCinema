@@ -117,4 +117,59 @@
 		  FROM QNABOARD 
 		 WHERE QNACATEGORY = #{qnaCategory};
 	</select>
+	
+	<select id="getLostBoardList" resultType="LostBoardDTO" parameterType="PageDTO">
+		SELECT *,
+		       (SELECT C.CI_NAME
+		          FROM CINEMA AS C
+		         WHERE C.LO_IDX = LOST.LO_IDX AND C.CI_IDX = LOST.CI_IDX) AS 'CI_NAME',
+		       ROW_NUMBER() OVER (ORDER BY LOST.CREATE_DATE) AS RN
+		  FROM LOSTBOARD AS LOST
+		 ORDER BY LOST.CREATE_DATE DESC
+		 LIMIT #{startRow}, #{pageSize}
+	</select>
+	<select id="getLostBoardCount" resultType="int">
+		SELECT COUNT(*) 
+		  FROM LOSTBOARD
+	</select>
+	<select id="getLostBoard" resultType="LostBoardDTO" parameterType="map">
+		 SELECT *,
+			      (SELECT C.CI_NAME
+			         FROM CINEMA AS C
+		        	WHERE C.LO_IDX = LOST.LO_IDX AND C.CI_IDX = LOST.CI_IDX) AS 'CI_NAME'
+		  FROM LOSTBOARD AS LOST
+		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</select>
+	<update id="updateLostBoard" parameterType="LostBoardDTO">
+		UPDATE LOSTBOARD
+		SET
+		    LOSTRESPONSE = #{lostResponse},
+		    RESPONSE_USER = #{responseUser},
+		    RESPONSE_DATE = SYSDATE(),
+		    LOSTSTATUS = CASE
+		        WHEN LOSTRESPONSE IS NULL THEN 0
+		        ELSE 1
+		    END
+		WHERE
+		    CREATE_USER = #{createUser}
+		    AND CREATE_DATE = #{createDate}
+	</update>
+	<insert id="insertCsLost" parameterType="LostBoardDTO">
+		INSERT INTO LOSTBOARD
+		VALUES 
+		((SELECT *
+		   FROM (SELECT IFNULL(MAX(CAST(LOSTIDX as unsigned)), 0) + 1
+				   FROM LOSTBOARD) L)
+		,#{loIdx}
+		,#{ciIdx}
+		,#{lostSubject}
+		,#{lostContent}
+		,NULL
+		,0
+		,#{createUser}
+		,SYSDATE()
+		,NULL
+		,NULL
+		)
+	</insert>
 </mapper>

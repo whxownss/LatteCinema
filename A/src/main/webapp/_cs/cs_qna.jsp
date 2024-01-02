@@ -101,9 +101,9 @@
 					    <li class="page-item disabled">
 					      <a class="page-link text-secondary" href="cs_qna.cs?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
 					    </li>
-				    </c:if>	
+				    </c:if>
 				    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
-					    <li class="page-item" aria-current="page">
+					    <li class="page-item" aria-current="page" id="pageSet">
 					      <a class="page-link text-secondary" href="cs_qna.cs?pageNum=${i }">${i }</a>
 					    </li>
 				    </c:forEach>
@@ -121,6 +121,12 @@
 <%@include file="../_common/commonFooterStart.jsp"%>
 <script src="./jQuery/jquery-3.6.0.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	// qnaCategory 값이 비어 있지 않다면...
+    if($('#qnaCategory').val() != '') {
+   
+    }
+});
 $('#qnaCategory').change(function() {
 	 $.ajax({
  	    url: 'cs_qna.cs',  // 서버의 URL을 입력
