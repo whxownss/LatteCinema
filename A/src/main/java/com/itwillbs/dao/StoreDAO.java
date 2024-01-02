@@ -34,8 +34,8 @@ public class StoreDAO {
 		List<StoreItemDTO> storeItemListB = session.selectList("StoreItem.selectStoreItemB");
 		session.close();
 		
-		for(StoreItemDTO s : storeItemListB) {
-			System.out.println(s);
+		for(StoreItemDTO b : storeItemListB) {
+			System.out.println(b);
 		}
 		
 		return storeItemListB;
@@ -46,6 +46,11 @@ public class StoreDAO {
 		
 		List<StoreItemDTO> storeItemListS = session.selectList("StoreItem.selectStoreItemS");
 		session.close();
+		
+		for(StoreItemDTO s : storeItemListS) {
+			System.out.println(s);
+		}
+		
 		return storeItemListS;
 	}//
 	
@@ -54,6 +59,11 @@ public class StoreDAO {
 		
 		List<StoreItemDTO> storeItemListT = session.selectList("StoreItem.selectStoreItemT");
 		session.close();
+		
+		for(StoreItemDTO t : storeItemListT) {
+			System.out.println(t);
+		}
+		
 		return storeItemListT;
 	}//
 	
