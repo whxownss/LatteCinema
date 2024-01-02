@@ -26,7 +26,7 @@
 						</div>
 						<div class="form-floating mb-3">
 							<input type="password" class="form-control" id="passwd" placeholder="비밀번호" required
-									onblur="checkPassLength(); checkConfirmPasswd();" name="pass">
+									onblur="checkPass(); checkConfirmPasswd();" name="pass">
 							<label  for="passwd">비밀번호<span id="CheckPassword1"></span></label> 
 	
 						</div>
@@ -191,14 +191,14 @@ var emailRegex =  /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2
 // 아이디 유효성 및 중복체크
 function checkId() {
 	var id = $("#id").val();
-// 	debugger;
+	debugger;
 	if(id==""){
 		$("#CheckId").text("아이디를 입력하세요").css("color", "red");
 		return false;			
 	}else if(!RegexID.test(id)){
 		$("#CheckId").text("영문 대소문자,숫자 5~16자리 아이디 입력 ").css("color", "red");
 		return false;
-	}else if(!numRegex.text(id)){
+	}else if(!numRegex.test(id)){
 		$("#CheckId").text("영문 대소문자,숫자 5~16자리 아이디 입력 ").css("color", "red");
 		return false;
 	}else{
@@ -209,7 +209,7 @@ function checkId() {
 			url : "checkjoin.me", 
 			dataType: "text",
 			success:function(data){
-// 				debugger;
+				debugger;
 				if(data == '1'){
 					$("#CheckId").text("사용중인 아이디입니다.").css("color", "red");
 					
@@ -247,7 +247,7 @@ function checkId() {
 // };
 
 // 비밀번호 유효성
-function checkPassLength(){
+function checkPass(){
 	var passwd = $("#passwd").val();
 	var text =' ** 비밀번호 입력 필수 **';
 	var color='red';
