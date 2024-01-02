@@ -46,9 +46,9 @@ public class ResDAO {
 		return openCinemaList;
 	}
 
-	public List<ScheduleDTO> selectMovieList(String cinema) {
+	public List<ScheduleDTO> selectMovieList(Map<String, String> map) {
 		SqlSession session = sqlSessionFactory.openSession();
-		List<ScheduleDTO> movieList = session.selectList("Schedule.selectMovieList", cinema);
+		List<ScheduleDTO> movieList = session.selectList("Schedule.selectMovieList", map);
 		
 		
 		
