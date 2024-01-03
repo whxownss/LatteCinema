@@ -98,6 +98,8 @@ public class MemberController extends HttpServlet {
 			String email = request.getParameter("email");
 			PrintWriter out = response.getWriter();
 			
+		
+			
 		}//
 		
 		//  로그인 loginPro.me 이동
