@@ -277,7 +277,7 @@ function emailAuthentication() {
 			alert("인증번호 보내기 성공");
 			
 		},
-		error: function name() {
+		error: function () {
 			
 		}
 	});

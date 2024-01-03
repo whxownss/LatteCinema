@@ -96,7 +96,6 @@ public class MemberController extends HttpServlet {
 		if(sPath.equals("/emailCode.me")) {
 			response.setCharacterEncoding("utf-8");
 			String email = request.getParameter("email");
-			PrintWriter out = response.getWriter();
 			
 		
 			
