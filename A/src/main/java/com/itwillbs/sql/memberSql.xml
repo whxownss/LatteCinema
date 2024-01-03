@@ -67,6 +67,13 @@
 		WHERE MEM_ID = #{id}
 	</select>
 	
+	<!-- 	회원가입 이메일 중복확인 -->
+	<select id="checkEmail" parameterType="String"   resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBERS
+		WHERE MEM_EMAIL = #{email}
+	</select>
+	
 	<select id="userCheck" parameterType="MemberDTO" resultType="MemberDTO">
 		SELECT *
 		FROM MEMBERS

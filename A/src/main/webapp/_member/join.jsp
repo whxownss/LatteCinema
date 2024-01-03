@@ -82,7 +82,7 @@
 								</div>	
 							</div>	
 							<div class="col-3">	
-								<button class="btn btn-danger btn-lg" type="button" style="height:58px;">인증번호 발송</button>
+								<button onclick="emailAuthentication()" id="eamilAuthBtn" disabled="disabled" class="btn btn-danger btn-lg" type="button" style="height:58px;">인증번호 발송</button>
 							</div>
 						</div>
 						
@@ -95,7 +95,7 @@
 								</div>	
 							</div>	
 							<div class="col-3">	
-								<button class="btn btn-danger btn-lg" type="button" style="height:58px;">인증하기</button>
+								<button onclick="authCodeCheck()" id="authCodeCheckBtn" class="btn btn-danger btn-lg" type="button" style="height:58px;">인증하기</button>
 							</div>
 						</div>
 						<div class="d-grid gap-2" style="margin-top: 50px">
@@ -165,15 +165,17 @@
 </script>
 
 <script>
-// function checkSubmit() {
+
 
 // 회원가입 정규식
 var empJ = /\s/g; // 공백 정규식
-var RegexID = /^[A-Za-z0-9!@#$%]{5,16}$/; // 영문 대소문자 숫자 특수문자 5~16자 규칙(아이디)
+var RegexID = /^[a-zA-Z0-9]{5,16}$/; // 영문 대소문자 숫자 특수문자 5~16자 규칙(아이디)
+//var RegexID = /^(?=.*[a-z0-9])[a-z0-9]{3,16}$/; // 영문 대소문자 숫자 특수문자 5~16자 규칙(아이디)
 var lengthRegexPass = /^[A-Za-z0-9!@#$%]{8,16}$/; // 영문 대소문자 숫자 특수문자 8~16자 규칙(패스워드)
 var engUpperRegex = /[A-Z]/; //대문자 규칙 (비밀번호)
 var engLowerRegex = /[a-z]/;  //소문자 규칙 (비밀번호)
 var numRegex = /[0-9]/;	// 숫자 0~9 규칙 (비밀번호)
+var numRegex1 = /^[0-9]+$/;	// 숫자만 입력
 var specRegex = /[!@#$%]/;	// 특수문자 규칙 (비밀번호)
 var nameRegex = /^[가-힣]{2,5}$/; // 한글 2~5자 규칙 (이름)
 var phoneRegex =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/; // 모든 전화번호 규칙 (연락처)
@@ -197,10 +199,11 @@ function checkId() {
 	}else if(!RegexID.test(id)){
 		$("#CheckId").text("영문 대소문자,숫자 5~16자리 아이디 입력 ").css("color", "red");
 		return false;
-	}else if(numRegex.test(id)){
-		$("#CheckId").text("영문 대소문자,숫자 5~16자리 아이디 입력 ").css("color", "red");
+	}else if(numRegex1.test(id)){
+		$("#CheckId").text("영문 대소문자,숫자 5~16자리 아이디 입력1 ").css("color", "red");
 		return false;
-	}else{
+	}
+		
 		$.ajax({
 			type : "post",
 			
@@ -221,9 +224,71 @@ function checkId() {
 			}
 		});
 	}
+// }
 
-
+// 이메일 유효성 체크 및 인증번호체크
+function checkEmail() {
+	var email = $("#email").val();
+	if(email == ""){
+		$("#CheckEmail").text("** 본인인증 이메일 입력 필수 **").css("color", "red");
+		return false;
+	}else if(!emailRegex.test(email)){
+		$("#CheckEmail").text("** name@example.com 형식에 맞게 입력! **").css("color", "red");
+		return false;
+	}else{
+		$.ajax({
+			type : "post",
+			data : {memEmail : email},
+			url	 : "checkemail.me",
+			dataType : "text",
+			success:function(data){
+// 				debugger;
+				if(data == '1'){
+					$("#CheckEmail").text("사용중인 이메일입니다").css("color", "red");
+					return false;
+				}else if(data == '0'){
+					$("#CheckEmail").text("사용가능한 이메일입니다").css("color", "green");
+// 					debugger;
+					$("#eamilAuthBtn").attr("disabled" , false);
+					
+					return true;
+				}
+			},
+			error: function(){
+				
+			}
+			
+		});
+	}
+		
 }
+
+
+// 이메일 인증번호 발송 및 인증
+function emailAuthentication() {
+	var email = $("#email").val()
+	$.ajax({
+		type : "post",
+		url : "emailCode.me",
+		dataType : "text",
+		data : {email : email},
+		success:function(data){
+			debugger;
+			alert("인증번호 보내기 성공");
+			
+		},
+		error: function name() {
+			
+		}
+	});
+}
+
+
+
+// 이메일 인증 번호 확인하기 버튼
+// function authCodeCheck() {
+	
+// }
 
 
 
@@ -245,15 +310,7 @@ function checkId() {
 // 	$("#CheckId").text(text).css("color", color);
 // };
 
-// 비밀번호 유효성
-// function checkPass() {
-// 	var passwd = $("#passwd").val();
-// 	if(passwd == "" || passwd == null){
-// 		$("#CheckPassword1").text("** 비밀번호를 입력를 입력해주세요 **").css("color", "red").css("font-size", "15px");
-// 		return false;
-// 	}
-	
-// }
+
 
 // 비밀번호 유효성
 function checkPass(){
@@ -289,7 +346,7 @@ function checkPass(){
 		
 		
 	}
-	$("#CheckPassword1").text(text).css("color", color).css("font-size", "15px");
+	$("#CheckPassword1").text(text).css("color", color);
 };
 
 // 비밀번호 확인 유효성		
@@ -303,7 +360,7 @@ function checkConfirmPasswd() {
 		color='green';
 		
 	}
-	$("#CheckPassword2").text(text).css("color", color).css("font-size", "15px");
+	$("#CheckPassword2").text(text).css("color", color);
 }		
 
 // 이름 정규식 유효성
@@ -319,7 +376,7 @@ function checkName() {
 			color = "green";
 		}
 	}
-	$("#CheckName").text(text).css("color",color).css("font-size", "15px");
+	$("#CheckName").text(text).css("color",color);
 }
 
 // 연락처 정규식 유효성
@@ -336,7 +393,7 @@ function checkPhone() {
 			color = "green";
 		}
 	}
-	$("#CheckPhone").text(text).css("color",color).css("font-size", "15px");
+	$("#CheckPhone").text(text).css("color",color);
 }
 
 // 생년월일 8자 정규식 유효성
@@ -353,28 +410,28 @@ function checkBirth() {
 			color = "green";
 		}
 	}
-	$("#CheckBirth").text(text).css("color", color).css("font-size", "15px");
+	$("#CheckBirth").text(text).css("color", color);
 }
 
 // 이메일 정규식 유효성
-function checkEmail() {
-	var email = $("#email").val();
-	var text = "** 본인인증 이메일 필수 입력! **";
-	var color= "red";
+// function checkEmail() {
+// 	var email = $("#email").val();
+// 	var text = "** 본인인증 이메일 필수 입력! **";
+// 	var color= "red";
 	
-	if(email != ""){
-		text = "** name@example.com 형식에 맞게 입력! **";
+// 	if(email != ""){
+// 		text = "** name@example.com 형식에 맞게 입력! **";
 		
-		if(emailRegex.test(email)){
-			text = "** 유효한 이메일 ** ";
-			color = "green";
-		}
-	}
+// 		if(emailRegex.test(email)){
+// 			text = "** 유효한 이메일 ** ";
+// 			color = "green";
+// 		}
+// 	}
 	
-	$("#CheckEmail").text(text).css("color" , color).css("font-size", "15px");
-}
-
+// 	$("#CheckEmail").text(text).css("color" , color);
 // }
+
+
 // 유효성 체크 후 submit
 function checkSubmit() {
 	

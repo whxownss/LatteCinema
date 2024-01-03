@@ -16,6 +16,7 @@ public class MemberDAO {
 
 	private SqlSessionFactory sqlSessionFactory = SqlMapClient.getSqlSession();
 	
+	// 회원가입 정보 입력
 	public boolean insertMember(MemberDTO memberDTO) {
 		SqlSession session = sqlSessionFactory.openSession();
 		int insertResult = session.insert("Member.insertMember", memberDTO); // namespace.id
@@ -25,12 +26,20 @@ public class MemberDAO {
 		
 	}
 
+	// 아이디 중복체크
 	public int checkId(String id) {
 		SqlSession session = sqlSessionFactory.openSession();
 		int result = session.selectOne("Member.checkId", id);
 		session.close();
 		return result;
 		
+	}
+	// 이메일 중복체크
+	public int checkEmail(String email) {
+		SqlSession session = sqlSessionFactory.openSession();
+			int result = session.selectOne("Member.checkEmail", email);
+			session.close();
+		return result;
 	}
 	
 	public MemberDTO userCheck(MemberDTO memberDTO) {
@@ -40,6 +49,7 @@ public class MemberDAO {
 		return memberDTO;
 	}
 	
+	// 회워탈퇴
 	public boolean deleteMember(MemberDTO memberDTO) {
 		SqlSession session = sqlSessionFactory.openSession();
 		int deleteResult = session.delete("Member.deleteMember", memberDTO);
@@ -49,6 +59,7 @@ public class MemberDAO {
 		return deleteResult > 0 ? true : false;
 	}
 	
+	// 회원정보수정
 	public boolean updateMember(MemberDTO memberDTO) {
 		SqlSession session = sqlSessionFactory.openSession();
 		int updateResult = session.update("Member.updateMember", memberDTO);
@@ -69,6 +80,7 @@ public class MemberDAO {
 		
 		return memberDTO;
 	}
+
 	
 }
 

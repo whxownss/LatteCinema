@@ -151,6 +151,25 @@ public class MemberService {
 		return result; 
 		
 	}//checkId()
+
+	public int checkEmail(HttpServletRequest request) {
+		System.out.println("MemberService checkEmail()");
+		MemberDTO memberDTO = new MemberDTO();
+		int result = 0;
+		try {
+			String email = request.getParameter("memEmail");
+			memberDAO = new MemberDAO();
+			result = memberDAO.checkEmail(email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}//checkEmail()
+
+//	public void sendGmail(HttpServletRequest request) {
+//		System.out.println("MemberService sendGmail()");	
+//		
+//	}//sendGmail()
 	
 	
 }

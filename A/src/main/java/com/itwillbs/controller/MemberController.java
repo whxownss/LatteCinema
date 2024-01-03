@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.itwillbs.domain.MemberDTO;
+import com.itwillbs.email.sendGmail;
 import com.itwillbs.service.MemberService;
 
 
@@ -76,10 +77,30 @@ public class MemberController extends HttpServlet {
 			
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(result + "");
-			// 주소변경 login.me 이동
-//			response.sendRedirect("login.me");
+
 		}//
 		
+		// 회원가입 이메일 중복체크 checkemail.me
+		if(sPath.equals("/checkemail.me")) {
+			memberService = new MemberService();
+			
+			int result = memberService.checkEmail(request);
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result + "");
+
+		}//
+		
+		// 회원가입 이메일 인증번호 checkemail.me
+		if(sPath.equals("/emailCode.me")) {
+			response.setCharacterEncoding("utf-8");
+			sendGmail sendgmail = new sendGmail();
+		
+//			memberService = new MemberService();
+//			// sendGmail 메서드 호출
+//			memberService.sendGmail(request);
+
+		}//
 		
 		//  로그인 loginPro.me 이동
 		if(sPath.equals("/loginPro.me")) {
