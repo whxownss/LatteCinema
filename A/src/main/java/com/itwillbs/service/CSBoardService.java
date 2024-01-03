@@ -15,6 +15,7 @@ import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ExqBoardDTO;
 import com.itwillbs.domain.LocationDTO;
+import com.itwillbs.domain.LostBoardDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 
@@ -338,6 +339,100 @@ public class CSBoardService {
 		}
 		return count;
 	}// qnaCategory로 검색 페이징 처리를 위한 count
+
+	public ArrayList<LostBoardDTO> getLostBoardList(PageDTO pageDTO) {
+		System.out.println("CSBoardService getLostBoardList()");
+		ArrayList<LostBoardDTO> lostBoardList = null;
+		try {
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			lostBoardList = csBoardDAO.getLostBoardList(pageDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lostBoardList;
+	}//getLostBoardList()
+
+	public int getLostBoardCount() {
+		System.out.println("CSBoardService getLostBoardCount()");
+		int count = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getLostBoardCount();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getLostBoardCount()
+
+	public LostBoardDTO getLostBoard(String createUser, String createDate) {
+		System.out.println("CSBoardService getLostBoard()");
+		LostBoardDTO lostBoardDTO = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			lostBoardDTO = csBoardDAO.getLostBoard(createUser,createDate);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lostBoardDTO;
+	}//getLostBoard()
+
+	public boolean updateLostBoard(HttpServletRequest request) {
+		System.out.println("CSBoardService updateLostBoard()");
+		int lostUpdateSuccess = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+	        // 요청으로부터 JSON 데이터 읽기
+	        StringBuilder jsonBuffer = new StringBuilder();
+	        String line;
+	        BufferedReader reader = request.getReader();
+	        while ((line = reader.readLine()) != null) {
+	            jsonBuffer.append(line);
+	        }
+	        String jsonStr = jsonBuffer.toString();
+
+	        // Gson 객체 생성
+	        Gson gson = new Gson();
+
+	        // JSON 문자열을 Java 객체로 변환
+	        LostBoardDTO lostBoardDTO = gson.fromJson(jsonStr, LostBoardDTO.class);
+
+	        lostUpdateSuccess = csBoardDAO.updateLostBoard(lostBoardDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lostUpdateSuccess > 0;
+	}//
+
+	public boolean insertCsLost(HttpServletRequest request) {
+		System.out.println("CSBoardService insertCsLost()");
+		int lostInsertSuccess = 0;
+		try {
+			String lostSubject = request.getParameter("lostSubject");
+			String lostContent = request.getParameter("lostContent");
+			String createUser = request.getParameter("createUser");
+			String loIdx = request.getParameter("loIdx");
+			String ciIdx = request.getParameter("ciIdx");
+			
+			LostBoardDTO lostBoardDTO = new LostBoardDTO();
+			lostBoardDTO.setLoIdx(loIdx);
+			lostBoardDTO.setCiIdx(ciIdx);
+			lostBoardDTO.setLostSubject(lostSubject);
+			lostBoardDTO.setLostContent(lostContent);
+			lostBoardDTO.setCreateUser(createUser);
+			csBoardDAO = new CSBoardDAO();
+			lostInsertSuccess = csBoardDAO.insertCsLost(lostBoardDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lostInsertSuccess > 0;
+	}//insertCsLost()
 
 	
 }//클래스

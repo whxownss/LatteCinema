@@ -135,7 +135,7 @@ $('#locationSelect').change(function() {
 	  	        // 예: 받은 데이터를 페이지에 표시
 	  	        var cinemas = response;
 	  	        $('#cinemaSelect').empty();
-	  	        $('#cinemaSelect').append($('<option>전체</option>'));
+// 	  	        $('#cinemaSelect').append($('<option>전체</option>')); // 이거 빼기로 했음. 나중에 확인해보기.
 	  	        cinemas.forEach(function(cinema) {
 // 	  	        	debugger;
 	  	            $('#cinemaSelect').append($('<option></option>').val(cinema.ciIdx).text(cinema.ciName));

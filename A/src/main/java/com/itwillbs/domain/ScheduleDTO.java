@@ -10,14 +10,14 @@ public class ScheduleDTO {
 	private Timestamp schDate;
 	private String schMovType;
 	private String schMovIdx;
-	private String schTime;
+	private String schStime;
 	private String schRun;
+	private String schEtime;
 	private String scrIdx;
 	private String scrSeatAvail;
 	
 	private String title;
 	private String scrSeat;
-	
 	public String getLoIdx() {
 		return loIdx;
 	}
@@ -54,17 +54,23 @@ public class ScheduleDTO {
 	public void setSchMovIdx(String schMovIdx) {
 		this.schMovIdx = schMovIdx;
 	}
-	public String getSchTime() {
-		return schTime;
+	public String getSchStime() {
+		return schStime;
 	}
-	public void setSchTime(String schTime) {
-		this.schTime = schTime;
+	public void setSchStime(String schStime) {
+		this.schStime = schStime;
 	}
 	public String getSchRun() {
 		return schRun;
 	}
 	public void setSchRun(String schRun) {
 		this.schRun = schRun;
+	}
+	public String getSchEtime() {
+		return schEtime;
+	}
+	public void setSchEtime(String schEtime) {
+		this.schEtime = schEtime;
 	}
 	public String getScrIdx() {
 		return scrIdx;
@@ -93,10 +99,12 @@ public class ScheduleDTO {
 	@Override
 	public String toString() {
 		return "ScheduleDTO [loIdx=" + loIdx + ", ciIdx=" + ciIdx + ", schIdx=" + schIdx + ", schDate=" + schDate
-				+ ", schMovType=" + schMovType + ", schMovIdx=" + schMovIdx + ", schTime=" + schTime + ", schRun="
-				+ schRun + ", scrIdx=" + scrIdx + ", scrSeatAvail=" + scrSeatAvail + ", title=" + title + ", scrSeat="
-				+ scrSeat + "]";
+				+ ", schMovType=" + schMovType + ", schMovIdx=" + schMovIdx + ", schStime=" + schStime + ", schRun="
+				+ schRun + ", schEtime=" + schEtime + ", scrIdx=" + scrIdx + ", scrSeatAvail=" + scrSeatAvail
+				+ ", title=" + title + ", scrSeat=" + scrSeat + "]";
 	}
+	
+	
 	
 	
 	

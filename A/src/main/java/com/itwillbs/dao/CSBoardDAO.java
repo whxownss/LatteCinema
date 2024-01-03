@@ -12,6 +12,7 @@ import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ExqBoardDTO;
 import com.itwillbs.domain.LocationDTO;
+import com.itwillbs.domain.LostBoardDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.sql.SqlMapClient;
@@ -312,6 +313,95 @@ public class CSBoardDAO {
 		}
 		return count;
 	}// qnaCategory로 검색 getQnaBoardCount()
+
+	public ArrayList<LostBoardDTO> getLostBoardList(PageDTO pageDTO) {
+		System.out.println("CSBoardDAO getLostBoardList()");
+		ArrayList<LostBoardDTO> lostBoardList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			lostBoardList = new ArrayList<LostBoardDTO>(session.selectList("CsAdmin.getLostBoardList", pageDTO));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return lostBoardList;
+	}//getLostBoardList()
+
+	public int getLostBoardCount() {
+		System.out.println("CSBoardDAO getLostBoardCount()");
+		int count = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			count = session.selectOne("CsAdmin.getLostBoardCount");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return count;
+	}//getLostBoardCount()
+
+	public LostBoardDTO getLostBoard(String createUser, String createDate) {
+		System.out.println("CSBoardDAO getLostBoard()");
+		LostBoardDTO lostBoardDTO = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			// 파라미터를 맵에 저장
+	        Map<String, Object> params = new HashMap<>();
+	        params.put("createUser", createUser);
+	        params.put("createDate", createDate);
+	        // selectOne 메소드 사용 및 파라미터 전달
+			lostBoardDTO = session.selectOne("CsAdmin.getLostBoard",params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return lostBoardDTO;
+	}//getLostBoard()
+
+	public int updateLostBoard(LostBoardDTO lostBoardDTO) {
+		System.out.println("CSBoardDAO updateLostBoard()");
+		int lostUpdateSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			lostUpdateSuccess = session.update("CsAdmin.updateLostBoard",lostBoardDTO);
+			
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return lostUpdateSuccess;
+	}//updateLostBoard()
+
+	public int insertCsLost(LostBoardDTO lostBoardDTO) {
+		System.out.println("CSBoardDAO insertCsLost()");
+		int lostInsertSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			lostInsertSuccess = session.insert("CsAdmin.insertCsLost",lostBoardDTO);
+			
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return lostInsertSuccess;
+	}//insertCsLost()
 	
 	
 	
