@@ -49,7 +49,7 @@ PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
 			<div class="container" data-aos="fade-up">
 				<div class="row">
 				  <div class="col-md-3">
-				    <p><strong>전체 <span id="totalCnt" class="font-gblue">${pageDTO.count }</span>건</strong></p>
+<%-- 				    <p><strong>전체 <span id="totalCnt" class="font-gblue">${pageDTO.count }</span>건</strong></p> --%>
 				  </div>
 <!-- 				  <form class="row gy-2 gx-3 align-items-center" action="cs_lost_search.cs" method="post" name="fr"> -->
 				  <div class="col-md-2">
@@ -191,11 +191,10 @@ $(document).ready(function(){
    					// 'response' 객체에서 'lostBoardList'와 'pageDTO' 데이터 추출
    			        var lostBoardList = response.lostBoardList;
    			        var pageDTO = response.pageDTO;
-
+// 					debugger;
    					$('#tbody').empty();
    					lostBoardList.forEach(function(search) {
    						// 날짜 형식 변경 (예: yyyy-MM-dd)
-
    						console.log('Received createDate:', search.createDate);
    		                var formattedDate = formatDate(search.createDate); // 'formatDate'는 날짜 형식을 변경하는 함수
    		                var parseAndFormat= parseAndFormatDate(search.createDate);
@@ -216,6 +215,7 @@ $(document).ready(function(){
    		                $('#tbody').append(newRow);
    		            });
    					$('#searchPaging').empty();  // 페이지네이션 영역 비우기
+//    					debugger;
    					    // '이전' 버튼
    					    if(pageDTO.startPage > pageDTO.pageBlock) {
    					        $('#searchPaging').append(
@@ -251,59 +251,12 @@ $(document).ready(function(){
    		 	    }
    		 	});
     });
- 	// 날짜 형식을 변경하는 함수
-    function formatDate(dateString) {
-        var date = new Date(dateString);
-        var year = date.getFullYear();
-        var month = ('0' + (date.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 1을 더해줍니다.
-        var day = ('0' + date.getDate()).slice(-2);
-        return year + '-' + month + '-' + day;
-    }
-    function parseAndFormatDate(dateString) {
-        // 'Jan 2, 2024, 12:18:27 AM'와 같은 형식을 파싱
-        var parts = dateString.match(/(\w+) (\d+), (\d+), (\d+):(\d+):(\d+) (\w+)/);
-        
-        if (parts) {
-            var months = {'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5, 'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11};
-            var year = parseInt(parts[3], 10);
-            var month = months[parts[1]];
-            var day = parseInt(parts[2], 10);
-            var hours = parseInt(parts[4], 10);
-            var minutes = parseInt(parts[5], 10);
-            var seconds = parseInt(parts[6], 10);
-            var ampm = parts[7].toLowerCase();
 
-            // 'AM'과 'PM'을 고려하여 시간 조정
-            if (ampm === 'pm' && hours < 12) {
-                hours += 12;
-            }
-            if (ampm === 'am' && hours === 12) {
-                hours = 0;
-            }
-
-            // Date 객체 생성
-            var date = new Date(year, month, day, hours, minutes, seconds);
-            
-            // 원하는 형식으로 날짜 포맷팅 (예: 'YYYY-MM-DD HH:mm:ss')
-            return formatDate2(date);
-        } else {
-            // 파싱할 수 없는 형식이면 원래 문자열 반환 또는 오류 처리
-            return dateString;
-        }
-    }
- 	// 주어진 Date 객체를 'YYYY-MM-DD HH:mm:ss' 형식으로 포맷팅하는 함수
-    function formatDate2(date) {
-        var year = date.getFullYear();
-        var month = ('0' + (date.getMonth() + 1)).slice(-2);
-        var day = ('0' + date.getDate()).slice(-2);
-        var hours = ('0' + date.getHours()).slice(-2);
-        var minutes = ('0' + date.getMinutes()).slice(-2);
-        var seconds = ('0' + date.getSeconds()).slice(-2);
-
-        return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
-    }
+ 	
+});
     function searchPageNm(pageNum, loIdx, ciIdx, lostStatus, lostSubject){
         // AJAX 요청을 통해 서버로부터 새로운 페이징 데이터를 가져옴
+        debugger;
         $.ajax({
             url: 'cs_lost_search.cs',
             type: 'GET',
@@ -318,12 +271,18 @@ $(document).ready(function(){
                 // 서버로부터 받은 새로운 페이징 데이터로 '#searchPaging' 업데이트
                 // response는 새로운 페이징 데이터를 포함하고 있어야 함
                 updatePagination(response);
+            },
+            error: function(xhr, status, error) {
+                console.error("An error occurred: " + status + "\nError: " + error);
+                // 사용자에게 오류 알림
+                alert("문제가 발생했습니다. 관리자에게 문의하세요.");
             }
         });
     }
     //
     function updatePagination(response) {
 		// 'response' 객체에서 'lostBoardList'와 'pageDTO' 데이터 추출
+		debugger;
 	       var lostBoardList = response.lostBoardList;
 	       var pageDTO = response.pageDTO;
 	
@@ -378,7 +337,6 @@ $(document).ready(function(){
 		        );
 		    }
 	}
-});
 
 $('#locationSelect').change(function() {
 	 $.ajax({
@@ -403,5 +361,56 @@ $('#locationSelect').change(function() {
  	});
 });
 
+	// 날짜 형식을 변경하는 함수
+function formatDate(dateString) {
+    var date = new Date(dateString);
+    var year = date.getFullYear();
+    var month = ('0' + (date.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 1을 더해줍니다.
+    var day = ('0' + date.getDate()).slice(-2);
+    return year + '-' + month + '-' + day;
+}
+function parseAndFormatDate(dateString) {
+    // 'Jan 2, 2024, 12:18:27 AM'와 같은 형식을 파싱
+    var parts = dateString.match(/(\w+) (\d+), (\d+), (\d+):(\d+):(\d+) (\w+)/);
+    
+    if (parts) {
+        var months = {'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5, 'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11};
+        var year = parseInt(parts[3], 10);
+        var month = months[parts[1]];
+        var day = parseInt(parts[2], 10);
+        var hours = parseInt(parts[4], 10);
+        var minutes = parseInt(parts[5], 10);
+        var seconds = parseInt(parts[6], 10);
+        var ampm = parts[7].toLowerCase();
+
+        // 'AM'과 'PM'을 고려하여 시간 조정
+        if (ampm === 'pm' && hours < 12) {
+            hours += 12;
+        }
+        if (ampm === 'am' && hours === 12) {
+            hours = 0;
+        }
+
+        // Date 객체 생성
+        var date = new Date(year, month, day, hours, minutes, seconds);
+        
+        // 원하는 형식으로 날짜 포맷팅 (예: 'YYYY-MM-DD HH:mm:ss')
+        return formatDate2(date);
+    } else {
+        // 파싱할 수 없는 형식이면 원래 문자열 반환 또는 오류 처리
+        return dateString;
+    }
+}
+	// 주어진 Date 객체를 'YYYY-MM-DD HH:mm:ss' 형식으로 포맷팅하는 함수
+function formatDate2(date) {
+    var year = date.getFullYear();
+    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+    var day = ('0' + date.getDate()).slice(-2);
+    var hours = ('0' + date.getHours()).slice(-2);
+    var minutes = ('0' + date.getMinutes()).slice(-2);
+    var seconds = ('0' + date.getSeconds()).slice(-2);
+
+    return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+}
 </script>
 <%@include file="../_common/commonFooterEnd.jsp"%>

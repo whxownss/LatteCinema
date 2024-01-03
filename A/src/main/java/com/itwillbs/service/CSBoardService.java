@@ -472,8 +472,8 @@ public class CSBoardService {
 		System.out.println("CSBoardService getLostBoardCount()");
 		int count = 0;
 		try {
-			String loIdx = request.getParameter("locationSelect");
-			String ciIdx = request.getParameter("cinemaSelect");
+			String loIdx = request.getParameter("loIdx");
+			String ciIdx = request.getParameter("ciIdx");
 			String lostStatus = request.getParameter("lostStatus");
 			String lostSubject = request.getParameter("lostSubject");
 			
