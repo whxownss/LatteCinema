@@ -208,8 +208,11 @@
               </div>
             </div>
             
+            
+            <!-- 검색창 스크린 세이브와 동일하여 주석처리 -->
+            
             <!-- latttte movie -->
-          	<div class="clearfix"></div>
+          <!-- 	<div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -248,7 +251,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             
             
 
