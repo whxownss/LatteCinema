@@ -434,5 +434,67 @@ public class CSBoardService {
 		return lostInsertSuccess > 0;
 	}//insertCsLost()
 
+	public ArrayList<LostBoardDTO> getLostBoardList(PageDTO pageDTO, HttpServletRequest request) {
+		System.out.println("CSBoardService getLostBoardList()");
+		ArrayList<LostBoardDTO> lostBoardList = null;
+		try {
+			String loIdx = request.getParameter("loIdx");
+			String ciIdx = request.getParameter("ciIdx");
+			String lostStatus = request.getParameter("lostStatus");
+			String lostSubject = request.getParameter("lostSubject");
+			
+			System.out.println("loIdx: " + loIdx);
+			System.out.println("ciIdx: " + ciIdx);
+			System.out.println("lostStatus: " + lostStatus);
+			System.out.println("lostSubject: " + lostSubject);
+			
+			LostBoardDTO lostBoardDTO = new LostBoardDTO();
+			lostBoardDTO.setLoIdx(loIdx);
+			lostBoardDTO.setCiIdx(ciIdx);
+			lostBoardDTO.setLostStatus(lostStatus);
+			lostBoardDTO.setLostSubject(lostSubject);
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			lostBoardList = csBoardDAO.getLostBoardList(pageDTO,lostBoardDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lostBoardList;
+	}//getLostBoardList() 검색버튼 사용
+
+	public int getLostBoardCount(HttpServletRequest request) {
+		System.out.println("CSBoardService getLostBoardCount()");
+		int count = 0;
+		try {
+			String loIdx = request.getParameter("locationSelect");
+			String ciIdx = request.getParameter("cinemaSelect");
+			String lostStatus = request.getParameter("lostStatus");
+			String lostSubject = request.getParameter("lostSubject");
+			
+			System.out.println("loIdx: " + loIdx);
+			System.out.println("ciIdx: " + ciIdx);
+			System.out.println("lostStatus: " + lostStatus);
+			System.out.println("lostSubject: " + lostSubject);
+			
+			LostBoardDTO lostBoardDTO = new LostBoardDTO();
+			lostBoardDTO.setLoIdx(loIdx);
+			lostBoardDTO.setCiIdx(ciIdx);
+			lostBoardDTO.setLostStatus(lostStatus);
+			lostBoardDTO.setLostSubject(lostSubject);
+			
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getLostBoardCount(lostBoardDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getLostBoardCount 검색버튼 사용
+
 	
 }//클래스

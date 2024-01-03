@@ -172,4 +172,45 @@
 		,NULL
 		)
 	</insert>
+	<select id="getLBSearchList" parameterType="map" resultType="LostBoardDTO">
+		SELECT *,
+		       (SELECT C.CI_NAME
+		          FROM CINEMA AS C
+		         WHERE C.LO_IDX = LOST.LO_IDX AND C.CI_IDX = LOST.CI_IDX) AS 'CI_NAME',
+		       ROW_NUMBER() OVER (ORDER BY LOST.CREATE_DATE) AS RN
+		  FROM LOSTBOARD AS LOST
+		 WHERE 1 = 1
+		 <if test="lostBoardDTO.loIdx != ''">
+		   AND LO_IDX = #{lostBoardDTO.loIdx}
+		 </if>
+		 <if test="lostBoardDTO.ciIdx != ''">  
+		   AND CI_IDX = #{lostBoardDTO.ciIdx}
+		 </if>
+		 <if test="lostBoardDTO.lostStatus != ''">  
+		   AND LOSTSTATUS = #{lostBoardDTO.lostStatus}
+		 </if>
+		 <if test="lostBoardDTO.lostSubject != null">  
+		   AND LOSTSUBJECT LIKE '%${lostBoardDTO.lostSubject}%' 
+		 </if>
+		 ORDER BY LOST.CREATE_DATE DESC
+		 LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}		
+	</select>
+	<select id="getLBSearchCount" parameterType="LostBoardDTO" resultType="int">
+	    SELECT COUNT(*) 
+	    FROM LOSTBOARD
+	    WHERE 1 = 1
+	    <if test="loIdx != ''">	
+	        AND LO_IDX = #{loIdx}
+	    </if>
+	    <if test="ciIdx != ''">
+	        AND CI_IDX = #{ciIdx}
+	    </if>
+	    <if test="lostStatus != ''">
+	        AND LOSTSTATUS = #{lostStatus}
+	    </if>
+	    <if test="lostSubject != null">
+	        AND LOSTSUBJECT LIKE CONCAT('%', #{lostSubject}, '%')
+	    </if>
+	</select>
+
 </mapper>

@@ -83,6 +83,12 @@ public class PageDTO {
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
 	}
+	@Override
+	public String toString() {
+		return "PageDTO [pageSize=" + pageSize + ", pageNum=" + pageNum + ", currentPage=" + currentPage + ", startRow="
+				+ startRow + ", endRow=" + endRow + ", count=" + count + ", pageBlock=" + pageBlock + ", startPage="
+				+ startPage + ", endPage=" + endPage + ", pageCount=" + pageCount + ", search=" + search + "]";
+	}
 	
 	
 }
