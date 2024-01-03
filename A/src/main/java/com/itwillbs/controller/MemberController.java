@@ -94,12 +94,8 @@ public class MemberController extends HttpServlet {
 		// 회원가입 이메일 인증번호 checkemail.me
 		if(sPath.equals("/emailCode.me")) {
 			response.setCharacterEncoding("utf-8");
-			sendGmail sendgmail = new sendGmail();
-		
-//			memberService = new MemberService();
-//			// sendGmail 메서드 호출
-//			memberService.sendGmail(request);
-
+			String email = request.getParameter("email");
+			
 		}//
 		
 		//  로그인 loginPro.me 이동
