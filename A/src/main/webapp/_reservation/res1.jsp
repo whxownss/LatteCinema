@@ -16,6 +16,27 @@
 <c:set var="cinemaListJson" value="${requestScope.cinemaListJson}" />
 <c:set var="scheduleListJson" value="${requestScope.scheduleListJson}" />
 
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalTitle">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <main id="main">
 
 	<section class="category-section">
@@ -119,10 +140,8 @@
 <%@include file="../_common/commonFooterStart.jsp"%>
 <script src="jQuery/jquery-3.6.0.js"></script>
 <script>
-
 var cinemaList = ${cinemaListJson};
-// var scheduleList = ${scheduleListJson};
-
+var movieList;
 var days = ["일", "월", "화", "수", "목", "금", "토"];
 //맨처음 상단에 날짜 표시
 var writeDate = function(date){
@@ -140,7 +159,15 @@ var setDateRange = function(date){
 	$("#myCalendar").prop("min", dateFormat(date));
 	$("#myCalendar").prop("max", dateFormat(new Date(date.setDate(date.getDate() + 4))));
 };
-
+// showSchedule에서 필요한 부분
+var check = function(type, value){
+	var id = (type == "OLD") ? "oldSch" : "nowSch";
+	var text = (type == "OLD") ? "옛날 영화" : "최신 영화";
+	
+	if(value.schMovType == type && $("#showTimeTable").children("#" + id).length == 0){
+		$("#showTimeTable").append("<div class='text-start' id='" + id + "'>" + text + "</div>");
+	}
+}
 //상영 시간표 출력
 var showSchedule = function(param, date){
 	$("#showTimeTable").empty();
@@ -153,19 +180,6 @@ var showSchedule = function(param, date){
 		dataType: "json"  // fail 기준 질문하기. 결과값 [] 여도 done -> 왜??
 	})
 	.done(function(data){
-// 		debugger;
-// 		$("#showTimeTable").append("<div class='text-start' id='oldSch'>옛날 영화</div>" + 
-// 								   "<div class='text-start mt-3' id='nowSch'>최신 영화</div>");
-
-		// 이거 따로 빼줄것
-		var check = function(type, value){
-			var id = (type == "OLD") ? "oldSch" : "nowSch";
-			var text = (type == "OLD") ? "옛날 영화" : "최신 영화";
-			
-			if(value.schMovType == type && $("#showTimeTable").children("#" + id).length == 0){
-				$("#showTimeTable").append("<div class='text-start' id='" + id + "'>" + text + "</div>");
-			}
-		}
 		$.each(data, function(index, value){
 			check("OLD", value);
 			check("NOW", value);
@@ -178,11 +192,13 @@ var showSchedule = function(param, date){
 				$("#" + id).append("<div class='text-start'><ul class='text-start  list-time ps-2'></ul></div>");
 			}
 			$("#" + id).find(".list-time")
-			   		   .append("<a class='btn btn-light ms-1 me-1 mt-1 mb-1 pt-0 pb-0 border border-dark-subtle'" 
-					    	   + "href='#' role='button' style='width: 100px;'>" 
-					   		   + "<span class='fs-5'>" + value.schTime + "</span>" + "<br>" 
-					   		   + "<span style='font-size: small'>" + value.scrSeatAvail + "/" + value.scrSeat + "</span>&nbsp;&nbsp;&nbsp;&nbsp;" 
-					   		   + "<span style='font-size: small'>" + value.scrIdx + "관</span>" + "</a>");
+			   		   .append("<a class='btn btn-light ms-1 me-1 mt-1 mb-1 pt-0 pb-0 border border-dark-subtle modalBtn'" 
+					    	   + "href='#' role='button' style='width: 100px;'" 
+					    	   + "data-bs-toggle='modal' data-bs-target='#staticBackdrop'>" // 모달모달모달모달모달모달모달모달모달모달모달모달모달모달 
+					   		   + "<span class='fs-5 starTime'>" + value.schStime + "</span>" + "<br>" 
+					   		   + "<span class='seat' style='font-size: small'>" + value.scrSeatAvail + "/" + value.scrSeat + "</span>&nbsp;&nbsp;&nbsp;&nbsp;" 
+					   		   + "<span class='scrIdx' style='font-size: small'>" + value.scrIdx + "관</span>" 
+					   		   + "<p class='arrow_box'>말풍선 등장!</p></a>");
 		})
 	})
 	.fail(function(){
@@ -193,9 +209,7 @@ var showSchedule = function(param, date){
 		})
 		.done(function(data){
 			// 영업중인 곳 선택한 상태에서 다른 곳 선택하면 영화 목록 그대로인거 해결
-			$(".showMovies").empty();
-			$(".myMovie").removeClass("bg-body-secondary");
-			$(".myMovie").addClass("bg-body-secondary");
+			cleanMyMovies();
 			
 			var msg = "";
 			
@@ -213,204 +227,172 @@ var showSchedule = function(param, date){
 	})
 	
 };
-
+var cleanMyMovies = function(){
+	$("#selectedMovie").text("영화");
+	$(".showMovies").empty();
+	$(".myMovie").removeClass("bg-body-secondary");
+	$(".myMovie").addClass("bg-body-secondary");
+}
+var keepCheck = function(param){
+	var type = (param == "cinema") ? "Cinema" : "Movie";
+	var target = (param == "cinema") ? "지역 및 영화관" : "영화";
+	var text = $("#selected" + type).text().replace(" (준비중)", "");
+	
+	if(text != target){
+		var list = $("[id*=" + type.toLowerCase() + "]").text();
+		if(list.includes(text)){
+			$(".myMouse:contains(" + text + ")").append("<span class='position-absolute top-50 end-0 translate-middle-y me-2 bi bi-check-lg' style='color: red;'></span>")
+										  		.removeClass("border border-0")
+										  		.css("border", "1px red solid");
+		}
+	}
+}
+var changeBgColor = function(param){
+	var selector = ($(param).hasClass("myLocation")) ? "Location" : "Movie";
+	
+	$(".my" + selector).addClass("bg-body-secondary");
+	$(param).removeClass("bg-body-secondary");
+	$(param).css("background", "white");
+}
+var selectMovieList = function(){
+	var cinema = $("#selectedCinema").text();
+	if(!($("#selectedCinema").text() == "지역 및 영화관" || $("#selectedCinema").text().includes("(준비중)"))){
+		$.ajax({
+			type: "GET",
+			url: "res1ProML.re",
+			data: {cinema: cinema,
+				   date: $("#myCalendar").val()},
+			dataType: "json"  
+		})
+		.done(function(data){
+			movieList = data;
+		})
+		.fail(function(){
+		})
+	}
+}
+var letsGoSchedule = function(p){
+	// showSchedule()
+	if($("#selectedMovie").text() != "영화" && $("#selectedCinema").text() == "지역 및 영화관") return;
+	// 특정 영화의 시간표만 보여주기 위함
+	var param = "all";
+	// find(".bi-check-lg") 체크 해제 시 다시 전체 시간표로 나오기 위한 조건
+	if($(p).find(".bi-check-lg").length == 0 && $(p).attr("id").includes("movie")){
+		param = $(p).text();
+	}
+	showSchedule(param);
+}
 
 $(function(){
-			var movieList;
-			
-			// 지역 선택
-			$(".myLocation").click(function(e){
-				// 배경색 변경
-				$(".myLocation").addClass("bg-body-secondary");
-				$(this).removeClass("bg-body-secondary");
-				$(this).css("background", "white");
-				
-				// 목록 나타내기
-				var lo = $(this).attr("id").slice(2);
-				// cinemaList에서 클릭한 지역에 해당하는 영화관 이름만 content에 담기
-				var content = [];
-				$.each(cinemaList, (i, e) => {
-					if(lo == e.loIdx){
-						content.push(e.ciName);
-					}
-				});
-				
-				$(".showLocations").empty();
-				$.each(content, (i, e) => {
-					$(".showLocations").append("<li class='list-group-item border border-0 myMouse' id='cinema" + (i+1) + "'>" + e + "</li>");
-				});
-				
-				// 다른 지역 선택하고 오면 체크 없어지는거 해결
-				if($("#selectedCinema").text() != "지역 및 영화관"){
-					var list = $("[id*=cinema]").text();
-					var text = $("#selectedCinema").text()
-					if(list.includes(text)){
-						$(".myMouse:contains(" + text + ")").append("<span class='position-absolute top-50 end-0 translate-middle-y me-2 bi bi-check-lg' style='color: red;'></span>")
-													  		.removeClass("border border-0")
-													  		.css("border", "1px red solid");
-					}
-				}
-			}); // 지역 선택 끝
+	// 지역 선택
+	$(".myLocation").click(function(e){
+		// 배경색 변경
+		changeBgColor(this);
+		// 목록 나타내기
+		var lo = $(this).attr("id").slice(2);
+		// cinemaList에서 클릭한 지역에 해당하는 영화관 이름만 content에 담기
+		var content = [];
+		$.each(cinemaList, (i, e) => {
+			if(lo == e.loIdx){
+				content.push(e.ciName);
+			}
+		});
+		
+		$(".showLocations").empty();
+		$.each(content, (i, e) => {
+			$(".showLocations").append("<li class='list-group-item border border-0 myMouse' id='cinema" + (i+1) + "'>" + e + "</li>");
+		});
+		
+		// 다른 지역 선택하고 오면 체크 없어지는거 해결
+		keepCheck("cinema")
+	}); // 지역 선택 끝
 
-			// 영화 종류 선택
-			$(".myMovie").click(function(e){
-				// 배경색 변경
-				$(".myMovie").addClass("bg-body-secondary");
-				$(this).removeClass("bg-body-secondary");
-				$(this).css("background", "white");
-				
-				// 목록 나타내기
-				$(".showMovies").empty();
-				var id = $(this).attr("id")
-				$.each(movieList, (i, e) => {
-					if(e.schMovType != id) return;
- 					$(".showMovies").append("<li class='list-group-item border border-0 myMouse' id='" + id + "movie" 
- 													+ (i+1) + "'>" + e.title + "</li>");
- 				});			
-				
-				// 다른 지역 선택하고 오면 체크 없어지는거 해결
-				if($("#selectedMovie").text() != "영화"){
-					var list = $("[id*=movie]").text();
-					var text = $("#selectedMovie").text()
-					if(list.includes(text)){
-						
-						$(".myMouse:contains(" + text + ")").append("<span class='position-absolute top-50 end-0 translate-middle-y me-2 bi bi-check-lg' style='color: red;'></span>")
-													  		.removeClass("border border-0")
-													  		.css("border", "1px red solid");
-					}
-				}
-			}); // 영화 종류 선택 끝
-				
-			// 영화관 및 영화 선택 (동적으로 생긴 태그에 대해선 이렇게 해야함)								// **이 두개 합치기
-			$(document).on("click", "[id*=cinema], [id*=movie]", function(e){
-				var tmp = $(this).attr("id");
-				var id = (tmp.startsWith("c")) ? "selectedCinema" : "selectedMovie";
-				$("#" + id).text(this.textContent);
-				
-				if(id == "selectedCinema"){
-					var cinema = $("#selectedCinema").text();
-					if(id == "selectedCinema"){
-						if(!($("#selectedCinema").text() == "지역 및 영화관" || $("#selectedCinema").text().includes("(준비중)"))){
-							$.ajax({
-								type: "GET",
-								url: "res1ProML.re",
-								data: {cinema: cinema,
-									   date: $("#myCalendar").val()},
-								dataType: "json"  
-							})
-							.done(function(data){
-								movieList = data;
-							})
-							.fail(function(){
-							})
-						}				
-					}
-				}
-				
-				// showSchedule()   (젤 바같에 날짜 != "날짜 및 시간" 조건 뺏음)
-				if($("#selectedMovie").text() != "영화" && $("#selectedCinema").text() == "지역 및 영화관") return;
-				// 특정 영화의 시간표만 보여주기 위함
-				var param = "all";
-				// find(".bi-check-lg") 체크 해제 시 다시 전체 시간표로 나오기 위한 조건
-				if($(this).find(".bi-check-lg").length == 0 && $(this).attr("id").includes("movie")){
-					param = $(this).text();
-				}
-				showSchedule(param);
-			});
-				
-				
-			// 선택시 체크표시																	// **이 두개 합치기
-			$(document).on("click", "[id*=cinema], [id*=movie]", function(e){
-				var tmp = $(this).attr("id");
-				var id = (tmp.startsWith("c")) ? "[id*=cinema]" : "[id*=movie]";
-				// 영화 선택 해제
-				if(id == "[id*=movie]" && $(this).children("span").length){
-					$(this).addClass("border border-0");
-					$(this).children("span").remove();
-					$("#selectedMovie").text("영화")
-					return;
-				}
-				// 같은 영화관 선택시 처리
-				if(id == "[id*=cinema]" && $(this).children("span").length){
-					$(".showMovies").empty();
-					$(".myMovie").removeClass("bg-body-secondary");
-					$(".myMovie").addClass("bg-body-secondary");
-					$("#selectedMovie").text("영화")
-					return;
-				}
-				$(id).addClass("border border-0");
-				$(this).removeClass("border border-0");
-				$(this).css("border", "1px red solid");
-				$(id + " span").remove();
-				$(this).append("<span class='position-absolute top-50 end-0 translate-middle-y me-2 bi bi-check-lg' style='color: red;'></span>");
-			});
-				
-				
-			// 날짜 표시
-			var date = new Date();
-			// 맨처음 달력에 날짜 표시
-			$("#myCalendar").val(date.toISOString().substring(0, 10));
-			// 맨처음 상단에 날짜 표시
-			writeDate(date);  												// **일단은 처음에는 날짜 표시 안되게끔.
-			// 당일 날짜 기준으로 범위 설정
-			setDateRange(date);
-			// 달력에서 선택 후 날짜 표시
-			$("#myCalendar").on("change", function(){
-				date = new Date($("#myCalendar").val());
-				writeDate(date);
-				
-				
-				
-				
-				//////////////////////////////////////////////////////////// 이 부분도 꽤 많이 쓰임
-				$(".showMovies").empty();
-				$(".myMovie").removeClass("bg-body-secondary");
-				$(".myMovie").addClass("bg-body-secondary");
-				////////////////////////////////////////////////////////////
-				// 이 부분 중복 ---------- 지역 선택시 영화 목록 가져오는 거랑
-				var cinema = $("#selectedCinema").text();
-				if(!($("#selectedCinema").text() == "지역 및 영화관" || $("#selectedCinema").text().includes("(준비중)"))){
-					$.ajax({
-						type: "GET",
-						url: "res1ProML.re",
-						data: {cinema: cinema,
-							   date: $("#myCalendar").val()},
-						dataType: "json"  
-					})
-					.done(function(data){
-						movieList = data;
-					})
-					.fail(function(){
-					})
-				}
-				// -------------------------------------------------
-				
-				
-				
-				
-				
-				
-				// showSchedule()
-				if($("#selectedMovie").text() != "영화" && $("#selectedCinema").text() == "지역 및 영화관") return;
-				// 특정 영화의 시간표만 보여주기 위함
-				var param = "all";
-				// find(".bi-check-lg") 체크 해제 시 다시 전체 시간표로 나오기 위한 조건
-				if($(this).find(".bi-check-lg").length == 0 && $(this).attr("id").includes("movie")){
-					param = $(this).text();
-				}
-				showSchedule(param);
-				
-				
-			}); // 날짜 표시 끝
-			
+	// 영화 종류 선택
+	$(".myMovie").click(function(e){
+		if($("#selectedCinema").text().includes(" (준비중)") || $("#selectedCinema").text() == "지역 및 영화관"){
+			alert("영화관을 먼저 선택해 주세요");
+			return;
+		}
+		
+		// 배경색 변경
+		changeBgColor(this);
+		
+		// 목록 나타내기
+		$(".showMovies").empty();
+		var id = $(this).attr("id")
+		$.each(movieList, (i, e) => {
+			if(e.schMovType != id) return;
+				$(".showMovies").append("<li class='list-group-item border border-0 myMouse' id='" + id + "movie" 
+												+ (i+1) + "'>" + e.title + "</li>");
+			});			
+		
+		// 다른 영화 선택하고 오면 체크 없어지는거 해결
+		keepCheck("movie")
+	}); // 영화 종류 선택 끝
+		
+	// 영화관 및 영화 선택 (동적으로 생긴 태그에 대해선 이렇게 해야함)								// **이 두개 합치기
+	$(document).on("click", "[id*=cinema], [id*=movie]", function(e){
+		var tmp = $(this).attr("id");
+		var id = (tmp.startsWith("c")) ? "selectedCinema" : "selectedMovie";
+		$("#" + id).text(this.textContent);
+		
+		if(id == "selectedCinema") selectMovieList();				
+		
+		letsGoSchedule(this);
+		
+		//////////////////////////////선택시 체크표시	
+		var id2 = (tmp.startsWith("c")) ? "[id*=cinema]" : "[id*=movie]";
+		// 영화 선택 해제
+		if(id2 == "[id*=movie]" && $(this).children("span").length){
+			$(this).addClass("border border-0");
+			$(this).children("span").remove();
+			$("#selectedMovie").text("영화")
+			return;
+		}
+		// 같은 영화관 선택시 처리
+		if(id2 == "[id*=cinema]" && $(this).children("span").length){
+			cleanMyMovies();
+			$("#selectedMovie").text("영화")
+			return;
+		}
+		$(id2).addClass("border border-0");
+		$(this).removeClass("border border-0");
+		$(this).css("border", "1px red solid");
+		$(id2 + " span").remove();
+		$(this).append("<span class='position-absolute top-50 end-0 translate-middle-y me-2 bi bi-check-lg' style='color: red;'></span>");
+		////////////////////////////////////
+	});
+		
+	// 날짜 표시
+	var date = new Date();
+	// 맨처음 달력에 날짜 표시
+	$("#myCalendar").val(date.toISOString().substring(0, 10));
+	// 맨처음 상단에 날짜 표시
+	writeDate(date);  												// **일단은 처음에는 날짜 표시 안되게끔.
+	// 당일 날짜 기준으로 범위 설정
+	setDateRange(date);
+	// 달력에서 선택 후 날짜 표시
+	$("#myCalendar").on("change", function(){
+		date = new Date($("#myCalendar").val());
+		writeDate(date);
+		
+		cleanMyMovies();
+		selectMovieList();
+		
+		letsGoSchedule(this);
+	}); // 날짜 표시 끝
+	
+	// 시간표 선택시 모달 창에 내용 넣기
+	$(document).on("click", ".modalBtn", function(){
+		debugger;
+		$("#modalTitle").text("모달제목ㅇㅇㅇㅇ")
+	});
+	
 
-			// 호버시 마우서 커서 모양 변경
-			$(document).on("mouseover", ".myMouse", function(e){
-				$(".myMouse").css("cursor","pointer");
-			});
+	// 호버시 마우서 커서 모양 변경
+	$(document).on("mouseover", ".myMouse", function(e){
+		$(".myMouse").css("cursor","pointer");
+	});
 });
-
-
-
 </script>
 <%@include file="../_common/commonFooterEnd.jsp"%>

@@ -5,18 +5,19 @@
 <mapper namespace="Schedule">
 
 	<select id="select" parameterType="map" resultType="scheduleDTO">
-		SELECT S.LO_IDX							"LO_IDX"
-			 , S.CI_IDX							"CI_IDX"
-			 , S.SCH_IDX						"SCH_IDX"
-			 , S.SCH_DATE						"SCH_DATE"
-			 , S.SCH_MOV_TYPE					"SCH_MOV_TYPE"
-			 , S.SCH_MOV_IDX					"SCH_MOV_IDX"
-			 , DATE_FORMAT(S.SCH_TIME, "%H:%i") "SCH_TIME"
-			 , S.SCH_RUN						"SCH_RUN"
-			 , S.SCR_IDX						"SCR_IDX"
-			 , S.SCR_SEAT_AVAIL					"SCR_SEAT_AVAIL"
-			 , M.TITLE							"TITLE"
-			 , SC.SCR_SEAT						"SCR_SEAT"
+		SELECT S.LO_IDX							 "LO_IDX"
+			 , S.CI_IDX							 "CI_IDX"
+			 , S.SCH_IDX						 "SCH_IDX"
+			 , S.SCH_DATE						 "SCH_DATE"
+			 , S.SCH_MOV_TYPE					 "SCH_MOV_TYPE"
+			 , S.SCH_MOV_IDX					 "SCH_MOV_IDX"
+			 , DATE_FORMAT(S.SCH_STIME, "%H:%i") "SCH_STIME"
+			 , S.SCH_RUN						 "SCH_RUN"
+			 , DATE_FORMAT(S.SCH_ETIME, "%H:%i") "SCH_ETIME"
+			 , S.SCR_IDX						 "SCR_IDX"
+			 , S.SCR_SEAT_AVAIL					 "SCR_SEAT_AVAIL"
+			 , M.TITLE							 "TITLE"
+			 , SC.SCR_SEAT						 "SCR_SEAT"
 		  FROM SCHEDULE S
 		  JOIN MOVIE M
 		    ON (S.SCH_MOV_IDX = M.MOVIE_IDX
@@ -36,7 +37,7 @@
 		<if test="!PARAM.equals('all')">
 		   AND M.TITLE = #{PARAM} 
 		</if>
-		ORDER BY CAST(S.SCH_IDX AS UNSIGNED), DATE_FORMAT(S.SCH_TIME, "%H:%i")
+		ORDER BY CAST(S.SCH_IDX AS UNSIGNED), DATE_FORMAT(S.SCH_STIME, "%H:%i")
 	</select>
 	
 	
