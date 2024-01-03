@@ -133,6 +133,9 @@
                 </div>
               </div>
             </div>
+            
+            
+            
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -160,29 +163,59 @@
                     <br />
                     <form id="demo-form1" data-parsley-validate class="form-horizontal form-label-left">
 
+
+                                     <!-- 확인용 -->
+                    <style>
+   							 /* 추가한 스타일 */
+    				button {
+			        float: right; /* 오른쪽으로 이동 */
+			        margin-right: 10px; /* 오른쪽 여백 추가 */
+					}
+				 	</style>                 
+                                     
+					<button onclick="openMovieModal()">
+						일별 박스오피스 조회
+					</button>       
+					
+					<!-- 모달 추가 -->
+					<div id="movieModal" class="modal" style="display: none;">
+					    <div class="modal-content">
+					        <span class="close" onclick="closeMovieModal()">&times;</span>
+					        <ul id="movieList">
+					           <!-- 하단 스크립트 모달 동작 -->
+					        </ul>
+					        <button onclick="confirmMovieSelection()">확인</button>
+					    </div>
+					</div> 
+
+
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-name">영화이름<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="movie-name" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
-                      </div>
+            <button type="submit" class="btn btn-success" onclick="openRegistrationPage()">Search</button>
+
+			<script>
+			    function openRegistrationPage() {
+			        // 현재 페이지의 컨텍스트 경로를 얻어옵니다.
+			        var contextPath = "<%= request.getContextPath() %>";
+			
+			        // 상대 경로를 사용하여 JSP 파일의 URL을 생성합니다.
+			        var registrationPageUrl = contextPath + "/_movie/regist2.jsp";
+			
+			        // 윈도우를 새로 열어서 팝업으로 페이지를 표시
+			        window.open(registrationPageUrl, "_blank", "width=1200, height=1000");
+			    }
+			</script>
+
+                     </div>
                       
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-grade">관람등급<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select id="movie-grade" class="form-control" required>
-                            <option value="">관람등급</option>
-                            <option value="전체관람가">전체관람가</option>
-                            <option value="12세 이상 관람가">12세 이상 관람가</option>
-                            <option value="15세 이상 관람가">15세 이상 관람가</option>
-                            <option value="청소년 관람불가">청소년 관람불가</option>
-                          </select>
-                         </div> 
-                      </div>
+                     
+                     <!--  잠시 주석 처리   / 이미지는 검색으로 다른 정보와  불러올 예정 -->
                       
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-img">영화 이미지<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -191,7 +224,7 @@
 								<input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage">
 							</div>
                         </div>
-                      </div>
+                      </div> -->
                       
                       <div class="ln_solid"></div>
                       <div class="form-group">
@@ -208,51 +241,7 @@
               </div>
             </div>
             
-            
-            <!-- 검색창 스크린 세이브와 동일하여 주석처리 -->
-            
-            <!-- latttte movie -->
-          <!-- 	<div class="clearfix"></div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Movie Search</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <br />
-                    <form id="demo-form1" data-parsley-validate class="form-horizontal form-label-left">
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-name">영화이름<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="movie-name2" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="button">Cancel</button>
-						  <button class="btn btn-primary" type="reset">Reset</button>
-                          
-                        </div>
-                      </div>
-
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-            
+          
             
 
 			<div class="row">
@@ -334,6 +323,9 @@
                 </div>
               </div>
             </div>
+            
+   
+					         
 			
 			<div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -361,22 +353,21 @@
                         </div>
                       </div>
                       
-                      <!-- 확인용 -->
-					<div onclick="openMovieModal()">
-						일별 박스오피스 조회
-					</div>       
-					
-					<!-- 모달 추가 -->
-					<div id="movieModal" class="modal" style="display: none;">
-					    <div class="modal-content">
-					        <span class="close" onclick="closeMovieModal()">&times;</span>
-					        <ul id="movieList">
-					           <!-- 하단 스크립트 모달 동작 -->
-					        </ul>
-					        <button onclick="confirmMovieSelection()">확인</button>
-					    </div>
-					</div> 
-					                      
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-grade">관람등급<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select id="movie-grade" class="form-control" required>
+                            <option value="">관람등급</option>
+                            <option value="전체관람가">전체관람가</option>
+                            <option value="12세 이상 관람가">12세 이상 관람가</option>
+                            <option value="15세 이상 관람가">15세 이상 관람가</option>
+                            <option value="청소년 관람불가">청소년 관람불가</option>
+                          </select>
+                         </div> 
+                      </div>
+                      
+                   
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="areas">지역<span class="required">*</span>
                         </label>

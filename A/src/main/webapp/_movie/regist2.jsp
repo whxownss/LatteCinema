@@ -15,14 +15,14 @@
 <button type="button" onclick="searchMovie()">찾기</button>
 <table id="search-result" border="1">
   <thead>
+    <th>선택</th>
     <th>제목</th>
     <th>제작사</th>
     <th>국가</th>
-<!--     <th>줄거리</th> -->
+    <th>줄거리</th>
     <th>관람등급</th>
     <th>개봉일</th>
     <th>감독</th>
-<!--     <th>배우</th> -->
     <th>상영시간</th>
     <th>장르</th>
     <th>포스터</th>
@@ -58,6 +58,16 @@ $(function(){
   
 })
 
+ function truncateText(text, maxLength) {
+    if (text.length > maxLength) {
+      // 문자열이 지정된 최대 길이를 초과하면 일정 길이로 자르고 생략 부호를 추가
+      return text.substring(0, maxLength) + '...';
+    } else {
+      // 최대 길이를 초과하지 않으면 그대로 반환
+      return text;
+    }
+  }
+
 function searchMovie(){
   var info_movie_title = $('#search-movie-title').val();
   $('#search-result').find('tbody').html('');
@@ -81,10 +91,11 @@ function searchMovie(){
         //var actors = '';                                                      
         var html = '';
         html += '<tr>'
-        // html += '<td>'+ info.plots.plot[0].plotText + '</td>'                // 줄거리가 길어서 적당히 자르는 로직 필요함 
+        html += '<td><input type="checkbox" class="movie-checkbox" /></td>';
         html += '<td>'+ title + '</td>'
         html += '<td>'+ info.company + '</td>'
         html += '<td>'+ info.nation + '</td>'
+        html += '<td>'+ truncateText(info.plots.plot[0].plotText, 200) + '</td>' // 줄거리가 길어서 적당히 자르는 함수 호출          // 줄거리가 길어서 적당히 자르는 로직 필요함 
         html += '<td>'+ info.rating + '</td>'
         html += '<td>'+ info.repRlsDate + '</td>'
         html += '<td>'+ info.directors.director[0].directorNm + '</td>'
