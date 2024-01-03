@@ -1,6 +1,7 @@
 	package com.itwillbs.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -95,6 +96,7 @@ public class MemberController extends HttpServlet {
 		if(sPath.equals("/emailCode.me")) {
 			response.setCharacterEncoding("utf-8");
 			String email = request.getParameter("email");
+			PrintWriter out = response.getWriter();
 			
 		}//
 		
