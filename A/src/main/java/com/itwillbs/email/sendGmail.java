@@ -16,7 +16,7 @@ public class sendGmail {
 	String sender = "brisk7700@gmail.com";
 //	String receiver = "";
 	String title = "라떼시네마 회원가입 이메일 인증번호";
-//	String content ="인증번호 : " + "";
+	String content ="인증번호 : " + "";
 	
 	try {
 		Properties properties = System.getProperties();
@@ -40,7 +40,7 @@ public class sendGmail {
 		mailMessage.addRecipient(RecipientType.TO, receiver_address);
 		mailMessage.setSubject(title);
 		
-//		mailMessage.setContent(content, "text/html; charset=UTF-8");
+		mailMessage.setContent(content, "text/html; charset=UTF-8");	
 		mailMessage.setSentDate(new Date());
 		
 		
