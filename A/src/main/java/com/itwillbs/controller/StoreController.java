@@ -1,6 +1,7 @@
 package com.itwillbs.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -32,7 +33,6 @@ public class StoreController extends HttpServlet{
 		
 		// store 페이지 이동
 		if(sPath.equals("/store.st")) {
-			request.setAttribute("storeItemList", storeService.storeList());
 			request.setAttribute("storeItemListB", storeService.storeListB());
 			request.setAttribute("storeItemListS", storeService.storeListS());
 			request.setAttribute("storeItemListT", storeService.storeListT());
@@ -40,6 +40,18 @@ public class StoreController extends HttpServlet{
 			dispatcher = request.getRequestDispatcher("_store/store.jsp");
 			dispatcher.forward(request, response);
 		} // store
+		
+		// storeitem 내용 표시
+		if(sPath.equals("/viewstore.bo")) {
+			
+			storeService = new StoreService();
+			storeService.viewstore(request);
+			
+			request.setAttribute("storeItemList", storeService.storeList());
+			
+			dispatcher = request.getRequestDispatcher("_store/viewstore.jsp");
+			dispatcher.forward(request, response);
+		}//
 		
 		// 베스트
 		// store_best1 페이지 이동
@@ -64,68 +76,68 @@ public class StoreController extends HttpServlet{
 		} // store_best3
 		
 		// 스낵음료
-		// store_snacks01 페이지 이동
-		if(sPath.equals("/store_snacks01.st")) {
+		// store_snacks1 페이지 이동
+		if(sPath.equals("/store_snacks1.st")) {
 					
-			dispatcher = request.getRequestDispatcher("_store/store_snacks01.jsp");
+			dispatcher = request.getRequestDispatcher("_store/store_snacks1.jsp");
 			dispatcher.forward(request, response);
-		} // store_snacks01
+		} // store_snacks1
 		
-		// store_snacks02 페이지 이동
-		if(sPath.equals("/store_snacks02.st")) {
+		// store_snacks2 페이지 이동
+		if(sPath.equals("/store_snacks2.st")) {
 					
-			dispatcher = request.getRequestDispatcher("_store/store_snacks02.jsp");
+			dispatcher = request.getRequestDispatcher("_store/store_snacks2.jsp");
 			dispatcher.forward(request, response);
-		} // store_snacks02
+		} // store_snacks2
 		
-		// store_snacks03 페이지 이동
-		if(sPath.equals("/store_snacks03.st")) {
+		// store_snacks3 페이지 이동
+		if(sPath.equals("/store_snacks3.st")) {
 					
-			dispatcher = request.getRequestDispatcher("_store/store_snacks03.jsp");
+			dispatcher = request.getRequestDispatcher("_store/store_snacks3.jsp");
 			dispatcher.forward(request, response);
-		} // store_snacks03
+		} // store_snacks3
 		
-		// store_snacks04 페이지 이동
-		if(sPath.equals("/store_snacks04.st")) {
+		// store_snacks4 페이지 이동
+		if(sPath.equals("/store_snacks4.st")) {
 					
-			dispatcher = request.getRequestDispatcher("_store/store_snacks04.jsp");
+			dispatcher = request.getRequestDispatcher("_store/store_snacks4.jsp");
 			dispatcher.forward(request, response);
-		} // store_snacks04
+		} // store_snacks4
 		
-		// store_snacks05 페이지 이동
-		if(sPath.equals("/store_snacks05.st")) {
+		// store_snacks5 페이지 이동
+		if(sPath.equals("/store_snacks5.st")) {
 					
-			dispatcher = request.getRequestDispatcher("_store/store_snacks05.jsp");
+			dispatcher = request.getRequestDispatcher("_store/store_snacks5.jsp");
 			dispatcher.forward(request, response);
-		} // store_snacks05
+		} // store_snacks5
 		
-		// store_snacks06 페이지 이동
-		if(sPath.equals("/store_snacks06.st")) {
+		// store_snacks6 페이지 이동
+		if(sPath.equals("/store_snacks6.st")) {
 					
-			dispatcher = request.getRequestDispatcher("_store/store_snacks06.jsp");
+			dispatcher = request.getRequestDispatcher("_store/store_snacks6.jsp");
 			dispatcher.forward(request, response);
-		} // store_snacks06
+		} // store_snacks6
 		
-		// store_snacks07 페이지 이동
-		if(sPath.equals("/store_snacks07.st")) {
+		// store_snacks7 페이지 이동
+		if(sPath.equals("/store_snacks7.st")) {
 					
-			dispatcher = request.getRequestDispatcher("_store/store_snacks07.jsp");
+			dispatcher = request.getRequestDispatcher("_store/store_snacks7.jsp");
 			dispatcher.forward(request, response);
-		} // store_snacks07
+		} // store_snacks7
 		
-		// store_snacks08 페이지 이동
-		if(sPath.equals("/store_snacks08.st")) {
+		// store_snacks8 페이지 이동
+		if(sPath.equals("/store_snacks8.st")) {
 					
-			dispatcher = request.getRequestDispatcher("_store/store_snacks08.jsp");
+			dispatcher = request.getRequestDispatcher("_store/store_snacks8.jsp");
 			dispatcher.forward(request, response);
-		} // store_snacks08
+		} // store_snacks8
 		
-		// store_snacks09 페이지 이동
-		if(sPath.equals("/store_snacks09.st")) {
+		// store_snacks9 페이지 이동
+		if(sPath.equals("/store_snacks9.st")) {
 					
-			dispatcher = request.getRequestDispatcher("_store/store_snacks09.jsp");
+			dispatcher = request.getRequestDispatcher("_store/store_snacks9.jsp");
 			dispatcher.forward(request, response);
-		} // store_snacks09
+		} // store_snacks9
 		
 		// store_snacks10 페이지 이동
 		if(sPath.equals("/store_snacks10.st")) {
@@ -162,13 +174,6 @@ public class StoreController extends HttpServlet{
 			dispatcher = request.getRequestDispatcher("_store/store_ticket3.jsp");
 			dispatcher.forward(request, response);
 		} // store_ticket3
-		
-		// store_ticket4 페이지 이동
-		if(sPath.equals("/store_ticket4.st")) {
-					
-			dispatcher = request.getRequestDispatcher("_store/store_ticket4.jsp");
-			dispatcher.forward(request, response);
-		} // store_ticket4
 		
 	} // doProcess
 	

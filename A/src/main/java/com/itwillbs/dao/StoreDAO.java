@@ -66,5 +66,10 @@ public class StoreDAO {
 		
 		return storeItemListT;
 	}//
+
+	public void viewstore(StoreItemDTO storeitemDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		
+	}//
 	
 }

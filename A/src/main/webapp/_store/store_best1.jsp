@@ -4,12 +4,14 @@
 <%@include file="../_common/commonHeaderStart.jsp"%>
 <%@include file="../_common/commonHeaderEnd.jsp"%>
 
+<c:set var="storeItemList" value="${requestScope.storeItemList}" />
+
 <main id="main">
+
+	<!-- 메인 -->
 
 	<section class="category-section">
 		<div class="container" data-aos="fade-up">
-
-			<!-- 메인 -->
 
 			<section class="contents d-flex">
 				<div class="col-6" style="display: flex; justify-content: center;">
@@ -60,11 +62,13 @@
 									<div class="input-group mb-3 container _count"
 										style="width: 400px; padding-top: 4%; text-align: center;">
 										<button class="minus btn btn-outline-secondary"
-										style="text-align: center; padding-left: 20px; padding-right: 20px;">-</button>
-										<label class="inpp input-group-text border border-secondary fs-5" for="inputGroupFile01"
+											style="text-align: center; padding-left: 20px; padding-right: 20px;">-</button>
+										<label
+											class="inpp input-group-text border border-secondary fs-5"
+											for="inputGroupFile01"
 											style="text-align: center; padding-left: 133px; padding-right: 133px;">1</label>
 										<button class="plus btn btn-outline-secondary"
-										style="text-align: center; padding-left: 20px; padding-right: 20px;">+</button>
+											style="text-align: center; padding-left: 20px; padding-right: 20px;">+</button>
 									</div>
 								</td>
 							</tr>
@@ -79,8 +83,10 @@
 						</tbody>
 					</table>
 				</article>
+			</section>
 		</div>
 	</section>
+
 	<!-- 메인 -->
 
 	<!-- 정보	 -->
@@ -165,6 +171,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 	</section>
 	<!-- 정보	 -->
 </main>
@@ -175,41 +182,46 @@
 
 <script src="jQuery/jquery-3.6.0.js"></script>
 
-<!-- jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <!-- iamport.payment.js -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 
 <script type="text/javascript">
-	const IMP = window.IMP;
-	IMP.init("imp67011510");
+
+var IMP = window.IMP;   // 생략 가능
+IMP.init("imp20121707"); // 가맹점 번호 
+
+  function requestPay() {
 	
-	var today = new Date();   
-    var hours = today.getHours(); // 시
-    var minutes = today.getMinutes();  // 분
-    var seconds = today.getSeconds();  // 초
-    var milliseconds = today.getMilliseconds();
-    var makeMerchantUid = hours +  minutes + seconds + milliseconds;
-    
-    function requestPay() {
-        IMP.request_pay({
-            pg : 'kcp',
-            pay_method : 'card',
-            merchant_uid: "IMP"+makeMerchantUid, 
-            name : '스위트콤보',
-            amount : 10000,
-            buyer_email : 'Iamport@chai.finance',
-            buyer_name : '아임포트 기술지원팀',
-            buyer_tel : '010-1234-5678',
-            buyer_addr : '서울특별시 강남구 삼성동',
-            buyer_postcode : '123-456'
-        }, function (rsp) { // callback
-            if (rsp.success) {
-                console.log(rsp);
-            } else {
-                console.log(rsp);
-            }
-        });
+// 	// 로그인 체크
+//       if (!isLogin) {
+//           alert("로그인 후 이용할 수 있습니다.");
+//           return;
+//       }
+	
+      IMP.request_pay({ 
+          pg: "html5_inicis",
+          pay_method: "card",
+          merchant_uid: "ORD20180131-0000001",   //주문번호
+          name: "테스트",
+          amount: 100,                         // 가격숫자타입
+          buyer_email: "gildong@gmail.com",
+          buyer_name: "구매자이름",
+          buyer_tel: "010-4242-4242",
+          buyer_addr: "서울특별시 강남구 신사동",
+          buyer_postcode: "01181"
+      }, function (rsp) { // callback
+    	  console.log(rsp);
+    	    if (rsp.success) {
+    	      var msg = '결제가 완료되었습니다.';
+    	      alert(msg);
+    	      location.href = "결제 완료 후 이동할 페이지 url"
+    	    } else {
+    	      var msg = '결제에 실패하였습니다.';
+    	      msg += '에러내용 : ' + rsp.error_msg;
+    	      alert(msg);
+    	    }
+      });
+      
     }
 
 </script>
@@ -250,7 +262,7 @@
          
          // 상품금액
          $(".inpp").on("DOMSubtreeModified", function(){
-				// 좌석 선택 다 해야 뜨는걸로
+        	 
 				var p1 = parseInt($("#price").text().replace(/[^\d]+/g, ""));
 				var p2 = parseInt($(".inpp").text());
 				
