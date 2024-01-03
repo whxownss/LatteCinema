@@ -84,7 +84,7 @@
 							<tr>
 								<th scope="row" class="text-center border-bottom-0" colspan="4">
 									<h3 class="section-header fs-1">
-										<i>5만 관람권</i>
+										<i>3만 관람권</i>
 									</h3>
 								</th>
 							</tr>
@@ -92,11 +92,11 @@
 						<tbody>
 							<tr>
 								<th colspan="2" scope="row" class="text-center"><span
-									class="fs-3" id="price">50000</span>원</th>
+									class="fs-3" id="price">30000</span>원</th>
 							</tr>
 							<tr>
 								<th scope="row">구성품</th>
-								<td class="text-end">5만원 상품권</td>
+								<td class="text-end">3만원 상품권</td>
 							</tr>
 							<tr>
 								<th scope="row">구매제한</th>
@@ -109,7 +109,7 @@
 							<tr>
 								<th scope="col" style="padding-top: 3%">총 상품금액</th>
 								<td class="text-end" style="font-weight: bold; color: #FF243E;">
-									<span class="fs-2" id="sPrice">50,000</span>원
+									<span class="fs-2" id="sPrice">30,000</span>원
 								</td>
 							</tr>
 							<tr class="border border-bottom-0 border-white">

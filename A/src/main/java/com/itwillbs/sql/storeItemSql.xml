@@ -59,4 +59,9 @@
 		 where ITEM_IDX LIKE 'T%';
 	</select>
 	
+	<select resultType="StoreItemDTO" id="selectStoreItems">
+		select ITEM_IDX, format(ITEM_PRICE, 0) "ITEM_PRICE",ITEM_NAME, ITEM_DATAIL
+		from STORE_ITEM
+	</select>
+	
 </mapper>
