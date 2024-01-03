@@ -10,10 +10,166 @@
    		 ORDER BY CREATE_DATE  DESC 
    		 LIMIT #{startRow}, #{pageSize}
 	</select>
-	
 	<select id="exqBoardCount" resultType="int"> 
 		SELECT COUNT(*) 
 		  FROM EXQBOARD
 	</select>
 	
+	<select id="getCenterBoardList" resultType="CenterBoardDTO" parameterType="PageDTO">
+		SELECT *,
+	       (SELECT C.CI_NAME
+	          FROM CINEMA AS C
+	         WHERE C.LO_IDX = CENTER.LO_IDX AND C.CI_IDX = CENTER.CI_IDX) AS 'CI_NAME',
+       	 ROW_NUMBER() OVER (ORDER BY CENTER.CREATE_DATE) AS RN
+	 	 FROM CENTERBOARD AS CENTER
+		 ORDER BY CENTER.CREATE_DATE DESC
+		 LIMIT #{startRow}, #{pageSize}	
+	</select>
+	<select id="centerBoardCount" resultType="int">
+		SELECT COUNT(*) 
+		  FROM CENTERBOARD
+	</select>
+	<select id="getCenterBoard" resultType="CenterBoardDTO" parameterType="map">
+		 SELECT *,
+		       (SELECT C.CI_NAME
+		          FROM CINEMA AS C
+		         WHERE C.LO_IDX = CENTER.LO_IDX AND C.CI_IDX = CENTER.CI_IDX) AS 'CI_NAME'
+		  FROM CENTERBOARD AS CENTER
+		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</select>
+	<update id="saveCenterContent" parameterType="centerBoardDTO">
+		UPDATE CENTERBOARD 
+		   SET CENTERSUBJECT = #{centerSubject}, CENTERCONTENT = #{centerContent}, UPDATE_USER = #{updateUser}, UPDATE_DATE = SYSDATE()
+		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</update>
+	<delete id="deleteCenterContent" parameterType="centerBoardDTO">
+		DELETE FROM CENTERBOARD
+ 		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</delete>
+	<select id="getRegionList" resultType="LocationDTO">
+		SELECT * 
+		  FROM LOCATION
+	</select>
+	<select id="getCinemaList" resultType="CinemaDTO" parameterType="String">
+		SELECT CI_IDX,CI_NAME
+		  FROM CINEMA
+		 WHERE LO_IDX = #{loIdx};
+	</select>
+	<insert id="insertCenterWrite" parameterType="CenterBoardDTO">
+		INSERT INTO CENTERBOARD (LO_IDX,CI_IDX,CENTERSUBJECT,CENTERCONTENT,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE)
+		VALUES
+		(
+		 #{loIdx}
+		,#{ciIdx}
+		,#{centerSubject}
+		,#{centerContent}
+		,#{createUser}
+		,sysdate()
+		,NULL
+		,NULL
+		)
+	</insert>
+	
+	<select id="getQnaBoardList" resultType="QnaBoardDTO" parameterType="PageDTO">
+		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
+	  	  FROM QNABOARD
+ 		 ORDER BY CREATE_DATE  DESC 
+ 		 LIMIT #{startRow}, #{pageSize}
+	</select>
+	<select id="getQnaBoardCount" resultType="int">
+		SELECT COUNT(*) 
+	 	  FROM QNABOARD
+	</select>
+	<select id="searchQnaBoardList" resultType="QnaBoardDTO" parameterType="map">
+		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
+	  	  FROM QNABOARD
+	  	 WHERE QNACATEGORY = #{qnaCategory}
+ 		 ORDER BY CREATE_DATE  DESC 
+ 		 LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
+	</select>
+	<select id="getQnaBoard" resultType="QnaBoardDTO" parameterType="map">
+		 SELECT *
+		   FROM QNABOARD
+		  WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate};
+	</select>
+	<update id="updateQnaBoard" parameterType="QnaBoardDTO">
+		UPDATE QNABOARD
+		   SET QNARESPONSE = #{qnaResponse}, RESPONSE_USER = #{responseUser}, RESPONSE_DATE = SYSDATE()
+		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</update>
+	<insert id="qnaBoardInsert" parameterType="QnaBoardDTO">
+		INSERT INTO QNABOARD
+		VALUES ((SELECT *
+		   FROM (SELECT IFNULL(MAX(CAST(QNAIDX as unsigned)), 0) + 1
+				   FROM QNABOARD) Q)
+		,#{qnaCategory}
+		,'비밀글입니다'
+		,#{qnaContent}
+		,NULL
+		,#{createUser}
+		,SYSDATE()
+		,NULL
+		,NULL
+		);
+	</insert>
+	<select id="searchQnaBoardCount" resultType="int" parameterType="String">
+		SELECT COUNT(*) 
+		  FROM QNABOARD 
+		 WHERE QNACATEGORY = #{qnaCategory};
+	</select>
+	
+	<select id="getLostBoardList" resultType="LostBoardDTO" parameterType="PageDTO">
+		SELECT *,
+		       (SELECT C.CI_NAME
+		          FROM CINEMA AS C
+		         WHERE C.LO_IDX = LOST.LO_IDX AND C.CI_IDX = LOST.CI_IDX) AS 'CI_NAME',
+		       ROW_NUMBER() OVER (ORDER BY LOST.CREATE_DATE) AS RN
+		  FROM LOSTBOARD AS LOST
+		 ORDER BY LOST.CREATE_DATE DESC
+		 LIMIT #{startRow}, #{pageSize}
+	</select>
+	<select id="getLostBoardCount" resultType="int">
+		SELECT COUNT(*) 
+		  FROM LOSTBOARD
+	</select>
+	<select id="getLostBoard" resultType="LostBoardDTO" parameterType="map">
+		 SELECT *,
+			      (SELECT C.CI_NAME
+			         FROM CINEMA AS C
+		        	WHERE C.LO_IDX = LOST.LO_IDX AND C.CI_IDX = LOST.CI_IDX) AS 'CI_NAME'
+		  FROM LOSTBOARD AS LOST
+		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</select>
+	<update id="updateLostBoard" parameterType="LostBoardDTO">
+		UPDATE LOSTBOARD
+		SET
+		    LOSTRESPONSE = #{lostResponse},
+		    RESPONSE_USER = #{responseUser},
+		    RESPONSE_DATE = SYSDATE(),
+		    LOSTSTATUS = CASE
+		        WHEN LOSTRESPONSE IS NULL THEN 0
+		        ELSE 1
+		    END
+		WHERE
+		    CREATE_USER = #{createUser}
+		    AND CREATE_DATE = #{createDate}
+	</update>
+	<insert id="insertCsLost" parameterType="LostBoardDTO">
+		INSERT INTO LOSTBOARD
+		VALUES 
+		((SELECT *
+		   FROM (SELECT IFNULL(MAX(CAST(LOSTIDX as unsigned)), 0) + 1
+				   FROM LOSTBOARD) L)
+		,#{loIdx}
+		,#{ciIdx}
+		,#{lostSubject}
+		,#{lostContent}
+		,NULL
+		,0
+		,#{createUser}
+		,SYSDATE()
+		,NULL
+		,NULL
+		)
+	</insert>
 </mapper>

@@ -9,11 +9,16 @@
 	</settings>
 	
 	 <typeAliases>
+        <typeAlias type="com.itwillbs.domain.CenterBoardDTO" alias="CenterBoardDTO"/>
+        <typeAlias type="com.itwillbs.domain.StoreItemDTO" alias="StoreItemDTO"/>
         <typeAlias type="com.itwillbs.domain.ExqBoardDTO" alias="ExqBoardDTO"/>
         <typeAlias type="com.itwillbs.domain.PageDTO" alias="PageDTO"/>
         <typeAlias type="com.itwillbs.domain.MemberDTO" alias="MemberDTO"/>
         <typeAlias type="com.itwillbs.domain.LocationDTO" alias="LocationDTO"/>
+        <typeAlias type="com.itwillbs.domain.QnaBoardDTO" alias="QnaBoardDTO"/>
         <typeAlias type="com.itwillbs.domain.CinemaDTO" alias="CinemaDTO"/>
+        <typeAlias type="com.itwillbs.domain.ScheduleDTO" alias="ScheduleDTO"/>
+        <typeAlias type="com.itwillbs.domain.LostBoardDTO" alias="LostBoardDTO"/>
     </typeAliases>
 
 	<environments default="development">
@@ -29,10 +34,12 @@
 	</environments>
 	
 	<mappers>
+		<mapper resource="com/itwillbs/sql/storeItemSql.xml"/>
 		<mapper resource="com/itwillbs/sql/csSql.xml"/>
 		<mapper resource="com/itwillbs/sql/memberSql.xml"/>
 		<mapper resource="com/itwillbs/sql/cinemaSql.xml"/>
 		<mapper resource="com/itwillbs/sql/locationSql.xml"/>
+		<mapper resource="com/itwillbs/sql/scheduleSql.xml"/>
 	</mappers>
 
     

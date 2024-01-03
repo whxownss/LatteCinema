@@ -55,6 +55,7 @@ PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
 				      <option value="멤버십">멤버십</option>
 				      <option value="할인혜택">할인혜택</option>
 				      <option value="영화관이용">영화관이용</option>
+				      <option value="기타">기타</option>
 				    </select>
 				  </div>
 				</div> 		
@@ -110,4 +111,5 @@ PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
 		</section>	
 	</main>
 	
-<%@include file ="../_common/commonFooter.jsp" %>
+<%@include file="../_common/commonFooterStart.jsp"%>
+<%@include file="../_common/commonFooterEnd.jsp"%>

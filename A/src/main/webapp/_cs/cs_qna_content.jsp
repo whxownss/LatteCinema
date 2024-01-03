@@ -1,11 +1,16 @@
+<%@page import="com.itwillbs.domain.QnaBoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
+<%
+QnaBoardDTO qnaBoardDTO = (QnaBoardDTO)request.getAttribute("qnaBoardDTO");
+String responseUser = "ADMIN2477";
+%>	
 			
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
@@ -45,7 +50,6 @@
 				<table class="table">
 				  <thead>
 				    <tr class="table-secondary">
-				      <th scope="col">#</th>
 				      <th scope="col">카테고리</th>
 				      <th scope="col">제목</th>
 				      <th scope="col">글쓴이</th>
@@ -54,30 +58,34 @@
 				  </thead>
 				  <tbody>
 				    <tr>
-				      <th scope="row">1</th>
-				      <td>기타</td>
-				      <td>비밀글입니다.</td>
-				      <td>차*****</td>
+				      <td>${qnaBoardDTO.qnaCategory }</td>
+				      <td>${qnaBoardDTO.qnaSubject }</td>
+				      <td>${qnaBoardDTO.createUser }</td>
 				      <td></td>
 				    </tr>
 				    <tr>
 				    	<td colspan="5">
 				    		<pre style="text-align: center;">
-분명히 쿠폰을 적용했는데 적용 안된 금액으로 결제가 되었습니다.
-빨리 확인해주시고 환불해주세요. 급합니다!
+${qnaBoardDTO.qnaContent }
 				    		</pre>
 				   		</td>
 				    </tr>
-				    
-				    <tr>
-				    	<td><span>관리자</span>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="#" id="editLink">수정</a>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="cs_lost_content.jsp">삭제</a><p class="mb-0">2023-12-15 09:05</p></td>
+				    <!-- 여기서부터는 답변이 없고 관리자가 아니면 안보이게 만들면 될듯  -->
+				    <tr><!-- <a href="cs_lost_content.jsp">삭제</a> 이거 제거함. -->
+				    	<td><span>관리자</span>&nbsp&nbsp&nbsp&nbsp&nbsp<c:if test="${! empty qnaBoardDTO.qnaResponse }"><a href="javascript:edit();" id="editLink">수정</a>&nbsp&nbsp&nbsp&nbsp&nbsp</c:if><p class="mb-0">${qnaBoardDTO.responseDate }</p></td>
 				    	<td colspan="4"></td>
 				    </tr>
 				    <tr>
-				    	<td colspan="5"><textarea class="form-control" id="editableTextArea" readonly="">
-*** 고객님, 안녕하세요. 라떼 시네마 입니다. 결제를 확인해보니 쿠폰 오류로 인해 발생한 일입니다.
-금일 내로 처리하겠습니다. 정말 죄송합니다. 라떼 시네마 : 010-1111-1111. 재문의를 하시려면 새 문의글을 작성해주세요.
-				    	</textarea></td>
+				    	<td colspan="5"><div class="input-group"><textarea class="form-control" id="editableTextArea" readonly>
+${qnaBoardDTO.qnaResponse }
+				    	</textarea>
+						    	<div class="input-group-append">
+						    		<c:if test="${empty qnaBoardDTO.qnaResponse }">
+							    		<button class="btn btn-outline-secondary" type="button" id="editButton" style="height: 100%;">댓글 쓰기</button>
+							    	</c:if>
+						    	</div>
+					    	</div>
+				    	</td>
 				    </tr>
 				    
 <!-- 				    <tr> -->
@@ -98,30 +106,94 @@
 				    
 				  </tbody>
 				</table>
-				<button type="submit">저장</button>
+<!-- 				<button type="submit">저장</button> -->
 			</form>	
 			</div>
 		</section>
 		
 	</main>
+	
+<%@include file="../_common/commonFooterStart.jsp"%>
 <script>
     $(document).ready(function() {
-        // 수정 링크 클릭 시 이벤트 처리
-        $("#editLink").click(function() {
-            // readonly 속성 제거하여 편집 가능 상태로 변경
-            $("#editableTextArea").removeAttr("readonly");
-        });
-        
-     	// 폼 제출 시 이벤트 처리
-        $("#editForm").submit(function(event) {
-            // 폼이 실제로 제출되지 않도록 막음
-            event.preventDefault();
+    	if ($("#editableTextArea").val().trim() === '') {
+	          $("#editableTextArea").val(''); // 텍스트 영역을 비웁니다.
+	    }
+        if($('#editableTextArea').val() === ''){
+            $('#editableTextArea').prop('readonly', false);
+        }
+    	
+    	// 수정 링크 클릭 시 이벤트 처리
+    	$("#editLink").click(function(e) {
+    	    var isReadonly = $('#editableTextArea').prop('readonly'); // readonly 상태 확인
+    	    $('#editableTextArea').prop('readonly', !isReadonly); // readonly 상태 토글
+    	    $(this).text(isReadonly ? "저장" : "수정"); // 버튼 텍스트 업데이트
 
-            // 수정한 내용을 서버로 전송하는 로직을 추가
-            var editedContent = $("#editableTextArea").val();
-            console.log("수정된 내용:", editedContent);
-            // 이후에 서버로 데이터를 전송하거나 다른 작업을 수행할 수 있음
-        });
+    	    if($("#editableTextArea").val().trim() === '') {
+  	          $("#editableTextArea").val(''); // 텍스트 영역을 비웁니다.
+  	    	}
+    	    if($("#editableTextArea").val() === ''){
+	    		e.preventDefault();
+			    alert('답변을 하고 등록해주세요.');
+	   	    } else {
+   	    	    if (!isReadonly) { // 편집 상태이면 저장 작업 수행
+	    	        $.ajax({
+	    	            url: 'updateQnaBoard.cs',
+	    	            type: 'POST',
+	    	            contentType: 'application/json', // 데이터 타입 명시
+	    	            data: JSON.stringify({ // 데이터를 JSON 문자열로 변환
+	    	                'qnaResponse': $('#editableTextArea').val(), // 수정된 내용
+	    	                'createDate': '${qnaBoardDTO.createDate}',
+	    	                'createUser': '${qnaBoardDTO.createUser}',
+	    	                'responseUser': '<%=responseUser%>'
+	    	            }),
+	    	            success: function(response) {
+	    	                alert("저장되었습니다!");
+	    	                $('#editableTextArea').prop('readonly', true); // 저장 후 readonly 다시 설정
+	    	                $("#editLink").text("수정"); // 버튼 텍스트 업데이트
+	    	            },
+	    	            error: function() {
+	    	                alert("저장 중 오류가 발생했습니다.");
+	    	            }
+	    	        });
+	    	    }
+	   	    } 
+    	});
+    	
+	       	// 수정 버튼 클릭 시 이벤트 처리
+	    	$("#editButton").click(function(e) {
+	    		if ($("#editableTextArea").val().trim() === '') {
+	  	          $("#editableTextArea").val(''); // 텍스트 영역을 비웁니다.
+	  	        }
+	    		if($("#editableTextArea").val() === ''){
+		    		e.preventDefault();
+				    alert('답변을 하고 등록해주세요.');
+	       	    } else {
+	       	    	$.ajax({
+	    	            url: 'updateQnaBoard.cs',
+	    	            type: 'POST',
+	    	            contentType: 'application/json', // 데이터 타입 명시
+	    	            data: JSON.stringify({ // 데이터를 JSON 문자열로 변환
+	    	                'qnaResponse': $('#editableTextArea').val(), // 수정된 내용
+	    	                'createDate': '${qnaBoardDTO.createDate}',
+	    	                'createUser': '${qnaBoardDTO.createUser}',
+	    	                'responseUser': '<%=responseUser%>'
+	    	            }),
+	    	            success: function(response) {
+	    	                alert("저장되었습니다!");
+	    	                window.location.href = 'cs_qna_content.cs?createUser=${qnaBoardDTO.createUser }&createDate=${qnaBoardDTO.createDate}';
+	    	            },
+	    	            error: function() {
+	    	                alert("저장 중 오류가 발생했습니다.");
+	    	            }
+	    	        });
+	       	    }
+    	        
+    	    });
+
     });
-</script>	
-<%@include file ="../_common/commonFooter.jsp" %>
+    function edit(){
+    	
+    }
+</script>
+<%@include file="../_common/commonFooterEnd.jsp"%>

@@ -1,3 +1,7 @@
+<%@page import="com.google.gson.Gson"%>
+<%@page import="java.util.List"%>
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
+<%@page import="com.itwillbs.domain.ScheduleDTO"%>
 <%@page import="com.itwillbs.domain.CinemaDTO"%>
 <%@page import="com.itwillbs.domain.LocationDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -8,10 +12,10 @@
 	<link rel="stylesheet" href="_assets/css/res_1.css">
 <%@include file="../_common/commonHeaderEnd.jsp"%>
 
-<%
-ArrayList<LocationDTO> locationList = (ArrayList<LocationDTO>)request.getAttribute("locationList");
-ArrayList<CinemaDTO> cinemaList = (ArrayList<CinemaDTO>)request.getAttribute("cinemaList");
-%>
+<c:set var="locationList" value="${requestScope.locationList}" />
+<c:set var="cinemaListJson" value="${requestScope.cinemaListJson}" />
+<c:set var="scheduleListJson" value="${requestScope.scheduleListJson}" />
+
 <main id="main">
 
 	<section class="category-section">
@@ -71,8 +75,8 @@ ArrayList<CinemaDTO> cinemaList = (ArrayList<CinemaDTO>)request.getAttribute("ci
 								<div class="row hErrorC" style="">
 									<div class="col p-0 bg-body-secondary">
 										<ul class="list-group text-start mb-0 ps-0 rounded-0">
-											<li class="list-group-item border border-0 bg-body-secondary myMovie myMouse" id="mo1">옛날영화</li>
-											<li class="list-group-item border border-0 bg-body-secondary myMovie myMouse" id="mo2">최신영화</li>
+											<li class="list-group-item border border-0 bg-body-secondary myMovie myMouse" id="OLD">옛날영화</li>
+											<li class="list-group-item border border-0 bg-body-secondary myMovie myMouse" id="NOW">최신영화</li>
 										</ul>
 									</div>
 									<div class="col p-0">
@@ -115,131 +119,10 @@ ArrayList<CinemaDTO> cinemaList = (ArrayList<CinemaDTO>)request.getAttribute("ci
 <%@include file="../_common/commonFooterStart.jsp"%>
 <script src="jQuery/jquery-3.6.0.js"></script>
 <script>
-// ArrayList<CinemaDTO> cinemaList를 json 배열로
-var cinemaList = [
-	<c:forEach items="${cinemaList}" var="cinema" varStatus="status">
- 	{	'loIdx' : '${cinema.loIdx}'
- 	  , 'ciIdx' : '${cinema.ciIdx}'
- 	  , 'ciName' : '${cinema.ciName}'
- 	} ${not status.last ? ',' : ''}
-	</c:forEach>
-];
-var movies = {
-		mo1: ["옛날영화제목1", "옛날영화제목2", "옛날영화제목3", "옛날영화제목4", "옛날영화제목5", "옛날영화제목6", "옛날영화제목7"],						  
-		mo2: ["최신영화제목1", "최신영화제목2", "최신영화제목3", "최신영화제목4", "최신영화제목5", "최신영화제목6", "최신영화제목7", 
-			  "최신영화제목8", "최신영화제목9", "최신영화제목10", "최신영화제목11", "최신영화제목12"]
-};
-var lInfos = {
-		info1: [{time: "10:00",seat: "40/50",cine: "1관"}],
-		info2: [{time: "10:00",seat: "40/50",cine: "2관"},
-				{time: "11:00",seat: "40/50",cine: "2관"}],
-		info3: [{time: "10:00",seat: "40/50",cine: "3관"},
-				{time: "11:00",seat: "40/50",cine: "3관"},
-				{time: "12:00",seat: "40/50",cine: "3관"}],
-		info4: [{time: "10:00",seat: "40/50",cine: "4관"},
-				{time: "11:00",seat: "40/50",cine: "4관"},
-				{time: "12:00",seat: "40/50",cine: "4관"},
-				{time: "13:00",seat: "40/50",cine: "4관"}],
-		info5: [{time: "10:00",seat: "40/50",cine: "5관"},
-				{time: "11:00",seat: "40/50",cine: "5관"},
-				{time: "12:00",seat: "40/50",cine: "5관"},
-				{time: "13:00",seat: "40/50",cine: "5관"},
-				{time: "14:00",seat: "40/50",cine: "5관"}],
-		info6: [{time: "10:00",seat: "40/50",cine: "6관"},
-				{time: "11:00",seat: "40/50",cine: "6관"},
-				{time: "12:00",seat: "40/50",cine: "6관"},
-				{time: "13:00",seat: "40/50",cine: "6관"},
-				{time: "14:00",seat: "40/50",cine: "6관"},
-				{time: "15:00",seat: "40/50",cine: "6관"}],
-		info7: [{time: "10:00",seat: "40/50",cine: "7관"},
-				{time: "11:00",seat: "40/50",cine: "7관"},
-				{time: "12:00",seat: "40/50",cine: "7관"},
-				{time: "13:00",seat: "40/50",cine: "7관"},
-				{time: "14:00",seat: "40/50",cine: "7관"},
-				{time: "15:00",seat: "40/50",cine: "7관"},
-				{time: "16:00",seat: "40/50",cine: "7관"}]
-};
-var nInfos = {
-		info1: [{time: "10:30",seat: "40/50",cine: "1관"}],
-		info2: [{time: "10:30",seat: "40/50",cine: "2관"},
-				{time: "11:30",seat: "40/50",cine: "2관"}],
-		info3: [{time: "10:30",seat: "40/50",cine: "3관"},
-				{time: "11:30",seat: "40/50",cine: "3관"},
-				{time: "12:30",seat: "40/50",cine: "3관"}],
-		info4: [{time: "10:30",seat: "40/50",cine: "4관"},
-				{time: "11:30",seat: "40/50",cine: "4관"},
-				{time: "12:30",seat: "40/50",cine: "4관"},
-				{time: "13:30",seat: "40/50",cine: "4관"}],
-		info5: [{time: "10:30",seat: "40/50",cine: "5관"},
-				{time: "11:30",seat: "40/50",cine: "5관"},
-				{time: "12:30",seat: "40/50",cine: "5관"},
-				{time: "13:30",seat: "40/50",cine: "5관"},
-				{time: "14:30",seat: "40/50",cine: "5관"}],
-		info6: [{time: "10:30",seat: "40/50",cine: "6관"},
-				{time: "11:30",seat: "40/50",cine: "6관"},
-				{time: "12:30",seat: "40/50",cine: "6관"},
-				{time: "13:30",seat: "40/50",cine: "6관"},
-				{time: "14:30",seat: "40/50",cine: "6관"},
-				{time: "15:30",seat: "40/50",cine: "6관"}],
-		info7: [{time: "10:30",seat: "40/50",cine: "7관"},
-				{time: "11:30",seat: "40/50",cine: "7관"},
-				{time: "12:30",seat: "40/50",cine: "7관"},
-				{time: "13:30",seat: "40/50",cine: "7관"},
-				{time: "14:30",seat: "40/50",cine: "7관"},
-				{time: "15:30",seat: "40/50",cine: "7관"},
-				{time: "16:30",seat: "40/50",cine: "7관"}],
-		info8: [{time: "10:30",seat: "40/50",cine: "8관"},
-				{time: "11:30",seat: "40/50",cine: "8관"},
-				{time: "12:30",seat: "40/50",cine: "8관"},
-				{time: "13:30",seat: "40/50",cine: "8관"},
-				{time: "14:30",seat: "40/50",cine: "8관"},
-				{time: "15:30",seat: "40/50",cine: "8관"},
-				{time: "16:30",seat: "40/50",cine: "8관"},
-				{time: "17:30",seat: "40/50",cine: "8관"}],
-		info9: [{time: "10:30",seat: "40/50",cine: "9관"},
-				{time: "11:30",seat: "40/50",cine: "9관"},
-				{time: "12:30",seat: "40/50",cine: "9관"},
-				{time: "13:30",seat: "40/50",cine: "9관"},
-				{time: "14:30",seat: "40/50",cine: "9관"},
-				{time: "15:30",seat: "40/50",cine: "9관"},
-				{time: "16:30",seat: "40/50",cine: "9관"},
-				{time: "17:30",seat: "40/50",cine: "9관"},
-				{time: "18:30",seat: "40/50",cine: "9관"}],
-		info10: [{time: "10:30",seat: "40/50",cine: "10관"},
-				 {time: "11:30",seat: "40/50",cine: "10관"},
-				 {time: "12:30",seat: "40/50",cine: "10관"},
-				 {time: "13:30",seat: "40/50",cine: "10관"},
-				 {time: "14:30",seat: "40/50",cine: "10관"},
-				 {time: "15:30",seat: "40/50",cine: "10관"},
-				 {time: "16:30",seat: "40/50",cine: "10관"},
-				 {time: "17:30",seat: "40/50",cine: "10관"},
-				 {time: "18:30",seat: "40/50",cine: "10관"},
-				 {time: "19:30",seat: "40/50",cine: "10관"}],
-		info11: [{time: "10:30",seat: "40/50",cine: "11관"},
-				 {time: "11:30",seat: "40/50",cine: "11관"},
-				 {time: "12:30",seat: "40/50",cine: "11관"},
-				 {time: "13:30",seat: "40/50",cine: "11관"},
-				 {time: "14:30",seat: "40/50",cine: "11관"},
-				 {time: "15:30",seat: "40/50",cine: "11관"},
-				 {time: "16:30",seat: "40/50",cine: "11관"},
-				 {time: "17:30",seat: "40/50",cine: "11관"},
-				 {time: "18:30",seat: "40/50",cine: "11관"},
-				 {time: "19:30",seat: "40/50",cine: "11관"},
-				 {time: "20:30",seat: "40/50",cine: "11관"}],
-		info12: [{time: "10:30",seat: "40/50",cine: "12관"},
-				 {time: "11:30",seat: "40/50",cine: "12관"},
-				 {time: "12:30",seat: "40/50",cine: "12관"},
-				 {time: "13:30",seat: "40/50",cine: "12관"},
-				 {time: "14:30",seat: "40/50",cine: "12관"},
-				 {time: "15:30",seat: "40/50",cine: "12관"},
-				 {time: "16:30",seat: "40/50",cine: "12관"},
-				 {time: "17:30",seat: "40/50",cine: "12관"},
-				 {time: "18:30",seat: "40/50",cine: "12관"},
-				 {time: "19:30",seat: "40/50",cine: "12관"},
-				 {time: "20:30",seat: "40/50",cine: "12관"},
-				 {time: "21:30",seat: "40/50",cine: "12관"}]
-};
-var moInfos = [lInfos, nInfos];
+
+var cinemaList = ${cinemaListJson};
+// var scheduleList = ${scheduleListJson};
+
 var days = ["일", "월", "화", "수", "목", "금", "토"];
 //맨처음 상단에 날짜 표시
 var writeDate = function(date){
@@ -257,49 +140,84 @@ var setDateRange = function(date){
 	$("#myCalendar").prop("min", dateFormat(date));
 	$("#myCalendar").prop("max", dateFormat(new Date(date.setDate(date.getDate() + 4))));
 };
-//상영 시간표 출력
-var showTimeTable = function(){
 
+//상영 시간표 출력
+var showSchedule = function(param, date){
 	$("#showTimeTable").empty();
-	$("#showTimeTable").append("<div class='text-start' id='lMT'>옛날 영화</div>" + 
-							   "<div class='text-start mt-3' id='nMT'>최신 영화</div>");
-	
-	// 영화 종류별
-	$.each(movies, function(key, value){
-		var k = key.endsWith("1") ? "lMT" : "nMT";
-		// 영화별
-		$.each(value, function(idx, val){
-			var id = k + (idx+1)
-			$("#" + k).append("<div class='text-start' id='" + id + "'>" + val + "</div>");
-			// 영화별 시간 담을 div
-			$("#" + id).append("<div class='text-start'><ul class='text-start list-time ps-2'></ul></div>");
-			// 시간표 
-			$.each(moInfos, function(i, v){ // v : lInfos, nInfos 의 값 -> json
-				check1 = (i == 0) ? "l" : "n";
-				check2 = id.substr(0, 1);
-				if(check1 != check2) return;
-				$.each(v, function(ki, vel){ // ki : info1, info2, info3, ...
-					check3 = id.substr(3);
-					check4 = ki.substr(4);
-//						debugger;
-					if(check3 != check4) return;
-					$.each(vel, function(ii, vv){ // vv : 영화별 시간
-// 						var tmp = vv.time + " | " + vv.seat + " | " + vv.cine;
-						$("#" + id).find(".list-time")
-								   .append("<a class='btn btn-light ms-1 me-1 mt-1 mb-1 pt-0 pb-0 border border-dark-subtle'" 
-										    + "href='#' role='button' style='width: 100px;'>" 
-										   	+ "<span class='fs-5'>" + vv.time + "</span>" + "<br>" 
-										   	+ "<span style='font-size: small'>" + vv.seat + "</span>" + "&nbsp;&nbsp;&nbsp;&nbsp;" 
-										   	+ "<span style='font-size: small'>" + vv.cine + "</span>" + "</a>");
-					});
-				});
-			});
+	$.ajax({
+		type: "GET",
+		url: "res1Pro.re",
+		data: {cinema: $("#selectedCinema").text(),
+			   param: param,
+			   date: $("#myCalendar").val()},
+		dataType: "json"  // fail 기준 질문하기. 결과값 [] 여도 done -> 왜??
+	})
+	.done(function(data){
+// 		debugger;
+// 		$("#showTimeTable").append("<div class='text-start' id='oldSch'>옛날 영화</div>" + 
+// 								   "<div class='text-start mt-3' id='nowSch'>최신 영화</div>");
+
+		// 이거 따로 빼줄것
+		var check = function(type, value){
+			var id = (type == "OLD") ? "oldSch" : "nowSch";
+			var text = (type == "OLD") ? "옛날 영화" : "최신 영화";
+			
+			if(value.schMovType == type && $("#showTimeTable").children("#" + id).length == 0){
+				$("#showTimeTable").append("<div class='text-start' id='" + id + "'>" + text + "</div>");
+			}
+		}
+		$.each(data, function(index, value){
+			check("OLD", value);
+			check("NOW", value);
+			
+			var id = (value.schMovType == "OLD") ? "oldSch" : "nowSch";
+			var pId = id;
+			id += value.schMovIdx;
+			if(! $("#" + id).length){
+				$("#" + pId).append("<div class='text-start' id='" + id + "'>" + value.title + "</div>");
+				$("#" + id).append("<div class='text-start'><ul class='text-start  list-time ps-2'></ul></div>");
+			}
+			$("#" + id).find(".list-time")
+			   		   .append("<a class='btn btn-light ms-1 me-1 mt-1 mb-1 pt-0 pb-0 border border-dark-subtle'" 
+					    	   + "href='#' role='button' style='width: 100px;'>" 
+					   		   + "<span class='fs-5'>" + value.schTime + "</span>" + "<br>" 
+					   		   + "<span style='font-size: small'>" + value.scrSeatAvail + "/" + value.scrSeat + "</span>&nbsp;&nbsp;&nbsp;&nbsp;" 
+					   		   + "<span style='font-size: small'>" + value.scrIdx + "관</span>" + "</a>");
 		})
-	});
+	})
+	.fail(function(){
+		$.ajax({
+			type: "GET",
+			url: "res1ProOc.re",
+			dataType: "json" 
+		})
+		.done(function(data){
+			// 영업중인 곳 선택한 상태에서 다른 곳 선택하면 영화 목록 그대로인거 해결
+			$(".showMovies").empty();
+			$(".myMovie").removeClass("bg-body-secondary");
+			$(".myMovie").addClass("bg-body-secondary");
+			
+			var msg = "";
+			
+			for(var i = 0; i < data.length; i++){
+				if(!msg.includes(data[i].loName)) msg += ("\n - " + data[i].loName + " : ");
+				msg += data[i].ciName;
+				msg += ( (i == data.length-1 || (data[i].loName != data[i+1].loName)) ? "" : ", " );
+			}
+			$("#selectedCinema").text($("#selectedCinema").text() + " (준비중)")  // 순서가 뭔가 아쉽
+			alert("선택하신 지점은 오픈 준비 중입니다.\n다른 지점을 선택해 주세요.\n\n현재 운영중인 지점 :" + msg);
+		})
+		.fail(function(){
+			alert("현재 모든 지점 오픈 준비 중입니다.");
+		})
+	})
+	
 };
 
+
 $(function(){
-	
+			var movieList;
+			
 			// 지역 선택
 			$(".myLocation").click(function(e){
 				// 배경색 변경
@@ -342,12 +260,13 @@ $(function(){
 				$(this).css("background", "white");
 				
 				// 목록 나타내기
-				var mo = $(this).attr("id");
-				var content = movies[$(this).attr("id")];
 				$(".showMovies").empty();
-				$.each(content, (i, e) => {
-					$(".showMovies").append("<li class='list-group-item border border-0 myMouse' id='movie" + (i+1) + "'>" + e + "</li>");
-				});
+				var id = $(this).attr("id")
+				$.each(movieList, (i, e) => {
+					if(e.schMovType != id) return;
+ 					$(".showMovies").append("<li class='list-group-item border border-0 myMouse' id='" + id + "movie" 
+ 													+ (i+1) + "'>" + e.title + "</li>");
+ 				});			
 				
 				// 다른 지역 선택하고 오면 체크 없어지는거 해결
 				if($("#selectedMovie").text() != "영화"){
@@ -368,18 +287,35 @@ $(function(){
 				var id = (tmp.startsWith("c")) ? "selectedCinema" : "selectedMovie";
 				$("#" + id).text(this.textContent);
 				
-				
-				// showTimeTable()
-				if($("#selectedDate").text() != "날짜 및 시간") {
-					if($("#selectedMovie").text() != "영화" && $("#selectedCinema").text() == "지역 및 영화관") return;
-					showTimeTable();
+				if(id == "selectedCinema"){
+					var cinema = $("#selectedCinema").text();
+					if(id == "selectedCinema"){
+						if(!($("#selectedCinema").text() == "지역 및 영화관" || $("#selectedCinema").text().includes("(준비중)"))){
+							$.ajax({
+								type: "GET",
+								url: "res1ProML.re",
+								data: {cinema: cinema,
+									   date: $("#myCalendar").val()},
+								dataType: "json"  
+							})
+							.done(function(data){
+								movieList = data;
+							})
+							.fail(function(){
+							})
+						}				
+					}
 				}
-			});
 				
-			
-			// 호버시 마우서 커서 모양 변경
-			$(document).on("mouseover", ".myMouse", function(e){
-				$(".myMouse").css("cursor","pointer");
+				// showSchedule()   (젤 바같에 날짜 != "날짜 및 시간" 조건 뺏음)
+				if($("#selectedMovie").text() != "영화" && $("#selectedCinema").text() == "지역 및 영화관") return;
+				// 특정 영화의 시간표만 보여주기 위함
+				var param = "all";
+				// find(".bi-check-lg") 체크 해제 시 다시 전체 시간표로 나오기 위한 조건
+				if($(this).find(".bi-check-lg").length == 0 && $(this).attr("id").includes("movie")){
+					param = $(this).text();
+				}
+				showSchedule(param);
 			});
 				
 				
@@ -391,6 +327,14 @@ $(function(){
 				if(id == "[id*=movie]" && $(this).children("span").length){
 					$(this).addClass("border border-0");
 					$(this).children("span").remove();
+					$("#selectedMovie").text("영화")
+					return;
+				}
+				// 같은 영화관 선택시 처리
+				if(id == "[id*=cinema]" && $(this).children("span").length){
+					$(".showMovies").empty();
+					$(".myMovie").removeClass("bg-body-secondary");
+					$(".myMovie").addClass("bg-body-secondary");
 					$("#selectedMovie").text("영화")
 					return;
 				}
@@ -415,10 +359,55 @@ $(function(){
 				date = new Date($("#myCalendar").val());
 				writeDate(date);
 				
-				if($("#selectedCinema").text() != "지역 및 영화관"){
-					showTimeTable();
+				
+				
+				
+				//////////////////////////////////////////////////////////// 이 부분도 꽤 많이 쓰임
+				$(".showMovies").empty();
+				$(".myMovie").removeClass("bg-body-secondary");
+				$(".myMovie").addClass("bg-body-secondary");
+				////////////////////////////////////////////////////////////
+				// 이 부분 중복 ---------- 지역 선택시 영화 목록 가져오는 거랑
+				var cinema = $("#selectedCinema").text();
+				if(!($("#selectedCinema").text() == "지역 및 영화관" || $("#selectedCinema").text().includes("(준비중)"))){
+					$.ajax({
+						type: "GET",
+						url: "res1ProML.re",
+						data: {cinema: cinema,
+							   date: $("#myCalendar").val()},
+						dataType: "json"  
+					})
+					.done(function(data){
+						movieList = data;
+					})
+					.fail(function(){
+					})
 				}
+				// -------------------------------------------------
+				
+				
+				
+				
+				
+				
+				// showSchedule()
+				if($("#selectedMovie").text() != "영화" && $("#selectedCinema").text() == "지역 및 영화관") return;
+				// 특정 영화의 시간표만 보여주기 위함
+				var param = "all";
+				// find(".bi-check-lg") 체크 해제 시 다시 전체 시간표로 나오기 위한 조건
+				if($(this).find(".bi-check-lg").length == 0 && $(this).attr("id").includes("movie")){
+					param = $(this).text();
+				}
+				showSchedule(param);
+				
+				
 			}); // 날짜 표시 끝
+			
+
+			// 호버시 마우서 커서 모양 변경
+			$(document).on("mouseover", ".myMouse", function(e){
+				$(".myMouse").css("cursor","pointer");
+			});
 });
 
 
