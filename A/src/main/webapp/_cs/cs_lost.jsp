@@ -328,7 +328,7 @@ $(document).ready(function(){
 
 		        );
 		    }
-		    // '다음' 버튼
+		    // '다음' 버튼 searchPageNm 이 함수 써서 해결하는게 맞는가?
 		    if(pageDTO.endPage < pageDTO.pageCount) {
 		        $('#searchPaging').append(
 		            '<li class="page-item">' +
