@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.itwillbs.domain.CenterBoardDTO;
+import com.itwillbs.domain.LostBoardDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.service.CSBoardService;
 
@@ -83,6 +84,10 @@ public class AdminController extends HttpServlet {
 		
 		// 관리자 분실물 페이지 이동
 		if(sPath.equals("/adm_cs_lost.ad")) {
+			CSBoardService csBoardService = new CSBoardService();
+			ArrayList<LostBoardDTO> lostBoardList = csBoardService.getLostBoardList();
+			request.setAttribute("lostBoardList",lostBoardList);
+			
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_cs_lost.jsp");
 			dispatcher.forward(request, response);
 		}	

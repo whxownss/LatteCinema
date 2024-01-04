@@ -158,6 +158,15 @@
 		SELECT COUNT(*) 
 		  FROM LOSTBOARD
 	</select>
+	<select id="getlostBoardAll" resultType="LostBoardDTO">
+		SELECT *,
+		       (SELECT C.CI_NAME
+		          FROM CINEMA AS C
+		         WHERE C.LO_IDX = LOST.LO_IDX AND C.CI_IDX = LOST.CI_IDX) AS 'CI_NAME',
+		       ROW_NUMBER() OVER (ORDER BY LOST.CREATE_DATE) AS RN
+		  FROM LOSTBOARD AS LOST
+		 ORDER BY LOST.CREATE_DATE DESC
+	</select>
 	<select id="getLostBoard" resultType="LostBoardDTO" parameterType="map">
 		 SELECT *,
 			      (SELECT C.CI_NAME

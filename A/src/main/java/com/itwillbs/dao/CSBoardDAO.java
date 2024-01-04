@@ -504,6 +504,21 @@ public class CSBoardDAO {
 		}
 		return qnaBoardList;
 	}//getQnaBoardList() 조건 없이 모두 부를 때
+
+	public ArrayList<LostBoardDTO> getLostBoardList() {
+		ArrayList<LostBoardDTO> lostBoardList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			lostBoardList = new ArrayList<LostBoardDTO>(session.selectList("CsAdmin.getlostBoardAll")); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+			   session.close();
+			}
+		}
+		return lostBoardList;
+	}//getLostBoardList() 조건 없이 모두 부를 때
 	
 	
 	
