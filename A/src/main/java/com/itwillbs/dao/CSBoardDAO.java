@@ -421,7 +421,7 @@ public class CSBoardDAO {
 	        }
 		}
 		return lostBoardList;
-	}
+	}//getLostBoardList() 검색용
 
 	public int getLostBoardCount(LostBoardDTO lostBoardDTO) {
 		System.out.println("CSBoardDAO getLostBoardCount() 검색용");
@@ -437,7 +437,43 @@ public class CSBoardDAO {
 	        }
 		}
 		return count;
-	}
+	}//getLostBoardCount() 검색용
+
+	public ArrayList<ExqBoardDTO> getExqBoardList(PageDTO pageDTO, String exqSelect) {
+		System.out.println("CSBoardDAO getExqBoardList() 검색용");
+		ArrayList<ExqBoardDTO> exqBoardList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			// 파라미터를 맵에 저장
+	        Map<String, Object> params = new HashMap<>();
+	        params.put("pageDTO", pageDTO);
+	        params.put("exqSelect", exqSelect);
+	        exqBoardList = new ArrayList<ExqBoardDTO>(session.selectList("CsAdmin.getExqSearchList", params));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return exqBoardList;
+	}//getExqBoardList() 셀렉트 박스로 검색
+
+	public int getExqBoardCount(String exqSelect) {
+		System.out.println("CSBoardDAO getExqBoardCount() 검색용");
+		int count = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			count = session.selectOne("CsAdmin.getExqBSearchCount", exqSelect);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+			   session.close();
+			}
+		}
+		return count;
+	}//getExqBoardList() 셀렉트 박스로 검색
 	
 	
 	

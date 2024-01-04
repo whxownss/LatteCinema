@@ -14,6 +14,18 @@
 		SELECT COUNT(*) 
 		  FROM EXQBOARD
 	</select>
+	<select id="getExqSearchList" resultType="ExqBoardDTO" parameterType="map">
+		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
+		  FROM EXQBOARD
+		 WHERE EXQSELECT = #{exqSelect} 
+   		 ORDER BY CREATE_DATE  DESC 
+   		 LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
+	</select>
+	<select id="getExqBSearchCount" resultType="int" parameterType="String">
+		SELECT COUNT(*) 
+		  FROM EXQBOARD
+		 WHERE EXQSELECT = #{exqSelect}
+	</select>
 	
 	<select id="getCenterBoardList" resultType="CenterBoardDTO" parameterType="PageDTO">
 		SELECT *,

@@ -496,5 +496,38 @@ public class CSBoardService {
 		return count;
 	}//getLostBoardCount 검색버튼 사용
 
+	public ArrayList<ExqBoardDTO> getExqBoardList(PageDTO pageDTO, HttpServletRequest request) {
+		System.out.println("CSBoardService getExqBoardList() 검색");
+		ArrayList<ExqBoardDTO> exqBoardList = null;
+		try {
+			String exqSelect = request.getParameter("exqSelect");
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			exqBoardList = csBoardDAO.getExqBoardList(pageDTO,exqSelect);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return exqBoardList;
+	}//getExqBoardList 셀렉트박스로 검색
+
+	public int getExqBoardCount(HttpServletRequest request) {
+		System.out.println("CSBoardService getExqBoardCount() 검색");
+		int count = 0;
+		try {
+			String exqSelect = request.getParameter("exqSelect");
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getExqBoardCount(exqSelect);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getExqBoardCount 셀렉트박스로 검색
+
 	
 }//클래스
