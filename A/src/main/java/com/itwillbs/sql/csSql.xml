@@ -26,6 +26,11 @@
 		  FROM EXQBOARD
 		 WHERE EXQSELECT = #{exqSelect}
 	</select>
+	<select id="getExqBoardAll" resultType="ExqBoardDTO">
+		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
+		  FROM EXQBOARD
+   		 ORDER BY CREATE_DATE  DESC 
+	</select>
 	
 	<select id="getCenterBoardList" resultType="CenterBoardDTO" parameterType="PageDTO">
 		SELECT *,

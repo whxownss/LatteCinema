@@ -562,5 +562,16 @@ public class CSBoardService {
 		return lostBoardList;
 	}//getLostBoardList() 조건없이 모두 부를 때.
 
+	public ArrayList<ExqBoardDTO> getExqBoardList() {
+		ArrayList<ExqBoardDTO> exqBoardList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			exqBoardList = csBoardDAO.getExqBoardList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return exqBoardList;
+	}//getExqBoardList() 조건없이 모두 부를 때.
+
 	
 }//클래스

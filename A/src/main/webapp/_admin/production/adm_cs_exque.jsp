@@ -1,5 +1,8 @@
+<%@page import="com.itwillbs.domain.ExqBoardDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,10 +36,11 @@
 
   <body class="nav-md">
  <%
- 	String select = "멤버십";
- 	String subject = "제목 데이터를 받자";
- 	String content = "내용 데이터를 받자";
- 	int exqNum = 1; //글번호도 받아와야할듯
+//  	String select = "멤버십";
+//  	String subject = "제목 데이터를 받자";
+//  	String content = "내용 데이터를 받자";
+//  	int exqNum = 1; //글번호도 받아와야할듯
+ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribute("exqBoardList");
  %>
     <div class="container body">
       <div class="main_container">
@@ -230,410 +234,25 @@
                           <th>글번호</th>	
                           <th>구분</th>
                           <th>질문</th>
+                          <th>등록자</th>
                           <th>등록일</th>
+                          <th>수정자</th>
                           <th>수정일</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td><%=select %></td>
-                          <td><a data-toggle="modal" data-target="#myModal" data-info='{"key1": "<%=subject%>", "key2": "<%=content%>", "key3": "<%=select%>"}'><%=subject %></a></td>
-                          <td>2011/04/25</td>
-                          <td>2011/06/25</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>멤버십</td>
-                          <td>포인트 소멸은 어떻게 이루어 지나요?</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>멤버십</td>
-                          <td>VIP 선정 기준이 어떻게 되나요?</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>4</td>
-                          <td>관람권</td>
-                          <td>특별한 전용 관람권이 따로 있나요?</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>5</td>
-                          <td>영화관이용</td>
-                          <td>주차가 가능한가요?</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>6</td>
-                          <td>영화관이용</td>
-                          <td>관람등급에 대해 알고 싶습니다.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>7</td>
-                          <td>영화관이용</td>
-                          <td>상영관 내 다른 음식물의 반입이 되나요?</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>8</td>
-                          <td>할인혜택</td>
-                          <td>장애인, 경로 등 우대할인에 대해 알고 싶습니다.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>9</td>
-                          <td>예매</td>
-                          <td>예매는 몇 장까지 가능한가요?</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>11</td>
-                          <td><%=select %></td>
-                          <td><a data-toggle="modal" data-target="#myModal" data-info='{"key1": "<%=subject%>", "key2": "<%=content%>", "key3": "<%=select%>"}'><%=subject %></a></td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
+                      	<c:forEach var="exqBoardDTO" items="${exqBoardList }">
+                      	<tr>
+                      		<td>${exqBoardDTO.rn }</td>
+                      		<td>${exqBoardDTO.exqSelect }</td>
+                      		<td><a data-toggle="modal" data-target="#myModal" data-info='{"key1": "${exqBoardDTO.exqSubject }", "key2": "${exqBoardDTO.exqContent }", "key3": "${exqBoardDTO.exqSelect }"}'>${exqBoardDTO.exqSubject }</a></td>
+                      		<td>${exqBoardDTO.createUser }</td>
+                      		<td>${exqBoardDTO.createDate }</td>
+                      		<td>${exqBoardDTO.updateUser }</td>
+                      		<td>${exqBoardDTO.updateDate }</td>
+                      	</tr>
+                      	</c:forEach>
+  
                       </tbody>
                     </table>
 					
@@ -744,23 +363,23 @@
 	 	//수정 모달 수정 버튼 클릭
 	 	$("#modalRewrite").on("click",function(){
 	 		alert("이벤트 연결 성공");
-	 	// 실제 값으로 subject, content, select 값을 대체하세요
-	 	    var subject = '<%=subject %>';
-	 	    var content = '<%=content %>';
-	 	    var select = '<%=select %>';
+// 	 	// 실제 값으로 subject, content, select 값을 대체하세요
+<%-- 	 	    var subject = '<%=subject %>'; --%>
+<%-- 	 	    var content = '<%=content %>'; --%>
+<%-- 	 	    var select = '<%=select %>'; --%>
 
-	 	    // anchorString을 생성합니다.
-// 	 	    var anchorString = '<a data-toggle="modal" data-target="#myModal" data-info=\'{"key1": "' + subject + '", "key2": "' + content + '", "key3": "' + select + '"}\'>';
-	 	    var anchorString = '<a data-toggle="modal" data-target="#myModal" data-info=\'{"key1": "' + $("#recipient-name").val() + '", "key2": "' + content + '", "key3": "' + $("#modalSelect").val() + '"}\'>';
+// 	 	    // anchorString을 생성합니다.
+// // 	 	    var anchorString = '<a data-toggle="modal" data-target="#myModal" data-info=\'{"key1": "' + subject + '", "key2": "' + content + '", "key3": "' + select + '"}\'>';
+// 	 	    var anchorString = '<a data-toggle="modal" data-target="#myModal" data-info=\'{"key1": "' + $("#recipient-name").val() + '", "key2": "' + content + '", "key3": "' + $("#modalSelect").val() + '"}\'>';
 
-	 	    console.log(anchorString);
+// 	 	    console.log(anchorString);
 
-	 	    // <td> 요소의 내용을 설정합니다.
-	 	    $("tr:eq(1) td:eq(1)").text($("#modalSelect").val());
-	 	    $("tr:eq(1) td:eq(2)").html(anchorString + $("#recipient-name").val() + '</a>');
+// 	 	    // <td> 요소의 내용을 설정합니다.
+// 	 	    $("tr:eq(1) td:eq(1)").text($("#modalSelect").val());
+// 	 	    $("tr:eq(1) td:eq(2)").html(anchorString + $("#recipient-name").val() + '</a>');
 
-	 	    // 모달을 숨깁니다.
-	 	    $("#myModal").modal('hide');
+// 	 	    // 모달을 숨깁니다.
+// 	 	    $("#myModal").modal('hide');
 	 	});
 	 	
 	 	// 추가 버튼 누르면 새로운 행 추가 하기

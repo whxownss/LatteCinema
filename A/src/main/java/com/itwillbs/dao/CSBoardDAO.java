@@ -519,6 +519,21 @@ public class CSBoardDAO {
 		}
 		return lostBoardList;
 	}//getLostBoardList() 조건 없이 모두 부를 때
+
+	public ArrayList<ExqBoardDTO> getExqBoardList() {
+		ArrayList<ExqBoardDTO> exqBoardList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			exqBoardList = new ArrayList<ExqBoardDTO>(session.selectList("CsAdmin.getExqBoardAll")); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+			   session.close();
+			}
+		}
+		return exqBoardList;
+	}//getExqBoardList() 조건없이 모두 부를 때
 	
 	
 	

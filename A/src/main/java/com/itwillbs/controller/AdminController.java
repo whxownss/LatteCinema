@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.itwillbs.domain.CenterBoardDTO;
+import com.itwillbs.domain.ExqBoardDTO;
 import com.itwillbs.domain.LostBoardDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.service.CSBoardService;
@@ -68,6 +69,10 @@ public class AdminController extends HttpServlet {
 
 		// 관리자 자주찾는질문 페이지 이동
 		if(sPath.equals("/adm_cs_exque.ad")) {
+			CSBoardService csBoardService = new CSBoardService();
+			ArrayList<ExqBoardDTO> exqBoardList = csBoardService.getExqBoardList();
+			request.setAttribute("exqBoardList",exqBoardList);
+			
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_cs_exque.jsp");
 			dispatcher.forward(request, response);
 		}	
