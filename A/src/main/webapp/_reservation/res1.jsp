@@ -432,7 +432,6 @@ $(function(){
 		
 		var date = $("#selectedDate").text();           			   // 선택 날짜
 		var title = $(this).parents(".fTitle").find(".mTitle").text(); // 영화 제목
-		
 		// 포스터도 담아야함
 		var schDTO = {
 				"rating" : rating,
