@@ -62,6 +62,7 @@
             
             	<input type="hidden" name="id" value="${memberDTO.memId }">
             	<input type="hidden" name="pass" value="${memberDTO.memPass }">
+            	<input type="hidden" name="phone" value="${memberDTO.memPhone }">
             	
 <!--               <input type="hidden" name="mbNo" value="3487839"> -->
 <!--               <input type="hidden" name="phoneNo" value="010-3333-3333"> -->
@@ -82,7 +83,7 @@
                         <em class="font-orange">*</em>
                       </th>
                       <td>
-                        <span class="mbNmClass" name="name" >${memberDTO.memName }</span>
+                        <span class="mbNmClass" >${memberDTO.memName }</span>
                         
 <!--                         <a href="#layer_name" class="button small gray-line ml10 mr10 btn-modal-open" w-data="600" h-data="350" title="이름변경">이름변경</a> -->
 
@@ -116,7 +117,7 @@
                       <th scope="row">생년월일
                         <em class="font-orange">*</em>
                       </th>
-                      <td><span name="birth" >${memberDTO.memBirthD}</span></td>
+                      <td><span >${memberDTO.memBirthD}</span></td>
                     </tr>
                     <tr>
                       <th scope="row">
@@ -125,7 +126,7 @@
                       </th>
                       <td>
                         <div class="clearfix">
-                          <p class="reset float-l w170px lh32 changeVal" name="phone" data-name="phoneNo">${memberDTO.memPhone }</p>
+                          <p class="reset float-l w170px lh32 changeVal" data-name="phoneNo">${memberDTO.memPhone }</p>
                           <div class="float-l">
                             <button type="button" class="button small gray-line change-phone-num" id="phoneChgBtn" title="휴대폰번호 변경">휴대폰번호 변경</button>
                           </div>
