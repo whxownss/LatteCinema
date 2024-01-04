@@ -31,6 +31,11 @@
 		  FROM EXQBOARD
    		 ORDER BY CREATE_DATE  DESC 
 	</select>
+	<update id="updateExqBoard" parameterType="ExqBoardDTO" >
+		UPDATE EXQBOARD 
+		   SET EXQSUBJECT = #{exqSubject}, EXQCONTENT = #{exqContent}, UPDATE_USER = #{updateUser}, UPDATE_DATE = SYSDATE()
+		 WHERE CREATE_DATE = #{createDate} AND CREATE_USER = #{createUser}
+	</update>
 	
 	<select id="getCenterBoardList" resultType="CenterBoardDTO" parameterType="PageDTO">
 		SELECT *,

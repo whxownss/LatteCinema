@@ -330,6 +330,20 @@ public class CSController extends HttpServlet  {
 		    // JSON 문자열을 응답으로 작성
 		    response.getWriter().write(json);
 		}
+		// 자주 찾는 질문 수정
+		if(sPath.equals("/cs_exqueUpdate.cs")) {
+			System.out.println("주소비교 /cs_exqueUpdate.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "exq update fail";
+			if(csBoardService.updateExqBoard(request)) {
+				msg = "exq update success";
+			}
+			System.out.println(msg);
+			
+			response.sendRedirect("adm_cs_exque.ad");
+		}
 		
 		// 1:1문의 페이지 이동
 		if(sPath.equals("/cs_qna.cs")) {

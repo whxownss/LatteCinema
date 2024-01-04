@@ -40,6 +40,7 @@
 //  	String subject = "제목 데이터를 받자";
 //  	String content = "내용 데이터를 받자";
 //  	int exqNum = 1; //글번호도 받아와야할듯
+String updateUser = "ADMIN2477";
 ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribute("exqBoardList");
  %>
     <div class="container body">
@@ -127,33 +128,37 @@ ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribu
           	<!-- 임시  -->
 			<div class="container">
 			  <!-- Modal -->
-			 <form action="#" method="get" name="frChange"> 
+			 <form action="cs_exqueUpdate.cs" method="get" name="frChange"> 
 			  <div class="modal fade" id="myModal" role="dialog">
 			    <div class="modal-dialog">
 <!-- 			    <button type="button" class="btn-close" aria-label="Close"></button> -->
 			      <!-- Modal content-->
 			      <div class="modal-content">
 				      <div class="modal-header">
+				      <input type="hidden" name="updateUser" value="<%=updateUser%>">
+				      <input type="hidden" id="exqUser" name="createUser" value="">
+				      <input type="hidden" id="exqDate" name="createDate" value="">
 				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				        <h5 class="modal-title" id="exampleModalLabel">자주찾는질문</h5>
-				        <select id="modalSelect" name="changeSelect">
+				        <select id="modalSelect" name="exqSelect">
 				        	<option value="">구분선택</option>
 				        	<option value="예매">예매</option>
 				        	<option value="관람권">관람권</option>
 				        	<option value="멤버십">멤버십</option>
 				        	<option value="할인혜택">할인혜택</option>
 				        	<option value="영화관이용">영화관이용</option>
+				        	<option value="기타">기타</option>
 				        </select>
 				      </div>
 				      <div class="modal-body">
 <!-- 				        <form> -->
 				          <div class="mb-3">
 				            <label for="recipient-name" class="col-form-label">질문</label>
-				            <input type="text" class="form-control" id="recipient-name" name="changeQue" value="">
+				            <input type="text" class="form-control" id="recipient-name" name="exqSubject" value="">
 				          </div>
 				          <div class="mb-3">
 				            <label for="message-text" class="col-form-label">글내용</label>
-				            <textarea class="form-control" id="message-text" name="changeContent"></textarea>
+				            <textarea class="form-control" id="message-text" name="exqContent"></textarea>
 				          </div>
 <!-- 				        </form> -->
 				      </div>
@@ -245,7 +250,7 @@ ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribu
                       	<tr>
                       		<td>${exqBoardDTO.rn }</td>
                       		<td>${exqBoardDTO.exqSelect }</td>
-                      		<td><a data-toggle="modal" data-target="#myModal" data-info='{"key1": "${exqBoardDTO.exqSubject }", "key2": "${exqBoardDTO.exqContent }", "key3": "${exqBoardDTO.exqSelect }"}'>${exqBoardDTO.exqSubject }</a></td>
+                      		<td><a data-toggle="modal" data-target="#myModal" data-info='{"key1": "${exqBoardDTO.exqSubject }", "key2": "${exqBoardDTO.exqContent }", "key3": "${exqBoardDTO.exqSelect }", "key4": "${exqBoardDTO.createUser }", "key5": "${exqBoardDTO.createDate }"}'>${exqBoardDTO.exqSubject }</a></td>
                       		<td>${exqBoardDTO.createUser }</td>
                       		<td>${exqBoardDTO.createDate }</td>
                       		<td>${exqBoardDTO.updateUser }</td>
@@ -326,17 +331,23 @@ ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribu
 		    var key1 = infoData.key1;
 		    var key2 = infoData.key2;
 		    var key3 = infoData.key3;
+		    var key4 = infoData.key4;
+		    var key5 = infoData.key5;
 		
 		    // 추출한 정보를 출력하거나 다른 작업 수행
 		    console.log("Key1:", key1);
 		    console.log("Key2:", key2);
 		    console.log("Key3:", key3);
+		    console.log("Key4:", key4);
+		    console.log("Key5:", key5);
 		
 	        if (infoData) {
 	            // 필요한 정보 추출
 	            $("#modalSelect").val(infoData.key3); // select 옵션 선택 받기
 	            $("#recipient-name").val(infoData.key1); // a 태그에서 가져온 정보
 	            $("#message-text").text(infoData.key2); // a 태그에서 가져온 정보
+	            $("#exqUser").val(infoData.key4);
+	            $("#exqDate").val(infoData.key5);
 	        } else {
 	            console.log("data-info not found");
 	        }

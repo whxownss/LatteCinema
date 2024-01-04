@@ -534,6 +534,24 @@ public class CSBoardDAO {
 		}
 		return exqBoardList;
 	}//getExqBoardList() 조건없이 모두 부를 때
+
+	public int updateExqBoard(ExqBoardDTO exqBoardDTO) {
+		System.out.println("CSBoardDAO updateExqBoard()");
+		int updateSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			updateSuccess = session.update("CsAdmin.updateExqBoard",exqBoardDTO);
+			
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return updateSuccess;
+	}//updateExqBoard()
 	
 	
 	

@@ -573,5 +573,37 @@ public class CSBoardService {
 		return exqBoardList;
 	}//getExqBoardList() 조건없이 모두 부를 때.
 
+	public boolean updateExqBoard(HttpServletRequest request) {
+		System.out.println("CSBoardService updateExqBoard()");
+	    int updateSuccess = 0;
+	    try {
+	        ExqBoardDTO exqBoardDTO = new ExqBoardDTO();
+	        String exqSubject = request.getParameter("exqSubject");
+	        String exqContent = request.getParameter("exqContent");
+	        String exqSelect = request.getParameter("exqSelect");
+	        String createUser = request.getParameter("createUser"); 
+	        String updateUser = request.getParameter("updateUser");
+	        
+	        String createDate = preprocessDate(request.getParameter("createDate"));
+	        
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+	        LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
+	        Timestamp createTime = Timestamp.valueOf(dateTime);
+	        
+	        exqBoardDTO.setExqSubject(exqSubject);
+	        exqBoardDTO.setExqContent(exqContent);
+	        exqBoardDTO.setExqSelect(exqSelect);
+	        exqBoardDTO.setCreateUser(createUser);
+	        exqBoardDTO.setCreateDate(createTime);
+	        exqBoardDTO.setUpdateUser(updateUser);
+	        
+	        csBoardDAO = new CSBoardDAO();
+	        updateSuccess = csBoardDAO.updateExqBoard(exqBoardDTO);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return updateSuccess > 0;
+	}//updateExqBoard()
+
 	
 }//클래스
