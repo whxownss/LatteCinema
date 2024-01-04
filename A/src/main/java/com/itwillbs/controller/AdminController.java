@@ -1,12 +1,16 @@
 package com.itwillbs.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.itwillbs.domain.CenterBoardDTO;
+import com.itwillbs.service.CSBoardService;
 
 public class AdminController extends HttpServlet {
 	
@@ -52,6 +56,10 @@ public class AdminController extends HttpServlet {
 
 		// 관리자 공지사항 페이지 이동
 		if(sPath.equals("/adm_cs_center.ad")) {
+			CSBoardService csBoardService = new CSBoardService();
+			ArrayList<CenterBoardDTO> centerBoardList = csBoardService.getCenterBoardList();
+			request.setAttribute("centerBoardList", centerBoardList);
+			
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_cs_center.jsp");
 			dispatcher.forward(request, response);
 		}	

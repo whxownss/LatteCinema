@@ -41,6 +41,15 @@
 		SELECT COUNT(*) 
 		  FROM CENTERBOARD
 	</select>
+	<select id="getCenterBoardAll" resultType="centerBoardDTO">
+		SELECT *,
+	       (SELECT C.CI_NAME
+	          FROM CINEMA AS C
+	         WHERE C.LO_IDX = CENTER.LO_IDX AND C.CI_IDX = CENTER.CI_IDX) AS 'CI_NAME',
+       	 ROW_NUMBER() OVER (ORDER BY CENTER.CREATE_DATE) AS RN
+	 	 FROM CENTERBOARD AS CENTER
+		 ORDER BY CENTER.CREATE_DATE DESC
+	</select>
 	<select id="getCenterBoard" resultType="CenterBoardDTO" parameterType="map">
 		 SELECT *,
 		       (SELECT C.CI_NAME

@@ -529,5 +529,16 @@ public class CSBoardService {
 		return count;
 	}//getExqBoardCount 셀렉트박스로 검색
 
+	public ArrayList<CenterBoardDTO> getCenterBoardList() {
+		ArrayList<CenterBoardDTO> centerBoardList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			centerBoardList = csBoardDAO.getCenterBoardList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return centerBoardList;
+	}//getCenterBoardList 조건없이 모두 부를 때.
+
 	
 }//클래스

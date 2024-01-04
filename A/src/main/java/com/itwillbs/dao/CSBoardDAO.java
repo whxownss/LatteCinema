@@ -474,6 +474,21 @@ public class CSBoardDAO {
 		}
 		return count;
 	}//getExqBoardList() 셀렉트 박스로 검색
+
+	public ArrayList<CenterBoardDTO> getCenterBoardList() {
+		ArrayList<CenterBoardDTO> centerBoardList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			centerBoardList = new ArrayList<CenterBoardDTO>(session.selectList("CsAdmin.getCenterBoardAll")); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+			   session.close();
+			}
+		}
+		return centerBoardList;
+	}//getCenterBoardList() 조건 없이 모두 부를 때
 	
 	
 	
