@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class randomize {
+public class EmailCode {
 
 	public static String randomizeCode(){
 		Random r = new Random();

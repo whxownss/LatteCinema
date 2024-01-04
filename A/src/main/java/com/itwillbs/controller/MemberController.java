@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.itwillbs.domain.MemberDTO;
-import com.itwillbs.email.sendGmail;
+import com.itwillbs.email.SendGmail;
+import com.itwillbs.email.EmailCode;
 import com.itwillbs.service.MemberService;
 
 
@@ -95,10 +96,16 @@ public class MemberController extends HttpServlet {
 		// 회원가입 이메일 인증번호 checkemail.me
 		if(sPath.equals("/emailCode.me")) {
 			response.setCharacterEncoding("utf-8");
-			String email = request.getParameter("email");
+			String receiver = request.getParameter("email");
 			
-		
+			EmailCode emailcode = new EmailCode();
+			String content = emailcode.randomizeCode();
+			System.out.println(receiver);
+			System.out.println("--------------------"+content);
+			SendGmail sendgmail = new SendGmail(receiver, content);
+			sendgmail.sendMail();
 			
+			response.getWriter().write(content + "");
 		}//
 		
 		//  로그인 loginPro.me 이동

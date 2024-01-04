@@ -94,12 +94,12 @@
 									<label for="emailCheck">인증번호 입력</label>
 								</div>	
 							</div>	
-							<div class="col-3">	
+							<div class="col-3">	 
 								<button onclick="authCodeCheck()" id="authCodeCheckBtn" class="btn btn-danger btn-lg" type="button" style="height:58px;">인증하기</button>
 							</div>
 						</div>
 						<div class="d-grid gap-2" style="margin-top: 50px">
-							<button class="btn btn-danger btn-lg" type="submit" id="joinbtn">가입</button>
+							<button class="btn btn-danger btn-lg" type="submit" id="joinbtn" disabled="disabled">가입</button>
 						</div>
 					</form>
 			</div>
@@ -182,6 +182,8 @@ var phoneRegex =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/; 
 var birthRegex1 = /^\d{4}\d{2}\d{2}$/; //? YYYYMMDD 형식의 정규식 (생년월일)
 var birthRegex2 = /^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/; //YYYYMMDD 각 자리에 유효한 생년월일인지 확인 (생년월일)
 var emailRegex =  /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/; // 이메일형식 규칙(이메일)
+
+var checkCodee;
 
 // 변수저장
 // var id = $("#id").val();
@@ -273,8 +275,9 @@ function emailAuthentication() {
 		dataType : "text",
 		data : {email : email},
 		success:function(data){
-			debugger;
+// 			debugger;
 			alert("인증번호 보내기 성공");
+			checkCodee = data;
 			
 		},
 		error: function () {
@@ -286,9 +289,16 @@ function emailAuthentication() {
 
 
 // 이메일 인증 번호 확인하기 버튼
-// function authCodeCheck() {
+function authCodeCheck() {
+	debugger;
+	if($("#emailCheck").val() == checkCodee){
+		alert('인증 성공');
+		$("#joinbtn").attr("disabled" , false);
+	} else{
+		alert('인증 실패');
+	}
 	
-// }
+}
 
 
 
