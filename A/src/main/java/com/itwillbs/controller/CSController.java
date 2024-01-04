@@ -610,7 +610,7 @@ public class CSController extends HttpServlet  {
 			// int 리턴할 형 getBoardCount() 메서드 정의
 			// int count = getBoardCount() 메서드 호출
 			int count = csBoardService.getLostBoardCount(request);
-			// 한 화면에 보여줄 페이지 개수 설정
+			// 한 화면에 보여줄 페이지 개수 설정. 테스트를 위해서 3으로 한다. 3으로 해서 확인하니 잘 돌아간다.
 			int pageBlock = 10;
 			// 시작하는 페이지 번호 구하기
 			int startPage = (currentPage-1)/pageBlock*pageBlock+1;
