@@ -33,7 +33,7 @@
 									<div id="formCheck"></div>
 									
 									<div>
-										<button class="btn btn-secondary btn-lg" type="submit" style="width: 100%;">로그인</button>
+										<button class="btn btn-danger btn-lg" type="submit" style="width: 100%;">로그인</button>
 									</div>
 								</form>	
 							</div>	
