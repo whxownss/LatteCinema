@@ -101,7 +101,7 @@ public class MemberController extends HttpServlet {
 			EmailCode emailcode = new EmailCode();
 			String content = emailcode.randomizeCode();
 			System.out.println(receiver);
-			System.out.println("--------------------"+content);
+//			System.out.println("--------------------"+content);
 			SendGmail sendgmail = new SendGmail(receiver, content);
 			sendgmail.sendMail();
 			

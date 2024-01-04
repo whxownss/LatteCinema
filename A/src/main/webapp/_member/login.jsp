@@ -84,7 +84,6 @@
 <%@include file ="../_common/commonFooterStart.jsp" %>
 <script>
 $(() => {
-	
 	$("#login").submit(function() {
 		if($("#id").val() == ""){
 			if(!$("#idCheck").length){
@@ -106,8 +105,6 @@ $(() => {
 		
 		return true;
 	})
-	
-	
 });
 
 
