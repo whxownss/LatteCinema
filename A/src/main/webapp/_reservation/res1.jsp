@@ -20,6 +20,7 @@
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
+      <input type="hidden" id="schDTO"></input>
       <div class="modal-header d-flex justify-content-between pt-2 pb-2 bg-secondary-subtle" >
       	<div style="width: 32px"></div>
         <div><h1 class="modal-title fs-5 text-center" id="modalTitle"></h1></div>
@@ -49,7 +50,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-danger">인원/좌석 선택</button>
+        <button type="button" class="btn btn-danger goRes2Btn">인원/좌석 선택</button>
       </div>
     </div>
   </div>
@@ -215,7 +216,7 @@ var showSchedule = function(param, date){
 			id += value.schMovIdx;
 			if(! $("#" + id).length){
 				$("#" + pId).append("<div class='text-start fTitle' id='" + id + "'>" 
-								 	+ "<img src='_assets/img/grade_" + value.rating + ".png' class='pb-1'/> "
+								 	+ "<img src='_assets/img/grade_" + value.rating + ".png' class='pb-1 ps-2'/> "
 								    + "<span class='mTitle'>" + value.title + "</span></div>");
 				$("#" + id).append("<div class='text-start'><ul class='text-start  list-time ps-2'></ul></div>");
 			}
@@ -355,7 +356,7 @@ $(function(){
 			if(e.schMovType != id) return;
 				$(".showMovies").append("<li class='list-group-item border border-0 myMouse' id='" 
 										+ id + "movie" + (i+1) + "'>" 
-										+ "<img src='_assets/img/grade_" + e.rating + ".png' class='pb-1'/> "
+										+ "<img src='_assets/img/grade_" + e.rating + ".png' class='pb-1'/>"
 										+ e.title + "</li>");
 			});			
 		
@@ -422,14 +423,27 @@ $(function(){
 		var selector = ($(this).parents("#nowSch").length == 0) ? "#OLD" : "#NOW";
 		$(selector).trigger("click");
 		
-		var sTime = $(this).find(".starTime").text();	// 시작 시간
-		var cSeat = $(this).find(".cSeat").text();		// 남은 자리
-		var aSeat = $(this).find(".aSeat").text();		// 모든 자리
-		var sIdx = $(this).find(".scrIdx").text();		// 몇관 번호
-		var eTime = $(this).find(".endTime").val();		// 종료 시간
-		var rating = $(this).find(".rating").val();		// 관람 등급  
+		var sTime = $(this).find(".starTime").text();				   // 시작 시간
+		var cSeat = $(this).find(".cSeat").text();					   // 남은 자리
+		var aSeat = $(this).find(".aSeat").text();					   // 모든 자리
+		var sIdx = $(this).find(".scrIdx").text();					   // 몇관 번호
+		var eTime = $(this).find(".endTime").val();					   // 종료 시간
+		var rating = $(this).find(".rating").val();					   // 관람 등급
 		
-		
+		var date = $("#selectedDate").text();           			   // 선택 날짜
+		var title = $(this).parents(".fTitle").find(".mTitle").text(); // 영화 제목
+		// 포스터도 담아야함
+		var schDTO = {
+				"rating" : rating,
+				"title"  : title,
+				"date"   : date,
+				"sTime"  : sTime,
+				"eTime"  : eTime,
+				"sIdx"   : sIdx,
+				"cSeat"  : cSeat,
+				"aSeat"  : aSeat
+		}
+		$("#schDTO").val(JSON.stringify(schDTO));
 		$("#modalTitle").text(sTime + " ~ " + eTime + " (" + sIdx + ")");
 		$("#modalSeat .cSeat").text(cSeat);
 		$("#modalSeat .aSeat").text(aSeat);
@@ -449,10 +463,17 @@ $(function(){
 		$(".ratingText").text(ratingText);
 		$(".ratingText").css("text-decoration","underline").css("color", ratingColor);
 		$(".subText").text(subTitle);
-		
 	});
 	
-
+	
+	// res2 페이지 이동
+	$(".goRes2Btn").on("click", function(){
+		localStorage.setItem('schDTO', $("#schDTO").val());
+		window.location = "res2.re";
+	});
+	
+	
+	
 	// 호버시 마우서 커서 모양 변경
 	$(document).on("mouseover", ".myMouse", function(e){
 		$(".myMouse").css("cursor","pointer");

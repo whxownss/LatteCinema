@@ -38,7 +38,7 @@
 		<if test="!PARAM.equals('all')">
 		   AND M.TITLE = #{PARAM} 
 		</if>
-		ORDER BY CAST(S.SCH_IDX AS UNSIGNED), DATE_FORMAT(S.SCH_STIME, "%H:%i")
+		 ORDER BY CAST(S.SCH_IDX AS UNSIGNED), DATE_FORMAT(S.SCH_STIME, "%H:%i")
 	</select>
 	
 	
