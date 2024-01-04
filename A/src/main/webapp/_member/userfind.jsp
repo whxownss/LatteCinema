@@ -14,6 +14,25 @@
 
 </head>
 <body>
+<!-- Modal -->
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        ...
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Understood</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- Modal -->
 
 	<main id="main">
 		<section class="category-section">
@@ -73,7 +92,7 @@
 						</form>
 			
 							<div class="btn-member-bottom v1">
-								<button id="btnFindId" type="button" class="button purple large" >아이디 찾기<!--아이디 찾기--></button>
+								<button id="btnFindId" type="button" class="button purple large" disabled="disabled" data-bs-toggle="modal" data-bs-target="#staticBackdrop">아이디 찾기<!--아이디 찾기--></button>
 			
 							</div>
 			
@@ -84,11 +103,9 @@
 					<!--// col-wrap -->
 				</div>
 				<!--// member-wrap -->
-	
-
-
 			</div>
 		</section>
+	</main>
 <!-- 		<div class="normalStyle" style="display:none;position:fixed;top:0;left:0;background:#000;opacity:0.7;text-indent:-9999px;width:100%;height:100%;z-index:100;">닫기</div> -->
 <!-- 		<div class="alertStyle" style="position: fixed; top: 0px; left: 0px; background: rgb(0, 0, 0); opacity: 0.7; width: 100%; height: 100%; z-index: 5005; display: block;"></div> -->
 <!-- 		<section class="alert-popup" style="position: fixed; padding-top: 45px; background: rgb(255, 255, 255); z-index: 5006; top: 434.5px; left: 866.5px; width: 400px; opacity: 1;"  -->
@@ -107,7 +124,6 @@
 <!-- 				<button type="button" class="btn-layer-close">레이어 닫기</button> -->
 <!-- 			</div> -->
 <!-- 		</section> -->
-	</main>
 	
 <%@include file ="../_common/commonFooterStart.jsp" %>
 <script type="text/javascript">
@@ -125,11 +141,12 @@ $(function () {
 	$("#birth").on("keyup", function(e){
 		var partton = /[^0-9]/g;
 		if($("#birth").val() == ""){
-			$('#schIdBirthDe-error-text').text('생년월일을 정확히 입력해주세요.');
+			$('#schIdBirthDe-error-text').text('생년월일을 입력해주세요.');
 			return false;
 		}
-		if(parrton.test($(this).val())){
+		if(partton.test($(this).val())){
 			var value = $(this).val($(this).val().replace(/[^0-9]/g,""));
+			$('#schIdBirthDe-error-text').text('');
 			$("#birth").val(value);
 		}
 		
@@ -138,8 +155,13 @@ $(function () {
 	/* 연락처 입력 */
 	$("#phone").on("keyup", function(e){
 		var partton = /[^0-9]/g;
-		if(parrton.test($(this).val())){
+		if($("#phone").val() == ""){
+			$('#schIdMblpNo-error-text').text('연락처 입력해주세요.');
+			return false;
+		}
+		if(partton.test($(this).val())){
 			var value = $(this).val($(this).val().replace(/[^0-9]/g,""));
+			$('#schIdMblpNo-error-text').text('');
 			$("#phone").val(value);
 		}
 	});
@@ -147,9 +169,9 @@ $(function () {
 	
 	$(".findInput").on("keyup", function(){
 		debugger;
-		if(!$("#name").val() == "" && !$("#birth").val() == "" && !$("#phone").val() == ""){
+		if($("#name").val() != "" && $("#birth").val() != "" && $("#phone").val() != ""){
 			debugger;
-			$(this).attr("disabled", false);
+			$("#btnFindId").attr("disabled", false);
 		}
 	})
 	
