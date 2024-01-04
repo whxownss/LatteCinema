@@ -7,6 +7,15 @@
 	<script>
 		$(function(){
 			
+			var schDTO = JSON.parse(localStorage.getItem("schDTO"));
+			$(".rating").attr("src", "_assets/img/grade_" + schDTO.rating + ".png");
+			$(".mTitle").text(schDTO.title);
+			$(".date").text(schDTO.date);
+			$(".sTime").text(schDTO.sTime + " ~ ");
+			$(".eTime").text(schDTO.eTime + "  |  ");
+			$(".sIdx").text(schDTO.sIdx);
+			debugger;
+			
 			//수량 옵션
 			$('._count :button').on({
 			    'click' : function(e){
@@ -137,9 +146,18 @@
 							<div class="p-2 flex-shrink-2 d-flex">
 								<div><img src="assets/img/post1.jpg" style="height: 100px"></div>
 								<div class="d-flex flex-column p-2 text-start">
-									<span>영화제목1111111111111111</span>
-									<span>날짜 시간222222222222</span>
-									<span>1관3333333333333333</span>
+									<span>
+										<img src="" class="rating">
+										<span class="mTitle"></span>
+									</span>
+									<span>
+										<span class="date"></span>
+									</span>
+									<span>
+										<span class="sTime"></span>
+										<span class="eTime"></span>
+										<span class="sIdx"></span>
+									</span>
 								</div>
 							</div>
 							<div class="p-2 d-flex align-items-center">
