@@ -489,6 +489,21 @@ public class CSBoardDAO {
 		}
 		return centerBoardList;
 	}//getCenterBoardList() 조건 없이 모두 부를 때
+
+	public ArrayList<QnaBoardDTO> getQnaBoardList() {
+		ArrayList<QnaBoardDTO> qnaBoardList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			qnaBoardList = new ArrayList<QnaBoardDTO>(session.selectList("CsAdmin.getQnaBoardAll")); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+			   session.close();
+			}
+		}
+		return qnaBoardList;
+	}//getQnaBoardList() 조건 없이 모두 부를 때
 	
 	
 	

@@ -101,6 +101,11 @@
 		SELECT COUNT(*) 
 	 	  FROM QNABOARD
 	</select>
+	<select id="getQnaBoardAll" resultType="QnaBoardDTO">
+		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
+	  	  FROM QNABOARD
+ 		 ORDER BY CREATE_DATE  DESC 
+	</select>
 	<select id="searchQnaBoardList" resultType="QnaBoardDTO" parameterType="map">
 		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
 	  	  FROM QNABOARD

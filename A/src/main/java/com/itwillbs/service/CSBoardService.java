@@ -540,5 +540,16 @@ public class CSBoardService {
 		return centerBoardList;
 	}//getCenterBoardList 조건없이 모두 부를 때.
 
+	public ArrayList<QnaBoardDTO> getQnaBoardList() {
+		ArrayList<QnaBoardDTO> qnaBoardList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			qnaBoardList = csBoardDAO.getQnaBoardList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return qnaBoardList;
+	}//getQnaBoardList() 조건없이 모두 부를 때.
+
 	
 }//클래스
