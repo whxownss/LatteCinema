@@ -99,11 +99,20 @@
 	<update id="updateMember" parameterType="MemberDTO">
 		UPDATE MEMBERS
 		SET 
-			MEM_PASS = #{memPass}
-		  , MEM_PHONE = #{memPhone}
+<!-- 			MEM_PASS  = #{memPass} -->
+		    MEM_PHONE = #{memPhone}
 		  , MEM_EMAIL = #{memEmail}
 		  , MEM_ADDRESS = #{memAddress}
 		WHERE MEM_ID = #{memId}
+	</update>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePasswd" parameterType="MemberDTO">
+		UPDATE MEMBERS
+		SET
+			MEM_PASS = #{memPass}
+		WHERE MEM_ID = #{memId}
+	
 	</update>
 	
 	

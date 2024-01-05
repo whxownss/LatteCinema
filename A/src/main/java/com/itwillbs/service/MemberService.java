@@ -107,7 +107,6 @@ public class MemberService {
 		try {
 			MemberDTO memberDTO = new MemberDTO();
 			memberDTO.setMemId(request.getParameter("id"));
-			memberDTO.setMemPass(request.getParameter("pass"));
 			memberDTO.setMemName(request.getParameter("name"));
 			memberDTO.setMemPhone(request.getParameter("phone"));
 			memberDTO.setMemAddress(request.getParameter("postcode") + "/" + request.getParameter("addr1") + "/" + request.getParameter("addr2"));
@@ -175,6 +174,11 @@ public class MemberService {
 	public void updatePasswd(HttpServletRequest request) {
 		System.out.println("MemberService updatePasswd()");
 		try {
+			MemberDTO memberDTO = new MemberDTO();
+			memberDTO.setMemPass(request.getParameter("newpasswd"));
+			
+			memberDAO = new MemberDAO();
+			memberDAO.updatePasswd(memberDTO);			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

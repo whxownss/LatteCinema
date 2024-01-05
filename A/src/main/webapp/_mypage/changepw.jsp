@@ -16,8 +16,8 @@
 <%-- 										<input type="hidden" name="id" value="${memberDTO.memId }"> --%>
 <%--             							<input type="hidden" name="pass" value="${memberDTO.memPass }">		 --%>
 										<input id="ibxSchPwdLoginId" type="hidden" value="${sessionScope.sId}" name="id"><!--아이디-->
-										<input id="ibxSchPwdMbNm" type="hidden" value="${sessionScope.sName}" name="name"><!--이름-->
-										<input id="ibxSchPwdMbNm" type="hidden" value="${sessionScope.sPass}" name="pass"><!--pass-->
+<%-- 										<input id="ibxSchPwdMbNm" type="hidden" value="${sessionScope.sName}" name="name"><!--이름--> --%>
+<%-- 										<input id="ibxSchPwdMbNm" type="hidden" value="${sessionScope.sPass}" name="pass"><!--pass--> --%>
 
 <jsp:include page="../_common/header.jsp"></jsp:include>
 <main id="main">
@@ -143,22 +143,22 @@ function checkConfirmPasswd() {
 }		
 
 //유효성 체크 후 submit
-// function checkSubmit() {
+function checkSubmit() {
 	
-// 	var color = $('#fr span');
+	var color = $('#fr span');
 	
-// 	var flag = 1;
+	var flag = 1;
 	
-// 	$.each(color, function(i, v){
-// 		if(this.style.color == "red") {
-// 			flag = 0;
-// 			alert("비밀번호 양식을 확인해 주세요.")
-// 			return false;
-// 		}
-// 	});
+	$.each(color, function(i, v){
+		if(this.style.color == "red") {
+			flag = 0;
+			alert("비밀번호 양식을 확인해 주세요.")
+			return false;
+		}
+	});
 	
-// 	return ((flag == 0) ? false : true);
-// }	
+	return ((flag == 0) ? false : true);
+}	
 
 </script>
 <%@include file ="../_common/commonFooterEnd.jsp" %>
