@@ -173,11 +173,19 @@ $(function(){
 	$('._count :button').on({
 		
 	    'click' : function(e){
+	    	var p1 = parseInt($("#pCase1").text());
+			var p2 = parseInt($("#pCase2").text());
+			var p3 = parseInt($("#pCase3").text());
+			var p4 = parseInt($("#pCase4").text());
+	    	var pSum = p1 + p2 + p3 + p4;
+			// 8 넘는 경우 || 0 인거 -버튼 눌렀을때 좌석 초기화 	    	
+	    	if(pSum >= 8 && $(this).hasClass('plus') || $(this).hasClass('minus') && $(this).next().text() == "0") return;
+	    	
 	    	// 인원 변경시 버튼선택과 금액 초기화
 	    	$(".seat").removeClass("btn-secondary selectedSeat btn-danger btn-light")
-	          		  .addClass("btn-light")
+       				  .addClass("btn-light")
 	  		  		  .prop("disabled", false);
-	    	$("#mPrice").text("0");
+ 			$("#mPrice").text("0");
 			
 	        e.preventDefault();
 	        var count = $(this).parent('._count').find('.inpp').text();
@@ -256,7 +264,6 @@ $(function(){
 			var p2 = parseInt($("#pCase2").text());
 			var p3 = parseInt($("#pCase3").text());
 			var p4 = parseInt($("#pCase4").text());
-			
 			var sum = p1 * 12000 + p2 * 7000 + p3 * 5000 + p4 * 4000;
 			
 			$("#mPrice").text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
