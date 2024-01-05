@@ -61,7 +61,10 @@ public class MemberService {
 //			String address = request.getParameter("postcode") + "/" + request.getParameter("address1") + "/" + request.getParameter("address2");
 //			String birth = request.getParameter("birth");
 //			String email = request.getParameter("email");
-			
+			System.out.println("@############3");
+			System.out.println(id);
+			System.out.println(pass);
+			System.out.println("@############3");
 			
 			memberDAO = new MemberDAO();
 			memberDTO.setMemId(id);
@@ -175,8 +178,11 @@ public class MemberService {
 		System.out.println("MemberService updatePasswd()");
 		try {
 			MemberDTO memberDTO = new MemberDTO();
+			memberDTO.setMemId(request.getParameter("id"));
 			memberDTO.setMemPass(request.getParameter("newpasswd"));
-			
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			System.out.println(memberDTO);
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			memberDAO = new MemberDAO();
 			memberDAO.updatePasswd(memberDTO);			
 			

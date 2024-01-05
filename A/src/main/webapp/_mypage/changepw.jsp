@@ -15,7 +15,7 @@
 
 <%-- 										<input type="hidden" name="id" value="${memberDTO.memId }"> --%>
 <%--             							<input type="hidden" name="pass" value="${memberDTO.memPass }">		 --%>
-										<input id="ibxSchPwdLoginId" type="hidden" value="${sessionScope.sId}" name="id"><!--아이디-->
+<%-- 										<input id="ibxSchPwdLoginId" type="hidden" value="${sessionScope.sId}" name="id" ><!--아이디--> --%>
 <%-- 										<input id="ibxSchPwdMbNm" type="hidden" value="${sessionScope.sName}" name="name"><!--이름--> --%>
 <%-- 										<input id="ibxSchPwdMbNm" type="hidden" value="${sessionScope.sPass}" name="pass"><!--pass--> --%>
 
@@ -27,6 +27,7 @@
       <div class="inner-wrap">
         <jsp:include page="lnb.jsp"></jsp:include>
         <form id="fr" method="post" action="changepwPro.me">
+			<input id="ibxSchPwdLoginId" type="hidden" value="${sessionScope.sId}" name="id"> <!--아이디-->
 			<div id="contents">
 				<h2 class="tit">비밀번호 변경</h2>
 			
@@ -43,17 +44,17 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<th scope="row"><label for="passwd">현재 비밀번호</label></th>
+								<th scope="row"><label for="pass">현재 비밀번호</label></th>
 								<td>
-									<input type="password" id="passwd" class="input-text w150px" >
+									<input type="password" name="pass" class="input-text w150px" >
 								</td>
 							</tr>
 							<tr>
 								<th scope="row"><label for="newpasswd">새 비밀번호</label></th>
 								<td>
-									<input type="password" id="newpasswd" class="input-text w150px"
-											onblur="checkPass(); checkConfirmPasswd();"><br>
-									<span id="CheckPassword1"></span>											
+									<input type="password" id="newpasswd" name="newpasswd" class="input-text w150px"
+											onblur="checkPass(); ">
+									<span id="CheckPassword1"></span><br>								
 									<span class="ml10 font-size-14">※ 영문, 숫자, 특수문자 중 2가지 이상 조합하여 8~16자리 이상으로 입력 해 주세요.</span>
 								</td>
 							</tr>
@@ -61,8 +62,8 @@
 								<th scope="row"><label for="newpasswd2">새 비밀번호 재입력</label></th>
 								<td>
 									<input type="password" id="newpasswd2" class="input-text w150px" 
-											onchange="checkConfirmPasswd()"><br>
-									<span id="CheckPassword2"></span>
+											onchange="checkConfirmPasswd()">
+									<span id="CheckPassword2"></span><br>
 									<span class="ml10 font-size-14">※ 비밀번호 확인을 위해 한 번 더 입력해 주시기 바랍니다.</span>
 								</td>
 							</tr>
@@ -90,7 +91,10 @@
 <script>
 // 새비밀번호 정규식
 var lengthRegexPass = /^[A-Za-z0-9!@#$%]{8,16}$/; // 영문 대소문자 숫자 특수문자 8~16자 규칙(패스워드)
-
+var engUpperRegex = /[A-Z]/; //대문자 규칙 (비밀번호)
+var engLowerRegex = /[a-z]/;  //소문자 규칙 (비밀번호)
+var numRegex = /[0-9]/;	// 숫자 0~9 규칙 (비밀번호)
+var specRegex = /[!@#$%]/;	// 특수문자 규칙 (비밀번호)
 // 새비밀번호 유효성
 function checkPass(){
 	var passwd = $("#newpasswd").val();
@@ -132,9 +136,10 @@ function checkPass(){
 function checkConfirmPasswd() {
 	var passwd = $("#newpasswd").val();
 	var passwd2 = $("#newpasswd2").val();
+	
 	var text = '**비밀번호 불일치**';
 	var color = 'red';
-	if( passwd == passwd2 ){
+	if( passwd == passwd2 && passwd != ""){
 		text='**비밀번호 일치**';
 		color='green';
 		

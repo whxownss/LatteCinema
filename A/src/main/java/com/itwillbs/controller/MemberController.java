@@ -279,7 +279,7 @@ public class MemberController extends HttpServlet {
 			
 			
 			
-			response.sendRedirect("myPage.me");
+//			response.sendRedirect("myPage.me");
 		}//
 		
 		
