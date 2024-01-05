@@ -178,12 +178,12 @@
 					</button>       
 					
 					<!-- 모달 추가 -->
-					<div id="movieModal" class="modal" style="display: none;">
+					<div id="movieModal" class="modal" style="display: none; width: 800px;">
 					    <div class="modal-content">
 					        <span class="close" onclick="closeMovieModal()">&times;</span>
-					        <ul id="movieList">
+					        <ol id="movieList">
 					           <!-- 하단 스크립트 모달 동작 -->
-					        </ul>
+					        </ol>
 					        <button onclick="confirmMovieSelection()">확인</button>
 					    </div>
 					</div> 
