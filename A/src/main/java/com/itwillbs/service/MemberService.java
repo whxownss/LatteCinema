@@ -11,7 +11,7 @@ public class MemberService {
 
 	MemberDAO memberDAO = null;
 	
-	
+	//회원가입
 	public void insertMember(HttpServletRequest request) {
 		
 		try {
@@ -49,6 +49,7 @@ public class MemberService {
 		
 	}// insertMember()
 
+	// 유저체크
 	public MemberDTO userCheck(HttpServletRequest request) {
 		System.out.println("MemberService userCheck()");
 		MemberDTO memberDTO = new MemberDTO();
@@ -79,6 +80,7 @@ public class MemberService {
 		return memberDTO;
 	}// userCheck()
 
+	//회원탈퇴
 	public void deleteMember(HttpServletRequest request) {
 		System.out.println("MemberService deleteMember()");
 		try {
@@ -99,6 +101,7 @@ public class MemberService {
 		}
 	}// deleteMember()	
 	
+	//회원정보수정
 	public void updateMember(HttpServletRequest request) {
 		System.out.println("MemberService updateMember()");
 		try {
@@ -135,6 +138,7 @@ public class MemberService {
 		return memberDTO;
 	}// getMember()
 
+	// 아이디 중복체크
 	public int checkId(HttpServletRequest request) {
 		System.out.println("MemberService checkId()");
 		MemberDTO memberDTO = new MemberDTO();
@@ -152,6 +156,7 @@ public class MemberService {
 		
 	}//checkId()
 
+	// 이메일 인증
 	public int checkEmail(HttpServletRequest request) {
 		System.out.println("MemberService checkEmail()");
 		MemberDTO memberDTO = new MemberDTO();
@@ -165,6 +170,17 @@ public class MemberService {
 		}
 		return result;
 	}//checkEmail()
+	
+	// 비밀번호 변경
+	public void updatePasswd(HttpServletRequest request) {
+		System.out.println("MemberService updatePasswd()");
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}//updatePasswd()
 
 //	public void sendGmail(HttpServletRequest request) {
 //		System.out.println("MemberService sendGmail()");	

@@ -365,55 +365,8 @@
             });
         });
 
-        // 파일 선택 후 액션
-        $('#profileTarget').on('change', function(e) {
-            var file = e.target.files[0];
-            var filePath = $(this).val();
-            var type = file.type;
 
-            if(type.indexOf('image') == -1)
-                return gfn_alertMsgBox('이미지 파일만 등록 가능합니다.');
 
-            $.ajax({
-                url: '/on/oh/ohh/Mypage/addProfile.do',
-                data: new FormData(document.forms.fileForm),
-                type: 'POST',
-                dataType: 'json',
-                processData: false,
-                contentType: false,
-                success: function(data) {
-
-                    if (data.statCd != 0) {
-                        if( data.msg != "" ){
-                            gfn_alertMsgBox(data.msg);
-                        }else{
-                            gfn_alertMsgBox('프로필 사진이 등록시 오류가 발생하였습니다.');
-                        }
-
-                        return;
-                    }
-
-                    gfn_alertMsgBox({ msg: '프로필 사진이 등록되었습니다.', callback: fn_reload });
-                }
-            });
-        });
-
-        // 첨부파일 추가
-        $('#addProfileImgBtn').on('click', function() {
-            $('#profileTarget').click();
-        });
-
-        // 첨부파일 삭제
-        $('#deleteProfileImgBtn').on('click', function() {
-            if(!confirm('프로필 사진을 삭제하시겠습니까?')) return;
-
-            $.ajaxMegaBox({
-                 url: '/on/oh/ohh/Mypage/deleteProfile.do',
-                 success: function(d) {
-                     gfn_alertMsgBox({ msg: '프로필 사진이 삭제되었습니다.', callback: fn_reload });
-                  }
-            });
-        });
 
         // 취소 버튼
         $('#cancelBtn').on('click', function(e) {

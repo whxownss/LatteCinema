@@ -248,6 +248,9 @@ public class MemberController extends HttpServlet {
 		
 		// 마이페이지 비밀번호 변경(비밀번호변경) 이동 (userInfo > changepw.jsp)
 		if(sPath.equals("/changepw.me")) {
+			
+			
+			
 			dispatcher = request.getRequestDispatcher("_mypage/changepw.jsp");
 			dispatcher.forward(request, response);
 		}//
@@ -255,7 +258,24 @@ public class MemberController extends HttpServlet {
 		// 비밀번호 변경 changepwPro
 		if(sPath.equals("/changepwPro.me")) {
 			
+			memberService = new MemberService();
+			MemberDTO memberDTO = memberService.userCheck(request);
 			
+			if(memberDTO != null) {
+				System.out.println("비밀번호 일치 ");
+				memberService.updatePasswd(request);
+				//비밀번호 변경 후 세션값 제거 > main.me 로 이동 (변경된 비밀번호로 다시 로그인 하도록)
+				// 세션객체생성
+				HttpSession session = request.getSession();
+				// 세션초기화
+				session.invalidate();
+				// main.me 이동
+				response.sendRedirect("main.me");
+				
+			}else {
+				System.out.println("비밀번호 틀림");
+				response.sendRedirect("changepw.me");
+			}
 			
 			
 			
