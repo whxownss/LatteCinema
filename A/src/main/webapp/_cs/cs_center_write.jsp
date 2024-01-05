@@ -47,7 +47,7 @@ String user = "ADMIN2477";
 		
 		<section class="category-section" id="">
 		<form action="insertCenterWrite.cs" method="post" name="fr">
-		<input type="hidden" name="createUser" value=<%=user %>>
+		<input type="hidden" name="createUser" value=${sessionScope.sId }>
 			<div class="container" data-aos="fade-up">
 				<select id="locationSelect" name="loIdx" class="form-select" aria-label="Default select example">
 					<option selected>지역</option>

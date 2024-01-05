@@ -182,7 +182,9 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
                           <th>글번호</th>	
                           <th>영화관</th>
                           <th>글 제목</th>
+                          <th>등록자</th>
                           <th>등록일</th>
+                          <th>수정자</th>
                           <th>수정일</th>
                         </tr>
                       </thead>
@@ -193,7 +195,9 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
                       		<td>${centerBoardDTO.ciName }</td>
                       		<td><a data-toggle="modal" data-target="#myModal" data-info='{"key1": "${centerBoardDTO.centerSubject}", "key2": "${centerBoardDTO.centerContent}", "key3": "${centerBoardDTO.ciName}", "key4": "${centerBoardDTO.createUser}", "key5": "${centerBoardDTO.createDate}"}'>${centerBoardDTO.centerSubject}</a></td>
 <%--                       		<td><a href="cs_center_content.cs?createUser=${centerBoardDTO.createUser }&createDate=${centerBoardDTO.createDate}">${centerBoardDTO.centerSubject }</a></td> --%>
+                      		<td>${centerBoardDTO.createUser }</td>
                       		<td>${centerBoardDTO.createDate }</td>
+                      		<td>${centerBoardDTO.updateUser }</td>
                       		<td>${centerBoardDTO.updateDate }</td>
                       	</tr>
                       	</c:forEach>
