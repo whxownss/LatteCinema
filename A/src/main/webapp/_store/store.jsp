@@ -10,6 +10,8 @@
 
 <main id="main">
 
+	<!-- 상단 이미지 -->
+	
 	<div id="visual_top" class="visual_top visual_mall"
 		style="margin-top: 40px; margin-bottom: 40px;">
 		<div class="inner">
@@ -18,49 +20,47 @@
 				alt="팝콘&amp;음료, 스낵에서 영화 티켓까지 한번에!" width="100%" height="300">
 		</div>
 	</div>
-	<!-- 상단 이미지 -->
+	
+	<!-- 상단 메뉴 -->
 
 	<div class="container" data-aos="fade-up">
 		<div class="container text-center">
 			<div class="row">
-				<div class="col">
+				<div class="col coll">
 					<img src="assets/img/free-icon-hot-1859430.png" alt="hot"
 						width="50" height="60"> <a href="#store1" class="more fs-1">베스트</a>
 				</div>
-				<div class="col">
+				<div class="col coll">
 					<img src="assets/img/free-icon-popcorn-864818.png" alt="popcorn"
 						width="50" height="60"> <a href="#store2" class="more fs-1">스낵음료</a>
 				</div>
-				<div class="col">
+				<div class="col coll">
 					<img src="assets/img/free-icon-ticket-432312.png" alt="ticket"
 						width="50" height="70"> <a href="#store3" class="more fs-1">관람권</a>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<!-- 메인	 -->
 	
 	<!-- 테두리 css -->
 			
 	<style type="text/css">
-		.col-lg-4:hover {
-		  margin-left: 48px;
-		  margin-right: 45px;
-		  margin-top: 40px;
-		  margin-bottom: 20px;
-		  border-radius: 25px;
-		  border: 3px solid #ff1a1a;
-		  padding: 5px;
-		  width: 350px;
-		  height: 430px;
-		</style>
+	
+		.col-lg-4 {border:#FFF 2px solid; border-radius: 25px;}
+		.col-lg-4:hover {border:#F00 2px solid;}
+		
+		.coll {border:#FFF 2px solid; border-radius: 50px;}
+		.coll:hover {border:#F00 2px solid;}
+		
+	</style>
+		
+	<!-- ////////// 메인 //////////	 -->
 
 	<!-- 베스트 -->
 
 	<section class="category-section fs-5" id="store1">
 		<div class="container" data-aos="fade-up">
-			<span class="anchor" id="store1"
+			<span class="anchor"
 				style="display: block; height: 20px; margin-top: 20px; visibility: hidden;"></span>
 			<div
 				class="section-header d-flex justify-content-between align-items-center mb-5">
@@ -70,7 +70,7 @@
 			<div class="row g-5">
 				<c:forEach var="itemB" items="${storeItemListB}" varStatus="status">
 					<div class="col-lg-4">
-						<a href="store_best${status.index + 1}.st" class="text-center">
+						<a href="storeList.st?itemIdx=${itemB.itemIdx}" class="text-center">
 							<div class="itm_img">
 								<img src="${itemB.itemImage}" alt="${itemB.itemName}">
 							</div>
@@ -88,13 +88,12 @@
 			</div>
 		</div>
 	</section>
-	<!-- 베스트 -->
-
+	
 	<!-- 스낵음료 -->
 
 	<section class="category-section fs-5" id="store2">
 		<div class="container" data-aos="fade-up">
-			<span class="anchor" id="store2"
+			<span class="anchor"
 				style="display: block; height: 20px; margin-top: 20px; visibility: hidden;"></span>
 			<div
 				class="section-header d-flex justify-content-between align-items-center mb-5">
@@ -104,7 +103,7 @@
 			<div class="row g-5">
 				<c:forEach var="itemS" items="${storeItemListS}" varStatus="status">
 					<div class="col-lg-4">
-						<a href="store_snacks${status.index + 1}.st" class="text-center">
+						<a href="storeList.st?itemIdx=${itemS.itemIdx}" class="text-center">
 							<div class="itm_img">
 								<img src="${itemS.itemImage}" alt="${itemS.itemName}">
 							</div>
@@ -122,13 +121,12 @@
 			</div>
 		</div>
 	</section>
-	<!-- 스낵음료 -->
 
 	<!-- 관람권 -->
 
 	<section class="category-section fs-5" id="store3">
 		<div class="container" data-aos="fade-up">
-			<span class="anchor" id="store3"
+			<span class="anchor"
 				style="display: block; height: 20px; margin-top: 20px; visibility: hidden;"></span>
 			<div
 				class="section-header d-flex justify-content-between align-items-center mb-5">
@@ -138,7 +136,7 @@
 			<div class="row g-5">
 				<c:forEach var="itemT" items="${storeItemListT}" varStatus="status">
 					<div class="col-lg-4">
-						<a href="store_ticket${status.index + 1}.st" class="text-center">
+						<a href="storeList.st?itemIdx=${itemT.itemIdx}" class="text-center">
 							<div class="itm_img">
 								<img src="${itemT.itemImage}" alt="${itemT.itemName}">
 							</div>
@@ -156,14 +154,14 @@
 			</div>
 		</div>
 	</section>
+	
+	<!-- ////////// 메인 //////////	 -->
 
-	<!-- 관람권 -->
-
-	<!-- 광고 -->
+	<!-- 광고 이미지 -->
 
 	<section class="category-section fs-5">
 		<div class="container w-100%" data-aos="fade-up">
-			<span class="anchor" id="store2"
+			<span class="anchor"
 				style="display: block; height: 20px; margin-top: 20px; visibility: hidden;"></span>
 			<div class="banner_01">
 				<a href="#" target="" title="화면이동"><img
@@ -171,8 +169,6 @@
 					alt="트롤: 밴드 투게더 절찬상영중 전체관람가 12월, 가장 짜릿한 컴백 무대의 시작!" width="100%"></a>
 			</div>
 	</section>
-
-	<!-- 광고 -->
 
 </main>
 
