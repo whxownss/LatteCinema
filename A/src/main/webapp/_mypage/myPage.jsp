@@ -8,8 +8,7 @@
 </head>
 <body>
 <jsp:include page="../_common/header.jsp"></jsp:include>
-<% String name = "김나혜";
-   int count1 = 1;
+<% int count1 = 1;
    int count2 = 1;
    int count3 = 1;
 %>
@@ -25,8 +24,8 @@
                     <!-- top -->
                     <div class="top2" style="back-ground color: #dc3545;">
                       <div class="mbimg"></div>
-                      <div class="mb_name">안녕하세요! <%=name %><span>님</span></div>
-                      <div class="link"><a href="#" title="개인정보수정 페이지로 이동">개인정보수정</a>
+                      <div class="mb_name">안녕하세요! ${sessionScope.sName}님</div>
+                      <div class="link"><a href="myInfo.me" title="개인정보수정 페이지로 이동">개인정보수정</a>
                       </div>
                     </div>
                     <!--// top -->
@@ -120,6 +119,6 @@
 			</div>
 		</section>
 	</main>
-  <jsp:include page="../_common/commonFooter.jsp"></jsp:include>
-</body>
-</html>
+<%@include file ="../_common/commonFooterStart.jsp" %>
+
+<%@include file ="../_common/commonFooterEnd.jsp" %>

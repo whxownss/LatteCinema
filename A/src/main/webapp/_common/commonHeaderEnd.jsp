@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
     </head>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <body class="d-flex flex-column min-vh-100">
 
   <!-- ======= Header ======= -->
@@ -141,13 +141,21 @@
         </ul>
       </nav><!-- .navbar -->
 
-      <div class="position-relative">
+	<div class="position-relative">
         <a href="#" class="mx-2 js-search-open"></a>	<!-- **의미없음. 오류 없애기 위한 태그일 뿐 -->
-        <a href="login.me" class="mx-2">로그인</a>  				<!-- **로그인 세션 있으면 로그아웃으로 변경 -->
-        <a href="join.me" class="mx-2">회원가입</a> 				<!-- **로그인 세션 있으면 마이페이지로 변경 -->
-        <a href="myPage.me" class="mx-2">마이페이지</a>
-        <a href="adm_home.ad" class="mx-2">관리자</a>
         
+        <c:if test="${empty sessionScope.sId }">
+        	<a href="login.me" class="mx-2">로그인</a>  				<!-- **로그인 세션 있으면 로그아웃으로 변경 -->
+        	<a href="join.me" class="mx-2">회원가입</a> 				<!-- **로그인 세션 있으면 마이페이지로 변경 -->
+        </c:if>
+        <c:if test="${!empty sessionScope.sId }">
+        	<a href="#" class="mx-2">${sessionScope.sName}님</a>
+        	<a href="logout.me">로그아웃</a>
+        	<a href="myPage.me" class="mx-2">마이페이지</a>
+        	<c:if test="${empty sessionScope.sIdx}">
+        		<a href="adm_home.ad" class="mx-2">관리자</a>
+        	</c:if>
+        </c:if>
         <i class="bi bi-list mobile-nav-toggle"></i>
 
 <!--         ======= Search Form ======= -->

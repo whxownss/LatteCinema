@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header id="header" class="header d-flex align-items-center fixed-top">
   <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
     <a href="main.me" class="logo d-flex align-items-center">
@@ -125,11 +126,22 @@
         </li>
       </ul>
     </nav><!-- .navbar -->
-    <div class="position-relative">
-      <a href="#" class="mx-2 js-search-open"></a>  <!-- **의미없음. 오류 없애기 위한 태그일 뿐 -->
-      <a href="login.me" class="mx-2">로그인</a>         <!-- **로그인 세션 있으면 로그아웃으로 변경 -->
-      <a href="join.me" class="mx-2">회원가입</a>        <!-- **로그인 세션 있으면 마이페이지로 변경 -->
-      <i class="bi bi-list mobile-nav-toggle"></i>
+      <div class="position-relative">
+        <a href="#" class="mx-2 js-search-open"></a>	<!-- **의미없음. 오류 없애기 위한 태그일 뿐 -->
+        
+        <c:if test="${empty sessionScope.sId }">
+        	<a href="login.me" class="mx-2">로그인</a>  				<!-- **로그인 세션 있으면 로그아웃으로 변경 -->
+        	<a href="join.me" class="mx-2">회원가입</a> 				<!-- **로그인 세션 있으면 마이페이지로 변경 -->
+        </c:if>
+        <c:if test="${!empty sessionScope.sId }">
+        	<a href="#" class="mx-2">${sessionScope.sName}님</a>
+        	<a href="logout.me">로그아웃</a>
+        	<a href="myPage.me" class="mx-2">마이페이지</a>
+        	<c:if test="${empty sessionScope.sIdx}">
+        		<a href="adm_home.ad" class="mx-2">관리자</a>
+        	</c:if>
+        </c:if>
+        <i class="bi bi-list mobile-nav-toggle"></i>
 <!--         ======= Search Form ======= -->
       <div class="search-form-wrap js-search-form-wrap">
         <form action="search-result.html" class="search-form">

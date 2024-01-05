@@ -34,6 +34,7 @@
 <!-- 		</if> -->
 <!-- 	</select> -->
 
+<!-- 	회원가입 -->
 	<insert id="insertMember" parameterType="MemberDTO">
 		INSERT INTO MEMBERS
 		 	 ( MEM_IDX
@@ -59,6 +60,20 @@
 			 , #{memAddress})
 	</insert>
 	
+<!-- 	회원가입 아이디 중복확인 -->
+	<select id="checkId" parameterType="String"   resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBERS
+		WHERE MEM_ID = #{id}
+	</select>
+	
+	<!-- 	회원가입 이메일 중복확인 -->
+	<select id="checkEmail" parameterType="String"   resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBERS
+		WHERE MEM_EMAIL = #{email}
+	</select>
+	
 	<select id="userCheck" parameterType="MemberDTO" resultType="MemberDTO">
 		SELECT *
 		FROM MEMBERS
@@ -67,6 +82,29 @@
 		
 	</select>
 	
+	<select id="getMember" parameterType="String" resultType="MemberDTO">
+		SELECT *
+		FROM MEMBERS
+		WHERE MEM_ID = #{value}
+		
+	</select>	
+
+<!-- 회원탈퇴 -->
+	<delete id="deleteMember" parameterType="MemberDTO">
+		DELETE FROM MEMBERS
+		 WHERE MEM_ID = #{memId}
+	</delete>
+	
+<!-- 	회원정보수정 -->
+	<update id="updateMember" parameterType="MemberDTO">
+		UPDATE MEMBERS
+		SET 
+			MEM_PASS = #{memPass}
+		  , MEM_PHONE = #{memPhone}
+		  , MEM_EMAIL = #{memEmail}
+		  , MEM_ADDRESS = #{memAddress}
+		WHERE MEM_ID = #{memId}
+	</update>
 	
 	
 <!-- 	<delete id="delete"> -->

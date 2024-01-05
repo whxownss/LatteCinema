@@ -8,14 +8,7 @@
 </head>
 <body>
 <jsp:include page="../_common/header.jsp"></jsp:include>
-<%
-  //FIXME phone_number 중간에 ****으로 포맷팅 해주기
-  //FIXME myInfo.js에 href 속성들 수정하기
-  String name = "김라떼";
-  String id = "id";
-  String password = "password";
-  String phone_number = "010-1234-5678";
-%>
+
 
 	<main id="main">
 		<section class="category-section">
@@ -23,7 +16,7 @@
     			<!-- 이곳에 코드작성 -->
             <div class="inner-wrap">
               <jsp:include page="lnb.jsp"></jsp:include>
-              <form id="moveFrm" action="userInfo.me" method="post">
+              <form id="moveFrm" action="myInfoPro.me" method="post" name="fr">
                 <div id="contents">
                 <h2 class="tit">회원정보</h2>
                 <div class="member-wrap">
@@ -36,23 +29,23 @@
                           <col>
                         </colgroup>
                         <tbody>
-                          <input id="ibxSchPwdLoginId" type="hidden" value="<%=id %>"><!--아이디-->
-                          <input id="ibxSchPwdMbNm" type="hidden" value="<%= name %>"><!--이름-->
+                          <input id="ibxSchPwdLoginId" type="hidden" value="${sessionScope.sId}" name="id"><!--아이디-->
+                          <input id="ibxSchPwdMbNm" type="hidden"  value="${sessionScope.sName}" name="name"><!--이름-->
                           <tr>
                             <th scope="row"><label for="pwd">비밀번호</label></th>
                             <td>
-                              <input type="text" value="" placeholder="비밀번호 입력" class="input-text w230px" >
-                              <button id="btnSchPwdMbCertNoSend" type="button" class="button gray w75px ml08">확인<!--비밀번호 확인--></button>
+                              <input type="password" value="" placeholder="비밀번호 입력" class="input-text w230px" name="pass"	 >
+<!--                          <button id="btnSchPwdMbCertNoSend" type="button" class="button gray w75px ml08">확인비밀번호 확인</button> -->
+							  <span id="myinfoPassCheck"></span>
                             </td>
                           </tr>
-
                         </tbody>
                       </table>
                     </div>
                   </div>
                   <div class="btn-group">
                     <button class="button large" id="cancelBtn" title="취소">취소</button>
-                    <button class="button large purple" id="ckBtn" data-url="userInfo.me" title="확인" >확인</button>
+                    <button class="button large purple" id="ckBtn" title="확인" name="pass" >확인</button>
                   </div>
                     
                   </div>
@@ -62,6 +55,6 @@
         </div>
     </section>
 	</main>
-  <jsp:include page="../_common/footer.jsp" ></jsp:include>
-</body>
-</html>
+<%@include file ="../_common/commonFooterStart.jsp" %>
+
+<%@include file ="../_common/commonFooterEnd.jsp" %>
