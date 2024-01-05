@@ -151,7 +151,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
 <!-- 				        </form> -->
 				      </div>
 				      <div class="modal-footer">
-				      	<button type="button" class="btn btn-danger" id="deletecenterBoard">삭제</button>
+				      	<button type="button" class="btn btn-danger" id="deleteCenterBoard">삭제</button>
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">나가기</button>
 				        <button type="submit" id="modalRewrite" class="btn btn-primary">수정</button>
 				      </div>
@@ -165,7 +165,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>공지사항</h2>
+                    <h2>공지사항<small><button type="button" class="btn btn-secondary" id="insertCenterBoard">추가</button></small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -299,6 +299,19 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
         }
 	    // 또는 다른 작업을 수행
 	    // 예를 들어, 모달을 열거나 다른 페이지로 이동
+	});//tr 누르면 모달 토글
+	$("#insertCenterBoard").on("click",function(){
+		window.location.href = "cs_center_write.cs";
+	});
+	$("#deleteCenterBoard").on("click",function(){
+		alert('삭제 버튼 이벤트 연결확인');
+ 		
+ 		if(confirm("삭제하시겠습니까?")){
+ 			alert("정상적으로 삭제되었습니다.");
+ 			window.location.href = 'deleteCenterContent.cs?createUser=' + $("#centerUser").val() + '&createDate=' + $("#centerDate").val();
+ 		}else{
+ 			alert("삭제가 취소되었습니다.");
+ 		}
 	});
 	</script>
   </body>

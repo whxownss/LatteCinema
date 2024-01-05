@@ -134,7 +134,7 @@ public class CSController extends HttpServlet  {
 				msg = "update success";
 			}
 			System.out.println(msg);
-//			response.sendRedirect(""); //ajax를 써서 굳이 주소 적을 필요 없다.
+			response.sendRedirect("adm_cs_center.ad"); //ajax를 써서 굳이 주소 적을 필요 없다.
 		}
 		// 공지사항 삭제 하기
 		if(sPath.equals("/deleteCenterContent.cs")) {
@@ -148,6 +148,7 @@ public class CSController extends HttpServlet  {
 			}
 			System.out.println(msg);
 			//response.sendRedirect("cs_center.cs");
+			response.sendRedirect("adm_cs_center.ad");
 		}
 		
 		// 공지사항 글쓰기 페이지 이동
@@ -203,7 +204,8 @@ public class CSController extends HttpServlet  {
 			}
 			System.out.println(msg);
 			
-			response.sendRedirect("cs_center.cs");
+//			response.sendRedirect("cs_center.cs");
+			response.sendRedirect("adm_cs_center.ad");
 		}
 		
 		// 자주찾는질문 페이지 이동
