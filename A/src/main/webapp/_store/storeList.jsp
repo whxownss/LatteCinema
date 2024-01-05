@@ -28,7 +28,7 @@
 						<thead>
 							<tr>
 								<th scope="row" class="text-center border-bottom-0" colspan="4">
-									<h3 class="section-header fs-1">
+									<h3 class="section-header fs-1" id="itemName">
 										<i>${storeItem.itemName}</i>
 									</h3>
 								</th>
@@ -54,7 +54,7 @@
 							<tr>
 								<th scope="col" style="padding-top: 3%">총 상품금액</th>
 								<td class="text-end" style="font-weight: bold; color: #FF243E;">
-									<span class="fs-2" id="sPrice"></span>원
+									<span class="fs-2" id="sPrice"></span>원 
 								</td>
 							</tr>
 							<tr class="border border-bottom-0 border-white">
@@ -181,7 +181,8 @@
 <script src="jQuery/jquery-3.6.0.js"></script>
 
 <!-- iamport.payment.js -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+ <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
 <script type="text/javascript">
 
@@ -197,24 +198,27 @@ IMP.init("imp20121707");
 //           alert("로그인 후 이용할 수 있습니다.");
 //           return;
 //       }
+
+	var itemName = $("#itemName i").text();
+	var price = parseInt($("#sPrice").text().replace(",", "")); 
 	
       IMP.request_pay({ 
-          pg: "html5_inicis",	// PG사
+          pg: "html5_inicis.INIBillTst",	// PG사
           pay_method: "card",	// 지불수단
-          merchant_uid: "ORD20180131-0000001",   // 주문번호
-          name: "테스트",	// 상품명
-          amount: 100,                         // 가격
+          merchant_uid: "ORD20180131-00000012",   // 주문번호
+          name: itemName,	// 상품명
+          amount: price,                         // 가격
           buyer_email: "gildong@gmail.com",	// 구매자 이메일
           buyer_name: "홍길동",	// 구매자 이름
           buyer_tel: "010-4242-4242",	// 구매자 연락처
           buyer_addr: "서울특별시 강남구 신사동",	// 구매자 주소
-          buyer_postcode: "01181"	// 구매자 우편번호
       }, function (rsp) { // callback
     	  console.log(rsp);
     	  if (rsp.success) {	// 결제성공
+    		  console.log(rep);
     	      var msg = '결제가 완료되었습니다.';
     	      alert(msg);
-    	      location.href = "결제 완료 후 이동할 페이지 url"
+    	      location.href = "store.st"
     	    } else {	// 결제실패
     	      var msg = '결제에 실패하였습니다.';
     	      msg += '에러내용 : ' + rsp.error_msg;
@@ -229,7 +233,6 @@ IMP.init("imp20121707");
    <script>
 	  // 수량 옵션
       $(function(){
-         
     	  var price = ${storeItem.itemPrice} + "";
     	  $("#sPrice").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     	  
