@@ -88,6 +88,13 @@ public class ResController extends HttpServlet {
 		
 		// 예약2 페이지 이동
 		if(sPath.equals("/res2.re")) {
+			
+			
+			
+			
+			
+			
+			
 			dispatcher = request.getRequestDispatcher("_reservation/res2.jsp");
 			dispatcher.forward(request, response);
 		}

@@ -20,16 +20,37 @@
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modalTitle">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <input type="hidden" id="schDTO"></input>
+      <div class="modal-header d-flex justify-content-between pt-2 pb-2 bg-secondary-subtle" >
+      	<div style="width: 32px"></div>
+        <div><h1 class="modal-title fs-5 text-center" id="modalTitle"></h1></div>
+        <div class="ppa"><button type="button" class="btn-close pt-0 pb-0 vca" data-bs-dismiss="modal" aria-label="Close"></button></div>
       </div>
       <div class="modal-body">
-        ...
+        <div class="row">
+        	<div class="text-center" id="modalSeat">
+        		잔여좌석
+        		<span class="fw-bold fs-4 cSeat"></span>
+        		/
+        		<span class="aSeat"></span>
+        	</div>
+        </div>
+        <div class="row">
+        	<div class="text-center mainTitle mb-1">
+        		<img class="modalRating pb-1" src=""/>
+        		<span class="">본 영화는 </span>
+        		<span class="ratingText"></span>
+        		<span class=""> 영화입니다.</span>
+        	</div>
+        	
+        	<div class="text-center subTitle">
+        		<div class="subText " style='font-size: small'></div>
+        	</div>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-danger goRes2Btn">인원/좌석 선택</button>
       </div>
     </div>
   </div>
@@ -143,6 +164,12 @@
 var cinemaList = ${cinemaListJson};
 var movieList;
 var days = ["일", "월", "화", "수", "목", "금", "토"];
+var ratingSubTitles = {
+		"all" : "",
+		"12"  : "만 12세 미만의 고객님(영, 유아 포함)은 반드시 부모님 또는 성인 보호자의 동반하에\n관람이 가능합니다. 연령 확인 불가 시 입장이 제한될 수 있습니다.",
+		"15"  : "만 15세 미만의 고객님(영, 유아 포함)은 반드시 부모님 또는 성인 보호자의 동반하에\n관람이 가능합니다. 연령 확인 불가 시 입장이 제한될 수 있습니다.",
+		"18"  : "만 18세 미만의 고객님(영, 유아 포함)은 부모님 또는 성인 보호자를 동반하여도\n관람이 불가합니다. 또한 만 18세 이상이라도 재학중인 학생은 관람이 불가합니다.\n영화 관람 시, 반드시 신분증을 지참하여 주시기 바랍니다."
+}
 //맨처음 상단에 날짜 표시
 var writeDate = function(date){
 	$("#selectedDate").text($("#myCalendar").val() + " (" + days[date.getDay()] + ")");
@@ -188,7 +215,9 @@ var showSchedule = function(param, date){
 			var pId = id;
 			id += value.schMovIdx;
 			if(! $("#" + id).length){
-				$("#" + pId).append("<div class='text-start' id='" + id + "'>" + value.title + "</div>");
+				$("#" + pId).append("<div class='text-start fTitle' id='" + id + "'>" 
+								 	+ "<img src='_assets/img/grade_" + value.rating + ".png' class='pb-1 ps-2'/> "
+								    + "<span class='mTitle'>" + value.title + "</span></div>");
 				$("#" + id).append("<div class='text-start'><ul class='text-start  list-time ps-2'></ul></div>");
 			}
 			$("#" + id).find(".list-time")
@@ -196,9 +225,12 @@ var showSchedule = function(param, date){
 					    	   + "href='#' role='button' style='width: 100px;'" 
 					    	   + "data-bs-toggle='modal' data-bs-target='#staticBackdrop'>" // 모달모달모달모달모달모달모달모달모달모달모달모달모달모달 
 					   		   + "<span class='fs-5 starTime'>" + value.schStime + "</span>" + "<br>" 
-					   		   + "<span class='seat' style='font-size: small'>" + value.scrSeatAvail + "/" + value.scrSeat + "</span>&nbsp;&nbsp;&nbsp;&nbsp;" 
+					   		   + "<span class='seat' style='font-size: small'><span class='cSeat'>" 
+					   		   + value.scrSeatAvail + "</span>/<span class='aSeat'>" 
+					   		   + value.scrSeat + "</span></span>&nbsp;&nbsp;&nbsp;&nbsp;" 
 					   		   + "<span class='scrIdx' style='font-size: small'>" + value.scrIdx + "관</span>" 
-					   		   + "<p class='arrow_box'>말풍선 등장!</p></a>");
+					   		   + "<input type='hidden' class='endTime'  value='" + value.schEtime + "'>"
+					   		   + "<input type='hidden' class='rating'  value='" + value.rating + "'>");
 		})
 	})
 	.fail(function(){
@@ -322,8 +354,10 @@ $(function(){
 		var id = $(this).attr("id")
 		$.each(movieList, (i, e) => {
 			if(e.schMovType != id) return;
-				$(".showMovies").append("<li class='list-group-item border border-0 myMouse' id='" + id + "movie" 
-												+ (i+1) + "'>" + e.title + "</li>");
+				$(".showMovies").append("<li class='list-group-item border border-0 myMouse' id='" 
+										+ id + "movie" + (i+1) + "'>" 
+										+ "<img src='_assets/img/grade_" + e.rating + ".png' class='pb-1'/>"
+										+ e.title + "</li>");
 			});			
 		
 		// 다른 영화 선택하고 오면 체크 없어지는거 해결
@@ -384,11 +418,62 @@ $(function(){
 	
 	// 시간표 선택시 모달 창에 내용 넣기
 	$(document).on("click", ".modalBtn", function(){
-		debugger;
-		$("#modalTitle").text("모달제목ㅇㅇㅇㅇ")
+		// 영화고르지 않고 시간표에서 바로 고를때 영화부분 수정
+		$("#selectedMovie").text($(this).parents(".fTitle").children().eq(1).text());
+		var selector = ($(this).parents("#nowSch").length == 0) ? "#OLD" : "#NOW";
+		$(selector).trigger("click");
+		
+		var sTime = $(this).find(".starTime").text();				   // 시작 시간
+		var cSeat = $(this).find(".cSeat").text();					   // 남은 자리
+		var aSeat = $(this).find(".aSeat").text();					   // 모든 자리
+		var sIdx = $(this).find(".scrIdx").text();					   // 몇관 번호
+		var eTime = $(this).find(".endTime").val();					   // 종료 시간
+		var rating = $(this).find(".rating").val();					   // 관람 등급
+		
+		var date = $("#selectedDate").text();           			   // 선택 날짜
+		var title = $(this).parents(".fTitle").find(".mTitle").text(); // 영화 제목
+		// 포스터도 담아야함
+		var schDTO = {
+				"rating" : rating,
+				"title"  : title,
+				"date"   : date,
+				"sTime"  : sTime,
+				"eTime"  : eTime,
+				"sIdx"   : sIdx,
+				"cSeat"  : cSeat,
+				"aSeat"  : aSeat
+		}
+		$("#schDTO").val(JSON.stringify(schDTO));
+		$("#modalTitle").text(sTime + " ~ " + eTime + " (" + sIdx + ")");
+		$("#modalSeat .cSeat").text(cSeat);
+		$("#modalSeat .aSeat").text(aSeat);
+		
+		var imgSrc;
+		var ratingText;
+		var ratingColor;
+		var subTitle = ratingSubTitles[rating];
+		switch (rating) {
+		case "all": ratingText = "전체관람가";			  ratingColor = "green"; break;
+		case "12":  ratingText = "만 12세 이상 관람가";   ratingColor = "goldenrod"; break;
+		case "15":  ratingText = "만 15세 이상 관람가";   ratingColor = "chocolate"; break;
+		case "18":  ratingText = "청소년 관람불가";		  ratingColor = "Crimson"; break;
+		}
+		
+		$(".modalRating").attr("src", "_assets/img/grade_" + rating + ".png");
+		$(".ratingText").text(ratingText);
+		$(".ratingText").css("text-decoration","underline").css("color", ratingColor);
+		$(".subText").text(subTitle);
 	});
 	
-
+	
+	// res2 페이지 이동
+	$(".goRes2Btn").on("click", function(){
+		localStorage.setItem('schDTO', $("#schDTO").val());
+		window.location = "res2.re";
+	});
+	
+	
+	
 	// 호버시 마우서 커서 모양 변경
 	$(document).on("mouseover", ".myMouse", function(e){
 		$(".myMouse").css("cursor","pointer");

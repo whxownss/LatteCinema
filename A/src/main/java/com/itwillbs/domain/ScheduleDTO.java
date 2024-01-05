@@ -18,6 +18,8 @@ public class ScheduleDTO {
 	
 	private String title;
 	private String scrSeat;
+	private String rating;
+	
 	public String getLoIdx() {
 		return loIdx;
 	}
@@ -96,13 +98,22 @@ public class ScheduleDTO {
 	public void setScrSeat(String scrSeat) {
 		this.scrSeat = scrSeat;
 	}
+	
+	public String getRating() {
+		return rating;
+	}
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
 	@Override
 	public String toString() {
 		return "ScheduleDTO [loIdx=" + loIdx + ", ciIdx=" + ciIdx + ", schIdx=" + schIdx + ", schDate=" + schDate
 				+ ", schMovType=" + schMovType + ", schMovIdx=" + schMovIdx + ", schStime=" + schStime + ", schRun="
 				+ schRun + ", schEtime=" + schEtime + ", scrIdx=" + scrIdx + ", scrSeatAvail=" + scrSeatAvail
-				+ ", title=" + title + ", scrSeat=" + scrSeat + "]";
+				+ ", title=" + title + ", scrSeat=" + scrSeat + ", rating=" + rating + "]";
 	}
+	
+	
 	
 	
 	

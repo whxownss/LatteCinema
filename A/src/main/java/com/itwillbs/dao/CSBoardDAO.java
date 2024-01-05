@@ -402,6 +402,42 @@ public class CSBoardDAO {
 		}
 		return lostInsertSuccess;
 	}//insertCsLost()
+
+	public ArrayList<LostBoardDTO> getLostBoardList(PageDTO pageDTO, LostBoardDTO lostBoardDTO) {
+		System.out.println("CSBoardDAO getLostBoardList() 검색용");
+		ArrayList<LostBoardDTO> lostBoardList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			// 파라미터를 맵에 저장
+	        Map<String, Object> params = new HashMap<>();
+	        params.put("pageDTO", pageDTO);
+	        params.put("lostBoardDTO", lostBoardDTO);
+			lostBoardList = new ArrayList<LostBoardDTO>(session.selectList("CsAdmin.getLBSearchList", params));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return lostBoardList;
+	}
+
+	public int getLostBoardCount(LostBoardDTO lostBoardDTO) {
+		System.out.println("CSBoardDAO getLostBoardCount() 검색용");
+		int count = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			count = session.selectOne("CsAdmin.getLBSearchCount",lostBoardDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return count;
+	}
 	
 	
 	
