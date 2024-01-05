@@ -344,6 +344,20 @@ public class CSController extends HttpServlet  {
 			
 			response.sendRedirect("adm_cs_exque.ad");
 		}
+		// 자주 찾는 질문 삭제
+		if(sPath.equals("/cs_deleteExqBoard.cs")) {
+			System.out.println("주소비교 /cs_deleteExqBoard.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "exq delete fail";
+			if(csBoardService.deleteExqBoard(request)) {
+				msg = "exq delete success";
+			}
+			System.out.println(msg);
+			
+			response.sendRedirect("adm_cs_exque.ad");
+		}
 		
 		// 1:1문의 페이지 이동
 		if(sPath.equals("/cs_qna.cs")) {

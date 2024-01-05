@@ -605,5 +605,30 @@ public class CSBoardService {
 	    return updateSuccess > 0;
 	}//updateExqBoard()
 
+	public boolean deleteExqBoard(HttpServletRequest request) {
+		System.out.println("CSBoardService deleteCenterContent()");
+		int deleteSuccess = 0;
+		try {
+			ExqBoardDTO exqBoardDTO = new ExqBoardDTO();
+	        String createUser = request.getParameter("createUser");
+	        String createDate = preprocessDate(request.getParameter("createDate"));
+	        
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+	        LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
+	        Timestamp createTime = Timestamp.valueOf(dateTime);
+	        
+	        exqBoardDTO.setCreateUser(createUser);
+	        exqBoardDTO.setCreateDate(createTime);
+	        
+	        csBoardDAO = new CSBoardDAO();
+	        deleteSuccess = csBoardDAO.deleteExqBoard(exqBoardDTO);
+	    } catch (DateTimeParseException dtpe) {
+	        System.err.println("Date parsing failed: " + dtpe.getMessage());
+	    } catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deleteSuccess > 0;
+	}//deleteExqBoard
+
 	
 }//클래스

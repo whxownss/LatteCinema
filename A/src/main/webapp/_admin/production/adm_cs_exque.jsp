@@ -163,7 +163,7 @@ ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribu
 <!-- 				        </form> -->
 				      </div>
 				      <div class="modal-footer">
-				      	<button type="button" class="btn btn-danger">삭제</button>
+				      	<button type="button" class="btn btn-danger" id="deleteExqBoard">삭제</button>
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">나가기</button>
 				        <button type="submit" id="modalRewrite" class="btn btn-primary">수정</button>
 				      </div>
@@ -311,6 +311,7 @@ ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribu
     <!-- Custom Theme Scripts -->
     <script src="_admin/build/js/custom.min.js"></script>
 <script type="text/javascript">
+
 	// 테이블의 각 행에 클릭 이벤트를 추가
 	$("table tbody tr").on("click", function () {
 	    // 클릭한 행에서 첫 번째 <td> 요소의 내용을 가져옴
@@ -439,6 +440,18 @@ ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribu
 
 	 	    // 모달 닫기
 	 	    $("#myModal2").modal("hide");
+	 	});
+	 	
+	 	// 모달 창에서 삭제 버튼 클릭.
+	 	$("#deleteExqBoard").on("click",function(){
+	 		alert('삭제 버튼 이벤트 연결확인');
+	 		
+	 		if(confirm("삭제하시겠습니까?")){
+	 			alert("정상적으로 삭제되었습니다.");
+	 			window.location.href = 'cs_deleteExqBoard.cs?createUser=' + $("#exqUser").val() + '&createDate=' + $("#exqDate").val();
+	 		}else{
+	 			alert("삭제가 취소되었습니다.");
+	 		}
 	 	});
 	
 </script>

@@ -552,6 +552,23 @@ public class CSBoardDAO {
 		}
 		return updateSuccess;
 	}//updateExqBoard()
+
+	public int deleteExqBoard(ExqBoardDTO exqBoardDTO) {
+		System.out.println("CSBoardDAO deleteExqBoard()");
+		int deleteSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			deleteSuccess = session.delete("CsAdmin.deleteExqBoard", exqBoardDTO);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return deleteSuccess;
+	}//deleteExqBoard()
 	
 	
 	

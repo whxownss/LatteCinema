@@ -36,6 +36,10 @@
 		   SET EXQSUBJECT = #{exqSubject}, EXQCONTENT = #{exqContent}, UPDATE_USER = #{updateUser}, UPDATE_DATE = SYSDATE()
 		 WHERE CREATE_DATE = #{createDate} AND CREATE_USER = #{createUser}
 	</update>
+	<delete id="deleteExqBoard" parameterType="ExqBoardDTO">
+		DELETE FROM EXQBOARD
+ 		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</delete>
 	
 	<select id="getCenterBoardList" resultType="CenterBoardDTO" parameterType="PageDTO">
 		SELECT *,
