@@ -640,6 +640,10 @@ public class CSBoardService {
 			String createUser = request.getParameter("createUser");
 			
 			ExqBoardDTO exqBoardDTO = new ExqBoardDTO();
+			exqBoardDTO.setExqSelect(exqSelect);
+			exqBoardDTO.setExqSubject(exqSubject);
+			exqBoardDTO.setExqContent(exqContent);
+			exqBoardDTO.setCreateUser(createUser);
 			
 			csBoardDAO = new CSBoardDAO();
 			insertSuccess = csBoardDAO.exqBoardInsert(exqBoardDTO);

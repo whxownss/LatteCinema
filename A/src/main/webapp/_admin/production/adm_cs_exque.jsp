@@ -40,8 +40,8 @@
 //  	String subject = "제목 데이터를 받자";
 //  	String content = "내용 데이터를 받자";
 //  	int exqNum = 1; //글번호도 받아와야할듯
-String updateUser = "ADMIN2477";
-String createUser = "ADMIN2477";
+// String updateUser = "ADMIN2477";
+// String createUser = "ADMIN2477";
 ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribute("exqBoardList");
  %>
     <div class="container body">
@@ -136,7 +136,7 @@ ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribu
 			      <!-- Modal content-->
 			      <div class="modal-content">
 				      <div class="modal-header">
-				      <input type="hidden" name="updateUser" value="<%=updateUser%>">
+				      <input type="hidden" name="updateUser" value="${sessionScope.sId }">
 				      <input type="hidden" id="exqUser" name="createUser" value="">
 				      <input type="hidden" id="exqDate" name="createDate" value="">
 				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -181,7 +181,7 @@ ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribu
 			      <!-- Modal content-->
 			      <div class="modal-content">
 				      <div class="modal-header">
-				      <input type="hidden" id="insertUser" name="createUser" value="<%=createUser%>">
+				      <input type="hidden" id="insertUser" name="createUser" value="${sessionScope.sId }">
 				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				        <h5 class="modal-title" id="exampleModalLabel">자주찾는질문</h5>
 				        <select id="insertSelect" name="exqSelect">
@@ -330,7 +330,6 @@ ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribu
 		$("tr a[data-toggle='modal']").on("click", function () {
 		    // data-info 속성에서 JSON 데이터 가져오기
 		    var infoData = $(this).data("info");
-		
 		    // 필요한 정보 추출
 		    var key1 = infoData.key1;
 		    var key2 = infoData.key2;

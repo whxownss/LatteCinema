@@ -41,7 +41,17 @@
  		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
 	</delete>
 	<insert id="exqBoardInsert" parameterType="ExqBoardDTO">
-		
+		INSERT INTO EXQBOARD (EXQSUBJECT,EXQCONTENT,EXQSELECT,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE)
+		VALUES
+		(
+		#{exqSubject}
+		,#{exqContent}
+		,#{exqSelect}
+		,#{createUser}
+		,SYSDATE()
+		,NULL
+		,NULL
+		);
 	</insert>
 	
 	<select id="getCenterBoardList" resultType="CenterBoardDTO" parameterType="PageDTO">
