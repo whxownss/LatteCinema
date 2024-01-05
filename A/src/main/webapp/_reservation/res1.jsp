@@ -16,7 +16,25 @@
 <c:set var="cinemaListJson" value="${requestScope.cinemaListJson}" />
 <c:set var="scheduleListJson" value="${requestScope.scheduleListJson}" />
 
-<!-- Modal -->
+<!-- Modal1 -->
+<div class="modal fade" id="warning" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+<!--       <div class="modal-header"> -->
+<!--         <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1> -->
+<!--       </div> -->
+      <div class="modal-body">
+        <div class="text-center mt-5 mb-5 fw-bold">영화관을 선택해 주십시오.</div>
+      </div>
+      <div class="modal-footer ps-0 pe-0 pt-0 pb-0">
+        <button type="button" class="btn btn-light w-100 ms-0 me-0 mt-0 mb-0"" data-bs-dismiss="modal">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal1 -->
+
+<!-- Modal2 -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -55,6 +73,7 @@
     </div>
   </div>
 </div>
+<!-- Modal2 -->
 
 
 
@@ -342,7 +361,8 @@ $(function(){
 	// 영화 종류 선택
 	$(".myMovie").click(function(e){
 		if($("#selectedCinema").text().includes(" (준비중)") || $("#selectedCinema").text() == "지역 및 영화관"){
-			alert("영화관을 먼저 선택해 주세요");
+			
+			$("#warning").modal("show");
 			return;
 		}
 		
@@ -432,6 +452,7 @@ $(function(){
 		
 		var date = $("#selectedDate").text();           			   // 선택 날짜
 		var title = $(this).parents(".fTitle").find(".mTitle").text(); // 영화 제목
+		var cinema = $("#selectedCinema").text();					   // 영화관
 		// 포스터도 담아야함
 		var schDTO = {
 				"rating" : rating,
@@ -441,7 +462,8 @@ $(function(){
 				"eTime"  : eTime,
 				"sIdx"   : sIdx,
 				"cSeat"  : cSeat,
-				"aSeat"  : aSeat
+				"aSeat"  : aSeat,
+				"cinema" : cinema
 		}
 		$("#schDTO").val(JSON.stringify(schDTO));
 		$("#modalTitle").text(sTime + " ~ " + eTime + " (" + sIdx + ")");

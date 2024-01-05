@@ -5,6 +5,24 @@
 	<link rel="stylesheet" href="_assets/css/res_1.css">
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
+<!-- Modal1 -->
+<div class="modal fade" id="warning" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+<!--       <div class="modal-header"> -->
+<!--         <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1> -->
+<!--       </div> -->
+      <div class="modal-body">
+        <div class="text-center mt-5 mb-5 fw-bold">인원을 선택해 주십시오.</div>
+      </div>
+      <div class="modal-footer ps-0 pe-0 pt-0 pb-0">
+        <button type="button" class="btn btn-light w-100 ms-0 me-0 mt-0 mb-0"" data-bs-dismiss="modal">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal1 -->
+
 	<main id="main">
 			
 		<section class="category-section">
@@ -101,7 +119,7 @@
 						
 						<div class="row">
 							<div class="col bg-secondary text-white p-4 text-start fs-4">총 합계 <span class="fs-1" id="mPrice">0</span>원</div>
-							<div class="col-2 bg-danger text-white p-4 fs-6 mca myMouse">결제하기</div>
+							<div class="col-2 bg-danger text-white p-4 fs-6 mca myMouse goRes3Btn">결제하기</div>
 						</div>
 					</div>
 					
@@ -134,25 +152,21 @@ $(function(){
 	var aSeat = parseInt(schDTO.aSeat);
 	var col = 10;
 	var row = aSeat / col;
-	debugger;
 	for(var i = 0; i < row; i++){
+		var seatRow = String.fromCharCode(65 + i);
 		$(".drawSeat").append("<div class='mb-1  d-flex justify-content-between'>"
-				               + "<div class='text-end vca' style='width:300px'>" + String.fromCharCode(65 + i) + "</div>"
-				               + "<div>"
-							   + 	"<button type='button' class='btn btn-light seat' style='width:40px'><span class='mca'>1</span></button> "
-							   +	"<button type='button' class='btn btn-light seat' style='width:40px'><span class='mca'>2</span></button> "
-							   +	"<button type='button' class='btn btn-light seat' style='width:40px'><span class='mca'>3</span></button> "
-							   +	"<button type='button' class='btn btn-light seat' style='width:40px'><span class='mca'>4</span></button> "
-							   +	"<button type='button' class='btn btn-light seat' style='width:40px'><span class='mca'>5</span></button> "
-							   +	"<span class='me-5'></span> "
-							   +	"<button type='button' class='btn btn-light seat' style='width:40px'><span class='mca'>6</span></button> "
-							   +	"<button type='button' class='btn btn-light seat' style='width:40px'><span class='mca'>7</span></button> "
-							   +	"<button type='button' class='btn btn-light seat' style='width:40px'><span class='mca'>8</span></button> "
-							   +	"<button type='button' class='btn btn-light seat' style='width:40px'><span class='mca'>9</span></button> "
-							   +	"<button type='button' class='btn btn-light seat' style='width:40px'><span class='mca'>10</span></button> "
+				               + "<div class='text-end vca' style='width:300px'>" + seatRow + "</div>"
+				               + "<div class='" + seatRow + "'>"
 							   + "</div>"
 							   + "<div style='width:300px'></div>"
 							   +"</div>");
+		for(var j = 1; j <= col; j++){
+			$("." + seatRow).append("<button type='button' id='seatNum" + (seatRow + "" + j) + "' class='btn btn-light seat' style='width:40px'>"
+								   +	"<span class='mca'>" + j + "</span>"
+								   +"</button> ");
+			if(j == col/2) 
+				$("." + seatRow).append("<span class='me-5'></span> ");
+		}
 	}
 	
 	//수량 옵션
@@ -215,7 +229,7 @@ $(function(){
     	var pSum = p1 + p2 + p3 + p4;
 		
     	if(pSum == 0) {
-    		alert('인원을 선택해 주십시오.');
+    		$("#warning").modal("show");
     		return;
     	}
 		
@@ -253,6 +267,27 @@ $(function(){
 			  		  .prop("disabled", false);
 		}
 	});
+	
+	$(".goRes3Btn").on("click", function(){
+		if($("#mPrice").text() == "0") return;
+
+		var p1 = parseInt($("#pCase1").text());
+		var p2 = parseInt($("#pCase2").text());
+		var p3 = parseInt($("#pCase3").text());
+		var selectedSeat = [];
+		$(".selectedSeat").each(function(i, e){
+			selectedSeat.push($(e).attr('id').replace("seatNum", ""));
+	    });
+		
+		// schDTO에 정보 추가
+		schDTO["p1"] = p1;
+		schDTO["p2"] = p2;
+		schDTO["p3"] = p3;
+		schDTO["selectedSeat"] = selectedSeat;
+		
+		localStorage.setItem('schDTO', JSON.stringify(schDTO));
+		window.location = "res3.re";
+	})
 	
 	
 });
