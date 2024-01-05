@@ -421,7 +421,7 @@ public class CSBoardDAO {
 	        }
 		}
 		return lostBoardList;
-	}
+	}//getLostBoardList() 검색용
 
 	public int getLostBoardCount(LostBoardDTO lostBoardDTO) {
 		System.out.println("CSBoardDAO getLostBoardCount() 검색용");
@@ -437,7 +437,155 @@ public class CSBoardDAO {
 	        }
 		}
 		return count;
-	}
+	}//getLostBoardCount() 검색용
+
+	public ArrayList<ExqBoardDTO> getExqBoardList(PageDTO pageDTO, String exqSelect) {
+		System.out.println("CSBoardDAO getExqBoardList() 검색용");
+		ArrayList<ExqBoardDTO> exqBoardList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			// 파라미터를 맵에 저장
+	        Map<String, Object> params = new HashMap<>();
+	        params.put("pageDTO", pageDTO);
+	        params.put("exqSelect", exqSelect);
+	        exqBoardList = new ArrayList<ExqBoardDTO>(session.selectList("CsAdmin.getExqSearchList", params));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return exqBoardList;
+	}//getExqBoardList() 셀렉트 박스로 검색
+
+	public int getExqBoardCount(String exqSelect) {
+		System.out.println("CSBoardDAO getExqBoardCount() 검색용");
+		int count = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			count = session.selectOne("CsAdmin.getExqBSearchCount", exqSelect);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+			   session.close();
+			}
+		}
+		return count;
+	}//getExqBoardList() 셀렉트 박스로 검색
+
+	public ArrayList<CenterBoardDTO> getCenterBoardList() {
+		ArrayList<CenterBoardDTO> centerBoardList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			centerBoardList = new ArrayList<CenterBoardDTO>(session.selectList("CsAdmin.getCenterBoardAll")); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+			   session.close();
+			}
+		}
+		return centerBoardList;
+	}//getCenterBoardList() 조건 없이 모두 부를 때
+
+	public ArrayList<QnaBoardDTO> getQnaBoardList() {
+		ArrayList<QnaBoardDTO> qnaBoardList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			qnaBoardList = new ArrayList<QnaBoardDTO>(session.selectList("CsAdmin.getQnaBoardAll")); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+			   session.close();
+			}
+		}
+		return qnaBoardList;
+	}//getQnaBoardList() 조건 없이 모두 부를 때
+
+	public ArrayList<LostBoardDTO> getLostBoardList() {
+		ArrayList<LostBoardDTO> lostBoardList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			lostBoardList = new ArrayList<LostBoardDTO>(session.selectList("CsAdmin.getlostBoardAll")); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+			   session.close();
+			}
+		}
+		return lostBoardList;
+	}//getLostBoardList() 조건 없이 모두 부를 때
+
+	public ArrayList<ExqBoardDTO> getExqBoardList() {
+		ArrayList<ExqBoardDTO> exqBoardList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			exqBoardList = new ArrayList<ExqBoardDTO>(session.selectList("CsAdmin.getExqBoardAll")); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+			   session.close();
+			}
+		}
+		return exqBoardList;
+	}//getExqBoardList() 조건없이 모두 부를 때
+
+	public int updateExqBoard(ExqBoardDTO exqBoardDTO) {
+		System.out.println("CSBoardDAO updateExqBoard()");
+		int updateSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			updateSuccess = session.update("CsAdmin.updateExqBoard",exqBoardDTO);
+			
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return updateSuccess;
+	}//updateExqBoard()
+
+	public int deleteExqBoard(ExqBoardDTO exqBoardDTO) {
+		System.out.println("CSBoardDAO deleteExqBoard()");
+		int deleteSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			deleteSuccess = session.delete("CsAdmin.deleteExqBoard", exqBoardDTO);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return deleteSuccess;
+	}//deleteExqBoard()
+
+	public int exqBoardInsert(ExqBoardDTO exqBoardDTO) {
+		System.out.println("CSBoardDAO exqBoardInsert()");
+		int insertSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			insertSuccess = session.insert("CsAdmin.exqBoardInsert", exqBoardDTO);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return insertSuccess;
+	}//exqBoardInsert()
 	
 	
 	

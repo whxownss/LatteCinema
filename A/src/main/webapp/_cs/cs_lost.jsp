@@ -220,7 +220,7 @@ $(document).ready(function(){
    					    if(pageDTO.startPage > pageDTO.pageBlock) {
    					        $('#searchPaging').append(
    					            '<li class="page-item disabled">' +
-   					            '<a class="page-link text-secondary" href="cs_lost.cs?pageNum=' + (pageDTO.startPage - pageDTO.pageBlock) + '" tabindex="-1" aria-disabled="true">이전</a>' +
+   					         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage - pageDTO.pageBlock) + ', \'' + $('#locationSelect').val() + '\', \'' + $('#cinemaSelect').val() + '\', \'' + $('#lostStatus').val() + '\', \'' + $('#lostSubject').val() + '\'); return false;">' + '이전' + '</a>' +
    					            '</li>'
    					        );
    					    }
@@ -240,7 +240,7 @@ $(document).ready(function(){
    					    if(pageDTO.endPage < pageDTO.pageCount) {
    					        $('#searchPaging').append(
    					            '<li class="page-item">' +
-   					            '<a class="page-link text-secondary" href="cs_lost.cs?pageNum=' + (pageDTO.startPage + pageDTO.pageBlock) + '">다음</a>' +
+   					         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage + pageDTO.pageBlock) + ', \'' + $('#locationSelect').val() + '\', \'' + $('#cinemaSelect').val() + '\', \'' + $('#lostStatus').val() + '\', \'' + $('#lostSubject').val() + '\'); return false;">' + '다음' + '</a>' +
    					            '</li>'
    					        );
    					    }
@@ -256,7 +256,7 @@ $(document).ready(function(){
 });
     function searchPageNm(pageNum, loIdx, ciIdx, lostStatus, lostSubject){
         // AJAX 요청을 통해 서버로부터 새로운 페이징 데이터를 가져옴
-        debugger;
+//         debugger;
         $.ajax({
             url: 'cs_lost_search.cs',
             type: 'GET',
@@ -282,7 +282,7 @@ $(document).ready(function(){
     //
     function updatePagination(response) {
 		// 'response' 객체에서 'lostBoardList'와 'pageDTO' 데이터 추출
-		debugger;
+
 	       var lostBoardList = response.lostBoardList;
 	       var pageDTO = response.pageDTO;
 	
@@ -308,11 +308,13 @@ $(document).ready(function(){
 	              $('#tbody').append(newRow);
 	    });
 		$('#searchPaging').empty();  // 페이지네이션 영역 비우기
+// 		debugger;
 		    // '이전' 버튼
 		    if(pageDTO.startPage > pageDTO.pageBlock) {
 		        $('#searchPaging').append(
-		            '<li class="page-item disabled">' +
-		            '<a class="page-link text-secondary" href="cs_lost.cs?pageNum=' + (pageDTO.startPage - pageDTO.pageBlock) + '" tabindex="-1" aria-disabled="true">이전</a>' +
+		            '<li class="page-item ">' +
+// 		            '<a class="page-link text-secondary" href="cs_lost.cs?pageNum=' + (pageDTO.startPage - pageDTO.pageBlock) + '" tabindex="-1" aria-disabled="true">이전</a>' +
+		            '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage - pageDTO.pageBlock) + ', \'' + $('#locationSelect').val() + '\', \'' + $('#cinemaSelect').val() + '\', \'' + $('#lostStatus').val() + '\', \'' + $('#lostSubject').val() + '\'); return false;">' + '이전' + '</a>' +
 		            '</li>'
 		        );
 		    }
@@ -328,11 +330,12 @@ $(document).ready(function(){
 
 		        );
 		    }
-		    // '다음' 버튼 searchPageNm 이 함수 써서 해결하는게 맞는가?
+		    // '다음' 버튼 searchPageNm 이 함수 써서 해결하는게 맞는가? 맞음
 		    if(pageDTO.endPage < pageDTO.pageCount) {
 		        $('#searchPaging').append(
 		            '<li class="page-item">' +
-		            '<a class="page-link text-secondary" href="cs_lost.cs?pageNum=' + (pageDTO.startPage + pageDTO.pageBlock) + '">다음</a>' +
+// 		            '<a class="page-link text-secondary" href="cs_lost.cs?pageNum=' + (pageDTO.startPage + pageDTO.pageBlock) + '">다음</a>' +
+		            '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage + pageDTO.pageBlock) + ', \'' + $('#locationSelect').val() + '\', \'' + $('#cinemaSelect').val() + '\', \'' + $('#lostStatus').val() + '\', \'' + $('#lostSubject').val() + '\'); return false;">' + '다음' + '</a>' +
 		            '</li>'
 		        );
 		    }

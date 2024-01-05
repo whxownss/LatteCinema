@@ -161,8 +161,9 @@ $('#qnaCategory').change(function() {
 			    // '이전' 버튼
 			    if(pageDTO.startPage > pageDTO.pageBlock) {
 			        $('#searchPaging').append(
-			            '<li class="page-item disabled">' +
-			            '<a class="page-link text-secondary" href="cs_qna.cs?pageNum=' + (pageDTO.startPage - pageDTO.pageBlock) + '" tabindex="-1" aria-disabled="true">이전</a>' +
+			            '<li class="page-item ">' +
+// 			            '<a class="page-link text-secondary" href="cs_qna.cs?pageNum=' + (pageDTO.startPage - pageDTO.pageBlock) + '" tabindex="-1" aria-disabled="true">이전</a>' +
+			            '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage - pageDTO.pageBlock) + ', \'' + $('#qnaCategory').val() + '\'); return false;">' + '이전' + '</a>' +
 			            '</li>'
 			        );
 			    }
@@ -180,7 +181,8 @@ $('#qnaCategory').change(function() {
 			    if(pageDTO.endPage < pageDTO.pageCount) {
 			        $('#searchPaging').append(
 			            '<li class="page-item">' +
-			            '<a class="page-link text-secondary" href="cs_qna.cs?pageNum=' + (pageDTO.startPage + pageDTO.pageBlock) + '">다음</a>' +
+// 			            '<a class="page-link text-secondary" href="cs_qna.cs?pageNum=' + (pageDTO.startPage + pageDTO.pageBlock) + '">다음</a>' +
+			            '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage + pageDTO.pageBlock) + ', \'' + $('#qnaCategory').val() + '\'); return false;">' + '다음' + '</a>' +
 			            '</li>'
 			        );
 			    }
@@ -191,13 +193,7 @@ $('#qnaCategory').change(function() {
  	    }
  	});
 });
-// function searchPageNm(pageNum, qnaCategory){
-//     // URL 구성
-//     var url = 'cs_qnaSearch.cs?pageNum=' + pageNum + '&qnaCategory=' + encodeURIComponent(qnaCategory);
-    
-//     // 사용자를 생성된 URL로 리다이렉트
-//     window.location.href = url;
-// }
+
 function searchPageNm(pageNum, qnaCategory){
 // 	debugger;
     // AJAX 요청을 통해 서버로부터 새로운 페이징 데이터를 가져옴
@@ -242,8 +238,9 @@ function updatePagination(response) {
 	    // '이전' 버튼
 	    if(pageDTO.startPage > pageDTO.pageBlock) {
 	        $('#searchPaging').append(
-	            '<li class="page-item disabled">' +
-	            '<a class="page-link text-secondary" href="cs_qna.cs?pageNum=' + (pageDTO.startPage - pageDTO.pageBlock) + '" tabindex="-1" aria-disabled="true">이전</a>' +
+	            '<li class="page-item ">' +
+// 	            '<a class="page-link text-secondary" href="cs_qna.cs?pageNum=' + (pageDTO.startPage - pageDTO.pageBlock) + '" tabindex="-1" aria-disabled="true">이전</a>' +
+	            '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage - pageDTO.pageBlock) + ', \'' + $('#qnaCategory').val() + '\'); return false;">' + '이전' + '</a>' +
 	            '</li>'
 	        );
 	    }
@@ -261,7 +258,8 @@ function updatePagination(response) {
 	    if(pageDTO.endPage < pageDTO.pageCount) {
 	        $('#searchPaging').append(
 	            '<li class="page-item">' +
-	            '<a class="page-link text-secondary" href="cs_qna.cs?pageNum=' + (pageDTO.startPage + pageDTO.pageBlock) + '">다음</a>' +
+// 	            '<a class="page-link text-secondary" href="cs_qna.cs?pageNum=' + (pageDTO.startPage + pageDTO.pageBlock) + '">다음</a>' +
+	            '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage + pageDTO.pageBlock) + ', \'' + $('#qnaCategory').val() + '\'); return false;">' + '다음' + '</a>' +
 	            '</li>'
 	        );
 	    }

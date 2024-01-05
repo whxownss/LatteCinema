@@ -14,6 +14,35 @@
 		SELECT COUNT(*) 
 		  FROM EXQBOARD
 	</select>
+	<select id="getExqSearchList" resultType="ExqBoardDTO" parameterType="map">
+		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
+		  FROM EXQBOARD
+		 WHERE EXQSELECT = #{exqSelect} 
+   		 ORDER BY CREATE_DATE  DESC 
+   		 LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
+	</select>
+	<select id="getExqBSearchCount" resultType="int" parameterType="String">
+		SELECT COUNT(*) 
+		  FROM EXQBOARD
+		 WHERE EXQSELECT = #{exqSelect}
+	</select>
+	<select id="getExqBoardAll" resultType="ExqBoardDTO">
+		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
+		  FROM EXQBOARD
+   		 ORDER BY CREATE_DATE  DESC 
+	</select>
+	<update id="updateExqBoard" parameterType="ExqBoardDTO" >
+		UPDATE EXQBOARD 
+		   SET EXQSUBJECT = #{exqSubject}, EXQCONTENT = #{exqContent}, UPDATE_USER = #{updateUser}, UPDATE_DATE = SYSDATE()
+		 WHERE CREATE_DATE = #{createDate} AND CREATE_USER = #{createUser}
+	</update>
+	<delete id="deleteExqBoard" parameterType="ExqBoardDTO">
+		DELETE FROM EXQBOARD
+ 		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</delete>
+	<insert id="exqBoardInsert" parameterType="ExqBoardDTO">
+		
+	</insert>
 	
 	<select id="getCenterBoardList" resultType="CenterBoardDTO" parameterType="PageDTO">
 		SELECT *,
@@ -28,6 +57,15 @@
 	<select id="centerBoardCount" resultType="int">
 		SELECT COUNT(*) 
 		  FROM CENTERBOARD
+	</select>
+	<select id="getCenterBoardAll" resultType="centerBoardDTO">
+		SELECT *,
+	       (SELECT C.CI_NAME
+	          FROM CINEMA AS C
+	         WHERE C.LO_IDX = CENTER.LO_IDX AND C.CI_IDX = CENTER.CI_IDX) AS 'CI_NAME',
+       	 ROW_NUMBER() OVER (ORDER BY CENTER.CREATE_DATE) AS RN
+	 	 FROM CENTERBOARD AS CENTER
+		 ORDER BY CENTER.CREATE_DATE DESC
 	</select>
 	<select id="getCenterBoard" resultType="CenterBoardDTO" parameterType="map">
 		 SELECT *,
@@ -80,6 +118,11 @@
 		SELECT COUNT(*) 
 	 	  FROM QNABOARD
 	</select>
+	<select id="getQnaBoardAll" resultType="QnaBoardDTO">
+		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
+	  	  FROM QNABOARD
+ 		 ORDER BY CREATE_DATE  DESC 
+	</select>
 	<select id="searchQnaBoardList" resultType="QnaBoardDTO" parameterType="map">
 		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
 	  	  FROM QNABOARD
@@ -131,6 +174,15 @@
 	<select id="getLostBoardCount" resultType="int">
 		SELECT COUNT(*) 
 		  FROM LOSTBOARD
+	</select>
+	<select id="getlostBoardAll" resultType="LostBoardDTO">
+		SELECT *,
+		       (SELECT C.CI_NAME
+		          FROM CINEMA AS C
+		         WHERE C.LO_IDX = LOST.LO_IDX AND C.CI_IDX = LOST.CI_IDX) AS 'CI_NAME',
+		       ROW_NUMBER() OVER (ORDER BY LOST.CREATE_DATE) AS RN
+		  FROM LOSTBOARD AS LOST
+		 ORDER BY LOST.CREATE_DATE DESC
 	</select>
 	<select id="getLostBoard" resultType="LostBoardDTO" parameterType="map">
 		 SELECT *,

@@ -1,5 +1,8 @@
+<%@page import="com.itwillbs.domain.ExqBoardDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,10 +36,13 @@
 
   <body class="nav-md">
  <%
- 	String select = "멤버십";
- 	String subject = "제목 데이터를 받자";
- 	String content = "내용 데이터를 받자";
- 	int exqNum = 1; //글번호도 받아와야할듯
+//  	String select = "멤버십";
+//  	String subject = "제목 데이터를 받자";
+//  	String content = "내용 데이터를 받자";
+//  	int exqNum = 1; //글번호도 받아와야할듯
+String updateUser = "ADMIN2477";
+String createUser = "ADMIN2477";
+ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribute("exqBoardList");
  %>
     <div class="container body">
       <div class="main_container">
@@ -123,38 +129,42 @@
           	<!-- 임시  -->
 			<div class="container">
 			  <!-- Modal -->
-			 <form action="#" method="get" name="frChange"> 
+			 <form action="cs_exqueUpdate.cs" method="get" name="frChange"> 
 			  <div class="modal fade" id="myModal" role="dialog">
 			    <div class="modal-dialog">
 <!-- 			    <button type="button" class="btn-close" aria-label="Close"></button> -->
 			      <!-- Modal content-->
 			      <div class="modal-content">
 				      <div class="modal-header">
+				      <input type="hidden" name="updateUser" value="<%=updateUser%>">
+				      <input type="hidden" id="exqUser" name="createUser" value="">
+				      <input type="hidden" id="exqDate" name="createDate" value="">
 				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				        <h5 class="modal-title" id="exampleModalLabel">자주찾는질문</h5>
-				        <select id="modalSelect" name="changeSelect">
+				        <select id="modalSelect" name="exqSelect">
 				        	<option value="">구분선택</option>
 				        	<option value="예매">예매</option>
 				        	<option value="관람권">관람권</option>
 				        	<option value="멤버십">멤버십</option>
 				        	<option value="할인혜택">할인혜택</option>
 				        	<option value="영화관이용">영화관이용</option>
+				        	<option value="기타">기타</option>
 				        </select>
 				      </div>
 				      <div class="modal-body">
 <!-- 				        <form> -->
 				          <div class="mb-3">
 				            <label for="recipient-name" class="col-form-label">질문</label>
-				            <input type="text" class="form-control" id="recipient-name" name="changeQue" value="">
+				            <input type="text" class="form-control" id="recipient-name" name="exqSubject" value="">
 				          </div>
 				          <div class="mb-3">
 				            <label for="message-text" class="col-form-label">글내용</label>
-				            <textarea class="form-control" id="message-text" name="changeContent"></textarea>
+				            <textarea class="form-control" id="message-text" name="exqContent"></textarea>
 				          </div>
 <!-- 				        </form> -->
 				      </div>
 				      <div class="modal-footer">
-				      	<button type="button" class="btn btn-danger">삭제</button>
+				      	<button type="button" class="btn btn-danger" id="deleteExqBoard">삭제</button>
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">나가기</button>
 				        <button type="submit" id="modalRewrite" class="btn btn-primary">수정</button>
 				      </div>
@@ -164,39 +174,41 @@
 			</div>
 		 </form>	
           	<!-- //임시  -->
-          	<form action="#" method="get" name="frAdd"> <!-- form태그로 submit 버튼  -->
+          	<form action="#" method="get" id="frAdd" name="frAdd"> <!-- form태그로 submit 버튼  -->
 			  <div class="modal fade" id="myModal2" role="dialog">
 			    <div class="modal-dialog">
 <!-- 			    <button type="button" class="btn-close" aria-label="Close"></button> -->
 			      <!-- Modal content-->
 			      <div class="modal-content">
 				      <div class="modal-header">
+				      <input type="hidden" id="insertUser" name="createUser" value="<%=createUser%>">
 				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				        <h5 class="modal-title" id="exampleModalLabel">자주찾는질문</h5>
-				        <select name="newSelect">
+				        <select id="insertSelect" name="exqSelect">
 				        	<option value="">구분선택</option>
 				        	<option value="예매">예매</option>
 				        	<option value="관람권">관람권</option>
 				        	<option value="멤버십">멤버십</option>
 				        	<option value="할인혜택">할인혜택</option>
 				        	<option value="영화관이용">영화관이용</option>
+				        	<option value="기타">기타</option>
 				        </select>
 				      </div>
 				      <div class="modal-body">
 <!-- 				        <form> -->
 				          <div class="mb-3">
-				            <label for="recipient-name" class="col-form-label">질문</label>
-				            <input type="text" class="form-control" id="recipient-name" name="newQue" value="">
+				            <label for="insertSubject" class="col-form-label">질문</label>
+				            <input type="text" class="form-control" id="insertSubject" name="exqSubject" value="">
 				          </div>
 				          <div class="mb-3">
-				            <label for="message-text" class="col-form-label">글내용</label>
-				            <textarea class="form-control" id="message-text" name="newContent"></textarea>
+				            <label for="insertContent" class="col-form-label">글내용</label>
+				            <textarea class="form-control" id="insertContent" name="exqContent"></textarea>
 				          </div>
 <!-- 				        </form> -->
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">나가기</button>
-				        <button type="submit" id="insertRow" class="btn btn-primary">추가</button>
+				        <button type="button" id="insertRow" class="btn btn-primary">추가</button>
 				      </div>
 			    </div>
 			  </div>
@@ -230,410 +242,25 @@
                           <th>글번호</th>	
                           <th>구분</th>
                           <th>질문</th>
+                          <th>등록자</th>
                           <th>등록일</th>
+                          <th>수정자</th>
                           <th>수정일</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td><%=select %></td>
-                          <td><a data-toggle="modal" data-target="#myModal" data-info='{"key1": "<%=subject%>", "key2": "<%=content%>", "key3": "<%=select%>"}'><%=subject %></a></td>
-                          <td>2011/04/25</td>
-                          <td>2011/06/25</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>멤버십</td>
-                          <td>포인트 소멸은 어떻게 이루어 지나요?</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>멤버십</td>
-                          <td>VIP 선정 기준이 어떻게 되나요?</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>4</td>
-                          <td>관람권</td>
-                          <td>특별한 전용 관람권이 따로 있나요?</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>5</td>
-                          <td>영화관이용</td>
-                          <td>주차가 가능한가요?</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>6</td>
-                          <td>영화관이용</td>
-                          <td>관람등급에 대해 알고 싶습니다.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>7</td>
-                          <td>영화관이용</td>
-                          <td>상영관 내 다른 음식물의 반입이 되나요?</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>8</td>
-                          <td>할인혜택</td>
-                          <td>장애인, 경로 등 우대할인에 대해 알고 싶습니다.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>9</td>
-                          <td>예매</td>
-                          <td>예매는 몇 장까지 가능한가요?</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>예매</td>
-                          <td>예매 취소를 하였는데 환불이 안된 것 같아요.</td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
-                        <tr>
-                          <td>11</td>
-                          <td><%=select %></td>
-                          <td><a data-toggle="modal" data-target="#myModal" data-info='{"key1": "<%=subject%>", "key2": "<%=content%>", "key3": "<%=select%>"}'><%=subject %></a></td>
-                          <td>2011/04/25</td>
-                          <td>2011/05/25</td>
-                        </tr>
+                      	<c:forEach var="exqBoardDTO" items="${exqBoardList }">
+                      	<tr>
+                      		<td>${exqBoardDTO.rn }</td>
+                      		<td>${exqBoardDTO.exqSelect }</td>
+                      		<td><a data-toggle="modal" data-target="#myModal" data-info='{"key1": "${exqBoardDTO.exqSubject }", "key2": "${exqBoardDTO.exqContent }", "key3": "${exqBoardDTO.exqSelect }", "key4": "${exqBoardDTO.createUser }", "key5": "${exqBoardDTO.createDate }"}'>${exqBoardDTO.exqSubject }</a></td>
+                      		<td>${exqBoardDTO.createUser }</td>
+                      		<td>${exqBoardDTO.createDate }</td>
+                      		<td>${exqBoardDTO.updateUser }</td>
+                      		<td>${exqBoardDTO.updateDate }</td>
+                      	</tr>
+                      	</c:forEach>
+  
                       </tbody>
                     </table>
 					
@@ -687,6 +314,7 @@
     <!-- Custom Theme Scripts -->
     <script src="_admin/build/js/custom.min.js"></script>
 <script type="text/javascript">
+
 	// 테이블의 각 행에 클릭 이벤트를 추가
 	$("table tbody tr").on("click", function () {
 	    // 클릭한 행에서 첫 번째 <td> 요소의 내용을 가져옴
@@ -707,17 +335,23 @@
 		    var key1 = infoData.key1;
 		    var key2 = infoData.key2;
 		    var key3 = infoData.key3;
+		    var key4 = infoData.key4;
+		    var key5 = infoData.key5;
 		
 		    // 추출한 정보를 출력하거나 다른 작업 수행
 		    console.log("Key1:", key1);
 		    console.log("Key2:", key2);
 		    console.log("Key3:", key3);
+		    console.log("Key4:", key4);
+		    console.log("Key5:", key5);
 		
 	        if (infoData) {
 	            // 필요한 정보 추출
 	            $("#modalSelect").val(infoData.key3); // select 옵션 선택 받기
 	            $("#recipient-name").val(infoData.key1); // a 태그에서 가져온 정보
 	            $("#message-text").text(infoData.key2); // a 태그에서 가져온 정보
+	            $("#exqUser").val(infoData.key4);
+	            $("#exqDate").val(infoData.key5);
 	        } else {
 	            console.log("data-info not found");
 	        }
@@ -744,71 +378,46 @@
 	 	//수정 모달 수정 버튼 클릭
 	 	$("#modalRewrite").on("click",function(){
 	 		alert("이벤트 연결 성공");
-	 	// 실제 값으로 subject, content, select 값을 대체하세요
-	 	    var subject = '<%=subject %>';
-	 	    var content = '<%=content %>';
-	 	    var select = '<%=select %>';
+// 	 	// 실제 값으로 subject, content, select 값을 대체하세요
+<%-- 	 	    var subject = '<%=subject %>'; --%>
+<%-- 	 	    var content = '<%=content %>'; --%>
+<%-- 	 	    var select = '<%=select %>'; --%>
 
-	 	    // anchorString을 생성합니다.
-// 	 	    var anchorString = '<a data-toggle="modal" data-target="#myModal" data-info=\'{"key1": "' + subject + '", "key2": "' + content + '", "key3": "' + select + '"}\'>';
-	 	    var anchorString = '<a data-toggle="modal" data-target="#myModal" data-info=\'{"key1": "' + $("#recipient-name").val() + '", "key2": "' + content + '", "key3": "' + $("#modalSelect").val() + '"}\'>';
+// 	 	    // anchorString을 생성합니다.
+// // 	 	    var anchorString = '<a data-toggle="modal" data-target="#myModal" data-info=\'{"key1": "' + subject + '", "key2": "' + content + '", "key3": "' + select + '"}\'>';
+// 	 	    var anchorString = '<a data-toggle="modal" data-target="#myModal" data-info=\'{"key1": "' + $("#recipient-name").val() + '", "key2": "' + content + '", "key3": "' + $("#modalSelect").val() + '"}\'>';
 
-	 	    console.log(anchorString);
+// 	 	    console.log(anchorString);
 
-	 	    // <td> 요소의 내용을 설정합니다.
-	 	    $("tr:eq(1) td:eq(1)").text($("#modalSelect").val());
-	 	    $("tr:eq(1) td:eq(2)").html(anchorString + $("#recipient-name").val() + '</a>');
+// 	 	    // <td> 요소의 내용을 설정합니다.
+// 	 	    $("tr:eq(1) td:eq(1)").text($("#modalSelect").val());
+// 	 	    $("tr:eq(1) td:eq(2)").html(anchorString + $("#recipient-name").val() + '</a>');
 
-	 	    // 모달을 숨깁니다.
-	 	    $("#myModal").modal('hide');
+// 	 	    // 모달을 숨깁니다.
+// 	 	    $("#myModal").modal('hide');
 	 	});
 	 	
 	 	// 추가 버튼 누르면 새로운 행 추가 하기
 	 	$("#insertRow").on("click", function () {
-// 	 	    // 새로운 행을 생성
-// 	 	    var newRow = $("<tr></tr>");
-
-// 	 	    // 각 열에 대한 데이터를 가져와서 새로운 셀을 생성하여 행에 추가
-// 	 	    var selectValue = $("#myModal2 select").val();
-// 	 	    var question = $("#myModal2 #recipient-name").val();
-// 	 	    var content = $("#myModal2 #message-text").val();
-
-// 	 	    // 이 예제에서는 각 열에 데이터를 추가하고 있습니다.
-// 	 	    newRow.append("<td>" + 11 + "</td>");
-// 	 	    newRow.append("<td>" + selectValue + "</td>");
-// 	 	    newRow.append("<td>" + question + "</td>");
-// // 	 	    newRow.append("<td>" + content + "</td>");
-// 			newRow.append("<td>" + "</td>");
-// 			newRow.append("<td>" + "</td>");
-
-// 	 	    // 테이블의 맨 위에 행을 추가
-// 	 	    $("table tbody").prepend(newRow);
-
-// 	 	    // 모달 닫기
-// 	 	    $("#myModal2").modal("hide");
-	 	// 현재 테이블에 있는 행의 개수를 가져옴=>나중엔 DB에서 맥스넘버 + 1로 해야함.
-	 	    var rowCount = $("table tbody tr").length;
-
-	 	    // 새로운 행을 생성
-	 	    var newRow = $("<tr></tr>");
-
-	 	    // 각 열에 대한 데이터를 가져와서 새로운 셀을 생성하여 행에 추가
-	 	    var selectValue = $("#myModal2 select").val();
-	 	    var question = $("#myModal2 #recipient-name").val();
-	 	    var content = $("#myModal2 #message-text").val();
-
-	 	    // 새로운 행을 추가할 때는 현재 행의 개수를 기반으로 하여 숫자를 설정
-	 	    newRow.append("<td>" + (rowCount + 1) + "</td>");
-	 	    newRow.append("<td>" + selectValue + "</td>");
-	 	    newRow.append("<td>" + question + "</td>");
-	 	    newRow.append("<td></td>");
-	 	    newRow.append("<td></td>");
-
-	 	    // 테이블의 맨 위에 행을 추가
-	 	    $("table tbody").prepend(newRow);
-
-	 	    // 모달 닫기
-	 	    $("#myModal2").modal("hide");
+	 		alert('추가 버튼 이벤트 연결확인');
+	 		if(confirm("추가하시겠습니까?")){
+	 			alert("정상적으로 추가되었습니다.");
+	 			window.location.href = 'cs_insertExqBoard.cs?createUser=' + $("#insertUser").val() + '&exqSelect=' + $("#insertSelect").val() + '&exqSubject=' + $("#insertSubject").val() + '&exqContent=' + $("#insertContent").val();
+	 		}else{
+	 			alert("추가가 취소되었습니다.");
+	 		}
+	 	});
+	 	
+	 	// 모달 창에서 삭제 버튼 클릭.
+	 	$("#deleteExqBoard").on("click",function(){
+	 		alert('삭제 버튼 이벤트 연결확인');
+	 		
+	 		if(confirm("삭제하시겠습니까?")){
+	 			alert("정상적으로 삭제되었습니다.");
+	 			window.location.href = 'cs_deleteExqBoard.cs?createUser=' + $("#exqUser").val() + '&createDate=' + $("#exqDate").val();
+	 		}else{
+	 			alert("삭제가 취소되었습니다.");
+	 		}
 	 	});
 	
 </script>

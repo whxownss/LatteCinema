@@ -1,6 +1,8 @@
+<%@page import="com.itwillbs.domain.CenterBoardDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 	<link rel="stylesheet" href="_assets/css/hover.css">
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
@@ -10,7 +12,9 @@
 
     <%@include file="../_common/commonMovieSlide.jsp"%>
 	
-	
+<%
+ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.getAttribute("centerBoardList");
+%>	
 	    
     
 
@@ -223,26 +227,18 @@
 
         <div class="section-header d-flex justify-content-between align-items-center mb-5">
           <h2>공지사항</h2>
-          <div><a href="#" class="more">더보기 &gt;</a></div>
+          <div><a href="cs_center.cs" class="more">더보기 &gt;</a></div>
         </div>
 
         <div class="row g-5">
            <div class="col-lg-12">
-
-             <div class="post-entry-1 border-bottom">
-               <div class="post-meta"><span>Jul 5th '22</span></div>
-               <h2 class="mb-2"><a href="single-post.html">공지내용1공지내용1공지내용1공지내용1공지내용1공지내용1공지내용1공지내용1</a></h2>
-             </div>
-
-             <div class="post-entry-1 border-bottom">
-               <div class="post-meta"><span>Jul 5th '22</span></div>
-               <h2 class="mb-2"><a href="single-post.html">공지내용2공지내용2공지내용2공지내용2공지내용2공지내용2공지내용2공지내용2</a></h2>
-             </div>
-
-             <div class="post-entry-1 border-bottom">
-               <div class="post-meta"><span>Jul 5th '22</span></div>
-               <h2 class="mb-2"><a href="single-post.html">공지내용3공지내용3공지내용3공지내용3공지내용3공지내용3공지내용3공지내용3</a></h2>
-             </div>
+			<c:forEach var="centerBoardDTO" items="${centerBoardList }">
+				 <div class="post-entry-1 border-bottom">
+	               <div class="post-meta"><span>${centerBoardDTO.createDate }</span></div>
+	               <h2 class="mb-2"><a href="cs_center_content.cs?createUser=${centerBoardDTO.createUser }&createDate=${centerBoardDTO.createDate}">${centerBoardDTO.centerSubject }</a></h2>
+	             </div>
+			</c:forEach>
+             
            </div>
 
         </div> <!-- End .row -->

@@ -1,12 +1,19 @@
 package com.itwillbs.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.itwillbs.domain.CenterBoardDTO;
+import com.itwillbs.domain.ExqBoardDTO;
+import com.itwillbs.domain.LostBoardDTO;
+import com.itwillbs.domain.QnaBoardDTO;
+import com.itwillbs.service.CSBoardService;
 
 public class AdminController extends HttpServlet {
 	
@@ -52,24 +59,40 @@ public class AdminController extends HttpServlet {
 
 		// 관리자 공지사항 페이지 이동
 		if(sPath.equals("/adm_cs_center.ad")) {
+			CSBoardService csBoardService = new CSBoardService();
+			ArrayList<CenterBoardDTO> centerBoardList = csBoardService.getCenterBoardList();
+			request.setAttribute("centerBoardList", centerBoardList);
+			
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_cs_center.jsp");
 			dispatcher.forward(request, response);
 		}	
 
 		// 관리자 자주찾는질문 페이지 이동
 		if(sPath.equals("/adm_cs_exque.ad")) {
+			CSBoardService csBoardService = new CSBoardService();
+			ArrayList<ExqBoardDTO> exqBoardList = csBoardService.getExqBoardList();
+			request.setAttribute("exqBoardList",exqBoardList);
+			
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_cs_exque.jsp");
 			dispatcher.forward(request, response);
 		}	
 	 
 		// 관리자 1:1문의 페이지 이동
 		if(sPath.equals("/adm_cs_qna.ad")) {
+			CSBoardService csBoardService = new CSBoardService();
+			ArrayList<QnaBoardDTO> qnaBoardList = csBoardService.getQnaBoardList();
+			request.setAttribute("qnaBoardList", qnaBoardList);
+			
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_cs_qna.jsp");
 			dispatcher.forward(request, response);
 		}
 		
 		// 관리자 분실물 페이지 이동
 		if(sPath.equals("/adm_cs_lost.ad")) {
+			CSBoardService csBoardService = new CSBoardService();
+			ArrayList<LostBoardDTO> lostBoardList = csBoardService.getLostBoardList();
+			request.setAttribute("lostBoardList",lostBoardList);
+			
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_cs_lost.jsp");
 			dispatcher.forward(request, response);
 		}	

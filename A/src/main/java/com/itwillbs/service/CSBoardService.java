@@ -496,5 +496,159 @@ public class CSBoardService {
 		return count;
 	}//getLostBoardCount 검색버튼 사용
 
+	public ArrayList<ExqBoardDTO> getExqBoardList(PageDTO pageDTO, HttpServletRequest request) {
+		System.out.println("CSBoardService getExqBoardList() 검색");
+		ArrayList<ExqBoardDTO> exqBoardList = null;
+		try {
+			String exqSelect = request.getParameter("exqSelect");
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			exqBoardList = csBoardDAO.getExqBoardList(pageDTO,exqSelect);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return exqBoardList;
+	}//getExqBoardList 셀렉트박스로 검색
+
+	public int getExqBoardCount(HttpServletRequest request) {
+		System.out.println("CSBoardService getExqBoardCount() 검색");
+		int count = 0;
+		try {
+			String exqSelect = request.getParameter("exqSelect");
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getExqBoardCount(exqSelect);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getExqBoardCount 셀렉트박스로 검색
+
+	public ArrayList<CenterBoardDTO> getCenterBoardList() {
+		ArrayList<CenterBoardDTO> centerBoardList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			centerBoardList = csBoardDAO.getCenterBoardList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return centerBoardList;
+	}//getCenterBoardList 조건없이 모두 부를 때.
+
+	public ArrayList<QnaBoardDTO> getQnaBoardList() {
+		ArrayList<QnaBoardDTO> qnaBoardList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			qnaBoardList = csBoardDAO.getQnaBoardList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return qnaBoardList;
+	}//getQnaBoardList() 조건없이 모두 부를 때.
+
+	public ArrayList<LostBoardDTO> getLostBoardList() {
+		ArrayList<LostBoardDTO> lostBoardList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			lostBoardList = csBoardDAO.getLostBoardList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lostBoardList;
+	}//getLostBoardList() 조건없이 모두 부를 때.
+
+	public ArrayList<ExqBoardDTO> getExqBoardList() {
+		ArrayList<ExqBoardDTO> exqBoardList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			exqBoardList = csBoardDAO.getExqBoardList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return exqBoardList;
+	}//getExqBoardList() 조건없이 모두 부를 때.
+
+	public boolean updateExqBoard(HttpServletRequest request) {
+		System.out.println("CSBoardService updateExqBoard()");
+	    int updateSuccess = 0;
+	    try {
+	        ExqBoardDTO exqBoardDTO = new ExqBoardDTO();
+	        String exqSubject = request.getParameter("exqSubject");
+	        String exqContent = request.getParameter("exqContent");
+	        String exqSelect = request.getParameter("exqSelect");
+	        String createUser = request.getParameter("createUser"); 
+	        String updateUser = request.getParameter("updateUser");
+	        
+	        String createDate = preprocessDate(request.getParameter("createDate"));
+	        
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+	        LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
+	        Timestamp createTime = Timestamp.valueOf(dateTime);
+	        
+	        exqBoardDTO.setExqSubject(exqSubject);
+	        exqBoardDTO.setExqContent(exqContent);
+	        exqBoardDTO.setExqSelect(exqSelect);
+	        exqBoardDTO.setCreateUser(createUser);
+	        exqBoardDTO.setCreateDate(createTime);
+	        exqBoardDTO.setUpdateUser(updateUser);
+	        
+	        csBoardDAO = new CSBoardDAO();
+	        updateSuccess = csBoardDAO.updateExqBoard(exqBoardDTO);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return updateSuccess > 0;
+	}//updateExqBoard()
+
+	public boolean deleteExqBoard(HttpServletRequest request) {
+		System.out.println("CSBoardService deleteCenterContent()");
+		int deleteSuccess = 0;
+		try {
+			ExqBoardDTO exqBoardDTO = new ExqBoardDTO();
+	        String createUser = request.getParameter("createUser");
+	        String createDate = preprocessDate(request.getParameter("createDate"));
+	        
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+	        LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
+	        Timestamp createTime = Timestamp.valueOf(dateTime);
+	        
+	        exqBoardDTO.setCreateUser(createUser);
+	        exqBoardDTO.setCreateDate(createTime);
+	        
+	        csBoardDAO = new CSBoardDAO();
+	        deleteSuccess = csBoardDAO.deleteExqBoard(exqBoardDTO);
+	    } catch (DateTimeParseException dtpe) {
+	        System.err.println("Date parsing failed: " + dtpe.getMessage());
+	    } catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deleteSuccess > 0;
+	}//deleteExqBoard
+
+	public boolean exqBoardInsert(HttpServletRequest request) {
+		System.out.println("CSBoardService exqBoardInsert()");
+		int insertSuccess = 0;
+		try {
+			String exqSelect = request.getParameter("exqSelect");
+			String exqSubject = request.getParameter("exqSubject");
+			String exqContent = request.getParameter("exqContent");
+			String createUser = request.getParameter("createUser");
+			
+			ExqBoardDTO exqBoardDTO = new ExqBoardDTO();
+			
+			csBoardDAO = new CSBoardDAO();
+			insertSuccess = csBoardDAO.exqBoardInsert(exqBoardDTO);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return insertSuccess > 0;
+	}//exqBoardInsert()
+
 	
 }//클래스
