@@ -40,6 +40,9 @@
 		DELETE FROM EXQBOARD
  		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
 	</delete>
+	<insert id="exqBoardInsert" parameterType="ExqBoardDTO">
+		
+	</insert>
 	
 	<select id="getCenterBoardList" resultType="CenterBoardDTO" parameterType="PageDTO">
 		SELECT *,

@@ -41,6 +41,7 @@
 //  	String content = "내용 데이터를 받자";
 //  	int exqNum = 1; //글번호도 받아와야할듯
 String updateUser = "ADMIN2477";
+String createUser = "ADMIN2477";
 ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribute("exqBoardList");
  %>
     <div class="container body">
@@ -173,39 +174,41 @@ ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribu
 			</div>
 		 </form>	
           	<!-- //임시  -->
-          	<form action="#" method="get" name="frAdd"> <!-- form태그로 submit 버튼  -->
+          	<form action="#" method="get" id="frAdd" name="frAdd"> <!-- form태그로 submit 버튼  -->
 			  <div class="modal fade" id="myModal2" role="dialog">
 			    <div class="modal-dialog">
 <!-- 			    <button type="button" class="btn-close" aria-label="Close"></button> -->
 			      <!-- Modal content-->
 			      <div class="modal-content">
 				      <div class="modal-header">
+				      <input type="hidden" id="insertUser" name="createUser" value="<%=createUser%>">
 				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				        <h5 class="modal-title" id="exampleModalLabel">자주찾는질문</h5>
-				        <select name="newSelect">
+				        <select id="insertSelect" name="exqSelect">
 				        	<option value="">구분선택</option>
 				        	<option value="예매">예매</option>
 				        	<option value="관람권">관람권</option>
 				        	<option value="멤버십">멤버십</option>
 				        	<option value="할인혜택">할인혜택</option>
 				        	<option value="영화관이용">영화관이용</option>
+				        	<option value="기타">기타</option>
 				        </select>
 				      </div>
 				      <div class="modal-body">
 <!-- 				        <form> -->
 				          <div class="mb-3">
-				            <label for="recipient-name" class="col-form-label">질문</label>
-				            <input type="text" class="form-control" id="recipient-name" name="newQue" value="">
+				            <label for="insertSubject" class="col-form-label">질문</label>
+				            <input type="text" class="form-control" id="insertSubject" name="exqSubject" value="">
 				          </div>
 				          <div class="mb-3">
-				            <label for="message-text" class="col-form-label">글내용</label>
-				            <textarea class="form-control" id="message-text" name="newContent"></textarea>
+				            <label for="insertContent" class="col-form-label">글내용</label>
+				            <textarea class="form-control" id="insertContent" name="exqContent"></textarea>
 				          </div>
 <!-- 				        </form> -->
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">나가기</button>
-				        <button type="submit" id="insertRow" class="btn btn-primary">추가</button>
+				        <button type="button" id="insertRow" class="btn btn-primary">추가</button>
 				      </div>
 			    </div>
 			  </div>
@@ -396,50 +399,13 @@ ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribu
 	 	
 	 	// 추가 버튼 누르면 새로운 행 추가 하기
 	 	$("#insertRow").on("click", function () {
-// 	 	    // 새로운 행을 생성
-// 	 	    var newRow = $("<tr></tr>");
-
-// 	 	    // 각 열에 대한 데이터를 가져와서 새로운 셀을 생성하여 행에 추가
-// 	 	    var selectValue = $("#myModal2 select").val();
-// 	 	    var question = $("#myModal2 #recipient-name").val();
-// 	 	    var content = $("#myModal2 #message-text").val();
-
-// 	 	    // 이 예제에서는 각 열에 데이터를 추가하고 있습니다.
-// 	 	    newRow.append("<td>" + 11 + "</td>");
-// 	 	    newRow.append("<td>" + selectValue + "</td>");
-// 	 	    newRow.append("<td>" + question + "</td>");
-// // 	 	    newRow.append("<td>" + content + "</td>");
-// 			newRow.append("<td>" + "</td>");
-// 			newRow.append("<td>" + "</td>");
-
-// 	 	    // 테이블의 맨 위에 행을 추가
-// 	 	    $("table tbody").prepend(newRow);
-
-// 	 	    // 모달 닫기
-// 	 	    $("#myModal2").modal("hide");
-	 	// 현재 테이블에 있는 행의 개수를 가져옴=>나중엔 DB에서 맥스넘버 + 1로 해야함.
-	 	    var rowCount = $("table tbody tr").length;
-
-	 	    // 새로운 행을 생성
-	 	    var newRow = $("<tr></tr>");
-
-	 	    // 각 열에 대한 데이터를 가져와서 새로운 셀을 생성하여 행에 추가
-	 	    var selectValue = $("#myModal2 select").val();
-	 	    var question = $("#myModal2 #recipient-name").val();
-	 	    var content = $("#myModal2 #message-text").val();
-
-	 	    // 새로운 행을 추가할 때는 현재 행의 개수를 기반으로 하여 숫자를 설정
-	 	    newRow.append("<td>" + (rowCount + 1) + "</td>");
-	 	    newRow.append("<td>" + selectValue + "</td>");
-	 	    newRow.append("<td>" + question + "</td>");
-	 	    newRow.append("<td></td>");
-	 	    newRow.append("<td></td>");
-
-	 	    // 테이블의 맨 위에 행을 추가
-	 	    $("table tbody").prepend(newRow);
-
-	 	    // 모달 닫기
-	 	    $("#myModal2").modal("hide");
+	 		alert('추가 버튼 이벤트 연결확인');
+	 		if(confirm("추가하시겠습니까?")){
+	 			alert("정상적으로 추가되었습니다.");
+	 			window.location.href = 'cs_insertExqBoard.cs?createUser=' + $("#insertUser").val() + '&exqSelect=' + $("#insertSelect").val() + '&exqSubject=' + $("#insertSubject").val() + '&exqContent=' + $("#insertContent").val();
+	 		}else{
+	 			alert("추가가 취소되었습니다.");
+	 		}
 	 	});
 	 	
 	 	// 모달 창에서 삭제 버튼 클릭.

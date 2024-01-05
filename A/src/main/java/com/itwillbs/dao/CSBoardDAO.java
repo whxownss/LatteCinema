@@ -569,6 +569,23 @@ public class CSBoardDAO {
 		}
 		return deleteSuccess;
 	}//deleteExqBoard()
+
+	public int exqBoardInsert(ExqBoardDTO exqBoardDTO) {
+		System.out.println("CSBoardDAO exqBoardInsert()");
+		int insertSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			insertSuccess = session.insert("CsAdmin.exqBoardInsert", exqBoardDTO);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return insertSuccess;
+	}//exqBoardInsert()
 	
 	
 	

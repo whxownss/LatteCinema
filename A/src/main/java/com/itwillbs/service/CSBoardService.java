@@ -630,5 +630,25 @@ public class CSBoardService {
 		return deleteSuccess > 0;
 	}//deleteExqBoard
 
+	public boolean exqBoardInsert(HttpServletRequest request) {
+		System.out.println("CSBoardService exqBoardInsert()");
+		int insertSuccess = 0;
+		try {
+			String exqSelect = request.getParameter("exqSelect");
+			String exqSubject = request.getParameter("exqSubject");
+			String exqContent = request.getParameter("exqContent");
+			String createUser = request.getParameter("createUser");
+			
+			ExqBoardDTO exqBoardDTO = new ExqBoardDTO();
+			
+			csBoardDAO = new CSBoardDAO();
+			insertSuccess = csBoardDAO.exqBoardInsert(exqBoardDTO);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return insertSuccess > 0;
+	}//exqBoardInsert()
+
 	
 }//클래스

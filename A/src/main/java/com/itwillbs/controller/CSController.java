@@ -358,6 +358,19 @@ public class CSController extends HttpServlet  {
 			
 			response.sendRedirect("adm_cs_exque.ad");
 		}
+		// 자주 찾는 질문 추가
+		if(sPath.equals("/cs_insertExqBoard.cs")) {
+			System.out.println("주소비교 /cs_insertExqBoard.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "exq insert fail";
+			if(csBoardService.exqBoardInsert(request)) {
+				msg = "exq insert success";
+				response.sendRedirect("adm_cs_exque.ad");
+			}
+			System.out.println(msg);
+		}
 		
 		// 1:1문의 페이지 이동
 		if(sPath.equals("/cs_qna.cs")) {
