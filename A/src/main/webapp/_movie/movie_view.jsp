@@ -19,13 +19,13 @@
 <main>
 
 <%
- String movieNm = "노량: 죽음의 바다";
- String movieEngNm = "Noryang: Deadly Sea";
+ String movieName = "노량: 죽음의 바다";
+ String movieEngName = "Noryang: Deadly Sea";
  String grade = "12세이상관람가";
  String date = "2023.12.20";
  String genre = "액션,드라마";
  String runTime = "152분";
- String reserve = "40.56%";
+ String totalView = "2,659,893명";
  String synopsys = "";
 %>
 
@@ -35,29 +35,29 @@
     <div class="inner">
       <div class="info-box">
         <div class="btns only-pc">
-          <a href="javascript:goLink('/reserve/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기</a>
+          <a href="javascript:goLink('/totalView/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기</a>
           <a href="#" class="btn-type1 movie-open" data-poster="https://img.dtryx.com/poster/2023/12/D3ED4691-3003-4A40-BA15-E029AC980BEF.small.jpg" data-source="https://img.dtryx.com/video/2023/12/45030FA5-DC2D-4702-A4B8-731108559CBA.mp4">예고편 보기</a></div>
         <div class="poster">
           <img src="https://img.dtryx.com/poster/2023/12/5E0206A2-7177-4466-A25F-2B6726844F6A.small.jpg" onerror="this.src='/resources/img/common/no-poster.png';">
           <i class="age12"></i>
         </div>
         <div class="mobile mb15">
-          <a href="javascript:goLink('/reserve/movie.do', 'MovieCd=023901');" class="btn-type0" style="border-radius:0">예매하기</a>
+          <a href="javascript:goLink('/totalView/movie.do', 'MovieCd=023901');" class="btn-type0" style="border-radius:0">예매하기</a>
         </div>
         <i class="age12"></i>
-        <h3 class="h3"><%=movieNm %></h3>
-        <h4 class="h4"><%=movieEngNm %></h4>
+        <h3 class="h3"><%=movieName %></h3>
+        <h4 class="h4"><%=movieEngName %></h4>
         <div class="etc">
-          <span><%=movieNm %></span>
+          <span><%=movieName %></span>
           <span><%=date %></span>
           <span><%=genre %></span>
           <span><%=runTime %></span>
         </div>
         <div class="grade">
-          예매율<strong><%=reserve %></strong>
+          누적 관객 수<strong><%=totalView %></strong>
         </div>
         <div class="btns only-m">
-          <a href="javascript:goLink('/reserve/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기</a>
+          <a href="javascript:goLink('/totalView/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기</a>
           <a href="#" class="btn-type1 movie-open" data-poster="https://img.dtryx.com/poster/2023/12/D3ED4691-3003-4A40-BA15-E029AC980BEF.small.jpg" data-source="https://img.dtryx.com/video/2023/12/45030FA5-DC2D-4702-A4B8-731108559CBA.mp4">예고편 보기</a></div>
       </div>
       
@@ -66,10 +66,10 @@
           <div class="img"><img src="https://img.dtryx.com/poster/2023/12/5E0206A2-7177-4466-A25F-2B6726844F6A.small.jpg" style="width: 80%;" onerror="this.src='/resources/img/common/no-poster.png';"/></div>
           <div class="info">
             <i class="age12"></i>
-            <h3 class="h3"><%=movieNm %></h3>
-            <h4 class="h4"><%=movieEngNm %></h4>
+            <h3 class="h3"><%=movieName %></h3>
+            <h4 class="h4"><%=movieEngName %></h4>
             <div class="btns">
-              <a href="javascript:goLink('/reserve/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기</a>
+              <a href="javascript:goLink('/totalView/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기</a>
               <a href="#" class="btn-type1 movie-open" data-poster="https://img.dtryx.com/poster/2023/12/D3ED4691-3003-4A40-BA15-E029AC980BEF.small.jpg" data-source="https://img.dtryx.com/video/2023/12/45030FA5-DC2D-4702-A4B8-731108559CBA.mp4">예고편 보기</a></div>
           </div>
         </div>
@@ -117,7 +117,7 @@
                 </dl>
                 <dl>
                   <dt>배우</dt>
-                  <dd> 김윤석(이순신) | 백윤식(시마즈) | 정재영(진린) </dd>
+                  <dd> 김윤석 | 백윤식 | 정재영 </dd>
                 </dl>
                 <dl>
                   <dt>배급사</dt>

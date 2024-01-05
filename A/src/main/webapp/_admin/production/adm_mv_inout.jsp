@@ -133,6 +133,9 @@
                 </div>
               </div>
             </div>
+            
+            
+            
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -160,29 +163,59 @@
                     <br />
                     <form id="demo-form1" data-parsley-validate class="form-horizontal form-label-left">
 
+
+                                     <!-- 확인용 -->
+                    <style>
+   							 /* 추가한 스타일 */
+    				button {
+			        float: right; /* 오른쪽으로 이동 */
+			        margin-right: 10px; /* 오른쪽 여백 추가 */
+					}
+				 	</style>                 
+                                     
+					<button onclick="openMovieModal()">
+						일별 박스오피스 조회
+					</button>       
+					
+					<!-- 모달 추가 -->
+					<div id="movieModal" class="modal" style="display: none; width: 800px;">
+					    <div class="modal-content">
+					        <span class="close" onclick="closeMovieModal()">&times;</span>
+					        <ol id="movieList">
+					           <!-- 하단 스크립트 모달 동작 -->
+					        </ol>
+					        <button onclick="confirmMovieSelection()">확인</button>
+					    </div>
+					</div> 
+
+
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-name">영화이름<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="movie-name" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
-                      </div>
+            <button type="submit" class="btn btn-success" onclick="openRegistrationPage()">Search</button>
+
+			<script>
+			    function openRegistrationPage() {
+			        // 현재 페이지의 컨텍스트 경로를 얻어옵니다.
+			        var contextPath = "<%= request.getContextPath() %>";
+			
+			        // 상대 경로를 사용하여 JSP 파일의 URL을 생성합니다.
+			        var registrationPageUrl = contextPath + "/_movie/regist2.jsp";
+			
+			        // 윈도우를 새로 열어서 팝업으로 페이지를 표시
+			        window.open(registrationPageUrl, "_blank", "width=1200, height=1000");
+			    }
+			</script>
+
+                     </div>
                       
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-grade">관람등급<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select id="movie-grade" class="form-control" required>
-                            <option value="">관람등급</option>
-                            <option value="전체관람가">전체관람가</option>
-                            <option value="12세 이상 관람가">12세 이상 관람가</option>
-                            <option value="15세 이상 관람가">15세 이상 관람가</option>
-                            <option value="청소년 관람불가">청소년 관람불가</option>
-                          </select>
-                         </div> 
-                      </div>
+                     
+                     <!--  잠시 주석 처리   / 이미지는 검색으로 다른 정보와  불러올 예정 -->
                       
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-img">영화 이미지<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -191,7 +224,7 @@
 								<input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage">
 							</div>
                         </div>
-                      </div>
+                      </div> -->
                       
                       <div class="ln_solid"></div>
                       <div class="form-group">
@@ -207,6 +240,9 @@
                 </div>
               </div>
             </div>
+            
+          
+            
 
 			<div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -287,6 +323,9 @@
                 </div>
               </div>
             </div>
+            
+   
+					         
 			
 			<div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -303,20 +342,32 @@
                   <div class="x_content">
                     <br />
                     <form id="demo-form3" data-parsley-validate class="form-horizontal form-label-left">
-
+					
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-names">영화이름<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select id="movie-names" class="form-control" required>
-                            <option value="">영화이름 선택</option>
-                            <option value="영화이름1">영화이름1</option>
-                            <option value="영화이름2">영화이름2</option>
-                            <option value="영화이름3">영화이름3</option>
-                            <option value="영화이름4">영화이름4</option>
-                          </select>
+                         <!-- 검색 api 로직 들어갈 곳  -->
+                         <input type="text" id="movie-name2" required="required" class="form-control col-md-7 col-xs-12">
+                         <button type="submit" class="btn btn-success">Search</button>
                         </div>
                       </div>
+                      
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-grade">관람등급<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select id="movie-grade" class="form-control" required>
+                            <option value="">관람등급</option>
+                            <option value="전체관람가">전체관람가</option>
+                            <option value="12세 이상 관람가">12세 이상 관람가</option>
+                            <option value="15세 이상 관람가">15세 이상 관람가</option>
+                            <option value="청소년 관람불가">청소년 관람불가</option>
+                          </select>
+                         </div> 
+                      </div>
+                      
+                   
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="areas">지역<span class="required">*</span>
                         </label>
@@ -414,6 +465,80 @@
 
     <!-- jQuery -->
     <script src="_admin/vendors/jquery/dist/jquery.min.js"></script>
+    
+    <script type="text/javascript">
+	  function openMovieModal() {	
+		  document.getElementById("movieModal").style.display = "block";
+		
+		$.ajax({
+			url : 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json',
+			type : 'GET',
+			data : {
+					key : "ee9ed756bb3f15468dceccf766e69e7b",
+					targetDt : "20190900"                         //날짜형식이 틀리면 최신날짜를 보여주는걸로 알고있음
+			},
+			async : false,                              //비동기식인 ajax를 동기식으로 만들어줌 만약 출력해야될 결과가 많거나 제대로 출력되지 않을때, 이 옵션을 사용
+			success : function(data) {                        //data에 들어오는 값들은 앞에서 출력되던 예시와 같음
+				var movieList = '';
+                for (var i = 0; i < data.boxOfficeResult.dailyBoxOfficeList.length; i++) {
+                    movieList += '<li data-movieCd="' + data.boxOfficeResult.dailyBoxOfficeList[i].movieCd +
+                                 '" data-openDt="' + data.boxOfficeResult.dailyBoxOfficeList[i].openDt + '">' +
+                                 data.boxOfficeResult.dailyBoxOfficeList[i].movieNm +
+                                 ' (' + data.boxOfficeResult.dailyBoxOfficeList[i].openDt + ')</li>';
+                }
+                $('#movieList').html(movieList);
+                
+            	 // 각 항목에 클릭 이벤트 추가
+                $('#movieList li').on('click', function() {
+                    $(this).toggleClass('selected');
+                });
+			}
+		});
+	}
+	  
+	  
+	  function closeMovieModal() {
+	        // 모달 닫기
+	        document.getElementById("movieModal").style.display = "none";
+	    }
+	
+	  function confirmMovieSelection() {
+	        // 선택된 영화 목록을 확인하는 로직 추가
+	        var selectedMovies = $('#movieList li.selected');
+	        var selectedMovieCodes = selectedMovies.map(function() {
+	            return $(this).data('movieCd');
+	        }).get();
+	        var selectedOpenDates = selectedMovies.map(function() {
+	            return $(this).data('openDt');
+	        }).get();
+
+	        // 확인 로직 (예: 콘솔에 출력)
+	        console.log('선택한 영화 코드: ', selectedMovieCodes);
+	        console.log('선택한 영화 제목과 개봉일: ', selectedOpenDates);
+
+
+	        // 모달 닫기
+	        closeMovieModal();
+	    }
+	
+	</script>
+	
+	
+	<script type="text/javascript">
+		function func1(){
+			var movieNm = $('#movie-names').find(':selected').attr('value');
+			var movieCd = $('#movie-names').find(':selected').attr('movieCd');
+			var openDt = $('#movie-names').find(':selected').attr('openDt');
+			
+			alert(movieNm);
+			alert(movieCd);
+			alert(openDt);
+			
+			location.href='main.me?movieNm='+movieNm+'movieCd='+movieCd+'openDt='+openDt;
+		}					
+	</script>
+	
+    
     <!-- Bootstrap -->
     <script src="_admin/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
