@@ -26,7 +26,7 @@
       <!-- 이곳에 코드작성 -->
       <div class="inner-wrap">
         <jsp:include page="lnb.jsp"></jsp:include>
-        <form id="fr" method="post" action="changepwPro.me">
+        <form id="fr" method="post" action="changepwPro.me" onsubmit="return checkSubmit()">
 			<input id="ibxSchPwdLoginId" type="hidden" value="${sessionScope.sId}" name="id"> <!--아이디-->
 			<div id="contents">
 				<h2 class="tit">비밀번호 변경</h2>
