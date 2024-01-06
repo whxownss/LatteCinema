@@ -295,11 +295,15 @@ public class CSBoardService {
 			String qnaCategory = request.getParameter("qnaCategory");
 			String createUser = request.getParameter("createUser");
 			String qnaContent = request.getParameter("qnaContent");
+			String qnaSubject	= request.getParameter("qnaSubject");
+			String qnaSecret = request.getParameter("qnaSecret");
 			
 			QnaBoardDTO qnaBoardDTO = new QnaBoardDTO();
 			qnaBoardDTO.setQnaCategory(qnaCategory);
 			qnaBoardDTO.setCreateUser(createUser);
 			qnaBoardDTO.setQnaContent(qnaContent);
+			qnaBoardDTO.setQnaSecret(qnaSecret);
+			qnaBoardDTO.setQnaSubject(qnaSubject);
 			csBoardDAO = new CSBoardDAO();
 			insertSuccess = csBoardDAO.qnaBoardInsert(qnaBoardDTO);
 			

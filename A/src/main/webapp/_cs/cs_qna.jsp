@@ -19,9 +19,11 @@
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 					<h2>1:1문의</h2>
 					<div>
+					<c:if test="${! empty sessionScope.sId }">
 						<a href="cs_qna_write.cs" class="more " style="font-size: 18px;">
 							1:1문의 글쓰기
 						</a>
+					</c:if>	
 					</div>
 				</div>
 			</div>
@@ -84,7 +86,13 @@
 				  	 <tr> 
 				  		<th scope="row">${qnaBoardDTO.rn }</th>
 				  		<td>${qnaBoardDTO.qnaCategory }</td><!-- 이 글을 클릭 가능하게 하는 것은 운영자와 당사자만 가능하게 하자.  -->
-				        <td><a href="cs_qna_content.cs?createUser=${qnaBoardDTO.createUser }&createDate=${qnaBoardDTO.createDate}"> ${qnaBoardDTO.qnaSubject } </a></td>
+				  		
+				  		<c:if test="${qnaBoardDTO.qnaSecret eq 0 }">
+				  			<td><a href="cs_qna_content.cs?createUser=${qnaBoardDTO.createUser }&createDate=${qnaBoardDTO.createDate}">${qnaBoardDTO.qnaSubject } </a></td>
+				  		</c:if>
+				  		<c:if test="${qnaBoardDTO.qnaSecret eq 1 }">
+				  			<td><a href="cs_qna_content.cs?createUser=${qnaBoardDTO.createUser }&createDate=${qnaBoardDTO.createDate}"><img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">비밀글로 설정되어 있습니다. </a></td>
+				  		</c:if>
 				        <td>${qnaBoardDTO.createUser }</td>
 				  	 </tr>
 				  	</c:forEach>

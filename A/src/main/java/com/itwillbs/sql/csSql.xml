@@ -156,13 +156,14 @@
 		   FROM (SELECT IFNULL(MAX(CAST(QNAIDX as unsigned)), 0) + 1
 				   FROM QNABOARD) Q)
 		,#{qnaCategory}
-		,'비밀글입니다'
+		,#{qnaSubject}
 		,#{qnaContent}
 		,NULL
 		,#{createUser}
 		,SYSDATE()
 		,NULL
 		,NULL
+		,#{qnaSecret}
 		);
 	</insert>
 	<select id="searchQnaBoardCount" resultType="int" parameterType="String">
