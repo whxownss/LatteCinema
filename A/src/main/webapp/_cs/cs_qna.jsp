@@ -11,6 +11,10 @@
 <%
 	ArrayList<QnaBoardDTO> qnaBoardList = (ArrayList<QnaBoardDTO>)request.getAttribute("qnaBoardList");
 	PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
+	
+	String sId = (String)session.getAttribute("sId");
+	boolean isUserAdmin = sId != null && sId.startsWith("admin");
+	request.setAttribute("isUserAdmin", isUserAdmin);
 %>	
 			
 		<section class="category-section" id="">
@@ -84,6 +88,8 @@
 				  </thead>
 				  <tbody id="tbody">
 				  	<c:forEach var="qnaBoardDTO" items="${qnaBoardList }">
+<%-- 				  	<c:out value="${sessionScope.sId}"/><br/> --%>
+<%-- 					<c:out value="${qnaBoardDTO.createUser}"/><br/> --%>
 				  	 <tr> 
 				  		<th scope="row">${qnaBoardDTO.rn }</th>
 				  		<td>${qnaBoardDTO.qnaCategory }</td><!-- 이 글을 클릭 가능하게 하는 것은 운영자와 당사자만 가능하게 하자.  -->
@@ -91,9 +97,17 @@
 				  		<c:if test="${qnaBoardDTO.qnaSecret eq 0 }">
 				  			<td><a href="cs_qna_content.cs?createUser=${qnaBoardDTO.createUser }&createDate=${qnaBoardDTO.createDate}">${qnaBoardDTO.qnaSubject } </a></td>
 				  		</c:if>
-				  		<c:if test="${qnaBoardDTO.qnaSecret eq 1 }">
-				  			<td><a href="cs_qna_content.cs?createUser=${qnaBoardDTO.createUser }&createDate=${qnaBoardDTO.createDate}"><img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">비밀글로 설정되어 있습니다. </a></td>
+				  		<c:if test="${isUserAdmin || sessionScope.sId eq qnaBoardDTO.createUser}">
+					  		<c:if test="${qnaBoardDTO.qnaSecret eq 1 }">
+					  			<td><a href="cs_qna_content.cs?createUser=${qnaBoardDTO.createUser }&createDate=${qnaBoardDTO.createDate}"><img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">${qnaBoardDTO.qnaSubject } </a></td>
+					  		</c:if>
 				  		</c:if>
+				  		<c:if test="${!isUserAdmin && sessionScope.sId ne qnaBoardDTO.createUser }">
+					  		<c:if test="${qnaBoardDTO.qnaSecret eq 1 }">
+					  			<td><img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">비밀글로 설정되어 있습니다.</td>
+					  		</c:if>
+				  		</c:if>
+				  		
 				        <c:if test="${empty qnaBoardDTO.responseUser }">
 				        	<td>미답변</td>
 				        </c:if>
@@ -137,6 +151,7 @@
 <script src="./jQuery/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	var sId = '<%=sId%>';
 	// qnaCategory 값이 비어 있지 않다면...
     if($('#qnaCategory').val() != '') {
    
@@ -151,6 +166,7 @@ $(document).ready(function(){
     });
 });
 $('#qnaCategory').change(function() {
+	var sId = '<%=sId%>';
 	 $.ajax({
  	    url: 'cs_qna.cs',  // 서버의 URL을 입력
  	    type: 'GET',  // 요청 유형을 'GET'으로 설정
@@ -174,11 +190,15 @@ $('#qnaCategory').change(function() {
                 var newRow = $('<tr></tr>');
                 newRow.append($('<td></td>').text(search.rn));  
                 newRow.append($('<td></td>').text(search.qnaCategory));
+                
                 if(search.qnaSecret === '0'){
 	                newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + search.qnaSubject + '</a>'));
-                } else {
-                	newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + '<img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">' + "비밀글로 설정되어 있습니다." + '</a>'));
+                } else if(search.qnaSecret === '1' && !sId.startsWith("admin") && sId != search.createUser){
+                	newRow.append($('<td></td>').html('<img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">' + "비밀글로 설정되어 있습니다."));
+                } else if(search.qnaSecret === '1' || sId.startsWith("admin") || sId === search.createUser){
+                	newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + '<img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">' +search.qnaSubject + '</a>'));
                 }
+                
                 if(!search.responseUser){
                 	newRow.append($('<td></td>').text('미답변'));
                 } else{
@@ -247,6 +267,7 @@ function searchPageNm(pageNum, qnaCategory){
 }
 
 function updatePagination(response) {
+	var sId = '<%=sId%>';
 // 	debugger;
 	// 'response' 객체에서 'qnaBoardList'와 'pageDTO' 데이터 추출
     var qnaBoardList = response.qnaBoardList;
@@ -262,11 +283,15 @@ function updatePagination(response) {
         var newRow = $('<tr></tr>');
         newRow.append($('<td></td>').text(search.rn));  
         newRow.append($('<td></td>').text(search.qnaCategory));
+        
         if(search.qnaSecret === '0'){
             newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + search.qnaSubject + '</a>'));
-        } else {
-        	newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + '<img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">' + "비밀글로 설정되어 있습니다." + '</a>'));
+        } else if(search.qnaSecret === '1' && !sId.startsWith("admin") && sId != search.createUser){
+        	newRow.append($('<td></td>').html('<img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">' + "비밀글로 설정되어 있습니다."));
+        } else if(search.qnaSecret === '1' || sId.startsWith("admin") || sId === search.createUser){
+        	newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + '<img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">' +search.qnaSubject + '</a>'));
         }
+        
         if(!search.responseUser){
         	newRow.append($('<td></td>').text('미답변'));
         } else{
