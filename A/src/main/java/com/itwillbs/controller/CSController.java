@@ -701,6 +701,19 @@ public class CSController extends HttpServlet  {
 			}
 			System.out.println(msg);
 		}
+		// 분실물 글내용 페이지 관리자 답변 수정2
+		if(sPath.equals("/updateLostBoard2.cs")) {
+			System.out.println("주소비교 /updateLostBoard2.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "lost update fail";
+			if(csBoardService.updateLostBoard2(request)) {
+				msg = "lost update success";
+			}
+			System.out.println(msg);
+			response.sendRedirect("adm_cs_lost.ad");
+		}
 		// 분실물 글쓰기
 		if(sPath.equals("/insertCsLost.cs")) {
 			System.out.println("주소비교 /insertCsLost.cs 일치");

@@ -436,6 +436,33 @@ public class CSBoardService {
 		}
 		return lostUpdateSuccess > 0;
 	}//
+	public boolean updateLostBoard2(HttpServletRequest request) {
+		System.out.println("CSBoardService updateLostBoard2()");
+		int lostUpdateSuccess = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+	        String createUser = request.getParameter("createUser");
+//	        String createDate = request.getParameter("createDate");
+	        String lostResponse = request.getParameter("lostResponse");
+	        String responseUser = request.getParameter("responseUser");
+	        String createDate = preprocessDate(request.getParameter("createDate"));
+	        
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+	        LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
+	        Timestamp createTime = Timestamp.valueOf(dateTime);
+	        
+	        LostBoardDTO lostBoardDTO = new LostBoardDTO();
+	        lostBoardDTO.setCreateUser(createUser);
+	        lostBoardDTO.setCreateDate(createTime);
+	        lostBoardDTO.setLostResponse(lostResponse);
+	        lostBoardDTO.setResponseUser(responseUser);
+
+	        lostUpdateSuccess = csBoardDAO.updateLostBoard2(lostBoardDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lostUpdateSuccess > 0;
+	}//
 
 	public boolean insertCsLost(HttpServletRequest request) {
 		System.out.println("CSBoardService insertCsLost()");

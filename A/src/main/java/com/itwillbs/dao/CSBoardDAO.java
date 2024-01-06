@@ -401,6 +401,23 @@ public class CSBoardDAO {
 		}
 		return lostUpdateSuccess;
 	}//updateLostBoard()
+	public int updateLostBoard2(LostBoardDTO lostBoardDTO) {
+		System.out.println("CSBoardDAO updateLostBoard2()");
+		int lostUpdateSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			lostUpdateSuccess = session.update("CsAdmin.updateLostBoard",lostBoardDTO);
+			
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return lostUpdateSuccess;
+	}//updateLostBoard2()
 
 	public int insertCsLost(LostBoardDTO lostBoardDTO) {
 		System.out.println("CSBoardDAO insertCsLost()");
