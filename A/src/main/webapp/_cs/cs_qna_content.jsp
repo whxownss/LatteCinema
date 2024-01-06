@@ -145,7 +145,7 @@ ${qnaBoardDTO.qnaResponse }
 	    	                'qnaResponse': $('#editableTextArea').val(), // 수정된 내용
 	    	                'createDate': '${qnaBoardDTO.createDate}',
 	    	                'createUser': '${qnaBoardDTO.createUser}',
-	    	                'responseUser': '<%=responseUser%>'
+	    	                'responseUser': '${sessionScope.sId}'
 	    	            }),
 	    	            success: function(response) {
 	    	                alert("저장되었습니다!");
@@ -177,7 +177,7 @@ ${qnaBoardDTO.qnaResponse }
 	    	                'qnaResponse': $('#editableTextArea').val(), // 수정된 내용
 	    	                'createDate': '${qnaBoardDTO.createDate}',
 	    	                'createUser': '${qnaBoardDTO.createUser}',
-	    	                'responseUser': '<%=responseUser%>'
+	    	                'responseUser': '${sessionScope.sId}'
 	    	            }),
 	    	            success: function(response) {
 	    	                alert("저장되었습니다!");
