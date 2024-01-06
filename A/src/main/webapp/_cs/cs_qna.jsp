@@ -93,7 +93,7 @@
 				  		<c:if test="${qnaBoardDTO.qnaSecret eq 1 }">
 				  			<td><a href="cs_qna_content.cs?createUser=${qnaBoardDTO.createUser }&createDate=${qnaBoardDTO.createDate}"><img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">비밀글로 설정되어 있습니다. </a></td>
 				  		</c:if>
-				        <td>${qnaBoardDTO.createUser }</td>
+				        <td class="name">${qnaBoardDTO.createUser }</td>
 				  	 </tr>
 				  	</c:forEach>
 				    
@@ -134,6 +134,14 @@ $(document).ready(function(){
     if($('#qnaCategory').val() != '') {
    
     }
+    // 'name' 클래스를 가진 모든 요소를 선택
+    $('.name').each(function() {
+      var fullName = $(this).text(); // 현재 텍스트 가져오기
+      if(fullName.length > 1) {
+        var maskedName = fullName[0] + '*'.repeat(fullName.length - 1) +"***"; // 마스킹 처리
+        $(this).text(maskedName); // 마스킹된 이름으로 업데이트
+      }
+    });
 });
 $('#qnaCategory').change(function() {
 	 $.ajax({
@@ -158,9 +166,15 @@ $('#qnaCategory').change(function() {
                 // 새로운 행(<tr>)을 생성하고 각 칼럼(<td>)에 데이터 추가
                 var newRow = $('<tr></tr>');
                 newRow.append($('<td></td>').text(search.rn));  
-                newRow.append($('<td></td>').text(search.qnaCategory));  
-                newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + search.qnaSubject + '</a>'));
-                newRow.append($('<td></td>').text(search.createUser));
+                newRow.append($('<td></td>').text(search.qnaCategory));
+                if(search.qnaSecret === '0'){
+	                newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + search.qnaSubject + '</a>'));
+                } else {
+                	newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + '<img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">' + "비밀글로 설정되어 있습니다." + '</a>'));
+                }
+                var fullName = search.createUser;
+                var maskedName = fullName.length > 1 ? fullName[0] + '*'.repeat(fullName.length - 1)+'***' : fullName;
+                newRow.append($('<td></td>').text(maskedName));
 
                 // 완성된 행을 tbody에 추가
                 $('#tbody').append(newRow);
@@ -235,9 +249,15 @@ function updatePagination(response) {
         // 새로운 행(<tr>)을 생성하고 각 칼럼(<td>)에 데이터 추가
         var newRow = $('<tr></tr>');
         newRow.append($('<td></td>').text(search.rn));  
-        newRow.append($('<td></td>').text(search.qnaCategory));  
-        newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + search.qnaSubject + '</a>'));
-        newRow.append($('<td></td>').text(search.createUser));
+        newRow.append($('<td></td>').text(search.qnaCategory));
+        if(search.qnaSecret === '0'){
+            newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + search.qnaSubject + '</a>'));
+        } else {
+        	newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + '<img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">' + "비밀글로 설정되어 있습니다." + '</a>'));
+        }
+        var fullName = search.createUser;
+        var maskedName = fullName.length > 1 ? fullName[0] + '*'.repeat(fullName.length - 1)+'***' : fullName;
+        newRow.append($('<td></td>').text(maskedName));
 
         // 완성된 행을 tbody에 추가
         $('#tbody').append(newRow);
