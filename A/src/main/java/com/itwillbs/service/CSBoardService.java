@@ -732,5 +732,28 @@ public class CSBoardService {
 		return deleteSuccess > 0;
 	}//deleteQnaBoard()
 
+	public boolean deleteLostBoard(HttpServletRequest request) {
+		System.out.println("CSBoardService deleteLostBoard()");
+		int deleteSuccess = 0;
+		try {
+			LostBoardDTO lostBoardDTO = new LostBoardDTO();
+	        String createUser = request.getParameter("createUser");
+	        String createDate = preprocessDate(request.getParameter("createDate"));
+	        
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+	        LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
+	        Timestamp createTime = Timestamp.valueOf(dateTime);
+	        
+	        lostBoardDTO.setCreateUser(createUser);
+	        lostBoardDTO.setCreateDate(createTime);
+	        
+	        csBoardDAO = new CSBoardDAO();
+	        deleteSuccess = csBoardDAO.deleteLostBoard(lostBoardDTO);
+	    } catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deleteSuccess > 0;
+	}//deleteLostBoard()
+
 	
 }//클래스

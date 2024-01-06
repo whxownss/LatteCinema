@@ -637,6 +637,23 @@ public class CSBoardDAO {
 		}
 		return deleteSuccess;
 	}//deleteQnaBoard()
+
+	public int deleteLostBoard(LostBoardDTO lostBoardDTO) {
+		System.out.println("CSBoardDAO deleteLostBoard()");
+		int deleteSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			deleteSuccess = session.delete("CsAdmin.deleteLostBoard", lostBoardDTO);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return deleteSuccess;
+	}//deleteLostBoard()
 	
 	
 	

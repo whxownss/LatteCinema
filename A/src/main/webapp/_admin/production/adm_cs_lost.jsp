@@ -316,7 +316,7 @@ ArrayList<LostBoardDTO> lostBoardList = (ArrayList<LostBoardDTO>)request.getAttr
  		
  		if(confirm("삭제하시겠습니까?")){
  			alert("정상적으로 삭제되었습니다.");
- 			window.location.href = 'deleteCenterContent.cs?createUser=' + $("#centerUser").val() + '&createDate=' + $("#centerDate").val();
+ 			window.location.href = 'deleteLostBoard.cs?createUser=' + $("#lostUser").val() + '&createDate=' + $("#lostDate").val();
  		}else{
  			alert("삭제가 취소되었습니다.");
  		}

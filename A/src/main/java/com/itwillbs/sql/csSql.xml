@@ -221,6 +221,10 @@
 		    CREATE_USER = #{createUser}
 		    AND CREATE_DATE = #{createDate}
 	</update>
+	<delete id="deleteLostBoard" parameterType="LostBoardDTO">
+		DELETE FROM LOSTBOARD
+ 		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</delete>
 	<insert id="insertCsLost" parameterType="LostBoardDTO">
 		INSERT INTO LOSTBOARD
 		VALUES 

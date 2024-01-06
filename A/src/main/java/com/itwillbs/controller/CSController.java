@@ -800,7 +800,21 @@ public class CSController extends HttpServlet  {
 //			request.setAttribute("lostBoardList",lostBoardList);
 //			dispatcher = request.getRequestDispatcher("_cs/cs_lost_search.jsp");
 //			dispatcher.forward(request, response);
-		}
+		}//
+		// 분실물 글 삭제
+		if(sPath.equals("/deleteLostBoard.cs")) {
+			System.out.println("주소비교 /deleteLostBoard.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "delete fail";
+			if(csBoardService.deleteLostBoard(request)) {
+				msg = "delete success";
+			}
+			System.out.println(msg);
+			//response.sendRedirect("cs_center.cs");
+			response.sendRedirect("adm_cs_lost.ad");
+		}//
 		
 		
 		
