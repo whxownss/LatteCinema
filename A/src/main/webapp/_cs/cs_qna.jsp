@@ -78,6 +78,7 @@
 				      <th scope="col">#</th>
 				      <th scope="col">카테고리</th>
 				      <th scope="col">제목</th>
+				      <th scope="col">접수상태</th>
 				      <th scope="col">글쓴이</th>
 				    </tr>
 				  </thead>
@@ -93,6 +94,12 @@
 				  		<c:if test="${qnaBoardDTO.qnaSecret eq 1 }">
 				  			<td><a href="cs_qna_content.cs?createUser=${qnaBoardDTO.createUser }&createDate=${qnaBoardDTO.createDate}"><img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">비밀글로 설정되어 있습니다. </a></td>
 				  		</c:if>
+				        <c:if test="${empty qnaBoardDTO.responseUser }">
+				        	<td>미답변</td>
+				        </c:if>
+				        <c:if test="${! empty qnaBoardDTO.responseUser }">
+				        	<td>답변완료</td>
+				        </c:if>
 				        <td class="name">${qnaBoardDTO.createUser }</td>
 				  	 </tr>
 				  	</c:forEach>
@@ -171,6 +178,11 @@ $('#qnaCategory').change(function() {
 	                newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + search.qnaSubject + '</a>'));
                 } else {
                 	newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + '<img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">' + "비밀글로 설정되어 있습니다." + '</a>'));
+                }
+                if(!search.responseUser){
+                	newRow.append($('<td></td>').text('미답변'));
+                } else{
+                	newRow.append($('<td></td>').text('답변완료'));
                 }
                 var fullName = search.createUser;
                 var maskedName = fullName.length > 1 ? fullName[0] + '*'.repeat(fullName.length - 1)+'***' : fullName;
@@ -254,6 +266,11 @@ function updatePagination(response) {
             newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + search.qnaSubject + '</a>'));
         } else {
         	newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + '<img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">' + "비밀글로 설정되어 있습니다." + '</a>'));
+        }
+        if(!search.responseUser){
+        	newRow.append($('<td></td>').text('미답변'));
+        } else{
+        	newRow.append($('<td></td>').text('답변완료'));
         }
         var fullName = search.createUser;
         var maskedName = fullName.length > 1 ? fullName[0] + '*'.repeat(fullName.length - 1)+'***' : fullName;
