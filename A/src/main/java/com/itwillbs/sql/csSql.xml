@@ -166,6 +166,10 @@
 		,#{qnaSecret}
 		);
 	</insert>
+	<delete id="deleteQnaBoard" parameterType="QnaBoardDTO">
+		DELETE FROM QNABOARD
+		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate} 
+	</delete>
 	<select id="searchQnaBoardCount" resultType="int" parameterType="String">
 		SELECT COUNT(*) 
 		  FROM QNABOARD 

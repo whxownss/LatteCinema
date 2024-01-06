@@ -681,5 +681,29 @@ public class CSBoardService {
 		return insertSuccess > 0;
 	}//exqBoardInsert()
 
+	public boolean deleteQnaBoard(HttpServletRequest request) {
+		System.out.println("CSBoardService deleteQnaBoard()");
+		int deleteSuccess = 0;
+		try {
+			QnaBoardDTO qnaBoardDTO = new QnaBoardDTO();
+	        String createUser = request.getParameter("createUser");
+	        String createDate = request.getParameter("createDate");
+//	        String createDate = preprocessDate(request.getParameter("createDate"));
+	        
+//	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+//	        LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
+//	        Timestamp createTime = Timestamp.valueOf(dateTime);
+	        
+	        qnaBoardDTO.setCreateUser(createUser);
+	        qnaBoardDTO.setCreateDate(createDate);
+	        
+	        csBoardDAO = new CSBoardDAO();
+	        deleteSuccess = csBoardDAO.deleteQnaBoard(qnaBoardDTO);
+	    } catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deleteSuccess > 0;
+	}//deleteQnaBoard()
+
 	
 }//클래스

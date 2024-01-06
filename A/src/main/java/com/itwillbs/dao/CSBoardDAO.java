@@ -603,6 +603,23 @@ public class CSBoardDAO {
 		}
 		return insertSuccess;
 	}//exqBoardInsert()
+
+	public int deleteQnaBoard(QnaBoardDTO qnaBoardDTO) {
+		System.out.println("CSBoardDAO deleteQnaBoard()");
+		int deleteSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			deleteSuccess = session.delete("CsAdmin.deleteQnaBoard", qnaBoardDTO);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return deleteSuccess;
+	}//deleteQnaBoard()
 	
 	
 	

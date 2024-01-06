@@ -314,7 +314,14 @@ ArrayList<QnaBoardDTO> qnaBoardList = (ArrayList<QnaBoardDTO>)request.getAttribu
 	    // 또는 다른 작업을 수행
 	    // 예를 들어, 모달을 열거나 다른 페이지로 이동
 	});//tr 누르면 모달 토글		
-	
+	$('#deleteQnaBoard').on("click",function(){
+		if(confirm('정말 삭제하시겠습니까?')){
+			alert('삭제완료');
+			window.location.href = 'deleteQnaBoard.cs?createUser=' + $('#qnaUser').val() + '&createDate=' + $("#qnaDate").val();
+		} else {
+			alert('삭제를 취소하셨습니다.');
+		}
+	});
 	</script>
   </body>
 </html>
