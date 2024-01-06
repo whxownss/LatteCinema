@@ -125,7 +125,7 @@ ArrayList<QnaBoardDTO> qnaBoardList = (ArrayList<QnaBoardDTO>)request.getAttribu
             </div>
 
 						  <!-- Modal -->
-			 <form action="#" method="get" name="frChange"> 
+			 <form action="updateQnaBoard2.cs" method="get" name="frChange"> 
 			  <div class="modal fade" id="myModal" role="dialog">
 			    <div class="modal-dialog">
 <!-- 			    <button type="button" class="btn-close" aria-label="Close"></button> -->
@@ -137,17 +137,17 @@ ArrayList<QnaBoardDTO> qnaBoardList = (ArrayList<QnaBoardDTO>)request.getAttribu
 				      <input type="hidden" id="qnaDate" name="createDate" value="">
 				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				        <h5 class="modal-title" id="exampleModalLabel">1:1문의사항</h5>
-				        <input type="text" value="" id="qnaCategory" name="qnaCategory">
+				        <input type="text" value="" id="qnaCategory" name="qnaCategory" readonly>
 				      </div>
 				      <div class="modal-body">
 <!-- 				        <form> -->
 				          <div class="mb-3">
 				            <label for="recipient-name" class="col-form-label">제목</label>
-				            <input type="text" class="form-control" id="recipient-name" name="qnaSubject" value="">
+				            <input type="text" class="form-control" id="recipient-name" name="qnaSubject" value="" readonly>
 				          </div>
 				          <div class="mb-3">
 				            <label for="message-text" class="col-form-label">내용</label>
-				            <textarea class="form-control" id="message-text" name="qnaContent"></textarea>
+				            <textarea class="form-control" id="message-text" name="qnaContent" readonly></textarea>
 				          </div>
 				          <div class="mb-3">
 				            <label for="message-text" class="col-form-label">문의답변</label>
@@ -156,7 +156,7 @@ ArrayList<QnaBoardDTO> qnaBoardList = (ArrayList<QnaBoardDTO>)request.getAttribu
 <!-- 				        </form> -->
 				      </div>
 				      <div class="modal-footer">
-<!-- 				      	<button type="button" class="btn btn-danger" id="deleteQnaBoard">삭제</button> -->
+				      	<button type="button" class="btn btn-danger" id="deleteQnaBoard">삭제</button>
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">나가기</button>
 				        <button type="submit" id="modalRewrite" class="btn btn-primary">수정</button>
 				      </div>
@@ -263,7 +263,7 @@ ArrayList<QnaBoardDTO> qnaBoardList = (ArrayList<QnaBoardDTO>)request.getAttribu
     <script src="_admin/build/js/custom.min.js"></script>
 	<script type="text/javascript">
 	$("tr a[data-toggle='modal']").on("click", function () {
-		debugger; // 문제점은 공지사항 내용쪽 텍스트가 공백이 너무 많아서 터져버림.
+// 		debugger; // 문제점은 공지사항 내용쪽 텍스트가 공백이 너무 많아서 터져버림.
 	    // data-info 속성에서 JSON 데이터 가져오기
 	    var infoData = $(this).data("info");
 	    console.log(typeof infoData); //1번째 글은 Object타입, 서면입력글은 string으로 잡힘.
@@ -290,7 +290,7 @@ ArrayList<QnaBoardDTO> qnaBoardList = (ArrayList<QnaBoardDTO>)request.getAttribu
 	    var key3 = infoData.key3;
 	    var key4 = infoData.key4;
 	    var key5 = infoData.key5;
-	    var key6 = infoData.key5;
+	    var key6 = infoData.key6;
 	
 	    // 추출한 정보를 출력하거나 다른 작업 수행
 	    console.log("Key1:", key1);
@@ -305,8 +305,8 @@ ArrayList<QnaBoardDTO> qnaBoardList = (ArrayList<QnaBoardDTO>)request.getAttribu
             $("#qnaCategory").val(infoData.key3); // 
             $("#recipient-name").val(infoData.key1); // a 태그에서 가져온 정보
             $("#message-text").text(infoData.key2); // a 태그에서 가져온 정보
-            $("#centerUser").val(infoData.key4);
-            $("#centerDate").val(infoData.key5);
+            $("#qnaUser").val(infoData.key4);
+            $("#qnaDate").val(infoData.key5);
             $("#qnaResponse").val(infoData.key6);
         } else {
             console.log("data-info not found");

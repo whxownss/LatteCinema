@@ -565,6 +565,19 @@ public class CSController extends HttpServlet  {
 			}
 			System.out.println(msg);
 		}
+		// 1:1문의 글 업데이트 하기2
+		if(sPath.equals("/updateQnaBoard2.cs")) {
+			System.out.println("주소비교 /updateQnaBoard2.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "qna update fail";
+			if(csBoardService.updateQnaBoard2(request)) {
+				msg = "qna update success";
+			}
+			System.out.println(msg);
+			response.sendRedirect("adm_cs_qna.ad");
+		}
 		// 1:1문의 글쓰기 페이지 이동
 		if(sPath.equals("/cs_qna_write.cs")) {
 			System.out.println("주소비교 /cs_qna_write.cs 일치");

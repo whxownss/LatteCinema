@@ -287,6 +287,29 @@ public class CSBoardService {
 		}
 		return qnaUpdateSuccess > 0;
 	}//updateQnaBoard()
+	public boolean updateQnaBoard2(HttpServletRequest request) {
+		System.out.println("CSBoardService updateQnaBoard2()");
+		int qnaUpdateSuccess = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+	        QnaBoardDTO qnaBoardDTO = new QnaBoardDTO();
+//	        // 데이터 사용
+	        String qnaResponse = request.getParameter("qnaResponse");
+	        String responseUser = request.getParameter("responseUser");
+	        String createUser = request.getParameter("createUser");
+	        String createDate = request.getParameter("createDate");
+	        
+	        qnaBoardDTO.setCreateDate(createDate);
+	        qnaBoardDTO.setCreateUser(createUser);
+	        qnaBoardDTO.setResponseUser(responseUser);
+	        qnaBoardDTO.setQnaResponse(qnaResponse);
+	        
+	        qnaUpdateSuccess = csBoardDAO.updateQnaBoard(qnaBoardDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return qnaUpdateSuccess > 0;
+	}//updateQnaBoard2()
 
 	public boolean qnaBoardInsert(HttpServletRequest request) {
 		System.out.println("CSBoardService qnaBoardInsert()");

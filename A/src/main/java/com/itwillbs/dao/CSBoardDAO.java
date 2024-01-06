@@ -261,6 +261,23 @@ public class CSBoardDAO {
 		}
 		return qnaUpdateSuccess;
 	}//updateQnaBoard()
+	public int updateQnaBoard2(QnaBoardDTO qnaBoardDTO) {
+		System.out.println("CSBoardDAO updateQnaBoard2()");
+		int qnaUpdateSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			qnaUpdateSuccess = session.update("CsAdmin.updateQnaBoard",qnaBoardDTO);
+			
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return qnaUpdateSuccess;
+	}//updateQnaBoard()
 
 	public int qnaBoardInsert(QnaBoardDTO qnaBoardDTO) {
 		System.out.println("CSBoardDAO qnaBoardInsert()");
