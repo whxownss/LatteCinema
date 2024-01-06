@@ -59,10 +59,10 @@
 								</td>
 							</tr>
 							<tr>
-								<th scope="row"><label for="ibxSchPwdMblpTelno">휴대폰 번호<!--휴대폰 번호--></label></th>
+								<th scope="row"><label for="ibxSchPwdMblpTelno">이메일<!--회원가입시 입력한 이메일--></label></th>
 								<td>
-									<input type="text" id="ibxSchPwdMblpTelno" maxlength="11" placeholder="'-' 없이 입력" class="input-text w230px"><!--'-' 없이 입력-->
-									<button id="btnSchPwdMbCertNoSend" type="button" class="button gray w75px ml08" disabled="disabled">인증요청<!--인증요청--></button>
+									<input type="text" id="ibxSchPwdMblpTelno" maxlength="11" placeholder="example@example.com" class="input-text w230px"><!--'-' 없이 입력-->
+									<button id="btnSchPwdMbCertNoSend" type="button" class="button gray w100px ml08" disabled="disabled">인증번호 발송<!--인증요청--></button>
 								</td>
 							</tr>
 							<tr id="schPwdMblpCertRow">
@@ -70,16 +70,12 @@
 								<td>
 									<div class="chk-num">
 										<div class="line">
-											<input maxlength="4" type="text" id="ibxSchPwdMblpCharCertNo" class="input-text w180px" title="인증번호 입력" /><!--인증번호 입력-->
-
-											<div class="time-limit" id="schPwdtimer">
-												3:00
-											</div>
+											<input  type="text" id="ibxSchPwdMblpCharCertNo" class="input-text w180px" title="인증번호 입력" /><!--인증번호 입력-->
 										</div>
 									</div>
 
 									<button id="btnSchPwdMblpCharCert" type="button" class="button gray-line w75px ml08">인증확인<!--인증확인--></button>
-									<div id="schPwdMblpNo-error-text" class="alert"></div>
+<!-- 									<div id="schPwdMblpNo-error-text" class="alert"></div> -->
 								</td>
 							</tr>
 
@@ -87,9 +83,6 @@
 					</table>
 				</div>
 
-				<div class="mt20 font-size-14">
-					※ 휴대폰 번호가 변경된 경우 본인인증 찾기를 통하여 비밀번호찾기를 진행해주시기 바랍니다.<!--※ 휴대폰 번호가 변경된 경우 본인인증 찾기를 통하여 비밀번호찾기를 진행해주시기 바랍니다.-->
-				</div>
 
 				<div class="btn-member-bottom v1">
 
