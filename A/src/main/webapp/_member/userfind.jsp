@@ -168,40 +168,67 @@ $(function () {
 		}
 	});
 	
+    $("#btnFindId").on("click", function () {
+        if ($("#name").val() !== "" && $("#birth").val() !== "" && $("#phone").val() !== "") {
+            var name = $("#name").val();
+            var birth = $("#birth").val();
+            var phone = $("#phone").val();
+
+            $.ajax({
+                type: "post",
+                data: { memName: name, memBirth: birth, memPhone: phone },
+                url: "userFindId.me",
+                dataType: "text",
+                success: function (data) {
+                    if (data === '1') {
+                        alert('회원님이 가입하신 아이디는' + name + '입니다.');
+                    } else if (data === '0') {
+                        alert('해당정보로 가입한 회원 아이디가 없습니다.');
+                    }
+                },
+                error: function () {
+                    // 에러 처리 코드 추가
+                }
+            });
+        }
+    });
 	
-	$(".findInput").on("keyup", function(){
-// 		debugger;
-		if($("#name").val() != "" && $("#birth").val() != "" && $("#phone").val() != ""){
-// 			debugger;
-			$("#btnFindId").attr("disabled", false);
-			var name = $("#name").val()
-			var birth = $("#birth").val()
-			var phone = $("#phone").val()
+	
+	
+	
+// 	$(".findInput").on("keyup", function(){
+// // 		debugger;
+// 		if($("#name").val() != "" && $("#birth").val() != "" && $("#phone").val() != ""){
+// // 			debugger;
+// 			$("#btnFindId").attr("disabled", false);
+// 			var name = $("#name").val()
+// 			var birth = $("#birth").val()
+// 			var phone = $("#phone").val()
 			
-			$("#btnFindId").on("click", function() {
-				debugger;
-				$.ajax({
-					type : "post",
-					data : {memName : name, memBirth : birth, memPhone : phone},
-					url : "userFindId.me",
-					dataType : "text",
-					success:function(data){
-						debugger;
-						if(data == '1'){
-							alert('회원님이 가입하신 아이디는' + text + '입니다.');
-						}else if(data == '0'){
-							alert('해당정보로 가입한 회원 아이디가 없습니다.');
-						}
-					},
-					error : function() {
+// 			$("#btnFindId").on("click", function() {
+// // 				debugger;
+// 				$.ajax({
+// 					type : "post",
+// 					data : {memName : name, memBirth : birth, memPhone : phone},
+// 					url : "userFindId.me",
+// 					dataType : "text",
+// 					success:function(data){
+// // 						debugger;
+// 						if(data == '1'){
+// 							alert('회원님이 가입하신 아이디는' + text + '입니다.');
+// 						}else if(data == '0'){
+// 							alert('해당정보로 가입한 회원 아이디가 없습니다.');
+// 						}
+// 					},
+// 					error : function() {
 						
-					}
-				})	
+// 					}
+// 				})	
 			
-			})
-		}
+// 			})
+// 		}
 	
-	});
+// 	});
 });
 </script>
 

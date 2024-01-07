@@ -147,13 +147,19 @@ public class MemberController extends HttpServlet {
 			memberService = new MemberService();
 			MemberDTO memberDTO = memberService.userFindId(request);
 			
-			
-			
-				System.out.println(memberDTO);
-				System.out.println("이름,생년월일,연락처 일치");
-				request.setAttribute("memberDTO", memberDTO);
-				response.sendRedirect("login.me");
-			
+
+			if (memberDTO != null) {
+			    System.out.println(memberDTO);
+			    System.out.println("이름, 생년월일, 연락처 일치");
+			    request.setAttribute("memberDTO", memberDTO);
+			    response.sendRedirect("login.me");
+			} else {
+			    // 아이디를 찾을 수 없는 경우의 처리 (예: 에러 메시지 전송 등)
+			    // 예시: request.setAttribute("errorMessage", "아이디를 찾을 수 없습니다.");
+			    //       dispatcher = request.getRequestDispatcher("errorPage.jsp");
+			    //       dispatcher.forward(request, response);
+			}
+
 			
 			
 			
