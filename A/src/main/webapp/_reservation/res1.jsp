@@ -433,6 +433,10 @@ $(function(){
 		cleanMyMovies();
 		selectMovieList();
 		
+		// 영화관 선택도 없이 날짜 변경 할 때
+		var cinema = $("#selectedCinema").text();
+		if(cinema == "지역 및 영화관" || cinema.includes("(준비중)")) return;
+		
 		letsGoSchedule(this);
 	}); // 날짜 표시 끝
 	

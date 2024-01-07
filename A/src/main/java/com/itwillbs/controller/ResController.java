@@ -88,13 +88,6 @@ public class ResController extends HttpServlet {
 		
 		// 예약2 페이지 이동
 		if(sPath.equals("/res2.re")) {
-			
-			
-			
-			
-			
-			
-			
 			dispatcher = request.getRequestDispatcher("_reservation/res2.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -102,6 +95,15 @@ public class ResController extends HttpServlet {
 
 		// 예약3 페이지 이동
 		if(sPath.equals("/res3.re")) {
+			dispatcher = request.getRequestDispatcher("_reservation/res3.jsp");
+			dispatcher.forward(request, response);
+		}
+		// 결제정보 저장
+		if(sPath.equals("/res3Pro.re")) {
+			System.out.println(request.getParameter("rsp"));
+			System.out.println(request.getParameter("schDTO"));		// 잘넘어온거 확인.
+			
+			
 			dispatcher = request.getRequestDispatcher("_reservation/res3.jsp");
 			dispatcher.forward(request, response);
 		}
