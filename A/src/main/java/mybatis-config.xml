@@ -26,7 +26,7 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="com.mysql.jdbc.Driver"/>
-				<property name="url" value="jdbc:mysql://itwillbs.com:3306/c2d2309t2?useSSL=false&amp;serverTimezone=Asia/Seoul"/>
+				<property name="url" value="jdbc:mysql://itwillbs.com:3306/c2d2309t2?useSSL=false&amp;serverTimezone=Asia/Seoul&amp;allowPublicKeyRetrieval=true"/>
 				<property name="username" value="c2d2309t2"/>
 				<property name="password" value="1234"/>
 			</dataSource>
