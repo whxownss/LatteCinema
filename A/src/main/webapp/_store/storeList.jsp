@@ -140,7 +140,6 @@
 						aria-labelledby="headingTwo" data-bs-parent="#accordionExample"
 						style="">
 						<div class="accordion-body">
-
 							<div
 								class="section-header d-flex justify-content-between align-items-center mb-5">
 								<h2>유의사항</h2>
@@ -181,7 +180,6 @@
 <script src="jQuery/jquery-3.6.0.js"></script>
 
 <!-- iamport.payment.js -->
- <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
 <script type="text/javascript">
@@ -203,11 +201,11 @@ IMP.init("imp20121707");
 	var price = parseInt($("#sPrice").text().replace(",", "")); 
 	
       IMP.request_pay({ 
-          pg: "html5_inicis.INIBillTst",	// PG사
+          pg: "html5_inicis.INIpayTest",	// PG사
           pay_method: "card",	// 지불수단
           merchant_uid: "ORD20180131-00000012",   // 주문번호
           name: itemName,	// 상품명
-          amount: price,                         // 가격
+          amount: price,    // 가격
           buyer_email: "gildong@gmail.com",	// 구매자 이메일
           buyer_name: "홍길동",	// 구매자 이름
           buyer_tel: "010-4242-4242",	// 구매자 연락처
@@ -215,18 +213,80 @@ IMP.init("imp20121707");
       }, function (rsp) { // callback
     	  console.log(rsp);
     	  if (rsp.success) {	// 결제성공
-    		  console.log(rep);
-    	      var msg = '결제가 완료되었습니다.';
-    	      alert(msg);
-    	      location.href = "store.st"
+    		  var msg = '결제가 완료되었습니다.';
+    	        msg += '고유ID : ' + rsp.imp_uid;
+    	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+    	        msg += '결제 금액 : ' + rsp.paid_amount;
+    	        msg += '카드 승인번호 : ' + rsp.apply_num;
     	    } else {	// 결제실패
-    	      var msg = '결제에 실패하였습니다.';
-    	      msg += '에러내용 : ' + rsp.error_msg;
-    	      alert(msg);
+    	    	var msg = '결제에 실패하였습니다.';
+    	        msg += '에러내용 : ' + rsp.error_msg;
     	    }
+    	  alert(msg);
       });
       
     }
+    
+//현재 사용자의 정보를 가져오는 함수
+  function getCurrentUserInfo() {
+      $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "/users/getCurrentUser",
+          type: "get",
+          async:false, // 동기방식(전역변수에 값 저장하려면 필요)
+          dataType : "json",
+          success : function(data) {
+              buyer_name = data.name;
+              buyer_tel = data.tel;
+          },
+          error: function(request,status,error){ 
+              alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); 
+              console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+          }
+      });
+  }
+  
+	// 주문번호를 가져오는 함수 
+  function getMerchantUid_setPrice() {
+      var result = "";
+      $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "/pay/getMerchantUidAndSetPrice",
+          type: "GET",
+          async:false, // 동기방식(전역변수에 값 저장하려면 필요)
+          dataType: "json",
+          data : {
+              goods_id : goods_id
+          },
+          success : function(data) {
+              result = data;
+          },
+          error: function(request,status,error){ 
+              alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); 
+              console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+              result = "error";
+          }
+      });
+      return result;
+  }
+
+  function removePayAuth(removePayAuthId) {
+      $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "/pay/removePayAuth",
+          method: "POST",
+          dataType : "text",
+          data: {
+              removePayAuthId : removePayAuthId
+          },
+          success: function() {
+              
+          },
+          error: function(request, status, error) {
+              console.log("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
+          }
+      });
+  }
 
 </script>
 
