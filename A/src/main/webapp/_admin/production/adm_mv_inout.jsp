@@ -160,22 +160,17 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <br />
-                    <form id="demo-form1" data-parsley-validate class="form-horizontal form-label-left">
 
 
                                      <!-- 확인용 -->
-                    <style>
-   							 /* 추가한 스타일 */
-    				button {
-			        float: right; /* 오른쪽으로 이동 */
-			        margin-right: 10px; /* 오른쪽 여백 추가 */
-					}
-				 	</style>                 
+                            
+                 
+                                
                                      
-					<button onclick="openMovieModal()">
+					<button class="btn btn-success" onclick="openMovieModal()">
 						일별 박스오피스 조회
 					</button>       
+            		<button type="button" class="btn btn-success" onclick="openRegistrationPage()">영화조회 / 등록</button>
 					
 					<!-- 모달 추가 -->
 					<div id="movieModal" class="modal" style="display: none; width: 800px;">
@@ -187,31 +182,33 @@
 					        <button onclick="confirmMovieSelection()">확인</button>
 					    </div>
 					</div> 
+					</div>
 
 
-                      <div class="form-group">
+                <!--       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-name">영화이름<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="movie-name" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-            <button type="submit" class="btn btn-success" onclick="openRegistrationPage()">Search</button>
-
+                        </div> -->
+   
+        
+ 		
+ 			
 			<script>
 			    function openRegistrationPage() {
 			        // 현재 페이지의 컨텍스트 경로를 얻어옵니다.
 			        var contextPath = "<%= request.getContextPath() %>";
 			
 			        // 상대 경로를 사용하여 JSP 파일의 URL을 생성합니다.
-			        var registrationPageUrl = contextPath + "/_movie/regist2.jsp";
+			        var registrationPageUrl = contextPath + "/_movie/movie_SearchPopUp.jsp";
 			
 			        // 윈도우를 새로 열어서 팝업으로 페이지를 표시
 			        window.open(registrationPageUrl, "_blank", "width=1200, height=1000");
 			    }
 			</script>
 
-                     </div>
-                      
+                        	
                      
                      <!--  잠시 주석 처리   / 이미지는 검색으로 다른 정보와  불러올 예정 -->
                       
@@ -229,9 +226,7 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="button">Cancel</button>
-						  <button class="btn btn-primary" type="reset">Reset</button>
-                          <button type="submit" class="btn btn-success">Submit</button>
+                         
                         </div>
                       </div>
 
