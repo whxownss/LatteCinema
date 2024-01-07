@@ -82,6 +82,16 @@
 		
 	</select>
 	
+<!-- 	회원 아이디 찾기 -->
+	<select id="userFindId" parameterType="MemberDTO" resultType="MemberDTO">
+		SELECT MEM_ID
+		FROM MEMBERS
+		WHERE MEM_NAME = #{memName}
+		AND   MEM_BIRTH = #{memBirth}	
+		AND	  MEM_PHONE = #{memPhone}
+	</select>
+	
+	
 	<select id="getMember" parameterType="String" resultType="MemberDTO">
 		SELECT *
 		FROM MEMBERS

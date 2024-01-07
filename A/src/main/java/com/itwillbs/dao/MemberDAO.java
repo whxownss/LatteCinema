@@ -91,6 +91,14 @@ public class MemberDAO {
 		
 	}
 
+	public MemberDTO userFindId(MemberDTO memberDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		memberDTO = session.selectOne("Member.userFindId", memberDTO);
+		System.out.println(memberDTO);
+		session.close();
+		return memberDTO;
+	}
+
 	
 }
 

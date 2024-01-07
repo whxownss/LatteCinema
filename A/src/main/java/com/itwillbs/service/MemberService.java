@@ -180,9 +180,7 @@ public class MemberService {
 			MemberDTO memberDTO = new MemberDTO();
 			memberDTO.setMemId(request.getParameter("id"));
 			memberDTO.setMemPass(request.getParameter("newpasswd"));
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			System.out.println(memberDTO);
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			memberDAO = new MemberDAO();
 			memberDAO.updatePasswd(memberDTO);			
 			
@@ -191,6 +189,34 @@ public class MemberService {
 		}
 		
 	}//updatePasswd()
+
+	// 회원 아이디 찾기
+	public MemberDTO userFindId(HttpServletRequest request) {
+		System.out.println("MemberService userFindId()");
+		MemberDTO memberDTO = new MemberDTO();
+		try {
+			String name = request.getParameter("memName");
+			String birth = request.getParameter("memBirth");
+			String phone = request.getParameter("memPhone");
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@");
+			System.out.println(name);
+			System.out.println(birth);
+			System.out.println(phone);
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@");
+			
+			memberDTO.setMemName(name);
+			memberDTO.setMemBirthD(birth);
+			memberDTO.setMemPhone(phone);
+			
+			memberDAO = new MemberDAO();
+			memberDTO = memberDAO.userFindId(memberDTO);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return memberDTO;
+	}//userFindId()
 
 //	public void sendGmail(HttpServletRequest request) {
 //		System.out.println("MemberService sendGmail()");	

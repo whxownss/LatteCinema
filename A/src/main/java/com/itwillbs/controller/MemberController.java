@@ -141,6 +141,27 @@ public class MemberController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}//
 		
+		// 아이디 찾기 userfind.jsp
+		if(sPath.equals("/userFindId.me")) {
+			response.setCharacterEncoding("utf-8");
+			memberService = new MemberService();
+			MemberDTO memberDTO = memberService.userFindId(request);
+			
+			
+			
+				System.out.println(memberDTO);
+				System.out.println("이름,생년월일,연락처 일치");
+				request.setAttribute("memberDTO", memberDTO);
+				response.sendRedirect("login.me");
+			
+			
+			
+			
+			
+			dispatcher = request.getRequestDispatcher("_member/userfind.jsp");
+			dispatcher.forward(request, response);
+		}//
+		
 		// 비밀번호 찾기 페이지 이동
 		if(sPath.equals("/passfind.me")) {
 			dispatcher = request.getRequestDispatcher("_member/passfind.jsp");
