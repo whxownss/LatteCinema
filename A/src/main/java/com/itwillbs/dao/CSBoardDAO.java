@@ -13,6 +13,7 @@ import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ExqBoardDTO;
 import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.LostBoardDTO;
+import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.sql.SqlMapClient;
@@ -654,6 +655,22 @@ public class CSBoardDAO {
 		}
 		return deleteSuccess;
 	}//deleteLostBoard()
+
+	public ArrayList<MemberDTO> getMemberList() {
+		System.out.println("CSBoardDAO getMemberList()");
+		ArrayList<MemberDTO> memberList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			memberList = new ArrayList<MemberDTO>(session.selectList("CsAdmin.getMemberList"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return memberList;
+	}
 	
 	
 	

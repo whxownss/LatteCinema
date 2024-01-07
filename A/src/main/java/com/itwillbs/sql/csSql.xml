@@ -284,4 +284,10 @@
 	    </if>
 	</select>
 
+	<select id="getMemberList" resultType="MemberDTO">
+		SELECT * 
+		  FROM MEMBERS
+		 WHERE MEM_IDX IS NOT NULL
+	</select>
+	
 </mapper>

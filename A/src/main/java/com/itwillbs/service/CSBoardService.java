@@ -16,6 +16,7 @@ import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ExqBoardDTO;
 import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.LostBoardDTO;
+import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 
@@ -754,6 +755,18 @@ public class CSBoardService {
 		}
 		return deleteSuccess > 0;
 	}//deleteLostBoard()
+
+	public ArrayList<MemberDTO> getMemberList() {
+		System.out.println("CSBoardService getMemberList()");
+		ArrayList<MemberDTO> memberList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			memberList = csBoardDAO.getMemberList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return memberList;
+	}//getMemberList()
 
 	
 }//클래스
