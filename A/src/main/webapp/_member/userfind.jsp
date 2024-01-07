@@ -170,7 +170,9 @@ $(function () {
 	
     $("#btnFindId").on("click", function () {
         if ($("#name").val() !== "" && $("#birth").val() !== "" && $("#phone").val() !== "") {
-            var name = $("#name").val();
+            
+        	$("#btnFindId").attr("disabled", false);
+        	var name = $("#name").val();
             var birth = $("#birth").val();
             var phone = $("#phone").val();
 
