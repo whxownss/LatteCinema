@@ -123,13 +123,49 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
               <div class="title_left">
               </div>
             </div>
-
+						  <!-- Modal -->
+			 <form action="saveCenterContent.cs" method="get" name="frChange"> 
+			  <div class="modal fade" id="myModal" role="dialog">
+			    <div class="modal-dialog">
+<!-- 			    <button type="button" class="btn-close" aria-label="Close"></button> -->
+			      <!-- Modal content-->
+			      <div class="modal-content">
+				      <div class="modal-header">
+				      <input type="hidden" name="updateUser" value="${sessionScope.sId }">
+				      <input type="hidden" id="centerUser" name="createUser" value="">
+				      <input type="hidden" id="centerDate" name="createDate" value="">
+				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				        <h5 class="modal-title" id="exampleModalLabel">공지사항</h5>
+				        <input type="text" value="" id="centerName" name="ciName">
+				      </div>
+				      <div class="modal-body">
+<!-- 				        <form> -->
+				          <div class="mb-3">
+				            <label for="recipient-name" class="col-form-label">제목</label>
+				            <input type="text" class="form-control" id="recipient-name" name="centerSubject" value="">
+				          </div>
+				          <div class="mb-3">
+				            <label for="message-text" class="col-form-label">내용</label>
+				            <textarea class="form-control" id="message-text" name="centerContent"></textarea>
+				          </div>
+<!-- 				        </form> -->
+				      </div>
+				      <div class="modal-footer">
+				      	<button type="button" class="btn btn-danger" id="deleteCenterBoard">삭제</button>
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">나가기</button>
+				        <button type="submit" id="modalRewrite" class="btn btn-primary">수정</button>
+				      </div>
+			    </div>
+			  </div>
+			  
+			</div>
+		 </form>
             <div class="clearfix"></div>
 
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>공지사항</h2>
+                    <h2>공지사항<small><button type="button" class="btn btn-secondary" id="insertCenterBoard">추가</button></small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -146,7 +182,9 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
                           <th>글번호</th>	
                           <th>영화관</th>
                           <th>글 제목</th>
+                          <th>등록자</th>
                           <th>등록일</th>
+                          <th>수정자</th>
                           <th>수정일</th>
                         </tr>
                       </thead>
@@ -155,8 +193,11 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
                       	<tr>	
                       		<td>${centerBoardDTO.rn }</td>
                       		<td>${centerBoardDTO.ciName }</td>
-                      		<td><a href="cs_center_content.cs?createUser=${centerBoardDTO.createUser }&createDate=${centerBoardDTO.createDate}">${centerBoardDTO.centerSubject }</a></td>
+                      		<td><a data-toggle="modal" data-target="#myModal" data-info='{"key1": "${centerBoardDTO.centerSubject}", "key2": "${centerBoardDTO.centerContent}", "key3": "${centerBoardDTO.ciName}", "key4": "${centerBoardDTO.createUser}", "key5": "${centerBoardDTO.createDate}"}'>${centerBoardDTO.centerSubject}</a></td>
+<%--                       		<td><a href="cs_center_content.cs?createUser=${centerBoardDTO.createUser }&createDate=${centerBoardDTO.createDate}">${centerBoardDTO.centerSubject }</a></td> --%>
+                      		<td>${centerBoardDTO.createUser }</td>
                       		<td>${centerBoardDTO.createDate }</td>
+                      		<td>${centerBoardDTO.updateUser }</td>
                       		<td>${centerBoardDTO.updateDate }</td>
                       	</tr>
                       	</c:forEach>
@@ -213,6 +254,69 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
 
     <!-- Custom Theme Scripts -->
     <script src="_admin/build/js/custom.min.js"></script>
-
+	<script type="text/javascript">
+	$("tr a[data-toggle='modal']").on("click", function () {
+		debugger; // 문제점은 공지사항 내용쪽 텍스트가 공백이 너무 많아서 터져버림.
+	    // data-info 속성에서 JSON 데이터 가져오기
+	    var infoData = $(this).data("info");
+	    console.log(typeof infoData); //1번째 글은 Object타입, 서면입력글은 string으로 잡힘.
+	    
+	    //Object면 String으로 바꾸고 String이면 그냥 통과해서 replaceAll 가능하게 함.
+	    if(typeof infoData != 'string'){
+	    	infoData = JSON.stringify(infoData);	
+	    }
+		
+	    if (infoData.includes("\n")) {
+	        // \n이 포함되어 있다면, replaceAll을 사용하여 모두 제거
+	        infoData = infoData.replaceAll("\n", "");
+	    }
+	    if (infoData.includes("\t")) {
+	    	infoData = infoData.replaceAll("\t", "");
+	    }
+// 	    infoData = infoData.replaceAll("\n", "");
+// 	    infoData = infoData.replaceAll("\t", "");
+	    infoData = JSON.parse(infoData);
+	
+	    // 필요한 정보 추출
+	    var key1 = infoData.key1;
+	    var key2 = infoData.key2;
+	    var key3 = infoData.key3;
+	    var key4 = infoData.key4;
+	    var key5 = infoData.key5;
+	
+	    // 추출한 정보를 출력하거나 다른 작업 수행
+	    console.log("Key1:", key1);
+	    console.log("Key2:", key2);
+	    console.log("Key3:", key3);
+	    console.log("Key4:", key4);
+	    console.log("Key5:", key5);
+	
+        if (infoData) {
+            // 필요한 정보 추출
+            $("#centerName").val(infoData.key3); // 
+            $("#recipient-name").val(infoData.key1); // a 태그에서 가져온 정보
+            $("#message-text").text(infoData.key2); // a 태그에서 가져온 정보
+            $("#centerUser").val(infoData.key4);
+            $("#centerDate").val(infoData.key5);
+        } else {
+            console.log("data-info not found");
+        }
+	    // 또는 다른 작업을 수행
+	    // 예를 들어, 모달을 열거나 다른 페이지로 이동
+	});//tr 누르면 모달 토글
+	$("#insertCenterBoard").on("click",function(){
+		window.location.href = "cs_center_write.cs";
+	});
+	$("#deleteCenterBoard").on("click",function(){
+		alert('삭제 버튼 이벤트 연결확인');
+ 		
+ 		if(confirm("삭제하시겠습니까?")){
+ 			alert("정상적으로 삭제되었습니다.");
+ 			window.location.href = 'deleteCenterContent.cs?createUser=' + $("#centerUser").val() + '&createDate=' + $("#centerDate").val();
+ 		}else{
+ 			alert("삭제가 취소되었습니다.");
+ 		}
+	});
+	</script>
   </body>
 </html>

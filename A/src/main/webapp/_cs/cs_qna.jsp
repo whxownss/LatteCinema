@@ -11,6 +11,10 @@
 <%
 	ArrayList<QnaBoardDTO> qnaBoardList = (ArrayList<QnaBoardDTO>)request.getAttribute("qnaBoardList");
 	PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
+	
+	String sId = (String)session.getAttribute("sId");
+	boolean isUserAdmin = sId != null && sId.startsWith("admin");
+	request.setAttribute("isUserAdmin", isUserAdmin);
 %>	
 			
 		<section class="category-section" id="">
@@ -19,9 +23,11 @@
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 					<h2>1:1문의</h2>
 					<div>
+					<c:if test="${! empty sessionScope.sId }">
 						<a href="cs_qna_write.cs" class="more " style="font-size: 18px;">
 							1:1문의 글쓰기
 						</a>
+					</c:if>	
 					</div>
 				</div>
 			</div>
@@ -76,16 +82,39 @@
 				      <th scope="col">#</th>
 				      <th scope="col">카테고리</th>
 				      <th scope="col">제목</th>
+				      <th scope="col">접수상태</th>
 				      <th scope="col">글쓴이</th>
 				    </tr>
 				  </thead>
 				  <tbody id="tbody">
 				  	<c:forEach var="qnaBoardDTO" items="${qnaBoardList }">
+<%-- 				  	<c:out value="${sessionScope.sId}"/><br/> --%>
+<%-- 					<c:out value="${qnaBoardDTO.createUser}"/><br/> --%>
 				  	 <tr> 
 				  		<th scope="row">${qnaBoardDTO.rn }</th>
 				  		<td>${qnaBoardDTO.qnaCategory }</td><!-- 이 글을 클릭 가능하게 하는 것은 운영자와 당사자만 가능하게 하자.  -->
-				        <td><a href="cs_qna_content.cs?createUser=${qnaBoardDTO.createUser }&createDate=${qnaBoardDTO.createDate}"> ${qnaBoardDTO.qnaSubject } </a></td>
-				        <td>${qnaBoardDTO.createUser }</td>
+				  		
+				  		<c:if test="${qnaBoardDTO.qnaSecret eq 0 }">
+				  			<td><a href="cs_qna_content.cs?createUser=${qnaBoardDTO.createUser }&createDate=${qnaBoardDTO.createDate}">${qnaBoardDTO.qnaSubject } </a></td>
+				  		</c:if>
+				  		<c:if test="${isUserAdmin || sessionScope.sId eq qnaBoardDTO.createUser}">
+					  		<c:if test="${qnaBoardDTO.qnaSecret eq 1 }">
+					  			<td><a href="cs_qna_content.cs?createUser=${qnaBoardDTO.createUser }&createDate=${qnaBoardDTO.createDate}"><img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">${qnaBoardDTO.qnaSubject } </a></td>
+					  		</c:if>
+				  		</c:if>
+				  		<c:if test="${!isUserAdmin && sessionScope.sId ne qnaBoardDTO.createUser }">
+					  		<c:if test="${qnaBoardDTO.qnaSecret eq 1 }">
+					  			<td><img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">비밀글로 설정되어 있습니다.</td>
+					  		</c:if>
+				  		</c:if>
+				  		
+				        <c:if test="${empty qnaBoardDTO.responseUser }">
+				        	<td>미답변</td>
+				        </c:if>
+				        <c:if test="${! empty qnaBoardDTO.responseUser }">
+				        	<td>답변완료</td>
+				        </c:if>
+				        <td class="name">${qnaBoardDTO.createUser }</td>
 				  	 </tr>
 				  	</c:forEach>
 				    
@@ -122,12 +151,22 @@
 <script src="./jQuery/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	var sId = '<%=sId%>';
 	// qnaCategory 값이 비어 있지 않다면...
     if($('#qnaCategory').val() != '') {
    
     }
+    // 'name' 클래스를 가진 모든 요소를 선택
+    $('.name').each(function() {
+      var fullName = $(this).text(); // 현재 텍스트 가져오기
+      if(fullName.length > 1) {
+        var maskedName = fullName[0] + '*'.repeat(fullName.length - 1) +"***"; // 마스킹 처리
+        $(this).text(maskedName); // 마스킹된 이름으로 업데이트
+      }
+    });
 });
 $('#qnaCategory').change(function() {
+	var sId = '<%=sId%>';
 	 $.ajax({
  	    url: 'cs_qna.cs',  // 서버의 URL을 입력
  	    type: 'GET',  // 요청 유형을 'GET'으로 설정
@@ -150,9 +189,24 @@ $('#qnaCategory').change(function() {
                 // 새로운 행(<tr>)을 생성하고 각 칼럼(<td>)에 데이터 추가
                 var newRow = $('<tr></tr>');
                 newRow.append($('<td></td>').text(search.rn));  
-                newRow.append($('<td></td>').text(search.qnaCategory));  
-                newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + search.qnaSubject + '</a>'));
-                newRow.append($('<td></td>').text(search.createUser));
+                newRow.append($('<td></td>').text(search.qnaCategory));
+                
+                if(search.qnaSecret === '0'){
+	                newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + search.qnaSubject + '</a>'));
+                } else if(search.qnaSecret === '1' && !sId.startsWith("admin") && sId != search.createUser){
+                	newRow.append($('<td></td>').html('<img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">' + "비밀글로 설정되어 있습니다."));
+                } else if(search.qnaSecret === '1' || sId.startsWith("admin") || sId === search.createUser){
+                	newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + '<img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">' +search.qnaSubject + '</a>'));
+                }
+                
+                if(!search.responseUser){
+                	newRow.append($('<td></td>').text('미답변'));
+                } else{
+                	newRow.append($('<td></td>').text('답변완료'));
+                }
+                var fullName = search.createUser;
+                var maskedName = fullName.length > 1 ? fullName[0] + '*'.repeat(fullName.length - 1)+'***' : fullName;
+                newRow.append($('<td></td>').text(maskedName));
 
                 // 완성된 행을 tbody에 추가
                 $('#tbody').append(newRow);
@@ -213,6 +267,7 @@ function searchPageNm(pageNum, qnaCategory){
 }
 
 function updatePagination(response) {
+	var sId = '<%=sId%>';
 // 	debugger;
 	// 'response' 객체에서 'qnaBoardList'와 'pageDTO' 데이터 추출
     var qnaBoardList = response.qnaBoardList;
@@ -227,9 +282,24 @@ function updatePagination(response) {
         // 새로운 행(<tr>)을 생성하고 각 칼럼(<td>)에 데이터 추가
         var newRow = $('<tr></tr>');
         newRow.append($('<td></td>').text(search.rn));  
-        newRow.append($('<td></td>').text(search.qnaCategory));  
-        newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + search.qnaSubject + '</a>'));
-        newRow.append($('<td></td>').text(search.createUser));
+        newRow.append($('<td></td>').text(search.qnaCategory));
+        
+        if(search.qnaSecret === '0'){
+            newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + search.qnaSubject + '</a>'));
+        } else if(search.qnaSecret === '1' && !sId.startsWith("admin") && sId != search.createUser){
+        	newRow.append($('<td></td>').html('<img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">' + "비밀글로 설정되어 있습니다."));
+        } else if(search.qnaSecret === '1' || sId.startsWith("admin") || sId === search.createUser){
+        	newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + encodeURIComponent(search.createDate) + '">' + '<img alt="lock" src="${pageContext.servletContext.contextPath }/_assets/img/lock.png" style="width: 20px;height: 20px;">' +search.qnaSubject + '</a>'));
+        }
+        
+        if(!search.responseUser){
+        	newRow.append($('<td></td>').text('미답변'));
+        } else{
+        	newRow.append($('<td></td>').text('답변완료'));
+        }
+        var fullName = search.createUser;
+        var maskedName = fullName.length > 1 ? fullName[0] + '*'.repeat(fullName.length - 1)+'***' : fullName;
+        newRow.append($('<td></td>').text(maskedName));
 
         // 완성된 행을 tbody에 추가
         $('#tbody').append(newRow);

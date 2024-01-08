@@ -74,8 +74,8 @@ ${centerBoardDTO.centerContent }
 				    <tr>
 				    	<td colspan="4">
 				    		<div class="d-flex justify-content-around">
-					            <button id="editButton" class="btn btn-dark" type="button">수정</button>
-					            <button id="deleteButton" class="btn btn-outline-secondary" type="button">삭제</button>
+<!-- 					            <button id="editButton" class="btn btn-dark" type="button">수정</button> -->
+<!-- 					            <button id="deleteButton" class="btn btn-outline-secondary" type="button">삭제</button> -->
 					        </div>
 				    	</td>
 				    </tr>

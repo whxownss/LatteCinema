@@ -1,5 +1,8 @@
+<%@page import="com.itwillbs.domain.ResponseDataDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -51,6 +54,8 @@
 <%
 	int totalCount = 10000;
 	int monthlyAudi = 120;
+	
+	ArrayList<ResponseDataDTO> responseList = (ArrayList<ResponseDataDTO>)request.getAttribute("responseList");
 %>
 
   <body class="nav-md">
@@ -873,7 +878,68 @@
                   </div>
                 </div>
               </div>
+              <!--  -->
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>답변 데이터</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <p class="text-muted font-13 m-b-30">
+                    </p>
+                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>게시판명</th>
+                          <th>회원명</th>
+                          <th>작성일</th>
+                          <th>글제목</th>
+                          <th>답변</th>
+                          <th>답변자</th>
+                          <th>답변일</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <c:forEach var="responseDataDTO" items="${responseList }">
+                      <tr>
+                      	  <c:if test="${empty responseDataDTO.qnaIdx }">
+                      	  <th>분실물</th>	
+                      	  </c:if>
+                      	  <c:if test="${empty responseDataDTO.lostIdx }">
+                      	  <th>1:1문의</th>	
+                      	  </c:if>
+                          <th>${responseDataDTO.createUser }</th>
+                          <th>${responseDataDTO.createDate }</th>
+                          <th>${responseDataDTO.subject }</th>
+                          <th>${responseDataDTO.response }</th>
+                          <th>${responseDataDTO.responseUser }</th>
+                          <th>${responseDataDTO.responseDate }</th>
+                      </tr>
+                      </c:forEach>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
           </div>
+             
 
         </div>
         <!-- /page content -->

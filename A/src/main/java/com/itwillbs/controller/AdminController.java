@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.ExqBoardDTO;
 import com.itwillbs.domain.LostBoardDTO;
+import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.QnaBoardDTO;
+import com.itwillbs.domain.ResponseDataDTO;
 import com.itwillbs.service.CSBoardService;
 
 public class AdminController extends HttpServlet {
@@ -35,12 +37,23 @@ public class AdminController extends HttpServlet {
 		
 		// 관리자 홈 페이지 이동
 		if(sPath.equals("/adm_home.ad")) {
+			System.out.println("주소비교 /adm_home.ad 일치");
+			request.setCharacterEncoding("utf-8");
+			CSBoardService csBoardService = new CSBoardService();
+			ArrayList<ResponseDataDTO> responseList = csBoardService.getResponseList();
+			
+			request.setAttribute("responseList", responseList);
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_home.jsp");
 			dispatcher.forward(request, response);
 		}
 		
 		// 관리자 회원관리 페이지 이동
 		if(sPath.equals("/adm_member.ad")) {
+			System.out.println("주소비교 /adm_member.ad 일치");
+			request.setCharacterEncoding("utf-8");
+			CSBoardService csBoardService = new CSBoardService();
+			ArrayList<MemberDTO> memberList = csBoardService.getMemberList();
+			request.setAttribute("memberList",memberList);
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_member.jsp");
 			dispatcher.forward(request, response);
 		}		
