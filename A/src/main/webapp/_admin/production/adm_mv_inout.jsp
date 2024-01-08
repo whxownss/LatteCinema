@@ -235,91 +235,7 @@
                 </div>
               </div>
             </div>
-            
           
-            
-
-			<div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Save Movie House</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown"></li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-space">상영관<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="movie-space" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="area">지역<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select id="area" class="form-control" required>
-                            <option value="">지역</option>
-                            <option value="서울">서울</option>
-                            <option value="부산">부산</option>
-                            <option value="제주도">제주도</option>
-                          </select>
-                         </div> 
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="area-detail">상세<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select id="area-detail" class="form-control" required>
-                            <option value="">상세</option>
-                            <option value="부산대">부산대</option>
-                            <option value="서면">서면</option>
-                          </select>
-                         </div> 
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-position">영화관 위치<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        	<input type="text" id="movie-position" required="required" class="form-control col-md-7 col-xs-12">
-                          	<div class="btn-group">
-								<a class="btn" title="Insert picture (or just drag &amp; drop)" id="pictureBtn"><i class="fa fa-picture-o"></i></a>
-								<input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage">
-							</div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="total-seat">총좌석수<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        	<input type="text" id="total-seat" required="required" class="form-control col-md-7 col-xs-12">
-                        </div> 
-                      </div>
-                      
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="button">Cancel</button>
-						  <button class="btn btn-primary" type="reset">Reset</button>
-                          <button type="submit" class="btn btn-success">Submit</button>
-                        </div>
-                      </div>
-
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-   
 					         
 			
 			<div class="row">
@@ -362,43 +278,21 @@
                          </div> 
                       </div>
                       
+                      
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-grade">관람등급<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select id="movie-grade" class="form-control" required>
+                            <option value="">영화분류</option>
+                            <option value="latteMovie">latte Movie</option>
+                            <option value="nowMovie">now Movie</option>
+                          </select>
+                         </div> 
+                      </div>
+                      
                    
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="areas">지역<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select id="areas" class="form-control" required>
-                            <option value="">지역</option>
-                            <option value="서울">서울</option>
-                            <option value="부산">부산</option>
-                            <option value="제주도">제주도</option>
-                          </select>
-                         </div> 
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="areas-detail">상세<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select id="areas-detail" class="form-control" required>
-                            <option value="">상세</option>
-                            <option value="부산대">부산대</option>
-                            <option value="서면">서면</option>
-                          </select>
-                         </div> 
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-number">상영관<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select id="movie-number" class="form-control" required>
-                            <option value="">상영관</option>
-                            <option value="1관">1관</option>
-                            <option value="2관">2관</option>
-                            <option value="3관">3관</option>
-                            <option value="4관">4관</option>
-                          </select>
-                         </div> 
-                      </div>
+                   
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-startDate">상영시작일<span class="required">*</span>
                         </label>
@@ -413,19 +307,7 @@
                         	<input type="date" id="movie-endDate" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 231021">
                         </div> 
                       </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-startTime">시작시간<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-						    <input type="time" id="movie-startTime" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 09:00">
-						</div> 
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-endTime">종료시간<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-						    <input type="time" id="movie-endTime" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 13:00">
-						</div> 
+                     
                       </div>
                       
                      
@@ -443,7 +325,55 @@
                 </div>
               </div>
             </div>
-             
+            
+            
+            
+           <div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>등록된 영화 관리</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <p class="text-muted font-13 m-b-30">
+                    </p>
+					
+                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                      <thead>
+                        <tr>
+                          <th>영화 인덱스</th>	
+                          <th>영화명</th>
+                          <th>개봉일자</th>
+                          <th>등급</th>
+                          <th>상영상태</th>
+                          <th>영화분류</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      	<tr>
+                      		<td>1</td>
+                      		<td>집에 보내줘</td>
+                      		<td>2023/12/25</td>
+                      		<td>전체관람가</td>
+                      		<td>상영중</select>       <!-- 상영종료일보다 이전인 날짜엔 상영중으로 보이고 지나면 상영종료로 보이게  -->
+                      		</td>
+                      		<td>now</td>
+                      	</tr>
+                       
+                      	
+                      </tbody>
+                    </table>
+					
+					
+                  </div>
+                </div>
+              </div>			
+             </div>
         <!-- /page content -->
 
         <!-- footer content -->
@@ -454,9 +384,20 @@
 <!--           <div class="clearfix"></div> -->
 <!--         </footer> -->
         <!-- /footer content -->
-      </div>
+     
     </div>
    </div> 
+   
+                        
+                  </div>
+                </div>
+              </div>
+            </div>
+         
+   
+   
+   
+   
 
     <!-- jQuery -->
  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>

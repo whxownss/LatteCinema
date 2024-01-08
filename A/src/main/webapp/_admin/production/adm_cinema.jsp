@@ -68,6 +68,7 @@
                   <li><a href="adm_member.ad"><i class="fa fa-user"></i> 회원관리</a></li>
                   <li><a href="adm_mv_inout.ad"><i class="fa fa-edit"></i>영화 통합 추가/제거</a></li>
                   <li><a href="adm_store.ad"><i class="fa fa-beer"></i>스토어 관리</a></li>
+                  <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
                 </ul>
               </div>
               <div class="menu_section">
@@ -154,13 +155,23 @@
                     <br />
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-space">상영관<span class="required">*</span>
+                  
+                  
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="area">영화<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="movie-space" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
+                        <select id="area" class="form-control" required>
+                            <option value="영화1">영화1</option>
+                            <option value="영화2">영화2</option>
+                            <option value="영화3">영화3</option>
+                            <option value="영화4">영화4</option>
+                          </select>
+                         </div> 
                       </div>
+                  
+                  
+                  
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="area">지역<span class="required">*</span>
                         </label>
@@ -173,6 +184,7 @@
                           </select>
                          </div> 
                       </div>
+                      
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="area-detail">상세<span class="required">*</span>
                         </label>
@@ -184,7 +196,18 @@
                           </select>
                          </div> 
                       </div>
-                      <div class="form-group">
+                      
+                          <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-space">상영관<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="movie-space" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      
+                      <!--  영화관 위치가 아니라 영화관 위치 설명 파일이면 다른 곳에 있어야 할듯 -->
+                      
+                     <!--  <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-position">영화관 위치<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -194,7 +217,7 @@
 								<input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage">
 							</div>
                         </div>
-                      </div>
+                      </div> -->
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="total-seat">총좌석수<span class="required">*</span>
                         </label>
@@ -202,6 +225,37 @@
                         	<input type="text" id="total-seat" required="required" class="form-control col-md-7 col-xs-12">
                         </div> 
                       </div>
+                      
+                      
+                        <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-startDate">상영일<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        	<input type="date" id="movie-startDate" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 230921">
+                        </div> 
+                      </div>
+               
+                     
+                     
+                      
+                      
+                      
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-startTime">시작시간<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+						    <input type="time" id="movie-startTime" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 09:00">
+						</div> 
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-endTime">종료시간<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+						    <input type="time" id="movie-endTime" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 13:00">
+						</div> 
+						
+					
+                     
                       
                       <div class="ln_solid"></div>
                       <div class="form-group">
@@ -211,8 +265,9 @@
                           <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                       </div>
-
+                      
                     </form>
+                  </div>
                   </div>
                 </div>
               </div>
