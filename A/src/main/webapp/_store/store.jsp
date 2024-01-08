@@ -23,7 +23,7 @@
 	
 	<!-- 상단 메뉴 -->
 
-	<div class="container" data-aos="fade-up">
+	<div class="container border-bottom toptitle" data-aos="fade-up">
 		<div class="container text-center">
 			<div class="row">
 				<div class="col coll">
@@ -45,6 +45,8 @@
 	<!-- 테두리 css -->
 			
 	<style type="text/css">
+	
+		.toptitle {position: sticky; top:70px;background-color: #fff;}
 	
 		/* 상단메뉴 css */
 		.coll {border:#FFF 2px solid; border-radius: 50px;}

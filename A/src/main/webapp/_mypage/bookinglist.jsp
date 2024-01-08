@@ -22,14 +22,14 @@
         <jsp:include page="lnb.jsp"></jsp:include>
 	
 
-
-			<div id="myLoactionInfo" style="display: none;">
-				<div class="location">
-					<span>Home</span>
-					<a href="/mypage" title="나의 메가박스 페이지로 이동">나의 메가박스</a>
-					<a href="/mypage/bookinglist?tab=01" title="예매/구매내역 페이지로 이동">예매/구매내역</a>
-				</div>
-			</div>			
+			<!-- 있는건지 모르겠음 삭제할까요? -->
+<!-- 			<div id="myLoactionInfo" style="display: none;"> -->
+<!-- 				<div class="location"> -->
+<!-- 					<span>Home</span> -->
+<!-- 					<a href="/mypage" title="나의 메가박스 페이지로 이동">나의 메가박스</a> -->
+<!-- 					<a href="/mypage/bookinglist?tab=01" title="예매/구매내역 페이지로 이동">예매/구매내역</a> -->
+<!-- 				</div> -->
+<!-- 			</div>			 -->
 			
 			
 			<div id="contents">
@@ -37,8 +37,8 @@
 			
 				<div class="tab-block tab-layer">
 					<ul>
-						<li data-url="/mypage/bookinglist?tab=01" data-tit="예매내역" title="예매내역 탭으로 이동" class="on"><a href="#myBokdArea" class="btn">예매 </a></li>
-						<li data-url="/mypage/bookinglist?tab=02" data-tit="구매내역" title="구매내역 탭으로 이동"><a href="#myPurcArea" class="btn">구매 </a></li>
+						<li data-url="/mypage/bookinglist?tab=01" data-tit="예매/구매 내역" title="예매구매 내역 탭으로 이동" class="on"><a href="#myBokdArea" class="btn">예매 / 구매 </a></li>
+<!-- 						<li data-url="/mypage/bookinglist?tab=02" data-tit="구매내역" title="구매내역 탭으로 이동"><a href="#myPurcArea" class="btn">구매 </a></li> -->
 					</ul>
 				</div>
 				<div class="tab-cont-wrap">
@@ -58,11 +58,18 @@
 										<th scope="row">구분 </th>
 										<td>
 											<input type="radio" id="radBokd01" name="radBokd" value="B" checked="checked">
-											<label for="radBokd01">예매내역 </label>
+											<label for="radBokd01"><b> 예매/구매내역 </b><small> (최근 3개월 내역) </small></label>
+											<br>
 											<input type="radio" id="radBokd02" name="radBokd" value="E">
-											<label for="radBokd02">지난내역 </label>
+											<label for="radBokd02"><b> 지난내역 </b></label>
 			
 											<div class="dropdown bootstrap-select disabled small bs3"><select name="selYM" class="selectpicker small" disabled="disabled" tabindex="-98">
+												
+													<option value="202312">2024년 03월</option>
+												
+													<option value="202312">2024년 02월</option>
+												
+													<option value="202312">2024년 01월</option>
 												
 													<option value="202312">2023년 12월</option>
 												
@@ -88,7 +95,8 @@
 												
 													<option value="202301">2023년 1월</option>
 												
-											</select><button type="button" class="btn dropdown-toggle disabled btn-default" data-toggle="dropdown" role="button" tabindex="-1" aria-disabled="true" title="2023년 12월"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">2023년 12월</div></div> </div><span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="inner open" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner "></ul></div></div></div>
+											</select>
+<!-- 											<button type="button" class="btn dropdown-toggle disabled btn-default" data-toggle="dropdown" role="button" tabindex="-1" aria-disabled="true" title="2023년 12월"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">2023년 12월</div></div> </div><span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="inner open" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner "></ul></div></div></div> -->
 			
 											<button type="button" class="button gray-line small ml05" name="search">
 												<i class="iconset ico-search-gray"></i> 조회 
@@ -101,9 +109,9 @@
 						<!-- 예매 조회 조건 End -->
 			
 						<!-- 예매 영화 목록 -->
-						<div id="bokdList"><div class="no-history-reservation mt20">	예매 내역이 없습니다. </div></div>
+						<div id="bokdList"><div class="no-history-reservation mt20"> 구매 내역이 없습니다. </div></div>
 			
-						<h3 class="tit mt70">예매취소내역</h3>
+						<h3 class="tit mt70"><b>나의 취소내역</b></h3>
 			
 						<ul class="dot-list">
 							<li>상영일 기준 7일간 취소내역을 확인하실 수 있습니다.</li>
@@ -123,24 +131,32 @@
 								<thead>
 									<tr>
 										<th scope="col">취소일시</th>
-										<th scope="col">영화명</th>
+										<th scope="col">영화/상품명</th>
 										<th scope="col">극장</th>
-										<th scope="col">상영일시</th>
+										<th scope="col">상영/구매 일시</th>
 										<th scope="col">취소금액</th>
 									</tr>
 								</thead>
-								<tbody><tr>	<td>2023.12.23 (14:29)</td>	<th scope="row">서울의 봄</th>	<td>양산</td>	<td>2023.12.24 (일) 13:25</td>	<td class="a-r">		<span class="font-red">42,000원</span>	</td></tr></tbody>
+								<tbody>
+									<tr>
+										<td>2023.12.23 (14:29)</td>
+										<th scope="row">서울의 봄</th>
+										<td scope="row" style="text-align: left;">양산</td>
+										<td scope="row" style="text-align: left;">2023.12.24 (일) 13:25</td>
+										<td><span class="font-red">42,000원</span></td>
+									</tr>
+								</tbody>
 							</table>
 						</div>
 			
 						<nav class="pagination" id="navBokd"><strong class="active">1</strong> </nav>
 			
 						<!-- 예매 안내상황  -->
+						
 						<div class="box-pulldown mt30">
 							<div class="tit">
-								<button type="button" class="btn-toggle">이용안내<i class="iconset ico-arr-toggle-down"></i></button>
-							</div>
-							<div class="cont">
+								<div type="box-polaroid" class="btn-toggle text-center more fs-3">이용안내</div>
+							<div class="box-inner" style="padding: 20px;">
 								<strong>[예매 안내]</strong>
 								<ul class="dot-list mb30">
 									<li>만 4세(48개월) 이상부터는 영화티켓을 반드시 구매하셔야 입장 가능합니다.</li>
@@ -170,6 +186,7 @@
 									<li>발권된 티켓은 상영시간 전까지 현장 방문 시에만 취소가 가능합니다.</li>
 								</ul>
 							</div>
+						</div>
 						</div>
 						<!-- 예매 안내상황 End -->
 					</div>

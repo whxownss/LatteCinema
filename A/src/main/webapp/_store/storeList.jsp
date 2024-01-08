@@ -197,7 +197,8 @@ IMP.init("imp20121707");
 //           alert("로그인 후 이용할 수 있습니다.");
 //           return;
 //       }
-
+	
+	//주문번호 만들기
 	const make_merchant_uid = () => {
             const current_time = new Date();
             const year = current_time.getFullYear().toString();
