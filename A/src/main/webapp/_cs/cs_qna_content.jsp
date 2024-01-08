@@ -9,7 +9,6 @@
 	<main id="main">
 <%
 QnaBoardDTO qnaBoardDTO = (QnaBoardDTO)request.getAttribute("qnaBoardDTO");
-String responseUser = "ADMIN2477";
 %>	
 			
 		<section class="category-section" id="">
@@ -60,7 +59,7 @@ String responseUser = "ADMIN2477";
 				    <tr>
 				      <td>${qnaBoardDTO.qnaCategory }</td>
 				      <td>${qnaBoardDTO.qnaSubject }</td>
-				      <td>${qnaBoardDTO.createUser }</td>
+				      <td id="userName">${qnaBoardDTO.createUser }</td>
 				      <td></td>
 				    </tr>
 				    <tr>
@@ -117,6 +116,24 @@ ${qnaBoardDTO.qnaResponse }
 <%@include file="../_common/commonFooterStart.jsp"%>
 <script>
     $(document).ready(function() {
+        // 사용자 이름을 변수로 받음
+        var fullName = $('#userName').text(); // '김철수'라고 가정
+        // 첫 글자를 제외하고 나머지 글자를 '*'로 변환하는 함수
+        function anonymizeName(name) {
+            if(name.length > 1) {
+                // 이름의 첫 글자를 제외한 나머지 길이만큼 '*' 문자를 생성
+                var stars = '*'.repeat(name.length - 1);
+                // 첫 글자와 생성된 '*' 문자열을 결합
+                return name[0] + stars;
+            }
+            // 이름이 한 글자인 경우 그대로 반환 (또는 다른 로직 적용 가능)
+            return name;
+        }
+        // 이름을 익명화하고 결과를 변수에 저장
+        var anonymizedName = anonymizeName(fullName);
+        // 익명화된 이름을 HTML 요소에 적용
+        $('#userName').text(anonymizedName);
+    	
 //     	if ($("#editableTextArea").val().trim() === '') {
 // 	          $("#editableTextArea").val(''); // 텍스트 영역을 비웁니다.
 // 	    }

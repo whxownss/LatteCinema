@@ -1,0 +1,114 @@
+<%@page import="com.itwillbs.domain.PageDTO"%>
+<%@page import="com.itwillbs.domain.CenterBoardDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@include file ="../_common/commonHeaderStart.jsp" %>
+<%@include file ="../_common/commonHeaderEnd.jsp" %>
+
+	<main id="main">
+<%
+	ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.getAttribute("centerBoardList");
+	PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
+%>			
+		<section class="category-section" id="">
+			<div class="container" data-aos="fade-up">
+				<!-- 이곳에 코드작성 -->
+				<div class="section-header d-flex justify-content-between align-items-center mb-5">
+					<h2>옛날영화 추천게시판</h2>
+					<div>
+						<a href="cs_recoSubscribe.cs" class="more" style="font-size: 17px;">
+							옛날영화 신청
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+		  
+		<section class="category-section" id="">
+			<div class="container" data-aos="fade-up">
+				<!-- 이곳에 코드작성 -->
+				  <div class="row">
+				    <div class="col-md-6 offset-md-3">
+				      <div class="bg-light">
+				        <ul class="d-flex flex-wrap justify-content-between list-unstyled">
+				          <li><a href="cs_center.cs">공지사항</a></li>
+				          <li><a href="cs_exque.cs">자주찾는질문</a></li>
+				          <li><a href="cs_qna.cs">1:1문의</a></li>
+				          <li><a href="cs_lost.cs">분실물</a></li>
+				        </ul>
+				      </div>
+				    </div>
+				  </div>
+			</div>
+		</section>
+		<!-- 진행상태, 신청영화, 감독, 신청자, 신청일, 추천수, 추천하기버튼, 수정버튼  -->
+		<section class="category-section" id="">
+			<div class="container" data-aos="fade-up">
+				<table class="table">
+				  <thead>
+				    <tr class="table-secondary">
+				      <th scope="col">#</th>
+				      <th scope="col">진행상태</th>
+				      <th scope="col">신청영화</th>
+				      <th scope="col">감독</th>
+				      <th scope="col">신청자</th>
+				      <th scope="col">신청일</th>
+				      <th scope="col">추천수</th>
+				      <th scope="col">추천하기</th>
+				      <th scope="col">수정하기</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  <tr>
+				  	<td>1</td>
+				  	<td>대기중</td>
+				  	<td>반지의 제왕: 왕의 귀환</td>
+				  	<td>피터 잭슨</td>
+				  	<td>김철수</td>
+				  	<td>2024-01-08 12:12:12</td>
+				  	<td>100</td>
+				  	<td><button type="button" class="btn btn-dark">추천</button></td>
+				  	<td><button type="button" class="btn btn-secondary">수정</button></td>
+				  </tr>
+<%-- 				  <c:forEach var="centerBoardDTO" items="${centerBoardList }"> --%>
+<!-- 				  	<tr> -->
+<%-- 				      <th scope="row">${centerBoardDTO.rn }</th> --%>
+<%-- 				      <td>${centerBoardDTO.ciName }</td> --%>
+<%-- 				      <td><a href="cs_center_content.cs?createUser=${centerBoardDTO.createUser }&createDate=${centerBoardDTO.createDate}">${centerBoardDTO.centerSubject }</a></td> --%>
+<%-- 				      <td><fmt:formatDate value="${centerBoardDTO.createDate }" pattern="yyyy-MM-dd"/></td> --%>
+<!-- 				    </tr> -->
+<%-- 				  </c:forEach> --%>
+				  </tbody>
+				</table>
+			</div>
+		</section>
+		<section class="category-section" id="">
+			<div class="container" data-aos="fade-up">
+				<div class="pagination-container d-flex justify-content-center">
+				  <ul class="pagination">
+					<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+					    <li class="page-item disabled">
+					      <a class="page-link text-secondary" href="cs_center.cs?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
+					    </li>
+				    </c:if>	
+				    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+					    <li class="page-item" aria-current="page">
+					      <a class="page-link text-secondary" href="cs_center.cs?pageNum=${i }">${i }</a>
+					    </li>
+				    </c:forEach>
+		    		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+					    <li class="page-item">
+					      <a class="page-link text-secondary" href="cs_center.cs?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
+					    </li>
+				    </c:if>
+				  </ul>
+				</div>
+			</div>
+		</section>	
+	</main>
+	
+<%@include file="../_common/commonFooterStart.jsp"%>
+<%@include file="../_common/commonFooterEnd.jsp"%>

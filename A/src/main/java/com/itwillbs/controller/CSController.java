@@ -816,7 +816,16 @@ public class CSController extends HttpServlet  {
 			response.sendRedirect("adm_cs_lost.ad");
 		}//
 		
-		
+		// 추천 게시판
+		if(sPath.equals("/cs_recommend.cs")) {
+			dispatcher = request.getRequestDispatcher("_cs/cs_recommend.jsp");
+			dispatcher.forward(request, response);
+		}
+		// 추천 게시판 영화 신청
+		if(sPath.equals("/cs_recoSubscribe.cs")) {
+			dispatcher = request.getRequestDispatcher("_cs/cs_recoSubscribe.jsp");
+			dispatcher.forward(request, response);
+		}
 		
 	}//doProcess()
 }
