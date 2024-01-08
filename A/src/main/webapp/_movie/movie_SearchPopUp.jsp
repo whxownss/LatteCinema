@@ -183,8 +183,15 @@ function searchMovie(){
                  contentType: false,
                  success: function () {
                    // 서버로부터의 응답을 받았을 때 실행되는 코드
+                   
+                   
+                   <!-- insertMovie 자바 코드 넣을 곳 -->
+                   location.href = "adm_mv_inout.ad";
+                   
                    console.log('등록 성공');
                    window.close();
+                   
+                
                  },
                  error: function () {
                    // 서버로부터의 응답을 받지 못했을 때 실행되는 코드

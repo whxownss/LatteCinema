@@ -55,12 +55,14 @@ public class MovieController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 			
+		// 관리자 영화 추가 페이지에서 search버튼 누르면 뜨는 창
 		if(sPath.equals("/movie_SearchPopUp.mo")) {
 			dispatcher = request.getRequestDispatcher("_movie/movie_SearchPopUp.jsp");
 			dispatcher.forward(request, response);	
 			
 		}
 		
+		// 영화 상세 페이지
 		if(sPath.equals("/movie_view.mo")) {
 			dispatcher = request.getRequestDispatcher("_movie/movie_view.jsp");
 			dispatcher.forward(request, response);	
@@ -77,7 +79,6 @@ public class MovieController extends HttpServlet {
 			System.out.println(request);
 			System.out.println("movieDTO : "+movieDTO);
 			
-			response.sendRedirect("/adm_mv_inout.ad");
 		}
 		
 		

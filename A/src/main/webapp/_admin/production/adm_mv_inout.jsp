@@ -459,7 +459,10 @@
    </div> 
 
     <!-- jQuery -->
-    <script src="_admin/vendors/jquery/dist/jquery.min.js"></script>
+ <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+ 
+ <!--  min.js를 위 코드로 바꿈 -->
+ 
     
     <script type="text/javascript">
 	  function openMovieModal() {	
@@ -553,7 +556,7 @@
     <script src="_admin/vendors/google-code-prettify/src/prettify.js"></script>
     <!-- jQuery Tags Input -->
     <script src="_admin/vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
-    <!-- Switchery -->
+    <!-- Switchery -->ㅗ
     <script src="_admin/vendors/switchery/dist/switchery.min.js"></script>
     <!-- Select2 -->
     <script src="_admin/vendors/select2/dist/js/select2.full.min.js"></script>
