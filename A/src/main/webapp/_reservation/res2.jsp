@@ -146,7 +146,7 @@ $(function(){
 	$(".date").text(schDTO.date);
 	$(".sTime").text(schDTO.sTime + " ~ ");
 	$(".eTime").text(schDTO.eTime);
-	$(".sIdx").text(schDTO.sIdx);
+	$(".sIdx").text(schDTO.scrIdx);
 	
 	// 좌석 그리기
 	var aSeat = parseInt(schDTO.aSeat);
@@ -290,7 +290,7 @@ $(function(){
 		schDTO["p1"] = p1;
 		schDTO["p2"] = p2;
 		schDTO["p3"] = p3;
-		schDTO["selectedSeat"] = selectedSeat;
+		schDTO["seat"] = selectedSeat;
 		
 		localStorage.setItem('schDTO', JSON.stringify(schDTO));
 		window.location = "res3.re";

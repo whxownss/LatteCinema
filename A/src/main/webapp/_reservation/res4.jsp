@@ -123,43 +123,27 @@
 <%@include file="../_common/commonFooterStart.jsp"%>	
 <script src="jQuery/jquery-3.6.0.js"></script>
 <script>
-var schDTO = JSON.parse(localStorage.getItem("schDTO"));
+// var schDTO = JSON.parse(localStorage.getItem("schDTO"));
 var rsp = JSON.parse(localStorage.getItem("rsp"));
 
-
 $(function(){
+	debugger;
 	$(".buyerName").text(rsp.buyer_name);
 	$(".resIdx").text(rsp.merchant_uid);
-	$(".sTime").text(schDTO.sTime);
-	$(".eTime").text(schDTO.eTime);
-	$(".sIdx").text(schDTO.sIdx);
-	$(".seat").text(schDTO.selectedSeat.join(', '));
-	$(".date").text(schDTO.date);
-	$(".cinema").text(schDTO.cinema);
+	$(".sTime").text(rsp.sTime);
+	$(".eTime").text(rsp.eTime);
+	$(".sIdx").text(rsp.scrIdx);
+	$(".seat").text(rsp.seat);
+	$(".date").text(rsp.date);
+	$(".cinema").text(rsp.cinema);
 	var personType = [];
-	if(schDTO["p1"] != "0") personType.push("성인 " + schDTO["p1"]);
-	if(schDTO["p2"] != "0") personType.push("청소년 " + schDTO["p2"]);
-	if(schDTO["p3"] != "0") personType.push("경로 " + schDTO["p3"]);
+	if(rsp["p1"] != "0") personType.push("성인 " + rsp["p1"]);
+	if(rsp["p2"] != "0") personType.push("청소년 " + rsp["p2"]);
+	if(rsp["p3"] != "0") personType.push("경로 " + rsp["p3"]);
+	debugger;
 	$(".personType").append("<span>" + personType.join(', ') + "</span>")
 	
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </script>
 <%@include file="../_common/commonFooterEnd.jsp"%>
