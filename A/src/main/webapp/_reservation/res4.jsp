@@ -130,7 +130,7 @@ $(function(){
 	debugger;
 	$(".buyerName").text(rsp.buyer_name);
 	$(".resIdx").text(rsp.merchant_uid);
-	$(".sTime").text(rsp.sTime);
+	$(".sTime").text(rsp.s_time);
 	$(".eTime").text(rsp.eTime);
 	$(".sIdx").text(rsp.scr_idx);
 	$(".seat").text(rsp.seat);

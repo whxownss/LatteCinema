@@ -305,7 +305,7 @@ $(function(){
 	$(".rating").attr("src", "_assets/img/grade_" + schDTO.rating + ".png");
 	$(".title").text(schDTO.title);
 	$(".date").text(schDTO.date);
-	$(".sTime").text(schDTO.sTime);
+	$(".sTime").text(schDTO.s_time);
 	$(".eTime").text(schDTO.eTime);
 	$(".scrIdx").text(schDTO.scr_idx);
 	$(".seat").text(schDTO.seat.join(', '));

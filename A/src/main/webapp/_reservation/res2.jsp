@@ -143,11 +143,19 @@ $(function(){
 	$.ajax({
 		type: "GET",
 		url: "res2Pro.re",
-		data: {},
+		data: {schDTO: JSON.stringify(schDTO)},
 		dataType: "text" 
 	})
 	.done(function(data){
-		
+		var paidSeats = data.split("/");
+		debugger;
+		$.each(paidSeats, (i, v) => {
+			debugger;
+			$("#seatNum" + v).removeClass("btn-light")
+							 .addClass("btn-dark")
+							 .addClass("paidSeat")
+							 .prop("disabled", true);		
+		});
 	})
 	.fail(function(){
 	})
@@ -167,7 +175,7 @@ $(function(){
 	$(".rating").attr("src", "_assets/img/grade_" + schDTO.rating + ".png");
 	$(".mTitle").text(schDTO.title);
 	$(".date").text(schDTO.date);
-	$(".sTime").text(schDTO.sTime + " ~ ");
+	$(".sTime").text(schDTO.s_time + " ~ ");
 	$(".eTime").text(schDTO.eTime);
 	$(".sIdx").text(schDTO.scr_idx);
 	
@@ -205,7 +213,8 @@ $(function(){
 	    	if(pSum >= 8 && $(this).hasClass('plus') || $(this).hasClass('minus') && $(this).next().text() == "0") return;
 	    	
 	    	// 인원 변경시 버튼선택과 금액 초기화
-	    	$(".seat").removeClass("btn-secondary selectedSeat btn-danger btn-light")
+	    	$(".seat").not(".paidSeat")
+	    			  .removeClass("btn-secondary selectedSeat btn-danger btn-light")
        				  .addClass("btn-light")
 	  		  		  .prop("disabled", false);
  			$("#mPrice").text("0");
@@ -277,7 +286,8 @@ $(function(){
 
 		var selectedSeatCNT = $(".selectedSeat").length;
 		if(selectedSeatCNT >= pSum){
-			$(".seat").not(".selectedSeat")
+			$(".seat").not(".paidSeat")
+					  .not(".selectedSeat")
 					  .removeClass("btn-light")
 					  .addClass("btn-secondary")
 					  .prop("disabled", true);
@@ -291,7 +301,8 @@ $(function(){
 			
 			$("#mPrice").text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		} else{
-			$(".seat").not(".selectedSeat")
+			$(".seat").not(".paidSeat")
+			  		  .not(".selectedSeat")
 			  		  .removeClass("btn-secondary")
 			  		  .addClass("btn-light")
 			  		  .prop("disabled", false);

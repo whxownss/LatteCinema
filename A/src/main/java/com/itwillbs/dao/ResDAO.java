@@ -64,6 +64,13 @@ public class ResDAO {
 		return insertCnt > 0 ? true : false;
 		
 	}
+
+	public List<String> checkSeat(ReservationDTO reservationDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<String> seatList = session.selectList("Reservation.select", reservationDTO);
+		
+		return seatList;
+	}
 	
 	
 

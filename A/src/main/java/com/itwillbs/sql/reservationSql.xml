@@ -22,6 +22,8 @@
 		 	 , SUCCESS
 		 	 , BUYER_NAME
 		 	 , MERCHANT_UID
+		 	 , SCR_IDX
+		 	 , S_TIME
 		 	 )  
 		VALUES 
 			 ( LEFT(#{date} ,LENGTH(#{date}) - 4) 
@@ -40,7 +42,21 @@
 			 , #{success}
 			 , #{buyerName}
 			 , #{merchantUid}
+			 , #{scrIdx}
+			 , #{sTime}
 			 )
 	</insert>	
+	
+	<select id="select" parameterType="ReservationDTO" resultType="String">
+		SELECT SEAT
+		  FROM RESERVATION
+		 WHERE 1 = 1
+		   AND SCR_IDX = #{scrIdx}
+		   AND DATE = #{date}
+		   AND S_TIME = #{sTime}
+		   AND TITLE = #{title}
+		   AND CINEMA = #{cinema}
+	</select>
+	
 	
 </mapper>

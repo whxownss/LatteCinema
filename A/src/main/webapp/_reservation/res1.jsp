@@ -462,9 +462,9 @@ $(function(){
 				"rating" : rating,
 				"title"  : title,
 				"date"   : date,
-				"sTime"  : sTime,
+				"s_time" : sTime,
 				"eTime"  : eTime,
-				"scr_idx" : sIdx,
+				"scr_idx": sIdx,
 				"cSeat"  : cSeat,
 				"aSeat"  : aSeat,
 				"cinema" : cinema

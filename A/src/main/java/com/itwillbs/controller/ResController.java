@@ -91,6 +91,15 @@ public class ResController extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("_reservation/res2.jsp");
 			dispatcher.forward(request, response);
 		}
+		// 좌석 체크
+		if(sPath.equals("/res2Pro.re")) {
+			resService = new ResService();
+			String schDTO = request.getParameter("schDTO");
+			String seatList = resService.checkSeat(schDTO);
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(seatList);
+		}
 		
 
 		// 예약3 페이지 이동
