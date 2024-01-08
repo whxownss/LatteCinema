@@ -464,7 +464,7 @@ $(function(){
 				"date"   : date,
 				"sTime"  : sTime,
 				"eTime"  : eTime,
-				"scrIdx" : sIdx,
+				"scr_idx" : sIdx,
 				"cSeat"  : cSeat,
 				"aSeat"  : aSeat,
 				"cinema" : cinema

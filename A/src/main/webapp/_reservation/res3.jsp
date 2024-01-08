@@ -307,7 +307,7 @@ $(function(){
 	$(".date").text(schDTO.date);
 	$(".sTime").text(schDTO.sTime);
 	$(".eTime").text(schDTO.eTime);
-	$(".scrIdx").text(schDTO.scrIdx);
+	$(".scrIdx").text(schDTO.scr_idx);
 	$(".seat").text(schDTO.seat.join(', '));
 	$(".date").text(schDTO.date);
 	$(".cinema").text(schDTO.cinema);

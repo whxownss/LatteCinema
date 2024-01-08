@@ -132,7 +132,7 @@ $(function(){
 	$(".resIdx").text(rsp.merchant_uid);
 	$(".sTime").text(rsp.sTime);
 	$(".eTime").text(rsp.eTime);
-	$(".sIdx").text(rsp.scrIdx);
+	$(".sIdx").text(rsp.scr_idx);
 	$(".seat").text(rsp.seat);
 	$(".date").text(rsp.date);
 	$(".cinema").text(rsp.cinema);
