@@ -79,6 +79,7 @@ public class ResService {
 		Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 		ReservationDTO reservationDTO = gson.fromJson(rsp, ReservationDTO.class);
 		System.out.println("@@@@@@@@@@@@@@@");
+		System.out.println(rsp);
 		System.out.println(reservationDTO);
 		System.out.println("@@@@@@@@@@@@@@@");
 		
