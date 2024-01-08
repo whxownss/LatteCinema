@@ -115,6 +115,8 @@
 <!--                       <li><a href="calendar.html">Calendar</a></li> -->
 <!--                     </ul> -->
                   </li>
+                  
+                   <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
                  
                 </ul>
               </div>

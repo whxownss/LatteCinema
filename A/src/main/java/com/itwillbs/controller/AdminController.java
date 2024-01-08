@@ -45,7 +45,7 @@ public class AdminController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}		
 		
-		// 관리자 영화 및 영화관 관리 페이지 이동
+		// 관리자 영화 관리 페이지 이동
 		if(sPath.equals("/adm_mv_inout.ad")) {
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_mv_inout.jsp");
 			dispatcher.forward(request, response);
@@ -94,6 +94,12 @@ public class AdminController extends HttpServlet {
 			request.setAttribute("lostBoardList",lostBoardList);
 			
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_cs_lost.jsp");
+			dispatcher.forward(request, response);
+		}	
+		
+		// 관리자 영화관 관리 페이지 이동
+		if(sPath.equals("/adm_cinema.ad")) {
+			dispatcher = request.getRequestDispatcher("_admin/production/adm_cinema.jsp");
 			dispatcher.forward(request, response);
 		}	
 		
