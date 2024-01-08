@@ -19,6 +19,7 @@ import com.itwillbs.domain.LostBoardDTO;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
+import com.itwillbs.domain.ResponseDataDTO;
 
 public class CSBoardService {
 	CSBoardDAO csBoardDAO = null;
@@ -283,6 +284,7 @@ public class CSBoardService {
 //	        String createUser = qnaBoardDTO.getCreateUser();
 //	        String createDate = qnaBoardDTO.getCreateDate();
 	        qnaUpdateSuccess = csBoardDAO.updateQnaBoard(qnaBoardDTO);
+	        //0108 추가 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -299,13 +301,16 @@ public class CSBoardService {
 	        String responseUser = request.getParameter("responseUser");
 	        String createUser = request.getParameter("createUser");
 	        String createDate = request.getParameter("createDate");
+	        //0108 추가
+	        String qnaSubject = request.getParameter("qnaSubject");
+	        qnaBoardDTO.setQnaSubject(qnaSubject);
 	        
 	        qnaBoardDTO.setCreateDate(createDate);
 	        qnaBoardDTO.setCreateUser(createUser);
 	        qnaBoardDTO.setResponseUser(responseUser);
 	        qnaBoardDTO.setQnaResponse(qnaResponse);
 	        
-	        qnaUpdateSuccess = csBoardDAO.updateQnaBoard(qnaBoardDTO);
+	        qnaUpdateSuccess = csBoardDAO.updateQnaBoard2(qnaBoardDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -442,6 +447,7 @@ public class CSBoardService {
 		int lostUpdateSuccess = 0;
 		try {
 			csBoardDAO = new CSBoardDAO();
+			String lostSubject = request.getParameter("lostSubject");
 	        String createUser = request.getParameter("createUser");
 //	        String createDate = request.getParameter("createDate");
 	        String lostResponse = request.getParameter("lostResponse");
@@ -457,6 +463,7 @@ public class CSBoardService {
 	        lostBoardDTO.setCreateDate(createTime);
 	        lostBoardDTO.setLostResponse(lostResponse);
 	        lostBoardDTO.setResponseUser(responseUser);
+	        lostBoardDTO.setLostSubject(lostSubject);
 
 	        lostUpdateSuccess = csBoardDAO.updateLostBoard2(lostBoardDTO);
 		} catch (Exception e) {
@@ -767,6 +774,18 @@ public class CSBoardService {
 		}
 		return memberList;
 	}//getMemberList()
+
+	public ArrayList<ResponseDataDTO> getResponseList() {
+		System.out.println("CSBoardService getResponseList()");
+		ArrayList<ResponseDataDTO> responseList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			responseList = csBoardDAO.getResponseList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return responseList;
+	}//getResponseList()
 
 	
 }//클래스

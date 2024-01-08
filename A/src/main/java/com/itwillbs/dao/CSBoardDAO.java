@@ -16,6 +16,7 @@ import com.itwillbs.domain.LostBoardDTO;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
+import com.itwillbs.domain.ResponseDataDTO;
 import com.itwillbs.sql.SqlMapClient;
 
 public class CSBoardDAO {
@@ -268,7 +269,7 @@ public class CSBoardDAO {
 		try {
 			session = sqlSessionFactory.openSession();
 			qnaUpdateSuccess = session.update("CsAdmin.updateQnaBoard",qnaBoardDTO);
-			
+			session.insert("CsAdmin.insertQnaRes",qnaBoardDTO);
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -408,7 +409,7 @@ public class CSBoardDAO {
 		try {
 			session = sqlSessionFactory.openSession();
 			lostUpdateSuccess = session.update("CsAdmin.updateLostBoard",lostBoardDTO);
-			
+			session.insert("CsAdmin.insertResLost",lostBoardDTO);
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -671,6 +672,22 @@ public class CSBoardDAO {
 		}
 		return memberList;
 	}
+
+	public ArrayList<ResponseDataDTO> getResponseList() {
+		System.out.println("CSBoardDAO getResponseList()");
+		ArrayList<ResponseDataDTO> responseList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			responseList = new ArrayList<ResponseDataDTO>(session.selectList("CsAdmin.getResponseList"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return responseList;
+	}//getResponseList()
 	
 	
 	
