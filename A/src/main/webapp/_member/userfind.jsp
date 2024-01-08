@@ -213,7 +213,7 @@ $(function () {
 	});
 			
 	$("#btnFindId").on("click", function() {
-// 		debugger;
+		debugger;
 		$.ajax({
 			type : "post",
 			data : {

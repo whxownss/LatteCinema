@@ -49,20 +49,21 @@
 							<tr>
 								<th scope="row"><label for="id">아이디<!--아이디--></label></th>
 								<td>
-									<input id="id" name="id" maxlength="20" type="text" placeholder="아이디" class="input-text w230px findInput"><!--아이디-->
+									<input id="id" name="id"  type="text" placeholder="아이디" class="input-text w230px findInput"><!--아이디-->
 								</td>
 							</tr>
 							<tr>
 								<th scope="row"><label for="name">이름<!--이름--></label></th>
 								<td>
-									<input id="name" name="name" maxlength="20" type="text" placeholder="이름" class="input-text w230px findInput"><!--이름-->
+									<input id="name" name="name" maxlength="5" type="text" placeholder="이름" class="input-text w230px findInput"><!--이름-->
 								</td>
 							</tr>
 							<tr>
 								<th scope="row"><label for="email">이메일<!--회원가입시 입력한 이메일--></label></th>
 								<td>
-									<input type="text" id="email" name="email" maxlength="11" placeholder="example@example.com" class="input-text w230px findInput"><!--'-' 없이 입력-->
-									<button onclick="emailAuthentication()" id="eamilAuthBtn" type="button" class="button gray w100px ml08" disabled="disabled">인증번호 발송<!--인증요청--></button>
+									<input type="text" id="email" name="email"  placeholder="example@example.com" class="input-text w230px findInput"><!--'-' 없이 입력-->
+									<button onclick="emailAuthentication()" id="eamilAuthBtn" type="button" class="button gray w100px ml08" disabled="disabled">인증번호 발송</button>
+<!-- 									<button onclick="emailAuthentication()" id="eamilAuthBtn" disabled="disabled" class="btn btn-danger btn-lg" type="button" style="height:58px;">인증번호 발송</button> -->
 								</td>
 							</tr>
 							<tr id="schPwdMblpCertRow">
@@ -107,6 +108,12 @@
 <%@include file ="../_common/commonFooterStart.jsp" %>
 <script type="text/javascript">
 $(function () {
+
+// 	var id = $("#id").val()
+// 	var name = $("#name").val()
+// 	var email = $("#email").val()
+	
+	
 	// 입력확인 및 버튼 활성화 
 	$('.findInput').on('keyup', function () {
 // 		debugger;
@@ -117,19 +124,23 @@ $(function () {
 		$("#eamilAuthBtn").attr("disabled", true);
 		
 		if(id != '' && name != '' && email != ''){
-			debugger;
+// 			debugger;
 			$.ajax({
 				type : "post",
 				data : {memId : id, memName : name, memEmail : email},
 				url : "userFindPass.me",
 				dataType : "text",
 				success:function(data){
-					if(data == '1'){
+				debugger;
+					if(data != "null"){
 						$("#eamilAuthBtn").attr("disabled", false);
 						$("#passCheck").remove();
-					}else if(data == '0'){
+						return true;
+					}else{
+						debugger;
 						$("#formCheck").append("<span id='passCheck'> 일치하는 회원정보가 없습니다. </span> ");
 						$("#passCheck").css("color", "red");
+						return false;
 					}
 				}
 			})
@@ -137,43 +148,45 @@ $(function () {
 		
 	});
 	
-	// 발송버튼 클릭시 (입력한 정보가 일치하는 회원이 있으면 이메일인증번호 보내기 없으면 X)
-// 	function emailAuthentication() {
-// 		var id = $("#id").val()
-// 		var name = $("#name").val()
-// 		var email = $("#email").val()
-// 		$.ajax({
-// 			type : "post",
-// 			data : {memId : id, memName : name, memEmail : email},
-// 			url : "userFindPass.me",
-// 			dataType : "text",
-// 			success:function(data){
-				
-// 			}
-// 		});
-	
-// 	}
-	
-// 	$("#btnFindPass").on("click", function () {
-// 		var id = $("#id").val()
-// 		var name = $("#name").val()
-// 		var email = $("#email").val()
-// 		debugger;
-// 		$.ajax({
-// 			type : "post",
-// 			data : {memId : id, memName : name, memEmail : email},
-// 			url : "userFindPass.me",
-// 			dataType : "text",
-// 			success:function(data){
-// 				if(data == '1'){
-					
-// 				}
-// 			}
-// 		})// ajax
-// 	});//on click
+
+
 	
 	
 });//
+
+// 이메일 인증번호 발송 및 인증
+function emailAuthentication() {
+	debugger;
+	var checkCode;
+	var email = $("#email").val()
+	$.ajax({
+		type : "post",
+		url : "emailCode.me",
+		dataType : "text",
+		data : {email : email},
+		success:function(data){
+ 			debugger;
+			alert("인증번호 보내기 성공");
+			checkCode = data;
+			
+		},
+		error: function () {
+			
+		}
+	});
+}
+
+// 이메일 인증 번호 확인하기 버튼
+function authCodeCheck() {
+	debugger;
+	if($("#emailCheck").val() == checkCode){
+		alert('인증 성공');
+		$("#btnFindPass").attr("disabled" , false);
+	} else{
+		alert('인증 실패');
+	}
+	
+}
 </script>
 
 <%@include file ="../_common/commonFooterEnd.jsp" %>

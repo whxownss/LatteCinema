@@ -198,15 +198,21 @@ public class MemberService {
 			String name = request.getParameter("memName");
 			String birth = request.getParameter("memBirth");
 			String phone = request.getParameter("memPhone");
+			String id = request.getParameter("memId");
+			String email = request.getParameter("memEmail");
 			System.out.println("@@@@@@@@@@@@@@@@@@@@@");
 			System.out.println(name);
 			System.out.println(birth);
 			System.out.println(phone);
+			System.out.println(id);
+			System.out.println(email);
 			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@");
 			
 			memberDTO.setMemName(name);
 			memberDTO.setMemBirthD(birth);
 			memberDTO.setMemPhone(phone);
+			memberDTO.setMemEmail(email);
+			memberDTO.setMemId(id);
 			
 			memberDAO = new MemberDAO();
 			memberDTO = memberDAO.userFind(memberDTO);

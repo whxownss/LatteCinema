@@ -87,14 +87,20 @@
 		SELECT *
 		FROM MEMBERS
 		WHERE 1=1
-		<if test = "!MEM_NAME.equals('') and MEM_NAME != null">
+		<if test = "memName != null  and !memName.equals('')">
 		AND	  MEM_NAME = #{memName}
 		</if>
-	  	<if test = "!MEM_BIRTH_D.equals('') and MEM_BIRTH_D != null">			  
+	  	<if test = "memBirthD != null  and !memBirthD.equals('')">			  
 		AND   MEM_BIRTH_D = #{memBirthD}	
 		</if>
-		<if test = "!MEM_PHONE.equals('') and MEM_PHONE != null">
+		<if test = "memPhone != null and  !memPhone.equals('')">
 		AND	  MEM_PHONE = #{memPhone}
+		</if>
+		<if test = " memId != null  and !memId.equals('')">
+		AND	  MEM_ID = #{memId}
+		</if>		
+		<if test = "memEmail != null  and !memEmail.equals('')">
+		AND	  MEM_EMAIL = #{memEmail}
 		</if>
 		
 	</select>
