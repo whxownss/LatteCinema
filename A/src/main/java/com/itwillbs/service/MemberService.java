@@ -191,8 +191,8 @@ public class MemberService {
 	}//updatePasswd()
 
 	// 회원 아이디 찾기
-	public MemberDTO userFindId(HttpServletRequest request) {
-		System.out.println("MemberService userFindId()");
+	public MemberDTO userFind(HttpServletRequest request) {
+		System.out.println("MemberService userFind()");
 		MemberDTO memberDTO = new MemberDTO();
 		try {
 			String name = request.getParameter("memName");
@@ -209,14 +209,14 @@ public class MemberService {
 			memberDTO.setMemPhone(phone);
 			
 			memberDAO = new MemberDAO();
-			memberDTO = memberDAO.userFindId(memberDTO);
+			memberDTO = memberDAO.userFind(memberDTO);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return memberDTO;
-	}//userFindId()
+	}//userFind()
 
 //	public void sendGmail(HttpServletRequest request) {
 //		System.out.println("MemberService sendGmail()");	

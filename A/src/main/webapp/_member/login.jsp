@@ -4,7 +4,7 @@
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 <script src="jQuery/jquery-3.6.0.js"></script>
 <!-- <script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script> -->
-<script src=  "https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
@@ -83,9 +83,28 @@
 	</main>
 	
 <%@include file ="../_common/commonFooterStart.jsp" %>
-<script>
-// Kakao.init('e798e95ef23a0c0ee390fcaba9cdd04b'); // 여기에 애플리케이션에서 발급받은 키를 넣어주세요.
+<script type="text/javascript">
+Kakao.init('e798e95ef23a0c0ee390fcaba9cdd04b'); // 여기에 애플리케이션에서 발급받은 키를 넣어주세요.
 // console.log(Kakao.isInitialized()); // sdk초기화여부판단
+    function kakaoLogin() {
+        Kakao.Auth.login({
+            success: function (response) {
+                Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function (response) {
+                        alert(JSON.stringify(response))
+                    },
+                    fail: function (error) {
+                        alert(JSON.stringify(error))
+                    },
+                })
+            },
+            fail: function (error) {
+                alert(JSON.stringify(error))
+            },
+        })
+    }
+
 // function kakaoLogin() {
 //     Kakao.Auth.login({
 //         success: function(authObj) {

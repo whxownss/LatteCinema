@@ -145,27 +145,20 @@ public class MemberController extends HttpServlet {
 		if(sPath.equals("/userFindId.me")) {
 			response.setCharacterEncoding("utf-8");
 			memberService = new MemberService();
-			MemberDTO memberDTO = memberService.userFindId(request);
+			MemberDTO memberDTO = memberService.userFind(request);
 			
-
+			String result = "0";
+			
 			if (memberDTO != null) {
 			    System.out.println(memberDTO);
-			    System.out.println("이름, 생년월일, 연락처 일치");
-			    request.setAttribute("memberDTO", memberDTO);
-			    response.sendRedirect("login.me");
-			} else {
-			    // 아이디를 찾을 수 없는 경우의 처리 (예: 에러 메시지 전송 등)
-			    // 예시: request.setAttribute("errorMessage", "아이디를 찾을 수 없습니다.");
-			    //       dispatcher = request.getRequestDispatcher("errorPage.jsp");
-			    //       dispatcher.forward(request, response);
+			    System.out.println("입력한 정보 일치");
+			    result = memberDTO.getMemId();
+//			    request.setAttribute("memberDTO", memberDTO);
+//			    response.sendRedirect("login.me");
 			}
-
+			System.out.println(result);
+			response.getWriter().write(result);
 			
-			
-			
-			
-			dispatcher = request.getRequestDispatcher("_member/userfind.jsp");
-			dispatcher.forward(request, response);
 		}//
 		
 		// 비밀번호 찾기 페이지 이동
@@ -173,6 +166,15 @@ public class MemberController extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("_member/passfind.jsp");
 			dispatcher.forward(request, response);
 		}//
+		
+		// 비밀번호 찾기 userFindPass.me  
+//		if(sPath.equals("/userFindPass.me")) {
+//			response.setCharacterEncoding("utf-8");
+//			memberService = new MemberService();
+//			MemberDTO memberDTO = memberService.userFind(request);			
+//			
+//			// 
+//		}//
 		
 		////////////////////////////////////////////////////////////////////////////////////
 		

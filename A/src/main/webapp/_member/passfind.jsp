@@ -37,7 +37,7 @@
 				</div>
 
 				<h2 class="tit mt40">간편찾기<!--간편찾기--></h2>
-
+			<form id="passFindForm" action="passfindPro.me" method="post" name="fr">
 				<div class="table-wrap">
 					<table class="board-form">
 						<caption>아이디이름, 휴대폰 번호, 인증번호 항목을 가진 비밀번호 찾기 입력 표<!--아이디이름, 휴대폰 번호, 인증번호 항목을 가진 비밀번호 찾기 입력 표--></caption>
@@ -47,34 +47,34 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<th scope="row"><label for="ibxSchPwdLoginId">아이디<!--아이디--></label></th>
+								<th scope="row"><label for="id">아이디<!--아이디--></label></th>
 								<td>
-									<input id="ibxSchPwdLoginId" maxlength="20" type="text" placeholder="아이디" class="input-text w230px"><!--아이디-->
+									<input id="id" name="id" maxlength="20" type="text" placeholder="아이디" class="input-text w230px findInput"><!--아이디-->
 								</td>
 							</tr>
 							<tr>
-								<th scope="row"><label for="ibxSchPwdMbNm">이름<!--이름--></label></th>
+								<th scope="row"><label for="name">이름<!--이름--></label></th>
 								<td>
-									<input id="ibxSchPwdMbNm" maxlength="20" type="text" placeholder="이름" class="input-text w230px"><!--이름-->
+									<input id="name" name="name" maxlength="20" type="text" placeholder="이름" class="input-text w230px findInput"><!--이름-->
 								</td>
 							</tr>
 							<tr>
-								<th scope="row"><label for="ibxSchPwdMblpTelno">이메일<!--회원가입시 입력한 이메일--></label></th>
+								<th scope="row"><label for="email">이메일<!--회원가입시 입력한 이메일--></label></th>
 								<td>
-									<input type="text" id="ibxSchPwdMblpTelno" maxlength="11" placeholder="example@example.com" class="input-text w230px"><!--'-' 없이 입력-->
-									<button id="btnSchPwdMbCertNoSend" type="button" class="button gray w100px ml08" disabled="disabled">인증번호 발송<!--인증요청--></button>
+									<input type="text" id="email" name="email" maxlength="11" placeholder="example@example.com" class="input-text w230px findInput"><!--'-' 없이 입력-->
+									<button onclick="emailAuthentication()" id="eamilAuthBtn" type="button" class="button gray w100px ml08" disabled="disabled">인증번호 발송<!--인증요청--></button>
 								</td>
 							</tr>
 							<tr id="schPwdMblpCertRow">
-								<th scope="row"><label for="ibxSchPwdMblpCharCertNo">인증번호<!--인증번호--></label></th>
+								<th scope="row"><label for="emailCheck">인증번호<!--인증번호--></label></th>
 								<td>
 									<div class="chk-num">
 										<div class="line">
-											<input  type="text" id="ibxSchPwdMblpCharCertNo" class="input-text w180px" title="인증번호 입력" /><!--인증번호 입력-->
+											<input  type="text" id="emailCheck" class="input-text w180px" title="인증번호 입력" /><!--인증번호 입력-->
 										</div>
 									</div>
 
-									<button id="btnSchPwdMblpCharCert" type="button" class="button gray-line w75px ml08">인증확인<!--인증확인--></button>
+									<button id="authCodeCheckBtn" type="button" class="button gray-line w75px ml08">인증확인<!--인증확인--></button>
 <!-- 									<div id="schPwdMblpNo-error-text" class="alert"></div> -->
 								</td>
 							</tr>
@@ -85,10 +85,10 @@
 
 
 				<div class="btn-member-bottom v1">
-
-					<button id="btnSchPwd" type="button" class="button purple large" disabled="disabled">비밀번호 찾기<!--비밀번호 찾기--></button>
+					<div id="formCheck"></div>
+					<button id="btnFindPass" type="button" class="button purple large" disabled="disabled">비밀번호 찾기<!--비밀번호 찾기--></button>
 				</div>
-
+			</form>
 
 			</div>
 			<!--// col -->
@@ -105,5 +105,75 @@
 	</main>
 	
 <%@include file ="../_common/commonFooterStart.jsp" %>
+<script type="text/javascript">
+$(function () {
+	// 입력확인 및 버튼 활성화 
+	$('.findInput').on('keyup', function () {
+// 		debugger;
+		var id = $("#id").val()
+		var name = $("#name").val()
+		var email = $("#email").val()
+		
+		$("#eamilAuthBtn").attr("disabled", true);
+		
+		if(id != '' && name != '' && email != ''){
+			debugger;
+			$.ajax({
+				type : "post",
+				data : {memId : id, memName : name, memEmail : email},
+				url : "userFindPass.me",
+				dataType : "text",
+				success:function(data){
+					if(data == '1'){
+						$("#eamilAuthBtn").attr("disabled", false);
+						$("#passCheck").remove();
+					}else if(data == '0'){
+						$("#formCheck").append("<span id='passCheck'> 일치하는 회원정보가 없습니다. </span> ");
+						$("#passCheck").css("color", "red");
+					}
+				}
+			})
+		}
+		
+	});
+	
+	// 발송버튼 클릭시 (입력한 정보가 일치하는 회원이 있으면 이메일인증번호 보내기 없으면 X)
+// 	function emailAuthentication() {
+// 		var id = $("#id").val()
+// 		var name = $("#name").val()
+// 		var email = $("#email").val()
+// 		$.ajax({
+// 			type : "post",
+// 			data : {memId : id, memName : name, memEmail : email},
+// 			url : "userFindPass.me",
+// 			dataType : "text",
+// 			success:function(data){
+				
+// 			}
+// 		});
+	
+// 	}
+	
+// 	$("#btnFindPass").on("click", function () {
+// 		var id = $("#id").val()
+// 		var name = $("#name").val()
+// 		var email = $("#email").val()
+// 		debugger;
+// 		$.ajax({
+// 			type : "post",
+// 			data : {memId : id, memName : name, memEmail : email},
+// 			url : "userFindPass.me",
+// 			dataType : "text",
+// 			success:function(data){
+// 				if(data == '1'){
+					
+// 				}
+// 			}
+// 		})// ajax
+// 	});//on click
+	
+	
+});//
+</script>
 
 <%@include file ="../_common/commonFooterEnd.jsp" %>

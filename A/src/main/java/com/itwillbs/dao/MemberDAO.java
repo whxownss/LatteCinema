@@ -91,9 +91,9 @@ public class MemberDAO {
 		
 	}
 
-	public MemberDTO userFindId(MemberDTO memberDTO) {
+	public MemberDTO userFind(MemberDTO memberDTO) {
 		SqlSession session = sqlSessionFactory.openSession();
-		memberDTO = session.selectOne("Member.userFindId", memberDTO);
+		memberDTO = session.selectOne("Member.userFind", memberDTO);
 		System.out.println(memberDTO);
 		session.close();
 		return memberDTO;

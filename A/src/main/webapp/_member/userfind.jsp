@@ -94,11 +94,11 @@
 									</tbody>
 								</table>
 							</div>
-						</form>
 							<div class="btn-member-bottom v1">
 <!-- 								<button id="btnFindId" type="button" class="button purple large" disabled="disabled" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="userFind()">아이디 찾기아이디 찾기</button> -->
-								<button id="btnFindId" type="button" class="button purple large" disabled="disabled" onclick="userFind()">아이디 찾기<!--아이디 찾기--></button>
+								<button id="btnFindId" type="button" class="button purple large" disabled="disabled" >아이디 찾기<!--아이디 찾기--></button>
 							</div>
+						</form>
 						</div>
 						<!--// col -->
 					</div>
@@ -140,7 +140,7 @@ $(function () {
 	});
 	
 	/* 생년월일 입력 */
-	$("#birth").on("keyup", function(e){
+	$("#birth").on("blur", function(e){
 		var partton = /[^0-9]/g;
 		if($("#birth").val() == ""){
 			$('#schIdBirthDe-error-text').text('생년월일을 입력해주세요.');
@@ -155,7 +155,7 @@ $(function () {
 	});
 	
 	/* 연락처 입력 */
-	$("#phone").on("keyup", function(e){
+	$("#phone").on("blur", function(e){
 		var partton = /[^0-9]/g;
 		if($("#phone").val() == ""){
 			$('#schIdMblpNo-error-text').text('연락처 입력해주세요.');
@@ -168,69 +168,75 @@ $(function () {
 		}
 	});
 	
-    $("#btnFindId").on("click", function () {
-        if ($("#name").val() !== "" && $("#birth").val() !== "" && $("#phone").val() !== "") {
+//     $("#btnFindId").on("click", function () {
+//         if ($("#name").val() !== "" && $("#birth").val() !== "" && $("#phone").val() !== "") {
             
-        	$("#btnFindId").attr("disabled", false);
-        	var name = $("#name").val();
-            var birth = $("#birth").val();
-            var phone = $("#phone").val();
+//         	$("#btnFindId").attr("disabled", false);
+//         	var name = $("#name").val();
+//             var birth = $("#birth").val();
+//             var phone = $("#phone").val();
 
-            $.ajax({
-                type: "post",
-                data: { memName: name, memBirth: birth, memPhone: phone },
-                url: "userFindId.me",
-                dataType: "text",
-                success: function (data) {
-                    if (data === '1') {
-                        alert('회원님이 가입하신 아이디는' + name + '입니다.');
-                    } else if (data === '0') {
-                        alert('해당정보로 가입한 회원 아이디가 없습니다.');
-                    }
-                },
-                error: function () {
-                    // 에러 처리 코드 추가
-                }
-            });
-        }
-    });
+//             $.ajax({
+//                 type: "post",
+//                 data: { memName: name, memBirth: birth, memPhone: phone },
+//                 url: "userFindId.me",
+//                 dataType: "text",
+//                 success: function (data) {
+//                     if (data === '1') {
+//                         alert('회원님이 가입하신 아이디는' + text + '입니다.');
+//                     } else if (data === '0') {
+//                         alert('해당정보로 가입한 회원 아이디가 없습니다.');
+//                     }
+//                 },
+//                 error: function () {
+//                     // 에러 처리 코드 추가
+//                 }
+//             });
+//         }
+//     });
 	
 	
 	
 	
-// 	$(".findInput").on("keyup", function(){
-// // 		debugger;
-// 		if($("#name").val() != "" && $("#birth").val() != "" && $("#phone").val() != ""){
-// // 			debugger;
-// 			$("#btnFindId").attr("disabled", false);
-// 			var name = $("#name").val()
-// 			var birth = $("#birth").val()
-// 			var phone = $("#phone").val()
+	$(".findInput").on("keyup", function(){
+// 		debugger;
+		if($("#name").val() != "" && $("#birth").val() != "" && $("#phone").val() != ""){
+// 			debugger;
+			$("#btnFindId").attr("disabled", false);
+			var name = $("#name").val()
+			var birth = $("#birth").val()
+			var phone = $("#phone").val()
+			$('#schIdBirthDe-error-text').text('');
+			$('#schIdMblpNo-error-text').text('');
+		}
+		
+	});
 			
-// 			$("#btnFindId").on("click", function() {
-// // 				debugger;
-// 				$.ajax({
-// 					type : "post",
-// 					data : {memName : name, memBirth : birth, memPhone : phone},
-// 					url : "userFindId.me",
-// 					dataType : "text",
-// 					success:function(data){
-// // 						debugger;
-// 						if(data == '1'){
-// 							alert('회원님이 가입하신 아이디는' + text + '입니다.');
-// 						}else if(data == '0'){
-// 							alert('해당정보로 가입한 회원 아이디가 없습니다.');
-// 						}
-// 					},
-// 					error : function() {
-						
-// 					}
-// 				})	
+	$("#btnFindId").on("click", function() {
+// 		debugger;
+		$.ajax({
+			type : "post",
+			data : {
+				memName : $("#name").val(), 
+				memBirth : $("#birth").val(), 
+				memPhone : $("#phone").val()
+				},
+			url : "userFindId.me",
+			dataType : "text",
+			success:function(data){
+				var msg = '해당정보로 가입한 회원 아이디가 없습니다.';
+				if(data != '0')
+					msg = '회원님이 가입하신 아이디는 ' + data + ' 입니다.';
+				
+					alert(msg);
+			},
+			error : function() {
+				
+			}
+		})	
 			
-// 			})
-// 		}
-	
-// 	});
+	});
+
 });
 </script>
 
