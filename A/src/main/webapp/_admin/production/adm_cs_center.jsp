@@ -69,6 +69,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
                   <li><a href="adm_member.ad"><i class="fa fa-user"></i> 회원관리</a></li>
                   <li><a href="adm_mv_inout.ad"><i class="fa fa-edit"></i>영화 통합 추가/제거</a></li>
                   <li><a href="adm_store.ad"><i class="fa fa-beer"></i>스토어 관리</a></li>
+                  <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
                 </ul>
               </div>
               <div class="menu_section">
