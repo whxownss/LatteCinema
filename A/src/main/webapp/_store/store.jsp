@@ -45,7 +45,7 @@
 	<!-- 테두리 css -->
 			
 	<style type="text/css">
-		
+	
 		/* 상단메뉴 css */
 		.coll {border:#FFF 2px solid; border-radius: 50px;}
 		.coll:hover {border:#F00 2px solid;}
@@ -78,7 +78,7 @@
 							</div>
 							<div class="itm_tit">
 								<h4>${itemB.itemName}</h4>
-								<p>${itemB.itemDatail}</p>
+								<p>${itemB.itemDetail}</p>
 							</div>
 							<div class="txt_price_wrap">
 								<span class="txt_price"
@@ -111,7 +111,7 @@
 							</div>
 							<div class="itm_tit">
 								<h4>${itemS.itemName}</h4>
-								<p>${itemS.itemDatail}</p>
+								<p>${itemS.itemDetail}</p>
 							</div>
 							<div class="txt_price_wrap">
 								<span class="txt_price"
@@ -144,7 +144,7 @@
 							</div>
 							<div class="itm_tit">
 								<h4>${itemT.itemName}</h4>
-								<p>${itemT.itemDatail}</p>
+								<p>${itemT.itemDetail}</p>
 							</div>
 							<div class="txt_price_wrap">
 								<span class="txt_price"

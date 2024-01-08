@@ -41,7 +41,7 @@
 							</tr>
 							<tr>
 								<th scope="row">구성품</th>
-								<td class="text-end">${storeItem.itemDatail}</td>
+								<td class="text-end">${storeItem.itemDetail}</td>
 							</tr>
 							<tr>
 								<th scope="row">구매제한</th>
@@ -180,6 +180,7 @@
 <script src="jQuery/jquery-3.6.0.js"></script>
 
 <!-- iamport.payment.js -->
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
 <script type="text/javascript">
@@ -197,21 +198,35 @@ IMP.init("imp20121707");
 //           return;
 //       }
 
+	const make_merchant_uid = () => {
+            const current_time = new Date();
+            const year = current_time.getFullYear().toString();
+            const month = (current_time.getMonth()+1).toString();
+            const day = current_time.getDate().toString();
+            const hour = current_time.getHours().toString();
+            const minute = current_time.getMinutes().toString();
+            const second = current_time.getSeconds().toString();
+            const merchant_uid = 'MIHEE' + year + month + day + hour + minute + second;
+            return merchant_uid;
+        };
+        const merchant_uid = make_merchant_uid()
+        
+	
 	var itemName = $("#itemName i").text();
 	var price = parseInt($("#sPrice").text().replace(",", "")); 
 	
       IMP.request_pay({ 
           pg: "html5_inicis.INIpayTest",	// PG사
           pay_method: "card",	// 지불수단
-          merchant_uid: "ORD20180131-00000012",   // 주문번호
+          merchant_uid: "STO" + merchant_uid,   // 주문번호
           name: itemName,	// 상품명
-          amount: price,    // 가격
+          amount: 100,    // 가격	price
           buyer_email: "gildong@gmail.com",	// 구매자 이메일
           buyer_name: "홍길동",	// 구매자 이름
           buyer_tel: "010-4242-4242",	// 구매자 연락처
-          buyer_addr: "서울특별시 강남구 신사동",	// 구매자 주소
       }, function (rsp) { // callback
     	  console.log(rsp);
+    	  debugger;
     	  if (rsp.success) {	// 결제성공
     		  var msg = '결제가 완료되었습니다.';
     	        msg += '고유ID : ' + rsp.imp_uid;
@@ -227,66 +242,68 @@ IMP.init("imp20121707");
       
     }
     
-//현재 사용자의 정보를 가져오는 함수
-  function getCurrentUserInfo() {
-      $.ajax({
-          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-          url: "/users/getCurrentUser",
-          type: "get",
-          async:false, // 동기방식(전역변수에 값 저장하려면 필요)
-          dataType : "json",
-          success : function(data) {
-              buyer_name = data.name;
-              buyer_tel = data.tel;
-          },
-          error: function(request,status,error){ 
-              alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); 
-              console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-          }
-      });
-  }
+    // 결제된 데이터
+  app.get('/payments/status/all',(req,res)=>{
+      iamport.payment.getByStatus({
+        payment_status: 'paid' 
+      }).then(function(result){
+          res.render('payments_list',{list:result.list});
+      }).catch(function(error){
+          console.log(error);
+          red.send(error);
+      })
+});
+    
+// 	//주문번호 만들기
+// 	  function createOrderNum(){
+// 	  	const date = new Date();
+// 	  	const year = date.getFullYear();
+// 	  	const month = String(date.getMonth() + 1).padStart(2, "0");
+// 	  	const day = String(date.getDate()).padStart(2, "0");
+	  	
+// 	  	let orderNum = year + month + day;
+// 	  	for(let i=0;i<10;i++) {
+// 	  		orderNum += Math.floor(Math.random() * 8);	
+// 	  	}
+// 	  	return orderNum;
+// 	  }
+    
+// //현재 사용자의 정보를 가져오는 함수
+//   function getCurrentUserInfo() {
+//       $.ajax({
+//           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+//           url: "/users/getCurrentUser",
+//           type: "get",
+//           async:false, // 동기방식(전역변수에 값 저장하려면 필요)
+//           dataType : "json",
+//           success : function(data) {
+//               buyer_name = data.name;
+//               buyer_tel = data.tel;
+//           },
+//           error: function(request,status,error){ 
+//               alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); 
+//               console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+//           }
+//       });
+//   }
   
-	// 주문번호를 가져오는 함수 
-  function getMerchantUid_setPrice() {
-      var result = "";
-      $.ajax({
-          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-          url: "/pay/getMerchantUidAndSetPrice",
-          type: "GET",
-          async:false, // 동기방식(전역변수에 값 저장하려면 필요)
-          dataType: "json",
-          data : {
-              goods_id : goods_id
-          },
-          success : function(data) {
-              result = data;
-          },
-          error: function(request,status,error){ 
-              alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); 
-              console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-              result = "error";
-          }
-      });
-      return result;
-  }
-
-  function removePayAuth(removePayAuthId) {
-      $.ajax({
-          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-          url: "/pay/removePayAuth",
-          method: "POST",
-          dataType : "text",
-          data: {
-              removePayAuthId : removePayAuthId
-          },
-          success: function() {
+//   function removePayAuth(removePayAuthId) {
+//       $.ajax({
+//           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+//           url: "/pay/removePayAuth",
+//           method: "POST",
+//           dataType : "text",
+//           data: {
+//               removePayAuthId : removePayAuthId
+//           },
+//           success: function() {
               
-          },
-          error: function(request, status, error) {
-              console.log("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
-          }
-      });
-  }
+//           },
+//           error: function(request, status, error) {
+//               console.log("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
+//           }
+//       });
+//   }
 
 </script>
 

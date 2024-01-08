@@ -7,7 +7,7 @@
 		INSERT INTO STORE_ITEM
 			( ITEM_IDX
 			, ITEM_NAME
-			, ITEM_DATAIL
+			, ITEM_DETAIL
 			, ITEM_PRICE
 			, ITEM_IMAGE
 			, ITEM_NUMBER
@@ -21,7 +21,7 @@
 				 FROM (SELECT IFNULL(MAX(CAST(ITEM_IDX as unsigned)), 0) + 1
 						 FROM STORE_ITEM) A)
 			, #{itemName}
-			, #{itemDatail}
+			, #{itemDetail}
 			, #{itemPrice}
 			, #{itemImage}
 			, #{itemNumber}
@@ -34,27 +34,27 @@
 	
 	<!-- DB 전체 -->
 	<select resultType="StoreItemDTO" id="selectStoreItem">
-		select ITEM_IDX, ITEM_NAME, ITEM_DATAIL, ITEM_PRICE, ITEM_IMAGE, CREATE_USER, CREATE_DATE
+		select ITEM_IDX, ITEM_NAME, ITEM_DETAIL, ITEM_PRICE, ITEM_IMAGE, CREATE_USER, CREATE_DATE
 		  from STORE_ITEM
 	</select>
 	
 	<!-- DB BAST -->
 	<select resultType="StoreItemDTO" id="selectStoreItemB">
-		select ITEM_IDX, ITEM_NAME, ITEM_DATAIL, format(ITEM_PRICE, 0) "ITEM_PRICE", ITEM_IMAGE, CREATE_USER, CREATE_DATE
+		select ITEM_IDX, ITEM_NAME, ITEM_DETAIL, format(ITEM_PRICE, 0) "ITEM_PRICE", ITEM_IMAGE, CREATE_USER, CREATE_DATE
 		  from STORE_ITEM
 		 where ITEM_IDX LIKE 'B%'
 	</select>
 	
 	<!-- DB SNACK -->
 	<select resultType="StoreItemDTO" id="selectStoreItemS">
-		select ITEM_IDX, ITEM_NAME, ITEM_DATAIL, format(ITEM_PRICE, 0) "ITEM_PRICE", ITEM_IMAGE, CREATE_USER, CREATE_DATE
+		select ITEM_IDX, ITEM_NAME, ITEM_DETAIL, format(ITEM_PRICE, 0) "ITEM_PRICE", ITEM_IMAGE, CREATE_USER, CREATE_DATE
 		  from STORE_ITEM
 		 where ITEM_IDX LIKE 'S%'
 	</select>
 	
 	<!-- DB TICKET -->
 	<select resultType="StoreItemDTO" id="selectStoreItemT">
-		select ITEM_IDX, ITEM_NAME, ITEM_DATAIL, format(ITEM_PRICE, 0) "ITEM_PRICE", ITEM_IMAGE, CREATE_USER, CREATE_DATE
+		select ITEM_IDX, ITEM_NAME, ITEM_DETAIL, format(ITEM_PRICE, 0) "ITEM_PRICE", ITEM_IMAGE, CREATE_USER, CREATE_DATE
 		  from STORE_ITEM
 		 where ITEM_IDX LIKE 'T%'
 	</select>
@@ -63,7 +63,7 @@
 	<select resultType="StoreItemDTO" id="selectItemInfo" parameterType="String">
 		select ITEM_IDX
 			 , ITEM_NAME
-			 , ITEM_DATAIL
+			 , ITEM_DETAIL
 			 , ITEM_PRICE
 			 , ITEM_IMAGE
 		from STORE_ITEM
