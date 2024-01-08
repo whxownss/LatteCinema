@@ -96,8 +96,8 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
     
 
     <!-- 일별 박스오피스 -->
-	
-	<!-- <section class="category-section">
+	<!-- 
+	<section class="category-section">
 		<div class="container" data-aos="fade-up">
 		  <div class="section-header d-flex justify-content-between align-items-center mb-5">
 	        <h2>박스오피스</h2>
@@ -117,10 +117,9 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
 		     </div>
 		        <div id="movie-names">영화제목자리</div>
 	       </div>
-	        -->
 	      
 
-
+ -->
 
 
 	       

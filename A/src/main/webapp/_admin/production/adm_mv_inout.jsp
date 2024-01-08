@@ -172,26 +172,72 @@
 					</button>       
             		<button type="button" class="btn btn-success" onclick="openRegistrationPage()">영화조회 / 등록</button>
 					
+					
+					
+					
+					
+					      <div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>등록된 영화 관리</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <p class="text-muted font-13 m-b-30">
+                    </p>
+					
+                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap boxmovie" cellspacing="0" width="100%">
+                      <thead>
+                        <tr>
+                         <th>선택</th>
+					    <!-- <th>영화코드</th> -->
+					    <th>제목</th>
+					    <th>제작사</th>
+					    <th>국가</th>
+					    <th>줄거리</th>
+					    <th>관람등급</th>
+					    <th>개봉일</th>
+					    <th>감독</th>
+					    <th>상영시간</th>
+					    <th>장르</th>
+					    <th>포스터</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                       
+                      	
+                      </tbody>
+                    </table>
+					
+					
+                  </div>
+                </div>
+              </div>			
+             </div>
+					
+					
+					
+					
+					
+					
 					<!-- 모달 추가 -->
-					<div id="movieModal" class="modal" style="display: none; width: 800px;">
+					<!-- <div id="movieModal" class="modal" style="display: none; width: 800px;">
 					    <div class="modal-content">
 					        <span class="close" onclick="closeMovieModal()">&times;</span>
 					        <ol id="movieList">
-					           <!-- 하단 스크립트 모달 동작 -->
+					           하단 스크립트 모달 동작
 					        </ol>
 					        <button onclick="confirmMovieSelection()">확인</button>
 					    </div>
-					</div> 
+					</div>  -->
 					</div>
 
 
-                <!--       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-name">영화이름<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="movie-name" required="required" class="form-control col-md-7 col-xs-12">
-                        </div> -->
-   
         
  		
  			
@@ -223,14 +269,13 @@
                         </div>
                       </div> -->
                       
-                      <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                          
                         </div>
                       </div>
 
-                    </form>
+                   
                   </div>
                 </div>
               </div>
@@ -308,7 +353,7 @@
                         </div> 
                       </div>
                      
-                      </div>
+                      
                       
                      
                       <div class="ln_solid"></div>
@@ -360,8 +405,7 @@
                       		<td>집에 보내줘</td>
                       		<td>2023/12/25</td>
                       		<td>전체관람가</td>
-                      		<td>상영중</select>       <!-- 상영종료일보다 이전인 날짜엔 상영중으로 보이고 지나면 상영종료로 보이게  -->
-                      		</td>
+                      		<td>상영중 <!-- 상영종료일보다 이전인 날짜엔 상영중으로 보이고 지나면 상영종료로 보이게  --></td>
                       		<td>now</td>
                       	</tr>
                        
@@ -388,13 +432,7 @@
     </div>
    </div> 
    
-                        
-                  </div>
-                </div>
-              </div>
-            </div>
-         
-   
+    
    
    
    
@@ -407,7 +445,6 @@
     
     <script type="text/javascript">
 	  function openMovieModal() {	
-		  document.getElementById("movieModal").style.display = "block";
 		
 		$.ajax({
 			url : 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json',
@@ -418,14 +455,38 @@
 			},
 			async : false,                              //비동기식인 ajax를 동기식으로 만들어줌 만약 출력해야될 결과가 많거나 제대로 출력되지 않을때, 이 옵션을 사용
 			success : function(data) {                        //data에 들어오는 값들은 앞에서 출력되던 예시와 같음
-				var movieList = '';
                 for (var i = 0; i < data.boxOfficeResult.dailyBoxOfficeList.length; i++) {
-                    movieList += '<li data-movieCd="' + data.boxOfficeResult.dailyBoxOfficeList[i].movieCd +
-                                 '" data-openDt="' + data.boxOfficeResult.dailyBoxOfficeList[i].openDt + '">' +
-                                 data.boxOfficeResult.dailyBoxOfficeList[i].movieNm +
-                                 ' (' + data.boxOfficeResult.dailyBoxOfficeList[i].openDt + ')</li>';
+                	
+                	
+                	var filmMade = '';
+                    var poster = '';
+                    var nation = '';
+                    var synopsis = '';
+                    var rating = '';
+                    var director = '';
+                    var runtime = '';
+                    var genre = '';
+                	var openDate = data.boxOfficeResult.dailyBoxOfficeList[i].openDt;
+                	var movieIdx = data.boxOfficeResult.dailyBoxOfficeList[i].movieCd;
+                	var title = data.boxOfficeResult.dailyBoxOfficeList[i].movieNm;
+                	
+                	var html = '';
+                    html += '<tr data-movieIdx="'+ movieIdx+'">'
+                    html += '<td><input type="checkbox" class="movie-checkbox" data-title="'+ title +'" data-rating="'+ rating +'" data-runtime="'+ runtime +'" data-filmMade="'+ filmMade +'" data-nation="'+ nation +'" data-synopsis="'+ synopsis +'" data-openDate="'+ openDate +'" data-director="'+ director +'" data-genre="'+ genre +'" data-poster="'+ poster +'"/></td>';
+                    html += '<td>'+ title + '</td>'
+                    html += '<td>'+ filmMade + '</td>'
+                    html += '<td>'+ nation + '</td>'
+                    html += '<td>'+ synopsis + '</td>'
+                    html += '<td>'+ rating + '</td>'
+                    html += '<td>'+ openDate + '</td>'
+                    html += '<td>'+ director + '</td>'
+                  	html += '<td>'+ runtime + '분</td>'
+                	html += '<td>'+ genre + '</td>'
+                	html += '<td><img src="' + poster + '"></td>'
+                    html += '</tr>';
+                    
+                    $('.boxmovie').find('tbody').append(html)
                 }
-                $('#movieList').html(movieList);
                 
             	 // 각 항목에 클릭 이벤트 추가
                 $('#movieList li').on('click', function() {
@@ -477,7 +538,8 @@
 		}					
 	</script>
 	
-    
+	 <script src="_admin/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+     <script src="_admin/build/js/custom.min.js"></script>
 
 	
   </body>
