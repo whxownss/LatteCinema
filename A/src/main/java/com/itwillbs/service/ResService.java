@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.itwillbs.dao.ResDAO;
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.LocationDTO;
+import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.domain.ScheduleDTO;
 
 public class ResService {
@@ -67,6 +70,25 @@ public class ResService {
 		String movieListJson = gson.toJson(movieList);
 		
 		return movieListJson;
+	}
+
+	public String setResInfo(String rsp) {
+		resDAO = new ResDAO();
+		
+//		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+		ReservationDTO reservationDTO = gson.fromJson(rsp, ReservationDTO.class);
+		System.out.println("@@@@@@@@@@@@@@@");
+		System.out.println(reservationDTO);
+		System.out.println("@@@@@@@@@@@@@@@");
+		
+		String msg = "실패";
+		
+		if(resDAO.setResInfo(reservationDTO)) 
+			msg = "성공";
+		
+		return msg;
+		
 	}
 
 }
