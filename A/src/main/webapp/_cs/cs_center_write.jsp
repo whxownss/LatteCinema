@@ -47,7 +47,7 @@ String user = "ADMIN2477";
 		
 		<section class="category-section" id="">
 		<form action="insertCenterWrite.cs" method="post" name="fr">
-		<input type="hidden" name="createUser" value=<%=user %>>
+		<input type="hidden" name="createUser" value=${sessionScope.sId }>
 			<div class="container" data-aos="fade-up">
 				<select id="locationSelect" name="loIdx" class="form-select" aria-label="Default select example">
 					<option selected>지역</option>
@@ -135,7 +135,7 @@ $('#locationSelect').change(function() {
 	  	        // 예: 받은 데이터를 페이지에 표시
 	  	        var cinemas = response;
 	  	        $('#cinemaSelect').empty();
-	  	        $('#cinemaSelect').append($('<option>전체</option>'));
+// 	  	        $('#cinemaSelect').append($('<option>전체</option>')); // 이거 빼기로 했음. 나중에 확인해보기.
 	  	        cinemas.forEach(function(cinema) {
 // 	  	        	debugger;
 	  	            $('#cinemaSelect').append($('<option></option>').val(cinema.ciIdx).text(cinema.ciName));

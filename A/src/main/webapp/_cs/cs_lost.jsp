@@ -1,11 +1,18 @@
+<%@page import="com.itwillbs.domain.PageDTO"%>
+<%@page import="com.itwillbs.domain.LostBoardDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
-			
+<%
+ArrayList<LostBoardDTO> lostBoardList = (ArrayList<LostBoardDTO>)request.getAttribute("lostBoardList");
+PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
+%>			
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
 				<!-- 이곳에 코드작성 -->
@@ -42,36 +49,37 @@
 			<div class="container" data-aos="fade-up">
 				<div class="row">
 				  <div class="col-md-3">
-				    <p><strong>전체 <span id="totalCnt" class="font-gblue">7,727</span>건</strong></p>
+<%-- 				    <p><strong>전체 <span id="totalCnt" class="font-gblue">${pageDTO.count }</span>건</strong></p> --%>
 				  </div>
+<!-- 				  <form class="row gy-2 gx-3 align-items-center" action="cs_lost_search.cs" method="post" name="fr"> -->
 				  <div class="col-md-2">
 				    <div class="input-group mb-3">
-				      <select class="form-select" id="inputGroupSelect02">
-				        <option selected class="text-muted">지역선택</option>
-				        <option value="1">서울</option>
-				        <option value="2">부산</option>
-				        <option value="3">제주</option>
+				      <select class="form-select" id="locationSelect" name="locationSelect">
+				        <option selected class="text-muted" value="">지역선택</option>
+<!-- 				        <option value="1">서울</option> -->
+<!-- 				        <option value="2">부산</option> -->
+<!-- 				        <option value="3">제주</option> -->
 				      </select>
 <!-- 				      <label class="input-group-text" for="inputGroupSelect02">Options</label> -->
 				    </div>
 				  </div>
 				  <div class="col-md-2">
 				    <div class="input-group mb-3">
-				      <select class="form-select" id="inputGroupSelect02">
-				        <option selected class="text-muted">영화관 선택</option>
-				        <option value="1">부산대</option>
-				        <option value="2">강남</option>
-				        <option value="3">서귀포</option>
+				      <select class="form-select" id="cinemaSelect" name="cinemaSelect">
+				        <option selected class="text-muted" value="">영화관 선택</option>
+<!-- 				        <option value="1">부산대</option> -->
+<!-- 				        <option value="2">강남</option> -->
+<!-- 				        <option value="3">서귀포</option> -->
 				      </select>
 <!-- 				      <label class="input-group-text" for="inputGroupSelect02">Options</label> -->
 				    </div>
 				  </div>
 				  <div class="col-md-2">
 				    <div class="input-group mb-3">
-				      <select class="form-select" id="inputGroupSelect02">
-				        <option selected class="text-muted">접수상태 선택</option>
-				        <option value="1">미답변</option>
-				        <option value="2">답변완료</option>
+				      <select class="form-select" id="lostStatus" name="lostStatus">
+				        <option selected class="text-muted" value="">접수상태 선택</option>
+				        <option value="0">미답변</option>
+				        <option value="1">답변완료</option>
 <!-- 				        <option value="3">Three</option> -->
 				      </select>
 <!-- 				      <label class="input-group-text" for="inputGroupSelect02">Options</label> -->
@@ -79,10 +87,11 @@
 				  </div>
 				  <div class="col-md-3">
 				    <div class="input-group mb-3">
-				      <input type="text" class="form-control" placeholder="검색어를 입력해주세요." aria-label="input-search" aria-describedby="button-addon2">
-				      <button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
+				      <input type="text" class="form-control" placeholder="검색어를 입력해주세요." id="lostSubject" name="lostSubject" aria-label="input-search" aria-describedby="button-addon2">
+				      <button class="btn btn-outline-secondary" type="button" id="lostSearchBtn">검색</button>
 				    </div>
 				  </div>
+<!-- 				  </form> -->
 				</div>
 				
 				<!-- table -->
@@ -96,77 +105,19 @@
 				      <th scope="col">등록일</th>
 				    </tr>
 				  </thead>
-				  <tbody>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>부산대</td>
-				      <td><a href="cs_lost_content.cs">책갈피 분실물 있나요?</a></td>
-				      <td>답변완료</td>
-				      <td>23.12.01</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">2</th>
-				      <td>부산대</td>
-				      <td><a href="#">토스유스카드 분실</a></td>
-				      <td>답변완료</td>
-				      <td>23.06.26</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>부산대</td>
-				      <td><a href="#">아디다스 검정점퍼 분실</a></td>
-				      <td>답변완료</td>
-				      <td>23.05.26</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">4</th>
-				      <td>부산대</td>
-				      <td><a href="#">분실물 문의드립니다</a></td>
-				      <td>답변완료</td>
-				      <td>23.05.26</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">5</th>
-				      <td>부산대</td>
-				      <td><a href="#">열쇠</a></td>
-				      <td>답변완료</td>
-				      <td>23.05.26</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">6</th>
-				      <td>부산대</td>
-				      <td><a href="#">시계분실</a></td>
-				      <td>답변완료</td>
-				      <td>23.05.26</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">7</th>
-				      <td>부산대</td>
-				      <td><a href="#">종이가방 분실했어요.</a></td>
-				      <td>미답변</td>
-				      <td>23.05.26</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">8</th>
-				      <td>부산대</td>
-				      <td><a href="#">신용카드를 잃어버렸어요</a></td>
-				      <td>답변완료</td>
-				      <td>23.05.26</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">9</th>
-				      <td>부산대</td>
-				      <td><a href="#">버즈분실요ㅠ</a></td>
-				      <td>미답변</td>
-				      <td>23.05.26</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">10</th>
-				      <td>부산대</td>
-				      <td><a href="#">아들이 지갑을 잃어버렸어요</a></td>
-				      <td>미답변</td>
-				      <td>23.05.26</td>
-				    </tr>
+				  <tbody id="tbody">
+				  	<c:forEach var="lostBoardDTO" items="${lostBoardList }">
+				  		<tr>
+				  			<td scope="row">${lostBoardDTO.rn }</td>
+				  			<td>${lostBoardDTO.ciName }</td>
+				  			<td><a href="cs_lost_content.cs?createUser=${lostBoardDTO.createUser }&createDate=${lostBoardDTO.createDate}">${lostBoardDTO.lostSubject }</a></td>
+				  			<td>
+				  				<c:if test="${lostBoardDTO.lostStatus eq 0 }">미답변</c:if>
+				  				<c:if test="${lostBoardDTO.lostStatus eq 1 }">답변완료</c:if>
+				  			</td>
+				  			<td><fmt:formatDate value="${lostBoardDTO.createDate }" pattern="yyyy-MM-dd"/></td>
+				  		</tr>
+				  	</c:forEach>
 				  </tbody>
 				</table>
 			</div>
@@ -174,23 +125,22 @@
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
 				<div class="pagination-container d-flex justify-content-center">
-				  <ul class="pagination">
-				    <li class="page-item disabled">
-				      <a class="page-link text-secondary" href="#" tabindex="-1" aria-disabled="true">이전</a>
-				    </li>
-				    <li class="page-item" aria-current="page">
-				      <a class="page-link text-secondary" href="#">1</a>
-				    </li>
-				    <li class="page-item">
-				      <a class="page-link text-secondary" href="#">2</a>
-				    </li>
-				    <li class="page-item">
-				      <a class="page-link text-secondary" href="#">3</a>
-				    </li>
-				    <!-- 나머지 페이지 번호 추가 -->
-				    <li class="page-item">
-				      <a class="page-link text-secondary" href="#">다음</a>
-				    </li>
+				  <ul class="pagination" id="searchPaging">
+					<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+					    <li class="page-item disabled">
+					      <a class="page-link text-secondary" href="cs_lost.cs?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
+					    </li>
+				    </c:if>	
+				    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+					    <li class="page-item" aria-current="page">
+					      <a class="page-link text-secondary" href="cs_lost.cs?pageNum=${i }">${i }</a>
+					    </li>
+				    </c:forEach>
+		    		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+					    <li class="page-item">
+					      <a class="page-link text-secondary" href="cs_lost.cs?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
+					    </li>
+				    </c:if>
 				  </ul>
 				</div>
 			</div>
@@ -198,4 +148,272 @@
 	</main>
 	
 <%@include file="../_common/commonFooterStart.jsp"%>
+<script src="./jQuery/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    // 지역명 불러오기.
+    $.ajax({
+	    url: 'getRegionList.cs',  // 서버의 URL을 입력
+	    type: 'GET',  // 요청 유형을 'GET'으로 설정
+	    success: function(response) { //response에 내가 가져온 json값이 있음.
+// 	    	debugger;
+	        // 서버로부터 응답을 성공적으로 받았을 때 실행될 코드
+	        // 예: 받은 데이터를 페이지에 표시
+	        var regions = response;
+	        regions.forEach(function(region) {
+	            // 각 지역에 대한 새로운 <option> 요소를 생성하고 <select>에 추가
+	            // 'region' 객체의 구조에 따라 'region.value'와 'region.name'를 적절히 조정
+	            $('#locationSelect').append($('<option></option>').val(region.loIdx).text(region.loName));
+	        });
+	    },
+	    error: function() {
+	        // 요청 처리 중 오류가 발생했을 때 실행될 코드
+	        alert("요청 중 오류가 발생했습니다.");
+	    }
+	});
+    
+    // 검색버튼 클릭
+    $('#lostSearchBtn').on("click",function(){
+   		 $.ajax({
+   		 	    url: 'cs_lost_search.cs',  // 서버의 URL을 입력
+   		 	    type: 'GET',  // 요청 유형을 'GET'으로 설정
+   		 	    data: {
+   		 	    	  'loIdx': $('#locationSelect').val(),
+   		 	    	  'ciIdx': $('#cinemaSelect').val(),
+   		 	    	  'lostStatus': $('#lostStatus').val(),
+   		 	    	  'lostSubject': $('#lostSubject').val()
+   		 	    },
+   		 	    success: function(response) {
+   		 	    	if($('#locationSelect').val() ===''&& $('#cinemaSelect').val()===''&& $('#lostStatus').val()===''&& $('#lostSubject').val()===''){
+   		 	    		window.location.href = 'cs_lost.cs';
+   		 	    		return;
+   		 	    	}
+   					// 'response' 객체에서 'lostBoardList'와 'pageDTO' 데이터 추출
+   			        var lostBoardList = response.lostBoardList;
+   			        var pageDTO = response.pageDTO;
+// 					debugger;
+   					$('#tbody').empty();
+   					lostBoardList.forEach(function(search) {
+   						// 날짜 형식 변경 (예: yyyy-MM-dd)
+   						console.log('Received createDate:', search.createDate);
+   		                var formattedDate = formatDate(search.createDate); // 'formatDate'는 날짜 형식을 변경하는 함수
+   		                var parseAndFormat= parseAndFormatDate(search.createDate);
+   		                // 새로운 행(<tr>)을 생성하고 각 칼럼(<td>)에 데이터 추가
+   		                var newRow = $('<tr></tr>');
+   		                newRow.append($('<td></td>').text(search.rn));  
+   		                newRow.append($('<td></td>').text(search.ciName));  
+   		                newRow.append($('<td></td>').html('<a href="cs_lost_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + parseAndFormat + '">' + search.lostSubject + '</a>'));
+
+   		                if(search.lostStatus === '0'){
+   		                	newRow.append($('<td></td>').val(search.lostStatus).text('미답변'));
+   		                } else {
+   		                	newRow.append($('<td></td>').val(search.lostStatus).text('답변완료'));
+   		                }
+   		                newRow.append($('<td></td>').text(formattedDate));
+   		                
+   		                // 완성된 행을 tbody에 추가
+   		                $('#tbody').append(newRow);
+   		            });
+   					$('#searchPaging').empty();  // 페이지네이션 영역 비우기
+//    					debugger;
+   					    // '이전' 버튼
+   					    if(pageDTO.startPage > pageDTO.pageBlock) {
+   					        $('#searchPaging').append(
+   					            '<li class="page-item disabled">' +
+   					         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage - pageDTO.pageBlock) + ', \'' + $('#locationSelect').val() + '\', \'' + $('#cinemaSelect').val() + '\', \'' + $('#lostStatus').val() + '\', \'' + $('#lostSubject').val() + '\'); return false;">' + '이전' + '</a>' +
+   					            '</li>'
+   					        );
+   					    }
+   					    // 페이지 번호 버튼
+   					    for(var i = pageDTO.startPage; i <= pageDTO.endPage; i++) {
+						    $('#searchPaging').append(
+// 						        '<li class="page-item" aria-current="page">' +
+// 						        '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + i + ', \'' + $('#locationSelect').val() + '\', \'' + $('#cinemaSelect').val() + '\', \'' + $('#lostStatus').val() + '\', \'' + $('#lostSubject').val() + '\'); return false;">' + i + '</a>' +
+// 						        '</li>'
+					    		'<li class="page-item" aria-current="page">' +
+						    	    '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + i + ', \'' + $('#locationSelect').val() + '\', \'' + $('#cinemaSelect').val() + '\', \'' + $('#lostStatus').val() + '\', \'' + $('#lostSubject').val() + '\'); return false;">' + i + '</a>' +
+						    	'</li>'
+						    );
+						}
+
+   					    // '다음' 버튼
+   					    if(pageDTO.endPage < pageDTO.pageCount) {
+   					        $('#searchPaging').append(
+   					            '<li class="page-item">' +
+   					         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage + pageDTO.pageBlock) + ', \'' + $('#locationSelect').val() + '\', \'' + $('#cinemaSelect').val() + '\', \'' + $('#lostStatus').val() + '\', \'' + $('#lostSubject').val() + '\'); return false;">' + '다음' + '</a>' +
+   					            '</li>'
+   					        );
+   					    }
+   		  	    },
+   		 	    error: function() {
+   		 	        // 요청 처리 중 오류가 발생했을 때 실행될 코드
+   		 	        alert("요청 중 오류가 발생했습니다.");
+   		 	    }
+   		 	});
+    });
+
+ 	
+});
+    function searchPageNm(pageNum, loIdx, ciIdx, lostStatus, lostSubject){
+        // AJAX 요청을 통해 서버로부터 새로운 페이징 데이터를 가져옴
+//         debugger;
+        $.ajax({
+            url: 'cs_lost_search.cs',
+            type: 'GET',
+            data: {
+                pageNum: pageNum
+               ,loIdx: loIdx
+               ,ciIdx: ciIdx
+               ,lostStatus: lostStatus
+               ,lostSubject: lostSubject
+            },
+            success: function(response) {
+                // 서버로부터 받은 새로운 페이징 데이터로 '#searchPaging' 업데이트
+                // response는 새로운 페이징 데이터를 포함하고 있어야 함
+                updatePagination(response);
+            },
+            error: function(xhr, status, error) {
+                console.error("An error occurred: " + status + "\nError: " + error);
+                // 사용자에게 오류 알림
+                alert("문제가 발생했습니다. 관리자에게 문의하세요.");
+            }
+        });
+    }
+    //
+    function updatePagination(response) {
+		// 'response' 객체에서 'lostBoardList'와 'pageDTO' 데이터 추출
+
+	       var lostBoardList = response.lostBoardList;
+	       var pageDTO = response.pageDTO;
+	
+		$('#tbody').empty();
+		lostBoardList.forEach(function(search) {
+			// 날짜 형식 변경 (예: yyyy-MM-dd)
+			console.log('Received createDate:', search.createDate);
+	              var formattedDate = formatDate(search.createDate); // 'formatDate'는 날짜 형식을 변경하는 함수
+	              var parseAndFormat= parseAndFormatDate(search.createDate);
+	              // 새로운 행(<tr>)을 생성하고 각 칼럼(<td>)에 데이터 추가
+	              var newRow = $('<tr></tr>');
+	              newRow.append($('<td></td>').text(search.rn));  
+	              newRow.append($('<td></td>').text(search.ciName));  
+	              newRow.append($('<td></td>').html('<a href="cs_lost_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + parseAndFormat + '">' + search.lostSubject + '</a>'));
+	              if(search.lostStatus === '0'){
+	              	newRow.append($('<td></td>').val(search.lostStatus).text('미답변'));
+	              } else {
+	              	newRow.append($('<td></td>').val(search.lostStatus).text('답변완료'));
+	              }
+	              newRow.append($('<td></td>').text(formattedDate));
+	              
+	              // 완성된 행을 tbody에 추가
+	              $('#tbody').append(newRow);
+	    });
+		$('#searchPaging').empty();  // 페이지네이션 영역 비우기
+// 		debugger;
+		    // '이전' 버튼
+		    if(pageDTO.startPage > pageDTO.pageBlock) {
+		        $('#searchPaging').append(
+		            '<li class="page-item ">' +
+// 		            '<a class="page-link text-secondary" href="cs_lost.cs?pageNum=' + (pageDTO.startPage - pageDTO.pageBlock) + '" tabindex="-1" aria-disabled="true">이전</a>' +
+		            '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage - pageDTO.pageBlock) + ', \'' + $('#locationSelect').val() + '\', \'' + $('#cinemaSelect').val() + '\', \'' + $('#lostStatus').val() + '\', \'' + $('#lostSubject').val() + '\'); return false;">' + '이전' + '</a>' +
+		            '</li>'
+		        );
+		    }
+		    // 페이지 번호 버튼
+		    for(var i = pageDTO.startPage; i <= pageDTO.endPage; i++) {
+		        $('#searchPaging').append(
+// 		            '<li class="page-item" aria-current="page">' +
+// 		            '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + i + ', \'' + $('#locationSelect').val() + '\'+ ', \'' + $('#cinemaSelect').val() + '\'+ ', \'' + $('#lostStatus').val() + '\'+ ', \'' + $('#lostSubject').val() + '\'); return false;">' + i + '</a>' +
+// 		            '</li>'
+	        		'<li class="page-item" aria-current="page">' +
+		        	    '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + i + ', \'' + $('#locationSelect').val() + '\', \'' + $('#cinemaSelect').val() + '\', \'' + $('#lostStatus').val() + '\', \'' + $('#lostSubject').val() + '\'); return false;">' + i + '</a>' +
+		        	'</li>'
+
+		        );
+		    }
+		    // '다음' 버튼 searchPageNm 이 함수 써서 해결하는게 맞는가? 맞음
+		    if(pageDTO.endPage < pageDTO.pageCount) {
+		        $('#searchPaging').append(
+		            '<li class="page-item">' +
+// 		            '<a class="page-link text-secondary" href="cs_lost.cs?pageNum=' + (pageDTO.startPage + pageDTO.pageBlock) + '">다음</a>' +
+		            '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage + pageDTO.pageBlock) + ', \'' + $('#locationSelect').val() + '\', \'' + $('#cinemaSelect').val() + '\', \'' + $('#lostStatus').val() + '\', \'' + $('#lostSubject').val() + '\'); return false;">' + '다음' + '</a>' +
+		            '</li>'
+		        );
+		    }
+	}
+
+$('#locationSelect').change(function() {
+	 $.ajax({
+ 	    url: 'getCinemaList.cs',  // 서버의 URL을 입력
+ 	    type: 'GET',  // 요청 유형을 'GET'으로 설정
+ 	    data: {'loIdx': $('#locationSelect').val()},
+ 	    success: function(response) {
+ 	        // 서버로부터 응답을 성공적으로 받았을 때 실행될 코드
+ 	        // 예: 받은 데이터를 페이지에 표시
+ 	        var cinemas = response;
+ 	        $('#cinemaSelect').empty();
+ 	        $('#cinemaSelect').append($('<option>영화관 선택</option>').val(''));
+ 	        cinemas.forEach(function(cinema) {
+//  	        	debugger;
+ 	            $('#cinemaSelect').append($('<option></option>').val(cinema.ciIdx).text(cinema.ciName));
+ 	        });
+ 	    },
+ 	    error: function() {
+ 	        // 요청 처리 중 오류가 발생했을 때 실행될 코드
+ 	        alert("요청 중 오류가 발생했습니다.");
+ 	    }
+ 	});
+});
+
+	// 날짜 형식을 변경하는 함수
+function formatDate(dateString) {
+    var date = new Date(dateString);
+    var year = date.getFullYear();
+    var month = ('0' + (date.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 1을 더해줍니다.
+    var day = ('0' + date.getDate()).slice(-2);
+    return year + '-' + month + '-' + day;
+}
+function parseAndFormatDate(dateString) {
+    // 'Jan 2, 2024, 12:18:27 AM'와 같은 형식을 파싱
+    var parts = dateString.match(/(\w+) (\d+), (\d+), (\d+):(\d+):(\d+) (\w+)/);
+    
+    if (parts) {
+        var months = {'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5, 'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11};
+        var year = parseInt(parts[3], 10);
+        var month = months[parts[1]];
+        var day = parseInt(parts[2], 10);
+        var hours = parseInt(parts[4], 10);
+        var minutes = parseInt(parts[5], 10);
+        var seconds = parseInt(parts[6], 10);
+        var ampm = parts[7].toLowerCase();
+
+        // 'AM'과 'PM'을 고려하여 시간 조정
+        if (ampm === 'pm' && hours < 12) {
+            hours += 12;
+        }
+        if (ampm === 'am' && hours === 12) {
+            hours = 0;
+        }
+
+        // Date 객체 생성
+        var date = new Date(year, month, day, hours, minutes, seconds);
+        
+        // 원하는 형식으로 날짜 포맷팅 (예: 'YYYY-MM-DD HH:mm:ss')
+        return formatDate2(date);
+    } else {
+        // 파싱할 수 없는 형식이면 원래 문자열 반환 또는 오류 처리
+        return dateString;
+    }
+}
+	// 주어진 Date 객체를 'YYYY-MM-DD HH:mm:ss' 형식으로 포맷팅하는 함수
+function formatDate2(date) {
+    var year = date.getFullYear();
+    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+    var day = ('0' + date.getDate()).slice(-2);
+    var hours = ('0' + date.getHours()).slice(-2);
+    var minutes = ('0' + date.getMinutes()).slice(-2);
+    var seconds = ('0' + date.getSeconds()).slice(-2);
+
+    return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+}
+</script>
 <%@include file="../_common/commonFooterEnd.jsp"%>

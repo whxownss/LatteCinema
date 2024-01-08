@@ -27,7 +27,7 @@
 				    <div class="col-md-8 offset-md-2">
 				      <div class="bg-light">
 				        <ul class="d-flex flex-wrap justify-content-between list-unstyled">
-				          <li><a href="#h2">L.멤버십 가입하기	</a></li>
+				          <li><a href="#h2">L.멤버십 소개하기	</a></li>
 				          <li><a href="#h3">L.멤버십 포인트 적립	</a></li>
 				          <li><a href="#h4">L.멤버십 포인트 사용	</a></li>
 				          <li><a href="#h5">L.멤버십 추가 혜택	</a></li>
@@ -44,34 +44,40 @@
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 				<!-- 이곳에 코드작성 -->
 					<h3>
-						L. 멤버십 가입하기
+						L. 멤버십 소개하기
 					</h3>
 					<div>
 <!-- 						<a href="#" class="btn-top more">위로 이동</a> -->
 					</div>
 				</div>
 				<div class="content" style="padding-left: 20px;">
-					멤버십 가입하기<br>
-					CINE Q(씨네큐) 웹/모바일 홈페이지 또는 앱에서 회원가입 후 멤버십 바코드를 발급받으세요.
 					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
+					<table class="table mx-auto">
+						<tr>
+							<th class="text-center"></th>
+							<th class="text-center"><img alt="beans" src="${pageContext.servletContext.contextPath }/_assets/img/beans.png" style="width: 100px; height: 100px;"></th>
+							<th class="text-center"><img alt="beans" src="${pageContext.servletContext.contextPath }/_assets/img/milk.png" style="width: 100px; height: 100px;"></th>
+							<th class="text-center"><img alt="beans" src="${pageContext.servletContext.contextPath }/_assets/img/latte.png" style="width: 100px; height: 100px;"></th>
+						</tr>
+						<tr>
+							<th>등급</th>
+							<td class="text-center">원두</td>
+							<td class="text-center">우유</td>
+							<td class="text-center">라떼</td>
+						</tr>
+						<tr>
+							<th>선정</th>
+							<td class="text-center">최초 가입시</td>
+							<td class="text-center">연간예매액 50만원 이상</td>
+							<td class="text-center">연간예매액 100만원 이상</td>
+						</tr>
+						<tr>
+							<th>혜택</th>
+							<td class="text-center">포인트 적립 1%</td>
+							<td class="text-center">포인트 적립 3%</td>
+							<td class="text-center">포인트 적립 5%</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</section>

@@ -72,18 +72,19 @@ ${qnaBoardDTO.qnaContent }
 				    </tr>
 				    <!-- 여기서부터는 답변이 없고 관리자가 아니면 안보이게 만들면 될듯  -->
 				    <tr><!-- <a href="cs_lost_content.jsp">삭제</a> 이거 제거함. -->
-				    	<td><span>관리자</span>&nbsp&nbsp&nbsp&nbsp&nbsp<c:if test="${! empty qnaBoardDTO.qnaResponse }"><a href="javascript:edit();" id="editLink">수정</a>&nbsp&nbsp&nbsp&nbsp&nbsp</c:if><p class="mb-0">${qnaBoardDTO.responseDate }</p></td>
+				    	<td><span>관리자</span><p class="mb-0">${qnaBoardDTO.responseDate }</p></td>
+<%-- 				    	<td><span>관리자</span>&nbsp&nbsp&nbsp&nbsp&nbsp<c:if test="${! empty qnaBoardDTO.qnaResponse }"><a href="javascript:edit();" id="editLink">수정</a>&nbsp&nbsp&nbsp&nbsp&nbsp</c:if><p class="mb-0">${qnaBoardDTO.responseDate }</p></td> --%>
 				    	<td colspan="4"></td>
 				    </tr>
 				    <tr>
 				    	<td colspan="5"><div class="input-group"><textarea class="form-control" id="editableTextArea" readonly>
 ${qnaBoardDTO.qnaResponse }
 				    	</textarea>
-						    	<div class="input-group-append">
-						    		<c:if test="${empty qnaBoardDTO.qnaResponse }">
-							    		<button class="btn btn-outline-secondary" type="button" id="editButton" style="height: 100%;">댓글 쓰기</button>
-							    	</c:if>
-						    	</div>
+<!-- 						    	<div class="input-group-append"> -->
+<%-- 						    		<c:if test="${empty qnaBoardDTO.qnaResponse }"> --%>
+<!-- 							    		<button class="btn btn-outline-secondary" type="button" id="editButton" style="height: 100%;">댓글 쓰기</button> -->
+<%-- 							    	</c:if> --%>
+<!-- 						    	</div> -->
 					    	</div>
 				    	</td>
 				    </tr>
@@ -116,60 +117,80 @@ ${qnaBoardDTO.qnaResponse }
 <%@include file="../_common/commonFooterStart.jsp"%>
 <script>
     $(document).ready(function() {
-        if($('#editableTextArea').val() == '\n\t\t\t\t    \t'){
-            $('#editableTextArea').prop('readonly', false);
-        }
+//     	if ($("#editableTextArea").val().trim() === '') {
+// 	          $("#editableTextArea").val(''); // 텍스트 영역을 비웁니다.
+// 	    }
+//         if($('#editableTextArea').val() === ''){
+//             $('#editableTextArea').prop('readonly', false);
+//         }
     	
-    	// 수정 링크 클릭 시 이벤트 처리
-    	$("#editLink").click(function() {
-    	    var isReadonly = $('#editableTextArea').prop('readonly'); // readonly 상태 확인
-    	    $('#editableTextArea').prop('readonly', !isReadonly); // readonly 상태 토글
-    	    $(this).text(isReadonly ? "저장" : "수정"); // 버튼 텍스트 업데이트
+//     	// 수정 링크 클릭 시 이벤트 처리
+//     	$("#editLink").click(function(e) {
+//     	    var isReadonly = $('#editableTextArea').prop('readonly'); // readonly 상태 확인
+//     	    $('#editableTextArea').prop('readonly', !isReadonly); // readonly 상태 토글
+//     	    $(this).text(isReadonly ? "저장" : "수정"); // 버튼 텍스트 업데이트
 
-    	    if (!isReadonly) { // 편집 상태이면 저장 작업 수행
-    	        $.ajax({
-    	            url: 'updateQnaBoard.cs',
-    	            type: 'POST',
-    	            contentType: 'application/json', // 데이터 타입 명시
-    	            data: JSON.stringify({ // 데이터를 JSON 문자열로 변환
-    	                'qnaResponse': $('#editableTextArea').val(), // 수정된 내용
-    	                'createDate': '${qnaBoardDTO.createDate}',
-    	                'createUser': '${qnaBoardDTO.createUser}',
-    	                'responseUser': '<%=responseUser%>'
-    	            }),
-    	            success: function(response) {
-    	                alert("저장되었습니다!");
-    	                $('#editableTextArea').prop('readonly', true); // 저장 후 readonly 다시 설정
-    	                $("#editLink").text("수정"); // 버튼 텍스트 업데이트
-    	            },
-    	            error: function() {
-    	                alert("저장 중 오류가 발생했습니다.");
-    	            }
-    	        });
-    	    }
-    	});
+//     	    if($("#editableTextArea").val().trim() === '') {
+//   	          $("#editableTextArea").val(''); // 텍스트 영역을 비웁니다.
+//   	    	}
+//     	    if($("#editableTextArea").val() === ''){
+// 	    		e.preventDefault();
+// 			    alert('답변을 하고 등록해주세요.');
+// 	   	    } else {
+//    	    	    if (!isReadonly) { // 편집 상태이면 저장 작업 수행
+// 	    	        $.ajax({
+// 	    	            url: 'updateQnaBoard.cs',
+// 	    	            type: 'POST',
+// 	    	            contentType: 'application/json', // 데이터 타입 명시
+// 	    	            data: JSON.stringify({ // 데이터를 JSON 문자열로 변환
+// 	    	                'qnaResponse': $('#editableTextArea').val(), // 수정된 내용
+// 	    	                'createDate': '${qnaBoardDTO.createDate}',
+// 	    	                'createUser': '${qnaBoardDTO.createUser}',
+// 	    	                'responseUser': '${sessionScope.sId}'
+// 	    	            }),
+// 	    	            success: function(response) {
+// 	    	                alert("저장되었습니다!");
+// 	    	                $('#editableTextArea').prop('readonly', true); // 저장 후 readonly 다시 설정
+// 	    	                $("#editLink").text("수정"); // 버튼 텍스트 업데이트
+// 	    	            },
+// 	    	            error: function() {
+// 	    	                alert("저장 중 오류가 발생했습니다.");
+// 	    	            }
+// 	    	        });
+// 	    	    }
+// 	   	    } 
+//     	});
     	
-	       	// 수정 버튼 클릭 시 이벤트 처리
-	    	$("#editButton").click(function() {
-    	        $.ajax({
-    	            url: 'updateQnaBoard.cs',
-    	            type: 'POST',
-    	            contentType: 'application/json', // 데이터 타입 명시
-    	            data: JSON.stringify({ // 데이터를 JSON 문자열로 변환
-    	                'qnaResponse': $('#editableTextArea').val(), // 수정된 내용
-    	                'createDate': '${qnaBoardDTO.createDate}',
-    	                'createUser': '${qnaBoardDTO.createUser}',
-    	                'responseUser': '<%=responseUser%>'
-    	            }),
-    	            success: function(response) {
-    	                alert("저장되었습니다!");
-    	                window.location.href = 'cs_qna_content.cs?createUser=${qnaBoardDTO.createUser }&createDate=${qnaBoardDTO.createDate}';
-    	            },
-    	            error: function() {
-    	                alert("저장 중 오류가 발생했습니다.");
-    	            }
-    	        });
-    	    });
+// 	       	// 수정 버튼 클릭 시 이벤트 처리
+// 	    	$("#editButton").click(function(e) {
+// 	    		if ($("#editableTextArea").val().trim() === '') {
+// 	  	          $("#editableTextArea").val(''); // 텍스트 영역을 비웁니다.
+// 	  	        }
+// 	    		if($("#editableTextArea").val() === ''){
+// 		    		e.preventDefault();
+// 				    alert('답변을 하고 등록해주세요.');
+// 	       	    } else {
+// 	       	    	$.ajax({
+// 	    	            url: 'updateQnaBoard.cs',
+// 	    	            type: 'POST',
+// 	    	            contentType: 'application/json', // 데이터 타입 명시
+// 	    	            data: JSON.stringify({ // 데이터를 JSON 문자열로 변환
+// 	    	                'qnaResponse': $('#editableTextArea').val(), // 수정된 내용
+// 	    	                'createDate': '${qnaBoardDTO.createDate}',
+// 	    	                'createUser': '${qnaBoardDTO.createUser}',
+// 	    	                'responseUser': '${sessionScope.sId}'
+// 	    	            }),
+// 	    	            success: function(response) {
+// 	    	                alert("저장되었습니다!");
+// 	    	                window.location.href = 'cs_qna_content.cs?createUser=${qnaBoardDTO.createUser }&createDate=${qnaBoardDTO.createDate}';
+// 	    	            },
+// 	    	            error: function() {
+// 	    	                alert("저장 중 오류가 발생했습니다.");
+// 	    	            }
+// 	    	        });
+// 	       	    }
+    	        
+//     	    });
 
     });
     function edit(){

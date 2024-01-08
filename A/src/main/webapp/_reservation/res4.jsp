@@ -3,9 +3,6 @@
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 	<link rel="stylesheet" href="_assets/css/res_1.css">
-	<script src="jQuery/jquery-3.6.0.js"></script>
-	<script>
-	</script>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
@@ -42,7 +39,7 @@
 						
 						<div class="row text-center pt-3">
 							<img src="_assets/img/payOK.png" class="" style="width:120px; height:100px; margin: 0 auto;"> 
-							<div class="pt-3">차동원 회원님, 결제가 성공적으로 완료되었습니다.</div>
+							<div class="pt-3"><span class="buyerName"></span> 회원님, 결제가 성공적으로 완료되었습니다.</div>
 						</div>
 						
 						
@@ -56,27 +53,34 @@
 										<table class="h-100">
 											<tr class="border-bottom border-dark-subtle mb-2">
 												<th class="text-start pe-3">예매번호</th>
-												<th class="text-start">37367922</th>
+												<th class="text-start resIdx"></th>
 											</tr>
 											
 											<tr>
 												<td class="text-start">상영일시</td>
-												<td class="text-start">2023-12-25 (금) 11:00 ~ 13:00</td>
+												<td class="text-start">
+													<span class="date"></span>
+													<span class="sTime"></span> ~ 
+													<span class="eTime"></span>
+												</td>
 											</tr>
 											
 											<tr>
 												<td class="text-start">상영관</td>
-												<td class="text-start">서면 2관</td>
+												<td class="text-start">
+													<span class="cinema"></span>
+													<span class="sIdx"></span>
+												</td>
 											</tr>
 											
 											<tr>
 												<td class="text-start">관람인원</td>
-												<td class="text-start">성인1</td>
+												<td class="text-start personType"></td>
 											</tr>
 											
 											<tr>
 												<td class="text-start">좌석</td>
-												<td class="text-start">E8</td>
+												<td class="text-start seat"></td>
 											</tr>
 										</table>
 								  </div>
@@ -116,4 +120,30 @@
 		</section>
 	</main>
 	
-<%@include file ="../_common/commonFooter.jsp" %>
+<%@include file="../_common/commonFooterStart.jsp"%>	
+<script src="jQuery/jquery-3.6.0.js"></script>
+<script>
+// var schDTO = JSON.parse(localStorage.getItem("schDTO"));
+var rsp = JSON.parse(localStorage.getItem("rsp"));
+
+$(function(){
+	debugger;
+	$(".buyerName").text(rsp.buyer_name);
+	$(".resIdx").text(rsp.merchant_uid);
+	$(".sTime").text(rsp.sTime);
+	$(".eTime").text(rsp.eTime);
+	$(".sIdx").text(rsp.scr_idx);
+	$(".seat").text(rsp.seat);
+	$(".date").text(rsp.date);
+	$(".cinema").text(rsp.cinema);
+	var personType = [];
+	if(rsp["p1"] != "0") personType.push("성인 " + rsp["p1"]);
+	if(rsp["p2"] != "0") personType.push("청소년 " + rsp["p2"]);
+	if(rsp["p3"] != "0") personType.push("경로 " + rsp["p3"]);
+	debugger;
+	$(".personType").append("<span>" + personType.join(', ') + "</span>")
+	
+})
+
+</script>
+<%@include file="../_common/commonFooterEnd.jsp"%>

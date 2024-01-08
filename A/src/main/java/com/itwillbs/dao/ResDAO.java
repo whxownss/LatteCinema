@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.LocationDTO;
+import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.domain.ScheduleDTO;
 import com.itwillbs.sql.SqlMapClient;
 
@@ -46,13 +47,22 @@ public class ResDAO {
 		return openCinemaList;
 	}
 
-	public List<ScheduleDTO> selectMovieList(String cinema) {
+	public List<ScheduleDTO> selectMovieList(Map<String, String> map) {
 		SqlSession session = sqlSessionFactory.openSession();
-		List<ScheduleDTO> movieList = session.selectList("Schedule.selectMovieList", cinema);
-		
-		
+		List<ScheduleDTO> movieList = session.selectList("Schedule.selectMovieList", map);
+		session.close();
 		
 		return movieList;
+	}
+
+	public boolean setResInfo(ReservationDTO reservationDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int insertCnt = session.insert("Reservation.insert", reservationDTO);
+		session.commit();
+		session.close();
+		
+		return insertCnt > 0 ? true : false;
+		
 	}
 	
 	

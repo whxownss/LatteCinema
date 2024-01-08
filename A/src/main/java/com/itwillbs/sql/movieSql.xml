@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Movie">
+
+	<insert id="insertMovie">
+			INSERT INTO MOVIE
+		 	 ( 
+		 	   MOVIE_IDX
+		 	 , TITLE
+		 	 , DIRECTOR
+		 	 , GENRE
+		 	 , OPENDATE
+		 	 , RATING
+		 	 , SYNOPSIS
+		 	 , POSTER
+		 	 , FILM_MADE
+		 	 , NATION
+		 	 , RUN_TIME)
+		VALUES (
+			  #{movieIdx}
+		  	, #{title}
+		  	, #{director}
+		  	, #{genre}
+		  	, #{openDate}
+		  	, #{rating} 
+		  	, #{synopsis}
+		  	, #{poster}
+		  	, #{filmMade}
+		  	, #{nation}
+		  	, #{runTime})
+	</insert>
+	
+</mapper>

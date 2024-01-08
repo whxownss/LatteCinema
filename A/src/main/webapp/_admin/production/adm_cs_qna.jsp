@@ -1,5 +1,8 @@
+<%@page import="com.itwillbs.domain.QnaBoardDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,7 +32,9 @@
     <!-- Custom Theme Style -->
     <link href="_admin/build/css/custom.min.css" rel="stylesheet">
   </head>
-
+<%
+ArrayList<QnaBoardDTO> qnaBoardList = (ArrayList<QnaBoardDTO>)request.getAttribute("qnaBoardList");
+%>
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
@@ -64,6 +69,7 @@
                   <li><a href="adm_member.ad"><i class="fa fa-user"></i> 회원관리</a></li>
                   <li><a href="adm_mv_inout.ad"><i class="fa fa-edit"></i>영화 통합 추가/제거</a></li>
                   <li><a href="adm_store.ad"><i class="fa fa-beer"></i>스토어 관리</a></li>
+                  <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
                 </ul>
               </div>
               <div class="menu_section">
@@ -119,6 +125,48 @@
               </div>
             </div>
 
+						  <!-- Modal -->
+			 <form action="updateQnaBoard2.cs" method="get" name="frChange"> 
+			  <div class="modal fade" id="myModal" role="dialog">
+			    <div class="modal-dialog">
+<!-- 			    <button type="button" class="btn-close" aria-label="Close"></button> -->
+			      <!-- Modal content-->
+			      <div class="modal-content">
+				      <div class="modal-header">
+				      <input type="hidden" name="responseUser" value="${sessionScope.sId }">
+				      <input type="hidden" id="qnaUser" name="createUser" value="">
+				      <input type="hidden" id="qnaDate" name="createDate" value="">
+				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				        <h5 class="modal-title" id="exampleModalLabel">1:1문의사항</h5>
+				        <input type="text" value="" id="qnaCategory" name="qnaCategory" readonly>
+				      </div>
+				      <div class="modal-body">
+<!-- 				        <form> -->
+				          <div class="mb-3">
+				            <label for="recipient-name" class="col-form-label">제목</label>
+				            <input type="text" class="form-control" id="recipient-name" name="qnaSubject" value="" readonly>
+				          </div>
+				          <div class="mb-3">
+				            <label for="message-text" class="col-form-label">내용</label>
+				            <textarea class="form-control" id="message-text" name="qnaContent" readonly></textarea>
+				          </div>
+				          <div class="mb-3">
+				            <label for="message-text" class="col-form-label">문의답변</label>
+				            <textarea class="form-control" id="qnaResponse" name="qnaResponse"></textarea>
+				          </div>
+<!-- 				        </form> -->
+				      </div>
+				      <div class="modal-footer">
+				      	<button type="button" class="btn btn-danger" id="deleteQnaBoard">삭제</button>
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">나가기</button>
+				        <button type="submit" id="modalRewrite" class="btn btn-primary">수정</button>
+				      </div>
+			    </div>
+			  </div>
+			  
+			</div>
+		 </form>
+
             <div class="clearfix"></div>
 
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -143,867 +191,25 @@
                           <th>글 제목</th>
                           <th>회원명</th>
                           <th>등록일</th>
-                          <th>핸드폰 번호</th>
-                          <th>E-mail</th>
-                          <th>답변유무</th>
+                          <th>답변자</th>
+                          <th>답변일</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>  
-                          <td><a href="cs_qna_content.cs">쿠폰 왜이럼?</a></td>
-                          <td>강동원</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>김길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>박길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>이길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>기타</td>
-                          <td>쿠폰 왜이럼?</td>
-                          <td>홍길동</td>
-                          <td>2011/04/25</td>
-                          <td>010 123 2222</td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>
-							<select>
-								<option>N</option>
-								<option>Y</option>
-							</select>
-						  </td>
-                        </tr>
+                      	<c:forEach var="qnaBoardDTO" items="${qnaBoardList }">
+                      	<tr>
+                      		<td>${qnaBoardDTO.rn }</td>
+                      		<td>${qnaBoardDTO.qnaCategory }</td>
+<%--                       		<td><a href="cs_qna_content.cs?createUser=${qnaBoardDTO.createUser }&createDate=${qnaBoardDTO.createDate}">${qnaBoardDTO.qnaSubject }</a></td> --%>
+                      		<td><a data-toggle="modal" data-target="#myModal" data-info='{"key1": "${qnaBoardDTO.qnaSubject}", "key2": "${qnaBoardDTO.qnaContent}", "key3": "${qnaBoardDTO.qnaCategory}", "key4": "${qnaBoardDTO.createUser}", "key5": "${qnaBoardDTO.createDate}", "key6": "${qnaBoardDTO.qnaResponse}"}'>${qnaBoardDTO.qnaSubject}</a></td>
+<%--                       		<td><a data-toggle="modal" data-target="#myModal" >${qnaBoardDTO.qnaSubject}</a></td> --%>
+                      		<td>${qnaBoardDTO.createUser }</td>
+                      		<td>${qnaBoardDTO.createDate }</td>
+                      		<td>${qnaBoardDTO.responseUser }</td>
+                      		<td>${qnaBoardDTO.responseDate }</td>
+                      	</tr>	
+                      	</c:forEach>
+                        
                       </tbody>
                     </table>
 					
@@ -1056,6 +262,67 @@
 
     <!-- Custom Theme Scripts -->
     <script src="_admin/build/js/custom.min.js"></script>
-
+	<script type="text/javascript">
+	$("tr a[data-toggle='modal']").on("click", function () {
+// 		debugger; // 문제점은 공지사항 내용쪽 텍스트가 공백이 너무 많아서 터져버림.
+	    // data-info 속성에서 JSON 데이터 가져오기
+	    var infoData = $(this).data("info");
+	    console.log(typeof infoData); //1번째 글은 Object타입, 서면입력글은 string으로 잡힘.
+	    
+	    //Object면 String으로 바꾸고 String이면 그냥 통과해서 replaceAll 가능하게 함.
+	    if(typeof infoData != 'string'){
+	    	infoData = JSON.stringify(infoData);	
+	    }
+		
+	    if (infoData.includes("\n")) {
+	        // \n이 포함되어 있다면, replaceAll을 사용하여 모두 제거
+	        infoData = infoData.replaceAll("\n", "");
+	    }
+	    if (infoData.includes("\t")) {
+	    	infoData = infoData.replaceAll("\t", "");
+	    }
+// 	    infoData = infoData.replaceAll("\n", "");
+// 	    infoData = infoData.replaceAll("\t", "");
+	    infoData = JSON.parse(infoData);
+	
+	    // 필요한 정보 추출
+	    var key1 = infoData.key1;
+	    var key2 = infoData.key2;
+	    var key3 = infoData.key3;
+	    var key4 = infoData.key4;
+	    var key5 = infoData.key5;
+	    var key6 = infoData.key6;
+	
+	    // 추출한 정보를 출력하거나 다른 작업 수행
+	    console.log("Key1:", key1);
+	    console.log("Key2:", key2);
+	    console.log("Key3:", key3);
+	    console.log("Key4:", key4);
+	    console.log("Key5:", key5);
+	    console.log("Key6:", key6);
+	
+        if (infoData) {
+            // 필요한 정보 추출
+            $("#qnaCategory").val(infoData.key3); // 
+            $("#recipient-name").val(infoData.key1); // a 태그에서 가져온 정보
+            $("#message-text").text(infoData.key2); // a 태그에서 가져온 정보
+            $("#qnaUser").val(infoData.key4);
+            $("#qnaDate").val(infoData.key5);
+            $("#qnaResponse").val(infoData.key6);
+        } else {
+            console.log("data-info not found");
+        }
+	    // 또는 다른 작업을 수행
+	    // 예를 들어, 모달을 열거나 다른 페이지로 이동
+	});//tr 누르면 모달 토글		
+	$('#deleteQnaBoard').on("click",function(){
+		if(confirm('정말 삭제하시겠습니까?')){
+			alert('삭제완료');
+			window.location.href = 'deleteQnaBoard.cs?createUser=' + $('#qnaUser').val() + '&createDate=' + $("#qnaDate").val();
+		} else {
+			alert('삭제를 취소하셨습니다.');
+		}
+	});
+	</script>
   </body>
 </html>

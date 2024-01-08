@@ -4,17 +4,19 @@
 <%@include file="../_common/commonHeaderStart.jsp"%>
 <%@include file="../_common/commonHeaderEnd.jsp"%>
 
+<c:set var="storeItem" value="${requestScope.storeItemDTO}" />
+
 <main id="main">
+
+	<!-- 메인 -->
 
 	<section class="category-section">
 		<div class="container" data-aos="fade-up">
 
-			<!-- 메인 -->
-
 			<section class="contents d-flex">
 				<div class="col-6" style="display: flex; justify-content: center;">
 					<img
-						src="https://cf.lottecinema.co.kr//Media/WebAdmin/113c4f562c6e4c9d94e973b590f594ab.jpg"
+						src="${storeItem.itemImage}"
 						alt="스위트콤보 상품이미지">
 				</div>
 				<article class="col-4">
@@ -26,8 +28,8 @@
 						<thead>
 							<tr>
 								<th scope="row" class="text-center border-bottom-0" colspan="4">
-									<h3 class="section-header fs-1">
-										<i>스위트콤보</i>
+									<h3 class="section-header fs-1" id="itemName">
+										<i>${storeItem.itemName}</i>
 									</h3>
 								</th>
 							</tr>
@@ -35,11 +37,11 @@
 						<tbody>
 							<tr>
 								<th colspan="2" scope="row" class="text-center"><span
-									class="fs-3" id="price">10000</span>원</th>
+									class="fs-3" id="price">${storeItem.itemPrice}</span>원</th>
 							</tr>
 							<tr>
 								<th scope="row">구성품</th>
-								<td class="text-end">오리지널L + 탄산음료M2</td>
+								<td class="text-end">${storeItem.itemDetail}</td>
 							</tr>
 							<tr>
 								<th scope="row">구매제한</th>
@@ -52,7 +54,7 @@
 							<tr>
 								<th scope="col" style="padding-top: 3%">총 상품금액</th>
 								<td class="text-end" style="font-weight: bold; color: #FF243E;">
-									<span class="fs-2" id="sPrice">10,000</span>원
+									<span class="fs-2" id="sPrice"></span>원 
 								</td>
 							</tr>
 							<tr class="border border-bottom-0 border-white">
@@ -60,11 +62,13 @@
 									<div class="input-group mb-3 container _count"
 										style="width: 400px; padding-top: 4%; text-align: center;">
 										<button class="minus btn btn-outline-secondary"
-										style="text-align: center; padding-left: 20px; padding-right: 20px;">-</button>
-										<label class="inpp input-group-text border border-secondary fs-5" for="inputGroupFile01"
+											style="text-align: center; padding-left: 20px; padding-right: 20px;">-</button>
+										<label
+											class="inpp input-group-text border border-secondary fs-5"
+											for="inputGroupFile01"
 											style="text-align: center; padding-left: 133px; padding-right: 133px;">1</label>
 										<button class="plus btn btn-outline-secondary"
-										style="text-align: center; padding-left: 20px; padding-right: 20px;">+</button>
+											style="text-align: center; padding-left: 20px; padding-right: 20px;">+</button>
 									</div>
 								</td>
 							</tr>
@@ -79,9 +83,9 @@
 						</tbody>
 					</table>
 				</article>
+			</section>
 		</div>
 	</section>
-	<!-- 메인 -->
 
 	<!-- 정보	 -->
 
@@ -136,7 +140,6 @@
 						aria-labelledby="headingTwo" data-bs-parent="#accordionExample"
 						style="">
 						<div class="accordion-body">
-
 							<div
 								class="section-header d-flex justify-content-between align-items-center mb-5">
 								<h2>유의사항</h2>
@@ -165,8 +168,9 @@
 					</div>
 				</div>
 			</div>
+		</div>
 	</section>
-	<!-- 정보	 -->
+	
 </main>
 
 <!-- ///// 자바스크립트 ///// -->
@@ -175,49 +179,140 @@
 
 <script src="jQuery/jquery-3.6.0.js"></script>
 
-<!-- jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <!-- iamport.payment.js -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
 <script type="text/javascript">
-	const IMP = window.IMP;
-	IMP.init("imp67011510");
+
+// 가맹점 식별코드
+var IMP = window.IMP;
+IMP.init("imp20121707"); 
+
+// 포트원 api
+  function requestPay() {
 	
-	var today = new Date();   
-    var hours = today.getHours(); // 시
-    var minutes = today.getMinutes();  // 분
-    var seconds = today.getSeconds();  // 초
-    var milliseconds = today.getMilliseconds();
-    var makeMerchantUid = hours +  minutes + seconds + milliseconds;
-    
-    function requestPay() {
-        IMP.request_pay({
-            pg : 'kcp',
-            pay_method : 'card',
-            merchant_uid: "IMP"+makeMerchantUid, 
-            name : '스위트콤보',
-            amount : 10000,
-            buyer_email : 'Iamport@chai.finance',
-            buyer_name : '아임포트 기술지원팀',
-            buyer_tel : '010-1234-5678',
-            buyer_addr : '서울특별시 강남구 삼성동',
-            buyer_postcode : '123-456'
-        }, function (rsp) { // callback
-            if (rsp.success) {
-                console.log(rsp);
-            } else {
-                console.log(rsp);
-            }
-        });
+// 	// 로그인 체크
+//       if (!isLogin) {
+//           alert("로그인 후 이용할 수 있습니다.");
+//           return;
+//       }
+
+	const make_merchant_uid = () => {
+            const current_time = new Date();
+            const year = current_time.getFullYear().toString();
+            const month = (current_time.getMonth()+1).toString();
+            const day = current_time.getDate().toString();
+            const hour = current_time.getHours().toString();
+            const minute = current_time.getMinutes().toString();
+            const second = current_time.getSeconds().toString();
+            const merchant_uid = 'MIHEE' + year + month + day + hour + minute + second;
+            return merchant_uid;
+        };
+        const merchant_uid = make_merchant_uid()
+        
+	
+	var itemName = $("#itemName i").text();
+	var price = parseInt($("#sPrice").text().replace(",", "")); 
+	
+      IMP.request_pay({ 
+          pg: "html5_inicis.INIpayTest",	// PG사
+          pay_method: "card",	// 지불수단
+          merchant_uid: "STO" + merchant_uid,   // 주문번호
+          name: itemName,	// 상품명
+          amount: 100,    // 가격	price
+          buyer_email: "gildong@gmail.com",	// 구매자 이메일
+          buyer_name: "홍길동",	// 구매자 이름
+          buyer_tel: "010-4242-4242",	// 구매자 연락처
+      }, function (rsp) { // callback
+    	  console.log(rsp);
+    	  debugger;
+    	  if (rsp.success) {	// 결제성공
+    		  var msg = '결제가 완료되었습니다.';
+    	        msg += '고유ID : ' + rsp.imp_uid;
+    	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+    	        msg += '결제 금액 : ' + rsp.paid_amount;
+    	        msg += '카드 승인번호 : ' + rsp.apply_num;
+    	    } else {	// 결제실패
+    	    	var msg = '결제에 실패하였습니다.';
+    	        msg += '에러내용 : ' + rsp.error_msg;
+    	    }
+    	  alert(msg);
+      });
+      
     }
+    
+    // 결제된 데이터
+  app.get('/payments/status/all',(req,res)=>{
+      iamport.payment.getByStatus({
+        payment_status: 'paid' 
+      }).then(function(result){
+          res.render('payments_list',{list:result.list});
+      }).catch(function(error){
+          console.log(error);
+          red.send(error);
+      })
+});
+    
+// 	//주문번호 만들기
+// 	  function createOrderNum(){
+// 	  	const date = new Date();
+// 	  	const year = date.getFullYear();
+// 	  	const month = String(date.getMonth() + 1).padStart(2, "0");
+// 	  	const day = String(date.getDate()).padStart(2, "0");
+	  	
+// 	  	let orderNum = year + month + day;
+// 	  	for(let i=0;i<10;i++) {
+// 	  		orderNum += Math.floor(Math.random() * 8);	
+// 	  	}
+// 	  	return orderNum;
+// 	  }
+    
+// //현재 사용자의 정보를 가져오는 함수
+//   function getCurrentUserInfo() {
+//       $.ajax({
+//           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+//           url: "/users/getCurrentUser",
+//           type: "get",
+//           async:false, // 동기방식(전역변수에 값 저장하려면 필요)
+//           dataType : "json",
+//           success : function(data) {
+//               buyer_name = data.name;
+//               buyer_tel = data.tel;
+//           },
+//           error: function(request,status,error){ 
+//               alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); 
+//               console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+//           }
+//       });
+//   }
+  
+//   function removePayAuth(removePayAuthId) {
+//       $.ajax({
+//           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+//           url: "/pay/removePayAuth",
+//           method: "POST",
+//           dataType : "text",
+//           data: {
+//               removePayAuthId : removePayAuthId
+//           },
+//           success: function() {
+              
+//           },
+//           error: function(request, status, error) {
+//               console.log("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
+//           }
+//       });
+//   }
 
 </script>
 
    <script>
+	  // 수량 옵션
       $(function(){
-         
-         // 수량 옵션
+    	  var price = ${storeItem.itemPrice} + "";
+    	  $("#sPrice").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    	  
          $('._count :button').on({
              'click' : function(e){
 
@@ -250,7 +345,7 @@
          
          // 상품금액
          $(".inpp").on("DOMSubtreeModified", function(){
-				// 좌석 선택 다 해야 뜨는걸로
+        	 
 				var p1 = parseInt($("#price").text().replace(/[^\d]+/g, ""));
 				var p2 = parseInt($(".inpp").text());
 				
@@ -262,7 +357,7 @@
 				
 			});
 		
-         // 3자리 콤마
+         // 3자리 콤마(,)
          var price = $('#price').text();
          var money = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
          $('#price').text(money);

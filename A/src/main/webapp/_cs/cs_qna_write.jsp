@@ -28,8 +28,13 @@ String createUser = "MEMBER2477";
 				<div class="row justify-content-center">
 			      <div class="col-lg-4 col-md-8 col-sm-10">
 <!-- 			        <h2 class="text-center">신청</h2> -->
-			        <form action="qnaBoardInsert.cs" method="post">
-			        <select class="form-select" id="qnaCategory" name="qnaCategory">
+			        <form action="qnaBoardInsert.cs" method="post" id="insertForm">
+			        <div class="pb-2 form-check">
+			        	<input class="form-check-input" type="checkbox" name="qnaChk" id="qnaSecretChk" checked/>
+			        	<label class="form-check-label" for="qnaSecretChk">비밀글 설정을 하시려면 체크해주세요.</label>
+						<input type="hidden" name="qnaSecret" value='1' id="qnaSecret"/>
+			        </div>
+			        <select class="form-select mb-3" id="qnaCategory" name="qnaCategory">
 						<option selected class="text-muted">카테고리</option>
 						<option value="상영작">상영작</option>
 						<option value="예매">예매</option>
@@ -37,12 +42,12 @@ String createUser = "MEMBER2477";
 					  </select>
 			          <div class="form-group mb-3">
 			            <label for="createUser">신청자명</label>
-			            <input type="text" class="form-control" id="createUser" name="createUser" placeholder="신청자명 입력" value="<%=createUser %>" readonly>
+			            <input type="text" class="form-control" id="createUser" name="createUser" placeholder="신청자명 입력" value="${sessionScope.sId }" readonly>
 			          </div>
-<!-- 			          <div class="form-group mb-3"> -->
-<!-- 			            <label for="password">비밀번호</label> -->
-<!-- 			            <input type="password" class="form-control" id="password" placeholder="비밀번호 입력"> -->
-<!-- 			          </div> -->
+			          <div class="form-group mb-3">
+			            <label for="qnaSubject">제목</label>
+			            <input type="text" class="form-control" id="qnaSubject" name="qnaSubject" placeholder="제목 입력">
+			          </div>
 <!-- 			          <div class="form-group mb-3"> -->
 <!-- 			            <label for="phone">신청자 연락처</label> -->
 <!-- 			            <input type="text" class="form-control" id="phone" placeholder="신청자 연락처 입력"> -->
@@ -79,7 +84,23 @@ String createUser = "MEMBER2477";
 <%@include file="../_common/commonFooterStart.jsp"%>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script type="text/javascript">
-
+$(document).ready(function() {
+	$('#qnaSecretChk').change(function(){
+        if($(this).is(':checked')){
+            $('#qnaSecret').val('1');
+        } else {
+            $('#qnaSecret').val('0');
+        }
+    });
+	$("#insertForm").on("submit", function (e) { 
+// 		alert("qnaSecret: "+$('#qnaSecret').val())
+// 		e.preventDefault();
+		  if($("#qnaCategory").val() == '카테고리'){
+		    e.preventDefault();
+		    alert('카테고리를 선택해주세요.')
+		  }
+	});
+});
 
 </script>
 <%@include file="../_common/commonFooterEnd.jsp"%>

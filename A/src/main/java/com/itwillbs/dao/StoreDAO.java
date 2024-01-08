@@ -20,14 +20,6 @@ public class StoreDAO {
 		return insertCnt > 0 ? true : false;
 	}//
 
-	public List<StoreItemDTO> selectStoreItem() {
-		SqlSession session = sqlSessionFactory.openSession();
-		
-		List<StoreItemDTO> storeItemList = session.selectList("StoreItem.selectStoreItem");
-		session.close();
-		return storeItemList;
-	}//
-	
 	public List<StoreItemDTO> selectStoreItemB() {
 		SqlSession session = sqlSessionFactory.openSession();
 		
@@ -65,6 +57,15 @@ public class StoreDAO {
 		}
 		
 		return storeItemListT;
+	}//
+
+	public StoreItemDTO getItemInfo(String idx) {
+		SqlSession session = sqlSessionFactory.openSession();
+		
+		StoreItemDTO storeItem = session.selectOne("StoreItem.selectItemInfo", idx);
+		
+		session.close();
+		return storeItem;
 	}//
 	
 }

@@ -14,6 +14,45 @@
 		SELECT COUNT(*) 
 		  FROM EXQBOARD
 	</select>
+	<select id="getExqSearchList" resultType="ExqBoardDTO" parameterType="map">
+		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
+		  FROM EXQBOARD
+		 WHERE EXQSELECT = #{exqSelect} 
+   		 ORDER BY CREATE_DATE  DESC 
+   		 LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
+	</select>
+	<select id="getExqBSearchCount" resultType="int" parameterType="String">
+		SELECT COUNT(*) 
+		  FROM EXQBOARD
+		 WHERE EXQSELECT = #{exqSelect}
+	</select>
+	<select id="getExqBoardAll" resultType="ExqBoardDTO">
+		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
+		  FROM EXQBOARD
+   		 ORDER BY CREATE_DATE  DESC 
+	</select>
+	<update id="updateExqBoard" parameterType="ExqBoardDTO" >
+		UPDATE EXQBOARD 
+		   SET EXQSUBJECT = #{exqSubject}, EXQCONTENT = #{exqContent}, UPDATE_USER = #{updateUser}, UPDATE_DATE = SYSDATE()
+		 WHERE CREATE_DATE = #{createDate} AND CREATE_USER = #{createUser}
+	</update>
+	<delete id="deleteExqBoard" parameterType="ExqBoardDTO">
+		DELETE FROM EXQBOARD
+ 		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</delete>
+	<insert id="exqBoardInsert" parameterType="ExqBoardDTO">
+		INSERT INTO EXQBOARD (EXQSUBJECT,EXQCONTENT,EXQSELECT,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE)
+		VALUES
+		(
+		#{exqSubject}
+		,#{exqContent}
+		,#{exqSelect}
+		,#{createUser}
+		,SYSDATE()
+		,NULL
+		,NULL
+		);
+	</insert>
 	
 	<select id="getCenterBoardList" resultType="CenterBoardDTO" parameterType="PageDTO">
 		SELECT *,
@@ -28,6 +67,15 @@
 	<select id="centerBoardCount" resultType="int">
 		SELECT COUNT(*) 
 		  FROM CENTERBOARD
+	</select>
+	<select id="getCenterBoardAll" resultType="centerBoardDTO">
+		SELECT *,
+	       (SELECT C.CI_NAME
+	          FROM CINEMA AS C
+	         WHERE C.LO_IDX = CENTER.LO_IDX AND C.CI_IDX = CENTER.CI_IDX) AS 'CI_NAME',
+       	 ROW_NUMBER() OVER (ORDER BY CENTER.CREATE_DATE) AS RN
+	 	 FROM CENTERBOARD AS CENTER
+		 ORDER BY CENTER.CREATE_DATE DESC
 	</select>
 	<select id="getCenterBoard" resultType="CenterBoardDTO" parameterType="map">
 		 SELECT *,
@@ -80,6 +128,11 @@
 		SELECT COUNT(*) 
 	 	  FROM QNABOARD
 	</select>
+	<select id="getQnaBoardAll" resultType="QnaBoardDTO">
+		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
+	  	  FROM QNABOARD
+ 		 ORDER BY CREATE_DATE  DESC 
+	</select>
 	<select id="searchQnaBoardList" resultType="QnaBoardDTO" parameterType="map">
 		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
 	  	  FROM QNABOARD
@@ -103,18 +156,179 @@
 		   FROM (SELECT IFNULL(MAX(CAST(QNAIDX as unsigned)), 0) + 1
 				   FROM QNABOARD) Q)
 		,#{qnaCategory}
-		,'비밀글입니다'
+		,#{qnaSubject}
 		,#{qnaContent}
 		,NULL
 		,#{createUser}
 		,SYSDATE()
 		,NULL
 		,NULL
+		,#{qnaSecret}
 		);
 	</insert>
+	<delete id="deleteQnaBoard" parameterType="QnaBoardDTO">
+		DELETE FROM QNABOARD
+		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate} 
+	</delete>
 	<select id="searchQnaBoardCount" resultType="int" parameterType="String">
 		SELECT COUNT(*) 
 		  FROM QNABOARD 
 		 WHERE QNACATEGORY = #{qnaCategory};
+	</select>
+	
+	<select id="getLostBoardList" resultType="LostBoardDTO" parameterType="PageDTO">
+		SELECT *,
+		       (SELECT C.CI_NAME
+		          FROM CINEMA AS C
+		         WHERE C.LO_IDX = LOST.LO_IDX AND C.CI_IDX = LOST.CI_IDX) AS 'CI_NAME',
+		       ROW_NUMBER() OVER (ORDER BY LOST.CREATE_DATE) AS RN
+		  FROM LOSTBOARD AS LOST
+		 ORDER BY LOST.CREATE_DATE DESC
+		 LIMIT #{startRow}, #{pageSize}
+	</select>
+	<select id="getLostBoardCount" resultType="int">
+		SELECT COUNT(*) 
+		  FROM LOSTBOARD
+	</select>
+	<select id="getlostBoardAll" resultType="LostBoardDTO">
+		SELECT *,
+		       (SELECT C.CI_NAME
+		          FROM CINEMA AS C
+		         WHERE C.LO_IDX = LOST.LO_IDX AND C.CI_IDX = LOST.CI_IDX) AS 'CI_NAME',
+		       ROW_NUMBER() OVER (ORDER BY LOST.CREATE_DATE) AS RN
+		  FROM LOSTBOARD AS LOST
+		 ORDER BY LOST.CREATE_DATE DESC
+	</select>
+	<select id="getLostBoard" resultType="LostBoardDTO" parameterType="map">
+		 SELECT *,
+			      (SELECT C.CI_NAME
+			         FROM CINEMA AS C
+		        	WHERE C.LO_IDX = LOST.LO_IDX AND C.CI_IDX = LOST.CI_IDX) AS 'CI_NAME'
+		  FROM LOSTBOARD AS LOST
+		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</select>
+	<update id="updateLostBoard" parameterType="LostBoardDTO">
+		UPDATE LOSTBOARD
+		SET
+		    LOSTRESPONSE = #{lostResponse},
+		    RESPONSE_USER = #{responseUser},
+		    RESPONSE_DATE = SYSDATE(),
+		    LOSTSTATUS = CASE
+		        WHEN LOSTRESPONSE IS NULL THEN 0
+		        ELSE 1
+		    END
+		WHERE
+		    CREATE_USER = #{createUser}
+		    AND CREATE_DATE = #{createDate}
+	</update>
+	<delete id="deleteLostBoard" parameterType="LostBoardDTO">
+		DELETE FROM LOSTBOARD
+ 		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</delete>
+	<insert id="insertCsLost" parameterType="LostBoardDTO">
+		INSERT INTO LOSTBOARD
+		VALUES 
+		((SELECT *
+		   FROM (SELECT IFNULL(MAX(CAST(LOSTIDX as unsigned)), 0) + 1
+				   FROM LOSTBOARD) L)
+		,#{loIdx}
+		,#{ciIdx}
+		,#{lostSubject}
+		,#{lostContent}
+		,NULL
+		,0
+		,#{createUser}
+		,SYSDATE()
+		,NULL
+		,NULL
+		)
+	</insert>
+	<select id="getLBSearchList" parameterType="map" resultType="LostBoardDTO">
+		SELECT *,
+		       (SELECT C.CI_NAME
+		          FROM CINEMA AS C
+		         WHERE C.LO_IDX = LOST.LO_IDX AND C.CI_IDX = LOST.CI_IDX) AS 'CI_NAME',
+		       ROW_NUMBER() OVER (ORDER BY LOST.CREATE_DATE) AS RN
+		  FROM LOSTBOARD AS LOST
+		 WHERE 1 = 1
+		 <if test="lostBoardDTO.loIdx != ''">
+		   AND LO_IDX = #{lostBoardDTO.loIdx}
+		 </if>
+		 <if test="lostBoardDTO.ciIdx != ''">  
+		   AND CI_IDX = #{lostBoardDTO.ciIdx}
+		 </if>
+		 <if test="lostBoardDTO.lostStatus != ''">  
+		   AND LOSTSTATUS = #{lostBoardDTO.lostStatus}
+		 </if>
+		 <if test="lostBoardDTO.lostSubject != null">  
+		   AND LOSTSUBJECT LIKE '%${lostBoardDTO.lostSubject}%' 
+		 </if>
+		 ORDER BY LOST.CREATE_DATE DESC
+		 LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}		
+	</select>
+	<select id="getLBSearchCount" parameterType="LostBoardDTO" resultType="int">
+	    SELECT COUNT(*) 
+	    FROM LOSTBOARD
+	    WHERE 1 = 1
+	    <if test="loIdx != ''">	
+	        AND LO_IDX = #{loIdx}
+	    </if>
+	    <if test="ciIdx != ''">
+	        AND CI_IDX = #{ciIdx}
+	    </if>
+	    <if test="lostStatus != ''">
+	        AND LOSTSTATUS = #{lostStatus}
+	    </if>
+	    <if test="lostSubject != null">
+	        AND LOSTSUBJECT LIKE CONCAT('%', #{lostSubject}, '%')
+	    </if>
+	</select>
+
+	<select id="getMemberList" resultType="MemberDTO">
+		SELECT * 
+		  FROM MEMBERS
+		 WHERE MEM_IDX IS NOT NULL
+	</select>
+	
+<!-- 	<insert id="insertQnaRes" parameterType="QnaBoardDTO"> -->
+<!-- 		INSERT INTO RESPONSEDATA (QNAIDX, SUBJECT, RESPONSE, RESPONSE_USER, RESPONSE_DATE) -->
+<!-- 		VALUES( -->
+<!-- 		    SELECT QNAIDX -->
+<!-- 		      FROM QNABOARD -->
+<!-- 		     WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}, -->
+<!-- 		    #{qnaSubject}, -->
+<!-- 		    #{qnaResponse}, -->
+<!-- 		    #{responseUser}, -->
+<!-- 		    SYSDATE() -->
+<!-- 			) -->
+<!-- 	</insert> -->
+	<insert id="insertQnaRes" parameterType="QnaBoardDTO">
+	    INSERT INTO RESPONSEDATA (QNAIDX, SUBJECT, RESPONSE, RESPONSE_USER, RESPONSE_DATE)
+	    SELECT QNAIDX,
+	           #{qnaSubject},
+	           #{qnaResponse},
+	           #{responseUser},
+	           SYSDATE()
+	    FROM QNABOARD
+	    WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</insert>
+	<insert id="insertResLost" parameterType="LostBoardDTO">
+		INSERT INTO RESPONSEDATA (LOSTIDX, SUBJECT, RESPONSE, RESPONSE_USER, RESPONSE_DATE)
+	    SELECT LOSTIDX,
+	           #{lostSubject},
+	           #{lostResponse},
+	           #{responseUser},
+	           SYSDATE()
+	    FROM LOSTBOARD
+	    WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</insert>
+	<select id="getResponseList" resultType="ResponseDataDTO">
+		SELECT R.RESDATAIDX,Q.QNAIDX,NULL AS LOSTIDX, Q.CREATE_USER, Q.CREATE_DATE, R.SUBJECT,R.RESPONSE, R.RESPONSE_USER, R.RESPONSE_DATE
+		  FROM QNABOARD Q JOIN RESPONSEDATA R
+		    ON Q.QNAIDX = R.QNAIDX
+		UNION ALL
+		SELECT R.RESDATAIDX,NULL AS QNAIDX,L.LOSTIDX, L.CREATE_USER, L.CREATE_DATE, R.SUBJECT,R.RESPONSE, R.RESPONSE_USER, R.RESPONSE_DATE
+		  FROM LOSTBOARD L JOIN RESPONSEDATA R    
+		    ON L.LOSTIDX = R.LOSTIDX
 	</select>
 </mapper>

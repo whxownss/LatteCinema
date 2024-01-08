@@ -18,6 +18,7 @@ import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ExqBoardDTO;
 import com.itwillbs.domain.LocationDTO;
+import com.itwillbs.domain.LostBoardDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.service.CSBoardService;
@@ -133,7 +134,7 @@ public class CSController extends HttpServlet  {
 				msg = "update success";
 			}
 			System.out.println(msg);
-//			response.sendRedirect(""); //ajax를 써서 굳이 주소 적을 필요 없다.
+			response.sendRedirect("adm_cs_center.ad"); //ajax를 써서 굳이 주소 적을 필요 없다.
 		}
 		// 공지사항 삭제 하기
 		if(sPath.equals("/deleteCenterContent.cs")) {
@@ -147,6 +148,7 @@ public class CSController extends HttpServlet  {
 			}
 			System.out.println(msg);
 			//response.sendRedirect("cs_center.cs");
+			response.sendRedirect("adm_cs_center.ad");
 		}
 		
 		// 공지사항 글쓰기 페이지 이동
@@ -202,7 +204,8 @@ public class CSController extends HttpServlet  {
 			}
 			System.out.println(msg);
 			
-			response.sendRedirect("cs_center.cs");
+//			response.sendRedirect("cs_center.cs");
+			response.sendRedirect("adm_cs_center.ad");
 		}
 		
 		// 자주찾는질문 페이지 이동
@@ -260,7 +263,116 @@ public class CSController extends HttpServlet  {
 			
 			dispatcher = request.getRequestDispatcher("_cs/cs_exque.jsp");
 			dispatcher.forward(request, response);
-		}		
+		}
+		// 자주 찾는 질문 카테고리로 검색하기.
+		if(sPath.equals("/cs_exq_search.cs")) {
+			System.out.println("주소비교 /cs_exq_search.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			// cs_exque.cs
+			// cs_exque.cs?pageNum=2
+			// 한 화면에 보여줄 글개수 설정
+			int pageSize = 10;
+			// 현 페이지 번호
+			String pageNum = request.getParameter("pageNum");
+			//페이지 번호가 없으면 1로 페이지 설정
+			if(pageNum == null) {
+				pageNum = "1";
+			}
+			// pageNum => 정수형 변경
+			int currentPage = Integer.parseInt(pageNum);
+			
+			// PageDTO 객체생성 
+			PageDTO pageDTO = new PageDTO();
+			// set메서드 호출해서 값을 저장
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			
+			CSBoardService csBoardService = new CSBoardService();
+
+			ArrayList<ExqBoardDTO> exqBoardList = csBoardService.getExqBoardList(pageDTO,request);
+			// 페이징 작업
+			// int 리턴할 형 getBoardCount() 메서드 정의
+			// int count = getBoardCount() 메서드 호출
+			int count = csBoardService.getExqBoardCount(request);
+			// 한 화면에 보여줄 페이지 개수 설정. 테스트를 위해 3으로 잠깐 변경. 테스트 성공
+			int pageBlock = 10;
+			// 시작하는 페이지 번호 구하기
+			int startPage = (currentPage-1)/pageBlock*pageBlock+1;
+			// 끝나는 페이지 번호 구하기
+			int endPage = startPage + pageBlock -1;
+			// 전체 페이지 수 구하기
+			int pageCount = count / pageSize + (count % pageSize == 0?0:1);
+			if(endPage > pageCount) {
+				endPage = pageCount;
+			}
+			
+			//pageDTO에 페이징 관련값 저장
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
+//			System.out.println("@@@@@");
+//			System.out.println(pageDTO);
+//			System.out.println(exqBoardList);
+			 // 리스트와 PageDTO를 모두 포함할 Map 또는 사용자 정의 객체 생성
+		    Map<String, Object> responseData = new HashMap<>();
+		    responseData.put("exqBoardList", exqBoardList);
+		    responseData.put("pageDTO", pageDTO);
+
+		    // Map 또는 사용자 정의 객체 직렬화
+		    String json = new Gson().toJson(responseData);
+
+		    // 컨텐츠 타입과 인코딩 설정
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("utf-8");
+		    
+		    // JSON 문자열을 응답으로 작성
+		    response.getWriter().write(json);
+		}
+		// 자주 찾는 질문 수정
+		if(sPath.equals("/cs_exqueUpdate.cs")) {
+			System.out.println("주소비교 /cs_exqueUpdate.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "exq update fail";
+			if(csBoardService.updateExqBoard(request)) {
+				msg = "exq update success";
+			}
+			System.out.println(msg);
+			
+			response.sendRedirect("adm_cs_exque.ad");
+		}
+		// 자주 찾는 질문 삭제
+		if(sPath.equals("/cs_deleteExqBoard.cs")) {
+			System.out.println("주소비교 /cs_deleteExqBoard.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "exq delete fail";
+			if(csBoardService.deleteExqBoard(request)) {
+				msg = "exq delete success";
+			}
+			System.out.println(msg);
+			
+			response.sendRedirect("adm_cs_exque.ad");
+		}
+		// 자주 찾는 질문 추가
+		if(sPath.equals("/cs_insertExqBoard.cs")) {
+			System.out.println("주소비교 /cs_insertExqBoard.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "exq insert fail";
+			if(csBoardService.exqBoardInsert(request)) {
+				msg = "exq insert success";
+				response.sendRedirect("adm_cs_exque.ad");
+			}
+			System.out.println(msg);
+		}
 		
 		// 1:1문의 페이지 이동
 		if(sPath.equals("/cs_qna.cs")) {
@@ -350,7 +462,7 @@ public class CSController extends HttpServlet  {
 			dispatcher = request.getRequestDispatcher("_cs/cs_qna.jsp");
 			dispatcher.forward(request, response);
 		}
-		// 1:1문의 글 검색 이거 말고 다르게 해보자.
+		// 1:1문의 글 검색 이거 너무 막 만들었음
 		if(sPath.equals("/cs_qnaSearch.cs")) {
 			System.out.println("주소비교 /cs_qnaSearch.cs 일치");
 			String pageNum = request.getParameter("pageNum");
@@ -388,7 +500,7 @@ public class CSController extends HttpServlet  {
 			// int 리턴할 형 getBoardCount() 메서드 정의
 			// int count = getBoardCount() 메서드 호출
 //						int count = csBoardService.getQnaBoardCount();
-			// 한 화면에 보여줄 페이지 개수 설정
+			// 한 화면에 보여줄 페이지 개수 설정. 테스트를 위한 값3을 주고 이전 다음 링크 확인 중. 테스트 성공 이전 다음 링크 완료.
 			int pageBlock = 10;
 			// 시작하는 페이지 번호 구하기
 			int startPage = (currentPage-1)/pageBlock*pageBlock+1;
@@ -406,8 +518,25 @@ public class CSController extends HttpServlet  {
 			pageDTO.setEndPage(endPage);
 			pageDTO.setPageCount(pageCount);
 			
-			request.setAttribute("pageDTO", pageDTO);			
-			request.setAttribute("qnaBoardList",qnaBoardList);
+			if(!qnaCategory.equals("")) {
+			    // 리스트와 PageDTO를 모두 포함할 Map 또는 사용자 정의 객체 생성
+			    Map<String, Object> responseData = new HashMap<>();
+			    responseData.put("qnaBoardList", qnaBoardList);
+			    responseData.put("pageDTO", pageDTO);
+
+			    // Map 또는 사용자 정의 객체 직렬화
+			    String json = new Gson().toJson(responseData);
+
+			    // 컨텐츠 타입과 인코딩 설정
+			    response.setContentType("application/json");
+			    response.setCharacterEncoding("utf-8");
+			    
+			    // JSON 문자열을 응답으로 작성
+			    response.getWriter().write(json);
+			    return;
+			}
+//			request.setAttribute("pageDTO", pageDTO);			
+//			request.setAttribute("qnaBoardList",qnaBoardList);
 			dispatcher = request.getRequestDispatcher("_cs/cs_qna.jsp");
 			dispatcher.forward(request, response);
 		}//
@@ -436,6 +565,19 @@ public class CSController extends HttpServlet  {
 			}
 			System.out.println(msg);
 		}
+		// 1:1문의 글 업데이트 하기2
+		if(sPath.equals("/updateQnaBoard2.cs")) {
+			System.out.println("주소비교 /updateQnaBoard2.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "qna update fail";
+			if(csBoardService.updateQnaBoard2(request)) {
+				msg = "qna update success";
+			}
+			System.out.println(msg);
+			response.sendRedirect("adm_cs_qna.ad");
+		}
 		// 1:1문의 글쓰기 페이지 이동
 		if(sPath.equals("/cs_qna_write.cs")) {
 			System.out.println("주소비교 /cs_qna_write.cs 일치");
@@ -454,25 +596,225 @@ public class CSController extends HttpServlet  {
 				response.sendRedirect("cs_qna.cs");
 			}
 			System.out.println(msg);
-			
 		}		
+		// 1:1문의 글삭제
+		if(sPath.equals("/deleteQnaBoard.cs")) {
+			System.out.println("주소비교 /deleteQnaBoard.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "delete fail";
+			if(csBoardService.deleteQnaBoard(request)) {
+				msg = "delete success";
+			}
+			System.out.println(msg);
+			response.sendRedirect("adm_cs_qna.ad");
+		}//
 
 		// 분실물 페이지 이동
 		if(sPath.equals("/cs_lost.cs")) {
+			System.out.println("주소비교 /cs_lost.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			// cs_center.cs
+			// cs_center.cs?pageNum=2
+			// 한 화면에 보여줄 글개수 설정
+			int pageSize = 10;
+			// 현 페이지 번호
+			String pageNum = request.getParameter("pageNum");
+			//페이지 번호가 없으면 1로 페이지 설정
+			if(pageNum == null) {
+				pageNum = "1";
+			}
+			// pageNum => 정수형 변경
+			int currentPage = Integer.parseInt(pageNum);
+			
+			// PageDTO 객체생성 
+			PageDTO pageDTO = new PageDTO();
+			// set메서드 호출해서 값을 저장
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			
+			csBoardService = new CSBoardService();
+
+			ArrayList<LostBoardDTO> lostBoardList = csBoardService.getLostBoardList(pageDTO);
+			// 페이징 작업
+			// int 리턴할 형 getBoardCount() 메서드 정의
+			// int count = getBoardCount() 메서드 호출
+			int count = csBoardService.getLostBoardCount();
+			// 한 화면에 보여줄 페이지 개수 설정
+			int pageBlock = 10;
+			// 시작하는 페이지 번호 구하기
+			int startPage = (currentPage-1)/pageBlock*pageBlock+1;
+			// 끝나는 페이지 번호 구하기
+			int endPage = startPage + pageBlock -1;
+			// 전체 페이지 수 구하기
+			int pageCount = count / pageSize + (count % pageSize == 0?0:1);
+			if(endPage > pageCount) {
+				endPage = pageCount;
+			}
+			
+			//pageDTO에 페이징 관련값 저장
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
+			System.out.println("!@#!@#");
+			System.out.println(lostBoardList);
+			
+			request.setAttribute("pageDTO", pageDTO);			
+			request.setAttribute("lostBoardList",lostBoardList);
 			dispatcher = request.getRequestDispatcher("_cs/cs_lost.jsp");
 			dispatcher.forward(request, response);
 		}
 		// 분실물 글쓰기 페이지 이동
 		if(sPath.equals("/cs_lost_write.cs")) {
+			System.out.println("주소비교 /cs_lost_write.cs 일치");
 			dispatcher = request.getRequestDispatcher("_cs/cs_lost_write.jsp");
 			dispatcher.forward(request, response);
 		}
 		// 분실물 글내용 페이지 이동
 		if(sPath.equals("/cs_lost_content.cs")) {
+			System.out.println("주소비교 /cs_lost_content.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			String createUser = request.getParameter("createUser");
+			String createDate = request.getParameter("createDate");
+			
+			csBoardService = new CSBoardService();
+			LostBoardDTO lostBoardDTO = csBoardService.getLostBoard(createUser,createDate);
+			request.setAttribute("lostBoardDTO", lostBoardDTO);
+			
 			dispatcher = request.getRequestDispatcher("_cs/cs_lost_content.jsp");
 			dispatcher.forward(request, response);
-		}		
-		
+		}
+		// 분실물 글내용 페이지 관리자 답변 수정
+		if(sPath.equals("/updateLostBoard.cs")) {
+			System.out.println("주소비교 /updateLostBoard.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "lost update fail";
+			if(csBoardService.updateLostBoard(request)) {
+				msg = "lost update success";
+			}
+			System.out.println(msg);
+		}
+		// 분실물 글내용 페이지 관리자 답변 수정2
+		if(sPath.equals("/updateLostBoard2.cs")) {
+			System.out.println("주소비교 /updateLostBoard2.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "lost update fail";
+			if(csBoardService.updateLostBoard2(request)) {
+				msg = "lost update success";
+			}
+			System.out.println(msg);
+			response.sendRedirect("adm_cs_lost.ad");
+		}
+		// 분실물 글쓰기
+		if(sPath.equals("/insertCsLost.cs")) {
+			System.out.println("주소비교 /insertCsLost.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "insert fail";
+			if(csBoardService.insertCsLost(request)) {
+				msg = "insert success";
+			}
+			System.out.println(msg);
+			
+			response.sendRedirect("cs_lost.cs");
+		}
+		// 분실물 글 검색하기
+		if(sPath.equals("/cs_lost_search.cs")) {
+			System.out.println("주소비교 /cs_lost_search.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			// cs_center.cs
+			// cs_center.cs?pageNum=2
+			// 한 화면에 보여줄 글개수 설정
+			int pageSize = 10;
+			// 현 페이지 번호
+			String pageNum = request.getParameter("pageNum");
+			//페이지 번호가 없으면 1로 페이지 설정
+			if(pageNum == null) {
+				pageNum = "1";
+			}
+			// pageNum => 정수형 변경
+			int currentPage = Integer.parseInt(pageNum);
+			
+			// PageDTO 객체생성 
+			PageDTO pageDTO = new PageDTO();
+			// set메서드 호출해서 값을 저장
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			
+			csBoardService = new CSBoardService();
+
+			ArrayList<LostBoardDTO> lostBoardList = csBoardService.getLostBoardList(pageDTO,request);
+			// 페이징 작업
+			// int 리턴할 형 getBoardCount() 메서드 정의
+			// int count = getBoardCount() 메서드 호출
+			int count = csBoardService.getLostBoardCount(request);
+			// 한 화면에 보여줄 페이지 개수 설정. 테스트를 위해서 3으로 한다. 3으로 해서 확인하니 잘 돌아간다.
+			int pageBlock = 10;
+			// 시작하는 페이지 번호 구하기
+			int startPage = (currentPage-1)/pageBlock*pageBlock+1;
+			// 끝나는 페이지 번호 구하기
+			int endPage = startPage + pageBlock -1;
+			// 전체 페이지 수 구하기
+			int pageCount = count / pageSize + (count % pageSize == 0?0:1);
+			if(endPage > pageCount) {
+				endPage = pageCount;
+			}
+			
+			//pageDTO에 페이징 관련값 저장
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
+			System.out.println("!@#!@#");
+			System.out.println(lostBoardList);
+			System.out.println(pageDTO);
+			 // 리스트와 PageDTO를 모두 포함할 Map 또는 사용자 정의 객체 생성
+		    Map<String, Object> responseData = new HashMap<>();
+		    responseData.put("lostBoardList", lostBoardList);
+		    responseData.put("pageDTO", pageDTO);
+
+		    // Map 또는 사용자 정의 객체 직렬화
+		    String json = new Gson().toJson(responseData);
+
+		    // 컨텐츠 타입과 인코딩 설정
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("utf-8");
+		    
+		    // JSON 문자열을 응답으로 작성
+		    response.getWriter().write(json);
+			
+//			request.setAttribute("pageDTO", pageDTO);			
+//			request.setAttribute("lostBoardList",lostBoardList);
+//			dispatcher = request.getRequestDispatcher("_cs/cs_lost_search.jsp");
+//			dispatcher.forward(request, response);
+		}//
+		// 분실물 글 삭제
+		if(sPath.equals("/deleteLostBoard.cs")) {
+			System.out.println("주소비교 /deleteLostBoard.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "delete fail";
+			if(csBoardService.deleteLostBoard(request)) {
+				msg = "delete success";
+			}
+			System.out.println(msg);
+			//response.sendRedirect("cs_center.cs");
+			response.sendRedirect("adm_cs_lost.ad");
+		}//
 		
 		
 		

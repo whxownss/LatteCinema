@@ -18,6 +18,10 @@
         <typeAlias type="com.itwillbs.domain.QnaBoardDTO" alias="QnaBoardDTO"/>
         <typeAlias type="com.itwillbs.domain.CinemaDTO" alias="CinemaDTO"/>
         <typeAlias type="com.itwillbs.domain.ScheduleDTO" alias="ScheduleDTO"/>
+        <typeAlias type="com.itwillbs.domain.ReservationDTO" alias="ReservationDTO"/>
+        <typeAlias type="com.itwillbs.domain.LostBoardDTO" alias="LostBoardDTO"/>
+        <typeAlias type="com.itwillbs.domain.ResponseDataDTO" alias="ResponseDataDTO"/>
+        <typeAlias type="com.itwillbs.domain.MovieDTO" alias="movieDTO"/>
     </typeAliases>
 
 	<environments default="development">
@@ -25,7 +29,7 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="com.mysql.jdbc.Driver"/>
-				<property name="url" value="jdbc:mysql://itwillbs.com:3306/c2d2309t2?useSSL=false&amp;serverTimezone=Asia/Seoul"/>
+				<property name="url" value="jdbc:mysql://itwillbs.com:3306/c2d2309t2?useSSL=false&amp;serverTimezone=Asia/Seoul&amp;allowPublicKeyRetrieval=true"/>
 				<property name="username" value="c2d2309t2"/>
 				<property name="password" value="1234"/>
 			</dataSource>
@@ -38,7 +42,9 @@
 		<mapper resource="com/itwillbs/sql/memberSql.xml"/>
 		<mapper resource="com/itwillbs/sql/cinemaSql.xml"/>
 		<mapper resource="com/itwillbs/sql/locationSql.xml"/>
+		<mapper resource="com/itwillbs/sql/reservationSql.xml"/>
 		<mapper resource="com/itwillbs/sql/scheduleSql.xml"/>
+		<mapper resource="com/itwillbs/sql/movieSql.xml"/>
 	</mappers>
 
     

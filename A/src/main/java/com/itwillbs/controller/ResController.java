@@ -50,7 +50,8 @@ public class ResController extends HttpServlet {
 			resService = new ResService();
 			String cinema = request.getParameter("cinema");
 			String param = request.getParameter("param");
-			String scheduleListJson = resService.getSchedules(cinema, param);
+			String date = request.getParameter("date");
+			String scheduleListJson = resService.getSchedules(cinema, param, date);
 			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("utf-8");
@@ -69,9 +70,10 @@ public class ResController extends HttpServlet {
 		if(sPath.equals("/res1ProML.re")) {
 			resService = new ResService();
 			String cinema = request.getParameter("cinema");
+			String date = request.getParameter("date");
 //			String movType = request.getParameter("movType");
 //			String movieListJson = resService.getMovieList(cinema, movType);
-			String movieListJson = resService.getMovieList(cinema);
+			String movieListJson = resService.getMovieList(cinema, date);
 			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("utf-8");
@@ -95,6 +97,15 @@ public class ResController extends HttpServlet {
 		if(sPath.equals("/res3.re")) {
 			dispatcher = request.getRequestDispatcher("_reservation/res3.jsp");
 			dispatcher.forward(request, response);
+		}
+		// 결제정보 저장
+		if(sPath.equals("/res3Pro.re")) {
+			String rsp = request.getParameter("rsp");
+			resService = new ResService();
+			String msg = resService.setResInfo(rsp);
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(msg);
 		}
 		
 

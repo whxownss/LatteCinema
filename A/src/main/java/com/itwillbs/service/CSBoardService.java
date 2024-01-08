@@ -15,8 +15,11 @@ import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ExqBoardDTO;
 import com.itwillbs.domain.LocationDTO;
+import com.itwillbs.domain.LostBoardDTO;
+import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
+import com.itwillbs.domain.ResponseDataDTO;
 
 public class CSBoardService {
 	CSBoardDAO csBoardDAO = null;
@@ -281,11 +284,38 @@ public class CSBoardService {
 //	        String createUser = qnaBoardDTO.getCreateUser();
 //	        String createDate = qnaBoardDTO.getCreateDate();
 	        qnaUpdateSuccess = csBoardDAO.updateQnaBoard(qnaBoardDTO);
+	        //0108 추가 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return qnaUpdateSuccess > 0;
 	}//updateQnaBoard()
+	public boolean updateQnaBoard2(HttpServletRequest request) {
+		System.out.println("CSBoardService updateQnaBoard2()");
+		int qnaUpdateSuccess = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+	        QnaBoardDTO qnaBoardDTO = new QnaBoardDTO();
+//	        // 데이터 사용
+	        String qnaResponse = request.getParameter("qnaResponse");
+	        String responseUser = request.getParameter("responseUser");
+	        String createUser = request.getParameter("createUser");
+	        String createDate = request.getParameter("createDate");
+	        //0108 추가
+	        String qnaSubject = request.getParameter("qnaSubject");
+	        qnaBoardDTO.setQnaSubject(qnaSubject);
+	        
+	        qnaBoardDTO.setCreateDate(createDate);
+	        qnaBoardDTO.setCreateUser(createUser);
+	        qnaBoardDTO.setResponseUser(responseUser);
+	        qnaBoardDTO.setQnaResponse(qnaResponse);
+	        
+	        qnaUpdateSuccess = csBoardDAO.updateQnaBoard2(qnaBoardDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return qnaUpdateSuccess > 0;
+	}//updateQnaBoard2()
 
 	public boolean qnaBoardInsert(HttpServletRequest request) {
 		System.out.println("CSBoardService qnaBoardInsert()");
@@ -294,11 +324,15 @@ public class CSBoardService {
 			String qnaCategory = request.getParameter("qnaCategory");
 			String createUser = request.getParameter("createUser");
 			String qnaContent = request.getParameter("qnaContent");
+			String qnaSubject	= request.getParameter("qnaSubject");
+			String qnaSecret = request.getParameter("qnaSecret");
 			
 			QnaBoardDTO qnaBoardDTO = new QnaBoardDTO();
 			qnaBoardDTO.setQnaCategory(qnaCategory);
 			qnaBoardDTO.setCreateUser(createUser);
 			qnaBoardDTO.setQnaContent(qnaContent);
+			qnaBoardDTO.setQnaSecret(qnaSecret);
+			qnaBoardDTO.setQnaSubject(qnaSubject);
 			csBoardDAO = new CSBoardDAO();
 			insertSuccess = csBoardDAO.qnaBoardInsert(qnaBoardDTO);
 			
@@ -338,6 +372,420 @@ public class CSBoardService {
 		}
 		return count;
 	}// qnaCategory로 검색 페이징 처리를 위한 count
+
+	public ArrayList<LostBoardDTO> getLostBoardList(PageDTO pageDTO) {
+		System.out.println("CSBoardService getLostBoardList()");
+		ArrayList<LostBoardDTO> lostBoardList = null;
+		try {
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			lostBoardList = csBoardDAO.getLostBoardList(pageDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lostBoardList;
+	}//getLostBoardList()
+
+	public int getLostBoardCount() {
+		System.out.println("CSBoardService getLostBoardCount()");
+		int count = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getLostBoardCount();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getLostBoardCount()
+
+	public LostBoardDTO getLostBoard(String createUser, String createDate) {
+		System.out.println("CSBoardService getLostBoard()");
+		LostBoardDTO lostBoardDTO = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			lostBoardDTO = csBoardDAO.getLostBoard(createUser,createDate);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lostBoardDTO;
+	}//getLostBoard()
+
+	public boolean updateLostBoard(HttpServletRequest request) {
+		System.out.println("CSBoardService updateLostBoard()");
+		int lostUpdateSuccess = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+	        // 요청으로부터 JSON 데이터 읽기
+	        StringBuilder jsonBuffer = new StringBuilder();
+	        String line;
+	        BufferedReader reader = request.getReader();
+	        while ((line = reader.readLine()) != null) {
+	            jsonBuffer.append(line);
+	        }
+	        String jsonStr = jsonBuffer.toString();
+
+	        // Gson 객체 생성
+	        Gson gson = new Gson();
+
+	        // JSON 문자열을 Java 객체로 변환
+	        LostBoardDTO lostBoardDTO = gson.fromJson(jsonStr, LostBoardDTO.class);
+
+	        lostUpdateSuccess = csBoardDAO.updateLostBoard(lostBoardDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lostUpdateSuccess > 0;
+	}//
+	public boolean updateLostBoard2(HttpServletRequest request) {
+		System.out.println("CSBoardService updateLostBoard2()");
+		int lostUpdateSuccess = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			String lostSubject = request.getParameter("lostSubject");
+	        String createUser = request.getParameter("createUser");
+//	        String createDate = request.getParameter("createDate");
+	        String lostResponse = request.getParameter("lostResponse");
+	        String responseUser = request.getParameter("responseUser");
+	        String createDate = preprocessDate(request.getParameter("createDate"));
+	        
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+	        LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
+	        Timestamp createTime = Timestamp.valueOf(dateTime);
+	        
+	        LostBoardDTO lostBoardDTO = new LostBoardDTO();
+	        lostBoardDTO.setCreateUser(createUser);
+	        lostBoardDTO.setCreateDate(createTime);
+	        lostBoardDTO.setLostResponse(lostResponse);
+	        lostBoardDTO.setResponseUser(responseUser);
+	        lostBoardDTO.setLostSubject(lostSubject);
+
+	        lostUpdateSuccess = csBoardDAO.updateLostBoard2(lostBoardDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lostUpdateSuccess > 0;
+	}//
+
+	public boolean insertCsLost(HttpServletRequest request) {
+		System.out.println("CSBoardService insertCsLost()");
+		int lostInsertSuccess = 0;
+		try {
+			String lostSubject = request.getParameter("lostSubject");
+			String lostContent = request.getParameter("lostContent");
+			String createUser = request.getParameter("createUser");
+			String loIdx = request.getParameter("loIdx");
+			String ciIdx = request.getParameter("ciIdx");
+			
+			LostBoardDTO lostBoardDTO = new LostBoardDTO();
+			lostBoardDTO.setLoIdx(loIdx);
+			lostBoardDTO.setCiIdx(ciIdx);
+			lostBoardDTO.setLostSubject(lostSubject);
+			lostBoardDTO.setLostContent(lostContent);
+			lostBoardDTO.setCreateUser(createUser);
+			csBoardDAO = new CSBoardDAO();
+			lostInsertSuccess = csBoardDAO.insertCsLost(lostBoardDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lostInsertSuccess > 0;
+	}//insertCsLost()
+
+	public ArrayList<LostBoardDTO> getLostBoardList(PageDTO pageDTO, HttpServletRequest request) {
+		System.out.println("CSBoardService getLostBoardList()");
+		ArrayList<LostBoardDTO> lostBoardList = null;
+		try {
+			String loIdx = request.getParameter("loIdx");
+			String ciIdx = request.getParameter("ciIdx");
+			String lostStatus = request.getParameter("lostStatus");
+			String lostSubject = request.getParameter("lostSubject");
+			
+			System.out.println("loIdx: " + loIdx);
+			System.out.println("ciIdx: " + ciIdx);
+			System.out.println("lostStatus: " + lostStatus);
+			System.out.println("lostSubject: " + lostSubject);
+			
+			LostBoardDTO lostBoardDTO = new LostBoardDTO();
+			lostBoardDTO.setLoIdx(loIdx);
+			lostBoardDTO.setCiIdx(ciIdx);
+			lostBoardDTO.setLostStatus(lostStatus);
+			lostBoardDTO.setLostSubject(lostSubject);
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			lostBoardList = csBoardDAO.getLostBoardList(pageDTO,lostBoardDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lostBoardList;
+	}//getLostBoardList() 검색버튼 사용
+
+	public int getLostBoardCount(HttpServletRequest request) {
+		System.out.println("CSBoardService getLostBoardCount()");
+		int count = 0;
+		try {
+			String loIdx = request.getParameter("loIdx");
+			String ciIdx = request.getParameter("ciIdx");
+			String lostStatus = request.getParameter("lostStatus");
+			String lostSubject = request.getParameter("lostSubject");
+			
+			System.out.println("loIdx: " + loIdx);
+			System.out.println("ciIdx: " + ciIdx);
+			System.out.println("lostStatus: " + lostStatus);
+			System.out.println("lostSubject: " + lostSubject);
+			
+			LostBoardDTO lostBoardDTO = new LostBoardDTO();
+			lostBoardDTO.setLoIdx(loIdx);
+			lostBoardDTO.setCiIdx(ciIdx);
+			lostBoardDTO.setLostStatus(lostStatus);
+			lostBoardDTO.setLostSubject(lostSubject);
+			
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getLostBoardCount(lostBoardDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getLostBoardCount 검색버튼 사용
+
+	public ArrayList<ExqBoardDTO> getExqBoardList(PageDTO pageDTO, HttpServletRequest request) {
+		System.out.println("CSBoardService getExqBoardList() 검색");
+		ArrayList<ExqBoardDTO> exqBoardList = null;
+		try {
+			String exqSelect = request.getParameter("exqSelect");
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			exqBoardList = csBoardDAO.getExqBoardList(pageDTO,exqSelect);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return exqBoardList;
+	}//getExqBoardList 셀렉트박스로 검색
+
+	public int getExqBoardCount(HttpServletRequest request) {
+		System.out.println("CSBoardService getExqBoardCount() 검색");
+		int count = 0;
+		try {
+			String exqSelect = request.getParameter("exqSelect");
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getExqBoardCount(exqSelect);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getExqBoardCount 셀렉트박스로 검색
+
+	public ArrayList<CenterBoardDTO> getCenterBoardList() {
+		ArrayList<CenterBoardDTO> centerBoardList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			centerBoardList = csBoardDAO.getCenterBoardList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return centerBoardList;
+	}//getCenterBoardList 조건없이 모두 부를 때.
+
+	public ArrayList<QnaBoardDTO> getQnaBoardList() {
+		ArrayList<QnaBoardDTO> qnaBoardList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			qnaBoardList = csBoardDAO.getQnaBoardList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return qnaBoardList;
+	}//getQnaBoardList() 조건없이 모두 부를 때.
+
+	public ArrayList<LostBoardDTO> getLostBoardList() {
+		ArrayList<LostBoardDTO> lostBoardList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			lostBoardList = csBoardDAO.getLostBoardList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lostBoardList;
+	}//getLostBoardList() 조건없이 모두 부를 때.
+
+	public ArrayList<ExqBoardDTO> getExqBoardList() {
+		ArrayList<ExqBoardDTO> exqBoardList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			exqBoardList = csBoardDAO.getExqBoardList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return exqBoardList;
+	}//getExqBoardList() 조건없이 모두 부를 때.
+
+	public boolean updateExqBoard(HttpServletRequest request) {
+		System.out.println("CSBoardService updateExqBoard()");
+	    int updateSuccess = 0;
+	    try {
+	        ExqBoardDTO exqBoardDTO = new ExqBoardDTO();
+	        String exqSubject = request.getParameter("exqSubject");
+	        String exqContent = request.getParameter("exqContent");
+	        String exqSelect = request.getParameter("exqSelect");
+	        String createUser = request.getParameter("createUser"); 
+	        String updateUser = request.getParameter("updateUser");
+	        
+	        String createDate = preprocessDate(request.getParameter("createDate"));
+	        
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+	        LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
+	        Timestamp createTime = Timestamp.valueOf(dateTime);
+	        
+	        exqBoardDTO.setExqSubject(exqSubject);
+	        exqBoardDTO.setExqContent(exqContent);
+	        exqBoardDTO.setExqSelect(exqSelect);
+	        exqBoardDTO.setCreateUser(createUser);
+	        exqBoardDTO.setCreateDate(createTime);
+	        exqBoardDTO.setUpdateUser(updateUser);
+	        
+	        csBoardDAO = new CSBoardDAO();
+	        updateSuccess = csBoardDAO.updateExqBoard(exqBoardDTO);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return updateSuccess > 0;
+	}//updateExqBoard()
+
+	public boolean deleteExqBoard(HttpServletRequest request) {
+		System.out.println("CSBoardService deleteCenterContent()");
+		int deleteSuccess = 0;
+		try {
+			ExqBoardDTO exqBoardDTO = new ExqBoardDTO();
+	        String createUser = request.getParameter("createUser");
+	        String createDate = preprocessDate(request.getParameter("createDate"));
+	        
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+	        LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
+	        Timestamp createTime = Timestamp.valueOf(dateTime);
+	        
+	        exqBoardDTO.setCreateUser(createUser);
+	        exqBoardDTO.setCreateDate(createTime);
+	        
+	        csBoardDAO = new CSBoardDAO();
+	        deleteSuccess = csBoardDAO.deleteExqBoard(exqBoardDTO);
+	    } catch (DateTimeParseException dtpe) {
+	        System.err.println("Date parsing failed: " + dtpe.getMessage());
+	    } catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deleteSuccess > 0;
+	}//deleteExqBoard
+
+	public boolean exqBoardInsert(HttpServletRequest request) {
+		System.out.println("CSBoardService exqBoardInsert()");
+		int insertSuccess = 0;
+		try {
+			String exqSelect = request.getParameter("exqSelect");
+			String exqSubject = request.getParameter("exqSubject");
+			String exqContent = request.getParameter("exqContent");
+			String createUser = request.getParameter("createUser");
+			
+			ExqBoardDTO exqBoardDTO = new ExqBoardDTO();
+			exqBoardDTO.setExqSelect(exqSelect);
+			exqBoardDTO.setExqSubject(exqSubject);
+			exqBoardDTO.setExqContent(exqContent);
+			exqBoardDTO.setCreateUser(createUser);
+			
+			csBoardDAO = new CSBoardDAO();
+			insertSuccess = csBoardDAO.exqBoardInsert(exqBoardDTO);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return insertSuccess > 0;
+	}//exqBoardInsert()
+
+	public boolean deleteQnaBoard(HttpServletRequest request) {
+		System.out.println("CSBoardService deleteQnaBoard()");
+		int deleteSuccess = 0;
+		try {
+			QnaBoardDTO qnaBoardDTO = new QnaBoardDTO();
+	        String createUser = request.getParameter("createUser");
+	        String createDate = request.getParameter("createDate");
+//	        String createDate = preprocessDate(request.getParameter("createDate"));
+	        
+//	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+//	        LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
+//	        Timestamp createTime = Timestamp.valueOf(dateTime);
+	        
+	        qnaBoardDTO.setCreateUser(createUser);
+	        qnaBoardDTO.setCreateDate(createDate);
+	        
+	        csBoardDAO = new CSBoardDAO();
+	        deleteSuccess = csBoardDAO.deleteQnaBoard(qnaBoardDTO);
+	    } catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deleteSuccess > 0;
+	}//deleteQnaBoard()
+
+	public boolean deleteLostBoard(HttpServletRequest request) {
+		System.out.println("CSBoardService deleteLostBoard()");
+		int deleteSuccess = 0;
+		try {
+			LostBoardDTO lostBoardDTO = new LostBoardDTO();
+	        String createUser = request.getParameter("createUser");
+	        String createDate = preprocessDate(request.getParameter("createDate"));
+	        
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+	        LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
+	        Timestamp createTime = Timestamp.valueOf(dateTime);
+	        
+	        lostBoardDTO.setCreateUser(createUser);
+	        lostBoardDTO.setCreateDate(createTime);
+	        
+	        csBoardDAO = new CSBoardDAO();
+	        deleteSuccess = csBoardDAO.deleteLostBoard(lostBoardDTO);
+	    } catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deleteSuccess > 0;
+	}//deleteLostBoard()
+
+	public ArrayList<MemberDTO> getMemberList() {
+		System.out.println("CSBoardService getMemberList()");
+		ArrayList<MemberDTO> memberList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			memberList = csBoardDAO.getMemberList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return memberList;
+	}//getMemberList()
+
+	public ArrayList<ResponseDataDTO> getResponseList() {
+		System.out.println("CSBoardService getResponseList()");
+		ArrayList<ResponseDataDTO> responseList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			responseList = csBoardDAO.getResponseList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return responseList;
+	}//getResponseList()
 
 	
 }//클래스

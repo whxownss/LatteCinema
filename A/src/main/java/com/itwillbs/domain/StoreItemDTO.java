@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class StoreItemDTO {
 	private String itemIdx;
 	private String itemName;
-	private String itemDatail;
+	private String itemDetail;
 	private String itemPrice;
 	private String itemImage;
 	private String itemNumber;
@@ -27,11 +27,11 @@ public class StoreItemDTO {
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	public String getItemDatail() {
-		return itemDatail;
+	public String getItemDetail() {
+		return itemDetail;
 	}
-	public void setItemDatail(String itemDatail) {
-		this.itemDatail = itemDatail;
+	public void setItemDetail(String itemDetail) {
+		this.itemDetail = itemDetail;
 	}
 	public String getItemPrice() {
 		return itemPrice;
@@ -83,7 +83,7 @@ public class StoreItemDTO {
 	}
 	@Override
 	public String toString() {
-		return "StoreItemDTO [itemIdx=" + itemIdx + ", itemName=" + itemName + ", itemDatail=" + itemDatail
+		return "StoreItemDTO [itemIdx=" + itemIdx + ", itemName=" + itemName + ", itemDetail=" + itemDetail
 				+ ", itemPrice=" + itemPrice + ", itemImage=" + itemImage + ", itemNumber=" + itemNumber + ", itemDate="
 				+ itemDate + ", createUser=" + createUser + ", createDate=" + createDate + ", updateUser=" + updateUser
 				+ ", updateDate=" + updateDate + "]";

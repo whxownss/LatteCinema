@@ -2,6 +2,7 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,9 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.email.SendGmail;
 import com.itwillbs.email.EmailCode;
+import com.itwillbs.domain.PageDTO;
+import com.itwillbs.service.CSBoardService;
 import com.itwillbs.service.MemberService;
 
 
@@ -35,6 +39,17 @@ public class MemberController extends HttpServlet {
 		
 		// 메인 페이지 이동
 		if(sPath.equals("/main.me")) {
+			// 메인화면 최근글 3개 가져오기
+			CSBoardService csBoardService = new CSBoardService();
+			// PageDTO 3개씩 잘라서 최근글 1페이지 설정
+			PageDTO pageDTO = new PageDTO();
+			pageDTO.setPageSize(3);
+			pageDTO.setCurrentPage(1);
+			// getBoardList(pageDTO) 메서드 호출
+			ArrayList<CenterBoardDTO> centerBoardList = csBoardService.getCenterBoardList(pageDTO);
+			// request에 boardList 저장
+			request.setAttribute("centerBoardList", centerBoardList);
+			
 			dispatcher = request.getRequestDispatcher("_a/main.jsp");
 			dispatcher.forward(request, response);
 		}//
@@ -335,7 +350,5 @@ public class MemberController extends HttpServlet {
 		
 
 		
-		
 	}
-	
 }

@@ -8,8 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.itwillbs.domain.MovieDTO;
+import com.itwillbs.service.MovieService;
+
 public class MovieController extends HttpServlet {
 	RequestDispatcher dispatcher = null;
+	MovieService movieService = null;
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,10 +55,32 @@ public class MovieController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 			
+		// 관리자 영화 추가 페이지에서 search버튼 누르면 뜨는 창
+		if(sPath.equals("/movie_SearchPopUp.mo")) {
+			dispatcher = request.getRequestDispatcher("_movie/movie_SearchPopUp.jsp");
+			dispatcher.forward(request, response);	
+			
+		}
+		
+		// 영화 상세 페이지
 		if(sPath.equals("/movie_view.mo")) {
 			dispatcher = request.getRequestDispatcher("_movie/movie_view.jsp");
 			dispatcher.forward(request, response);	
 			
 		}
+		
+		if(sPath.equals("/movie_insert.mo")) {
+			
+			System.out.println("movie_insert 오는지");
+			
+			movieService = new MovieService();
+			MovieDTO movieDTO = movieService.insertMovie(request);
+			
+			System.out.println(request);
+			System.out.println("movieDTO : "+movieDTO);
+			
+		}
+		
+		
 	}
 }
