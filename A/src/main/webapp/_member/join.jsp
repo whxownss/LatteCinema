@@ -301,27 +301,6 @@ function authCodeCheck() {
 }
 
 
-
-// 아이디 유효성 
-// function checkId(){
-// 	var id = $("#id").val();
-// 	var text = ' ** 아이디 입력 필수 **';
-// 	var color = "red";
-// 	if(id != ""){
-		
-// 		text = " **영문 대소문자,숫자 5~16자리로 입력해주세요";
-		
-// 		if(RegexID.test(id)){
-// 			text = " ** 사용가능";
-// 			color = "green";
-// 		}
-// 	}
-
-// 	$("#CheckId").text(text).css("color", color);
-// };
-
-
-
 // 비밀번호 유효성
 function checkPass(){
 	var passwd = $("#passwd").val();
@@ -365,7 +344,7 @@ function checkConfirmPasswd() {
 	var passwd2 = $("#passwd2").val();
 	var text = '**비밀번호 불일치**';
 	var color = 'red';
-	if( passwd == passwd2 ){
+	if( passwd == passwd2 && passwd != ""){
 		text='**비밀번호 일치**';
 		color='green';
 		

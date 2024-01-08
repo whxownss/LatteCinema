@@ -81,6 +81,24 @@ public class MemberDAO {
 		return memberDTO;
 	}
 
+	public boolean updatePasswd(MemberDTO memberDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int updateResult = session.update("Member.updatePasswd", memberDTO);
+		session.commit();
+		session.close();
+		
+		return updateResult > 0 ? true : false;
+		
+	}
+
+	public MemberDTO userFind(MemberDTO memberDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		memberDTO = session.selectOne("Member.userFind", memberDTO);
+		System.out.println(memberDTO);
+		session.close();
+		return memberDTO;
+	}
+
 	
 }
 

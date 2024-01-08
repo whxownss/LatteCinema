@@ -82,11 +82,36 @@
 		
 	</select>
 	
+<!-- 	회원 아이디/비밀번호 찾기 -->
+	<select id="userFind" parameterType="MemberDTO" resultType="MemberDTO">
+		SELECT *
+		FROM MEMBERS
+		WHERE 1=1
+		<if test = "!MEM_NAME.equals('') and MEM_NAME != null">
+		AND	  MEM_NAME = #{memName}
+		</if>
+	  	<if test = "!MEM_BIRTH_D.equals('') and MEM_BIRTH_D != null">			  
+		AND   MEM_BIRTH_D = #{memBirthD}	
+		</if>
+		<if test = "!MEM_PHONE.equals('') and MEM_PHONE != null">
+		AND	  MEM_PHONE = #{memPhone}
+		</if>
+		
+	</select>
+
+<!-- 	회원 아이디 찾기 -->
+<!-- 	<select id="userFind" parameterType="MemberDTO" resultType="MemberDTO"> -->
+<!-- 		SELECT MEM_ID -->
+<!-- 		FROM MEMBERS -->
+<!-- 		WHERE MEM_NAME = #{memName} -->
+<!-- 		AND   MEM_BIRTH_D = #{memBirthD}	 -->
+<!-- 		AND	  MEM_PHONE = #{memPhone} -->
+<!-- 	</select> -->
+	
 	<select id="getMember" parameterType="String" resultType="MemberDTO">
 		SELECT *
 		FROM MEMBERS
 		WHERE MEM_ID = #{value}
-		
 	</select>	
 
 <!-- 회원탈퇴 -->
@@ -99,10 +124,18 @@
 	<update id="updateMember" parameterType="MemberDTO">
 		UPDATE MEMBERS
 		SET 
-			MEM_PASS = #{memPass}
-		  , MEM_PHONE = #{memPhone}
+<!-- 			MEM_PASS  = #{memPass} -->
+		    MEM_PHONE = #{memPhone}
 		  , MEM_EMAIL = #{memEmail}
 		  , MEM_ADDRESS = #{memAddress}
+		WHERE MEM_ID = #{memId}
+	</update>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePasswd" parameterType="MemberDTO">
+		UPDATE MEMBERS
+		SET
+			MEM_PASS = #{memPass}
 		WHERE MEM_ID = #{memId}
 	</update>
 	
