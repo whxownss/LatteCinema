@@ -312,9 +312,33 @@ $(function(){
 		schDTO["p2"] = p2;
 		schDTO["p3"] = p3;
 		schDTO["seat"] = selectedSeat;
+		schDTO["seat_fc"] = selectedSeat.toString();
 		
-		localStorage.setItem('schDTO', JSON.stringify(schDTO));
-		window.location = "res3.re";
+		debugger;
+		// 동일 좌석 선택시 처리
+		$.ajax({
+			type: "GET",
+			url: "res2ProCS.re",
+			data: {schDTO: JSON.stringify(schDTO)},
+			dataType: "text" 
+		})
+		.done(function(data){
+			// 겹치는 자리 없을 시 DB작업 후 페이지 이동
+			$.ajax({
+				type: "GET",
+				url: "res2ProIS.re",
+				data: {},
+				dataType: "text" 
+			})
+			.done(function(data){})
+			.fail(function(){})
+			
+			localStorage.setItem('schDTO', JSON.stringify(schDTO));
+			window.location = "res3.re";
+		})
+		.fail(function(){
+			// 모달 창 띄우고 다시 자리 선택하게끔
+		})
 	})
 	
 	

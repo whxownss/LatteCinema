@@ -14,6 +14,7 @@ import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.domain.ScheduleDTO;
+import com.itwillbs.domain.SeatDTO;
 
 public class ResService {
 	ResDAO resDAO = null;
@@ -110,6 +111,13 @@ public class ResService {
 		
 		System.out.println(String.join("/", paidSeat));
 		return String.join("/", paidSeat);
+	}
+
+	public void isSameSeat(String schDTO) {
+		resDAO = new ResDAO();
+		Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+		SeatDTO seatDTO = gson.fromJson(schDTO, SeatDTO.class);
+		System.out.println(seatDTO);
 	}
 
 }
