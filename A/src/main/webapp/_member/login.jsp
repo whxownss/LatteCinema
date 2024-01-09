@@ -84,15 +84,25 @@
 	
 <%@include file ="../_common/commonFooterStart.jsp" %>
 <script type="text/javascript">
-Kakao.init('e798e95ef23a0c0ee390fcaba9cdd04b'); // 여기에 애플리케이션에서 발급받은 키를 넣어주세요.
-// console.log(Kakao.isInitialized()); // sdk초기화여부판단
+// $(function () {
+Kakao.init('44bd94c9c9fc31fcac5bd17dd86e5cba'); // 여기에 애플리케이션에서 발급받은 키를 넣어주세요.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
+// });
     function kakaoLogin() {
         Kakao.Auth.login({
             success: function (response) {
                 Kakao.API.request({
                     url: '/v2/user/me',
+//                     debugger;
                     success: function (response) {
                         alert(JSON.stringify(response))
+                        var id = response.kakao_account.id;
+						var email = response.kakao_account.email;
+                        var name = response.kakao_account.name;
+                        var birthyear = response.kakao_account.birthyear;
+                        var birthday = response.kakao_account.birthday;
+                        var phone = response.kakao_account.phone_number;
+                        debugger;
                     },
                     fail: function (error) {
                         alert(JSON.stringify(error))
@@ -127,6 +137,7 @@ Kakao.init('e798e95ef23a0c0ee390fcaba9cdd04b'); // 여기에 애플리케이션�
 //         }
 //     });
 // }
+// });
 </script>
 <script>
 $(() => {
