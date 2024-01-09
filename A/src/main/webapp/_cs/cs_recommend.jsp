@@ -20,9 +20,11 @@
 				<div class="section-header d-flex justify-content-between align-items-center mb-5">
 					<h2>옛날영화 추천게시판</h2>
 					<div>
+						<c:if test="${!empty sessionScope.sId }">
 						<a href="cs_recoSubscribe.cs" class="more" style="font-size: 17px;">
 							옛날영화 신청
 						</a>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -163,7 +165,7 @@ $('.btn').on("click",function(){
         
         
         $.ajax({
-            url: 'doRecommend.cs', // 서버 스크립트 경로로 교체하세요
+            url: 'doRecommend.cs',
             type: 'POST',
             data: { createUser: createUser, 
             		recommendIdx: recommendIdx,

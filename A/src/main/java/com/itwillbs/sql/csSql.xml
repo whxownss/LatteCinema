@@ -367,4 +367,8 @@
 		DELETE FROM RECOMMENDBOARD
  		 WHERE RECOMMENDIDX = #{recommendIdx}
 	</delete>
+	<select id="getRecoBoardCount" resultType="int">
+		SELECT COUNT(*) 
+		  FROM RECOMMENDBOARD
+	</select>
 </mapper>

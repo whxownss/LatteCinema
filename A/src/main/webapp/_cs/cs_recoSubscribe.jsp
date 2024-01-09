@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
@@ -82,12 +83,14 @@
 <!-- 							</label> -->
 <!-- 					  </div> -->
 					  <div class="d-flex justify-content-around">
+					  <c:if test="${!empty sessionScope.sId }">
 				          <div class="form-group mb-3 d-flex justify-content-center">
 							  <button type="submit" class="btn btn-primary">작성</button>
 						  </div>
 						   <div class="form-group mb-3 d-flex justify-content-center">
 							  <button type="reset" class="btn btn-outline-secondary">취소</button>
 						  </div>
+					  </c:if>	  
 			          </div>	
 			        </form>
 			      </div>
@@ -103,33 +106,38 @@
 $(document).ready(function() {
     var serviceKey = "L5BI6RFWUZ7B4WG0K4U6";
     var base_url = "https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_xml2.jsp";
-    var releaseStart = "20200101"; // 검색 시작 개봉연도
-    var releaseEnd = "20201231";   // 검색 종료 개봉연도
+    var releaseStart = "19990101";
+    var releaseEnd = "19991231";
+    var listCount = 100; // 한 페이지당 결과 수
 
-    function fetchMoviesByReleaseYear(start, end) {
-        var parameters = "?collection=kmdb_new2&detail=N&ServiceKey=" + serviceKey + "&releaseDts=" + start + "&releaseDte=" + end;
-        var url = base_url + parameters;
+    function fetchTotalCount(callback) {
+        var parameters = "?collection=kmdb_new2&detail=N&ServiceKey=" + serviceKey + "&releaseDts=" + releaseStart + "&releaseDte=" + releaseEnd + "&listCount=1";
         $.ajax({
-            url: url,
+            url: base_url + parameters,
+            type: 'GET',
+            dataType: 'xml',
+            success: function(response) {
+                var totalCount = $(response).find('TotalCount').text();
+                var totalPages = Math.ceil(totalCount / listCount);
+                callback(totalPages);
+            },
+            error: function(xhr, status, error) {
+                console.error("Error: " + error);
+            }
+        });
+    }
+
+    function fetchMoviesByReleaseYear(page) {
+        var startCount = (page - 1) * listCount;
+        var parameters = "?collection=kmdb_new2&detail=N&ServiceKey=" + serviceKey + "&releaseDts=" + releaseStart + "&releaseDte=" + releaseEnd + "&listCount=" + listCount + "&startCount=" + startCount;
+        $.ajax({
+            url: base_url + parameters,
             type: 'GET',
             dataType: 'xml',
             success: function(response) {
                 $(response).find('Row').each(function() {
-                    // 영화 제목 추출
                     var title = $(this).find('title').text();
-                    console.log("Title: " + title); // 콘솔에 제목 출력
-
-                    // 감독 이름 추출
-                    var directorNames = [];
-                    $(this).find('directors director').each(function() {
-                        directorNames.push($(this).find('directorNm').text());
-                    });
-                    console.log("Directors: " + directorNames.join(", ")); // 콘솔에 감독 이름 출력
-
-                    // 웹 페이지에 영화 제목과 감독 이름을 추가
-//                     $('#movieList').append($('<option>').text(title + " (Directed by " + directorNames.join(", ") + ")"));
                     $('#movieList').append($('<option>').text(title));
-                    
                 });
             },
             error: function(xhr, status, error) {
@@ -138,15 +146,21 @@ $(document).ready(function() {
         });
     }
 
-    fetchMoviesByReleaseYear(releaseStart, releaseEnd); // 특정 개봉연도의 영화 데이터 불러오기
+    fetchTotalCount(function(totalPages) {
+        for (var page = 1; page <= totalPages; page++) {
+            fetchMoviesByReleaseYear(page);
+        }
+    });
 });
-$('#movieName').on("change",function(){
+
+$('#movieName').on("change", function() {
     var serviceKey = "L5BI6RFWUZ7B4WG0K4U6";
     var base_url = "https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_xml2.jsp";
-    var releaseStart = "20200101"; // 검색 시작 개봉연도
-    var releaseEnd = "20201231";   // 검색 종료 개봉연도
-	var movieName = $('#movieName').val();
-    function fetchMoviesByReleaseYear(start, end,) {
+    var releaseStart = "19990101"; // 검색 시작 개봉연도
+    var releaseEnd = "19991231";   // 검색 종료 개봉연도
+    var movieName = encodeURIComponent($('#movieName').val());
+
+    function fetchMoviesByReleaseYear(start, end) {
         var parameters = "?collection=kmdb_new2&detail=N&ServiceKey=" + serviceKey + "&releaseDts=" + start + "&releaseDte=" + end + "&title=" + movieName;
         var url = base_url + parameters;
         $.ajax({
@@ -160,8 +174,7 @@ $('#movieName').on("change",function(){
                     $(this).find('directors director').each(function() {
                         directorNames.push($(this).find('directorNm').text());
                     });
-                    console.log("Directors: " + directorNames.join(", ")); // 콘솔에 감독 이름 출력
-
+                    console.log("Directors: " + directorNames.join(", "));
                     $('#director').val(directorNames.join(", "));
                 });
             },
@@ -170,8 +183,10 @@ $('#movieName').on("change",function(){
             }
         });
     }
+
     fetchMoviesByReleaseYear(releaseStart, releaseEnd); // 특정 개봉연도의 영화 데이터 불러오기
 });
+
 
 
 

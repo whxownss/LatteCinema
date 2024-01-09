@@ -847,7 +847,7 @@ public class CSController extends HttpServlet  {
 			// 페이징 작업
 			// int 리턴할 형 getBoardCount() 메서드 정의
 			// int count = getBoardCount() 메서드 호출
-			int count = csBoardService.getExqBoardCount();
+			int count = csBoardService.getRecoBoardCount();
 			// 한 화면에 보여줄 페이지 개수 설정
 			int pageBlock = 10;
 			// 시작하는 페이지 번호 구하기
@@ -869,7 +869,6 @@ public class CSController extends HttpServlet  {
 			
 			request.setAttribute("pageDTO", pageDTO);			
 			request.setAttribute("recommendList",recommendList);
-			
 			dispatcher = request.getRequestDispatcher("_cs/cs_recommend.jsp");
 			dispatcher.forward(request, response);
 		}

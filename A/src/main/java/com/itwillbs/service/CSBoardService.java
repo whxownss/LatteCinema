@@ -855,5 +855,17 @@ public class CSBoardService {
 		return deleteSuccess > 0;
 	}//
 
+	public int getRecoBoardCount() {
+		System.out.println("CSBoardService getRecoBoardCount()");
+		int count = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getRecoBoardCount();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getRecoBoardCount()
+
 	
 }//클래스

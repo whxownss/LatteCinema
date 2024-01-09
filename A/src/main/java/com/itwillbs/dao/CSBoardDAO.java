@@ -763,6 +763,22 @@ public class CSBoardDAO {
 		}
 		return deleteSuccess;
 	}//deleteRecoData()
+
+	public int getRecoBoardCount() {
+		System.out.println("CSBoardDAO getRecoBoardCount()");
+		int count = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			count = session.selectOne("CsAdmin.getRecoBoardCount");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return count;
+	}//getRecoBoardCount
 	
 	
 	
