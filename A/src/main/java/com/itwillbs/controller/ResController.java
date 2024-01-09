@@ -100,12 +100,12 @@ public class ResController extends HttpServlet {
 		}
 		// 결제정보 저장
 		if(sPath.equals("/res3Pro.re")) {
-			System.out.println(request.getParameter("rsp"));
-			System.out.println(request.getParameter("schDTO"));		// 잘넘어온거 확인.
+			String rsp = request.getParameter("rsp");
+			resService = new ResService();
+			String msg = resService.setResInfo(rsp);
 			
-			
-			dispatcher = request.getRequestDispatcher("_reservation/res3.jsp");
-			dispatcher.forward(request, response);
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(msg);
 		}
 		
 

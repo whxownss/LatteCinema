@@ -156,11 +156,40 @@ public class MemberController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}//
 		
+		// 아이디 찾기 userfind.jsp
+		if(sPath.equals("/userFindId.me")) {
+			response.setCharacterEncoding("utf-8");
+			memberService = new MemberService();
+			MemberDTO memberDTO = memberService.userFind(request);
+			
+			String result = "0";
+			
+			if (memberDTO != null) {
+			    System.out.println(memberDTO);
+			    System.out.println("입력한 정보 일치");
+			    result = memberDTO.getMemId();
+//			    request.setAttribute("memberDTO", memberDTO);
+//			    response.sendRedirect("login.me");
+			}
+			System.out.println(result);
+			response.getWriter().write(result);
+			
+		}//
+		
 		// 비밀번호 찾기 페이지 이동
 		if(sPath.equals("/passfind.me")) {
 			dispatcher = request.getRequestDispatcher("_member/passfind.jsp");
 			dispatcher.forward(request, response);
 		}//
+		
+		// 비밀번호 찾기 userFindPass.me  
+//		if(sPath.equals("/userFindPass.me")) {
+//			response.setCharacterEncoding("utf-8");
+//			memberService = new MemberService();
+//			MemberDTO memberDTO = memberService.userFind(request);			
+//			
+//			// 
+//		}//
 		
 		////////////////////////////////////////////////////////////////////////////////////
 		
@@ -294,7 +323,7 @@ public class MemberController extends HttpServlet {
 			
 			
 			
-			response.sendRedirect("myPage.me");
+//			response.sendRedirect("myPage.me");
 		}//
 		
 		

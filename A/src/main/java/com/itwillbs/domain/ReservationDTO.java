@@ -9,18 +9,23 @@ public class ReservationDTO {
 	private String scrIdx;
 	private String movType; 
 	private String movIdx;      
-	private String resDate;     
-	private String resTitle;    
-	private String resCinema;   
-	private String resSeat;     
-	private String resCount;   
-	private String resPay;   
-	private String resPayment;
-	private String resCard;
-	private String resCardnum;
-	private String resPhone;
-	private String resIsPay;
+	private String date;     
+	private String title;    
+	private String cinema;   
+	private String seat;     
+	private String p1;     
+	private String p2;     
+	private String p3;     
+	private String pSum;   
+	private String paidAmount;   
+	private String payMethod;
+	private String cardName;
+	private String cardNumber;
+	private String buyerTel;
+	private String success;
 	private String resPayDate;
+	private String buyerName;  	// 구매자 이름
+	private String merchantUid;	// 주문번호
 	public String getResIdx() {
 		return resIdx;
 	}
@@ -69,71 +74,89 @@ public class ReservationDTO {
 	public void setMovIdx(String movIdx) {
 		this.movIdx = movIdx;
 	}
-	public String getResDate() {
-		return resDate;
+	public String getDate() {
+		return date;
 	}
-	public void setResDate(String resDate) {
-		this.resDate = resDate;
+	public void setDate(String date) {
+		this.date = date;
 	}
-	public String getResTitle() {
-		return resTitle;
+	public String getTitle() {
+		return title;
 	}
-	public void setResTitle(String resTitle) {
-		this.resTitle = resTitle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getResCinema() {
-		return resCinema;
+	public String getCinema() {
+		return cinema;
 	}
-	public void setResCinema(String resCinema) {
-		this.resCinema = resCinema;
+	public void setCinema(String cinema) {
+		this.cinema = cinema;
 	}
-	public String getResSeat() {
-		return resSeat;
+	public String getSeat() {
+		return seat;
 	}
-	public void setResSeat(String resSeat) {
-		this.resSeat = resSeat;
+	public void setSeat(String seat) {
+		this.seat = seat;
 	}
-	public String getResCount() {
-		return resCount;
+	public String getP1() {
+		return p1;
 	}
-	public void setResCount(String resCount) {
-		this.resCount = resCount;
+	public void setP1(String p1) {
+		this.p1 = p1;
 	}
-	public String getResPay() {
-		return resPay;
+	public String getP2() {
+		return p2;
 	}
-	public void setResPay(String resPay) {
-		this.resPay = resPay;
+	public void setP2(String p2) {
+		this.p2 = p2;
 	}
-	public String getResPayment() {
-		return resPayment;
+	public String getP3() {
+		return p3;
 	}
-	public void setResPayment(String resPayment) {
-		this.resPayment = resPayment;
+	public void setP3(String p3) {
+		this.p3 = p3;
 	}
-	public String getResCard() {
-		return resCard;
+	public String getpSum() {
+		return pSum;
 	}
-	public void setResCard(String resCard) {
-		this.resCard = resCard;
+	public void setpSum(String pSum) {
+		this.pSum = pSum;
 	}
-	public String getResCardnum() {
-		return resCardnum;
+	public String getPaidAmount() {
+		return paidAmount;
 	}
-	public void setResCardnum(String resCardnum) {
-		this.resCardnum = resCardnum;
+	public void setPaidAmount(String paidAmount) {
+		this.paidAmount = paidAmount;
 	}
-	public String getResPhone() {
-		return resPhone;
+	public String getPayMethod() {
+		return payMethod;
 	}
-	public void setResPhone(String resPhone) {
-		this.resPhone = resPhone;
+	public void setPayMethod(String payMethod) {
+		this.payMethod = payMethod;
 	}
-	public String getResIsPay() {
-		return resIsPay;
+	public String getCardName() {
+		return cardName;
 	}
-	public void setResIsPay(String resIsPay) {
-		this.resIsPay = resIsPay;
+	public void setCardName(String cardName) {
+		this.cardName = cardName;
+	}
+	public String getCardNumber() {
+		return cardNumber;
+	}
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+	public String getBuyerTel() {
+		return buyerTel;
+	}
+	public void setBuyerTel(String buyerTel) {
+		this.buyerTel = buyerTel;
+	}
+	public String getSuccess() {
+		return success;
+	}
+	public void setSuccess(String success) {
+		this.success = success;
 	}
 	public String getResPayDate() {
 		return resPayDate;
@@ -141,15 +164,33 @@ public class ReservationDTO {
 	public void setResPayDate(String resPayDate) {
 		this.resPayDate = resPayDate;
 	}
+	public String getBuyerName() {
+		return buyerName;
+	}
+	public void setBuyerName(String buyerName) {
+		this.buyerName = buyerName;
+	}
+	public String getMerchantUid() {
+		return merchantUid;
+	}
+	public void setMerchantUid(String merchantUid) {
+		this.merchantUid = merchantUid;
+	}
 	@Override
 	public String toString() {
 		return "ReservationDTO [resIdx=" + resIdx + ", memId=" + memId + ", loIdx=" + loIdx + ", ciIdx=" + ciIdx
 				+ ", schIdx=" + schIdx + ", scrIdx=" + scrIdx + ", movType=" + movType + ", movIdx=" + movIdx
-				+ ", resDate=" + resDate + ", resTitle=" + resTitle + ", resCinema=" + resCinema + ", resSeat="
-				+ resSeat + ", resCount=" + resCount + ", resPay=" + resPay + ", resPayment=" + resPayment
-				+ ", resCard=" + resCard + ", resCardnum=" + resCardnum + ", resPhone=" + resPhone + ", resIsPay="
-				+ resIsPay + ", resPayDate=" + resPayDate + "]";
+				+ ", date=" + date + ", title=" + title + ", cinema=" + cinema + ", seat=" + seat + ", p1=" + p1
+				+ ", p2=" + p2 + ", p3=" + p3 + ", pSum=" + pSum + ", paidAmount=" + paidAmount + ", payMethod="
+				+ payMethod + ", cardName=" + cardName + ", cardNumber=" + cardNumber + ", buyerTel=" + buyerTel
+				+ ", success=" + success + ", resPayDate=" + resPayDate + ", buyerName=" + buyerName + ", merchantUid="
+				+ merchantUid + "]";
 	}
+	
+	
+	
+	
+	
 	
 	
 	

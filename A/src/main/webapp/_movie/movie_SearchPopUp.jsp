@@ -16,6 +16,7 @@
                       
 <table id="search-result" border="1">
   <thead>
+  <tr>
     <th>선택</th>
     <!-- <th>영화코드</th> -->
     <th>제목</th>
@@ -28,6 +29,7 @@
     <th>상영시간</th>
     <th>장르</th>
     <th>포스터</th>
+    </tr>
   </thead>
   <tbody></tbody>
 </table>
@@ -93,7 +95,7 @@ function searchMovie(){
         //var actors = '';                                  
  		var movieIdx = info.Codes.Code[0].CodeNo;
         
-        if(movieIdx === "") continue;           
+        
         
         var filmMade = info.company;
         var openDate = info.repRlsDate || 'N/A';
@@ -120,7 +122,6 @@ function searchMovie(){
         html += '<td>'+ rating + '</td>'
         html += '<td>'+ openDate + '</td>'
         html += '<td>'+ director + '</td>'
-        //         html += '<td>'+ actors + '</td>'                                     // 배우가 수십개씩 나올 수도 있어서, 적당히 추려주는 로직 필요함
       	html += '<td>'+ runtime + '분</td>'
     	html += '<td>'+ genre + '</td>'
     	html += '<td><img src="' + poster + '"></td>'
@@ -142,16 +143,16 @@ function searchMovie(){
               // 각 체크박스에 대한 처리
              selectedCheckboxes.each(function (index, checkbox) {
 	            var movieIdx = $(checkbox).closest('tr').attr('data-movieIdx');
-	            var title = $(checkbox).data('title');
-	            var rating = $(checkbox).data('rating');
-	            var runtime = $(checkbox).data('runtime');
-	            var filmMade = $(checkbox).data('filmMade');
-	            var openDate = $(checkbox).data('openDate');
-	            var nation = $(checkbox).data('nation');
-	            var synopsis = $(checkbox).data('synopsis');
-	            var director = $(checkbox).data('director');
-	            var genre = $(checkbox).data('genre');
-	            var poster = $(checkbox).data('poster');
+	            var title = $(checkbox).attr('data-title');
+	            var rating = $(checkbox).attr('data-rating');
+	            var runtime = $(checkbox).attr('data-runtime');
+	            var filmMade = $(checkbox).attr('data-filmMade');
+	            var openDate = $(checkbox).attr('data-openDate');
+	            var nation = $(checkbox).attr('data-nation');
+	            var synopsis = $(checkbox).attr('data-synopsis');
+	            var director = $(checkbox).attr('data-director');
+	            var genre = $(checkbox).attr('data-genre');
+	            var poster = $(checkbox).attr('data-poster');
 	            
 	            console.log("filmMade : "+filmMade);
 	            console.log("openDate : "+openDate);

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Reservation">
+
+	<insert id="insert" parameterType="ReservationDTO">
+		INSERT INTO RESERVATION
+		 	 ( DATE 
+		 	 , TITLE
+		 	 , CINEMA
+		 	 , SEAT
+		 	 , P1
+		 	 , P2
+		 	 , P3
+		 	 , P_SUM
+		 	 , PAID_AMOUNT
+		 	 , PAY_METHOD
+		 	 , CARD_NAME
+		 	 , CARD_NUMBER
+		 	 , BUYER_TEL
+		 	 , SUCCESS
+		 	 , BUYER_NAME
+		 	 , MERCHANT_UID
+		 	 )  
+		VALUES 
+			 ( LEFT(#{date} ,LENGTH(#{date}) - 4) 
+			 , #{title}
+			 , #{cinema}
+			 , #{seat}
+			 , #{p1}
+			 , #{p2}
+			 , #{p3}
+			 , CAST(CAST(#{p1} AS UNSIGNED) + CAST(#{p2} AS UNSIGNED) + CAST(#{p3} AS UNSIGNED) AS CHAR(20))
+			 , #{paidAmount}
+			 , #{payMethod}
+			 , #{cardName}
+			 , #{cardNumber}
+			 , #{buyerTel}
+			 , #{success}
+			 , #{buyerName}
+			 , #{merchantUid}
+			 )
+	</insert>	
+	
+</mapper>

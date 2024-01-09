@@ -378,7 +378,7 @@ $(function(){
 										+ id + "movie" + (i+1) + "'>" 
 										+ "<img src='_assets/img/grade_" + e.rating + ".png' class='pb-1'/>"
 										+ e.title + "</li>");
-			});			
+		});			
 		
 		// 다른 영화 선택하고 오면 체크 없어지는거 해결
 		keepCheck("movie")
@@ -464,7 +464,7 @@ $(function(){
 				"date"   : date,
 				"sTime"  : sTime,
 				"eTime"  : eTime,
-				"sIdx"   : sIdx,
+				"scr_idx" : sIdx,
 				"cSeat"  : cSeat,
 				"aSeat"  : aSeat,
 				"cinema" : cinema

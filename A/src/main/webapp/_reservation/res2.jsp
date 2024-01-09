@@ -135,10 +135,33 @@
 <%@include file="../_common/commonFooterStart.jsp"%>
 <script src="jQuery/jquery-3.6.0.js"></script>
 <script>
+var schDTO = JSON.parse(localStorage.getItem("schDTO"));
 
 $(function(){
+	debugger;
+	// 예약된 자리에 대해 선택 못하게 처리
+	$.ajax({
+		type: "GET",
+		url: "res2Pro.re",
+		data: {},
+		dataType: "text" 
+	})
+	.done(function(data){
+		
+	})
+	.fail(function(){
+	})
 	
-	var schDTO = JSON.parse(localStorage.getItem("schDTO"));
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	// 좌상단에 영화 정보 나타내기
 	$(".rating").attr("src", "_assets/img/grade_" + schDTO.rating + ".png");
@@ -146,7 +169,7 @@ $(function(){
 	$(".date").text(schDTO.date);
 	$(".sTime").text(schDTO.sTime + " ~ ");
 	$(".eTime").text(schDTO.eTime);
-	$(".sIdx").text(schDTO.sIdx);
+	$(".sIdx").text(schDTO.scr_idx);
 	
 	// 좌석 그리기
 	var aSeat = parseInt(schDTO.aSeat);
@@ -290,7 +313,7 @@ $(function(){
 		schDTO["p1"] = p1;
 		schDTO["p2"] = p2;
 		schDTO["p3"] = p3;
-		schDTO["selectedSeat"] = selectedSeat;
+		schDTO["seat"] = selectedSeat;
 		
 		localStorage.setItem('schDTO', JSON.stringify(schDTO));
 		window.location = "res3.re";

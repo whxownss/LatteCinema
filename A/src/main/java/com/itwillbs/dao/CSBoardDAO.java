@@ -13,8 +13,10 @@ import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ExqBoardDTO;
 import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.LostBoardDTO;
+import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
+import com.itwillbs.domain.ResponseDataDTO;
 import com.itwillbs.sql.SqlMapClient;
 
 public class CSBoardDAO {
@@ -261,6 +263,23 @@ public class CSBoardDAO {
 		}
 		return qnaUpdateSuccess;
 	}//updateQnaBoard()
+	public int updateQnaBoard2(QnaBoardDTO qnaBoardDTO) {
+		System.out.println("CSBoardDAO updateQnaBoard2()");
+		int qnaUpdateSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			qnaUpdateSuccess = session.update("CsAdmin.updateQnaBoard",qnaBoardDTO);
+			session.insert("CsAdmin.insertQnaRes",qnaBoardDTO);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return qnaUpdateSuccess;
+	}//updateQnaBoard()
 
 	public int qnaBoardInsert(QnaBoardDTO qnaBoardDTO) {
 		System.out.println("CSBoardDAO qnaBoardInsert()");
@@ -384,6 +403,23 @@ public class CSBoardDAO {
 		}
 		return lostUpdateSuccess;
 	}//updateLostBoard()
+	public int updateLostBoard2(LostBoardDTO lostBoardDTO) {
+		System.out.println("CSBoardDAO updateLostBoard2()");
+		int lostUpdateSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			lostUpdateSuccess = session.update("CsAdmin.updateLostBoard",lostBoardDTO);
+			session.insert("CsAdmin.insertResLost",lostBoardDTO);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return lostUpdateSuccess;
+	}//updateLostBoard2()
 
 	public int insertCsLost(LostBoardDTO lostBoardDTO) {
 		System.out.println("CSBoardDAO insertCsLost()");
@@ -586,6 +622,72 @@ public class CSBoardDAO {
 		}
 		return insertSuccess;
 	}//exqBoardInsert()
+
+	public int deleteQnaBoard(QnaBoardDTO qnaBoardDTO) {
+		System.out.println("CSBoardDAO deleteQnaBoard()");
+		int deleteSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			deleteSuccess = session.delete("CsAdmin.deleteQnaBoard", qnaBoardDTO);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return deleteSuccess;
+	}//deleteQnaBoard()
+
+	public int deleteLostBoard(LostBoardDTO lostBoardDTO) {
+		System.out.println("CSBoardDAO deleteLostBoard()");
+		int deleteSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			deleteSuccess = session.delete("CsAdmin.deleteLostBoard", lostBoardDTO);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return deleteSuccess;
+	}//deleteLostBoard()
+
+	public ArrayList<MemberDTO> getMemberList() {
+		System.out.println("CSBoardDAO getMemberList()");
+		ArrayList<MemberDTO> memberList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			memberList = new ArrayList<MemberDTO>(session.selectList("CsAdmin.getMemberList"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return memberList;
+	}
+
+	public ArrayList<ResponseDataDTO> getResponseList() {
+		System.out.println("CSBoardDAO getResponseList()");
+		ArrayList<ResponseDataDTO> responseList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			responseList = new ArrayList<ResponseDataDTO>(session.selectList("CsAdmin.getResponseList"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return responseList;
+	}//getResponseList()
 	
 	
 	

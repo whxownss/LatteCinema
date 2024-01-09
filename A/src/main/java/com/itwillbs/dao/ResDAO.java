@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.LocationDTO;
+import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.domain.ScheduleDTO;
 import com.itwillbs.sql.SqlMapClient;
 
@@ -52,6 +53,16 @@ public class ResDAO {
 		session.close();
 		
 		return movieList;
+	}
+
+	public boolean setResInfo(ReservationDTO reservationDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int insertCnt = session.insert("Reservation.insert", reservationDTO);
+		session.commit();
+		session.close();
+		
+		return insertCnt > 0 ? true : false;
+		
 	}
 	
 	

@@ -134,7 +134,7 @@ public class CSController extends HttpServlet  {
 				msg = "update success";
 			}
 			System.out.println(msg);
-//			response.sendRedirect(""); //ajax를 써서 굳이 주소 적을 필요 없다.
+			response.sendRedirect("adm_cs_center.ad"); //ajax를 써서 굳이 주소 적을 필요 없다.
 		}
 		// 공지사항 삭제 하기
 		if(sPath.equals("/deleteCenterContent.cs")) {
@@ -148,6 +148,7 @@ public class CSController extends HttpServlet  {
 			}
 			System.out.println(msg);
 			//response.sendRedirect("cs_center.cs");
+			response.sendRedirect("adm_cs_center.ad");
 		}
 		
 		// 공지사항 글쓰기 페이지 이동
@@ -203,7 +204,8 @@ public class CSController extends HttpServlet  {
 			}
 			System.out.println(msg);
 			
-			response.sendRedirect("cs_center.cs");
+//			response.sendRedirect("cs_center.cs");
+			response.sendRedirect("adm_cs_center.ad");
 		}
 		
 		// 자주찾는질문 페이지 이동
@@ -563,6 +565,19 @@ public class CSController extends HttpServlet  {
 			}
 			System.out.println(msg);
 		}
+		// 1:1문의 글 업데이트 하기2
+		if(sPath.equals("/updateQnaBoard2.cs")) {
+			System.out.println("주소비교 /updateQnaBoard2.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "qna update fail";
+			if(csBoardService.updateQnaBoard2(request)) {
+				msg = "qna update success";
+			}
+			System.out.println(msg);
+			response.sendRedirect("adm_cs_qna.ad");
+		}
 		// 1:1문의 글쓰기 페이지 이동
 		if(sPath.equals("/cs_qna_write.cs")) {
 			System.out.println("주소비교 /cs_qna_write.cs 일치");
@@ -581,8 +596,20 @@ public class CSController extends HttpServlet  {
 				response.sendRedirect("cs_qna.cs");
 			}
 			System.out.println(msg);
-			
 		}		
+		// 1:1문의 글삭제
+		if(sPath.equals("/deleteQnaBoard.cs")) {
+			System.out.println("주소비교 /deleteQnaBoard.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "delete fail";
+			if(csBoardService.deleteQnaBoard(request)) {
+				msg = "delete success";
+			}
+			System.out.println(msg);
+			response.sendRedirect("adm_cs_qna.ad");
+		}//
 
 		// 분실물 페이지 이동
 		if(sPath.equals("/cs_lost.cs")) {
@@ -674,6 +701,19 @@ public class CSController extends HttpServlet  {
 			}
 			System.out.println(msg);
 		}
+		// 분실물 글내용 페이지 관리자 답변 수정2
+		if(sPath.equals("/updateLostBoard2.cs")) {
+			System.out.println("주소비교 /updateLostBoard2.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "lost update fail";
+			if(csBoardService.updateLostBoard2(request)) {
+				msg = "lost update success";
+			}
+			System.out.println(msg);
+			response.sendRedirect("adm_cs_lost.ad");
+		}
 		// 분실물 글쓰기
 		if(sPath.equals("/insertCsLost.cs")) {
 			System.out.println("주소비교 /insertCsLost.cs 일치");
@@ -760,7 +800,21 @@ public class CSController extends HttpServlet  {
 //			request.setAttribute("lostBoardList",lostBoardList);
 //			dispatcher = request.getRequestDispatcher("_cs/cs_lost_search.jsp");
 //			dispatcher.forward(request, response);
-		}
+		}//
+		// 분실물 글 삭제
+		if(sPath.equals("/deleteLostBoard.cs")) {
+			System.out.println("주소비교 /deleteLostBoard.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "delete fail";
+			if(csBoardService.deleteLostBoard(request)) {
+				msg = "delete success";
+			}
+			System.out.println(msg);
+			//response.sendRedirect("cs_center.cs");
+			response.sendRedirect("adm_cs_lost.ad");
+		}//
 		
 		
 		

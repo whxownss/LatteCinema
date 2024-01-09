@@ -234,11 +234,11 @@ function kakaoPay(useremail, username) {
 
          IMP.init("imp16802722"); // 가맹점 식별코드
          IMP.request_pay({
-             pg: 'html5_inicis.INIBillTst', // PG사 코드표에서 선택
+             pg: 'html5_inicis.INIpayTest', // PG사 코드표에서 선택
              pay_method: 'card', // 결제 방식
              merchant_uid: "IMP" + makeMerchantUid, // 결제 고유 번호
              name: '라떼시네마', // 제품명
-             amount: 1, // 가격  parseInt($("#rsPrice").text().replace("," , ""))
+             amount: 100, // 가격  parseInt($("#rsPrice").text().replace("," , ""))
              //구매자 정보 ↓
              buyer_email: `${useremail}`,
              buyer_name: '조조태준'
@@ -246,32 +246,43 @@ function kakaoPay(useremail, username) {
              // buyer_addr : '서울특별시 강남구 삼성동',
              // buyer_postcode : '123-456'
          }, async function (rsp) { // callback
+        	 debugger;
              if (rsp.success) { //결제 성공시
 //                  console.log(rsp);
 //                  localStorage.setItem('rsp', JSON.stringify(rsp));
 //          		 localStorage.setItem('schDTO', JSON.stringify(schDTO));
 //          		 window.location = "res4.re";
 
+			$.each(schDTO, (k, v) => {
+				if(k == "seat"){
+					v = v.join(", ");
+				}
+				rsp[k] = v;
+			})
+			debugger;
+			
 			// 결제 정보 db에 insert
 			$.ajax({
 				type: "GET",
 				url: "res3Pro.re",
-				data: {rsp: JSON.stringify(rsp), 
-					   schDTO: JSON.stringify(schDTO)},
-				dataType: "json" 
+				data: {rsp: JSON.stringify(rsp)},
+				dataType: "text" 
 			})
 			.done(function(data){
+				alert(data);
+				localStorage.setItem('rsp', JSON.stringify(rsp));
+        		window.location = "res4.re";
 			})
 			.fail(function(){
 			})
                  //결제 성공시 프로젝트 DB저장 요청
-                 if (response.status == 200) { // DB저장 성공시
-                     alert('결제 완료!')
-                     window.location.reload();
-                 } else { // 결제완료 후 DB저장 실패시
-                     alert(`error:[${response.status}]\n결제요청이 승인된 경우 관리자에게 문의바랍니다.`);
-                     // DB저장 실패시 status에 따라 추가적인 작업 가능성
-                 }
+//                  if (response.status == 200) { // DB저장 성공시
+//                      alert('결제 완료!')
+//                      window.location.reload();
+//                  } else { // 결제완료 후 DB저장 실패시
+//                      alert(`error:[${response.status}]\n결제요청이 승인된 경우 관리자에게 문의바랍니다.`);
+//                      // DB저장 실패시 status에 따라 추가적인 작업 가능성
+//                  }
              } else if (rsp.success == false) { // 결제 실패시
                  alert(rsp.error_msg)
              }
@@ -296,8 +307,8 @@ $(function(){
 	$(".date").text(schDTO.date);
 	$(".sTime").text(schDTO.sTime);
 	$(".eTime").text(schDTO.eTime);
-	$(".sIdx").text(schDTO.sIdx);
-	$(".seat").text(schDTO.selectedSeat.join(', '));
+	$(".scrIdx").text(schDTO.scr_idx);
+	$(".seat").text(schDTO.seat.join(', '));
 	$(".date").text(schDTO.date);
 	$(".cinema").text(schDTO.cinema);
 	var personType = [];

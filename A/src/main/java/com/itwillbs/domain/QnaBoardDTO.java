@@ -11,6 +11,13 @@ public class QnaBoardDTO {
 	private String responseUser;
 	private String responseDate;
 	private int rn;
+	private String qnaSecret;
+	public String getQnaSecret() {
+		return qnaSecret;
+	}
+	public void setQnaSecret(String qnaSecret) {
+		this.qnaSecret = qnaSecret;
+	}
 	public int getRn() {
 		return rn;
 	}
@@ -76,8 +83,9 @@ public class QnaBoardDTO {
 		return "QnaBoardDTO [qnaIdx=" + qnaIdx + ", qnaCategory=" + qnaCategory + ", qnaSubject=" + qnaSubject
 				+ ", qnaContent=" + qnaContent + ", qnaResponse=" + qnaResponse + ", createUser=" + createUser
 				+ ", createDate=" + createDate + ", responseUser=" + responseUser + ", responseDate=" + responseDate
-				+ ", rn=" + rn + "]";
+				+ ", rn=" + rn + ", qnaSecret=" + qnaSecret + "]";
 	}
+	
 	
 	
 }

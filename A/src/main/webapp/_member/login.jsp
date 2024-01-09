@@ -3,8 +3,9 @@
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 <script src="jQuery/jquery-3.6.0.js"></script>
-
-
+<!-- <script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script> -->
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
@@ -51,11 +52,11 @@
 									<div class="sns-login">
 							
 										<div class="">
-											<a href="javaScript:void(0)" lnkgty="NAVER" title="네이버로 로그인 선택"><img src="assets/img/btnG_완성형.png" alt="네이버" style="width: 100%; height: 70px;">
+											<a href="javaScript:void(0)" id="naverIdLogin_loginButton" lnkgty="NAVER" title="네이버로 로그인 선택"><img src="assets/img/btnG_완성형.png" alt="네이버" style="width: 100%; height: 70px;">
 											<!--네이버--> <!--네이버로 로그인--></a>
 										</div>
 										<div class="mt-2">
-											<a href="javaScript:void(0)" lnkgty="KAKAO" title="카카오톡으로 로그인 선택"><img src="assets/img/kakao_login_medium_narrow.png" alt="카카오톡" style="width: 100%; height: 70px;">
+											<a href="javaScript:kakaoLogin()" id="kakao-login-btn" lnkgty="KAKAO" title="카카오톡으로 로그인 선택"><img src="assets/img/kakao_login_medium_narrow.png" alt="카카오 로그인 버튼" style="width: 100%; height: 70px;">
 											<!--카카오톡--> <!--카카오톡으로 로그인--></a>
 										</div>
 									</div>
@@ -82,6 +83,51 @@
 	</main>
 	
 <%@include file ="../_common/commonFooterStart.jsp" %>
+<script type="text/javascript">
+Kakao.init('e798e95ef23a0c0ee390fcaba9cdd04b'); // 여기에 애플리케이션에서 발급받은 키를 넣어주세요.
+// console.log(Kakao.isInitialized()); // sdk초기화여부판단
+    function kakaoLogin() {
+        Kakao.Auth.login({
+            success: function (response) {
+                Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function (response) {
+                        alert(JSON.stringify(response))
+                    },
+                    fail: function (error) {
+                        alert(JSON.stringify(error))
+                    },
+                })
+            },
+            fail: function (error) {
+                alert(JSON.stringify(error))
+            },
+        })
+    }
+
+// function kakaoLogin() {
+//     Kakao.Auth.login({
+//         success: function(authObj) {
+//             // 로그인 성공 시 처리
+//             Kakao.API.request({
+//                 url: '/v2/user/me',
+//                 success: function(response) {
+//                     console.log(response);
+//                 	// 서버로 회원 정보 전송
+//                     kakaoLoginPro(response);
+//                 },
+//                 fail: function(error) {
+//                     console.log(error);
+//                 },
+//             });
+//         },
+//         fail: function(err) {
+//             // 로그인 실패 시 처리
+//             console.log(err);
+//         }
+//     });
+// }
+</script>
 <script>
 $(() => {
 	$("#login").submit(function() {

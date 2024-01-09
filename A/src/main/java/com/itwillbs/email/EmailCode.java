@@ -27,7 +27,7 @@ public class EmailCode {
 
 		
 		String code = "";
-		int codeLength = 20;
+		int codeLength = 6;
 		
 		// StringBuffer 활용하기 메모리때문에
 		// 원하는 코드 길이만큼 for문을 사용하여 반복문으로 처리

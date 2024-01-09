@@ -61,7 +61,7 @@
 <!--             <form name="mbInfoForm" method="post"  > -->
             
             	<input type="hidden" name="id" value="${memberDTO.memId }">
-            	<input type="hidden" name="pass" value="${memberDTO.memPass }">
+<%--             	<input type="hidden" name="pass" value="${memberDTO.memPass }"> --%>
             	<input type="hidden" name="phone" value="${memberDTO.memPhone }">
             	
 <!--               <input type="hidden" name="mbNo" value="3487839"> -->

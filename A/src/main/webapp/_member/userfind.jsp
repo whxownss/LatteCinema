@@ -1,11 +1,16 @@
+<%@page import="com.itwillbs.domain.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%MemberDTO memberDTO = (MemberDTO)request.getAttribute("memberDTO"); %>
 <html lang="ko">
 <head>
   <jsp:include page="../_common/meta.jsp"></jsp:include>
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
-  <link href="_assets/js/findIdPass.js">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css">
+<!--   <link href="_assets/js/findIdPass.js"> -->
     <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
   <jsp:include page="../_common/header.jsp"></jsp:include>
 
 
@@ -57,7 +62,7 @@
 							</div>
 			
 							<h2 class="tit mt40">간편찾기<!--간편찾기--></h2>
-						<form >
+						<form id="userFindForm" action="userfindPro.me" method="post" name="fr">
 							<div class="table-wrap">
 								<table class="board-form">
 									<caption>이름, 생년월일, 휴대폰 번호 항목을 가진 아이디 찾기 입력 표<!--이름, 생년월일, 휴대폰 번호 항목을 가진 아이디 찾기 입력 표--></caption>
@@ -69,34 +74,31 @@
 										<tr>
 											<th scope="row"><label for="name">이름<!--이름--></label></th>
 											<td>
-												<input id="name" maxlength="20" type="text" placeholder="이름" class="input-text w230px findInput"><!--이름-->
+												<input id="name" maxlength="20" type="text" placeholder="이름" class="input-text w230px findInput" name="name"><!--이름-->
 											</td>
 										</tr>
 										<tr>
 											<th scope="row"><label for="birth">생년월일<!--생년월일--></label></th>
 											<td>
-												<input id="birth" maxlength="8" type="text" placeholder="생년월일 8자리" class="input-text w230px findInput"><!--생년월일 8자리-->
+												<input id="birth" maxlength="8" type="text" placeholder="생년월일 8자리" class="input-text w230px findInput" name="birth"><!--생년월일 8자리-->
 												<div id="schIdBirthDe-error-text" class="alert"></div>
 											</td>
 										</tr>
 										<tr>
 											<th scope="row"><label for="phone">휴대폰 번호<!--휴대폰 번호--></label></th>
 											<td>
-												<input id="phone"  maxlength="11" type="text" placeholder="'-' 없이 입력" class="input-text w230px findInput"><!--'-' 없이 입력-->
+												<input id="phone"  maxlength="11" type="text" placeholder="'-' 없이 입력" class="input-text w230px findInput" name="phone"><!--'-' 없이 입력-->
 												<div id="schIdMblpNo-error-text" class="alert"></div>
 											</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
-						</form>
-			
 							<div class="btn-member-bottom v1">
-								<button id="btnFindId" type="button" class="button purple large" disabled="disabled" data-bs-toggle="modal" data-bs-target="#staticBackdrop">아이디 찾기<!--아이디 찾기--></button>
-			
+<!-- 								<button id="btnFindId" type="button" class="button purple large" disabled="disabled" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="userFind()">아이디 찾기아이디 찾기</button> -->
+								<button id="btnFindId" type="button" class="button purple large" disabled="disabled" >아이디 찾기<!--아이디 찾기--></button>
 							</div>
-			
-			
+						</form>
 						</div>
 						<!--// col -->
 					</div>
@@ -138,7 +140,7 @@ $(function () {
 	});
 	
 	/* 생년월일 입력 */
-	$("#birth").on("keyup", function(e){
+	$("#birth").on("blur", function(e){
 		var partton = /[^0-9]/g;
 		if($("#birth").val() == ""){
 			$('#schIdBirthDe-error-text').text('생년월일을 입력해주세요.');
@@ -153,7 +155,7 @@ $(function () {
 	});
 	
 	/* 연락처 입력 */
-	$("#phone").on("keyup", function(e){
+	$("#phone").on("blur", function(e){
 		var partton = /[^0-9]/g;
 		if($("#phone").val() == ""){
 			$('#schIdMblpNo-error-text').text('연락처 입력해주세요.');
@@ -166,17 +168,76 @@ $(function () {
 		}
 	});
 	
+//     $("#btnFindId").on("click", function () {
+//         if ($("#name").val() !== "" && $("#birth").val() !== "" && $("#phone").val() !== "") {
+            
+//         	$("#btnFindId").attr("disabled", false);
+//         	var name = $("#name").val();
+//             var birth = $("#birth").val();
+//             var phone = $("#phone").val();
+
+//             $.ajax({
+//                 type: "post",
+//                 data: { memName: name, memBirth: birth, memPhone: phone },
+//                 url: "userFindId.me",
+//                 dataType: "text",
+//                 success: function (data) {
+//                     if (data === '1') {
+//                         alert('회원님이 가입하신 아이디는' + text + '입니다.');
+//                     } else if (data === '0') {
+//                         alert('해당정보로 가입한 회원 아이디가 없습니다.');
+//                     }
+//                 },
+//                 error: function () {
+//                     // 에러 처리 코드 추가
+//                 }
+//             });
+//         }
+//     });
+	
+	
+	
 	
 	$(".findInput").on("keyup", function(){
-		debugger;
+// 		debugger;
 		if($("#name").val() != "" && $("#birth").val() != "" && $("#phone").val() != ""){
-			debugger;
+// 			debugger;
 			$("#btnFindId").attr("disabled", false);
+			var name = $("#name").val()
+			var birth = $("#birth").val()
+			var phone = $("#phone").val()
+			$('#schIdBirthDe-error-text').text('');
+			$('#schIdMblpNo-error-text').text('');
 		}
-	})
-	
-});
+		
+	});
+			
+	$("#btnFindId").on("click", function() {
+// 		debugger;
+		$.ajax({
+			type : "post",
+			data : {
+				memName : $("#name").val(), 
+				memBirth : $("#birth").val(), 
+				memPhone : $("#phone").val()
+				},
+			url : "userFindId.me",
+			dataType : "text",
+			success:function(data){
+				var msg = '해당정보로 가입한 회원 아이디가 없습니다.';
+				if(data != '0')
+					msg = '회원님이 가입하신 아이디는 ' + data + ' 입니다.';
+				
+					alert(msg);
+			},
+			error : function() {
+				
+			}
+		})	
+			
+	});
 
+});
 </script>
 
 

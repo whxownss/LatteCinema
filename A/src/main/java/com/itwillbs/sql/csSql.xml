@@ -41,7 +41,17 @@
  		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
 	</delete>
 	<insert id="exqBoardInsert" parameterType="ExqBoardDTO">
-		
+		INSERT INTO EXQBOARD (EXQSUBJECT,EXQCONTENT,EXQSELECT,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE)
+		VALUES
+		(
+		#{exqSubject}
+		,#{exqContent}
+		,#{exqSelect}
+		,#{createUser}
+		,SYSDATE()
+		,NULL
+		,NULL
+		);
 	</insert>
 	
 	<select id="getCenterBoardList" resultType="CenterBoardDTO" parameterType="PageDTO">
@@ -146,15 +156,20 @@
 		   FROM (SELECT IFNULL(MAX(CAST(QNAIDX as unsigned)), 0) + 1
 				   FROM QNABOARD) Q)
 		,#{qnaCategory}
-		,'비밀글입니다'
+		,#{qnaSubject}
 		,#{qnaContent}
 		,NULL
 		,#{createUser}
 		,SYSDATE()
 		,NULL
 		,NULL
+		,#{qnaSecret}
 		);
 	</insert>
+	<delete id="deleteQnaBoard" parameterType="QnaBoardDTO">
+		DELETE FROM QNABOARD
+		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate} 
+	</delete>
 	<select id="searchQnaBoardCount" resultType="int" parameterType="String">
 		SELECT COUNT(*) 
 		  FROM QNABOARD 
@@ -206,6 +221,10 @@
 		    CREATE_USER = #{createUser}
 		    AND CREATE_DATE = #{createDate}
 	</update>
+	<delete id="deleteLostBoard" parameterType="LostBoardDTO">
+		DELETE FROM LOSTBOARD
+ 		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</delete>
 	<insert id="insertCsLost" parameterType="LostBoardDTO">
 		INSERT INTO LOSTBOARD
 		VALUES 
@@ -265,4 +284,51 @@
 	    </if>
 	</select>
 
+	<select id="getMemberList" resultType="MemberDTO">
+		SELECT * 
+		  FROM MEMBERS
+		 WHERE MEM_IDX IS NOT NULL
+	</select>
+	
+<!-- 	<insert id="insertQnaRes" parameterType="QnaBoardDTO"> -->
+<!-- 		INSERT INTO RESPONSEDATA (QNAIDX, SUBJECT, RESPONSE, RESPONSE_USER, RESPONSE_DATE) -->
+<!-- 		VALUES( -->
+<!-- 		    SELECT QNAIDX -->
+<!-- 		      FROM QNABOARD -->
+<!-- 		     WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}, -->
+<!-- 		    #{qnaSubject}, -->
+<!-- 		    #{qnaResponse}, -->
+<!-- 		    #{responseUser}, -->
+<!-- 		    SYSDATE() -->
+<!-- 			) -->
+<!-- 	</insert> -->
+	<insert id="insertQnaRes" parameterType="QnaBoardDTO">
+	    INSERT INTO RESPONSEDATA (QNAIDX, SUBJECT, RESPONSE, RESPONSE_USER, RESPONSE_DATE)
+	    SELECT QNAIDX,
+	           #{qnaSubject},
+	           #{qnaResponse},
+	           #{responseUser},
+	           SYSDATE()
+	    FROM QNABOARD
+	    WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</insert>
+	<insert id="insertResLost" parameterType="LostBoardDTO">
+		INSERT INTO RESPONSEDATA (LOSTIDX, SUBJECT, RESPONSE, RESPONSE_USER, RESPONSE_DATE)
+	    SELECT LOSTIDX,
+	           #{lostSubject},
+	           #{lostResponse},
+	           #{responseUser},
+	           SYSDATE()
+	    FROM LOSTBOARD
+	    WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
+	</insert>
+	<select id="getResponseList" resultType="ResponseDataDTO">
+		SELECT R.RESDATAIDX,Q.QNAIDX,NULL AS LOSTIDX, Q.CREATE_USER, Q.CREATE_DATE, R.SUBJECT,R.RESPONSE, R.RESPONSE_USER, R.RESPONSE_DATE
+		  FROM QNABOARD Q JOIN RESPONSEDATA R
+		    ON Q.QNAIDX = R.QNAIDX
+		UNION ALL
+		SELECT R.RESDATAIDX,NULL AS QNAIDX,L.LOSTIDX, L.CREATE_USER, L.CREATE_DATE, R.SUBJECT,R.RESPONSE, R.RESPONSE_USER, R.RESPONSE_DATE
+		  FROM LOSTBOARD L JOIN RESPONSEDATA R    
+		    ON L.LOSTIDX = R.LOSTIDX
+	</select>
 </mapper>

@@ -18,7 +18,9 @@
         <typeAlias type="com.itwillbs.domain.QnaBoardDTO" alias="QnaBoardDTO"/>
         <typeAlias type="com.itwillbs.domain.CinemaDTO" alias="CinemaDTO"/>
         <typeAlias type="com.itwillbs.domain.ScheduleDTO" alias="ScheduleDTO"/>
+        <typeAlias type="com.itwillbs.domain.ReservationDTO" alias="ReservationDTO"/>
         <typeAlias type="com.itwillbs.domain.LostBoardDTO" alias="LostBoardDTO"/>
+        <typeAlias type="com.itwillbs.domain.ResponseDataDTO" alias="ResponseDataDTO"/>
         <typeAlias type="com.itwillbs.domain.MovieDTO" alias="movieDTO"/>
     </typeAliases>
 
@@ -40,6 +42,7 @@
 		<mapper resource="com/itwillbs/sql/memberSql.xml"/>
 		<mapper resource="com/itwillbs/sql/cinemaSql.xml"/>
 		<mapper resource="com/itwillbs/sql/locationSql.xml"/>
+		<mapper resource="com/itwillbs/sql/reservationSql.xml"/>
 		<mapper resource="com/itwillbs/sql/scheduleSql.xml"/>
 		<mapper resource="com/itwillbs/sql/movieSql.xml"/>
 	</mappers>
