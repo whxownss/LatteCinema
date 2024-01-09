@@ -68,6 +68,7 @@
                   <li><a href="adm_member.ad"><i class="fa fa-user"></i> 회원관리</a></li>
                   <li><a href="adm_mv_inout.ad"><i class="fa fa-edit"></i>영화 통합 추가/제거</a></li>
                   <li><a href="adm_store.ad"><i class="fa fa-beer"></i>스토어 관리</a></li>
+                  <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
                 </ul>
               </div>
               <div class="menu_section">
@@ -230,7 +231,7 @@
                         </div>
                       </div>
 
-                    </form>
+                  
                   </div>
                 </div>
               </div>
@@ -277,7 +278,7 @@
                           </select>
                          </div> 
                       </div>
-                      
+                     </form> 
                       
                        <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-grade">관람등급<span class="required">*</span>
@@ -320,7 +321,6 @@
                         </div>
                       </div>
 
-                    </form>
                   </div>
                 </div>
               </div>
@@ -360,7 +360,7 @@
                       		<td>집에 보내줘</td>
                       		<td>2023/12/25</td>
                       		<td>전체관람가</td>
-                      		<td>상영중</select>       <!-- 상영종료일보다 이전인 날짜엔 상영중으로 보이고 지나면 상영종료로 보이게  -->
+                      		<td>상영중     <!-- 상영종료일보다 이전인 날짜엔 상영중으로 보이고 지나면 상영종료로 보이게  -->
                       		</td>
                       		<td>now</td>
                       	</tr>
@@ -386,14 +386,6 @@
         <!-- /footer content -->
      
     </div>
-   </div> 
-   
-                        
-                  </div>
-                </div>
-              </div>
-            </div>
-         
    
    
    
