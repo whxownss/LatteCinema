@@ -88,6 +88,15 @@ public class ResDAO {
 		session.commit();
 		session.close();
 		
-		return insertCnt > 0 ? "true" : "";
+		return insertCnt > 0 ? "true" : null;
+	}
+
+	public String deleteNonePaidSeat(String memId) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int deleteCnt = session.delete("Reservation.delete", memId);
+		session.commit();
+		session.close();
+		
+		return deleteCnt > 0 ? "true" : "";
 	}
 }

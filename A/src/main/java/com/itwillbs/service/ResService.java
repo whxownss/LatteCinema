@@ -129,4 +129,10 @@ public class ResService {
 		return resDAO.setSeatInfo(seatDTO);
 	}
 
+	public String isPaidSeat(String memId) {
+		resDAO = new ResDAO();
+		
+		return resDAO.deleteNonePaidSeat(memId);
+	}
+
 }

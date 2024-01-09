@@ -484,7 +484,6 @@ $(function(){
 				"mov_type" : movType,
 				"mov_idx"   : movIdx
 		}
-		debugger;
 		$("#schDTO").val(JSON.stringify(schDTO));
 		$("#modalTitle").text(sTime + " ~ " + eTime + " (" + sIdx + ")");
 		$("#modalSeat .cSeat").text(cSeat);

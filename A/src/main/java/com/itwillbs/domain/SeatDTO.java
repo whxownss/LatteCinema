@@ -1,11 +1,19 @@
 package com.itwillbs.domain;
 
 public class SeatDTO {
+	private String memId;
 	private String loIdx;
 	private String ciIdx;
 	private String movType;
 	private String schIdx;
 	private String seatC;
+	
+	public String getMemId() {
+		return memId;
+	}
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
 	public String getLoIdx() {
 		return loIdx;
 	}
@@ -38,9 +46,10 @@ public class SeatDTO {
 	}
 	@Override
 	public String toString() {
-		return "SeatDTO [loIdx=" + loIdx + ", ciIdx=" + ciIdx + ", movType=" + movType + ", schIdx=" + schIdx
-				+ ", seatC=" + seatC + "]";
+		return "SeatDTO [memId=" + memId + ", loIdx=" + loIdx + ", ciIdx=" + ciIdx + ", movType=" + movType
+				+ ", schIdx=" + schIdx + ", seatC=" + seatC + "]";
 	}
+	
 	
 	
 	

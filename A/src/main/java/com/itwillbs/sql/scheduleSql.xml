@@ -24,6 +24,7 @@
 				 			 WHERE LO_IDX = S.LO_IDX
 			 	  		  	   AND CI_IDX = S.CI_IDX
 			 	   		  	   AND SCH_IDX = S.SCH_IDX
+			 	   		  	   AND DATE_FORMAT(DATE, "%Y-%m-%d") = #{DATE}
 			 	   		       AND MOV_TYPE = S.SCH_MOV_TYPE) AS UNSIGNED)
 			 	   	  , SC.SCR_SEAT) "SCR_SEAT_AVAIL"
 		  FROM SCHEDULE S

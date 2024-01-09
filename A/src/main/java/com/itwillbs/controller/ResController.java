@@ -117,6 +117,15 @@ public class ResController extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(result);
 		}
+		// SEAT테이블에 내 자리가 결제 내역에 없을 때 delete
+		if(sPath.equals("/res2ProRS.re")) {
+			resService = new ResService();
+			String memId = request.getParameter("memId");
+			String result = resService.isPaidSeat(memId);
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result);
+		}
 
 		// 예약3 페이지 이동
 		if(sPath.equals("/res3.re")) {
