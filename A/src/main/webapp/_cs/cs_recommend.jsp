@@ -1,3 +1,4 @@
+<%@page import="com.itwillbs.domain.RecommendDTO"%>
 <%@page import="com.itwillbs.domain.PageDTO"%>
 <%@page import="com.itwillbs.domain.CenterBoardDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -10,7 +11,7 @@
 
 	<main id="main">
 <%
-	ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.getAttribute("centerBoardList");
+	ArrayList<RecommendDTO> recommendList = (ArrayList<RecommendDTO>)request.getAttribute("recommendList");
 	PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
 %>			
 		<section class="category-section" id="">
@@ -45,6 +46,7 @@
 			</div>
 		</section>
 		<!-- 진행상태, 신청영화, 감독, 신청자, 신청일, 추천수, 추천하기버튼, 수정버튼  -->
+		<input type="hidden" name="recoUser" id="recoUser" value="${sessionScope.sId }">
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
 				<table class="table">
@@ -62,17 +64,25 @@
 				    </tr>
 				  </thead>
 				  <tbody>
-				  <tr>
-				  	<td>1</td>
-				  	<td>대기중</td>
-				  	<td>반지의 제왕: 왕의 귀환</td>
-				  	<td>피터 잭슨</td>
-				  	<td>김철수</td>
-				  	<td>2024-01-08 12:12:12</td>
-				  	<td>100</td>
-				  	<td><button type="button" class="btn btn-dark">추천</button></td>
-				  	<td><button type="button" class="btn btn-secondary">수정</button></td>
-				  </tr>
+				  <c:forEach var="recommendDTO" items="${recommendList }">
+				  	<tr>
+				  		<td>${recommendDTO.recommendIdx }</td>
+				  		<td>대기중</td>
+				  		<td>${recommendDTO.movieName }</td>
+				  		<td>${recommendDTO.director }</td>
+				  		<td>${recommendDTO.createUser }</td>
+				  		<td>${recommendDTO.createDate }</td>
+				  		<td>${recommendDTO.countReco }</td>
+				  		<c:if test="${empty sessionScope.sId }">
+				  			<td><button type="button" class="btn btn-dark" id="recoBtn" disabled>추천</button></td>
+				  			<td><button type="button" class="btn btn-secondary" disabled>수정</button></td>
+				  		</c:if>
+				  		<c:if test="${!empty sessionScope.sId }">
+				  			<td><button type="button" class="btn btn-dark" id="recoBtn${recommendDTO.recommendIdx }">추천</button></td>
+				  			<td><button type="button" class="btn btn-secondary">삭제</button></td>
+				  		</c:if>
+				  	</tr>
+				  </c:forEach>
 <%-- 				  <c:forEach var="centerBoardDTO" items="${centerBoardList }"> --%>
 <!-- 				  	<tr> -->
 <%-- 				      <th scope="row">${centerBoardDTO.rn }</th> --%>
@@ -91,17 +101,17 @@
 				  <ul class="pagination">
 					<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
 					    <li class="page-item disabled">
-					      <a class="page-link text-secondary" href="cs_center.cs?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
+					      <a class="page-link text-secondary" href="cs_recommend.cs?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
 					    </li>
 				    </c:if>	
 				    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
 					    <li class="page-item" aria-current="page">
-					      <a class="page-link text-secondary" href="cs_center.cs?pageNum=${i }">${i }</a>
+					      <a class="page-link text-secondary" href="cs_recommend.cs?pageNum=${i }">${i }</a>
 					    </li>
 				    </c:forEach>
 		    		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
 					    <li class="page-item">
-					      <a class="page-link text-secondary" href="cs_center.cs?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
+					      <a class="page-link text-secondary" href="cs_recommend.cs?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
 					    </li>
 				    </c:if>
 				  </ul>
@@ -111,4 +121,73 @@
 	</main>
 	
 <%@include file="../_common/commonFooterStart.jsp"%>
+<script src="./jQuery/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+});
+$('.btn').on("click",function(){
+	// 클릭된 버튼의 ID 가져오기
+    var buttonId = $(this).attr('id');
+	var buttonText = $(this).text();
+    console.log('클릭된 버튼의 ID: ' + buttonId);
+    console.log('클릭된 버튼의 텍스트' + buttonText)
+    
+    var recoUser = $('#recoUser').val();
+    
+        // 'this'는 클릭된 버튼을 가리킵니다.
+        // closest() 함수를 사용하여 가장 가까운 <tr> 요소를 찾습니다.
+        var row = $(this).closest('tr');
+        // find() 함수와 선택자를 사용하여 해당 행에서 createUser의 값을 찾습니다.
+        var createUser = row.find('td:nth-child(5)').text(); // 'createUser' 값이 5번째 열에 있다고 가정
+        console.log('선택한 행의 createUser: ' + createUser);
+        var recommendIdx = row.find('td:nth-child(1)').text();
+        console.log('선택한 행의 recommendIdx: ' + recommendIdx)
+        // find() 함수와 선택자를 사용하여 해당 행에서 추천 수의 값을 찾습니다.
+        var countRecoCell = row.find('td:nth-child(7)'); // 'countReco' 값이 7번째 열에 있다고 가정
+        var countReco = parseInt(countRecoCell.text());
+
+        if(buttonText === '삭제'){
+        	if(createUser === recoUser){
+        		if(confirm('삭제하시겠습니까?')){
+        			window.location.href="deleteRecoData.cs?recommendIdx=" + recommendIdx;        			
+        		} else {
+        			return;
+        		}
+        	} else {
+        		alert('본인 글이 아닙니다.')
+        		return;
+        	}
+        }
+        
+        
+        
+        $.ajax({
+            url: 'doRecommend.cs', // 서버 스크립트 경로로 교체하세요
+            type: 'POST',
+            data: { createUser: createUser, 
+            		recommendIdx: recommendIdx,
+            		recoUser: recoUser
+            },
+            success: function(response) {
+            	debugger;
+            	var recoSuccess = response.recoSuccess;
+            	if(recoSuccess == '1'){
+            		// 추천 수 증가
+	   			     countReco++;
+	   			     countRecoCell.text(countReco);
+            	} else {
+            		alert('추천불가')
+            	}
+            	
+                // 'response'가 새로운 추천 수를 포함하고 있다고 가정
+            },
+            error: function() {
+                alert('추천 수 업데이트 오류');
+            }
+        });
+        
+        
+});
+</script>
 <%@include file="../_common/commonFooterEnd.jsp"%>

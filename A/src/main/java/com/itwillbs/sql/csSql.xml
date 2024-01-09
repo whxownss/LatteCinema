@@ -331,4 +331,40 @@
 		  FROM LOSTBOARD L JOIN RESPONSEDATA R    
 		    ON L.LOSTIDX = R.LOSTIDX
 	</select>
+	
+	<insert id="insertRecommend" parameterType="RecommendDTO">
+		INSERT INTO RECOMMENDBOARD(RECOMMENDIDX,MOVIENAME,DIRECTOR,CREATE_USER,CREATE_DATE,COUNTRECO)
+		VALUES
+		((SELECT *
+			FROM (SELECT IFNULL(MAX(CAST(RECOMMENDIDX as unsigned)), 0) + 1
+						   FROM RECOMMENDBOARD) R)
+		,#{movieName}
+		,#{director}
+		,#{createUser}
+		,SYSDATE()
+		,0     
+		);
+	</insert>
+	<select id="getRecommendList" parameterType="PageDTO" resultType="RecommendDTO">
+		SELECT *
+		  FROM RECOMMENDBOARD
+   		 ORDER BY CREATE_DATE  DESC 
+   		 LIMIT #{startRow}, #{pageSize}
+	</select>
+	<update id="plusRecoCount" parameterType="map">
+		UPDATE RECOMMENDBOARD
+		   SET COUNTRECO = COUNTRECO + 1
+		 WHERE RECOMMENDIDX = #{recommendIdx}
+		   AND #{recoUser} NOT IN (SELECT RECO_USER FROM RECODUPLICHK) 
+	</update>
+	<insert id="insertRecoUser" parameterType="map">
+		INSERT INTO RECODUPLICHK(RECOMMENDIDX,RECO_USER,RECO_DATE)
+		SELECT #{recommendIdx},#{recoUser},SYSDATE()
+		  FROM DUAL
+		 WHERE #{recoUser} NOT IN (SELECT RECO_USER FROM RECODUPLICHK)
+	</insert>
+	<delete id="deleteRecoData" parameterType="int">
+		DELETE FROM RECOMMENDBOARD
+ 		 WHERE RECOMMENDIDX = #{recommendIdx}
+	</delete>
 </mapper>

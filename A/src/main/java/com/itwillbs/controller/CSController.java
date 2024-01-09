@@ -21,6 +21,7 @@ import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.LostBoardDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
+import com.itwillbs.domain.RecommendDTO;
 import com.itwillbs.service.CSBoardService;
 
 public class CSController extends HttpServlet  {
@@ -818,13 +819,118 @@ public class CSController extends HttpServlet  {
 		
 		// 추천 게시판
 		if(sPath.equals("/cs_recommend.cs")) {
+			System.out.println("주소비교 /cs_recommend.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			// cs_exque.cs
+			// cs_exque.cs?pageNum=2
+			// 한 화면에 보여줄 글개수 설정
+			int pageSize = 10;
+			// 현 페이지 번호
+			String pageNum = request.getParameter("pageNum");
+			//페이지 번호가 없으면 1로 페이지 설정
+			if(pageNum == null) {
+				pageNum = "1";
+			}
+			// pageNum => 정수형 변경
+			int currentPage = Integer.parseInt(pageNum);
+			
+			// PageDTO 객체생성 
+			PageDTO pageDTO = new PageDTO();
+			// set메서드 호출해서 값을 저장
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			
+			CSBoardService csBoardService = new CSBoardService();
+
+			ArrayList<RecommendDTO> recommendList = csBoardService.getRecommendList(pageDTO);
+			// 페이징 작업
+			// int 리턴할 형 getBoardCount() 메서드 정의
+			// int count = getBoardCount() 메서드 호출
+			int count = csBoardService.getExqBoardCount();
+			// 한 화면에 보여줄 페이지 개수 설정
+			int pageBlock = 10;
+			// 시작하는 페이지 번호 구하기
+			int startPage = (currentPage-1)/pageBlock*pageBlock+1;
+			// 끝나는 페이지 번호 구하기
+			int endPage = startPage + pageBlock -1;
+			// 전체 페이지 수 구하기
+			int pageCount = count / pageSize + (count % pageSize == 0?0:1);
+			if(endPage > pageCount) {
+				endPage = pageCount;
+			}
+			
+			//pageDTO에 페이징 관련값 저장
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
+			request.setAttribute("pageDTO", pageDTO);			
+			request.setAttribute("recommendList",recommendList);
+			
 			dispatcher = request.getRequestDispatcher("_cs/cs_recommend.jsp");
 			dispatcher.forward(request, response);
 		}
-		// 추천 게시판 영화 신청
+		// 추천 게시판 영화 신청 페이지로 가기
 		if(sPath.equals("/cs_recoSubscribe.cs")) {
 			dispatcher = request.getRequestDispatcher("_cs/cs_recoSubscribe.jsp");
 			dispatcher.forward(request, response);
+		}
+		// 추천 영화 신청
+		if(sPath.equals("/insertRecommend.cs")) {
+			System.out.println("주소비교 /insertRecommend.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			csBoardService = new CSBoardService();
+			String msg = "insert fail";
+			if(csBoardService.insertRecommend(request)) {
+				msg = "insert success";
+			}
+			System.out.println(msg);
+			response.sendRedirect("cs_recommend.cs");
+		}
+		// 추천 버튼 눌렀을 때
+		if(sPath.equals("/doRecommend.cs")) {
+			System.out.println("주소비교 /doRecommend.cs 일치");
+			request.setCharacterEncoding("utf-8");
+//			String createUser = request.getParameter("createUser");
+//			String recommendIdx = request.getParameter("recommendIdx");
+			csBoardService = new CSBoardService();
+			String msg = "recommendcount update fail";
+			if(csBoardService.plusRecoCount(request)) {
+				msg = "recommendcount update success";
+				 // 리스트와 PageDTO를 모두 포함할 Map 또는 사용자 정의 객체 생성
+			    Map<String, Object> responseData = new HashMap<>();
+			    String recoSuccess = "1";
+			    responseData.put("recoSuccess", recoSuccess);
+			    System.out.println("@@@@@@@@@@@@");
+			    System.out.println(responseData);
+			    // Map 또는 사용자 정의 객체 직렬화
+			    String json = new Gson().toJson(responseData);
+
+			    // 컨텐츠 타입과 인코딩 설정
+			    response.setContentType("application/json");
+			    response.setCharacterEncoding("utf-8");
+			    
+			    // JSON 문자열을 응답으로 작성
+			    response.getWriter().write(json);
+			}
+			System.out.println(msg);
+		}
+		// 추천 글 삭제
+		if(sPath.equals("/deleteRecoData.cs")) {
+			System.out.println("주소비교 /deleteRecoData.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			int recommendIdx = Integer.parseInt(request.getParameter("recommendIdx"));
+			csBoardService = new CSBoardService();
+			String msg = "delete fail";
+			if(csBoardService.deleteRecoData(recommendIdx)) {
+				msg = "delete success";
+			}
+			System.out.println(msg);
+			response.sendRedirect("cs_recommend.cs");
 		}
 		
 	}//doProcess()

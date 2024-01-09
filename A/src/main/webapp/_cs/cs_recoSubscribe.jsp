@@ -41,7 +41,7 @@
 				<div class="row justify-content-center">
 			      <div class="col-lg-4 col-md-8 col-sm-10">
 			        <h2 class="text-center">신청</h2>
-			        <form action="#">
+			        <form action="insertRecommend.cs" method="post">
 			          <div class="form-group mb-3">
 			            <label for="createUser">신청자명</label>
 			            <input type="text" class="form-control" id="createUser" name="createUser" value="${sessionScope.sId }" readonly>
@@ -100,7 +100,6 @@
 <%@include file="../_common/commonFooterStart.jsp"%>
 <script src="./jQuery/jquery-3.6.0.js"></script>
 <script type="text/javascript">
-//jQuery를 사용하여 DOM이 준비되었을 때 실행되도록 합니다.
 $(document).ready(function() {
     var serviceKey = "L5BI6RFWUZ7B4WG0K4U6";
     var base_url = "https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_xml2.jsp";

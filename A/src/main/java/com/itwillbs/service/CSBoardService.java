@@ -19,6 +19,7 @@ import com.itwillbs.domain.LostBoardDTO;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
+import com.itwillbs.domain.RecommendDTO;
 import com.itwillbs.domain.ResponseDataDTO;
 
 public class CSBoardService {
@@ -786,6 +787,73 @@ public class CSBoardService {
 		}
 		return responseList;
 	}//getResponseList()
+
+	public boolean insertRecommend(HttpServletRequest request) {
+		System.out.println("CSBoardService insertRecommend()");
+		int insertSuccess = 0;
+		try {
+			String createUser = request.getParameter("createUser");
+			String movieName = request.getParameter("movieName");
+			String director	= request.getParameter("director");
+			
+			RecommendDTO recommendDTO = new RecommendDTO();
+			recommendDTO.setCreateUser(createUser);
+			recommendDTO.setMovieName(movieName);
+			recommendDTO.setDirector(director);
+			
+			csBoardDAO = new CSBoardDAO();
+			insertSuccess = csBoardDAO.insertRecommend(recommendDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return insertSuccess > 0;
+	}
+
+	public ArrayList<RecommendDTO> getRecommendList(PageDTO pageDTO) {
+		System.out.println("CSBoardService getRecommendList()");
+		ArrayList<RecommendDTO> recommendList = null;
+		try {
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			recommendList = csBoardDAO.getRecommendList(pageDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return recommendList;
+	}//getRecommendList()
+
+	public boolean plusRecoCount(HttpServletRequest request) {
+		System.out.println("CSBoardService plusRecoCount()");
+		 int updateSuccess = 0;
+		 try {
+			 String createUser = request.getParameter("createUser");
+			 String recommendIdx = request.getParameter("recommendIdx");
+			 String recoUser = request.getParameter("recoUser");
+			csBoardDAO = new CSBoardDAO();
+			updateSuccess = csBoardDAO.plusRecoCount(createUser,recommendIdx,recoUser);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 return updateSuccess > 0;
+	}
+
+	public boolean deleteRecoData(int recommendIdx) {
+		System.out.println("CSBoardService deleteRecoData()");
+		int deleteSuccess = 0;
+		try {
+	        csBoardDAO = new CSBoardDAO();
+	        deleteSuccess = csBoardDAO.deleteRecoData(recommendIdx);
+	    } catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deleteSuccess > 0;
+	}//
 
 	
 }//클래스

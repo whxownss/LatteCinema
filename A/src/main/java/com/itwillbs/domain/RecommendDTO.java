@@ -8,6 +8,8 @@ public class RecommendDTO {
 	private String createDate;
 	private int countReco;
 	
+	private String recoUser;
+	
 	public String getRecommendIdx() {
 		return recommendIdx;
 	}
@@ -44,10 +46,17 @@ public class RecommendDTO {
 	public void setCountReco(int countReco) {
 		this.countReco = countReco;
 	}
+	public String getRecoUser() {
+		return recoUser;
+	}
+	public void setRecoUser(String recoUser) {
+		this.recoUser = recoUser;
+	}
 	@Override
 	public String toString() {
 		return "RecommendDTO [recommendIdx=" + recommendIdx + ", movieName=" + movieName + ", director=" + director
-				+ ", createUser=" + createUser + ", createDate=" + createDate + ", countReco=" + countReco + "]";
+				+ ", createUser=" + createUser + ", createDate=" + createDate + ", countReco=" + countReco
+				+ ", recoUser=" + recoUser + "]";
 	}
 	
 	

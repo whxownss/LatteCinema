@@ -16,6 +16,7 @@ import com.itwillbs.domain.LostBoardDTO;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
+import com.itwillbs.domain.RecommendDTO;
 import com.itwillbs.domain.ResponseDataDTO;
 import com.itwillbs.sql.SqlMapClient;
 
@@ -688,6 +689,80 @@ public class CSBoardDAO {
 		}
 		return responseList;
 	}//getResponseList()
+
+	public int insertRecommend(RecommendDTO recommendDTO) {
+		System.out.println("CSBoardDAO insertRecommend()");
+		int insertSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			insertSuccess = session.insert("CsAdmin.insertRecommend", recommendDTO);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return insertSuccess;
+	}//insertRecommend()
+
+	public ArrayList<RecommendDTO> getRecommendList(PageDTO pageDTO) {
+		System.out.println("CSBoardDAO getRecommendList()");
+		ArrayList<RecommendDTO> recommendList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			recommendList = new ArrayList<RecommendDTO>(session.selectList("CsAdmin.getRecommendList", pageDTO));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return recommendList;
+	}//getRecommendList()
+
+	public int plusRecoCount(String createUser,String recommendIdx,String recoUser) {
+		System.out.println("CSBoardDAO plusRecoCount()");
+		int updateSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			Map<String, Object> params = new HashMap<>();
+	        params.put("createUser", createUser);
+	        params.put("recommendIdx", recommendIdx);
+	        params.put("recoUser", recoUser);
+			updateSuccess = session.update("CsAdmin.plusRecoCount",params);
+			session.insert("CsAdmin.insertRecoUser",params);
+			
+			session.commit();
+		} catch (Exception e) {
+			session.rollback();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return updateSuccess;
+	}
+
+	public int deleteRecoData(int recommendIdx) {
+		System.out.println("CSBoardDAO deleteRecoData()");
+		int deleteSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			deleteSuccess = session.delete("CsAdmin.deleteRecoData", recommendIdx);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return deleteSuccess;
+	}//deleteRecoData()
 	
 	
 	
