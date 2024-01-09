@@ -75,7 +75,7 @@
 										</div>
 									</div>
 
-									<button id="authCodeCheckBtn" type="button" class="button gray-line w75px ml08">인증확인<!--인증확인--></button>
+									<button id="authCodeCheckBtn" onclick="authCodeCheck()" type="button" class="button gray-line w75px ml08">인증확인<!--인증확인--></button>
 <!-- 									<div id="schPwdMblpNo-error-text" class="alert"></div> -->
 								</td>
 							</tr>
@@ -112,7 +112,7 @@
 								<th scope="row"><label for="newpasswd2">비밀번호 확인</label>
 								<td>
 									<input id="newpasswd2" name="newpasswd2"  type="password" placeholder="" class="input-text w240px"
-											onchange="checkConfirmPasswd()">
+											onblur="checkConfirmPasswd()">
 									<span id="checknewpasswd2"></span>
 								</td>							
 							</tr>
@@ -242,7 +242,7 @@ $(function () {
 				url : "userFindPass.me",
 				dataType : "text",
 				success:function(data){
-				debugger;
+// 				debugger;
 					if(data != "null"){
 						$("#eamilAuthBtn").attr("disabled", false);
 						$("#passCheck").remove();
@@ -259,11 +259,11 @@ $(function () {
 	});
 	
 });//
-
+var checkCode;
 // 이메일 인증번호 발송 및 인증
 function emailAuthentication() {
-	debugger;
-	var checkCode;
+// 	debugger;
+	
 	var email = $("#email").val()
 	$.ajax({
 		type : "post",
@@ -284,12 +284,13 @@ function emailAuthentication() {
 
 // 이메일 인증 번호 확인하기 버튼
 function authCodeCheck() {
-	debugger;
+// 	debugger;
 	if($("#emailCheck").val() == checkCode){
+// 		debugger;
 		alert('인증 성공');
-		$("#btnFindPass").attr("disabled" , false);
 		$("#changeNewPass").css("display", 'block');
-		$("#id").attr("readonly" true);
+		$("#btnFindPass").attr("disabled" , false);
+// 		$("#id").attr("readonly" true);
 	} else{
 		alert('인증 실패');
 	}
