@@ -200,6 +200,17 @@ public class MemberController extends HttpServlet {
 			// 
 		}//
 		
+		// passfind > 새 비밀번호 
+		if(sPath.equals("/passfindPro.me")) {
+			response.setCharacterEncoding("utf-8");
+			memberService = new MemberService();
+			
+			memberService.updatePasswd(request);
+			
+			response.sendRedirect("login.me");
+			
+		}//
+		
 		////////////////////////////////////////////////////////////////////////////////////
 		
 		// 마이페이지 (마이페이지 기본메인화면) 이동
