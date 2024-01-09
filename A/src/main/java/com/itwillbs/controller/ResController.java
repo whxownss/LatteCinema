@@ -102,17 +102,20 @@ public class ResController extends HttpServlet {
 		}
 		// 같은 자리 선택 했는지
 		if(sPath.equals("/res2ProCS.re")) {
-			System.out.println("################################");
 			resService = new ResService();
-			System.out.println(request.getParameter("schDTO"));
-			resService.isSameSeat(request.getParameter("schDTO"));
-			System.out.println("################################");
+			String result = resService.isSameSeat(request.getParameter("schDTO"));
 			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result); // 같은자리면 null, 아니면 "noSameSeat"
 		}
 		// 선택한 자리에 대해 insert (결제전)
 		if(sPath.equals("/res2ProIS.re")) {
-
+			resService = new ResService();
+			String schDTO = request.getParameter("schDTO");
+			String result = resService.setSeatInfo(schDTO);
 			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result);
 		}
 
 		// 예약3 페이지 이동

@@ -68,5 +68,39 @@
 		   AND CINEMA = #{cinema}
 	</select>
 	
+	<select id="selectSameSeat" parameterType="SeatDTO" resultType="Integer">
+		SELECT COUNT(*)
+		  FROM SEAT
+		 WHERE 1 = 1
+		   AND LO_IDX = #{loIdx}
+		   AND CI_IDX = #{ciIdx}
+		   AND MOV_TYPE = #{movType}
+		   AND SCH_IDX = #{schIdx}
+		   AND SEAT_C IN (
+		   <foreach collection="seatC.split(',')" item="seat" index="i" separator=",">
+		   	   #{seat}
+		   </foreach>
+		   )
+	</select>
+	
+	<insert id="insertSeatInfo" parameterType="SeatDTO">
+		INSERT INTO SEAT
+		     ( LO_IDX
+		     , CI_IDX
+		     , MOV_TYPE
+		     , SCH_IDX
+		     , SEAT_C
+		     )
+		VALUES
+		<foreach collection="seatC.split(',')" item="seat" index="i" separator=",">
+			 (
+			   #{loIdx}
+		     , #{ciIdx}
+			 , #{movType}
+			 , #{schIdx}
+			 , #{seat}
+			 )	 
+		</foreach>
+	</insert>
 	
 </mapper>

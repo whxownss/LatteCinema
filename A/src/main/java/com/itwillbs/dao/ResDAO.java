@@ -10,6 +10,7 @@ import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.domain.ScheduleDTO;
+import com.itwillbs.domain.SeatDTO;
 import com.itwillbs.sql.SqlMapClient;
 
 public class ResDAO {
@@ -73,11 +74,20 @@ public class ResDAO {
 		return seatList;
 	}
 
-	public void isSameSeat(String[] selectedSeat) {
+	public String isSameSeat(SeatDTO seatDTO) {
 		SqlSession session = sqlSessionFactory.openSession();
-		session.selectList("Seat.select", selectedSeat);
+		int seatCnt = session.selectOne("Reservation.selectSameSeat", seatDTO);
 		session.close();
 		
+		return seatCnt > 0 ? null : "noSameSeat";
 	}
 
+	public String setSeatInfo(SeatDTO seatDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int insertCnt = session.insert("Reservation.insertSeatInfo", seatDTO);
+		session.commit();
+		session.close();
+		
+		return insertCnt > 0 ? "true" : "";
+	}
 }

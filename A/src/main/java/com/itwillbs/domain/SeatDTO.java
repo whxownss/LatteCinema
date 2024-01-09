@@ -5,7 +5,7 @@ public class SeatDTO {
 	private String ciIdx;
 	private String movType;
 	private String schIdx;
-	private String seatFC;
+	private String seatC;
 	public String getLoIdx() {
 		return loIdx;
 	}
@@ -30,17 +30,18 @@ public class SeatDTO {
 	public void setSchIdx(String schIdx) {
 		this.schIdx = schIdx;
 	}
-	public String getSeat() {
-		return seat;
+	public String getSeatC() {
+		return seatC;
 	}
-	public void setSeat(String seat) {
-		this.seat = seat;
+	public void setSeatC(String seatC) {
+		this.seatC = seatC;
 	}
 	@Override
 	public String toString() {
 		return "SeatDTO [loIdx=" + loIdx + ", ciIdx=" + ciIdx + ", movType=" + movType + ", schIdx=" + schIdx
-				+ ", seat=" + seat + "]";
+				+ ", seatC=" + seatC + "]";
 	}
+	
 	
 	
 }
