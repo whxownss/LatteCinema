@@ -1,11 +1,13 @@
 package com.itwillbs.service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.itwillbs.dao.MemberDAO;
 import com.itwillbs.domain.MemberDTO;
+import com.itwillbs.domain.PageDTO;
 
 public class MemberService {
 
@@ -217,6 +219,42 @@ public class MemberService {
 		
 		return memberDTO;
 	}//userFind()
+	
+	// 페이징
+	public ArrayList<MemberDTO> getBoardList(PageDTO pageDTO) {
+		
+		ArrayList<MemberDTO> memberList = null;
+		try {
+			// 시작하는 행번호 구하는 식 
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식 
+			int endRow = startRow + pageDTO.getPageSize()-1;
+			
+			pageDTO.setStartRow(startRow);
+			pageDTO.setEndRow(endRow);
+			
+			// BoardDAO 객체생성
+			memberDAO = new MemberDAO();
+			// getBoardList(startRow,pageSize) 메서드 호출
+			memberList = memberDAO.getMemberList(pageDTO);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return memberList;
+	}//getBoardList()
+
+	public int getBoardCount() {
+		int count = 0;
+		try {
+			memberDAO = new MemberDAO();
+			count = memberDAO.getBoardCount();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getBoardCount()
 
 //	public void sendGmail(HttpServletRequest request) {
 //		System.out.println("MemberService sendGmail()");	

@@ -1,3 +1,6 @@
+<%@page import="com.itwillbs.domain.PageDTO"%>
+<%@page import="com.itwillbs.domain.MemberDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -8,7 +11,6 @@
   <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js?autoload=false"></script>
    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
- 
 </head>
 <body>
 
@@ -149,8 +151,29 @@
 							</table>
 						</div>
 			
-						<nav class="pagination" id="navBokd"><strong class="active">1</strong> </nav>
+<!-- 						<nav class="pagination" id="navBokd"><strong class="active">1</strong> </nav> -->
+			<%
+			ArrayList<MemberDTO> boardList = 
+	 		(ArrayList<MemberDTO>)request.getAttribute("boardList");
+			 PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
+			%>
 			
+			<!-- pagination -->
+			<div class="pagination">
+				
+				<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+					<c:if test="${pageDTO.currentPage eq i}">
+						<a href="list.bo?pageNum=${i}"><span class="pagenum currentpage">${i}</span></a>
+					</c:if>
+					<c:if test="${! (pageDTO.currentPage eq i)}">
+						<a href="list.bo?pageNum=${i}"><span class="pagenum">${i}</span></a>
+					</c:if>
+				</c:forEach>
+				
+			</div>
+			<!-- //pagination -->
+						
+						
 						<!-- 예매 안내상황  -->
 						
 						<div class="box-pulldown mt30">

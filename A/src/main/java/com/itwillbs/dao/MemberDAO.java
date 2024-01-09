@@ -2,6 +2,7 @@ package com.itwillbs.dao;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.MemberDTO;
+import com.itwillbs.domain.PageDTO;
 import com.itwillbs.sql.SqlMapClient;
 
 public class MemberDAO {
@@ -97,6 +100,22 @@ public class MemberDAO {
 		System.out.println(memberDTO);
 		session.close();
 		return memberDTO;
+	}
+
+	public ArrayList<MemberDTO> getMemberList(PageDTO pageDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		ArrayList<MemberDTO> getMemberList = null;
+		getMemberList = new ArrayList<MemberDTO>(session.selectList("Member.getMemberList", pageDTO));
+		session.close();
+		return getMemberList;
+	}
+
+	public int getBoardCount() {
+		SqlSession session = sqlSessionFactory.openSession();
+		int count = 0;
+		count = session.selectOne("CsAdmin.centerBoardCount");
+		session.close();
+		return count;
 	}
 
 	
