@@ -300,6 +300,7 @@ function kakaoPay(useremail, username) {
 
 
 var schDTO = JSON.parse(localStorage.getItem("schDTO"));
+debugger;
 $(function(){
 	// schDTO 그리기
 	$(".rating").attr("src", "_assets/img/grade_" + schDTO.rating + ".png");

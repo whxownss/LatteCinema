@@ -136,9 +136,9 @@
 <script src="jQuery/jquery-3.6.0.js"></script>
 <script>
 var schDTO = JSON.parse(localStorage.getItem("schDTO"));
-
+debugger;
 $(function(){
-	debugger;
+	
 	// 예약된 자리에 대해 선택 못하게 처리
 	$.ajax({
 		type: "GET",
@@ -146,11 +146,9 @@ $(function(){
 		data: {schDTO: JSON.stringify(schDTO)},
 		dataType: "text" 
 	})
-	.done(function(data){
+	.done(function(data){  // 예매 자리가 없어도 ""가 리턴 되어 done으로 옴
 		var paidSeats = data.split("/");
-		debugger;
 		$.each(paidSeats, (i, v) => {
-			debugger;
 			$("#seatNum" + v).removeClass("btn-light")
 							 .addClass("btn-dark")
 							 .addClass("paidSeat")
@@ -159,16 +157,6 @@ $(function(){
 	})
 	.fail(function(){
 	})
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	// 좌상단에 영화 정보 나타내기
@@ -202,14 +190,13 @@ $(function(){
 	
 	//수량 옵션
 	$('._count :button').on({
-		
 	    'click' : function(e){
 	    	var p1 = parseInt($("#pCase1").text());
 			var p2 = parseInt($("#pCase2").text());
 			var p3 = parseInt($("#pCase3").text());
 			var p4 = parseInt($("#pCase4").text());
 	    	var pSum = p1 + p2 + p3 + p4;
-			// 8 넘는 경우 || 0 인거 -버튼 눌렀을때 좌석 초기화 	    	
+			// 8 넘는 경우 || 0 인거 -버튼 눌렀을때	    	
 	    	if(pSum >= 8 && $(this).hasClass('plus') || $(this).hasClass('minus') && $(this).next().text() == "0") return;
 	    	
 	    	// 인원 변경시 버튼선택과 금액 초기화

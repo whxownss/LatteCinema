@@ -24,6 +24,11 @@
 		 	 , MERCHANT_UID
 		 	 , SCR_IDX
 		 	 , S_TIME
+		 	 , LO_IDX
+		 	 , CI_IDX
+		 	 , SCH_IDX
+		 	 , MOV_TYPE
+		 	 , MOV_IDX
 		 	 )  
 		VALUES 
 			 ( LEFT(#{date} ,LENGTH(#{date}) - 4) 
@@ -44,6 +49,11 @@
 			 , #{merchantUid}
 			 , #{scrIdx}
 			 , #{sTime}
+			 , #{loIdx}
+			 , #{ciIdx}
+			 , #{schIdx}
+			 , #{movType}
+			 , #{movIdx}
 			 )
 	</insert>	
 	
