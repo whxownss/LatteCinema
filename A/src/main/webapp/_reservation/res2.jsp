@@ -162,7 +162,24 @@ $(function(){
 		dataType: "text"
 	})
 	.done(function(data){
-		
+		// 예약된 자리에 대해 선택 못하게 처리  (+ 결제전 선택한 자리)  (원래는 done부분이 아니라 바같부분에 있던거)
+		$.ajax({
+			type: "GET",
+			url: "res2Pro.re",
+			data: {schDTO: JSON.stringify(schDTO)},
+			dataType: "text" 
+		})
+		.done(function(data){  // 예매 자리가 없어도 ""가 리턴 되어 done으로 옴
+			var paidSeats = data.split("/");
+			$.each(paidSeats, (i, v) => {
+				$("#seatNum" + v).removeClass("btn-light")
+								 .addClass("btn-dark")
+								 .addClass("paidSeat")
+								 .prop("disabled", true);		
+			});
+		})
+		.fail(function(){
+		})
 	})
 	.fail(function(){
 		
@@ -171,24 +188,7 @@ $(function(){
 	
 	
 	
-	// 예약된 자리에 대해 선택 못하게 처리  (+ 결제전 선택한 자리)  
-	$.ajax({
-		type: "GET",
-		url: "res2Pro.re",
-		data: {schDTO: JSON.stringify(schDTO)},
-		dataType: "text" 
-	})
-	.done(function(data){  // 예매 자리가 없어도 ""가 리턴 되어 done으로 옴
-		var paidSeats = data.split("/");
-		$.each(paidSeats, (i, v) => {
-			$("#seatNum" + v).removeClass("btn-light")
-							 .addClass("btn-dark")
-							 .addClass("paidSeat")
-							 .prop("disabled", true);		
-		});
-	})
-	.fail(function(){
-	})
+	
 	
 	
 	// 좌상단에 영화 정보 나타내기
