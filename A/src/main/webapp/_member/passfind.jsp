@@ -289,6 +289,7 @@ function authCodeCheck() {
 		alert('인증 성공');
 		$("#btnFindPass").attr("disabled" , false);
 		$("#changeNewPass").css("display", 'block');
+		$("#id").attr("readonly" true);
 	} else{
 		alert('인증 실패');
 	}
