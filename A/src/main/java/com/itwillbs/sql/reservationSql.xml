@@ -22,6 +22,13 @@
 		 	 , SUCCESS
 		 	 , BUYER_NAME
 		 	 , MERCHANT_UID
+		 	 , SCR_IDX
+		 	 , S_TIME
+		 	 , LO_IDX
+		 	 , CI_IDX
+		 	 , SCH_IDX
+		 	 , MOV_TYPE
+		 	 , MOV_IDX
 		 	 )  
 		VALUES 
 			 ( LEFT(#{date} ,LENGTH(#{date}) - 4) 
@@ -40,7 +47,85 @@
 			 , #{success}
 			 , #{buyerName}
 			 , #{merchantUid}
+			 , #{scrIdx}
+			 , #{sTime}
+			 , #{loIdx}
+			 , #{ciIdx}
+			 , #{schIdx}
+			 , #{movType}
+			 , #{movIdx}
 			 )
 	</insert>	
+	
+	<select id="select" parameterType="ReservationDTO" resultType="String">
+		SELECT SEAT
+		  FROM RESERVATION
+		 WHERE 1 = 1
+		   AND SCR_IDX = #{scrIdx}
+		   AND DATE = #{date}
+		   AND S_TIME = #{sTime}
+		   AND TITLE = #{title}
+		   AND CINEMA = #{cinema}
+		 UNION
+		SELECT SEAT_C "SEAT"
+		  FROM SEAT
+		 WHERE 1 = 1
+		   AND LO_IDX = #{loIdx}
+		   AND CI_IDX = #{ciIdx}
+		   AND MOV_TYPE = #{movType}
+		   AND SCH_IDX = #{schIdx}
+	</select>
+	
+	<select id="selectSameSeat" parameterType="SeatDTO" resultType="Integer">
+		SELECT COUNT(*)
+		  FROM SEAT
+		 WHERE 1 = 1
+		   AND LO_IDX = #{loIdx}
+		   AND CI_IDX = #{ciIdx}
+		   AND MOV_TYPE = #{movType}
+		   AND SCH_IDX = #{schIdx}
+		   AND SEAT_C IN (
+		   <foreach collection="seatC.split(',')" item="seat" index="i" separator=",">
+		   	   #{seat}
+		   </foreach>
+		   )
+	</select>
+	
+	<insert id="insertSeatInfo" parameterType="SeatDTO">
+		INSERT INTO SEAT
+		     ( MEM_ID
+		     , LO_IDX
+		     , CI_IDX
+		     , MOV_TYPE
+		     , SCH_IDX
+		     , SEAT_C
+		     )
+		VALUES
+		<foreach collection="seatC.split(',')" item="seat" index="i" separator=",">
+			 (
+			   "test1"
+			 , #{loIdx}
+		     , #{ciIdx}
+			 , #{movType}
+			 , #{schIdx}
+			 , #{seat}
+			 )	 
+		</foreach>
+	</insert>
+	
+	<delete id="delete" parameterType="String">
+		DELETE S
+		  FROM SEAT S
+		  LEFT
+		  JOIN RESERVATION R
+		    ON S.MEM_ID = R.MEM_ID
+		   AND S.LO_IDX = R.LO_IDX
+		   AND S.CI_IDX = R.CI_IDX
+		   AND S.SCH_IDX = R.SCH_IDX
+		   AND S.MOV_TYPE = R.MOV_TYPE
+		   AND R.SEAT LIKE CONCAT('%', S.SEAT_C, '%')
+		 WHERE S.MEM_ID = #{memId}
+		   AND R.SEAT IS NULL
+	</delete>
 	
 </mapper>
