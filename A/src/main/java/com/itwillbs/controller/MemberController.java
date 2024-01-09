@@ -108,7 +108,7 @@ public class MemberController extends HttpServlet {
 
 		}//
 		
-		// 회원가입 이메일 인증번호 checkemail.me
+		// 회원가입 이메일 인증번호 보내기 checkemail.me
 		if(sPath.equals("/emailCode.me")) {
 			response.setCharacterEncoding("utf-8");
 			String receiver = request.getParameter("email");
@@ -173,6 +173,7 @@ public class MemberController extends HttpServlet {
 			}
 			System.out.println(result);
 			response.getWriter().write(result);
+		
 			
 		}//
 		
@@ -183,13 +184,32 @@ public class MemberController extends HttpServlet {
 		}//
 		
 		// 비밀번호 찾기 userFindPass.me  
-//		if(sPath.equals("/userFindPass.me")) {
-//			response.setCharacterEncoding("utf-8");
-//			memberService = new MemberService();
-//			MemberDTO memberDTO = memberService.userFind(request);			
-//			
-//			// 
-//		}//
+		if(sPath.equals("/userFindPass.me")) {
+			response.setCharacterEncoding("utf-8");
+			memberService = new MemberService();
+			MemberDTO memberDTO = memberService.userFind(request);	
+			
+			if(memberDTO != null) {
+				System.out.println(memberDTO);
+				System.out.println("입력한 회원 존재");
+				
+			}
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(memberDTO + "");
+			
+			// 
+		}//
+		
+		// passfind > 새 비밀번호 
+		if(sPath.equals("/passfindPro.me")) {
+			response.setCharacterEncoding("utf-8");
+			memberService = new MemberService();
+			
+			memberService.updatePasswd(request);
+			
+			response.sendRedirect("login.me");
+			
+		}//
 		
 		////////////////////////////////////////////////////////////////////////////////////
 		
