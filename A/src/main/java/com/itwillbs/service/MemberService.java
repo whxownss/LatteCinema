@@ -226,7 +226,7 @@ public class MemberService {
 		return memberDTO;
 	}//userFind()
 	
-	// 페이징
+	// 마이페이지 예약구매 페이지 페이징 작업
 	public ArrayList<MemberDTO> getBoardList(PageDTO pageDTO) {
 		
 		ArrayList<MemberDTO> memberList = null;
@@ -236,13 +236,13 @@ public class MemberService {
 			// 끝나는 행번호 구하는 식 
 			int endRow = startRow + pageDTO.getPageSize()-1;
 			
-			pageDTO.setStartRow(startRow);
-			pageDTO.setEndRow(endRow);
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setEndRow(pageDTO.getPageSize());
 			
 			// BoardDAO 객체생성
 			memberDAO = new MemberDAO();
 			// getBoardList(startRow,pageSize) 메서드 호출
-			memberList = memberDAO.getMemberList(pageDTO);
+			memberList = memberDAO.getBoardList(pageDTO);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

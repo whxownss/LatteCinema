@@ -1,6 +1,7 @@
 <%@page import="com.itwillbs.domain.PageDTO"%>
 <%@page import="com.itwillbs.domain.MemberDTO"%>
 <%@page import="java.util.ArrayList"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -65,44 +66,40 @@
 											<input type="radio" id="radBokd02" name="radBokd" value="E">
 											<label for="radBokd02"><b> 지난내역 </b></label>
 			
-											<div class="dropdown bootstrap-select disabled small bs3"><select name="selYM" class="selectpicker small" disabled="disabled" tabindex="-98">
-												
-													<option value="202312">2024년 03월</option>
-												
-													<option value="202312">2024년 02월</option>
-												
-													<option value="202312">2024년 01월</option>
-												
-													<option value="202312">2023년 12월</option>
-												
-													<option value="202311">2023년 11월</option>
-												
-													<option value="202310">2023년 10월</option>
-												
-													<option value="202309">2023년 9월</option>
-												
-													<option value="202308">2023년 8월</option>
-												
-													<option value="202307">2023년 7월</option>
-												
-													<option value="202306">2023년 6월</option>
-												
-													<option value="202305">2023년 5월</option>
-												
-													<option value="202304">2023년 4월</option>
-												
-													<option value="202303">2023년 3월</option>
-												
-													<option value="202302">2023년 2월</option>
-												
-													<option value="202301">2023년 1월</option>
-												
-											</select>
-<!-- 											<button type="button" class="btn dropdown-toggle disabled btn-default" data-toggle="dropdown" role="button" tabindex="-1" aria-disabled="true" title="2023년 12월"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">2023년 12월</div></div> </div><span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="inner open" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner "></ul></div></div></div> -->
-			
-											<button type="button" class="button gray-line small ml05" name="search">
-												<i class="iconset ico-search-gray"></i> 조회 
-											</button>
+											<div class="dropdown bootstrap-select disabled small bs3">
+												<select name="selYM" class="selectpicker small" disabled="disabled" tabindex="-98">
+													
+														<option value="202312">2024년 01월</option>
+													
+														<option value="202312">2023년 12월</option>
+													
+														<option value="202311">2023년 11월</option>
+													
+														<option value="202310">2023년 10월</option>
+													
+														<option value="202309">2023년 9월</option>
+													
+														<option value="202308">2023년 8월</option>
+													
+														<option value="202307">2023년 7월</option>
+													
+														<option value="202306">2023년 6월</option>
+													
+														<option value="202305">2023년 5월</option>
+													
+														<option value="202304">2023년 4월</option>
+													
+														<option value="202303">2023년 3월</option>
+													
+														<option value="202302">2023년 2월</option>
+													
+														<option value="202301">2023년 1월</option>
+												</select>
+												<button type="button" class="button gray-line small ml05" name="search">
+													<i class="iconset ico-search-gray"></i> 조회 
+												</button>
+											</div>
+											
 										</td>
 									</tr>
 								</tbody>
@@ -110,9 +107,75 @@
 						</div>
 						<!-- 예매 조회 조건 End -->
 			
+						<%
+						ArrayList<MemberDTO> boardList = 
+				 			(ArrayList<MemberDTO>)request.getAttribute("boardList");
+						PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
+						%>
+						
 						<!-- 예매 영화 목록 -->
-						<div id="bokdList"><div class="no-history-reservation mt20"> 구매 내역이 없습니다. </div></div>
-			
+<!-- 						<div id="bokdList"><div class="no-history-reservation mt20"> 구매 내역이 없습니다. </div></div> -->
+						
+						<div class="table-wrap mt10">
+							<table class="board-list">
+								<caption>구매일시, 영화명, 극장, 상영일시, 구매금액 항목을 가진 구매내역 목록 표</caption>
+								<colgroup>
+									<col style="width:160px;">
+									<col>
+									<col style="width:130px;">
+									<col style="width:188px;">
+									<col style="width:105px;">
+								</colgroup>
+								<thead>
+									<tr>
+										<th scope="col">구매일시</th>
+										<th scope="col">영화/상품명</th>
+										<th scope="col">극장</th>
+										<th scope="col">상영 일시</th>
+										<th scope="col">구매금액</th>
+									</tr>
+								</thead>
+								<tbody>
+								<c:forEach var="boardList" items="${boardList}">
+									<tr>
+										<td>${boardList.mem_join-d}</td>
+										<th scope="row">서울의 봄</th>
+										<td scope="row" style="text-align: left;">양산</td>
+										<td scope="row" style="text-align: left;">2023.12.24 (일) 13:25</td>
+										<td><span class="font-blue">42,000원</span></td>
+									</tr>
+								</c:forEach>
+								</tbody>
+							</table>
+							
+							<!-- 페이징 처리 -->
+							<section class="category-section" id="">
+							<div class="container" data-aos="fade-up">
+								<div class="pagination-container d-flex justify-content-center">
+								  <ul class="pagination" id="searchPaging">
+									<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+									    <li class="page-item ">
+									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
+									    </li>
+								    </c:if>	
+								    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+									    <li class="page-item" aria-current="page">
+									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${i }">${i }</a>
+									    </li>
+								    </c:forEach>
+						    		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+									    <li class="page-item">
+									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
+									    </li>
+								    </c:if>	
+								  </ul>
+								</div>
+							</div>
+						</section>
+		
+						</div>
+						
+						
 						<h3 class="tit mt70"><b>나의 취소내역</b></h3>
 			
 						<ul class="dot-list">
@@ -140,39 +203,47 @@
 									</tr>
 								</thead>
 								<tbody>
+								<c:forEach var="boardList" items="${boardList}">
 									<tr>
-										<td>2023.12.23 (14:29)</td>
+										<td>${boardList.mem_join-d}</td>
 										<th scope="row">서울의 봄</th>
 										<td scope="row" style="text-align: left;">양산</td>
 										<td scope="row" style="text-align: left;">2023.12.24 (일) 13:25</td>
 										<td><span class="font-red">42,000원</span></td>
 									</tr>
+								</c:forEach>
 								</tbody>
 							</table>
+							
+							<!-- 페이징 처리 -->
+							<section class="category-section" id="">
+							<div class="container" data-aos="fade-up">
+								<div class="pagination-container d-flex justify-content-center">
+								  <ul class="pagination" id="searchPaging">
+									<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+									    <li class="page-item ">
+									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
+									    </li>
+								    </c:if>	
+								    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+									    <li class="page-item" aria-current="page">
+									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${i }">${i }</a>
+									    </li>
+								    </c:forEach>
+						    		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+									    <li class="page-item">
+									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
+									    </li>
+								    </c:if>	
+								  </ul>
+								</div>
+							</div>
+						</section>
+		
 						</div>
 			
 <!-- 						<nav class="pagination" id="navBokd"><strong class="active">1</strong> </nav> -->
-			<%
-			ArrayList<MemberDTO> boardList = 
-	 		(ArrayList<MemberDTO>)request.getAttribute("boardList");
-			 PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
-			%>
 			
-			<!-- pagination -->
-			<div class="pagination">
-				
-				<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
-					<c:if test="${pageDTO.currentPage eq i}">
-						<a href="list.bo?pageNum=${i}"><span class="pagenum currentpage">${i}</span></a>
-					</c:if>
-					<c:if test="${! (pageDTO.currentPage eq i)}">
-						<a href="list.bo?pageNum=${i}"><span class="pagenum">${i}</span></a>
-					</c:if>
-				</c:forEach>
-				
-			</div>
-			<!-- //pagination -->
-						
 						
 						<!-- 예매 안내상황  -->
 						

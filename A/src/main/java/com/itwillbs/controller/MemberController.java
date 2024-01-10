@@ -354,7 +354,10 @@ public class MemberController extends HttpServlet {
 		}//
 		
 		// 마이페이지 bookinglist(예매내역) 이동
+		// 화면에 보여줄 글개수 설정
 		if(sPath.equals("/bookinglist.me")) {
+			
+			request.setCharacterEncoding("utf-8");
 			
 			int pageSize = 10;
 			String pageNum = request.getParameter("pageNum");
@@ -375,12 +378,12 @@ public class MemberController extends HttpServlet {
 			ArrayList<MemberDTO> boardList = 
 					memberService.getBoardList(pageDTO);
 			
-			//페이징 작업
+			// 예약구매 페이지 페이징 작업
 			// int 리턴할형 getBoardCount() 메서드 정의
 		   //  int count =  getBoardCount()메서드 호출
 			int count = memberService.getBoardCount();
 			// 한 화면에 보여줄 페이지 개수 설정
-			int pageBlock = 5;
+			int pageBlock = 10;
 			// 시작하는 페이지 번호 구하기
 			int startPage= (currentPage-1)/pageBlock*pageBlock+1;
 			// 끝나는 페이지 번호 구하기

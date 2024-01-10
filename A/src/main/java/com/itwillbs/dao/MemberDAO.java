@@ -101,22 +101,23 @@ public class MemberDAO {
 		session.close();
 		return memberDTO;
 	}
-
-	public ArrayList<MemberDTO> getMemberList(PageDTO pageDTO) {
-		SqlSession session = sqlSessionFactory.openSession();
+	
+	// 마이페이지 예약구매 페이지 페이징 작업
+	public ArrayList<MemberDTO> getBoardList(PageDTO pageDTO) {
 		ArrayList<MemberDTO> getMemberList = null;
-		getMemberList = new ArrayList<MemberDTO>(session.selectList("Member.getMemberList", pageDTO));
+		SqlSession session = sqlSessionFactory.openSession();
+		getMemberList = new ArrayList<MemberDTO>(session.selectList("Member.getBoardList", pageDTO));
 		session.close();
 		return getMemberList;
-	}
+	}//
 
 	public int getBoardCount() {
-		SqlSession session = sqlSessionFactory.openSession();
 		int count = 0;
-		count = session.selectOne("CsAdmin.centerBoardCount");
+		SqlSession session = sqlSessionFactory.openSession();
+		count = session.selectOne("Member.getBoardCount");
 		session.close();
 		return count;
-	}
+	}//
 
 	
 }
