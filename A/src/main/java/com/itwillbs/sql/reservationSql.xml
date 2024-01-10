@@ -29,6 +29,7 @@
 		 	 , SCH_IDX
 		 	 , MOV_TYPE
 		 	 , MOV_IDX
+		 	 , MEM_ID
 		 	 )  
 		VALUES 
 			 ( LEFT(#{date} ,LENGTH(#{date}) - 4) 
@@ -54,6 +55,7 @@
 			 , #{schIdx}
 			 , #{movType}
 			 , #{movIdx}
+			 , "test1"
 			 )
 	</insert>	
 	
@@ -62,7 +64,7 @@
 		  FROM RESERVATION
 		 WHERE 1 = 1
 		   AND SCR_IDX = #{scrIdx}
-		   AND DATE = #{date}
+		   AND DATE_FORMAT(DATE, '%Y-%m-%d') = #{dateC}
 		   AND S_TIME = #{sTime}
 		   AND TITLE = #{title}
 		   AND CINEMA = #{cinema}
@@ -74,6 +76,7 @@
 		   AND CI_IDX = #{ciIdx}
 		   AND MOV_TYPE = #{movType}
 		   AND SCH_IDX = #{schIdx}
+		   AND DATE_FORMAT(DATE_C, '%Y-%m-%d') = #{dateC}
 	</select>
 	
 	<select id="selectSameSeat" parameterType="SeatDTO" resultType="Integer">
@@ -100,19 +103,19 @@
 		     , SCH_IDX
 		     , SEAT_C
 		     , DATE_C
+		     , INSERT_TIME
 		     )
 		VALUES
-		<foreach collection="seatC.split(',')" item="seat" index="i" separator=",">
 			 (
 			   "test1"
 			 , #{loIdx}
 		     , #{ciIdx}
 			 , #{movType}
 			 , #{schIdx}
-			 , #{seat}
+			 , REPLACE(#{seatC}, ',', ', ')
 			 , #{dateC}
+			 , NOW()
 			 )	 
-		</foreach>
 	</insert>
 	
 	<delete id="delete" parameterType="String">
@@ -125,11 +128,14 @@
 		   AND S.CI_IDX = R.CI_IDX
 		   AND S.SCH_IDX = R.SCH_IDX
 		   AND S.MOV_TYPE = R.MOV_TYPE
-		   AND R.SEAT LIKE CONCAT('%', S.SEAT_C, '%')
+		   AND S.SEAT_C = R.SEAT
 		 WHERE 1 = 1 
 		   AND R.SEAT IS NULL
-		 <if test="value != ''">
+		 <if test="memId != null">
 		   AND S.MEM_ID = #{memId}
+		 </if>
+		 <if test="memId == null">
+		   AND TIMESTAMPDIFF(SECOND, S.INSERT_TIME, NOW()) >= 45
 		 </if>
 	</delete>
 	
