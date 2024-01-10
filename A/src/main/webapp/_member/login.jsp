@@ -84,10 +84,10 @@
 	
 <%@include file ="../_common/commonFooterStart.jsp" %>
 <script type="text/javascript">
-// $(function () {
+
 Kakao.init('44bd94c9c9fc31fcac5bd17dd86e5cba'); // 여기에 애플리케이션에서 발급받은 키를 넣어주세요.
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
-// });
+
     function kakaoLogin() {
         Kakao.Auth.login({
             success: function (response) {
@@ -96,13 +96,33 @@ console.log(Kakao.isInitialized()); // sdk초기화여부판단
 //                     debugger;
                     success: function (response) {
                         alert(JSON.stringify(response))
-                        var id = response.kakao_account.id;
-						var email = response.kakao_account.email;
-                        var name = response.kakao_account.name;
-                        var birthyear = response.kakao_account.birthyear;
-                        var birthday = response.kakao_account.birthday;
-                        var phone = response.kakao_account.phone_number;
+                        console.log(response)
+                        var kakaoid = response.id;
+						var kakaoemail = response.kakao_account.email;
+                        var kakaoname = response.kakao_account.name;
+                        var kakaobirthyear = response.kakao_account.birthyear;
+                        var kakaobirthday = response.kakao_account.birthday;
+                        var kakaophone = response.kakao_account.phone_number.replace("+82 ","0").replaceAll("-","").trim();
+//                         var address = resonse.kakao_account.shipping_address;
                         debugger;
+                        $.ajax({
+                        	type : "post",
+                        	data : {
+                        			memId : kakaoid,
+                        			memEmail : kakaoemail,
+                        			memName : kakaoname,
+                        			memBirth : kakaobirthyear + kakaobirthday,
+                        			memPhone : kakaophone
+                        			},
+                        	url : "kakaologin.me",
+                        	dataType : "text",
+                        	success:function(data){
+                        		window.location = "main.me";
+                        	},
+                        	error:function(){
+                        		
+                        	}
+                        });//ajax
                     },
                     fail: function (error) {
                         alert(JSON.stringify(error))
@@ -115,29 +135,7 @@ console.log(Kakao.isInitialized()); // sdk초기화여부판단
         })
     }
 
-// function kakaoLogin() {
-//     Kakao.Auth.login({
-//         success: function(authObj) {
-//             // 로그인 성공 시 처리
-//             Kakao.API.request({
-//                 url: '/v2/user/me',
-//                 success: function(response) {
-//                     console.log(response);
-//                 	// 서버로 회원 정보 전송
-//                     kakaoLoginPro(response);
-//                 },
-//                 fail: function(error) {
-//                     console.log(error);
-//                 },
-//             });
-//         },
-//         fail: function(err) {
-//             // 로그인 실패 시 처리
-//             console.log(err);
-//         }
-//     });
-// }
-// });
+
 </script>
 <script>
 $(() => {
