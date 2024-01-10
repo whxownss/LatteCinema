@@ -27,6 +27,8 @@ public class ReservationDTO {
 	private String resPayDate;
 	private String buyerName;  	// 구매자 이름
 	private String merchantUid;	// 주문번호
+	
+	
 	public String getResIdx() {
 		return resIdx;
 	}
@@ -194,9 +196,6 @@ public class ReservationDTO {
 				+ buyerTel + ", success=" + success + ", resPayDate=" + resPayDate + ", buyerName=" + buyerName
 				+ ", merchantUid=" + merchantUid + "]";
 	}
-	
-	
-	
 	
 	
 	
