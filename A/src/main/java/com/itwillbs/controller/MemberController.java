@@ -3,6 +3,7 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,11 +14,13 @@ import javax.servlet.http.HttpSession;
 
 import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.MemberDTO;
+import com.itwillbs.domain.MovieDTO;
 import com.itwillbs.email.SendGmail;
 import com.itwillbs.email.EmailCode;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.service.CSBoardService;
 import com.itwillbs.service.MemberService;
+import com.itwillbs.service.MovieService;
 
 
 public class MemberController extends HttpServlet {
@@ -36,11 +39,12 @@ public class MemberController extends HttpServlet {
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String sPath = request.getServletPath();
-		
+	
 		// 메인 페이지 이동
 		if(sPath.equals("/main.me")) {
 			// 메인화면 최근글 3개 가져오기
 			CSBoardService csBoardService = new CSBoardService();
+			
 			// PageDTO 3개씩 잘라서 최근글 1페이지 설정
 			PageDTO pageDTO = new PageDTO();
 			pageDTO.setPageSize(3);
@@ -49,6 +53,13 @@ public class MemberController extends HttpServlet {
 			ArrayList<CenterBoardDTO> centerBoardList = csBoardService.getCenterBoardList(pageDTO);
 			// request에 boardList 저장
 			request.setAttribute("centerBoardList", centerBoardList);
+			
+			// 영화 포스터 넣는 부분 
+			MovieService movieService = new MovieService();
+		    MovieDTO movieDTO = new MovieDTO();
+			List<MovieDTO> posterList = movieService.getLattePoster(movieDTO);
+			request.setAttribute("lattePosterList", posterList);
+			
 			
 			dispatcher = request.getRequestDispatcher("_a/main.jsp");
 			dispatcher.forward(request, response);

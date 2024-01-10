@@ -1,6 +1,7 @@
 package com.itwillbs.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import com.itwillbs.service.MovieService;
 public class MovieController extends HttpServlet {
 	RequestDispatcher dispatcher = null;
 	MovieService movieService = null;
+	MovieDTO movieDTO = null;
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -80,7 +82,5 @@ public class MovieController extends HttpServlet {
 			System.out.println("movieDTO : "+movieDTO);
 			
 		}
-		
-		
-	}
+	}	
 }

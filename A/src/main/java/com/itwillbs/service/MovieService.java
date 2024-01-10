@@ -1,11 +1,16 @@
 package com.itwillbs.service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.itwillbs.dao.MemberDAO;
 import com.itwillbs.dao.MovieDAO;
+import com.itwillbs.domain.CenterBoardDTO;
+import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.MovieDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -61,5 +66,19 @@ public class MovieService {
 		return null; 
 		
 	}
+	
+
+	public List<MovieDTO> getLattePoster(MovieDTO movieDTO) {
+		System.out.println("MovieService getLattePoster()");
+		ArrayList<MovieDTO> LattePosterList = null;
+	    try {
+	        movieDAO = new MovieDAO();
+	        LattePosterList = movieDAO.getLattePoster(movieDTO);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return LattePosterList;
+	}
+	
 
 }
