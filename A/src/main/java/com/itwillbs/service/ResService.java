@@ -99,7 +99,9 @@ public class ResService {
 		resDAO = new ResDAO();
 		Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 		ReservationDTO reservationDTO = gson.fromJson(schDTO, ReservationDTO.class);
-		
+		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%");
+		System.out.println(reservationDTO);
+		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%");
 		List<String> seatList = resDAO.checkSeat(reservationDTO);
 		List<String> paidSeat = new ArrayList<String>();
 		for(String s : seatList) {

@@ -87,11 +87,11 @@
 		   AND CI_IDX = #{ciIdx}
 		   AND MOV_TYPE = #{movType}
 		   AND SCH_IDX = #{schIdx}
-		   AND SEAT_C IN (
-		   <foreach collection="seatC.split(',')" item="seat" index="i" separator=",">
-		   	   #{seat}
+		   AND (
+		   <foreach collection="seatC.split(',')" item="seat" index="i" separator="OR">
+		   	   FIND_IN_SET(#{seat}, REPLACE(SEAT_C, ' ', '')) > 0
 		   </foreach>
-		   )
+		   	   )
 	</select>
 	
 	<insert id="insertSeatInfo" parameterType="SeatDTO">
