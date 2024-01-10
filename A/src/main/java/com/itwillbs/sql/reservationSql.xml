@@ -99,6 +99,7 @@
 		     , MOV_TYPE
 		     , SCH_IDX
 		     , SEAT_C
+		     , DATE_C
 		     )
 		VALUES
 		<foreach collection="seatC.split(',')" item="seat" index="i" separator=",">
@@ -109,6 +110,7 @@
 			 , #{movType}
 			 , #{schIdx}
 			 , #{seat}
+			 , #{dateC}
 			 )	 
 		</foreach>
 	</insert>
