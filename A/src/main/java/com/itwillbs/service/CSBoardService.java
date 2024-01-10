@@ -867,5 +867,36 @@ public class CSBoardService {
 		return count;
 	}//getRecoBoardCount()
 
+	public ArrayList<RecommendDTO> getRecommendList(PageDTO pageDTO, String movieName) {
+		System.out.println("CSBoardService getRecommendList() search");
+		ArrayList<RecommendDTO> recommendList = null;
+		try {
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			recommendList = csBoardDAO.getRecommendList(pageDTO,movieName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return recommendList;
+	}//getRecommendList() search
+
+	public int getRecoBoardCount(String movieName) {
+		System.out.println("CSBoardService getRecoBoardCount() search");
+		int count = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getRecoBoardCount(movieName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getRecoBoardCount() search
+
 	
 }//클래스

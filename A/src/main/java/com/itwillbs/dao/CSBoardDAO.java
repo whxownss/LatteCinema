@@ -779,6 +779,42 @@ public class CSBoardDAO {
 		}
 		return count;
 	}//getRecoBoardCount
+
+	public ArrayList<RecommendDTO> getRecommendList(PageDTO pageDTO, String movieName) {
+		System.out.println("CSBoardDAO getRecommendList() search");
+		ArrayList<RecommendDTO> recommendList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			Map<String, Object> params = new HashMap<>();
+			params.put("pageDTO", pageDTO);
+			params.put("movieName", movieName);
+
+			recommendList = new ArrayList<RecommendDTO>(session.selectList("CsAdmin.searchRecoList", params));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return recommendList;
+	}//getRecommendList() search
+
+	public int getRecoBoardCount(String movieName) {
+		System.out.println("CSBoardDAO getRecoBoardCount() search");
+		int count = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			count = session.selectOne("CsAdmin.getRecoSrchCount",movieName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return count;
+	}//getRecoBoardCount() search
 	
 	
 	

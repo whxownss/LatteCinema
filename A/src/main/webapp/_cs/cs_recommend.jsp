@@ -47,10 +47,33 @@
 				  </div>
 			</div>
 		</section>
+
 		<!-- 진행상태, 신청영화, 감독, 신청자, 신청일, 추천수, 추천하기버튼, 수정버튼  -->
 		<input type="hidden" name="recoUser" id="recoUser" value="${sessionScope.sId }">
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
+			<div class="row">
+				  <div class="col-md-3">
+				  </div>
+				  <div class="col-md-2">
+				    <div class="input-group mb-3">
+				    </div>
+				  </div>
+				  <div class="col-md-2">
+				    <div class="input-group mb-3">
+				    </div>
+				  </div>
+				  <div class="col-md-2">
+				    <div class="input-group mb-3">
+				    </div>
+				  </div>
+				  <div class="col-md-3">
+				    <div class="input-group mb-3">
+				      <input type="text" class="form-control" placeholder="검색어를 입력해주세요." id="recoSearch" name="recoSearch" aria-label="input-search" aria-describedby="button-addon2">
+				      <button class="btn btn-outline-secondary" type="button" id="recoSearchBtn">검색</button>
+				    </div>
+				  </div>
+				</div>
 				<table class="table">
 				  <thead>
 				    <tr class="table-secondary">
@@ -62,14 +85,15 @@
 				      <th scope="col">신청일</th>
 				      <th scope="col">추천수</th>
 				      <th scope="col">추천하기</th>
-				      <th scope="col">수정하기</th>
+				      <th scope="col">삭제하기</th>
 				    </tr>
 				  </thead>
 				  <tbody>
 				  <c:forEach var="recommendDTO" items="${recommendList }">
+				  
 				  	<tr>
 				  		<td>${recommendDTO.recommendIdx }</td>
-				  		<td>대기중</td>
+				  		<td>진행중</td>
 				  		<td>${recommendDTO.movieName }</td>
 				  		<td>${recommendDTO.director }</td>
 				  		<td>${recommendDTO.createUser }</td>
@@ -133,9 +157,10 @@ $('.btn').on("click",function(){
     var buttonId = $(this).attr('id');
 	var buttonText = $(this).text();
     console.log('클릭된 버튼의 ID: ' + buttonId);
-    console.log('클릭된 버튼의 텍스트' + buttonText)
-    
-    var recoUser = $('#recoUser').val();
+    console.log('클릭된 버튼의 텍스트' + buttonText);
+    var searchName = $('#recoSearch').val();
+    var recoUser = [];
+	recoUser.push($('#recoUser').val()); // 문자열 값을 배열에 추가
     
         // 'this'는 클릭된 버튼을 가리킵니다.
         // closest() 함수를 사용하여 가장 가까운 <tr> 요소를 찾습니다.
@@ -150,17 +175,23 @@ $('.btn').on("click",function(){
         var countReco = parseInt(countRecoCell.text());
 
         if(buttonText === '삭제'){
-        	if(createUser === recoUser){
+        	if (  recoUser.includes(createUser)  // 지가 썻거
+        	   || recoUser.some(user => user.toLowerCase().startsWith('admin'))) { // 관리자면
         		if(confirm('삭제하시겠습니까?')){
         			window.location.href="deleteRecoData.cs?recommendIdx=" + recommendIdx;        			
-        		} else {
-        			return;
-        		}
-        	} else {
-        		alert('본인 글이 아닙니다.')
+        		} 
         		return;
-        	}
+        	} 
+        	
+        	alert('본인 글이 아닙니다.')
+    		return;
         }
+        if(buttonText === '검색'){
+        	window.location.href="searchReco.cs?movieName=" + searchName;
+        	return;
+        }
+        var recoUser = $('#recoUser').val();
+        console.log('선택하는 유저의 아이디: ' + recoUser)
         
         
         
@@ -172,7 +203,7 @@ $('.btn').on("click",function(){
             		recoUser: recoUser
             },
             success: function(response) {
-            	debugger;
+            	
             	var recoSuccess = response.recoSuccess;
             	if(recoSuccess == '1'){
             		// 추천 수 증가
@@ -188,8 +219,6 @@ $('.btn').on("click",function(){
                 alert('추천 수 업데이트 오류');
             }
         });
-        
-        
 });
 </script>
 <%@include file="../_common/commonFooterEnd.jsp"%>

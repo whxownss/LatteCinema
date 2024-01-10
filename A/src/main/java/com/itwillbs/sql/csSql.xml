@@ -353,15 +353,27 @@
 	</select>
 	<update id="plusRecoCount" parameterType="map">
 		UPDATE RECOMMENDBOARD
-		   SET COUNTRECO = COUNTRECO + 1
-		 WHERE RECOMMENDIDX = #{recommendIdx}
-		   AND #{recoUser} NOT IN (SELECT RECO_USER FROM RECODUPLICHK) 
+		SET COUNTRECO = COUNTRECO + 1
+		WHERE RECOMMENDIDX = #{recommendIdx}
+		  AND #{recoUser} NOT IN (
+		    SELECT RECO_USER
+		      FROM RECODUPLICHK
+		     WHERE DATE_ADD((SELECT MAX(RECO_DATE) FROM RECODUPLICHK WHERE RECO_USER = #{recoUser}), INTERVAL 1 MONTH) > SYSDATE()
+		      AND RECO_USER = #{recoUser}
+		    GROUP BY RECO_USER
+		  )
 	</update>
 	<insert id="insertRecoUser" parameterType="map">
 		INSERT INTO RECODUPLICHK(RECOMMENDIDX,RECO_USER,RECO_DATE)
 		SELECT #{recommendIdx},#{recoUser},SYSDATE()
 		  FROM DUAL
-		 WHERE #{recoUser} NOT IN (SELECT RECO_USER FROM RECODUPLICHK)
+		 WHERE #{recoUser} NOT IN (
+		    SELECT RECO_USER
+		      FROM RECODUPLICHK
+		     WHERE DATE_ADD((SELECT MAX(RECO_DATE) FROM RECODUPLICHK WHERE RECO_USER = #{recoUser}), INTERVAL 1 MONTH) > SYSDATE()
+		      AND RECO_USER = #{recoUser}
+		    GROUP BY RECO_USER
+		  )
 	</insert>
 	<delete id="deleteRecoData" parameterType="int">
 		DELETE FROM RECOMMENDBOARD
@@ -370,5 +382,17 @@
 	<select id="getRecoBoardCount" resultType="int">
 		SELECT COUNT(*) 
 		  FROM RECOMMENDBOARD
+	</select>
+	<select id="searchRecoList" parameterType="map" resultType="RecommendDTO">
+		SELECT *
+		  FROM RECOMMENDBOARD
+		 WHERE MOVIENAME LIKE '%${movieName}%'
+   		 ORDER BY CREATE_DATE  DESC 
+   		 LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
+	</select>
+	<select id="getRecoSrchCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) 
+		  FROM RECOMMENDBOARD
+		 WHERE MOVIENAME LIKE '%${movieName}%' 
 	</select>
 </mapper>
