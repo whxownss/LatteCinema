@@ -69,7 +69,7 @@
 				  </div>
 				  <div class="col-md-3">
 				    <div class="input-group mb-3">
-				      <input type="text" class="form-control" placeholder="검색어를 입력해주세요." id="recoSearch" name="recoSearch" aria-label="input-search" aria-describedby="button-addon2">
+				      <input type="text" class="form-control" placeholder="영화명을 검색해주세요." id="recoSearch" name="recoSearch" aria-label="input-search" aria-describedby="button-addon2">
 				      <button class="btn btn-outline-secondary" type="button" id="recoSearchBtn">검색</button>
 				    </div>
 				  </div>

@@ -936,6 +936,7 @@ public class CSController extends HttpServlet  {
 			System.out.println("주소비교 /searchReco.cs 일치");
 			request.setCharacterEncoding("utf-8");
 			String movieName = request.getParameter("movieName");
+			movieName = "%" + movieName + "%";
 			// cs_exque.cs
 			// cs_exque.cs?pageNum=2
 			// 한 화면에 보여줄 글개수 설정
