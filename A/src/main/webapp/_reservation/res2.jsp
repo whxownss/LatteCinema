@@ -158,10 +158,12 @@ $(function(){
 	$.ajax({
 		type: "POST",
 		url: "res2ProRS.re",
-		data: {memId: "test1"},
+		data: {memId: "test3"},
 		dataType: "text"
 	})
 	.done(function(data){
+		// 결제창갔다가 다시 새로 고침할때 문제 해결 (GSON 에러)
+		delete schDTO["seat"];
 		// 예약된 자리에 대해 선택 못하게 처리  (+ 결제전 선택한 자리)  (원래는 done부분이 아니라 바같부분에 있던거)
 		$.ajax({
 			type: "GET",
@@ -178,18 +180,9 @@ $(function(){
 								 .prop("disabled", true);		
 			});
 		})
-		.fail(function(){
-		})
+		.fail(function(){})
 	})
-	.fail(function(){
-		
-	})
-	
-	
-	
-	
-	
-	
+	.fail(function(){})
 	
 	// 좌상단에 영화 정보 나타내기
 	$(".rating").attr("src", "_assets/img/grade_" + schDTO.rating + ".png");
@@ -301,7 +294,6 @@ $(function(){
 			$(this).addClass("btn-danger");
 			$(this).addClass("selectedSeat");
 		}
-		
 
 		var selectedSeatCNT = $(".selectedSeat").length;
 		if(selectedSeatCNT >= pSum){
@@ -345,6 +337,7 @@ $(function(){
 		schDTO["p3"] = p3;
 		schDTO["seat"] = selectedSeat;
 		schDTO["seat_c"] = selectedSeat.toString();
+		schDTO["date_c"] = schDTO["date"].slice(0, -4);
 		
 		// 동시에 같은 좌석 선택시 처리
 		$.ajax({
@@ -354,7 +347,6 @@ $(function(){
 			dataType: "text" 
 		})
 		.done(function(data){
-			debugger;
 			// 겹치는 자리 없을 시 DB작업 후 페이지 이동
 			$.ajax({
 				type: "POST",
