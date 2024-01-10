@@ -214,6 +214,11 @@ function checkId() {
 			dataType: "text",
 			success:function(data){
 // 				debugger;
+
+				// 중요 복습필수
+// 				$("#CheckId").text(data.text).css("color", data.color);
+// 				return data.bool
+
 				if(data == '1'){
 					$("#CheckId").text("사용중인 아이디입니다.").css("color", "red");
 					return false;
@@ -237,31 +242,31 @@ function checkEmail() {
 	}else if(!emailRegex.test(email)){
 		$("#CheckEmail").text("** name@example.com 형식에 맞게 입력! **").css("color", "red");
 		return false;
-	}else{
-		$.ajax({
-			type : "post",
-			data : {memEmail : email},
-			url	 : "checkemail.me",
-			dataType : "text",
-			success:function(data){
-// 				debugger;
-				if(data == '1'){
-					$("#CheckEmail").text("사용중인 이메일입니다").css("color", "red");
-					return false;
-				}else if(data == '0'){
-					$("#CheckEmail").text("사용가능한 이메일입니다").css("color", "green");
-// 					debugger;
-					$("#eamilAuthBtn").attr("disabled" , false);
-					
-					return true;
-				}
-			},
-			error: function(){
-				
-			}
-			
-		});
 	}
+	
+	$.ajax({
+		type : "post",
+		data : {memEmail : email},
+		url	 : "checkemail.me",
+		dataType : "text",
+		success:function(data){
+			debugger;
+			if(data == '1'){
+				$("#CheckEmail").text("사용중인 이메일입니다").css("color", "red");
+				return false;
+			}else if(data == '0'){
+				$("#CheckEmail").text("사용가능한 이메일입니다").css("color", "green");
+				debugger;
+				$("#eamilAuthBtn").attr("disabled" , false);
+				
+				return true;
+			}
+		},
+		error: function(){
+			
+		}
+		
+	});
 		
 }
 

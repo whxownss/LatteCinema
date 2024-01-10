@@ -5,7 +5,12 @@
 <script src="jQuery/jquery-3.6.0.js"></script>
 <!-- <script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script> -->
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+<!-- <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+<!-- <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script> -->
+<!--   <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script> -->
+<!--   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script> -->
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
@@ -83,6 +88,53 @@
 	</main>
 	
 <%@include file ="../_common/commonFooterStart.jsp" %>
+<script type="text/javascript">
+var naverLogin = new naver.LoginWithNaverId({
+	clientId: "k4VcydIgNnToU82jOUPA",
+	callbackUrl: "http://localhost:8080/A/login.me",
+	isPopup: false, /* 팝업을 통한 연동처리 여부 */
+    callbackHandle: true
+});
+
+naverLogin.init();/* 설정정보를 초기화하고 연동을 준비 */
+
+window.addEventListener('load', function () {	
+	naverLogin.getLoginStatus(function(status) {
+		if (status) {
+			debugger;
+			var naveremail = naverLogin.user.getEmail();
+			var naverName = naverLogin.user.getName();
+			var id = naverLogin.user.getId();
+			
+			
+			console.log(naverLogin);
+			
+			debugger;
+// 			$.ajax({
+// 				type : 'post',
+// 				url : 'naverSaved',
+// 				data : {"email" : email, "nickname" : nickName, "id" : id},
+// 				dataType : 'text',
+// 				success: function(result) {
+					
+// 				},
+// 	            error: function(result) {
+// 	                console.log('오류 발생')
+// 	            }
+// 			})
+	         
+		} 
+// 		else alert("콜백 실패");
+		
+	});
+});
+
+
+
+
+</script>
+
+
 <script type="text/javascript">
 
 Kakao.init('44bd94c9c9fc31fcac5bd17dd86e5cba'); // 여기에 애플리케이션에서 발급받은 키를 넣어주세요.
