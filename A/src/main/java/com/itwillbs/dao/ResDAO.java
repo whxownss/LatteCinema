@@ -106,12 +106,16 @@ public class ResDAO {
 	public void startPayTimer() {
 		SqlSession session = sqlSessionFactory.openSession();
 		
+		String memId = null;
 		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-		scheduler.scheduleAtFixedRate(() -> {
-			System.out.println("결제 확인 및 DB 작업 실행");
-			session.delete("Reservation.delete", "");
-		}, 5, 10, TimeUnit.SECONDS);
+		scheduler.schedule(() -> {
+			System.out.println("DB 작업 실행");
+			session.delete("Reservation.delete", memId);
+			session.commit();
+			session.close();
+			System.out.println("DB 작업 종료");
+		}, 50, TimeUnit.SECONDS);
 		scheduler.shutdown();
-		
+
 	}
 }
