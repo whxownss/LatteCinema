@@ -1,5 +1,6 @@
 package com.itwillbs.service;
 
+import java.nio.file.spi.FileSystemProvider;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class MemberService {
 			String id = request.getParameter("id");
 			String pass = request.getParameter("pass");
 			String name = request.getParameter("name");
-			String phone = request.getParameter("phone");
+			String phone = request.getParameter("phone").replaceAll("-", "");
 			String address = request.getParameter("postcode") + "/" + request.getParameter("address1") + "/" + request.getParameter("address2");
 			String birth = request.getParameter("birth");
 			String email = request.getParameter("email");
@@ -50,6 +51,36 @@ public class MemberService {
 		}
 		
 	}// insertMember()
+	
+	//카카오간편로그인 관련
+	public void insertkakaoMember(HttpServletRequest request) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+			String idx = request.getParameter("idx");
+			String id = request.getParameter("memId");
+			String name = request.getParameter("memName");
+			String phone = request.getParameter("memPhone");
+			String birth = request.getParameter("memBirth");
+			String email = request.getParameter("memEmail");
+			Timestamp date = new Timestamp(System.currentTimeMillis());
+			
+			MemberDTO memberDTO = new MemberDTO();
+			memberDTO.setMemIdx(idx);
+			memberDTO.setMemId(id);
+			memberDTO.setMemName(name);
+			memberDTO.setMemPhone(phone);
+			memberDTO.setMemBirthD(birth);
+			memberDTO.setMemEmail(email);
+			memberDTO.setMemJoinD(date);
+			
+			System.out.println(memberDTO);
+			memberDAO = new MemberDAO();
+			memberDAO.insertMember(memberDTO);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}//insertkakaoMember()
 
 	// 유저체크
 	public MemberDTO userCheck(HttpServletRequest request) {
@@ -261,6 +292,14 @@ public class MemberService {
 		}
 		return count;
 	}//getBoardCount()
+
+
+
+//	public MemberDTO kakaoCheck(HttpServletRequest request) {
+//
+//		
+//		return null;
+//	}//kakaoCheck
 
 //	public void sendGmail(HttpServletRequest request) {
 //		System.out.println("MemberService sendGmail()");	

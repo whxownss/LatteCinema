@@ -158,7 +158,7 @@ $(function(){
 	$.ajax({
 		type: "POST",
 		url: "res2ProRS.re",
-		data: {memId: "test3"},
+		data: {memId: "test1"},
 		dataType: "text"
 	})
 	.done(function(data){

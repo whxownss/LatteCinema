@@ -129,6 +129,9 @@ public class ResController extends HttpServlet {
 
 		// 예약3 페이지 이동
 		if(sPath.equals("/res3.re")) {
+			resService = new ResService();
+			resService.startPayTimer();	
+			
 			dispatcher = request.getRequestDispatcher("_reservation/res3.jsp");
 			dispatcher.forward(request, response);
 		}
