@@ -1,6 +1,5 @@
 package com.itwillbs.domain;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 
 public class ScheduleDTO {
@@ -19,6 +18,9 @@ public class ScheduleDTO {
 	private String title;
 	private String scrSeat;
 	private String rating;
+	
+	private String pSum;
+	
 	
 	public String getLoIdx() {
 		return loIdx;
@@ -105,13 +107,21 @@ public class ScheduleDTO {
 	public void setRating(String rating) {
 		this.rating = rating;
 	}
+	
+	public String getpSum() {
+		return pSum;
+	}
+	public void setpSum(String pSum) {
+		this.pSum = pSum;
+	}
 	@Override
 	public String toString() {
 		return "ScheduleDTO [loIdx=" + loIdx + ", ciIdx=" + ciIdx + ", schIdx=" + schIdx + ", schDate=" + schDate
 				+ ", schMovType=" + schMovType + ", schMovIdx=" + schMovIdx + ", schStime=" + schStime + ", schRun="
 				+ schRun + ", schEtime=" + schEtime + ", scrIdx=" + scrIdx + ", scrSeatAvail=" + scrSeatAvail
-				+ ", title=" + title + ", scrSeat=" + scrSeat + ", rating=" + rating + "]";
+				+ ", title=" + title + ", scrSeat=" + scrSeat + ", rating=" + rating + ", pSum=" + pSum + "]";
 	}
+	
 	
 	
 	

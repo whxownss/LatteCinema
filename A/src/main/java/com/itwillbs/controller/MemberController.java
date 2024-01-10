@@ -119,7 +119,7 @@ public class MemberController extends HttpServlet {
 
 		}//
 		
-		// 회원가입 이메일 인증번호 checkemail.me
+		// 회원가입 이메일 인증번호 보내기 checkemail.me
 		if(sPath.equals("/emailCode.me")) {
 			response.setCharacterEncoding("utf-8");
 			String receiver = request.getParameter("email");
@@ -161,6 +161,30 @@ public class MemberController extends HttpServlet {
 			
 		}//
 		
+		// 카카오로그인 
+		if(sPath.equals("/kakaologin.me")) {
+			System.out.println("/kakaologin.me/ controller");
+			memberService = new MemberService();
+			//이메일 중복체크?
+			int result = memberService.checkEmail(request);
+			System.out.println("@@@@@@@@@@");
+			System.out.println(result);
+			System.out.println("@@@@@@@@@@");
+			// result 가 0일 때 중복된 email이 없으므로 가입가능 
+			if(result == 0)  memberService.insertkakaoMember(request);
+				
+			HttpSession session = request.getSession();
+//				session.setAttribute("sIdx", memberDTO.getMemIdx());
+			session.setAttribute("sId", request.getParameter("memId"));
+			session.setAttribute("sName", request.getParameter("memName"));
+				//회원가입 o 로그인 o  세션값??? > main.jsp ( 로그아웃 버튼에 function kakaoLogout())?
+//				response.sendRedirect("main.me");
+				
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result + "");
+				
+		}//
+		
 		// 아이디 찾기 페이지 이동
 		if(sPath.equals("/userfind.me")) {
 			dispatcher = request.getRequestDispatcher("_member/userfind.jsp");
@@ -194,13 +218,32 @@ public class MemberController extends HttpServlet {
 		}//
 		
 		// 비밀번호 찾기 userFindPass.me  
-//		if(sPath.equals("/userFindPass.me")) {
-//			response.setCharacterEncoding("utf-8");
-//			memberService = new MemberService();
-//			MemberDTO memberDTO = memberService.userFind(request);			
-//			
-//			// 
-//		}//
+		if(sPath.equals("/userFindPass.me")) {
+			response.setCharacterEncoding("utf-8");
+			memberService = new MemberService();
+			MemberDTO memberDTO = memberService.userFind(request);	
+			
+			if(memberDTO != null) {
+				System.out.println(memberDTO);
+				System.out.println("입력한 회원 존재");
+				
+			}
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(memberDTO + "");
+			
+			// 
+		}//
+		
+		// passfind > 새 비밀번호 
+		if(sPath.equals("/passfindPro.me")) {
+			response.setCharacterEncoding("utf-8");
+			memberService = new MemberService();
+			
+			memberService.updatePasswd(request);
+			
+			response.sendRedirect("login.me");
+			
+		}//
 		
 		////////////////////////////////////////////////////////////////////////////////////
 		
@@ -283,14 +326,10 @@ public class MemberController extends HttpServlet {
 			MemberDTO memberDTO = memberService.userCheck(request);
 			
 			if(memberDTO != null) {
-				//리턴받은 값이 null 아니면 => 아이디 비밀번호 일치
 				System.out.println("아이디 비밀번호 일치");
-			//  리턴값 없음 deleteMember(request) 메서드 호출
 				memberService.deleteMember(request);
-				//세션 초기화(전체기억장소 삭제)
 				HttpSession session = request.getSession();
 				session.invalidate();
-//				주소변경하면서 main.me 이동
 				response.sendRedirect("main.me");
 			}else {
 				System.out.println("아이디 비밀번호 틀림");
@@ -303,9 +342,6 @@ public class MemberController extends HttpServlet {
 		
 		// 마이페이지 비밀번호 변경(비밀번호변경) 이동 (userInfo > changepw.jsp)
 		if(sPath.equals("/changepw.me")) {
-			
-			
-			
 			dispatcher = request.getRequestDispatcher("_mypage/changepw.jsp");
 			dispatcher.forward(request, response);
 		}//
@@ -331,10 +367,6 @@ public class MemberController extends HttpServlet {
 				System.out.println("비밀번호 틀림");
 				response.sendRedirect("changepw.me");
 			}
-			
-			
-			
-//			response.sendRedirect("myPage.me");
 		}//
 		
 		

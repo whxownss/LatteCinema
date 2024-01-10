@@ -1,5 +1,7 @@
 package com.itwillbs.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +14,7 @@ import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.domain.ScheduleDTO;
+import com.itwillbs.domain.SeatDTO;
 
 public class ResService {
 	ResDAO resDAO = null;
@@ -90,6 +93,51 @@ public class ResService {
 		
 		return msg;
 		
+	}
+
+	public String checkSeat(String schDTO) {
+		resDAO = new ResDAO();
+		Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+		ReservationDTO reservationDTO = gson.fromJson(schDTO, ReservationDTO.class);
+		
+		List<String> seatList = resDAO.checkSeat(reservationDTO);
+		List<String> paidSeat = new ArrayList<String>();
+		for(String s : seatList) {
+//			System.out.println(s);
+			for(String ss : s.split(", ")) {
+				paidSeat.add(ss);
+			}
+		}
+		
+		System.out.println(String.join("/", paidSeat));
+		return String.join("/", paidSeat);
+	}
+
+	public String isSameSeat(String schDTO) {
+		resDAO = new ResDAO();
+		Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+		SeatDTO seatDTO = gson.fromJson(schDTO, SeatDTO.class);
+		
+		return resDAO.isSameSeat(seatDTO);
+	}
+
+	public String setSeatInfo(String schDTO) {
+		resDAO = new ResDAO();
+		Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+		SeatDTO seatDTO = gson.fromJson(schDTO, SeatDTO.class);
+		 
+		return resDAO.setSeatInfo(seatDTO);
+	}
+
+	public String isPaidSeat(String memId) {
+		resDAO = new ResDAO();
+		
+		return resDAO.deleteNonePaidSeat(memId);
+	}
+
+	public void startPayTimer() {
+		resDAO = new ResDAO();
+		resDAO.startPayTimer();
 	}
 
 }

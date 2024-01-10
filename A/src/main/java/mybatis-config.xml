@@ -22,6 +22,7 @@
         <typeAlias type="com.itwillbs.domain.LostBoardDTO" alias="LostBoardDTO"/>
         <typeAlias type="com.itwillbs.domain.ResponseDataDTO" alias="ResponseDataDTO"/>
         <typeAlias type="com.itwillbs.domain.MovieDTO" alias="movieDTO"/>
+        <typeAlias type="com.itwillbs.domain.SeatDTO" alias="SeatDTO"/>
     </typeAliases>
 
 	<environments default="development">
