@@ -7,6 +7,7 @@ public class SeatDTO {
 	private String movType;
 	private String schIdx;
 	private String seatC;
+	private String dateC;
 	
 	public String getMemId() {
 		return memId;
@@ -44,11 +45,19 @@ public class SeatDTO {
 	public void setSeatC(String seatC) {
 		this.seatC = seatC;
 	}
+	
+	public String getDate() {
+		return dateC;
+	}
+	public void setDate(String dateC) {
+		this.dateC = dateC;
+	}
 	@Override
 	public String toString() {
 		return "SeatDTO [memId=" + memId + ", loIdx=" + loIdx + ", ciIdx=" + ciIdx + ", movType=" + movType
-				+ ", schIdx=" + schIdx + ", seatC=" + seatC + "]";
+				+ ", schIdx=" + schIdx + ", seatC=" + seatC + ", dateC=" + dateC + "]";
 	}
+	
 	
 	
 	

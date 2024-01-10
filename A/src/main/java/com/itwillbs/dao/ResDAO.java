@@ -2,6 +2,9 @@ package com.itwillbs.dao;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -98,5 +101,17 @@ public class ResDAO {
 		session.close();
 		
 		return deleteCnt > 0 ? "true" : "";
+	}
+
+	public void startPayTimer() {
+		SqlSession session = sqlSessionFactory.openSession();
+		
+		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+		scheduler.scheduleAtFixedRate(() -> {
+			System.out.println("결제 확인 및 DB 작업 실행");
+			session.delete("Reservation.delete", "");
+		}, 5, 10, TimeUnit.SECONDS);
+		scheduler.shutdown();
+		
 	}
 }

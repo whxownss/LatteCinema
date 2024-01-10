@@ -135,4 +135,9 @@ public class ResService {
 		return resDAO.deleteNonePaidSeat(memId);
 	}
 
+	public void startPayTimer() {
+		resDAO = new ResDAO();
+		resDAO.startPayTimer();
+	}
+
 }
