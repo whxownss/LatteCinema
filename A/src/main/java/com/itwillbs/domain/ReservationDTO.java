@@ -28,6 +28,7 @@ public class ReservationDTO {
 	private String buyerName;  	// 구매자 이름
 	private String merchantUid;	// 주문번호
 	
+	private String dateC;
 	
 	public String getResIdx() {
 		return resIdx;
@@ -186,6 +187,13 @@ public class ReservationDTO {
 	public void setMerchantUid(String merchantUid) {
 		this.merchantUid = merchantUid;
 	}
+	
+	public String getDateC() {
+		return dateC;
+	}
+	public void setDateC(String dateC) {
+		this.dateC = dateC;
+	}
 	@Override
 	public String toString() {
 		return "ReservationDTO [resIdx=" + resIdx + ", memId=" + memId + ", loIdx=" + loIdx + ", ciIdx=" + ciIdx
@@ -194,8 +202,9 @@ public class ReservationDTO {
 				+ ", p1=" + p1 + ", p2=" + p2 + ", p3=" + p3 + ", pSum=" + pSum + ", paidAmount=" + paidAmount
 				+ ", payMethod=" + payMethod + ", cardName=" + cardName + ", cardNumber=" + cardNumber + ", buyerTel="
 				+ buyerTel + ", success=" + success + ", resPayDate=" + resPayDate + ", buyerName=" + buyerName
-				+ ", merchantUid=" + merchantUid + "]";
+				+ ", merchantUid=" + merchantUid + ", dateC=" + dateC + "]";
 	}
+	
 	
 	
 	
