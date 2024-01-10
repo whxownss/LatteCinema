@@ -47,7 +47,7 @@
 										</div>
 									</div>
 							<div class="position-absolute bottom-0 start-50 translate-middle-x w-50">	
-								<h4 class="text-center"> 소셜로그인 </h4>
+								<h4 class="text-center"> 간편로그인 </h4>
 								<form action="login.jsp" method="post">
 									<div class="sns-login">
 							

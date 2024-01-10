@@ -91,7 +91,41 @@ public class ResController extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("_reservation/res2.jsp");
 			dispatcher.forward(request, response);
 		}
-		
+		// 좌석 체크
+		if(sPath.equals("/res2Pro.re")) {
+			resService = new ResService();
+			String schDTO = request.getParameter("schDTO");
+			String seatList = resService.checkSeat(schDTO);
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(seatList);
+		}
+		// 같은 자리 선택 했는지
+		if(sPath.equals("/res2ProCS.re")) {
+			resService = new ResService();
+			String result = resService.isSameSeat(request.getParameter("schDTO"));
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result); // 같은자리면 null, 아니면 "noSameSeat"
+		}
+		// 선택한 자리에 대해 insert (결제전)
+		if(sPath.equals("/res2ProIS.re")) {
+			resService = new ResService();
+			String schDTO = request.getParameter("schDTO");
+			String result = resService.setSeatInfo(schDTO);
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result);
+		}
+		// SEAT테이블에 내 자리가 결제 내역에 없을 때 delete
+		if(sPath.equals("/res2ProRS.re")) {
+			resService = new ResService();
+			String memId = request.getParameter("memId");
+			String result = resService.isPaidSeat(memId);
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result);
+		}
 
 		// 예약3 페이지 이동
 		if(sPath.equals("/res3.re")) {
