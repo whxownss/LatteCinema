@@ -126,8 +126,11 @@
 		   AND S.SCH_IDX = R.SCH_IDX
 		   AND S.MOV_TYPE = R.MOV_TYPE
 		   AND R.SEAT LIKE CONCAT('%', S.SEAT_C, '%')
-		 WHERE S.MEM_ID = #{memId}
+		 WHERE 1 = 1 
 		   AND R.SEAT IS NULL
+		 <if test="value != ''">
+		   AND S.MEM_ID = #{memId}
+		 </if>
 	</delete>
 	
 </mapper>
