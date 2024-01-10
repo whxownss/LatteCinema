@@ -28,69 +28,26 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
         </div>
 
         <div class="row g-5">
-        
-	          <div class="col-lg-4">
-	            <div class="post-entry-1 lg">
-	            	<div class="item position-relative" id="wrap">
-			          <img src="assets/img/post20.jpg" style="width: 100%;">
-						<div class="titlee">
-							<a href="" class="moree">예매하기</a>
-							<a href="" class="moree">상세정보</a>
-						</div>
-		        	</div>
-<!-- 	              <img src="../assets/img/post20.jpg" alt="" class="img-fluid" style="width: 100%;"> -->
-	              <div class="post-meta"><span class="date">영화제목1</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '97</span></div>
-            	</div>
-          	  </div>
+	      <c:forEach var="movie" items="${lattePosterList}" varStatus="status">
+  <div class="col-lg">
+    <div class="post-entry-1 lg">
+      <div class="item position-relative" id="wrap">
+        <!-- 각 영화의 포스터 이미지를 동적으로 출력 -->
+        <img src="<c:out value="${movie.poster}" />" style="width: 60%;">
+        <div class="titlee">
+          <a href="#" class="moree">예매하기</a>
+          <a href="#" class="moree">상세정보</a>
+        </div>
+      </div>
+     </div>
+  </div>
+</c:forEach>
           
-          <div class="col-lg-4">
-            <div class="post-entry-1 lg">
-              <div class="item position-relative" id="wrap">
-			          <img src="assets/img/post21.jpg" style="width: 100%;">
-						<div class="titlee">
-							<a href="" class="moree">예매하기</a>
-							<a href="" class="moree">상세정보</a>
-						</div>
-		        </div>
-<!--               <img src="../assets/img/post21.jpg" alt="" class="img-fluid" style="width: 100%;"> -->
-              <div class="post-meta"><span class="date">영화제목2</span> <span class="mx-1">&bullet;</span> <span>Jan 15th '99</span></div>
-            </div>
-          </div>
-          
-          <div class="col-lg-4">
-            <div class="post-entry-1 lg">
-            	<div class="item position-relative" id="wrap">
-			          <img src="assets/img/post22.jpg" style="width: 100%;">
-						<div class="titlee">
-							<a href="" class="moree">예매하기</a>
-							<a href="" class="moree">상세정보</a>
-						</div>
-		        </div>
-            
-            
-<!--               <img src="../assets/img/post22.jpg" alt="" class="img-fluid" style="width: 100%;"> -->
-              <div class="post-meta"><span class="date">영화제목3</span> <span class="mx-1">&bullet;</span> <span>Feb 7th '02</span></div>
-            </div>
-          </div>
-
-<!--           <div class="col-lg-4"> -->
-<!--             <div class="post-entry-1 lg"> -->
-<!--               <a href="single-post.html"><img src="../assets/img/post21.jpg" alt="" class="img-fluid" style="width: 100%;"></a> -->
-<!--               <div class="post-meta"><span class="date">영화제목2</span> <span class="mx-1">&bullet;</span> <span>Jan 15th '99</span></div> -->
-<!--             </div> -->
-<!--           </div> -->
-          
-<!--           <div class="col-lg-4"> -->
-<!--             <div class="post-entry-1 lg"> -->
-<!--               <a href="single-post.html"><img src="../assets/img/post22.jpg" alt="" class="img-fluid" style="width: 100%;"></a> -->
-<!--               <div class="post-meta"><span class="date">영화제목3</span> <span class="mx-1">&bullet;</span> <span>Feb 7th '02</span></div> -->
-<!--             </div> -->
-<!--           </div> -->
-
         </div> <!-- End .row -->
       </div>
     </section><!-- End Lifestyle Category Section -->
     
+
 	
 
     

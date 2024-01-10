@@ -36,7 +36,7 @@
 
 	
 	<!-- 라떼 영화 포스터 불러오는 sql -->
-	<select id="selectlattePoster" resultType="MovieDTO" parameterType="MovieDTO">
+	<select id="getLattePoster" resultType="MovieDTO" parameterType="MovieDTO">
 	SELECT POSTER, TITLE
 	FROM MOVIE 
 	WHERE MOVIE_CATEGORY = 'OLD'

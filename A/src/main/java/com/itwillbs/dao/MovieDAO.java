@@ -26,14 +26,13 @@ public class MovieDAO {
 	 public ArrayList<MovieDTO> getLattePoster(MovieDTO movieDTO) {
 		    SqlSession session = sqlSessionFactory.openSession();
 		    ArrayList<MovieDTO> resultDTOList = null;
-		    try {
+		   
 		        // 매퍼 파일에 정의한 쿼리 호출
-		    	 resultDTOList = new ArrayList<MovieDTO>(session.selectList("Movie.selectLattePoster",movieDTO));
+		    	 resultDTOList = new ArrayList<MovieDTO>(session.selectList("Movie.getLattePoster",movieDTO));
 		    	 
+		    	 System.out.println("DAO 확인 : ");
 		        
-		    } finally {
 		        session.close();
-		    }
 		    return resultDTOList;
 		}
 

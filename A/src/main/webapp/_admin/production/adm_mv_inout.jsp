@@ -293,17 +293,17 @@
                </div> 
             </div>
             
-            <div class="form-group">
+           <!--  <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-nation">옵션1<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
               <select id="movie-grade" class="form-control" required>
                   <option value="">영화분류</option>
-                  <option value="latteMovie">latte Movie</option>
+                  <option value="NOW">latte Movie</option>
                   <option value="nowMovie">now Movie</option>
                 </select>
                </div> 
-            </div>
+            </div> -->
             
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-nation">국가<span class="required">*</span>
@@ -333,7 +333,7 @@
         <div class="modal-footer">
           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-2">
             <button class="btn btn-primary" type="button">취소</button>
-            <button class="btn btn-success" type="submit">등록</button>
+            <button class="btn btn-success btn-regist" type="submit">등록</button>
           </div>
         </div>
       </div>
@@ -483,6 +483,8 @@
           var runtime = info.runtime;
           var genre = info.genre;
           var html = '';
+       // openDate를 YYYYMMDD 형식에서 YYYY-MM-DD 형식으로 변경
+ 			openDate = openDate.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3');  
           
           html += '<tr data-movieIdx="'+ movieIdx+'">'
           html += '<td>'+ title + '</td>'
@@ -535,6 +537,11 @@
                 console.log("filmMade : "+filmMade);
                 console.log("openDate : "+openDate);
                 console.log("poster : "+poster);
+                console.log("poster : "+title);
+                console.log("poster : "+rating);
+                console.log("poster : "+filmMade);
+                console.log("poster : "+nation);
+                console.log("poster : "+synopsis);
     
                 formData.append("movieIdx", movieIdx);
                 formData.append("title", title);
