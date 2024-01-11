@@ -156,16 +156,16 @@ public class MemberController extends HttpServlet {
 			memberService = new MemberService();
 			//이메일 중복체크?
 			int result = memberService.checkEmail(request);
-			System.out.println("@@@@@@@@@@");
 			System.out.println(result);
-			System.out.println("@@@@@@@@@@");
+			HttpSession session = request.getSession();
+			if(result == 1) {
+				session.setAttribute("sId", memberService.getSimpleId(request));
+				session.setAttribute("sName", request.getParameter("memName"));
+			}
 			// result 가 0일 때 중복된 email이 없으므로 가입가능 
 //			memberService.insertSimpleMember(request);
-			HttpSession session = request.getSession();
 //			session.setAttribute("sId", );
-			System.out.println(request.getParameter("memName"));
-			session.setAttribute("sName", request.getParameter("memName"));
-			session.setAttribute("sId", request.getParameter("memId"));
+			
 			
 			
 			response.setCharacterEncoding("utf-8");

@@ -277,7 +277,7 @@ window.addEventListener('load', function () {
 				url : "simplelogin.me",
 				dataType : "text",
 				data : {
-						 memId : naverid
+// 						 memId : naverid
 						,memEmail : naveremail
 						,memName : navername
 						,memPhone : naverphone
@@ -344,7 +344,7 @@ console.log(Kakao.isInitialized()); // sdk초기화여부판단
                         $.ajax({
                         	type : "post",
                         	data : {
-                        			memId : kakaoid,
+//                         			memId : kakaoid,
                         			memEmail : kakaoemail,
                         			memName : kakaoname,
                         			memBirth : kakaobirthyear + kakaobirthday,

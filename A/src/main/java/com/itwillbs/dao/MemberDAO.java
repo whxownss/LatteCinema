@@ -119,6 +119,14 @@ public class MemberDAO {
 		return count;
 	}//
 
+	// 간편로그인 관련 Id값 가져오기
+	public String getSimpleId(String memEmail) {
+		SqlSession session = sqlSessionFactory.openSession();
+		String sId = session.selectOne("Member.getSimpleId", memEmail);
+		session.close();
+		return sId;
+	}
+
 	
 }
 

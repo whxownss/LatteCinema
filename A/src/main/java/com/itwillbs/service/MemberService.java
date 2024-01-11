@@ -298,6 +298,21 @@ public class MemberService {
 		return count;
 	}//getBoardCount()
 
+	public String getSimpleId(HttpServletRequest request) {
+		String sId = null;
+		try {
+//			MemberDTO memberDTO = new MemberDTO();
+//			memberDTO.setMemEmail(request.getParameter("memEmail"));
+			
+			memberDAO = new MemberDAO();
+			sId = memberDAO.getSimpleId(request.getParameter("memEmail"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return sId;
+	}
+
 
 
 //	public MemberDTO kakaoCheck(HttpServletRequest request) {

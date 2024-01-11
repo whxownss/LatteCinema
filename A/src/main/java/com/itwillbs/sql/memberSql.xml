@@ -82,6 +82,13 @@
 		
 	</select>
 	
+	<!--간편로그인 id값 가져오기  -->
+	<select id="getSimpleId" parameterType="String" resultType="String">
+		SELECT MEM_ID
+		FROM MEMBERS
+		WHERE MEM_EMAIL = #{memEmail}
+	</select>	
+	
 <!-- 	회원 아이디/비밀번호 찾기 -->
 	<select id="userFind" parameterType="MemberDTO" resultType="MemberDTO">
 		SELECT *
