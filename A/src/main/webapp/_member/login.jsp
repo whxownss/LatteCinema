@@ -317,7 +317,7 @@ function checkSubmit() {
 </script>
 <script type="text/javascript">
 var naverLogin = new naver.LoginWithNaverId({
-	clientId: "k4VcydIgNnToU82jOUPA",
+	clientId: "D1BU7LjLMPMtNqpPguWV",
 	callbackUrl: "http://localhost:8080/A/login.me",
 	isPopup: false, /* 팝업을 통한 연동처리 여부 */
     callbackHandle: true
