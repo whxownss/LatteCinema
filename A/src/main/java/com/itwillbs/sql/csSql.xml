@@ -311,6 +311,22 @@
 		  FROM LOSTBOARD
 		 WHERE CREATE_USER = #{createUser} 
 	</select>
+	<select id="myLostStatusList" parameterType="map" resultType="LostBoardDTO">
+		SELECT *,
+		       (SELECT C.CI_NAME
+		          FROM CINEMA AS C
+		         WHERE C.LO_IDX = LOST.LO_IDX AND C.CI_IDX = LOST.CI_IDX) AS 'CI_NAME',
+		       ROW_NUMBER() OVER (ORDER BY LOST.CREATE_DATE) AS RN
+		  FROM LOSTBOARD AS LOST
+		 WHERE CREATE_USER = #{createUser} AND LOSTSTATUS = #{lostStatus}
+		 ORDER BY LOST.CREATE_DATE DESC
+		 LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
+	</select>
+	<select id="myPageLostStatusCount" parameterType="map" resultType="int">
+		SELECT COUNT(*) 
+		  FROM LOSTBOARD
+		 WHERE CREATE_USER = #{createUser} AND LOSTSTATUS = #{lostStatus}
+	</select>
 
 	<select id="getMemberList" resultType="MemberDTO">
 		SELECT * 

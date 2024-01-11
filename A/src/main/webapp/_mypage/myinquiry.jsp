@@ -116,7 +116,30 @@
 					</table>
 				</div>
 				<!-- pagination -->
-				<nav class="pagination"></nav>
+<!-- 				<nav class="pagination"></nav> -->
+				<section class="category-section" id="">
+						<div class="container" data-aos="fade-up">
+							<div class="pagination-container d-flex justify-content-center">
+							  <ul class="pagination">
+								<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+								    <li class="page-item disabled">
+								      <a class="page-link text-secondary" href="myinquiry.me?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
+								    </li>
+							    </c:if>	
+							    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+								    <li class="page-item" aria-current="page">
+								      <a class="page-link text-secondary" href="myinquiry.me?pageNum=${i }">${i }</a>
+								    </li>
+							    </c:forEach>
+					    		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+								    <li class="page-item">
+								      <a class="page-link text-secondary" href="myinquiry.me?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
+								    </li>
+							    </c:if>
+							  </ul>
+							</div>
+						</div>
+					</section>	
 				<!--// pagination -->
 			</div>
       </div>
