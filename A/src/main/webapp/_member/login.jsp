@@ -102,27 +102,36 @@ window.addEventListener('load', function () {
 	naverLogin.getLoginStatus(function(status) {
 		if (status) {
 			debugger;
+			var naverid = naverLogin.user.getId();
 			var naveremail = naverLogin.user.getEmail();
-			var naverName = naverLogin.user.getName();
-			var id = naverLogin.user.getId();
-			
+			var navername = naverLogin.user.getName();
+			var naveryear = naverLogin.user.getBirthday().replaceAll("-","").trim();
+			var naverday = naverLogin.user.getBirthyear();
+			var naverphone = naverLogin.user.getMobile().replaceAll("-","").trim();
 			
 			console.log(naverLogin);
 			
 			debugger;
-// 			$.ajax({
-// 				type : 'post',
-// 				url : 'naverSaved',
-// 				data : {"email" : email, "nickname" : nickName, "id" : id},
-// 				dataType : 'text',
-// 				success: function(result) {
-					
-// 				},
-// 	            error: function(result) {
-// 	                console.log('오류 발생')
-// 	            }
-// 			})
-	         
+			$.ajax({
+				type : "post",
+				url : "simplelogin.me",
+				dataType : "text",
+				data : {
+						 memId : naverid
+						,memEmail : naveremail
+						,memName : navername
+						,memPhone : naverphone
+						,memBirth : naveryear + naverday
+						},
+				success:function(data){
+					naverLogin.logout();
+					window.location = "main.me";
+				},
+				error:function(){
+					console.log('오류 발생')
+            	}
+				
+			});
 		} 
 // 		else alert("콜백 실패");
 		
@@ -166,7 +175,7 @@ console.log(Kakao.isInitialized()); // sdk초기화여부판단
                         			memBirth : kakaobirthyear + kakaobirthday,
                         			memPhone : kakaophone
                         			},
-                        	url : "kakaologin.me",
+                        	url : "simplelogin.me",
                         	dataType : "text",
                         	success:function(data){
                         		window.location = "main.me";

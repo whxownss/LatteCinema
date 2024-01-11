@@ -151,8 +151,8 @@ public class MemberController extends HttpServlet {
 		}//
 		
 		// 카카오로그인 
-		if(sPath.equals("/kakaologin.me")) {
-			System.out.println("/kakaologin.me/ controller");
+		if(sPath.equals("/simplelogin.me")) {
+			System.out.println("/simplelogin.me/ controller");
 			memberService = new MemberService();
 			//이메일 중복체크?
 			int result = memberService.checkEmail(request);
@@ -160,14 +160,11 @@ public class MemberController extends HttpServlet {
 			System.out.println(result);
 			System.out.println("@@@@@@@@@@");
 			// result 가 0일 때 중복된 email이 없으므로 가입가능 
-			if(result == 0)  memberService.insertkakaoMember(request);
+			if(result == 0)  memberService.insertSimpleMember(request);
 				
 			HttpSession session = request.getSession();
-//				session.setAttribute("sIdx", memberDTO.getMemIdx());
 			session.setAttribute("sId", request.getParameter("memId"));
 			session.setAttribute("sName", request.getParameter("memName"));
-				//회원가입 o 로그인 o  세션값??? > main.jsp ( 로그아웃 버튼에 function kakaoLogout())?
-//				response.sendRedirect("main.me");
 				
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(result + "");

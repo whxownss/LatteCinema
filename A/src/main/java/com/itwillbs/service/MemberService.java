@@ -53,7 +53,7 @@ public class MemberService {
 	}// insertMember()
 	
 	//카카오간편로그인 관련
-	public void insertkakaoMember(HttpServletRequest request) {
+	public void insertSimpleMember(HttpServletRequest request) {
 		try {
 			request.setCharacterEncoding("UTF-8");
 			String idx = request.getParameter("idx");
