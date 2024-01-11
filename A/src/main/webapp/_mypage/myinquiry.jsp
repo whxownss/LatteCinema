@@ -28,7 +28,7 @@
 				<div class="tab-block">
 					<ul>
 						<li data-url="/mypage/myinquiry?cd=INQD01" class="on"><a href="#" class="btn" data-cd="INQD01" title="1:1 문의내역 탭으로 이동">1:1 문의내역</a></li>
-						<li data-url="/mypage/myinquiry?cd=INQD03"><a href="#" class="btn" data-cd="INQD03" title="단체관람/대관 문의내역 탭으로 이동" style="width: 100%;">단체관람/대관 문의내역</a></li>
+						<li data-url="/mypage/myinquiry?cd=INQD03"><a href="#" class="btn" data-cd="INQD03" title="단체관람/대관 문의내역 탭으로 이동" style="width: 100%;">단체관람 문의내역</a></li>
 						<li data-url="/mypage/myinquiry?cd=INQD02"><a href="#" class="btn" data-cd="INQD02" title="분실물 문의내역 탭으로 이동">분실물 문의내역</a></li>
 					</ul>
 				</div>
@@ -56,14 +56,15 @@
 								<option value="INQST1">미답변</option>
 								<option value="INQST2">답변완료</option>
 						
-					</select><button type="button" class="btn dropdown-toggle btn-default bs-placeholder" data-toggle="dropdown" role="button" data-id="custInqStatCd" title="전체"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">전체</div></div> </div><span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="inner open" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner "></ul></div></div></div>
-			
-					<div class="board-search ml07">
+					</select>
+								<div class="board-search ml07">
 						<input type="text" title="검색어를 입력해 주세요." placeholder="검색어를 입력해 주세요." class="input-text" id="searchTxt" value="">
 						<button type="button" class="btn-search-input" id="searchBtn">검색</button>
 					</div>
 				</div>
-			
+				
+				<br>
+				
 				<div class="table-wrap">
 					<table class="board-list a-c">
 						<caption>번호, 극장, 유형, 제목, 답변상태, 등록일 순서로 보여주는 1:1 문의 내역 표입니다</caption>
@@ -85,7 +86,18 @@
 								<th scope="col">등록일</th>
 							</tr>
 						</thead>
-						<tbody><tr><td colspan="6">목록이 없습니다.</td></tr></tbody>
+						<tbody>
+							<c:forEach var="boardList" items="${boardList}">
+								<tr>
+									<td style="text-align: center;">1</td>
+									<th style="text-align: center;">서면</th>
+									<td>기타</td>
+									<td>제목</td>
+									<td style="text-align: center;">답변완료</td>
+									<td style="text-align: center;">2023/12/25</td>
+								</tr>
+							</c:forEach>
+						</tbody>
 					</table>
 				</div>
 				<!-- pagination -->
@@ -156,9 +168,9 @@
 			var url = '';
 			var btnText = $(this).text();
 
-			if(btnText == '1:1 문의하기') url = '/support/inquiry';
-			else if(btnText == '단체관람/대관 문의하기') url = '/support/rent';
-			else url = '/support/lost/form';
+			if(btnText == '1:1 문의하기') url = 'cs_qna.cs';
+			else if(btnText == '단체관람/대관 문의하기') url = 'cs_rent.cs';
+			else url = 'cs_lost.cs';
 
 			location.href = url;
 		});

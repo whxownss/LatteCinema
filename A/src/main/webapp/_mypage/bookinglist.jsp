@@ -23,17 +23,6 @@
       <div class="inner-wrap">
 
         <jsp:include page="lnb.jsp"></jsp:include>
-	
-
-			<!-- 있는건지 모르겠음 삭제할까요? -->
-<!-- 			<div id="myLoactionInfo" style="display: none;"> -->
-<!-- 				<div class="location"> -->
-<!-- 					<span>Home</span> -->
-<!-- 					<a href="/mypage" title="나의 메가박스 페이지로 이동">나의 메가박스</a> -->
-<!-- 					<a href="/mypage/bookinglist?tab=01" title="예매/구매내역 페이지로 이동">예매/구매내역</a> -->
-<!-- 				</div> -->
-<!-- 			</div>			 -->
-			
 			
 			<div id="contents">
 				<h2 class="tit">예매/구매 내역</h2>
@@ -41,7 +30,6 @@
 				<div class="tab-block tab-layer">
 					<ul>
 						<li data-url="/mypage/bookinglist?tab=01" data-tit="예매/구매 내역" title="예매구매 내역 탭으로 이동" class="on"><a href="#myBokdArea" class="btn">예매 / 구매 </a></li>
-<!-- 						<li data-url="/mypage/bookinglist?tab=02" data-tit="구매내역" title="구매내역 탭으로 이동"><a href="#myPurcArea" class="btn">구매 </a></li> -->
 					</ul>
 				</div>
 				<div class="tab-cont-wrap">
@@ -94,6 +82,7 @@
 														<option value="202302">2023년 2월</option>
 													
 														<option value="202301">2023년 1월</option>
+														
 												</select>
 												<button type="button" class="button gray-line small ml05" name="search">
 													<i class="iconset ico-search-gray"></i> 조회 
@@ -138,11 +127,11 @@
 								<tbody>
 								<c:forEach var="boardList" items="${boardList}">
 									<tr>
-										<td>${boardList.mem_join-d}</td>
-										<th scope="row">서울의 봄</th>
-										<td scope="row" style="text-align: left;">양산</td>
-										<td scope="row" style="text-align: left;">2023.12.24 (일) 13:25</td>
-										<td><span class="font-blue">42,000원</span></td>
+										<td>${boardList.memId}</td>
+										<th scope="row">${boardList.memId}</th>
+										<td scope="row" style="text-align: left;">${boardList.memId}</td>
+										<td scope="row" style="text-align: left;">${boardList.memId}</td>
+										<td><span class="font-blue">${boardList.memId}</span></td>
 									</tr>
 								</c:forEach>
 								</tbody>
@@ -175,7 +164,6 @@
 		
 						</div>
 						
-						
 						<h3 class="tit mt70"><b>나의 취소내역</b></h3>
 			
 						<ul class="dot-list">
@@ -205,11 +193,11 @@
 								<tbody>
 								<c:forEach var="boardList" items="${boardList}">
 									<tr>
-										<td>${boardList.mem_join-d}</td>
-										<th scope="row">서울의 봄</th>
-										<td scope="row" style="text-align: left;">양산</td>
-										<td scope="row" style="text-align: left;">2023.12.24 (일) 13:25</td>
-										<td><span class="font-red">42,000원</span></td>
+										<td>${boardList.memId}</td>
+										<th scope="row">${boardList.memId}</th>
+										<td scope="row" style="text-align: left;">${boardList.memId}</td>
+										<td scope="row" style="text-align: left;">${boardList.memId}</td>
+										<td><span class="font-red">${boardList.memId}</span></td>
 									</tr>
 								</c:forEach>
 								</tbody>
@@ -243,7 +231,6 @@
 						</div>
 			
 <!-- 						<nav class="pagination" id="navBokd"><strong class="active">1</strong> </nav> -->
-			
 						
 						<!-- 예매 안내상황  -->
 						
@@ -285,117 +272,8 @@
 						<!-- 예매 안내상황 End -->
 					</div>
 			
-					<!-- 구매내역 영역 -->
-					<div id="myPurcArea" class="tab-cont"><a href="" class="ir"></a>
-			
-						<!-- 구매 조회 조건 -->
-						<div class="board-list-search mt20">
-							<table summary="구매 조회 조건">
-								<colgroup>
-									<col style="width:75px;">
-									<col>
-								</colgroup>
-								<tbody>
-									<tr>
-										<th scope="row">구분</th>
-										<td>
-											<div class="dropdown bootstrap-select mr10 small bs3"><select class="selectpicker mr10 small" name="selPurc" tabindex="-98">
-												<option value="">전체</option>
-												<option value="SPD54">스토어</option>
-												<option value="SPD52">모바일오더</option>
-											</select><button type="button" class="btn dropdown-toggle btn-default bs-placeholder" data-toggle="dropdown" role="button" title="전체"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">전체</div></div> </div><span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="inner open" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner "></ul></div></div></div>
-			
-											<input type="radio" name="radPurc" id="radPurc01" value="" checked="checked">
-											<label for="radPurc01">전체</label>
-											<input type="radio" name="radPurc" id="radPurc02" value="P">
-											<label for="radPurc02">구매내역</label>
-											<input type="radio" name="radPurc" id="radPurc03" value="C">
-											<label for="radPurc03">취소내역</label>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row">조회기간</th>
-										<td>
-											<div class="btn-period">
-												<button type="button" class="btn" value="D7">1주일</button>
-												<button type="button" class="btn on" value="M1">1개월</button>
-												<button type="button" class="btn" value="M3">3개월</button>
-												<button type="button" class="btn" value="M6">6개월</button>
-											</div>
-											<div class="date">
-												<input type="text" title="조회기간 시작 날짜 입력" placeholder="yyyy.mm.dd" class="date-calendar v2 hasDatepicker" id="dp1703435331895"><button type="button" class="ui-datepicker-trigger">날짜 선택</button>
-												<span>~</span>
-												<input type="text" title="조회기간 마지막 날짜 입력" placeholder="yyyy.mm.dd" class="date-calendar v2 hasDatepicker" id="dp1703435331896"><button type="button" class="ui-datepicker-trigger">날짜 선택</button>
-												<button type="button" class="button gray-line" name="search">
-													<i class="iconset ico-search-gray"></i> 조회
-												</button>
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<!-- 구매 조회 조건 End -->
-			
-						<!-- 구매 목록  -->
-						<div class="board-list-util mb10">
-							<p class="result-count pt00">
-								<strong>전체 <b class="font-gblue">0</b>건</strong>
-							</p>
-						</div>
-			
-						<div class="table-wrap">
-							<table class="board-list" summary="결제일시, 구분, 상품명, 결제금액, 상태 항목을 가진 결제내역 목록 표">
-								<caption>결제일시, 구분, 상품명, 결제금액, 상태 항목을 가진 결제내역 목록 표</caption>
-								<colgroup>
-									<col style="width:160px;">
-									<col style="width:150px;">
-									<col>
-									<col style="width:120px;">
-									<col style="width:120px;">
-								</colgroup>
-								<thead>
-									<tr>
-										<th scope="col">결제일시</th>
-										<th scope="col">구분</th>
-										<th scope="col">상품명</th>
-										<th scope="col">결제금액</th>
-										<th scope="col">상태</th>
-									</tr>
-								</thead>
-								<tbody></tbody>
-							</table>
-						</div>
-			
-						<nav class="pagination" id="navPurc"></nav>
-			
-						<!-- 구매 안내상황  -->
-						<div class="box-pulldown mt30">
-							<div class="tit">
-								<button type="button" class="btn-toggle">이용안내<i class="iconset ico-arr-toggle-down"></i></button>
-							</div>
-							<div class="cont">
-								<strong>[스토어 구매/취소 안내]</strong>
-								<ul class="dot-list mb30">
-									<li>스토어 상품은 구매 후 취소가능기간 내 100% 환불이 가능하며, 부분환불은 불가 합니다. </li>
-									<li>(ex. 3개의 쿠폰을 한 번에 구매하신 경우, 3개 모두 취소만 가능하며 그 중 사용하신 쿠폰이 있는 경우 환불이 불가합니다)</li>
-									<li>스토어 교환권은 MMS로 최대 1회 재전송 하실 수 있습니다.</li>
-								</ul>
-			
-								<strong>[모바일오더 구매/취소 안내]</strong>
-								<ul class="dot-list mb30">
-									<li class="font-red">ⓘ 모바일오더는 모바일앱을 통해 이용하실 수 있습니다.</li>
-									<li>모바일오더는 구매 후 즉시 조리되는 상품으로 취소가 불가 합니다.</li>
-									<li>극장 매점에서 주문번호가 호출되면 상품을 수령하실 수 있습니다.</li>
-									<li>극장 상황에 따라 상품준비시간이 다소 길어질 수 있습니다.</li>
-								</ul>
-							</div>
-						</div>
-						<!-- 구매 안내상황  End -->
-			
 					</div>
 				</div>
-			</div>
 
       </div>
     </div>

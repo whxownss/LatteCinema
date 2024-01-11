@@ -238,54 +238,6 @@
                   </ul>
                 </li>
                 
-                <li>
-                  <div class="date">
-                    <p>2023.10.29</p>
-                  </div>
-                  <ul class="movie">
-                    <li>
-                      <a href="javaScript:void(0)" title="그대들은 어떻게 살 것인가 상세보기" class="img posterImg btn-modal-open2" w-data="850" h-data="auto" data-no="102468890" data-cd="ADMIS" data-mno="23075200">
-                        <img src="https://img.megabox.co.kr/SharedImg/2023/10/25/FXFCIlhJ6JEcTfk8BpVkSWvmf84sSpe9_230.jpg" onerror="noImg(this)" alt="그대들은 어떻게 살 것인가">
-                      </a>
-                      <div class="cont">
-                        <p class="label">본영화</p>
-                        <p class="tit">
-                          <a href="javaScript:void(0)" title="그대들은 어떻게 살 것인가 상세보기">그대들은 어떻게 살 것인가</a>
-                        </p>
-                        <div class="theater">
-                          <p>코엑스</p>
-                          <p>SHINeeWORLD관(컴포트 3관)</p>
-                          <p>2023.10.29(일) 14:25 (3회차)</p>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-                
-                <li>
-                  <div class="date">
-                    <p>2023.10.29</p>
-                  </div>
-                  <ul class="movie">
-                    <li>
-                      <a href="javaScript:void(0)" title="그대들은 어떻게 살 것인가 상세보기" class="img posterImg btn-modal-open2" w-data="850" h-data="auto" data-no="102468890" data-cd="ADMIS" data-mno="23075200">
-                        <img src="https://img.megabox.co.kr/SharedImg/2023/10/25/FXFCIlhJ6JEcTfk8BpVkSWvmf84sSpe9_230.jpg" onerror="noImg(this)" alt="그대들은 어떻게 살 것인가">
-                      </a>
-                      <div class="cont">
-                        <p class="label">본영화</p>
-                        <p class="tit">
-                          <a href="javaScript:void(0)" title="그대들은 어떻게 살 것인가 상세보기">그대들은 어떻게 살 것인가</a>
-                        </p>
-                        <div class="theater">
-                          <p>코엑스</p>
-                          <p>SHINeeWORLD관(컴포트 3관)</p>
-                          <p>2023.10.29(일) 14:25 (3회차)</p>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-                
               </ol>
             </div>
             
