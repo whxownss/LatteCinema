@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.itwillbs.domain.CenterBoardDTO;
+import com.itwillbs.domain.LostBoardDTO;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.email.SendGmail;
 import com.itwillbs.email.EmailCode;
@@ -417,7 +418,7 @@ public class MemberController extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("_mypage/myinquiry.jsp");
 			dispatcher.forward(request, response);
 		}//
-		//mypage lostboard
+		//mypage에 lostboard 불러오기.
 		if(sPath.equals("/myinquiry2.me")) {
 			System.out.println("주소비교 /myinquiry2.me 일치");
 			request.setCharacterEncoding("utf-8");
@@ -444,12 +445,12 @@ public class MemberController extends HttpServlet {
 			pageDTO.setPageNum(pageNum);
 			pageDTO.setCurrentPage(currentPage);
 			
-			ArrayList<QnaBoardDTO> qnaBoardList = csBoardService.getQnaBoardList(createUser,pageDTO);
+			ArrayList<LostBoardDTO> lostBoardList = csBoardService.getLostBoardList(createUser,pageDTO);
 			
 			// 페이징 작업
 			// int 리턴할 형 getBoardCount() 메서드 정의
 			// int count = getBoardCount() 메서드 호출
-			int count = csBoardService.getQnaBoardCount(createUser,check);
+			int count = csBoardService.getLostBoardCount(createUser,check);
 			// 한 화면에 보여줄 페이지 개수 설정
 			int pageBlock = 10;
 			// 시작하는 페이지 번호 구하기
@@ -469,7 +470,7 @@ public class MemberController extends HttpServlet {
 			pageDTO.setEndPage(endPage);
 			pageDTO.setPageCount(pageCount);
 			
-			request.setAttribute("qnaBoardList",qnaBoardList);
+			request.setAttribute("lostBoardList",lostBoardList);
 			request.setAttribute("pageDTO", pageDTO);
 			dispatcher = request.getRequestDispatcher("_mypage/myinquiry2.jsp");
 			dispatcher.forward(request, response);

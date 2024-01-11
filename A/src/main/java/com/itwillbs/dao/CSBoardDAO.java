@@ -850,6 +850,41 @@ public class CSBoardDAO {
 		}
 		return count;
 	}//getQnaBoardCount() mypage
+
+	public ArrayList<LostBoardDTO> getLostBoardList(PageDTO pageDTO, String createUser) {
+		System.out.println("CSBoardDAO getLostBoardList() mypage");
+		ArrayList<LostBoardDTO> lostBoardList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			Map<String, Object> params = new HashMap<>();
+			params.put("pageDTO", pageDTO);
+			params.put("createUser", createUser);
+
+			lostBoardList = new ArrayList<LostBoardDTO>(session.selectList("CsAdmin.myPageLostBoardList", params));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return lostBoardList;
+	}//getLostBoardList() mypage
+
+	public int getLostBoardCount(String createUser, String check) {
+		int count = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			count = session.selectOne("CsAdmin.getMyPageLostCount",createUser);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return count;
+	}//getLostBoardCount() mypage
 	
 	
 	

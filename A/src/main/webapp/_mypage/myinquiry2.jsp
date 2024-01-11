@@ -1,3 +1,4 @@
+<%@page import="com.itwillbs.domain.LostBoardDTO"%>
 <%@page import="com.itwillbs.domain.PageDTO"%>
 <%@page import="com.itwillbs.domain.QnaBoardDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -21,9 +22,9 @@
   <section class="category-section">
     <div class="container has-lnb" data-aos="fade-up">
     <%
-    ArrayList<QnaBoardDTO> qnaBoardList = (ArrayList<QnaBoardDTO>)request.getAttribute("qnaBoardList");
+    ArrayList<LostBoardDTO> lostBoardList = (ArrayList<LostBoardDTO>)request.getAttribute("lostBoardList");
     PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
-    int qnaCount = pageDTO.getCount();
+    int lostCount = pageDTO.getCount();
     %>
       <!-- 이곳에 코드작성 -->
       <div class="inner-wrap">
@@ -44,19 +45,19 @@
 			
 				<div class="mypage-infomation mt20">
 					<ul class="dot-list mb20">
-						<li id="tabDesc">고객센터를 통해 남기신 1:1 문의내역을 확인하실 수 있습니다.</li>
+						<li id="tabDesc">고객센터를 통해 남기신 분실물 문의내역을 확인하실 수 있습니다.</li>
 						<!-- <li>문의하시기 전 <a href="/support/faq" class="a-link"><strong>자주묻는질문</strong></a>을 확인하시면 궁금증을 더욱 빠르게 해결하실 수 있습니다</li> -->
 					</ul>
 			
 					<div class="btn-group right">
-						<a href="#" class="button" id="inqBtn" title="1:1 문의하기">1:1 문의하기</a>
+						<a href="#" class="button" id="inqBtn" title="분실물 문의하기">분실물 문의하기</a>
 					</div>
 				</div>
 			
 				<div class="board-list-util mb10">
 					<p class="result-count">
 						<!-- to 개발 : 검색을 안한 경우 -->
-						<strong>전체 (<b id="totalCnt"><%=qnaCount %></b>건)</strong>
+						<strong>전체 (<b id="totalCnt"><%=lostCount %></b>건)</strong>
 					</p>
 			
 					<div class="dropdown bootstrap-select bs3"><select id="custInqStatCd" onchange="javascript:$('#searchBtn').click();" class="" tabindex="-98">
@@ -89,8 +90,8 @@
 						<thead>
 							<tr>
 								<th scope="col">번호</th>
-<!-- 								<th scope="col">극장</th> -->
-								<th scope="col">유형</th>
+<!-- 								<th scope="col">영화관</th> -->
+								<th scope="col">영화관</th>
 								<th scope="col">제목</th>
 								<th scope="col">답변상태</th>
 								<th scope="col">등록일</th>
@@ -98,18 +99,18 @@
 						</thead>
 						<tbody>
 <!-- 							<tr><td colspan="6">목록이 없습니다.</td></tr> -->
-							<c:forEach var="qnaBoardDTO" items="${qnaBoardList}">
+							<c:forEach var="lostBoardDTO" items="${lostBoardList}">
 								<tr>
-									<td>${qnaBoardDTO.rn }</td>
-									<td>${qnaBoardDTO.qnaCategory }</td>
-									<td><a href="cs_qna_content.cs?createUser=${qnaBoardDTO.createUser }&createDate=${qnaBoardDTO.createDate}">${qnaBoardDTO.qnaSubject }</a></td>
-									<c:if test="${empty qnaBoardDTO.responseUser }">
+									<td>${lostBoardDTO.rn }</td>
+									<td>${lostBoardDTO.ciName }</td>
+									<td><a href="cs_lost_content.cs?createUser=${lostBoardDTO.createUser }&createDate=${lostBoardDTO.createDate}">${lostBoardDTO.lostSubject }</a></td>
+									<c:if test="${empty lostBoardDTO.responseUser }">
 							        	<td>미답변</td>
 							        </c:if>
-							        <c:if test="${! empty qnaBoardDTO.responseUser }">
+							        <c:if test="${! empty lostBoardDTO.responseUser }">
 							        	<td>답변완료</td>
 							        </c:if>
-							        <td>${qnaBoardDTO.createDate }</td>
+							        <td>${lostBoardDTO.createDate }</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -157,7 +158,6 @@
 			if(idx == 0) {
 				$('#inqBtn').html('1:1 문의하기');
 				$('#tabDesc').html('고객센터를 통해 남기신 1:1 문의내역을 확인하실 수 있습니다.');
-				
 			} else if(idx == 1) {
 				$('#inqBtn').html('단체관람/대관 문의하기');
 				$('#tabDesc').html('고객센터를 통해 남기신 단체/대관 문의내역을 확인하실 수 있습니다.');
@@ -191,9 +191,9 @@
 			location.href = url;
 		});
 
-		if(cd == 'INQD03') $('.tab-block a').eq(1).click();
-		else if(cd == 'INQD02') $('.tab-block a').eq(2).click();
-		else $('.tab-block a').eq(0).click();
+// 		if(cd == 'INQD03') $('.tab-block a').eq(1).click();
+// 		else if(cd == 'INQD02') $('.tab-block a').eq(2).click();
+// 		else $('.tab-block a').eq(0).click();
 
 		MegaboxUtil.Common.bindSelectBox(); // 셀렉트 박스 라이브러리 적용
 	});

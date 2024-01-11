@@ -931,5 +931,36 @@ public class CSBoardService {
 		return count;
 	}//getQnaBoardCount() mypage
 
+	public ArrayList<LostBoardDTO> getLostBoardList(String createUser, PageDTO pageDTO) {
+		System.out.println("CSBoardService getLostBoardList() mypage");
+		ArrayList<LostBoardDTO> lostBoardList = null;
+		try {
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			lostBoardList = csBoardDAO.getLostBoardList(pageDTO,createUser);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lostBoardList;
+	}//getLostBoardList() mypage
+
+	public int getLostBoardCount(String createUser, String check) {
+		System.out.println("CSBoardService getLostBoardCount() mypage");
+		int count = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getLostBoardCount(createUser,check);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getLostBoardCount() mypage
+
 	
 }//클래스
