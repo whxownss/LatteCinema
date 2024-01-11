@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="_assets/css/res_1.css">
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
-<!-- Modal1 -->
+<!-- 인원 선택 Modal1 -->
 <div class="modal fade" id="warning" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -22,6 +22,23 @@
   </div>
 </div>
 <!-- Modal1 -->
+<!-- 좌석 중복 Modal2 -->
+<div class="modal fade" id="seatWarning" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+<!--       <div class="modal-header"> -->
+<!--         <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1> -->
+<!--       </div> -->
+      <div class="modal-body">
+        <div class="text-center mt-5 mb-5 fw-bold">해당 좌석은 이미 판매가 되었습니다.<br>다른 좌석을 선택하여 주십시오.</div>
+      </div>
+      <div class="modal-footer ps-0 pe-0 pt-0 pb-0">
+        <button type="button" class="btn btn-light w-100 ms-0 me-0 mt-0 mb-0"" data-bs-dismiss="modal">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal2 -->
 
 	<main id="main">
 			
@@ -135,18 +152,46 @@
 <%@include file="../_common/commonFooterStart.jsp"%>
 <script src="jQuery/jquery-3.6.0.js"></script>
 <script>
-
+var schDTO = JSON.parse(localStorage.getItem("schDTO"));
+debugger;
 $(function(){
-	
-	var schDTO = JSON.parse(localStorage.getItem("schDTO"));
+	// SEAT 테이블에 내가 선택한 자리가 구매한 내역에 없으면 SEAT 테이블에서 삭제
+	$.ajax({
+		type: "POST",
+		url: "res2ProRS.re",
+		data: {memId: "test1"},
+		dataType: "text"
+	})
+	.done(function(data){
+		// 결제창갔다가 다시 새로 고침할때 문제 해결 (GSON 에러)
+		delete schDTO["seat"];
+		// 예약된 자리에 대해 선택 못하게 처리  (+ 결제전 선택한 자리)  (원래는 done부분이 아니라 바같부분에 있던거)
+		$.ajax({
+			type: "GET",
+			url: "res2Pro.re",
+			data: {schDTO: JSON.stringify(schDTO)},
+			dataType: "text" 
+		})
+		.done(function(data){  // 예매 자리가 없어도 ""가 리턴 되어 done으로 옴
+			var paidSeats = data.split("/");
+			$.each(paidSeats, (i, v) => {
+				$("#seatNum" + v).removeClass("btn-light")
+								 .addClass("btn-dark")
+								 .addClass("paidSeat")
+								 .prop("disabled", true);		
+			});
+		})
+		.fail(function(){})
+	})
+	.fail(function(){})
 	
 	// 좌상단에 영화 정보 나타내기
 	$(".rating").attr("src", "_assets/img/grade_" + schDTO.rating + ".png");
 	$(".mTitle").text(schDTO.title);
 	$(".date").text(schDTO.date);
-	$(".sTime").text(schDTO.sTime + " ~ ");
+	$(".sTime").text(schDTO.s_time + " ~ ");
 	$(".eTime").text(schDTO.eTime);
-	$(".sIdx").text(schDTO.scrIdx);
+	$(".sIdx").text(schDTO.scr_idx);
 	
 	// 좌석 그리기
 	var aSeat = parseInt(schDTO.aSeat);
@@ -171,18 +216,18 @@ $(function(){
 	
 	//수량 옵션
 	$('._count :button').on({
-		
 	    'click' : function(e){
 	    	var p1 = parseInt($("#pCase1").text());
 			var p2 = parseInt($("#pCase2").text());
 			var p3 = parseInt($("#pCase3").text());
 			var p4 = parseInt($("#pCase4").text());
 	    	var pSum = p1 + p2 + p3 + p4;
-			// 8 넘는 경우 || 0 인거 -버튼 눌렀을때 좌석 초기화 	    	
+			// 8 넘는 경우 || 0 인거 -버튼 눌렀을때	    	
 	    	if(pSum >= 8 && $(this).hasClass('plus') || $(this).hasClass('minus') && $(this).next().text() == "0") return;
 	    	
 	    	// 인원 변경시 버튼선택과 금액 초기화
-	    	$(".seat").removeClass("btn-secondary selectedSeat btn-danger btn-light")
+	    	$(".seat").not(".paidSeat")
+	    			  .removeClass("btn-secondary selectedSeat btn-danger btn-light")
        				  .addClass("btn-light")
 	  		  		  .prop("disabled", false);
  			$("#mPrice").text("0");
@@ -250,11 +295,11 @@ $(function(){
 			$(this).addClass("btn-danger");
 			$(this).addClass("selectedSeat");
 		}
-		
 
 		var selectedSeatCNT = $(".selectedSeat").length;
 		if(selectedSeatCNT >= pSum){
-			$(".seat").not(".selectedSeat")
+			$(".seat").not(".paidSeat")
+					  .not(".selectedSeat")
 					  .removeClass("btn-light")
 					  .addClass("btn-secondary")
 					  .prop("disabled", true);
@@ -268,7 +313,8 @@ $(function(){
 			
 			$("#mPrice").text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		} else{
-			$(".seat").not(".selectedSeat")
+			$(".seat").not(".paidSeat")
+			  		  .not(".selectedSeat")
 			  		  .removeClass("btn-secondary")
 			  		  .addClass("btn-light")
 			  		  .prop("disabled", false);
@@ -291,9 +337,38 @@ $(function(){
 		schDTO["p2"] = p2;
 		schDTO["p3"] = p3;
 		schDTO["seat"] = selectedSeat;
-		
-		localStorage.setItem('schDTO', JSON.stringify(schDTO));
-		window.location = "res3.re";
+		schDTO["seat_c"] = selectedSeat.toString();
+		debugger;
+		// 동시에 같은 좌석 선택시 처리
+		$.ajax({
+			type: "GET",
+			url: "res2ProCS.re",
+			data: {schDTO: JSON.stringify(schDTO)},
+			dataType: "text" 
+		})
+		.done(function(data){
+			// 겹치는 자리 없을 시 DB작업 후 페이지 이동
+			debugger;
+			$.ajax({
+				type: "POST",
+				url: "res2ProIS.re",
+				data: {schDTO: JSON.stringify(schDTO)},
+				dataType: "text"
+			})
+			.done(function(data){
+				
+				
+				localStorage.setItem('schDTO', JSON.stringify(schDTO));
+				window.location = "res3.re";
+			})
+			.fail(function(){
+				alert('seat info insert error');
+			})
+		})
+		.fail(function(){
+			$("#seatWarning").modal("show");
+			// 모달 창 띄우고 다시 자리 선택하게끔
+		})
 	})
 	
 	

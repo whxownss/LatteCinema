@@ -31,6 +31,7 @@
               <li><a href="movie_now.mo">현재상영작</a></li>
               <li><a href="movie_will.mo">상영예정작</a></li>
               <li><a href="movie_latte.mo">옛날영화</a></li>
+              <li><a href="cs_recommend.cs">옛날영화 추천</a></li>
             </ul>
           </li>
           
@@ -136,7 +137,6 @@
               <li><a href="cs_member.cs">멤버십</a></li>
               <li><a href="cs_center.cs">고객센터</a></li>
               <li><a href="cs_rent.cs">단체관람/대관문의</a></li>
-              <li><a href="cs_recommend.cs">옛날영화 추천</a></li>
             </ul>
           </li>
         </ul>

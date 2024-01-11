@@ -817,9 +817,39 @@ public class CSBoardDAO {
 	}//getRecoBoardCount() search
 
 	public ArrayList<QnaBoardDTO> getQnaBoardList(String createUser, PageDTO pageDTO) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("CSBoardDAO getQnaBoardList() mypage");
+		ArrayList<QnaBoardDTO> qnaBoardList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			Map<String, Object> params = new HashMap<>();
+			params.put("pageDTO", pageDTO);
+			params.put("createUser", createUser);
+
+			qnaBoardList = new ArrayList<QnaBoardDTO>(session.selectList("CsAdmin.myPageQnaBoardList", params));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return qnaBoardList;
 	}//getQnaBoardList() mypage
+
+	public int getQnaBoardCount(String createUser, String check) {
+		int count = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			count = session.selectOne("CsAdmin.getMyPageQnaCount",createUser);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return count;
+	}//getQnaBoardCount() mypage
 	
 	
 	

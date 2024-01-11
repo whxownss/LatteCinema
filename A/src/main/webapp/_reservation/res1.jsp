@@ -249,7 +249,12 @@ var showSchedule = function(param, date){
 					   		   + value.scrSeat + "</span></span>&nbsp;&nbsp;&nbsp;&nbsp;" 
 					   		   + "<span class='scrIdx' style='font-size: small'>" + value.scrIdx + "관</span>" 
 					   		   + "<input type='hidden' class='endTime'  value='" + value.schEtime + "'>"
-					   		   + "<input type='hidden' class='rating'  value='" + value.rating + "'>");
+					   		   + "<input type='hidden' class='rating'  value='" + value.rating + "'>"
+					   		   + "<input type='hidden' class='loIdx' value='" + value.loIdx + "'>"
+					   		   + "<input type='hidden' class='ciIdx' value='" + value.ciIdx + "'>"
+					   		   + "<input type='hidden' class='schIdx' value='" + value.schIdx + "'>"
+					   		   + "<input type='hidden' class='movType' value='" + value.schMovType + "'>"
+					   		   + "<input type='hidden' class='movIdx' value='" + value.schMovIdx + "'>");
 		})
 	})
 	.fail(function(){
@@ -457,18 +462,30 @@ $(function(){
 		var date = $("#selectedDate").text();           			   // 선택 날짜
 		var title = $(this).parents(".fTitle").find(".mTitle").text(); // 영화 제목
 		var cinema = $("#selectedCinema").text();					   // 영화관
+		var loIdx = $(this).find(".loIdx").val();
+		var ciIdx = $(this).find(".ciIdx").val();
+		var schIdx = $(this).find(".schIdx").val();
+		var movType = $(this).find(".movType").val();
+		var movIdx = $(this).find(".movIdx").val();
 		// 포스터도 담아야함
 		var schDTO = {
-				"rating" : rating,
-				"title"  : title,
-				"date"   : date,
-				"sTime"  : sTime,
-				"eTime"  : eTime,
-				"scrIdx" : sIdx,
-				"cSeat"  : cSeat,
-				"aSeat"  : aSeat,
-				"cinema" : cinema
+				"rating"   : rating,
+				"title"    : title,
+				"date"     : date,
+				"s_time"   : sTime,
+				"eTime"    : eTime,
+				"scr_idx"  : sIdx,
+				"cSeat"    : cSeat,
+				"aSeat"    : aSeat,
+				"cinema"   : cinema,
+				"lo_idx"   : loIdx,
+				"ci_idx"   : ciIdx,
+				"sch_idx"  : schIdx,
+				"mov_type" : movType,
+				"mov_idx"  : movIdx,
+				"date_c"   : date.slice(0, -4)
 		}
+		debugger;
 		$("#schDTO").val(JSON.stringify(schDTO));
 		$("#modalTitle").text(sTime + " ~ " + eTime + " (" + sIdx + ")");
 		$("#modalSeat .cSeat").text(cSeat);

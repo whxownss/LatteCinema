@@ -175,6 +175,18 @@
 		  FROM QNABOARD 
 		 WHERE QNACATEGORY = #{qnaCategory};
 	</select>
+	<select id="myPageQnaBoardList" parameterType="map" resultType="QnaBoardDTO">
+		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
+	  	  FROM QNABOARD
+	  	 WHERE CREATE_USER = #{createUser}
+ 		 ORDER BY CREATE_DATE  DESC 
+ 		 LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
+	</select>
+	<select id="getMyPageQnaCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) 
+	 	  FROM QNABOARD
+	 	 WHERE CREATE_USER = #{createUser} 
+	</select>
 	
 	<select id="getLostBoardList" resultType="LostBoardDTO" parameterType="PageDTO">
 		SELECT *,

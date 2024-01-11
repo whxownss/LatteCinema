@@ -919,5 +919,17 @@ public class CSBoardService {
 		return qnaBoardList;
 	}//getQnaBoardList() mypage
 
+	public int getQnaBoardCount(String createUser, String check) {
+		System.out.println("CSBoardService getQnaBoardCount() mypage");
+		int count = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getQnaBoardCount(createUser,check);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getQnaBoardCount() mypage
+
 	
 }//클래스
