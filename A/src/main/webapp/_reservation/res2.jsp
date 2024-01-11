@@ -153,6 +153,7 @@
 <script src="jQuery/jquery-3.6.0.js"></script>
 <script>
 var schDTO = JSON.parse(localStorage.getItem("schDTO"));
+debugger;
 $(function(){
 	// SEAT 테이블에 내가 선택한 자리가 구매한 내역에 없으면 SEAT 테이블에서 삭제
 	$.ajax({
@@ -337,8 +338,7 @@ $(function(){
 		schDTO["p3"] = p3;
 		schDTO["seat"] = selectedSeat;
 		schDTO["seat_c"] = selectedSeat.toString();
-		schDTO["date_c"] = schDTO["date"].slice(0, -4);
-		
+		debugger;
 		// 동시에 같은 좌석 선택시 처리
 		$.ajax({
 			type: "GET",
@@ -348,6 +348,7 @@ $(function(){
 		})
 		.done(function(data){
 			// 겹치는 자리 없을 시 DB작업 후 페이지 이동
+			debugger;
 			$.ajax({
 				type: "POST",
 				url: "res2ProIS.re",
