@@ -84,7 +84,7 @@
 				      <th scope="col">감독</th>
 				      <th scope="col">신청자</th>
 				      <th scope="col">신청일</th>
-				      <th scope="col">추천수</th>
+				      <th scope="col"><a href="arrangeRecoCount.cs">추천수</a></th>
 				      <th scope="col">추천하기</th>
 				      <th scope="col">삭제하기</th>
 				    </tr>

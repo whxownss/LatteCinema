@@ -7,7 +7,14 @@ public class RecommendDTO {
 	private String createUser;
 	private String createDate;
 	private int countReco;
+	private String poster;
 	
+	public String getPoster() {
+		return poster;
+	}
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
 	private String recoUser;
 	
 	public String getRecommendIdx() {
@@ -55,10 +62,9 @@ public class RecommendDTO {
 	@Override
 	public String toString() {
 		return "RecommendDTO [recommendIdx=" + recommendIdx + ", movieName=" + movieName + ", director=" + director
-				+ ", createUser=" + createUser + ", createDate=" + createDate + ", countReco=" + countReco
-				+ ", recoUser=" + recoUser + "]";
+				+ ", createUser=" + createUser + ", createDate=" + createDate + ", countReco=" + countReco + ", poster="
+				+ poster + ", recoUser=" + recoUser + "]";
 	}
-	
 	
 	
 }

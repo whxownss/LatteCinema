@@ -333,7 +333,7 @@
 	</select>
 	
 	<insert id="insertRecommend" parameterType="RecommendDTO">
-		INSERT INTO RECOMMENDBOARD(RECOMMENDIDX,MOVIENAME,DIRECTOR,CREATE_USER,CREATE_DATE,COUNTRECO)
+		INSERT INTO RECOMMENDBOARD(RECOMMENDIDX,MOVIENAME,DIRECTOR,CREATE_USER,CREATE_DATE,COUNTRECO,POSTER)
 		VALUES
 		((SELECT *
 			FROM (SELECT IFNULL(MAX(CAST(RECOMMENDIDX as unsigned)), 0) + 1
@@ -342,7 +342,8 @@
 		,#{director}
 		,#{createUser}
 		,SYSDATE()
-		,0     
+		,0
+		,#{poster}     
 		);
 	</insert>
 	<select id="getRecommendList" parameterType="PageDTO" resultType="RecommendDTO">
@@ -363,7 +364,14 @@ SELECT *
     YEAR(CREATE_DATE) = YEAR(CURRENT_TIMESTAMP) + 1 AND 
     CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP) + 1, '-01-01')
   )
-ORDER BY CREATE_DATE DESC
+<choose>
+    <when test="search == 'arrange'">
+        ORDER BY COUNTRECO DESC
+    </when>
+    <otherwise>
+        ORDER BY CREATE_DATE DESC
+    </otherwise>
+</choose>
 LIMIT #{startRow}, #{pageSize}
 	</select>
 	<update id="plusRecoCount" parameterType="map">

@@ -795,11 +795,13 @@ public class CSBoardService {
 			String createUser = request.getParameter("createUser");
 			String movieName = request.getParameter("movieName");
 			String director	= request.getParameter("director");
+			String poster = request.getParameter("poster");
 			
 			RecommendDTO recommendDTO = new RecommendDTO();
 			recommendDTO.setCreateUser(createUser);
 			recommendDTO.setMovieName(movieName);
 			recommendDTO.setDirector(director);
+			recommendDTO.setPoster(poster);
 			
 			csBoardDAO = new CSBoardDAO();
 			insertSuccess = csBoardDAO.insertRecommend(recommendDTO);
@@ -897,6 +899,25 @@ public class CSBoardService {
 		}
 		return count;
 	}//getRecoBoardCount() search
+
+	public ArrayList<QnaBoardDTO> getQnaBoardList(String createUser, PageDTO pageDTO) {
+		System.out.println("CSBoardService getQnaBoardList() mypage");
+		ArrayList<QnaBoardDTO> qnaBoardList = null;
+		try {
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			qnaBoardList = csBoardDAO.getQnaBoardList(createUser,pageDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return qnaBoardList;
+	}//getQnaBoardList() mypage
 
 	
 }//클래스

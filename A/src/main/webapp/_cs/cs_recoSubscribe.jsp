@@ -84,6 +84,10 @@
 			            <input type="text" class="form-control" id="director" name="director" placeholder="감독명 입력"  autocomplete="off">
 			          </div>
 			          <div class="form-group mb-3">
+			            <label for="poster">포스터</label>
+			            <input type="text" class="form-control" id="poster" name="poster" placeholder=""  autocomplete="off" readonly>
+			          </div>
+			          <div class="form-group mb-3">
 			            <label for="agreement">신청 시 주의 사항</label>
 			            <div>
 				            <textarea class="form-control" id="agreement" style="overflow: auto; height: 300px; text-align: left;" readonly>
@@ -201,13 +205,14 @@ $('#movieName').on("change", function() {
     var movieName = encodeURIComponent($('#movieName').val());
 
     function fetchMoviesByReleaseYear(start, end) {
-        var parameters = "?collection=kmdb_new2&detail=N&ServiceKey=" + serviceKey + "&releaseDts=" + start + "&releaseDte=" + end + "&title=" + movieName;
+        var parameters = "?collection=kmdb_new2&detail=Y&ServiceKey=" + serviceKey + "&releaseDts=" + start + "&releaseDte=" + end + "&title=" + movieName;
         var url = base_url + parameters;
         $.ajax({
             url: url,
             type: 'GET',
             dataType: 'json',
             success: function(response) {
+            	debugger;
                 response.Data[0].Result.forEach(function(movie) {
                     // 감독 이름 추출
                     var directorNames = movie.directors.director.map(function(director) {
@@ -215,6 +220,12 @@ $('#movieName').on("change", function() {
                     });
                     console.log("Directors: " + directorNames.join(", "));
                     $('#director').val(directorNames.join(", ")); // 감독 이름을 #director 필드에 설정
+                    
+                    var posterUrl = movie.posters;
+                    var posterParts = posterUrl.split("|");
+                    var poster = posterParts[0];
+                    console.log("Poster URL: " + poster);
+                    $('#poster').val(poster);
                 });
             },
             error: function(xhr, status, error) {
@@ -230,6 +241,7 @@ $('#movieYear').on("change",function(){
 // 	alert('선택연도: ' + $('#movieYear').val()+'0101');
 	$('#movieName').val('');
 	$('#director').val('');
+	$('#poster').val('');
 	$("#movieList").empty();
 	
     var serviceKey = "L5BI6RFWUZ7B4WG0K4U6";

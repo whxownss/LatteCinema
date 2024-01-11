@@ -815,6 +815,11 @@ public class CSBoardDAO {
 		}
 		return count;
 	}//getRecoBoardCount() search
+
+	public ArrayList<QnaBoardDTO> getQnaBoardList(String createUser, PageDTO pageDTO) {
+		// TODO Auto-generated method stub
+		return null;
+	}//getQnaBoardList() mypage
 	
 	
 	
