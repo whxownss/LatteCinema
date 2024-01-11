@@ -13,6 +13,7 @@
 <%
 	ArrayList<RecommendDTO> recommendList = (ArrayList<RecommendDTO>)request.getAttribute("recommendList");
 	PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
+	String movieName = (String)request.getAttribute("movieName");
 %>			
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
@@ -69,7 +70,7 @@
 				  </div>
 				  <div class="col-md-3">
 				    <div class="input-group mb-3">
-				      <input type="text" class="form-control" placeholder="영화명을 검색해주세요." id="recoSearch" name="recoSearch" aria-label="input-search" aria-describedby="button-addon2">
+				      <input type="text" class="form-control" placeholder="영화명을 검색해주세요." id="recoSearch" name="recoSearch" value="<%=movieName %>" aria-label="input-search" aria-describedby="button-addon2">
 				      <button class="btn btn-outline-secondary" type="button" id="recoSearchBtn">검색</button>
 				    </div>
 				  </div>
@@ -109,14 +110,7 @@
 				  		</c:if>
 				  	</tr>
 				  </c:forEach>
-<%-- 				  <c:forEach var="centerBoardDTO" items="${centerBoardList }"> --%>
-<!-- 				  	<tr> -->
-<%-- 				      <th scope="row">${centerBoardDTO.rn }</th> --%>
-<%-- 				      <td>${centerBoardDTO.ciName }</td> --%>
-<%-- 				      <td><a href="cs_center_content.cs?createUser=${centerBoardDTO.createUser }&createDate=${centerBoardDTO.createDate}">${centerBoardDTO.centerSubject }</a></td> --%>
-<%-- 				      <td><fmt:formatDate value="${centerBoardDTO.createDate }" pattern="yyyy-MM-dd"/></td> --%>
-<!-- 				    </tr> -->
-<%-- 				  </c:forEach> --%>
+
 				  </tbody>
 				</table>
 			</div>
@@ -127,17 +121,17 @@
 				  <ul class="pagination">
 					<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
 					    <li class="page-item disabled">
-					      <a class="page-link text-secondary" href="cs_recommend.cs?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
+					      <a class="page-link text-secondary" href="searchReco.cs?pageNum=${pageDTO.startPage - pageDTO.pageBlock }&movieName=<%=movieName %>" tabindex="-1" aria-disabled="true">이전</a>
 					    </li>
 				    </c:if>	
 				    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
 					    <li class="page-item" aria-current="page">
-					      <a class="page-link text-secondary" href="cs_recommend.cs?pageNum=${i }">${i }</a>
+					      <a class="page-link text-secondary" href="searchReco.cs?pageNum=${i }&movieName=<%=movieName %>">${i }</a>
 					    </li>
 				    </c:forEach>
 		    		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
 					    <li class="page-item">
-					      <a class="page-link text-secondary" href="cs_recommend.cs?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
+					      <a class="page-link text-secondary" href="searchReco.cs?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&movieName=<%=movieName %>">다음</a>
 					    </li>
 				    </c:if>
 				  </ul>

@@ -821,6 +821,10 @@ public class CSController extends HttpServlet  {
 		if(sPath.equals("/cs_recommend.cs")) {
 			System.out.println("주소비교 /cs_recommend.cs 일치");
 			request.setCharacterEncoding("utf-8");
+			String movieName = request.getParameter("movieName");
+			if(movieName == null) {
+				movieName = "";
+			}
 			// cs_exque.cs
 			// cs_exque.cs?pageNum=2
 			// 한 화면에 보여줄 글개수 설정
@@ -869,6 +873,7 @@ public class CSController extends HttpServlet  {
 			
 			request.setAttribute("pageDTO", pageDTO);			
 			request.setAttribute("recommendList",recommendList);
+			request.setAttribute("movieName", movieName);
 			dispatcher = request.getRequestDispatcher("_cs/cs_recommend.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -936,7 +941,10 @@ public class CSController extends HttpServlet  {
 			System.out.println("주소비교 /searchReco.cs 일치");
 			request.setCharacterEncoding("utf-8");
 			String movieName = request.getParameter("movieName");
-			movieName = "%" + movieName + "%";
+			if(movieName == null) {
+				movieName = "";
+			}
+//			movieName = "%" + movieName + "%";
 			// cs_exque.cs
 			// cs_exque.cs?pageNum=2
 			// 한 화면에 보여줄 글개수 설정
@@ -985,6 +993,9 @@ public class CSController extends HttpServlet  {
 			
 			request.setAttribute("pageDTO", pageDTO);			
 			request.setAttribute("recommendList",recommendList);
+			request.setAttribute("movieName", movieName);
+			System.out.println("@@@@@@@@@@@@@@@@@@");
+			System.out.println(movieName);
 			dispatcher = request.getRequestDispatcher("_cs/cs_recommend.jsp");
 			dispatcher.forward(request, response);
 		}

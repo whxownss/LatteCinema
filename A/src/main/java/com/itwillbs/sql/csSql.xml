@@ -417,7 +417,7 @@ LIMIT #{startRow}, #{pageSize}
 		    CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP) + 1, '-01-01')
 		  )
 		  )
-		  AND MOVIENAME LIKE #{movieName}
+		  AND MOVIENAME LIKE '%${movieName}%'
 		ORDER BY CREATE_DATE DESC
 		LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
 	</select>
