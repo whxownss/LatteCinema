@@ -214,6 +214,11 @@ function checkId() {
 			dataType: "text",
 			success:function(data){
 // 				debugger;
+
+				// 중요 복습필수
+// 				$("#CheckId").text(data.text).css("color", data.color);
+// 				return data.bool
+
 				if(data == '1'){
 					$("#CheckId").text("사용중인 아이디입니다.").css("color", "red");
 					return false;
@@ -237,31 +242,31 @@ function checkEmail() {
 	}else if(!emailRegex.test(email)){
 		$("#CheckEmail").text("** name@example.com 형식에 맞게 입력! **").css("color", "red");
 		return false;
-	}else{
-		$.ajax({
-			type : "post",
-			data : {memEmail : email},
-			url	 : "checkemail.me",
-			dataType : "text",
-			success:function(data){
-// 				debugger;
-				if(data == '1'){
-					$("#CheckEmail").text("사용중인 이메일입니다").css("color", "red");
-					return false;
-				}else if(data == '0'){
-					$("#CheckEmail").text("사용가능한 이메일입니다").css("color", "green");
-// 					debugger;
-					$("#eamilAuthBtn").attr("disabled" , false);
-					
-					return true;
-				}
-			},
-			error: function(){
-				
-			}
-			
-		});
 	}
+	
+	$.ajax({
+		type : "post",
+		data : {memEmail : email},
+		url	 : "checkemail.me",
+		dataType : "text",
+		success:function(data){
+			debugger;
+			if(data == '1'){
+				$("#CheckEmail").text("사용중인 이메일입니다").css("color", "red");
+				return false;
+			}else if(data == '0'){
+				$("#CheckEmail").text("사용가능한 이메일입니다").css("color", "green");
+				debugger;
+				$("#eamilAuthBtn").attr("disabled" , false);
+				
+				return true;
+			}
+		},
+		error: function(){
+			
+		}
+		
+	});
 		
 }
 
@@ -401,24 +406,6 @@ function checkBirth() {
 	}
 	$("#CheckBirth").text(text).css("color", color);
 }
-
-// 이메일 정규식 유효성
-// function checkEmail() {
-// 	var email = $("#email").val();
-// 	var text = "** 본인인증 이메일 필수 입력! **";
-// 	var color= "red";
-	
-// 	if(email != ""){
-// 		text = "** name@example.com 형식에 맞게 입력! **";
-		
-// 		if(emailRegex.test(email)){
-// 			text = "** 유효한 이메일 ** ";
-// 			color = "green";
-// 		}
-// 	}
-	
-// 	$("#CheckEmail").text(text).css("color" , color);
-// }
 
 
 // 유효성 체크 후 submit

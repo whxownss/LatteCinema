@@ -29,6 +29,11 @@ public class MemberService {
 			String email = request.getParameter("email");
 			Timestamp date = new Timestamp(System.currentTimeMillis());
 			
+			System.out.println("@@@@@@@@@@@@@@@@@@");
+			System.out.println(phone);
+			System.out.println(birth);
+			System.out.println(email);
+			
 			MemberDTO memberDTO = new MemberDTO();
 			memberDTO.setMemIdx(idx);
 			memberDTO.setMemId(id);
@@ -53,7 +58,7 @@ public class MemberService {
 	}// insertMember()
 	
 	//카카오간편로그인 관련
-	public void insertkakaoMember(HttpServletRequest request) {
+	public void insertSimpleMember(HttpServletRequest request) {
 		try {
 			request.setCharacterEncoding("UTF-8");
 			String idx = request.getParameter("idx");
