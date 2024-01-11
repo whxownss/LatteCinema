@@ -347,11 +347,11 @@ window.addEventListener('load', function () {
 				url : "simplelogin.me",
 				dataType : "text",
 				data : {
-// 						 memId : naverid
-						 memEmail : naveremail
-						,memName : navername
-						,memPhone : naverphone
-						,memBirth : naveryear + naverday
+// 						memId : naverid
+						memEmail : naveremail,
+						memName : navername,
+						memPhone : naverphone,
+						memBirth : naveryear + naverday
 						},
                 success:function(data){
 					debugger;
