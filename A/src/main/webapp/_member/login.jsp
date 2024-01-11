@@ -8,6 +8,7 @@
 <!-- <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 주소 api  -->
 <!-- <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script> -->
 <!--   <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script> -->
 <!--   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script> -->
@@ -115,6 +116,26 @@
 								onchange="checkConfirmPasswd()">
 						<label for="passwd2">비밀번호 확인<span id="CheckPassword2"></span></label>
 					</div>
+					<div class="form-floating mb-3 row g-2">
+						<div class="col-5">
+							<div class="form-floating">
+								<input type="text" class="form-control" id="postcode" placeholder="우편번호" readonly name="postcode" >
+								<label for="address1">우편번호</label>
+							</div>	
+						</div>	
+						<div class="col-3">	
+								<input type="button" class="btn btn-danger btn-lg" type="button" style="height:58px;"
+										id="find_button" value="우편번호 찾기">
+						</div>
+					</div>
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="address1" placeholder="주소" required readonly name="address1">
+							<label for="address1">주소</label>
+						</div>	
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="address2" placeholder="상세주소 입력" required name="address2">
+							<label for="address2">상세주소 입력</label>
+						</div>	
 					<input id="email" type="hidden"  value="" name="email"><!--이메일-->
 					<input id="birth" type="hidden"  value="" name="birth"><!--생년월일-->
 					<input id="phone" type="hidden"  value="" name="phone"><!--연락처-->
@@ -124,7 +145,7 @@
 	        	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 	        	<button type="submit" class="btn btn-primary" >가입하기</button>
 	      	</div>
-	      	
+
 	      </form>
 	    </div>
 	  </div>
@@ -132,6 +153,55 @@
 	<!-- Modal -->
 	
 <%@include file ="../_common/commonFooterStart.jsp" %>
+<script>
+$(function(){
+	$("#find_button").on('click', function() {
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	        	console.log(data);
+	            
+	        	// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+	            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+	            var fullAddr= '';
+	            var extraAddr='';
+	            
+	            if(data.userSelectoredType === 'R'){
+	            	fullAddr = data.roadAddress;
+	            } else{
+	            	fullAddr = data.jibunAddress;
+	            }
+	            
+	            // extraAddr 
+	            if(data.userSelectedType === 'R'){
+	                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                    extraAddr += data.bname;
+	                }
+	            }
+	            // 건물명이 있고, 공동주택일 경우 추가한다.
+	            if(data.buildingName !== '' && data.apartment === 'Y'){
+	                extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	            }	                    
+	            // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	            if(extraAddr !== ''){
+	                extraAddr = ' (' + extraAddr + ')';
+	            }		            
+	            // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+	            if(fullAddr !== ''){
+	                fullAddr += extraAddr;
+	            }                    
+	            
+	            $("#postcode").val(data.zonecode); 
+	            $("#address1").val(fullAddr);
+	            $("#address2").focus();
+	            
+	        }
+	    }).open();
+	});
+});
+
+</script>
 <script>
 var RegexID = /^[a-zA-Z0-9]{5,16}$/; // 영문 대소문자 숫자 특수문자 5~16자 규칙(아이디)
 var lengthRegexPass = /^[A-Za-z0-9!@#$%]{8,16}$/; // 영문 대소문자 숫자 특수문자 8~16자 규칙(패스워드)
@@ -262,14 +332,14 @@ window.addEventListener('load', function () {
 			var naverid = naverLogin.user.getId();
 			var naveremail = naverLogin.user.getEmail();
 			var navername = naverLogin.user.getName();
-			var naveryear = naverLogin.user.getBirthday().replaceAll("-","").trim();
-			var naverday = naverLogin.user.getBirthyear();
+			var naverday = naverLogin.user.getBirthday().replaceAll("-","").trim();
+			var naveryear = naverLogin.user.getBirthyear();
 			var naverphone = naverLogin.user.getMobile().replaceAll("-","").trim();
 			
 			console.log(naverLogin);
 			$("#name").val(navername)
 			$("#email").val(naveremail)
-			$("#birth").val(naveryear)
+			$("#birth").val(naveryear + naverday)
 			$("#phone").val(naverphone)
 			debugger;
 			$.ajax({
@@ -278,7 +348,7 @@ window.addEventListener('load', function () {
 				dataType : "text",
 				data : {
 // 						 memId : naverid
-						,memEmail : naveremail
+						 memEmail : naveremail
 						,memName : navername
 						,memPhone : naverphone
 						,memBirth : naveryear + naverday
