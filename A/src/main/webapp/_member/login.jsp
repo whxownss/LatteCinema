@@ -259,7 +259,7 @@ window.addEventListener('load', function () {
 	naverLogin.getLoginStatus(function(status) {
 		if (status) {
 			debugger;
-// 			var naverid = naverLogin.user.getId();
+			var naverid = naverLogin.user.getId();
 			var naveremail = naverLogin.user.getEmail();
 			var navername = naverLogin.user.getName();
 			var naveryear = naverLogin.user.getBirthday().replaceAll("-","").trim();
@@ -277,19 +277,27 @@ window.addEventListener('load', function () {
 				url : "simplelogin.me",
 				dataType : "text",
 				data : {
-// 						 memId : naverid
-						 memEmail : naveremail
+						 memId : naverid
+						,memEmail : naveremail
 						,memName : navername
 						,memPhone : naverphone
 						,memBirth : naveryear + naverday
 						},
-				success:function(data){
+                success:function(data){
 					debugger;
 					naverLogin.logout();
-// 					window.location = "main.me";
+					if(data == '1'){
+                		window.location = "main.me";		
+					}
 					$("#staticBackdrop").modal("show");
+                },
+// 				success:function(data){
+// 					debugger;
+// 					naverLogin.logout();
+// 					window.location = "main.me";
+// 					$("#staticBackdrop").modal("show");
 
-				},
+// 				},
 				error:function(){
 					console.log('오류 발생')
             	}
@@ -318,9 +326,9 @@ console.log(Kakao.isInitialized()); // sdk초기화여부판단
                 Kakao.API.request({
                     url: '/v2/user/me',
                     success: function (response) {
-                        alert(JSON.stringify(response))
+//                         alert(JSON.stringify(response))
                         console.log(response)
-//                         var kakaoid = response.id;
+                        var kakaoid = response.id;
 						var kakaoemail = response.kakao_account.email;
                         var kakaoname = response.kakao_account.name;
                         var kakaobirthyear = response.kakao_account.birthyear;
@@ -336,7 +344,7 @@ console.log(Kakao.isInitialized()); // sdk초기화여부판단
                         $.ajax({
                         	type : "post",
                         	data : {
-//                         			memId : kakaoid,
+                        			memId : kakaoid,
                         			memEmail : kakaoemail,
                         			memName : kakaoname,
                         			memBirth : kakaobirthyear + kakaobirthday,
