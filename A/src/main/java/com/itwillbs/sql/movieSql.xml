@@ -11,6 +11,7 @@
 		 	 ( 
 		 	   MOVIE_IDX
 		 	 , TITLE
+		 	 , MOVIE_CATEGORY
 		 	 , DIRECTOR
 		 	 , GENRE
 		 	 , OPENDATE
@@ -23,6 +24,7 @@
 		VALUES (
 			  #{movieIdx}
 		  	, #{title}
+		  	, #{movieCategory}
 		  	, #{director}
 		  	, #{genre}
 		  	, #{openDate}

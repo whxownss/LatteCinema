@@ -211,21 +211,28 @@
           </button>
         </div>
         <div class="modal-body">
-          <form id="demo-form3" data-parsley-validate class="form-horizontal form-label-left">
+          <form id="modal-form" action="movie_insert.mo" method="post" data-parsley-validate class="form-horizontal form-label-left" onsubmit="return registMovie()">
+
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">포스터 미리보기</label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+               <img src="assets/img/post22.jpg" style="width: inherit;">
+              </div>
+            </div>
   
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-title">영화이름<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-               <input type="text" id="movie-title" required="required" class="form-control col-md-7 col-xs-12">
+               <input type="text" id="movie-title" name="title" class="form-control col-md-7 col-xs-12">
               </div>
             </div>
 
              <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-category">카테고리<span class="required">*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-category">카테고리<span>*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-              <select id="movie-category" class="form-control" required>
+              <select id="movie-category" name="movieCategory" class="form-control" required>
                   <option value="NOW">NOW</option>
                   <option value="OLD">OLD</option>
                 </select>
@@ -233,26 +240,26 @@
             </div>
             
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-director">감독<span class="required">*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-director">감독<span>*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-               <input type="text" id="movie-director" required="required" class="form-control col-md-7 col-xs-12">
+               <input type="text" id="movie-director" name="director" required="required" class="form-control col-md-7 col-xs-12">
               </div>
             </div>
 
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-actor">배우<span class="required">*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-actor">배우
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-               <input type="text" id="movie-actor" required="required" class="form-control col-md-7 col-xs-12">
+               <input type="text" id="movie-actor" name="actor" class="form-control col-md-7 col-xs-12">
               </div>
             </div>
             
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-genre">장르<span class="required">*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-genre">장르<span">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-               <input type="text" id="movie-genre" required="required" class="form-control col-md-7 col-xs-12">
+               <input type="text" id="movie-genre" name="genre" class="form-control col-md-7 col-xs-12">
               </div>
             </div>
             
@@ -260,15 +267,15 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-startdate">상영시작일<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="date" id="movie-startdate" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 230921">
+                <input type="date" id="movie-startdate" name="startDate"required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 230921">
               </div> 
             </div>
-            
+            	`
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-enddate">상영종료일<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="date" id="movie-enddate" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 231021">
+                <input type="date" id="movie-enddate" name="endDate" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 231021">
               </div> 
             </div>
 
@@ -276,15 +283,15 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-opendate">개봉일<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="date" id="movie-opendate" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 230921">
+                <input type="date" id="movie-opendate" name="openDate" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 230921">
               </div> 
             </div>
             
              <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-rating">관람등급<span class="required">*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-rating">관람등급<span>*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-              <select id="movie-rating" class="form-control" required>
+              <select id="movie-rating" class="form-control" name="rating" required>
                   <option value="전체관람가">전체관람가</option>
                   <option value="12세 이상 관람가">12세 이상 관람가</option>
                   <option value="15세 이상 관람가">15세 이상 관람가</option>
@@ -293,23 +300,11 @@
                </div> 
             </div>
             
-           <!--  <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-nation">옵션1<span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-              <select id="movie-grade" class="form-control" required>
-                  <option value="">영화분류</option>
-                  <option value="NOW">latte Movie</option>
-                  <option value="nowMovie">now Movie</option>
-                </select>
-               </div> 
-            </div> -->
-            
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-nation">국가<span class="required">*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-nation">국가<span>*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-               <input type="text" id="movie-nation" required="required" class="form-control col-md-7 col-xs-12">
+               <input type="text" id="movie-nation" name="nation" required="required" class="form-control col-md-7 col-xs-12">
               </div>
             </div>
             
@@ -317,15 +312,19 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-runtime">상영시간<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-               <input type="text" id="movie-runtime" required="required" class="form-control col-md-7 col-xs-12">
+               <input type="text" id="movie-runtime" name="runTime" required="required" class="form-control col-md-7 col-xs-12">
               </div>
             </div>
             
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-synopsis">줄거리<span class="required">*</span></label>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-synopsis">줄거리</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <textarea class="form-control" id="movie-synopsis" required="required" class="form-control col-md-7 col-xs-12"></textarea>
+                <textarea class="form-control" id="movie-synopsis" name="synopsis" class="form-control col-md-7 col-xs-12"></textarea>
               </div>
+            </div>
+            
+            <div class="form-group">
+              <input type="hidden" id="movie-poster" name="poster">
             </div>
             
           </form>
@@ -333,7 +332,7 @@
         <div class="modal-footer">
           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-2">
             <button class="btn btn-primary" type="button">취소</button>
-            <button class="btn btn-success btn-regist" type="submit">등록</button>
+            <button class="btn btn-success btn-regist" type="submit" form="modal-form">등록</button>
           </div>
         </div>
       </div>
@@ -382,6 +381,7 @@
        modal.find('#movie-runtime').val(runtime)
        modal.find('#movie-filmmade').val(filmMade)
        modal.find('#movie-nation').val(nation)
+       modal.find('#movie-startdate').val(opendate)   //상영일 : 개봉일을 디폴트값으로 넣었음
        modal.find('#movie-opendate').val(opendate)
        modal.find('#movie-synopsis').val(synopsis)
        modal.find('#movie-director').val(director)
@@ -511,83 +511,36 @@
        /*    html += '<td><img src="'+ info.stlls.split('|')[0] + '"></td>'      */     // 첫번째 스틸컷만
           $('.boxmovie').find('tbody').append(html)
         }
-        
-        $('.btn-regist').click(function(){
-            
-            if(confirm("등록하실래용?")){
-              var formData = new FormData();
-              
-              // 선택된 체크박스 가져오기
-                var selectedCheckboxes = $('.movie-checkbox:checked');
-              
-                // 각 체크박스에 대한 처리
-               selectedCheckboxes.each(function (index, checkbox) {
-                var movieIdx = $(checkbox).closest('tr').attr('data-movieIdx');
-                var title = $(checkbox).attr('data-title');
-                var rating = $(checkbox).attr('data-rating');
-                var runtime = $(checkbox).attr('data-runtime');
-                var filmMade = $(checkbox).attr('data-filmMade');
-                var openDate = $(checkbox).attr('data-openDate');
-                var nation = $(checkbox).attr('data-nation');
-                var synopsis = $(checkbox).attr('data-synopsis');
-                var director = $(checkbox).attr('data-director');
-                var genre = $(checkbox).attr('data-genre');
-                var poster = $(checkbox).attr('data-poster');
-                
-                console.log("filmMade : "+filmMade);
-                console.log("openDate : "+openDate);
-                console.log("poster : "+poster);
-                console.log("poster : "+title);
-                console.log("poster : "+rating);
-                console.log("poster : "+filmMade);
-                console.log("poster : "+nation);
-                console.log("poster : "+synopsis);
-    
-                formData.append("movieIdx", movieIdx);
-                formData.append("title", title);
-                formData.append("rating", rating);
-                formData.append("runtime", runtime);
-                formData.append("filmMade", filmMade);
-                formData.append("nation", nation);
-                formData.append("synopsis", synopsis);
-                formData.append("openDate", openDate);
-                formData.append("director", director);
-                formData.append("genre", genre);
-                // 파일 업로드 시
-                var posterFile = $(checkbox).data('posterFile');
-                if (posterFile) {
-                  // posterFile이 존재할 경우에만 FormData에 추가
-                  formData.append("poster", posterFile);
-                }
-              });
-                
-               $.ajax({
-                   type: 'POST',
-                   url: '/A/movie_insert.mo',
-                   data: formData,
-                   processData: false,
-                   contentType: false,
-                   success: function () {
-                     // 서버로부터의 응답을 받았을 때 실행되는 코드
-                     <!-- insertMovie 자바 코드 넣을 곳 -->
-                     location.href = "adm_mv_inout.ad";
-                     
-                     console.log('등록 성공');
-                     window.close();
-                  
-                   },
-                   error: function () {
-                     // 서버로부터의 응답을 받지 못했을 때 실행되는 코드
-                     console.log('등록 실패');
-                   }
-                 });
-               }
-             });
-           },
+
+       },
       error:function(){
         alert("상영 정보가 확실하지 않습니다.")  
       }
     });
+  }
+  /**
+   유효성 검사하는 로직 작성
+   영화 등록 버튼 눌렀을 때 실행
+  */
+  function registMovie(){
+	  
+    if(confirm("등록하시겠습니까?")){
+    	// TODO
+//        var msg = "";
+//        if($('#movie-title').val() === ""){ alert("이름을 입력해 주세요"); return false; }
+//        if($('#movie-genre').val() === ""){ alert("장르를 입력해 주세요"); return false; }
+//        if($('#movie-rating').val() === ""){ alert("관람등급을 입력해 주세요"); return false; }
+//        if($('#movie-runtime').val() === ""){ alert("상영시간을 입력해 주세요"); return false; }
+//        if($('#movie-filmmade').val() === ""){ alert("제작사를 입력해주세요"); return false; }
+//        if($('#movie-nation').val() === ""){ alert("제작국가 입력해 주세요"); return false; }
+//        if($('#movie-startdate').val() === ""){ alert("상영시작을 입력해 주세요"); return false; }
+//        if($('#movie-opendate').val() === ""){ alert("상영일을 입력해 주세요"); return false; }
+//        if($('#movie-synopsis').val() === ""){ alert("줄거리를 입력해 주세요"); return false; }
+//        if($('#movie-director').val() === ""){ alert("감독을 입력해 주세요"); return false; }
+//        if($('#movie-poster').val() === ""){ alert("등록된 포스터가 없습니다.");}
+      return true;
+    }
+
   }
   
 	</script>
