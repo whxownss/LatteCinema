@@ -160,15 +160,10 @@ public class MemberController extends HttpServlet {
 			System.out.println(result);
 			System.out.println("@@@@@@@@@@");
 			// result 가 0일 때 중복된 email이 없으므로 가입가능 
-//			if(result == 0)  
+			if(result == 0) {
+				
+			}
 //			memberService.insertSimpleMember(request);
-//				
-//			HttpSession session = request.getSession();
-////			session.setAttribute("sId", request.getParameter("memId"));
-//			session.setAttribute("sName", request.getParameter("memName"));
-//			session.setAttribute("sEmail", request.getParameter("memEmail"));
-//			session.setAttribute("sBirtn", request.getParameter("memEmail"));
-		
 				
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(result + "");

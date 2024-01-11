@@ -29,6 +29,11 @@ public class MemberService {
 			String email = request.getParameter("email");
 			Timestamp date = new Timestamp(System.currentTimeMillis());
 			
+			System.out.println("@@@@@@@@@@@@@@@@@@");
+			System.out.println(phone);
+			System.out.println(birth);
+			System.out.println(email);
+			
 			MemberDTO memberDTO = new MemberDTO();
 			memberDTO.setMemIdx(idx);
 			memberDTO.setMemId(id);

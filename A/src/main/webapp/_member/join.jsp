@@ -407,24 +407,6 @@ function checkBirth() {
 	$("#CheckBirth").text(text).css("color", color);
 }
 
-// 이메일 정규식 유효성
-// function checkEmail() {
-// 	var email = $("#email").val();
-// 	var text = "** 본인인증 이메일 필수 입력! **";
-// 	var color= "red";
-	
-// 	if(email != ""){
-// 		text = "** name@example.com 형식에 맞게 입력! **";
-		
-// 		if(emailRegex.test(email)){
-// 			text = "** 유효한 이메일 ** ";
-// 			color = "green";
-// 		}
-// 	}
-	
-// 	$("#CheckEmail").text(text).css("color" , color);
-// }
-
 
 // 유효성 체크 후 submit
 function checkSubmit() {
