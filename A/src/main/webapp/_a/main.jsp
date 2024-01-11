@@ -19,38 +19,32 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
     
 
     <!-- ======= Culture Category Section ======= -->
-    <section class="category-section">
-      <div class="container" data-aos="fade-up">
+    <  <!-- ======= Culture Category Section ======= -->
+  <section class="category-section">
+    <div class="container" data-aos="fade-up">
 
-        <div class="section-header d-flex justify-content-between align-items-center mb-5">
-          <h2>라떼는 말이야..</h2>
-          <div><a href="movie_latte.mo#vote" class="more">투표하러가기 &gt;</a></div>
-        </div>
-
-        <div class="row g-5">
-	      <c:forEach var="movie" items="${lattePosterList}" varStatus="status">
-  <div class="col-lg">
-    <div class="post-entry-1 lg">
-      <div class="item position-relative" id="wrap">
-        <!-- 각 영화의 포스터 이미지를 동적으로 출력 -->
-        <img src="<c:out value="${movie.poster}" />" style="width: 60%;">
-        <div class="titlee">
-          <a href="#" class="moree">예매하기</a>
-          <a href="#" class="moree">상세정보</a>
-        </div>
+      <div class="section-header d-flex justify-content-between align-items-center mb-5">
+        <h3>1월의 라떼..</h3>
       </div>
-     </div>
-  </div>
-</c:forEach>
-          
-        </div> <!-- End .row -->
-      </div>
-    </section><!-- End Lifestyle Category Section -->
-    
 
-	
-
-    
+		<div class="row g-5">
+		  <c:forEach var="movie" items="${lattePosterList}" varStatus="status">
+		    <div class="col-lg">
+		      <div class="post-entry-1 lg">
+		        <div class="item position-relative" id="wrap">
+		          <!-- 각 영화의 포스터 이미지를 동적으로 출력 -->
+		          <img src="<c:out value="${movie.poster}" />" style="width: 100%;">
+		          <div class="titlee">
+		            <a href="#" class="moree">예매하기</a>
+		            <a href="#" class="moree">상세정보</a>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </c:forEach>
+		
+		
+		    
 
     <!-- 일별 박스오피스 -->
 

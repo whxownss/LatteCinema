@@ -59,6 +59,7 @@
                   <li><a href="adm_member.ad"><i class="fa fa-user"></i> 회원관리</a></li>
                   <li><a href="adm_mv_inout.ad"><i class="fa fa-edit"></i>영화 통합 추가/제거</a></li>
                   <li><a href="adm_store.ad"><i class="fa fa-beer"></i>스토어 관리</a></li>
+                  <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
                 </ul>
               </div>
               <div class="menu_section">
@@ -216,7 +217,7 @@
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12">포스터 미리보기</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-               <img src="assets/img/post22.jpg" style="width: inherit;">
+               <img id="movie-preview" style="width: inherit;">
               </div>
             </div>
   
@@ -270,7 +271,7 @@
                 <input type="date" id="movie-startdate" name="startDate"required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 230921">
               </div> 
             </div>
-            	`
+            
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-enddate">상영종료일<span class="required">*</span>
               </label>
@@ -293,9 +294,9 @@
               <div class="col-md-6 col-sm-6 col-xs-12">
               <select id="movie-rating" class="form-control" name="rating" required>
                   <option value="전체관람가">전체관람가</option>
-                  <option value="12세 이상 관람가">12세 이상 관람가</option>
-                  <option value="15세 이상 관람가">15세 이상 관람가</option>
-                  <option value="청소년 관람불가">청소년 관람불가</option>
+                  <option value="12세관람가">12세 이상 관람가</option>
+                  <option value="15세관람가">15세 관람가</option>
+                  <option value="18세관람가(청소년관람불가)">청소년 관람불가</option>
                 </select>
                </div> 
             </div>
@@ -312,7 +313,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-runtime">상영시간<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-               <input type="text" id="movie-runtime" name="runTime" required="required" class="form-control col-md-7 col-xs-12">
+               <input type="text" id="movie-runtime" name="runtime" required="required" class="form-control col-md-7 col-xs-12">
               </div>
             </div>
             
@@ -331,7 +332,7 @@
         </div>
         <div class="modal-footer">
           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-2">
-            <button class="btn btn-primary" type="button">취소</button>
+            <button class="btn btn-primary" type="button" data-dismiss="modal">취소</button>
             <button class="btn btn-success btn-regist" type="submit" form="modal-form">등록</button>
           </div>
         </div>
@@ -353,15 +354,12 @@
        }
      });
     
-    
     /* 모달 활성화 됐을 때*/
      $('#movieModal').on('show.bs.modal', function (event) {
+       /*FIXME : 박스오피스에서 모달을 띄웠을때, 이전에 있던 포스터가 그대로 걸려있음 */
        var button = $(event.relatedTarget)
        var title = button.data('title')
        var opendate = button.data('opendate')
-       
-       console.log(opendate)
-       
        var rating = button.data('rating')
        var runtime = button.data('runtime')
        var filmMade = button.data('filmmade')
@@ -370,6 +368,9 @@
        var director = button.data('director')
        var genre = button.data('genre')
        var poster = button.data('poster')
+       var actor = button.data('actor')
+       var rating = button.data('rating')
+       var category = button.data('category')
        
        var modal = $(this)
        // 박스오피스 only
@@ -386,7 +387,9 @@
        modal.find('#movie-synopsis').val(synopsis)
        modal.find('#movie-director').val(director)
        modal.find('#movie-poster').val(poster)
-       
+       modal.find('#movie-actor').val(actor)
+       modal.find('#movie-category').val(category)
+       modal.find('#movie-preview').attr('src',poster) //포스터 미리보기 삽입
      })
      
    })
@@ -403,7 +406,7 @@
 					key : "ee9ed756bb3f15468dceccf766e69e7b",
 					targetDt : "20190900"                         //날짜형식이 틀리면 최신날짜를 보여주는걸로 알고있음
 			},
-			async : false,                              //비동기식인 ajax를 동기식으로 만들어줌 만약 출력해야될 결과가 많거나 제대로 출력되지 않을때, 이 옵션을 사용
+			async : false,                                    //비동기식인 ajax를 동기식으로 만들어줌 만약 출력해야될 결과가 많거나 제대로 출력되지 않을때, 이 옵션을 사용
 			success : function(data) {                        //data에 들어오는 값들은 앞에서 출력되던 예시와 같음
 			  console.log(data)
 			  var boxofficehead = `
@@ -435,12 +438,13 @@
 			}
 		});
 	}
-   /*검색 영화 조회*/
-  function openSearchMovie(){
+  /**
+  ajax 분리
+  FIXME : 분리하는 과정에서 무조건 OLD 넣게 설정되어버렸는데, 수정 필요함
+  */
+  function detailSearch(){
     var keyword = $('.input-movie-title').val();
-    $('.movie_contents').css('display','block')
-    $('.boxmovie').find('tbody').html('');
-    
+    var result = '';
     $.ajax({
       url : 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp',
       data : {
@@ -451,96 +455,115 @@
       },
       type : 'GET',
       dataType: 'json',
+      async : false,
       success : function(data) {
-        console.log(data);
-        var moviesearchhead = `
-          <tr>
-          <td>제목</td>
-          <td>국가</td>
-          <td>관람등급</td>
-          <td>개봉일</td>
-          <td>감독</td>
-          <td>장르</td>
-          <td>등록</td>
-          </tr>`
-        $('.boxmovie').find('thead').html(moviesearchhead)
-          
-          
-        for(var i=0; i<data.Data[0].Count ; i++){
-          var info = data.Data[0].Result[i];
-          var title = info.title.replace(/!HS | !HE /g, '');  
-          // 검색어에 !HS !HE 라는 글자가 같이 포함돼서 없애주는 작업
-          //var actors = '';                                  
-          var movieIdx = info.Codes.Code[0].CodeNo;
-          var filmMade = info.company;
-          var openDate = info.repRlsDate;
-          console.log(openDate)
-          var poster = info.posters.split('|')[0];
-          var nation = info.nation;
-          var synopsis = info.plots.plot[0].plotText;
-          var rating = info.rating;
-          var director = info.directors.director[0].directorNm;
-          var runtime = info.runtime;
-          var genre = info.genre;
-          var html = '';
-       // openDate를 YYYYMMDD 형식에서 YYYY-MM-DD 형식으로 변경
- 			openDate = openDate.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3');  
-          
-          html += '<tr data-movieIdx="'+ movieIdx+'">'
-          html += '<td>'+ title + '</td>'
-          html += '<td>'+ nation + '</td>'
-          html += '<td>'+ rating + '</td>'
-          html += '<td>'+ openDate + '</td>'
-          html += '<td>'+ director + '</td>'
-          html += '<td>'+ genre + '</td>'
-          html += '<td><button class="btn btn-success" type="button" data-toggle="modal" data-target="#movieModal" data-movieidx="'+ movieIdx +
-                  '"data-title="' + title +
-                  '"data-rating="'+ rating +
-                  '"data-runtime="'+ runtime +
-                  '"data-filmmade="'+ filmMade +
-                  '"data-nation="'+ nation +
-                  '"data-synopsis="'+ synopsis +
-                  '"data-opendate="'+ openDate +
-                  '"data-director="'+ director +
-                  '"data-genre="'+ genre +
-                  '"data-poster="'+ poster +
-                  '">등록</button></td>';
-          html += '</tr>';
-          
-        /* html += '<td><img src="'+ info.posters.split('|')[0] + '"></td>'  */  // 첫번째 포스터만
-       /*    html += '<td><img src="'+ info.stlls.split('|')[0] + '"></td>'      */     // 첫번째 스틸컷만
-          $('.boxmovie').find('tbody').append(html)
-        }
-
+        result = data;
        },
       error:function(){
         alert("상영 정보가 확실하지 않습니다.")  
       }
     });
+    return result;
+  }
+   
+   
+   /*검색 영화 조회*/
+  function openSearchMovie(){
+    var keyword = $('.input-movie-title').val();
+    $('.movie_contents').css('display','block')
+    $('.boxmovie').find('tbody').html('');
+    
+    var moviesearchhead = `
+      <tr>
+      <td>제목</td>
+      <td>국가</td>
+      <td>관람등급</td>
+      <td>개봉일</td>
+      <td>감독</td>
+      <td>장르</td>
+      <td>등록</td>
+      </tr>`
+    $('.boxmovie').find('thead').html(moviesearchhead)
+    
+    var data = detailSearch();
+      
+    for(var i=0; i<data.Data[0].Count ; i++){
+      var info = data.Data[0].Result[i];
+      var title = info.title.replace(/!HS | !HE /g, '');  
+      // 검색어에 !HS !HE 라는 글자가 같이 포함돼서 없애주는 작업
+      var movieIdx = info.Codes.Code[0].CodeNo;
+      var filmMade = info.company;
+      var openDate = info.repRlsDate;
+      var poster = info.posters.split('|')[0];
+      var nation = info.nation;
+      var synopsis = info.plots.plot[0].plotText;
+      var rating = info.rating==="전체관람가" ? "all":
+                   info.rating==="12세관람가" ? "12" : 
+                   info.rating==="15세관람가" ? "15" :
+                   info.rating==="18세관람가(청소년관람불가)" ? "18" : "";
+      var director = info.directors.director[0].directorNm;
+      var runtime = info.runtime;
+      var genre = info.genre;
+      var html = '';
+      // openDate를 YYYYMMDD 형식에서 YYYY-MM-DD 형식으로 변경
+      openDate = openDate.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3');  
+      
+      var actorArr = [];
+      let count = info.actors.actor.length > 3 ? 3 : info.actors.actor.length;
+      for(let i = 0; i < count ; i++){
+        actorArr.push(info.actors.actor[i].actorNm);
+      }
+      var actor = actorArr.join('|');
+       
+      html += '<tr data-movieIdx="'+ movieIdx+'">'
+      html += '<td>'+ title + '</td>'
+      html += '<td>'+ nation + '</td>'
+      html += '<td>'+ rating + '</td>'
+      html += '<td>'+ openDate + '</td>'
+      html += '<td>'+ director + '</td>'
+      html += '<td>'+ genre + '</td>'
+      html += '<td><button class="btn btn-success" type="button" data-toggle="modal" data-target="#movieModal" data-movieidx="'+ movieIdx +
+              '"data-title="' + title +
+              '"data-rating="'+ rating +
+              '"data-runtime="'+ runtime +
+              '"data-filmmade="'+ filmMade +
+              '"data-nation="'+ nation +
+              '"data-synopsis="'+ synopsis +
+              '"data-opendate="'+ openDate +
+              '"data-director="'+ director +
+              '"data-genre="'+ genre +
+              '"data-poster="'+ poster +
+              '"data-actor="'+ actor +
+              '"data-category="OLD"'  +
+              '">등록</button></td>';
+      html += '</tr>';
+      
+      $('.boxmovie').find('tbody').append(html)
+  }
+      
   }
   /**
    유효성 검사하는 로직 작성
    영화 등록 버튼 눌렀을 때 실행
   */
   function registMovie(){
-	  
     if(confirm("등록하시겠습니까?")){
-    	// TODO
-//        var msg = "";
-//        if($('#movie-title').val() === ""){ alert("이름을 입력해 주세요"); return false; }
-//        if($('#movie-genre').val() === ""){ alert("장르를 입력해 주세요"); return false; }
-//        if($('#movie-rating').val() === ""){ alert("관람등급을 입력해 주세요"); return false; }
-//        if($('#movie-runtime').val() === ""){ alert("상영시간을 입력해 주세요"); return false; }
-//        if($('#movie-filmmade').val() === ""){ alert("제작사를 입력해주세요"); return false; }
-//        if($('#movie-nation').val() === ""){ alert("제작국가 입력해 주세요"); return false; }
-//        if($('#movie-startdate').val() === ""){ alert("상영시작을 입력해 주세요"); return false; }
-//        if($('#movie-opendate').val() === ""){ alert("상영일을 입력해 주세요"); return false; }
-//        if($('#movie-synopsis').val() === ""){ alert("줄거리를 입력해 주세요"); return false; }
-//        if($('#movie-director').val() === ""){ alert("감독을 입력해 주세요"); return false; }
-//        if($('#movie-poster').val() === ""){ alert("등록된 포스터가 없습니다.");}
+       var msg = "";
+       if($('#movie-title').val() === ""){ alert("이름을 입력해 주세요"); return false; }
+       if($('#movie-genre').val() === ""){ alert("장르를 입력해 주세요"); return false; }
+       if($('#movie-rating').val() === ""){ alert("관람등급을 입력해 주세요"); return false; }
+       if($('#movie-runtime').val() === ""){ alert("상영시간을 입력해 주세요"); return false; }
+       if($('#movie-filmmade').val() === ""){ alert("제작사를 입력해주세요"); return false; }
+       if($('#movie-nation').val() === ""){ alert("제작국가 입력해 주세요"); return false; }
+       if($('#movie-startdate').val() === ""){ alert("상영시작을 입력해 주세요"); return false; }
+       if($('#movie-opendate').val() === ""){ alert("상영일을 입력해 주세요"); return false; }
+       if($('#movie-synopsis').val() === ""){ alert("줄거리를 입력해 주세요"); return false; }
+       if($('#movie-director').val() === ""){ alert("감독을 입력해 주세요"); return false; }
+       if($('#movie-poster').val() === ""){ alert("등록된 포스터가 없습니다.");}
+       if($('#movie-actor').val() === ""){ alert("등록된 배우가 없습니다.");}
       return true;
     }
-
+    return false;
   }
   
 	</script>
