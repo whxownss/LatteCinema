@@ -1,3 +1,6 @@
+<%@page import="com.itwillbs.domain.QnaBoardDTO"%>
+<%@page import="com.itwillbs.domain.PageDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -19,7 +22,11 @@
       <!-- 이곳에 코드작성 -->
       <div class="inner-wrap">
         <jsp:include page="lnb.jsp"></jsp:include>
-        
+        	
+        	<%
+			ArrayList<QnaBoardDTO> qnaBoardList = (ArrayList<QnaBoardDTO>)request.getAttribute("qnaBoardList");
+			PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
+			%>
 
 		
 			<div id="contents">
@@ -87,9 +94,9 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="boardList" items="${boardList}">
+							<c:forEach var="qnaBoardDTO" items="${qnaBoardList }">
 								<tr>
-									<td style="text-align: center;">1</td>
+									<td style="text-align: center;">${qnaBoardDTO.responseUser }</td>
 									<th style="text-align: center;">서면</th>
 									<td>기타</td>
 									<td>제목</td>

@@ -408,6 +408,8 @@ public class MemberController extends HttpServlet {
 			pageDTO.setEndPage(endPage);
 			pageDTO.setPageCount(pageCount);
 			
+			System.out.println(pageDTO);
+			
 			// request에 pageDTO 저장
 			request.setAttribute("pageDTO", pageDTO);
 			//request에 boardList 저장
