@@ -173,7 +173,7 @@
 <%--                         <span name="postcode">${memberDTO.memAddress.split("/")[0]}</span> --%>
                         <a href="#none" id="addrBtn" class="button small gray-line ml10" title="우편번호 검색">우편번호 검색</a><br>
 <%--                         <p class="reset mt10" id="addr1" name="addr1">${memberDTO.memAddress.split("/")[1]}</p><br> --%>
-						<input class="reset mt10" id="addr1" name="addr1" value="${memberDTO.memAddress.split("/")[1]}">
+						<input class="reset mt10 w-100" id="addr1" name="addr1" value="${memberDTO.memAddress.split("/")[1]}"><br>
                         <input type="text" id="addr2" name="addr2" value="${memberDTO.memAddress.split('/')[2]}" placeholder="상세주소 입력" required>
                         
                       </td>
@@ -270,10 +270,15 @@
 
         // 휴대폰번호 변경 클릭
         $('#phoneChgBtn').on('click', function() {
+        	debugger;
             $('.change-phone-num-area > div input').val('');
+        	debugger;
             $('.change-phone-num-area > div:first button').text('인증번호 전송');
+        	debugger;
             $('#timeLimit').html('');
+        	debugger;
             clearInterval(interval);
+        	debugger;
         });
 
         // 인증번호 발송 버튼 클릭
