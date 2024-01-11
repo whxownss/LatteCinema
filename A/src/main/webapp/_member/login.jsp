@@ -87,6 +87,46 @@
 	
 	</main>
 	
+	<!-- Modal -->
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="staticBackdropLabel">간편 가입</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <form  onsubmit="return checkSubmit()" action="joinPro.me" id="fr" >
+	      	<div class="modal-body">
+       				<div class="form-floating mb-3">
+						<input type="text" class="form-control" id="id" placeholder="5자 이상" minlength="5" required 
+								onblur="checkId()" name="id"> 
+						<label for="id">아이디<span id="CheckId" style="font-size: 15px;"></span></label>
+
+					</div>
+					<div class="form-floating mb-3">
+						<input type="password" class="form-control" id="passwd" placeholder="비밀번호" required
+								onblur="checkPass(); checkConfirmPasswd();" name="pass">
+						<label  for="passwd">비밀번호<span id="CheckPassword1"></span></label> 
+
+					</div>
+					<div class="form-floating mb-3">
+						<input type="password" class="form-control" id="passwd2" placeholder="비밀번호 확인" required
+								onchange="checkConfirmPasswd()">
+						<label for="passwd2">비밀번호 확인<span id="CheckPassword2"></span></label>
+
+					</div>
+	      	</div>
+	      	<div class="modal-footer">
+	        	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	        	<button type="button" class="btn btn-primary">Understood</button>
+	      	</div>
+	      	
+	      </form>
+	    </div>
+	  </div>
+	</div>
+	<!-- Modal -->
+	
 <%@include file ="../_common/commonFooterStart.jsp" %>
 <script type="text/javascript">
 var naverLogin = new naver.LoginWithNaverId({
@@ -117,8 +157,8 @@ window.addEventListener('load', function () {
 				url : "simplelogin.me",
 				dataType : "text",
 				data : {
-						 memId : naverid
-						,memEmail : naveremail
+// 						 memId : naverid
+						 memEmail : naveremail
 						,memName : navername
 						,memPhone : naverphone
 						,memBirth : naveryear + naverday
@@ -158,7 +198,7 @@ console.log(Kakao.isInitialized()); // sdk초기화여부판단
                     success: function (response) {
                         alert(JSON.stringify(response))
                         console.log(response)
-                        var kakaoid = response.id;
+//                         var kakaoid = response.id;
 						var kakaoemail = response.kakao_account.email;
                         var kakaoname = response.kakao_account.name;
                         var kakaobirthyear = response.kakao_account.birthyear;
@@ -169,7 +209,7 @@ console.log(Kakao.isInitialized()); // sdk초기화여부판단
                         $.ajax({
                         	type : "post",
                         	data : {
-                        			memId : kakaoid,
+//                         			memId : kakaoid,
                         			memEmail : kakaoemail,
                         			memName : kakaoname,
                         			memBirth : kakaobirthyear + kakaobirthday,
