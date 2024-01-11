@@ -153,14 +153,8 @@
                 <li data-url="/mypage/moviestory?cd=tl" class="on">
                   <a id="movieTimeLineTab" href="#" class="btn" data-type="tl" title="무비타임라인 탭으로 이동">무비타임라인</a>
                 </li>
-                <li data-url="/mypage/moviestory?cd=mp">
-                  <a href="#" class="btn" data-type="mp" title="무비포스트 탭으로 이동">무비포스트</a>
-                </li>
                 <li data-url="/mypage/moviestory?cd=one">
                   <a href="#" class="btn" data-type="one" title="관람평 탭으로 이동">관람평</a>
-                </li>
-                <li data-url="/mypage/moviestory?cd=sm">
-                  <a href="#" class="btn" data-type="sm" title="본영화 탭으로 이동">본영화</a>
                 </li>
                 <li data-url="/mypage/moviestory?cd=lm">
                   <a href="#" class="btn" data-type="lm" title="보고싶어 탭으로 이동">보고싶어</a>
@@ -243,52 +237,65 @@
                     </li>
                   </ul>
                 </li>
+                
+                <li>
+                  <div class="date">
+                    <p>2023.10.29</p>
+                  </div>
+                  <ul class="movie">
+                    <li>
+                      <a href="javaScript:void(0)" title="그대들은 어떻게 살 것인가 상세보기" class="img posterImg btn-modal-open2" w-data="850" h-data="auto" data-no="102468890" data-cd="ADMIS" data-mno="23075200">
+                        <img src="https://img.megabox.co.kr/SharedImg/2023/10/25/FXFCIlhJ6JEcTfk8BpVkSWvmf84sSpe9_230.jpg" onerror="noImg(this)" alt="그대들은 어떻게 살 것인가">
+                      </a>
+                      <div class="cont">
+                        <p class="label">본영화</p>
+                        <p class="tit">
+                          <a href="javaScript:void(0)" title="그대들은 어떻게 살 것인가 상세보기">그대들은 어떻게 살 것인가</a>
+                        </p>
+                        <div class="theater">
+                          <p>코엑스</p>
+                          <p>SHINeeWORLD관(컴포트 3관)</p>
+                          <p>2023.10.29(일) 14:25 (3회차)</p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <div class="date">
+                    <p>2023.10.29</p>
+                  </div>
+                  <ul class="movie">
+                    <li>
+                      <a href="javaScript:void(0)" title="그대들은 어떻게 살 것인가 상세보기" class="img posterImg btn-modal-open2" w-data="850" h-data="auto" data-no="102468890" data-cd="ADMIS" data-mno="23075200">
+                        <img src="https://img.megabox.co.kr/SharedImg/2023/10/25/FXFCIlhJ6JEcTfk8BpVkSWvmf84sSpe9_230.jpg" onerror="noImg(this)" alt="그대들은 어떻게 살 것인가">
+                      </a>
+                      <div class="cont">
+                        <p class="label">본영화</p>
+                        <p class="tit">
+                          <a href="javaScript:void(0)" title="그대들은 어떻게 살 것인가 상세보기">그대들은 어떻게 살 것인가</a>
+                        </p>
+                        <div class="theater">
+                          <p>코엑스</p>
+                          <p>SHINeeWORLD관(컴포트 3관)</p>
+                          <p>2023.10.29(일) 14:25 (3회차)</p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                
               </ol>
             </div>
+            
             <!--// my-timeline-list -->
             <div class="btn-more v1 pt00 myTimeline myMovieStory" style="display: none;">
-              <button type="button" class="btn" id="addList">더보기
+              <button type="button" class="btn" id="load">더보기
                 <i class="iconset ico-btn-more-arr"></i>
               </button>
             </div>
             <!--// 나의 무비타임라인 -->
-            <!-- 나의 무비포스트 -->
-            <div class="my-movie-post myMoviePost myMovieStory" style="display: none;">
-              <div class="tab-sorting mb20">
-                <button type="button" class="on" data-type="my">나의 포스트</button>
-                <button type="button" data-type="mySubscribe">구독중인 포스트</button>
-              </div>
-              <!-- movie-list-util -->
-              <div class="movie-list-util">
-                <p class="result-count  line32">
-                  <strong>총
-                    <b class="font-gblue" id="myMoviePostCnt"></b>건</strong>
-                </p>
-                <div class="float-r">
-                  <div class="movie-sorting">
-                    <span>
-                      <button type="button" class="btn on" data-type="date">최신순</button>
-                    </span>
-                    <span>
-                      <button type="button" class="btn" data-type="like">공감순</button>
-                    </span>
-                  </div>
-                  <div class="movie-search">
-                    <input type="text" title="제목, 장르, 감독, 주연배우를 입력하세요" placeholder="제목, 장르, 감독, 주연배우" class="input-text" name="ibxMovieNmSearch">
-                    <button type="button" class="btn-search-input">검색</button>
-                  </div>
-                </div>
-              </div>
-              <!--// movie-list-util -->
-              <div class="movie-post-list" id="moviePostList">
-              </div>
-              <div class="more-movie-list">
-                <button type="button" class="button btn-more-movie-list">더보기
-                  <i class="iconset ico-btn-more-arr"></i>
-                </button>
-              </div>
-            </div>
-            <!--// 나의 무비포스트 -->
             <div class="board-list-util myOne myMovieStory" style="display: none;">
               <p class="result-count">
                 <strong>총
@@ -303,33 +310,6 @@
             <nav class="pagination myOne myMovieStory" style="display: none;">
             </nav>
             <!--// 나의 한줄평 -->
-            <!-- 나의 본영화 -->
-            <div class="mypage-infomation mt20 mySeenMovie myMovieStory" style="display: none;">
-              <ul class="dot-list mb20">
-                <!-- <li>본 영화 리스트는 실제 관람한 이력으로 보여지며, 상영일 익일에 자동 노출됩니다.</li> 20190819 -->
-                <li>극장에서 발권하신 티켓 바코드 하단의 거래번호를 통해 본 영화 등록을 하실 수 있습니다.</li>
-                <!-- <li>유료 관람 영화 편수는 ‘나의 메가박스’에서 확인 하실 수 있습니다.</li> -->
-                <li>본영화는 관람한 인원수에 한해 등록이 가능합니다.</li>
-              </ul>
-              <div class="btn-group right mySeenMovie myMovieStory" style="display: none;">
-                <a href="#saw_movie_regi" class="button btn-modal-open" w-data="600" h-data="470" title="본 영화 등록">본 영화 등록</a>
-              </div>
-            </div>
-            <div class="board-list-util mySeenMovie myMovieStory" style="display: none;">
-              <p class="result-count">
-                <strong>총
-                  <b class="font-gblue" id="mySeenMovieCnt"></b>건</strong>
-              </p>
-            </div>
-            <!-- my-saw-movie -->
-            <div class="my-saw-movie mt10 mySeenMovie myMovieStory" style="display: none;">
-              <ul id="mySawMovie">
-              </ul>
-            </div>
-            <!--// my-saw-movie -->
-            <nav class="pagination mySeenMovie myMovieStory" style="display: none;">
-            </nav>
-            <!--// 나의 본영화 -->
             <!--// 나의 보고싶어 -->
             <!-- my-movie-list -->
             <div class="my-movie-list myLikeMovie myMovieStory" style="display: none;">
@@ -340,8 +320,8 @@
                 </p>
               </div>
               <div class="movie-list myLikeMovie myMovieStory" style="display: none;">
-                <ol class="list" id="movieList">
-                </ol>
+<!--                 <ol class="list" id="movieList"> -->
+<!--                 </ol> -->
               </div>
               <div class="more-movie-list pt30 myLikeMovie myMovieStory" style="display: none;">
                 <button type="button" class="button btn-more-like-list">더보기
@@ -442,8 +422,6 @@
             $('#btnAddMovie').on('click', function() {
               fn_moviePostRlySearch('add');
             });
-
-
 
             // 댓글 사이즈
             $('#postRlyCn').on('keyup', function(e) {
