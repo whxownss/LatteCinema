@@ -74,7 +74,7 @@
 							</tr>
 							<tr class="border border-0 border-white">
 								<td scope="row" class="text-center" colspan="4">
-									<button class="btn btn-secondary btn-lg"
+									<button class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"
 										style="text-align: center; padding-left: 60px; padding-right: 60px;">선물하기</button>
 									<button class="btn btn-danger btn-lg" onclick="requestPay()"
 										style="text-align: center; padding-left: 60px; padding-right: 60px;">구매하기</button>
@@ -82,6 +82,39 @@
 							</tr>
 						</tbody>
 					</table>
+					
+					<!-- 선물하기 모달 내용 -->
+					<div class="modal fade" id="exampleModal" tabindex="-1"
+						aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-2" id="exampleModalLabel">선물하기</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<form>
+										<div class="mb-3">
+											<label for="recipient-name" class="col-form-label" id="username">받으시는 분 (아이디) : 
+											<img id="id_check_sucess" style="display: none;"></label>
+											<input type="text" class="form-control" id="recipient-name" check_result="fail" required />
+										</div>
+										<div class="mb-3">
+											<label for="message-text" class="col-form-label">보내는 메세지 :</label>
+											<textarea class="form-control" rows="5" id="message-text" placeholder="즐거운 관람 되세요~"></textarea>
+										</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal">닫기</button>
+									<button type="button" class="btn btn-danger" onclick="requestPay()">선물보내기</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</article>
 			</section>
 		</div>
@@ -179,10 +212,73 @@
 
 <script src="jQuery/jquery-3.6.0.js"></script>
 
+<script>
+
+// 연락처 유무 체크
+function checkId() {
+	var id = $("#id").val();
+// 	debugger;
+	if(id==""){
+		$("#CheckId").text("아이디를 입력하세요").css("color", "red");
+		return false;			
+	}else if(!RegexID.test(id)){
+		$("#CheckId").text("영문 대소문자,숫자 5~16자리 아이디 입력 ").css("color", "red");
+		return false;
+	}else if(numRegex1.test(id)){
+		$("#CheckId").text("영문 대소문자,숫자 5~16자리 아이디 입력1 ").css("color", "red");
+		return false;
+	}
+		
+		$.ajax({
+			type : "post",
+			
+			data : {memId : id}, //입력한 값 변수에 담기
+			url : "checkjoin.me", 
+			dataType: "text",
+			success:function(data){
+// 				debugger;
+
+				// 중요 복습필수
+// 				$("#CheckId").text(data.text).css("color", data.color);
+// 				return data.bool
+
+				if(data == '1'){
+					$("#CheckId").text("사용중인 아이디입니다.").css("color", "red");
+					return false;
+				}else if(data == '0'){
+					$("#CheckId").text("사용가능한 아이디입니다.").css("color", "green");
+					return true;
+				 }		
+			},
+			error: function(){
+			}
+		});
+	}
+
+// 연락처 정규식 체크
+function checkPhone() {
+	var phone = $("#phone").val();
+	var text = "** 연락처 입력 필수! **"
+	var color = "red";
+	
+	if(phone != ""){
+		text = "** 알맞은 연락처 형식으로 입력! '-' 생략가능!! **";
+		
+		if(phoneRegex.test(phone)){
+			text = "** 알맞은 연락처 형식! ** ";
+			color = "green";
+		}
+	}
+	$("#CheckPhone").text(text).css("color",color);
+}
+
+
+
 <!-- iamport.payment.js -->
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
+<!-- 결제 API -->
 <script type="text/javascript">
 
 // 가맹점 식별코드
