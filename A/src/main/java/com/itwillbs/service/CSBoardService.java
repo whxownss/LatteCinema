@@ -19,6 +19,7 @@ import com.itwillbs.domain.LostBoardDTO;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
+import com.itwillbs.domain.RecommendDTO;
 import com.itwillbs.domain.ResponseDataDTO;
 
 public class CSBoardService {
@@ -786,6 +787,211 @@ public class CSBoardService {
 		}
 		return responseList;
 	}//getResponseList()
+
+	public boolean insertRecommend(HttpServletRequest request) {
+		System.out.println("CSBoardService insertRecommend()");
+		int insertSuccess = 0;
+		try {
+			String createUser = request.getParameter("createUser");
+			String movieName = request.getParameter("movieName");
+			String director	= request.getParameter("director");
+			String poster = request.getParameter("poster");
+			
+			RecommendDTO recommendDTO = new RecommendDTO();
+			recommendDTO.setCreateUser(createUser);
+			recommendDTO.setMovieName(movieName);
+			recommendDTO.setDirector(director);
+			recommendDTO.setPoster(poster);
+			
+			csBoardDAO = new CSBoardDAO();
+			insertSuccess = csBoardDAO.insertRecommend(recommendDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return insertSuccess > 0;
+	}
+
+	public ArrayList<RecommendDTO> getRecommendList(PageDTO pageDTO) {
+		System.out.println("CSBoardService getRecommendList()");
+		ArrayList<RecommendDTO> recommendList = null;
+		try {
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			recommendList = csBoardDAO.getRecommendList(pageDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return recommendList;
+	}//getRecommendList()
+
+	public boolean plusRecoCount(HttpServletRequest request) {
+		System.out.println("CSBoardService plusRecoCount()");
+		 int updateSuccess = 0;
+		 try {
+			 String createUser = request.getParameter("createUser");
+			 String recommendIdx = request.getParameter("recommendIdx");
+			 String recoUser = request.getParameter("recoUser");
+			csBoardDAO = new CSBoardDAO();
+			updateSuccess = csBoardDAO.plusRecoCount(createUser,recommendIdx,recoUser);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 return updateSuccess > 0;
+	}
+
+	public boolean deleteRecoData(int recommendIdx) {
+		System.out.println("CSBoardService deleteRecoData()");
+		int deleteSuccess = 0;
+		try {
+	        csBoardDAO = new CSBoardDAO();
+	        deleteSuccess = csBoardDAO.deleteRecoData(recommendIdx);
+	    } catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deleteSuccess > 0;
+	}//
+
+	public int getRecoBoardCount() {
+		System.out.println("CSBoardService getRecoBoardCount()");
+		int count = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getRecoBoardCount();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getRecoBoardCount()
+
+	public ArrayList<RecommendDTO> getRecommendList(PageDTO pageDTO, String movieName) {
+		System.out.println("CSBoardService getRecommendList() search");
+		ArrayList<RecommendDTO> recommendList = null;
+		try {
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			recommendList = csBoardDAO.getRecommendList(pageDTO,movieName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return recommendList;
+	}//getRecommendList() search
+
+	public int getRecoBoardCount(String movieName) {
+		System.out.println("CSBoardService getRecoBoardCount() search");
+		int count = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getRecoBoardCount(movieName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getRecoBoardCount() search
+
+	public ArrayList<QnaBoardDTO> getQnaBoardList(String createUser, PageDTO pageDTO) {
+		System.out.println("CSBoardService getQnaBoardList() mypage");
+		ArrayList<QnaBoardDTO> qnaBoardList = null;
+		try {
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			qnaBoardList = csBoardDAO.getQnaBoardList(createUser,pageDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return qnaBoardList;
+	}//getQnaBoardList() mypage
+
+	public int getQnaBoardCount(String createUser, String check) {
+		System.out.println("CSBoardService getQnaBoardCount() mypage");
+		int count = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getQnaBoardCount(createUser,check);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getQnaBoardCount() mypage
+
+	public ArrayList<LostBoardDTO> getLostBoardList(String createUser, PageDTO pageDTO) {
+		System.out.println("CSBoardService getLostBoardList() mypage");
+		ArrayList<LostBoardDTO> lostBoardList = null;
+		try {
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			lostBoardList = csBoardDAO.getLostBoardList(pageDTO,createUser);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lostBoardList;
+	}//getLostBoardList() mypage
+
+	public int getLostBoardCount(String createUser, String check) {
+		System.out.println("CSBoardService getLostBoardCount() mypage");
+		int count = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getLostBoardCount(createUser,check);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getLostBoardCount() mypage
+
+	public ArrayList<LostBoardDTO> getLostBoardList(String createUser, PageDTO pageDTO, String lostStatus) {
+		System.out.println("CSBoardService getLostBoardList() mypage lostStatus");
+		ArrayList<LostBoardDTO> lostBoardList = null;
+		try {
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			csBoardDAO = new CSBoardDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			lostBoardList = csBoardDAO.getLostBoardList(pageDTO,createUser,lostStatus);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lostBoardList;
+	}//getLostBoardList() mypage lostStatus
+
+	public int getLostBoardCount(String createUser, String lostStatus, String check) {
+		System.out.println("CSBoardService getLostBoardCount() mypage lostStatus");
+		int count = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getLostBoardCount(createUser,check,lostStatus);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getLostBoardCount() mypage lostStatus
 
 	
 }//클래스
