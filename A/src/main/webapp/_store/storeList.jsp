@@ -4,7 +4,7 @@
 <%@include file="../_common/commonHeaderStart.jsp"%>
 <%@include file="../_common/commonHeaderEnd.jsp"%>
 
-<c:set var="storeItem" value="${requestScope.storeItemDTO}" />
+<c:set var="storeItem" value="${requestScope.itemInfoJson}" />
 
 <main id="main">
 
@@ -37,7 +37,8 @@
 						<tbody>
 							<tr>
 								<th colspan="2" scope="row" class="text-center"><span
-									class="fs-3" id="price">${storeItem.itemPrice}</span>원</th>
+									class="fs-3" id="price">
+									${storeItem.itemPrice}</span>원</th>
 							</tr>
 							<tr>
 								<th scope="row">구성품</th>
@@ -209,11 +210,12 @@
 <!-- ///// 자바스크립트 ///// -->
 
 <%@include file="../_common/commonFooterStart.jsp"%>
-
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script src="jQuery/jquery-3.6.0.js"></script>
 
 <script>
-
+var storeItem = ${storeItem};
+debugger;
 // 연락처 유무 체크
 function checkId() {
 	var id = $("#id").val();
@@ -275,11 +277,9 @@ function checkPhone() {
 
 
 <!-- iamport.payment.js -->
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+
 
 <!-- 결제 API -->
-<script type="text/javascript">
 
 // 가맹점 식별코드
 var IMP = window.IMP;
@@ -311,6 +311,7 @@ IMP.init("imp20121707");
 	
 	var itemName = $("#itemName i").text();
 	var price = parseInt($("#sPrice").text().replace(",", "")); 
+// 	var itemDTO = ${storeItem};
 	
       IMP.request_pay({ 
           pg: "html5_inicis.INIpayTest",	// PG사
@@ -340,16 +341,16 @@ IMP.init("imp20121707");
     }
     
     // 결제된 데이터
-  app.get('/payments/status/all',(req,res)=>{
-      iamport.payment.getByStatus({
-        payment_status: 'paid' 
-      }).then(function(result){
-          res.render('payments_list',{list:result.list});
-      }).catch(function(error){
-          console.log(error);
-          red.send(error);
-      })
-});
+//   app.get('/payments/status/all',(req,res)=>{
+//       iamport.payment.getByStatus({
+//         payment_status: 'paid' 
+//       }).then(function(result){
+//           res.render('payments_list',{list:result.list});
+//       }).catch(function(error){
+//           console.log(error);
+//           red.send(error);
+//       })
+// });
     
 // 	//주문번호 만들기
 // 	  function createOrderNum(){
@@ -407,6 +408,9 @@ IMP.init("imp20121707");
    <script>
 	  // 수량 옵션
       $(function(){
+//     	  alert(JSON.stringify(${storeItem}));
+    	  
+    	  
     	  var price = ${storeItem.itemPrice} + "";
     	  $("#sPrice").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     	  

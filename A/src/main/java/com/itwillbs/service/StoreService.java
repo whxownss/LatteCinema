@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.gson.Gson;
 import com.itwillbs.dao.StoreDAO;
 import com.itwillbs.domain.StoreItemDTO;
 
@@ -25,8 +26,13 @@ public class StoreService {
 		return storeDAO.selectStoreItemT();
 	}//
 
-	public StoreItemDTO getItemInfo(String idx) {
-		return storeDAO.getItemInfo(idx);
+	public String getItemInfo(String idx) {
+		StoreItemDTO dto = storeDAO.getItemInfo(idx);
+		System.out.println(dto);
+		Gson gson = new Gson();
+		String itemInfoJson = gson.toJson(dto);
+		System.out.println(itemInfoJson);
+		return itemInfoJson;
 	}//
 	
 }

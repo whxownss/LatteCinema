@@ -48,12 +48,14 @@ public class StoreController extends HttpServlet{
 			
 			storeService = new StoreService();
 			
-			StoreItemDTO storeItemDTO = storeService.getItemInfo(idx);
+			String itemInfoJson = storeService.getItemInfo(idx);
+//			System.out.println(storeItemDTO);
 			
-			request.setAttribute("storeItemDTO", storeItemDTO);
+			request.setAttribute("itemInfoJson", itemInfoJson);
 			dispatcher = request.getRequestDispatcher("_store/storeList.jsp");
 			dispatcher.forward(request, response);
 		}//
+		
 		
 	} // doProcess
 	
