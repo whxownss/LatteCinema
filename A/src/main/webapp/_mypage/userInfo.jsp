@@ -134,7 +134,7 @@
                         <div  id="phoneChange"class="change-phone-num-area" style="display: none">
                           <div class="position">
                             <label for="newPhone" class="label">변경할 휴대폰</label>
-                            <input onblur="checkPhone()" type="text" id="newPhone" class="input-text w160px numType" placeholder="'-'없이 입력가능" title="변경할 휴대폰 번호 입력" maxlength="11">
+                            <input onblur="checkPhone()" type="TEXT" id="newPhone" class="input-text w160px numType" placeholder="'-'없이 입력가능" title="변경할 휴대폰 번호 입력" maxlength="11">
                             <button type="button" class="button small gray-line" id="sendNumberBtn">인증번호 전송</button>
                             <br><span id="CheckPhone"></span>
                           </div>
@@ -176,7 +176,7 @@
 <%--                         <p class="reset mt10" id="addr1" name="addr1">${memberDTO.memAddress.split("/")[1]}</p><br> --%>
 						<input class="input-text mt10 w-100" id="addr1" name="addr1" value="${memberDTO.memAddress.split("/")[1]}"><br>
 <%-- 						<input class="reset mt10 w-100" id="addr1" name="addr1" value="${memberDTO.memAddress.split("/")[1]}"><br> --%>
-                        <input type="text" id="addr2" name="addr2" class="input-text w150px" value="${memberDTO.memAddress.split('/')[2]}" placeholder="상세주소 입력" required>
+                        <input class="input-text mt10 w150px" type="text" id="addr2" name="addr2"  value="${memberDTO.memAddress.split('/')[2]}" placeholder="상세주소 입력" required>
                         
                       </td>
                     </tr>
@@ -219,8 +219,19 @@ $('#phoneChgBtn').on('click', function() {
 // 새 휴대폰번호 정규식 검사 ()
 function checkPhone() {
 	var phone = $("#newPhone").val();
-	
-}
+	var text = "** 연락처 입력 필수! **"
+		var color = "red";
+		
+		if(phone != ""){
+			text = "** 알맞은 연락처 형식으로 입력! '-' 생략가능!! **";
+			
+			if(phoneRegex.test(phone)){
+				text = "** 알맞은 연락처 형식! ** ";
+				color = "green";
+			}
+		}
+		$("#CheckPhone").text(text).css("color",color);
+	}
 // 인증번호 발송 버튼 클릭
 // $('#sendNumberBtn').on('click', function() {
 	
