@@ -74,7 +74,7 @@
 							</tr>
 							<tr class="border border-0 border-white">
 								<td scope="row" class="text-center" colspan="4">
-									<button class="btn btn-secondary btn-lg"
+									<button class="btn btn-secondary btn-lg modal-dialog modal-dialog-centered modal-dialog-scrollable"
 										style="text-align: center; padding-left: 60px; padding-right: 60px;">선물하기</button>
 									<button class="btn btn-danger btn-lg" onclick="requestPay()"
 										style="text-align: center; padding-left: 60px; padding-right: 60px;">구매하기</button>
@@ -221,7 +221,7 @@ IMP.init("imp20121707");
           pay_method: "card",	// 지불수단
           merchant_uid: "STO" + merchant_uid,   // 주문번호
           name: itemName,	// 상품명
-          amount: 100,    // 가격	price
+          amount: 100,    // 가격		price
           buyer_email: "gildong@gmail.com",	// 구매자 이메일
           buyer_name: "홍길동",	// 구매자 이름
           buyer_tel: "010-4242-4242",	// 구매자 연락처

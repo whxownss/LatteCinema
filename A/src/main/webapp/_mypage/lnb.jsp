@@ -10,6 +10,7 @@
           <ul class="depth3">
               <li><a href="myinquiry.me" title="1:1문의">1:1문의</a></li>
               <li><a href="myinquiry.me" title="분실물 문의">분실물 문의</a></li>
+              <li><a href="myinquiry2.me" title="분실물 문의">분실물 문의</a></li>
           </ul>
         </li>
         <li><a href="#" title="회원정보">회원정보</a>
