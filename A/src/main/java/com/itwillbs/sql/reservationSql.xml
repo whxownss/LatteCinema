@@ -140,4 +140,18 @@
 		 </if>
 	</delete>
 	
+	<select id="selectTimeOverSeat" parameterType="SeatDTO" resultType="Integer">
+		SELECT COUNT(*)
+		  FROM SEAT
+		 WHERE 1 = 1
+		   AND LO_IDX = #{loIdx}
+		   AND CI_IDX = #{ciIdx}
+		   AND MOV_TYPE = #{movType}
+		   AND DATE_C = #{dateC}
+		   AND SEAT_C = REPLACE(#{seatC}, ',', ', ')
+	</select>
+	
+	
+	
+	
 </mapper>
