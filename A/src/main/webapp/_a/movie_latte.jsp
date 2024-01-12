@@ -202,7 +202,6 @@
 
 
 
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -214,108 +213,8 @@
 
   <%@include file="../_common/commonMovieSlide.jsp"%>
 
-  <!-- ======= Culture Category Section ======= -->
-  <section class="category-section">
-    <div class="container" data-aos="fade-up">
 
-      <div class="section-header d-flex justify-content-between align-items-center mb-5">
-        <h3>1월의 라떼..</h3>
-      </div>
-
-      <div class="row g-5">
-        <div class="col-lg-4">
-          <div class="post-entry-1 lg">
-            <div class="item position-relative" id="wrap">
-              <img src="assets/img/post20.jpg" style="width: 100%;">
-              <div class="titlee">
-                <a href="" class="moree">예매하기</a>
-                <a href="" class="moree">상세정보</a>
-              </div>
-            </div>
-            <div class="post-meta"><span class="date">영화제목1</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '97</span></div>
-          </div>
-        </div>
-
-        <div class="col-lg-4">
-          <div class="post-entry-1 lg">
-            <div class="item position-relative" id="wrap">
-              <img src="assets/img/post21.jpg" style="width: 100%;">
-              <div class="titlee">
-                <a href="" class="moree">예매하기</a>
-                <a href="" class="moree">상세정보</a>
-              </div>
-            </div>
-            <div class="post-meta"><span class="date">영화제목2</span> <span class="mx-1">&bullet;</span> <span>Jan 15th '99</span></div>
-          </div>
-        </div>
-
-        <div class="col-lg-4">
-          <div class="post-entry-1 lg">
-            <div class="item position-relative" id="wrap">
-              <img src="assets/img/post22.jpg" style="width: 100%;">
-              <div class="titlee">
-                <a href="" class="moree">예매하기</a>
-                <a href="" class="moree">상세정보</a>
-              </div>
-            </div>
-            <div class="post-meta"><span class="date">영화제목3</span> <span class="mx-1">&bullet;</span> <span>Feb 7th '02</span></div>
-          </div>
-        </div>
-
-      </div> <!-- End .row -->
-    </div>
-  </section><!-- End Lifestyle Category Section -->
-
-  <script>
-    function vote() {
-      // Check if user has voted in January or February 2024
-      if (hasVotedInJanuaryOrFebruary()) {
-        alert('3월 상영작에 이미 투표하셨습니다. 5월 상영작에 투표 가능합니다.');
-        return;
-      }
-
-      // Get the selected radio button value
-      var selectedCandidate = document.querySelector('input[name="vote"]:checked');
-
-      // Check if a candidate is selected
-      if (selectedCandidate) {
-        // Log the selected candidate value (you can replace this with your own logic)
-        console.log('투표한 후보:', selectedCandidate.id);
-
-        // Disable the vote button to prevent multiple votes
-        document.getElementById('voteButton').disabled = true;
-
-        // Record the date of the current vote
-        recordVoteDate();
-
-        alert('투표가 완료되었습니다!');
-      } else {
-        // Alert if no candidate is selected
-        alert('투표할 후보를 선택하세요!');
-      }
-    }
-
-    function hasVotedInJanuaryOrFebruary() {
-      // Retrieve the last vote date from cookies or local storage
-      var lastVoteDate = localStorage.getItem('lastVoteDate');
-
-      // Check if there is a last vote date and if it is in January or February 2024
-      if (lastVoteDate) {
-        var lastVoteMonth = new Date(lastVoteDate).getMonth();
-        return lastVoteMonth === 0 || lastVoteMonth === 1;
-      }
-
-      return false;
-    }
-
-    function recordVoteDate() {
-      // Record the current date as the last vote date in cookies or local storage
-      var currentDate = new Date();
-      localStorage.setItem('lastVoteDate', currentDate.toISOString());
-    }
-  </script>
-
-  <section class="category-section" id="vote">
+<section class="category-section" id="vote">
     <div class="container" data-aos="fade-up">
       <div class="section-header d-flex justify-content-between align-items-center mb-5">
         <h3>라떼 무비 - 3월의 상영 유력 후보</h3>
@@ -381,6 +280,110 @@
 	</section>
 	<!-- End Lifestyle Category Section -->
 	
+
+
+  <!-- ======= Culture Category Section ======= -->
+  <section class="category-section">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-header d-flex justify-content-between align-items-center mb-5">
+        <h3>1월의 라떼..</h3>
+      </div>
+
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <div class="post-entry-1 lg">
+            <div class="item position-relative" id="wrap">
+              <img src="assets/img/post20.jpg" style="width: 100%;">
+              <div class="titlee">
+                <a href="" class="moree">예매하기</a>
+                <a href="" class="moree">상세정보</a>
+              </div>
+            </div>
+            <div class="post-meta"><span class="date">영화제목1</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '97</span></div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="post-entry-1 lg">
+            <div class="item position-relative" id="wrap">
+              <img src="assets/img/post21.jpg" style="width: 100%;">
+              <div class="titlee">
+                <a href="" class="moree">예매하기</a>
+                <a href="" class="moree">상세정보</a>
+              </div>
+            </div>
+            <div class="post-meta"><span class="date">영화제목2</span> <span class="mx-1">&bullet;</span> <span>Jan 15th '99</span></div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="post-entry-1 lg">
+            <div class="item position-relative" id="wrap">
+              <img src="assets/img/post22.jpg" style="width: 100%;">
+              <div class="titlee">
+                <a href="" class="moree">예매하기</a>
+                <a href="" class="moree">상세정보</a>
+              </div>
+            </div>
+            <div class="post-meta"><span class="date">영화제목3</span> <span class="mx-1">&bullet;</span> <span>Feb 7th '02</span></div>
+          </div>
+        </div>
+
+      </div> <!-- End .row -->
+    </div>
+  </section><!-- End Lifestyle Category Section -->
+
+ <!--  <script>
+    function vote() {
+      // Check if user has voted in January or February 2024
+      if (hasVotedInJanuaryOrFebruary()) {
+        alert('3월 상영작에 이미 투표하셨습니다. 5월 상영작에 투표 가능합니다.');
+        return;
+      }
+
+      // Get the selected radio button value
+      var selectedCandidate = document.querySelector('input[name="vote"]:checked');
+
+      // Check if a candidate is selected
+      if (selectedCandidate) {
+        // Log the selected candidate value (you can replace this with your own logic)
+        console.log('투표한 후보:', selectedCandidate.id);
+
+        // Disable the vote button to prevent multiple votes
+        document.getElementById('voteButton').disabled = true;
+
+        // Record the date of the current vote
+        recordVoteDate();
+
+        alert('투표가 완료되었습니다!');
+      } else {
+        // Alert if no candidate is selected
+        alert('투표할 후보를 선택하세요!');
+      }
+    }
+
+    function hasVotedInJanuaryOrFebruary() {
+      // Retrieve the last vote date from cookies or local storage
+      var lastVoteDate = localStorage.getItem('lastVoteDate');
+
+      // Check if there is a last vote date and if it is in January or February 2024
+      if (lastVoteDate) {
+        var lastVoteMonth = new Date(lastVoteDate).getMonth();
+        return lastVoteMonth === 0 || lastVoteMonth === 1;
+      }
+
+      return false;
+    }
+
+    function recordVoteDate() {
+      // Record the current date as the last vote date in cookies or local storage
+      var currentDate = new Date();
+      localStorage.setItem('lastVoteDate', currentDate.toISOString());
+    }
+  </script> -->
+
+  
 
 
 

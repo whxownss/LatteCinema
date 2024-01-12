@@ -25,7 +25,7 @@
             </ul>
           </li>
           
-          <li class="dropdown"><a href="movie_home.mo"><span>영화</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href="#"><span>영화</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
              <!--  <li><a href="movie_home.mo">홈</a></li> -->
               <li><a href="movie_now.mo">현재상영작</a></li>
