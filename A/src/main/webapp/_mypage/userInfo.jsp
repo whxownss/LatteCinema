@@ -131,11 +131,12 @@
                             <button type="button" class="button small gray-line change-phone-num" id="phoneChgBtn" title="휴대폰번호 변경">휴대폰번호 변경</button>
                           </div>
                         </div>
-                        <div class="change-phone-num-area">
+                        <div  id="phoneChange"class="change-phone-num-area" style="display: none">
                           <div class="position">
-                            <label for="chPhone" class="label">변경할 휴대폰</label>
-                            <input type="text" id="chPhone" class="input-text w160px numType" placeholder="'-'없이 입력해 주세요" title="변경할 휴대폰 번호 입력" maxlength="11">
+                            <label for="newPhone" class="label">변경할 휴대폰</label>
+                            <input onblur="checkPhone()" type="text" id="newPhone" class="input-text w160px numType" placeholder="'-'없이 입력가능" title="변경할 휴대폰 번호 입력" maxlength="11">
                             <button type="button" class="button small gray-line" id="sendNumberBtn">인증번호 전송</button>
+                            <br><span id="CheckPhone"></span>
                           </div>
                           <div class="position" style="display: none;">
                             <label for="chkNum" class="label">인증번호 입력</label>
@@ -169,12 +170,13 @@
                     <tr>
                       <th scope="row">주소</th>
                       <td>
-                      	<input type="text" id="postcode" name="postcode" value="${memberDTO.memAddress.split("/")[0]}">
+                      	<input type="text" id="postcode" name="postcode" class="input-text w150px" value="${memberDTO.memAddress.split("/")[0]}">
 <%--                         <span name="postcode">${memberDTO.memAddress.split("/")[0]}</span> --%>
                         <a href="#none" id="addrBtn" class="button small gray-line ml10" title="우편번호 검색">우편번호 검색</a><br>
 <%--                         <p class="reset mt10" id="addr1" name="addr1">${memberDTO.memAddress.split("/")[1]}</p><br> --%>
-						<input class="reset mt10 w-100" id="addr1" name="addr1" value="${memberDTO.memAddress.split("/")[1]}"><br>
-                        <input type="text" id="addr2" name="addr2" value="${memberDTO.memAddress.split('/')[2]}" placeholder="상세주소 입력" required>
+						<input class="input-text mt10 w-100" id="addr1" name="addr1" value="${memberDTO.memAddress.split("/")[1]}"><br>
+<%-- 						<input class="reset mt10 w-100" id="addr1" name="addr1" value="${memberDTO.memAddress.split("/")[1]}"><br> --%>
+                        <input type="text" id="addr2" name="addr2" class="input-text w150px" value="${memberDTO.memAddress.split('/')[2]}" placeholder="상세주소 입력" required>
                         
                       </td>
                     </tr>
@@ -197,21 +199,32 @@
 <script>
 
 
-// 휴대폰 인증
-$('#phoneBtn').on('click', function(e) {
-    e.preventDefault();
-
-    fn_selfCheck('phone');
-});
-
+var phoneRegex =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/; // 모든 전화번호 규칙 (연락처)
 // // 휴대폰번호 변경 클릭
 $('#phoneChgBtn').on('click', function() {
-    $('.change-phone-num-area > div input').val('');
-    $('.change-phone-num-area > div:first button').text('인증번호 전송');
-    $('#timeLimit').html('');
-    clearInterval(interval);
+// 	debugger;
+	$("#phoneChange").toggle();
+	$("#newPhone").val('');
+	var text = "변경취소"
+	if($("#phoneChgBtn").text() == text) 
+		text = "휴대폰번호 변경";
+		
+	$("#phoneChgBtn").text(text);
+// 	debugger;
+//     $('.change-phone-num-area > div input').val('');
+//     $('.change-phone-num-area > div:first button').text('인증번호 전송');
+//     $('#timeLimit').html('');
+//     clearInterval(interval);
 });
-
+// 새 휴대폰번호 정규식 검사 ()
+function checkPhone() {
+	var phone = $("#newPhone").val();
+	
+}
+// 인증번호 발송 버튼 클릭
+// $('#sendNumberBtn').on('click', function() {
+	
+// });
 // 인증번호 발송 버튼 클릭
 // $('#sendNumberBtn').on('click', function() {
 //     var target = $('#sendNumberBtn');

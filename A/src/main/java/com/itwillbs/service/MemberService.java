@@ -149,7 +149,8 @@ public class MemberService {
 			MemberDTO memberDTO = new MemberDTO();
 			memberDTO.setMemId(request.getParameter("id"));
 			memberDTO.setMemName(request.getParameter("name"));
-			memberDTO.setMemPhone(request.getParameter("phone"));
+			memberDTO.setMemPhone(request.getParameter("phone").replaceAll("-", ""));
+			
 			memberDTO.setMemAddress(request.getParameter("postcode") + "/" + request.getParameter("addr1") + "/" + request.getParameter("addr2"));
 			memberDTO.setMemEmail(request.getParameter("email"));
 			
