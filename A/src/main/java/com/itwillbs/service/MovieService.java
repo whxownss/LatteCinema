@@ -70,4 +70,30 @@ public class MovieService {
 		}
 		
 	
+		
+		
+		public MovieDTO movieDetail(int movieIdx) {
+			
+			System.out.println("movieDetail 서비스");
+				
+			try {
+				movieDTO = movieDAO.movieDetail(movieIdx);
+
+		        System.out.println("!@#!@#!@#");
+		        System.out.println(movieDTO);
+		        
+		        return movieDTO;
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return null; 
+					
+		}
+		
+		
+		
+		
+		
 	}

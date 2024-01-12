@@ -22,7 +22,8 @@
 		 	 , NATION
 		 	 , RUN_TIME
 		 	 , START_DATE
-		 	 , END_DATE)
+		 	 , END_DATE
+		 	 , STATE)
 		VALUES (
 			  #{movieIdx}
 		  	, #{title}
@@ -38,13 +39,13 @@
 		  	, #{runTime}
 		  	, SUBSTRING(#{startDate}, 1, 10)
 		  	, SUBSTRING(#{endDate}, 1, 10)
-		  	)
+		  	, #{state})
 	</insert>
 
 	
 	<!-- 라떼 영화 포스터 불러오는 sql -->
 	<select id="getLattePoster" resultType="MovieDTO" parameterType="MovieDTO">
-	SELECT POSTER, TITLE
+	SELECT POSTER, TITLE, MOVIE_IDX
 	FROM MOVIE 
 	WHERE MOVIE_CATEGORY = 'OLD' 
  <![CDATA[
@@ -55,9 +56,13 @@
 
 	<!-- 현재 상영 영화 포스터 불러오는 sql -->
 	<select id="selectNowPoster" resultType="MovieDTO" parameterType="MovieDTO">
-	SELECT POSTER, TITLE
+	SELECT POSTER, TITLE, MOVIE_IDX
 	FROM MOVIE 
 	WHERE MOVIE_CATEGORY = 'NOW'
+	 <![CDATA[
+	AND START_DATE <= NOW() 
+	AND END_DATE > NOW() 
+		   ]]>
 
 	</select>
 
@@ -77,14 +82,24 @@
 		 	 , NATION
 		 	 , RUN_TIME
 	FROM MOVIE 
+	 <![CDATA[
+	AND START_DATE <= NOW() 
+	AND END_DATE > NOW() 
+		   ]]>
 
 	</select>
 	
 	<select id="movieAll" resultType="MovieDTO" parameterType="MovieDTO">
-	SELECT POSTER, TITLE
-	FROM MOVIE 
-	
-
+		SELECT 
+		  		   MOVIE_IDX
+			 	 , TITLE
+			 	 , DIRECTOR
+			 	 , OPENDATE
+			 	 , RATING
+		         , STATE
+				 , MOVIE_CATEGORY
+		
+		FROM MOVIE			 
 	</select>
 
 

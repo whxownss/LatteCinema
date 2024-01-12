@@ -37,6 +37,14 @@ public class MovieDAO {
 		}
 
 
+	public MovieDTO movieDetail(int movieIdx) {
+		 MovieDTO movieDTO = new MovieDTO();
+		 movieDTO.setMovieIdx(movieIdx);
+		 movieDTO.setTitle("영화 제목");
+		 movieDTO.setRating("영화 등급");
+	}
+
+
 
 
 		/*

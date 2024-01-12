@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -322,5 +322,65 @@
 	
 <%@include file ="../_common/commonFooter.jsp" %>
 
+
+</html> --%>
+
+
+
+
+
+<%@page import="com.itwillbs.domain.MovieDTO"%>
+<%@page import="com.itwillbs.service.MovieService"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+
+<%@include file ="../_common/commonHeaderStart.jsp" %>
+<link href="${pageContext.servletContext.contextPath }/_assets/css/view.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/scrollbar.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/swiper.min.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/front.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/app.js"></script>
+
+<%@include file ="../_common/commonHeaderEnd.jsp" %>
+  
+<main>
+
+<%
+ // MOVIE_IDX 가져오기
+ int movieIdx = 0; // 적절한 값으로 설정
+ try {
+     movieIdx = Integer.parseInt(request.getParameter("MOVIE_IDX")); // 적절한 파라미터 이름으로 변경
+ } catch (NumberFormatException e) {
+     e.printStackTrace();
+     // 예외 처리 - 파라미터를 정상적으로 얻을 수 없는 경우의 기본 값 설정
+ }
+
+ // 여기에서는 예시로 MovieService를 사용하여 영화 정보를 가져온다고 가정하겠습니다.
+ MovieService movieService = new MovieService(); // 실제로는 해당 서비스 클래스에 맞게 변경
+ MovieDTO movie = movieService.movieDetail(movieIdx);
+
+ // 영화 정보가 존재할 경우에만 값을 설정
+ if (movie != null) {
+     String movieName = movie.getTitle();
+   /*   String movieEngName = movie.getEngTitle(); */
+     String date = movie.getStartDate();
+     String genre = movie.getGenre();
+     String runTime = movie.getRunTime();
+     // 나머지 필요한 정보도 마찬가지로 설정
+ }
+%>
+
+<!-- 나머지 코드는 동일하게 유지 -->
+
+</main>
+
+<script type="text/javascript">
+  // 나머지 스크립트 코드는 동일하게 유지
+</script>
+	
+<%@include file ="../_common/commonFooter.jsp" %>
 
 </html>
