@@ -153,11 +153,16 @@ public class MemberService {
 			memberDTO.setMemName(request.getParameter("name"));
 			memberDTO.setMemAddress(request.getParameter("postcode") + "/" + request.getParameter("addr1") + "/" + request.getParameter("addr2"));
 			memberDTO.setMemEmail(request.getParameter("email"));
-			String phone = request.getParameter("newphone").replaceAll("-", "");
-			if(phone == null) {
-			memberDTO.setMemPhone(request.getParameter("phone").replaceAll("-", ""));
+			String phone = request.getParameter("newPhone").replaceAll("-", "");
+//			memberDTO.setMemPhone(phone);
+			System.out.println(phone);
+			
+			if(phone.equals("")) {
+				phone = request.getParameter("phone");
 			}
-			System.out.println(memberDTO);
+			memberDTO.setMemPhone(phone);
+			System.out.println(phone);
+//			System.out.println(memberDTO);
 			memberDAO = new MemberDAO();
 			
 			memberDAO.updateMember(memberDTO);

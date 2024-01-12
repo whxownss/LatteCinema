@@ -20,7 +20,7 @@
       <!-- 이곳에 코드작성 -->
       <div class="inner-wrap">
         <jsp:include page="lnb.jsp"></jsp:include>
-        <form id="moveFrm" method="post" action="userInfoPro.me">
+        <form id="moveFrm" method="post" action="userInfoPro.me" onsubmit="return checkSubmit()">
           <div id="contents" class="">
             <h2 class="tit">개인정보 수정</h2>
             <ul class="dot-list mb10">
@@ -134,20 +134,20 @@
                         <div  id="phoneChange"class="change-phone-num-area" style="display: none">
                           <div class="position">
                             <label for="newPhone" class="label">변경할 휴대폰</label>
-                            <input onblur="checkPhone()" type="TEXT" id="newPhone" class="input-text w160px numType" placeholder="'-'없이 입력가능" title="변경할 휴대폰 번호 입력" maxlength="11">
+                            <input onblur="checkPhone()" type="TEXT" id="newPhone" name="newPhone" class="input-text w160px numType" placeholder="'-'없이 입력가능" title="변경할 휴대폰 번호 입력" maxlength="11">
                             <button type="button" class="button small gray-line" id="sendNumberBtn">인증번호 전송</button>
                             <br><span id="CheckPhone"></span>
                           </div>
-                          <div class="position" style="display: none;">
-                            <label for="chkNum" class="label">인증번호 입력</label>
-                            <div class="chk-num small">
-                              <div class="line">
-                                <input type="text" id="chkNum" class="input-text w180px" title="인증번호 입력" placeholder="인증번호를 입력해 주세요" maxlength="4">
-                                <div class="time-limit" id="timeLimit">3:00</div>
-                              </div>
-                            </div>
-                            <button type="button" class="button small gray-line" id="chgBtn">변경완료</button>
-                          </div>
+<!--                           <div class="position" style="display: none;"> -->
+<!--                             <label for="chkNum" class="label">인증번호 입력</label> -->
+<!--                             <div class="chk-num small"> -->
+<!--                               <div class="line"> -->
+<!--                                 <input type="text" id="chkNum" class="input-text w180px" title="인증번호 입력" placeholder="인증번호를 입력해 주세요" maxlength="4"> -->
+<!--                                 <div class="time-limit" id="timeLimit">3:00</div> -->
+<!--                               </div> -->
+<!--                             </div> -->
+<!--                             <button type="button" class="button small gray-line" id="chgBtn">변경완료</button> -->
+<!--                           </div> -->
                         </div>
                       </td>
                     </tr>
@@ -187,7 +187,7 @@
 
             <div class="btn-group mt40">
               <button class="button large" id="cancelBtn">취소</button>
-              <button class="button purple large" id="updateBtn">등록</button>
+              <button class="button purple large" id="updateBtn" type="submit">등록</button>
             </div>
           </div>
         </form>
@@ -232,6 +232,24 @@ function checkPhone() {
 		}
 		$("#CheckPhone").text(text).css("color",color);
 	}
+	
+//유효성 체크 후 submit
+function checkSubmit() {
+	
+	var color = $('#moveFrm span');
+	
+	var flag = 1;
+	
+	$.each(color, function(i, v){
+		if(this.style.color == "red") {
+			flag = 0;
+			alert("정보수정 양식을 확인해 주세요.")
+			return false;
+		}
+	});
+	
+	return ((flag == 0) ? false : true);
+}	
 // 인증번호 발송 버튼 클릭
 // $('#sendNumberBtn').on('click', function() {
 	
