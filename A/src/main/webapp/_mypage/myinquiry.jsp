@@ -38,7 +38,7 @@
 					<ul>
 						<li data-url="/mypage/myinquiry?cd=INQD01" class="on"><a href="#" class="btn" data-cd="INQD01" title="1:1 문의내역 탭으로 이동">1:1 문의내역</a></li>
 						<li data-url="/mypage/myinquiry?cd=INQD03"><a href="#" class="btn" data-cd="INQD03" title="단체관람/대관 문의내역 탭으로 이동">단체관람/대관문의내역</a></li>
-						<li data-url="/mypage/myinquiry?cd=INQD02"><a href="#" class="btn" data-cd="INQD02" title="분실물 문의내역 탭으로 이동">분실물 문의내역</a></li>
+						<li data-url="/mypage/myinquiry?cd=INQD02"><a href="myinquiry2.me" class="btn" data-cd="INQD02" title="분실물 문의내역 탭으로 이동">분실물 문의내역</a></li>
 					</ul>
 				</div>
 			
@@ -153,22 +153,22 @@
 
 	$(function() {
 		// 검색 클릭
-		$('#searchBtn').on('click', function() {
-			$('[name=currentPage]').val(1);
-			fn_selectIrList($('.tab-block li.on a').data('cd'));
-		});
+// 		$('#searchBtn').on('click', function() {
+// 			$('[name=currentPage]').val(1);
+// 			fn_selectIrList($('.tab-block li.on a').data('cd'));
+// 		});
 
-		// 검색 엔터키
-		$('#searchTxt').on('keydown', function(e) {
-			if(e.keyCode == 13) {
-				$('[name=currentPage]').val(1);
-				fn_selectIrList($('.tab-block li.on a').data('cd'));
-			}
-		});
+// 		// 검색 엔터키
+// 		$('#searchTxt').on('keydown', function(e) {
+// 			if(e.keyCode == 13) {
+// 				$('[name=currentPage]').val(1);
+// 				fn_selectIrList($('.tab-block li.on a').data('cd'));
+// 			}
+// 		});
 
 		// 탭 클릭
 		$('.tab-block a').on('click', function(e) {
-			e.preventDefault();
+// 			e.preventDefault();
 
 			var cd = $(this).data('cd');
 			var idx = $(this).parent().index();

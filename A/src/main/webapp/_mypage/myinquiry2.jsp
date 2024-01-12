@@ -36,7 +36,8 @@
 			
 				<div class="tab-block">
 					<ul>
-						<li data-url="/mypage/myinquiry?cd=INQD01"><a href="#" class="btn" data-cd="INQD01" title="1:1 문의내역 탭으로 이동">1:1 문의내역</a></li>
+<!-- 						<li data-url="/mypage/myinquiry?cd=INQD01"><a href="myinquiry.me" class="btn" data-cd="INQD01" title="1:1 문의내역 탭으로 이동">1:1 문의내역</a></li> -->
+						<li><a href="myinquiry.me" class="btn" title="1:1 문의내역 탭으로 이동">1:1 문의내역</a></li>
 						<li data-url="/mypage/myinquiry?cd=INQD03"><a href="#" class="btn" data-cd="INQD03" title="단체관람/대관 문의내역 탭으로 이동">단체관람/대관문의내역</a></li>
 						<li data-url="/mypage/myinquiry?cd=INQD02" class="on"><a href="#" class="btn" data-cd="INQD02" title="분실물 문의내역 탭으로 이동">분실물 문의내역</a></li>
 					</ul>
@@ -57,6 +58,7 @@
 					<p class="result-count">
 						<!-- to 개발 : 검색을 안한 경우 -->
 						<strong>전체 (<b id="totalCnt"><%=lostCount %></b>건)</strong>
+						<input type="hidden" value="${sessionScope.sId }" id="userId">
 					</p>
 			
 					<div class="dropdown bootstrap-select bs3"><select id="myLostStatusSel" class="" tabindex="-98">
@@ -120,7 +122,7 @@
 				<section class="category-section" id="">
 						<div class="container" data-aos="fade-up">
 							<div class="pagination-container d-flex justify-content-center">
-							  <ul class="pagination">
+							  <ul class="pagination" id="searchPaging">
 								<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
 								    <li class="page-item disabled">
 								      <a class="page-link text-secondary" href="myinquiry2.me?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
@@ -169,7 +171,7 @@
 
 		// 탭 클릭
 		$('.tab-block a').on('click', function(e) {
-			e.preventDefault();
+// 			e.preventDefault();
 
 			var cd = $(this).data('cd');
 			var idx = $(this).parent().index();
@@ -266,7 +268,7 @@ $('#myLostStatusSel').on("change",function(){
 				    if(pageDTO.startPage > pageDTO.pageBlock) {
 				        $('#searchPaging').append(
 				            '<li class="page-item disabled">' +
-				         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage - pageDTO.pageBlock) + ', \'' + $('#locationSelect').val() + '\', \'' + $('#cinemaSelect').val() + '\', \'' + $('#lostStatus').val() + '\', \'' + $('#lostSubject').val() + '\'); return false;">' + '이전' + '</a>' +
+				         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage - pageDTO.pageBlock) + ', \'' + $('#userId').val() + '\', \'' + $('#myLostStatusSel').val() + '\'); return false;">' + '이전' + '</a>' +
 				            '</li>'
 				        );
 				    }
@@ -274,7 +276,7 @@ $('#myLostStatusSel').on("change",function(){
 				    for(var i = pageDTO.startPage; i <= pageDTO.endPage; i++) {
 					    $('#searchPaging').append(
 				    		'<li class="page-item" aria-current="page">' +
-					    	    '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + i + ', \'' + $('#locationSelect').val() + '\', \'' + $('#cinemaSelect').val() + '\', \'' + $('#lostStatus').val() + '\', \'' + $('#lostSubject').val() + '\'); return false;">' + i + '</a>' +
+					    	    '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + i + ', \'' + $('#userId').val() + '\', \'' + $('#myLostStatusSel').val() + '\'); return false;">' + i + '</a>' +
 					    	'</li>'
 					    );
 					}
@@ -282,7 +284,7 @@ $('#myLostStatusSel').on("change",function(){
 				    if(pageDTO.endPage < pageDTO.pageCount) {
 				        $('#searchPaging').append(
 				            '<li class="page-item">' +
-				         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage + pageDTO.pageBlock) + ', \'' + $('#locationSelect').val() + '\', \'' + $('#cinemaSelect').val() + '\', \'' + $('#lostStatus').val() + '\', \'' + $('#lostSubject').val() + '\'); return false;">' + '다음' + '</a>' +
+				         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage + pageDTO.pageBlock) + ', \'' + $('#userId').val() + '\', \'' + $('#myLostStatusSel').val() + '\'); return false;">' + '다음' + '</a>' +
 				            '</li>'
 				        );
 				    }
@@ -292,89 +294,86 @@ $('#myLostStatusSel').on("change",function(){
 	 	    }
 	 	});
 });
-	// 문의 목록 조회
-// 	function fn_selectIrList(cd) {
-// 		var currentPage = $('[name=currentPage]').val() ? $('[name=currentPage]').val() : 1;
-// 		var inqLclCd = cd || 'INQD01';
 
-// 		var params = {
-// 			custInqStatCd: $('#custInqStatCd').val(),
-// 			searchTxt: $('#searchTxt').val(),
-// 			inqLclCd: inqLclCd
-// 		};
+    function searchPageNm(pageNum, createUser, lostStatus){
+        // AJAX 요청을 통해 서버로부터 새로운 페이징 데이터를 가져옴
+//         debugger;
+        $.ajax({
+            url: 'myLostStatus.me',
+            type: 'GET',
+            data: {
+                pageNum: pageNum
+               ,createUser: createUser
+               ,lostStatus: lostStatus
+            },
+            success: function(response) {
+                // 서버로부터 받은 새로운 페이징 데이터로 '#searchPaging' 업데이트
+                // response는 새로운 페이징 데이터를 포함하고 있어야 함
+                updatePagination(response);
+            },
+            error: function(xhr, status, error) {
+                console.error("An error occurred: " + status + "\nError: " + error);
+                // 사용자에게 오류 알림
+                alert("문제가 발생했습니다. 관리자에게 문의하세요.");
+            }
+        });
+    }
+    function updatePagination(response) {
+		// 'response' 객체에서 'lostBoardList'와 'pageDTO' 데이터 추출
 
-// 		var options = {};
-// 		options.url = '/on/oh/ohh/MyInq/inqList.do';
-// 		options.paramData = params;
-// 		options.currentPage = currentPage;
+	       var lostBoardList = response.lostBoardList;
+	       var pageDTO = response.pageDTO;
+	
+		$('#tbody').empty();
+//			debugger;
+		lostBoardList.forEach(function(search) {
+			// 날짜 형식 변경 (예: yyyy-MM-dd)
+			console.log('Received createDate:', search.createDate);
+            var formattedDate = formatDate(search.createDate); // 'formatDate'는 날짜 형식을 변경하는 함수
+            var parseAndFormat= parseAndFormatDate(search.createDate);
+            // 새로운 행(<tr>)을 생성하고 각 칼럼(<td>)에 데이터 추가
+            var newRow = $('<tr></tr>');
+            newRow.append($('<td></td>').text(search.rn));  
+            newRow.append($('<td></td>').text(search.ciName));  
+            newRow.append($('<td></td>').html('<a href="cs_lost_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + parseAndFormat + '">' + search.lostSubject + '</a>'));
 
-// 		options.successCallBack = function(data) {
-// 			var totCount  = Number(data.totCount);
-// 			var target = $("div.table-wrap > table.board-list > tbody");
-
-// 			target.find('tr').remove();
-
-// 			$('#totalCnt').text(totCount);
-
-// 			if(data.list.length > 0) {
-// 				var tr, td1, td2, td3, td4, td5, td6, a;
-
-// 				target.find('tr').remove();
-
-// 				$.each(data.list, function(i, v) {
-// 					var custInqStatNm = '';
-// 					// 답변완료(메일+SMS), 답변완료(메일), 답변완료(SMS) ===> 답변완료
-// 					if (v.custInqStatCd == "INQST3" || v.custInqStatCd == "INQST4" || v.custInqStatCd == "INQST5") {
-// 						custInqStatNm = "답변완료";
-// 					} else {
-// 						custInqStatNm = v.custInqStatNm;
-// 					}
-
-// 					tr = $('<tr>');
-// 					a = $('<a>').attr({ 'href': '#', 'class': 'moveBtn', 'data-no': v.custInqSn, 'title': '문의내역 상세보기' }).html(v.custInqTitle);
-// 					td1 = $('<td>').text(totCount - (v.rowNum - 1));
-// 					td2 = $('<td>').html(v.brchNm ? v.brchNm : '메가박스');
-// 					td3 = $('<td>').html(v.inqSclNm);
-// 					td4 = $('<td>').attr('class', 'a-l').append(a);
-// 					td5 = $('<td>').html(custInqStatNm);
-// 					td6 = $('<td>').text(v.fstRegDtStr);
-
-// 					tr.append(td1).append(td2).append(td3).append(td4).append(td5).append(td6);
-// 					target.append(tr);
-// 				});
-
-// 				fn_bindMoveEvent(inqLclCd);
-// 			} else {
-// 				tr = $('<tr>');
-// 				td1 = $('<td>').attr('colspan', 6).text('목록이 없습니다.');
-
-// 				tr.append(td1);
-// 				target.append(tr);
-// 			}
-// 		};
-
-// 		gfn_setPage(options);
-// 	}
-
-	// 제목 버튼 이벤트
-// 	function fn_bindMoveEvent(cd) {
-// 		$('.moveBtn').off();
-// 		$('.moveBtn').on('click', function(e) {
-// 			e.preventDefault();
-
-// 			var form = MegaboxUtil.Form.createForm();
-// 			//form.append('<input type="hidden" name="custInqSn" value="' + $(this).data('no') + '">');
-// 			form.append('<input type="hidden" name="custInqStatCd" value="' + $('#custInqStatCd').val() + '">');
-// 			form.append('<input type="hidden" name="searchTxt" value="' + $('#searchTxt').val() + '">');
-// 			form.append('<input type="hidden" name="currentPage" value="' + $('.pagination .active').text() + '">');
-// 			form.append('<input type="hidden" name="cd" value="' + $('.tab-block li.on a').data('cd') + '">');
-
-// 			var custInqSn = $(this).data('no');
-
-// 			form.attr('action', '/mypage/myinquiry/detail?custInqSn='+custInqSn);
-// 			form.submit();
-// 		});
-// 	}
+            if(search.lostStatus === '0'){
+            	newRow.append($('<td></td>').val(search.lostStatus).text('미답변'));
+            } else {
+            	newRow.append($('<td></td>').val(search.lostStatus).text('답변완료'));
+            }
+            newRow.append($('<td></td>').text(formattedDate));
+            
+            // 완성된 행을 tbody에 추가
+            $('#tbody').append(newRow);
+        });
+		$('#searchPaging').empty();  // 페이지네이션 영역 비우기
+		    // '이전' 버튼
+		    if(pageDTO.startPage > pageDTO.pageBlock) {
+		        $('#searchPaging').append(
+		            '<li class="page-item disabled">' +
+		         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage - pageDTO.pageBlock) + ', \'' + $('#userId').val() + '\', \'' + $('#myLostStatusSel').val() + '\'); return false;">' + '이전' + '</a>' +
+		            '</li>'
+		        );
+		    }
+		    // 페이지 번호 버튼
+		    for(var i = pageDTO.startPage; i <= pageDTO.endPage; i++) {
+			    $('#searchPaging').append(
+		    		'<li class="page-item" aria-current="page">' +
+			    	    '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + i + ', \'' + $('#userId').val() + '\', \'' + $('#myLostStatusSel').val() + '\'); return false;">' + i + '</a>' +
+			    	'</li>'
+			    );
+			}
+		    // '다음' 버튼
+		    if(pageDTO.endPage < pageDTO.pageCount) {
+		        $('#searchPaging').append(
+		            '<li class="page-item">' +
+		         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage + pageDTO.pageBlock) + ', \'' + $('#userId').val() + '\', \'' + $('#myLostStatusSel').val() + '\'); return false;">' + '다음' + '</a>' +
+		            '</li>'
+		        );
+		    }
+	}	
+	
 		// 날짜 형식을 변경하는 함수
 function formatDate(dateString) {
     var date = new Date(dateString);
