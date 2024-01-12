@@ -102,8 +102,12 @@ public class ResController extends HttpServlet {
 		}
 		// 같은 자리 선택 했는지
 		if(sPath.equals("/res2ProCS.re")) {
+			System.out.println("???????????????????????????");
 			resService = new ResService();
 			String result = resService.isSameSeat(request.getParameter("schDTO"));
+			System.out.println("~~~~~~~~~~~~~~~~~~");
+			System.out.println(result);
+			System.out.println("~~~~~~~~~~~~~~~~~~");
 			
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(result); // 같은자리면 null, 아니면 "noSameSeat"

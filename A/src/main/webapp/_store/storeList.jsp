@@ -221,7 +221,7 @@ IMP.init("imp20121707");
           pay_method: "card",	// 지불수단
           merchant_uid: "STO" + merchant_uid,   // 주문번호
           name: itemName,	// 상품명
-          amount: 100,    // 가격	price
+          amount: 100,    // 가격		price
           buyer_email: "gildong@gmail.com",	// 구매자 이메일
           buyer_name: "홍길동",	// 구매자 이름
           buyer_tel: "010-4242-4242",	// 구매자 연락처

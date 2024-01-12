@@ -175,6 +175,18 @@
 		  FROM QNABOARD 
 		 WHERE QNACATEGORY = #{qnaCategory};
 	</select>
+	<select id="myPageQnaBoardList" parameterType="map" resultType="QnaBoardDTO">
+		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
+	  	  FROM QNABOARD
+	  	 WHERE CREATE_USER = #{createUser}
+ 		 ORDER BY CREATE_DATE  DESC 
+ 		 LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
+	</select>
+	<select id="getMyPageQnaCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) 
+	 	  FROM QNABOARD
+	 	 WHERE CREATE_USER = #{createUser} 
+	</select>
 	
 	<select id="getLostBoardList" resultType="LostBoardDTO" parameterType="PageDTO">
 		SELECT *,
@@ -283,6 +295,38 @@
 	        AND LOSTSUBJECT LIKE CONCAT('%', #{lostSubject}, '%')
 	    </if>
 	</select>
+	<select id="myPageLostBoardList" parameterType="map" resultType="LostBoardDTO">
+		SELECT *,
+		       (SELECT C.CI_NAME
+		          FROM CINEMA AS C
+		         WHERE C.LO_IDX = LOST.LO_IDX AND C.CI_IDX = LOST.CI_IDX) AS 'CI_NAME',
+		       ROW_NUMBER() OVER (ORDER BY LOST.CREATE_DATE) AS RN
+		  FROM LOSTBOARD AS LOST
+		 WHERE CREATE_USER = #{createUser} 
+		 ORDER BY LOST.CREATE_DATE DESC
+		 LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
+	</select>
+	<select id="getMyPageLostCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) 
+		  FROM LOSTBOARD
+		 WHERE CREATE_USER = #{createUser} 
+	</select>
+	<select id="myLostStatusList" parameterType="map" resultType="LostBoardDTO">
+		SELECT *,
+		       (SELECT C.CI_NAME
+		          FROM CINEMA AS C
+		         WHERE C.LO_IDX = LOST.LO_IDX AND C.CI_IDX = LOST.CI_IDX) AS 'CI_NAME',
+		       ROW_NUMBER() OVER (ORDER BY LOST.CREATE_DATE) AS RN
+		  FROM LOSTBOARD AS LOST
+		 WHERE CREATE_USER = #{createUser} AND LOSTSTATUS = #{lostStatus}
+		 ORDER BY LOST.CREATE_DATE DESC
+		 LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
+	</select>
+	<select id="myPageLostStatusCount" parameterType="map" resultType="int">
+		SELECT COUNT(*) 
+		  FROM LOSTBOARD
+		 WHERE CREATE_USER = #{createUser} AND LOSTSTATUS = #{lostStatus}
+	</select>
 
 	<select id="getMemberList" resultType="MemberDTO">
 		SELECT * 
@@ -330,5 +374,108 @@
 		SELECT R.RESDATAIDX,NULL AS QNAIDX,L.LOSTIDX, L.CREATE_USER, L.CREATE_DATE, R.SUBJECT,R.RESPONSE, R.RESPONSE_USER, R.RESPONSE_DATE
 		  FROM LOSTBOARD L JOIN RESPONSEDATA R    
 		    ON L.LOSTIDX = R.LOSTIDX
+	</select>
+	
+	<insert id="insertRecommend" parameterType="RecommendDTO">
+		INSERT INTO RECOMMENDBOARD(RECOMMENDIDX,MOVIENAME,DIRECTOR,CREATE_USER,CREATE_DATE,COUNTRECO,POSTER)
+		VALUES
+		((SELECT *
+			FROM (SELECT IFNULL(MAX(CAST(RECOMMENDIDX as unsigned)), 0) + 1
+						   FROM RECOMMENDBOARD) R)
+		,#{movieName}
+		,#{director}
+		,#{createUser}
+		,SYSDATE()
+		,0
+		,#{poster}     
+		);
+	</insert>
+	<select id="getRecommendList" parameterType="PageDTO" resultType="RecommendDTO">
+SELECT *
+  FROM RECOMMENDBOARD
+ WHERE 
+  YEAR(CREATE_DATE) = YEAR(CURRENT_TIMESTAMP) AND
+  (
+    (MONTH(CREATE_DATE) BETWEEN 1 AND 2 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-03-01')) OR
+    (MONTH(CREATE_DATE) BETWEEN 3 AND 4 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-05-01')) OR
+    (MONTH(CREATE_DATE) BETWEEN 5 AND 6 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-07-01')) OR
+    (MONTH(CREATE_DATE) BETWEEN 7 AND 8 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-09-01')) OR
+    (MONTH(CREATE_DATE) BETWEEN 9 AND 10 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-11-01'))
+  )
+  OR
+  (
+    MONTH(CREATE_DATE) BETWEEN 11 AND 12 AND 
+    YEAR(CREATE_DATE) = YEAR(CURRENT_TIMESTAMP) + 1 AND 
+    CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP) + 1, '-01-01')
+  )
+<choose>
+    <when test="search == 'arrange'">
+        ORDER BY COUNTRECO DESC
+    </when>
+    <otherwise>
+        ORDER BY CREATE_DATE DESC
+    </otherwise>
+</choose>
+LIMIT #{startRow}, #{pageSize}
+	</select>
+	<update id="plusRecoCount" parameterType="map">
+		UPDATE RECOMMENDBOARD
+		SET COUNTRECO = COUNTRECO + 1
+		WHERE RECOMMENDIDX = #{recommendIdx}
+		  AND #{recoUser} NOT IN (
+		    SELECT RECO_USER
+		      FROM RECODUPLICHK
+		     WHERE DATE_ADD((SELECT MAX(RECO_DATE) FROM RECODUPLICHK WHERE RECO_USER = #{recoUser}), INTERVAL 1 MONTH) > SYSDATE()
+		      AND RECO_USER = #{recoUser}
+		    GROUP BY RECO_USER
+		  )
+	</update>
+	<insert id="insertRecoUser" parameterType="map">
+		INSERT INTO RECODUPLICHK(RECOMMENDIDX,RECO_USER,RECO_DATE)
+		SELECT #{recommendIdx},#{recoUser},SYSDATE()
+		  FROM DUAL
+		 WHERE #{recoUser} NOT IN (
+		    SELECT RECO_USER
+		      FROM RECODUPLICHK
+		     WHERE DATE_ADD((SELECT MAX(RECO_DATE) FROM RECODUPLICHK WHERE RECO_USER = #{recoUser}), INTERVAL 1 MONTH) > SYSDATE()
+		      AND RECO_USER = #{recoUser}
+		    GROUP BY RECO_USER
+		  )
+	</insert>
+	<delete id="deleteRecoData" parameterType="int">
+		DELETE FROM RECOMMENDBOARD
+ 		 WHERE RECOMMENDIDX = #{recommendIdx}
+	</delete>
+	<select id="getRecoBoardCount" resultType="int">
+		SELECT COUNT(*) 
+		  FROM RECOMMENDBOARD
+	</select>
+	<select id="searchRecoList" parameterType="map" resultType="RecommendDTO">
+		SELECT *
+		  FROM RECOMMENDBOARD
+		 WHERE 
+		  (YEAR(CREATE_DATE) = YEAR(CURRENT_TIMESTAMP) AND
+		  (
+		    (MONTH(CREATE_DATE) BETWEEN 1 AND 2 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-03-01')) OR
+		    (MONTH(CREATE_DATE) BETWEEN 3 AND 4 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-05-01')) OR
+		    (MONTH(CREATE_DATE) BETWEEN 5 AND 6 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-07-01')) OR
+		    (MONTH(CREATE_DATE) BETWEEN 7 AND 8 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-09-01')) OR
+		    (MONTH(CREATE_DATE) BETWEEN 9 AND 10 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-11-01'))
+		  )
+		  OR
+		  (
+		    MONTH(CREATE_DATE) BETWEEN 11 AND 12 AND 
+		    YEAR(CREATE_DATE) = YEAR(CURRENT_TIMESTAMP) + 1 AND 
+		    CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP) + 1, '-01-01')
+		  )
+		  )
+		  AND MOVIENAME LIKE '%${movieName}%'
+		ORDER BY CREATE_DATE DESC
+		LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
+	</select>
+	<select id="getRecoSrchCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) 
+		  FROM RECOMMENDBOARD
+		 WHERE MOVIENAME LIKE '%${movieName}%' 
 	</select>
 </mapper>

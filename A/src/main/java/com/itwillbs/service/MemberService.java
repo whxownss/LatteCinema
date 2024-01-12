@@ -3,6 +3,8 @@ package com.itwillbs.service;
 import java.nio.file.spi.FileSystemProvider;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -279,7 +281,13 @@ public class MemberService {
 			// BoardDAO 객체생성
 			memberDAO = new MemberDAO();
 			// getBoardList(startRow,pageSize) 메서드 호출
-			memberList = memberDAO.getBoardList(pageDTO);
+//			memberList = memberDAO.getBoardList(pageDTO);
+			
+			Map<String, Integer> paramMap = new HashMap<String, Integer>();
+			paramMap.put("startRow", startRow);
+			paramMap.put("pageSize", pageDTO.getPageSize());
+			
+			memberList = memberDAO.getBoardList(paramMap);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

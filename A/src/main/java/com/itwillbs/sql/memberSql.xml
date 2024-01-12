@@ -159,18 +159,22 @@
 <!-- 	</delete> -->
 	
 	
-	<select id="getBoardList" parameterType="MemberDTO">
-		SELECT *
-		FROM MEMBERS
-		ORDER BY MEM_ID DESC
-		LIMIT #{startRow}, #{pageSize}
-	</select>
+<!-- 	<select id="getBoardList" parameterType="MemberDTO"> -->
+<!-- 		SELECT * -->
+<!-- 		FROM MEMBERS -->
+<!-- 		ORDER BY MEM_ID DESC -->
+<!-- 		LIMIT #{startRow}, #{pageSize} -->
+<!-- 	</select> -->
 	
-	<select id="getBoardCount" parameterType="MemberDTO">
+	<select id="getBoardCount" resultType="Integer">
 		SELECT COUNT(*)
 		FROM MEMBERS
 	</select>
 	
-	
+	<select id="getBoardList" parameterType="map" resultType="MemberDTO">
+		SELECT *
+		  FROM MEMBERS
+		LIMIT #{startRow}, #{pageSize}
+	</select>
 	
 </mapper>
