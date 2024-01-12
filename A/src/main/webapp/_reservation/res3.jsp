@@ -228,8 +228,24 @@ var milliseconds = today.getMilliseconds();
 var makeMerchantUid = "" + hours + minutes + seconds + milliseconds;
 
 function kakaoPay(useremail, username) {
- if (confirm("구매 하시겠습니까?")) { // 구매 클릭시 한번 더 확인하기
-     if (1 == 1) { // 회원만 결제 가능
+	// 내가 결제중에 SEAT테이블에 정보가 사라질 때 ******************************
+// 	$.ajax({
+// 		type: "GET",
+// 		url: "res3ProSE.re",
+// 		data: ,
+// 		dataType: "text",
+// 		async: false
+// 	})
+// 	.done(function(data){
+		
+// 	})
+// 	.fail(function(){})
+	
+	
+	
+	
+	if (confirm("구매 하시겠습니까?")) { // 구매 클릭시 한번 더 확인하기
+    if (1 == 1) { // 회원만 결제 가능
 //          const emoticonName = document.getElementById('title').innerText
 
          IMP.init("imp16802722"); // 가맹점 식별코드

@@ -116,6 +116,5 @@ public class ResDAO {
 			System.out.println("DB 작업 종료");
 		}, 50, TimeUnit.SECONDS);
 		scheduler.shutdown();
-
 	}
 }
