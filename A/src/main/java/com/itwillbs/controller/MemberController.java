@@ -559,6 +559,10 @@ public class MemberController extends HttpServlet {
 //			dispatcher = request.getRequestDispatcher("_mypage/myinquiry2.jsp");
 //			dispatcher.forward(request, response);
 		}
+		// 마이페이지 1대1문의 답변 미답변 서치
+		if(sPath.equals("/myQnaStatus.me")) {
+			
+		}
 		
 		// 마이페이지 bookinglist(예매내역) 이동
 		// 화면에 보여줄 글개수 설정
