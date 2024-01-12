@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,6 +19,8 @@ import com.itwillbs.sql.SqlMapClient;
 
 public class ResDAO {
 	private SqlSessionFactory sqlSessionFactory = SqlMapClient.getSqlSession();
+	private ScheduledExecutorService scheduler = null;
+	private static ScheduledFuture<?> scheduledFuture = null;
 
 	public List<LocationDTO> selectLocation() {
 		SqlSession session = sqlSessionFactory.openSession();
@@ -107,14 +110,31 @@ public class ResDAO {
 		SqlSession session = sqlSessionFactory.openSession();
 		
 		String memId = null;
-		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-		scheduler.schedule(() -> {
+		scheduler = Executors.newScheduledThreadPool(1);
+		System.out.println("이부분 오기는하나?이부분 오기는하나?이부분 오기는하나?이부분 오기는하나?");
+		scheduledFuture = scheduler.schedule(() -> {
 			System.out.println("DB 작업 실행");
 			session.delete("Reservation.delete", memId);
 			session.commit();
 			session.close();
 			System.out.println("DB 작업 종료");
 		}, 50, TimeUnit.SECONDS);
+		System.out.println("널인지 확인1111 : " + scheduledFuture);
 		scheduler.shutdown();
+	}
+
+	public String isTimeOver(SeatDTO seatDTO) {
+		System.out.println("+++++++++++++++++++++");
+		SqlSession session = sqlSessionFactory.openSession();
+		int seatCnt = session.selectOne("Reservation.selectTimeOverSeat", seatDTO);
+		session.close();
+		System.out.println("+++++++++++" + seatCnt + "++++++++++");
+		if(seatCnt > 0) {
+			System.out.println("작업취소부분작업취소부분작업취소부분작업취소부분");
+			System.out.println("널인지 확인22222 : " + scheduledFuture);
+			scheduledFuture.cancel(true);
+		}
+		
+		return seatCnt > 0 ? "false" : "true";
 	}
 }

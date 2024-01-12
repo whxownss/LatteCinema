@@ -130,7 +130,7 @@ public class ResController extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(result);
 		}
-
+		
 		// 예약3 페이지 이동
 		if(sPath.equals("/res3.re")) {
 			resService = new ResService();
@@ -148,7 +148,15 @@ public class ResController extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(msg);
 		}
-		
+
+		// 결제전 시간이 지났는지 확인 (지났으면 결제 취소, 안지났으면 스케줄러 shutdown)
+		if(sPath.equals("/res3ProSE.re")) {
+			resService = new ResService();
+			String result = resService.isTimeOver(request.getParameter("schDTO"));	
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result);
+		}
 
 		// 예약4 페이지 이동
 		if(sPath.equals("/res4.re")) {
