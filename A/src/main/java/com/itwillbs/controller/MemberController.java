@@ -566,7 +566,7 @@ public class MemberController extends HttpServlet {
 			
 			request.setCharacterEncoding("utf-8");
 			
-			int pageSize = 10;
+			int pageSize = 5;
 			String pageNum = request.getParameter("pageNum");
 			
 			if(pageNum == null){
@@ -590,7 +590,7 @@ public class MemberController extends HttpServlet {
 		   //  int count =  getBoardCount()메서드 호출
 			int count = memberService.getBoardCount();
 			// 한 화면에 보여줄 페이지 개수 설정
-			int pageBlock = 10;
+			int pageBlock = 5;
 			// 시작하는 페이지 번호 구하기
 			int startPage= (currentPage-1)/pageBlock*pageBlock+1;
 			// 끝나는 페이지 번호 구하기
@@ -606,6 +606,8 @@ public class MemberController extends HttpServlet {
 			pageDTO.setStartPage(startPage);
 			pageDTO.setEndPage(endPage);
 			pageDTO.setPageCount(pageCount);
+			
+			System.out.println(pageDTO);
 			
 			// request에 pageDTO 저장
 			request.setAttribute("pageDTO", pageDTO);
