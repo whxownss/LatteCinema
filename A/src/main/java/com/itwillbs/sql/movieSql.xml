@@ -2,12 +2,70 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
+<!-- 영화 삽입하는 sql -->
 <mapper namespace="Movie">
 
 	<insert id="insertMovie">
 			INSERT INTO MOVIE
 		 	 ( 
 		 	   MOVIE_IDX
+		 	 , TITLE
+		 	 , MOVIE_CATEGORY
+		 	 , DIRECTOR
+		 	 , GENRE
+		 	 , OPENDATE
+		 	 , RATING
+		 	 , SYNOPSIS
+		 	 , POSTER
+		 	 , FILM_MADE
+		 	 , NATION
+		 	 , RUN_TIME
+		 	 , START_DATE
+		 	 , END_DATE)
+		VALUES (
+			  #{movieIdx}
+		  	, #{title}
+		  	, #{movieCategory}
+		  	, #{director}
+		  	, #{genre}
+		  	, #{openDate}
+		  	, #{rating} 
+		  	, #{synopsis}
+		  	, #{poster}
+		  	, #{filmMade}
+		  	, #{nation}
+		  	, #{runTime}
+		  	, SUBSTRING(#{startDate}, 1, 10)
+		  	, SUBSTRING(#{endDate}, 1, 10)
+		  	)
+	</insert>
+
+	
+	<!-- 라떼 영화 포스터 불러오는 sql -->
+	<select id="getLattePoster" resultType="MovieDTO" parameterType="MovieDTO">
+	SELECT POSTER, TITLE
+	FROM MOVIE 
+	WHERE MOVIE_CATEGORY = 'OLD' 
+ <![CDATA[
+	AND START_DATE <= NOW() 
+	AND END_DATE > NOW() 
+		   ]]>
+	</select>
+
+	<!-- 현재 상영 영화 포스터 불러오는 sql -->
+	<select id="selectNowPoster" resultType="MovieDTO" parameterType="MovieDTO">
+	SELECT POSTER, TITLE
+	FROM MOVIE 
+	WHERE MOVIE_CATEGORY = 'NOW'
+
+	</select>
+
+
+    <!--  영화 상세 정보 불러오는 sql -->
+	<select id="movieDetail" resultType="MovieDTO" parameterType="MovieDTO">
+	SELECT 
+	  		   MOVIE_IDX
 		 	 , TITLE
 		 	 , DIRECTOR
 		 	 , GENRE
@@ -17,19 +75,19 @@
 		 	 , POSTER
 		 	 , FILM_MADE
 		 	 , NATION
-		 	 , RUN_TIME)
-		VALUES (
-			  #{movieIdx}
-		  	, #{title}
-		  	, #{director}
-		  	, #{genre}
-		  	, #{openDate}
-		  	, #{rating} 
-		  	, #{synopsis}
-		  	, #{poster}
-		  	, #{filmMade}
-		  	, #{nation}
-		  	, #{runTime})
-	</insert>
+		 	 , RUN_TIME
+	FROM MOVIE 
+
+	</select>
+	
+	<select id="movieAll" resultType="MovieDTO" parameterType="MovieDTO">
+	SELECT POSTER, TITLE
+	FROM MOVIE 
+	
+
+	</select>
+
+
+
 	
 </mapper>

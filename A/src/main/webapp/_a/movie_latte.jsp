@@ -202,7 +202,6 @@
 
 
 
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -213,6 +212,75 @@
 <main id="main">
 
   <%@include file="../_common/commonMovieSlide.jsp"%>
+
+
+<section class="category-section" id="vote">
+    <div class="container" data-aos="fade-up">
+      <div class="section-header d-flex justify-content-between align-items-center mb-5">
+        <h3>라떼 무비 - 3월의 상영 유력 후보</h3>
+       <!--  <div>
+          <input type="submit" value="투표" class="btn btn-secondary p-1" onclick="vote()" id="voteButton">
+        </div> -->
+      </div> 
+
+      <div class="row g-5">
+        <div class="col-lg">
+          <div class="post-entry-1 lg">
+           <!--  <div>
+              <input type="radio" id="vote-1" name="vote">
+              <label for="vote-1"><span class="date">후보 1</span></label>
+            </div> -->
+            <label for="vote-1"><img src="assets/img/post6.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
+            <div><label for="vote-1"><span>말하고싶은 비밀</span> <span>&bullet;</span> <span>홍길동</span></label></div>
+          </div>
+        </div>
+        <div class="col-lg">
+          <div class="post-entry-1 lg">
+           <!--  <div>
+              <input type="radio" id="vote-2" name="vote">
+              <label for="vote-2"><span class="date">후보 2</span></label>
+            </div> -->
+            <label for="vote-2"><img src="assets/img/post7.jpg" alt="" class="class="img-fluid" style="width: 100%;"></label>
+						<div><label for="vote-2"><span>괴물</span> <span>&bullet;</span> <span>홍길동</span></label></div>
+					</div>
+				</div>
+				<div class="col-lg">
+					<div class="post-entry-1 lg">
+						<!-- <div>
+							<input type="radio" id="vote-3" name="vote">
+							<label for="vote-3"><span class="date">후보 3</span></label>
+						</div> -->
+						<label for="vote-3"><img src="assets/img/post8.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
+						<div><label for="vote-3"><span>쏘우</span> <span>&bullet;</span> <span>제임스완</span></label></div>
+					</div>
+				</div>
+				<div class="col-lg">
+					<div class="post-entry-1 lg">
+						<!-- <div>
+							<input type="radio" id="vote-4" name="vote">
+							<label for="vote-4"><span class="date">후보 4</span></label>
+						</div> -->
+						<label for="vote-4"><img src="assets/img/post9.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
+						<div><label for="vote-4"><span>싱글인서울</span> <span>&bullet;</span> <span>홍길동</span></label></div>
+					</div>
+				</div>
+				<div class="col-lg">
+					<div class="post-entry-1 lg">
+						<!-- <div>
+							<input type="radio" id="vote-5" name="vote">
+							<label for="vote-5"><span class="date">후보 5</span></label>
+						</div> -->
+						<label for="vote-5"><img src="assets/img/post10.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
+						<div><label for="vote-5"><span>나폴레옹</span> <span>&bullet;</span> <span>홍길동</span></label></div>
+					</div>
+				</div>
+			</div>
+			<!-- End .row -->
+		</div>
+	</section>
+	<!-- End Lifestyle Category Section -->
+	
+
 
   <!-- ======= Culture Category Section ======= -->
   <section class="category-section">
@@ -266,7 +334,7 @@
     </div>
   </section><!-- End Lifestyle Category Section -->
 
-  <script>
+ <!--  <script>
     function vote() {
       // Check if user has voted in January or February 2024
       if (hasVotedInJanuaryOrFebruary()) {
@@ -313,74 +381,9 @@
       var currentDate = new Date();
       localStorage.setItem('lastVoteDate', currentDate.toISOString());
     }
-  </script>
+  </script> -->
 
-  <section class="category-section" id="vote">
-    <div class="container" data-aos="fade-up">
-      <div class="section-header d-flex justify-content-between align-items-center mb-5">
-        <h3>익월의 라떼 투표</h3>
-        <div>
-          <input type="submit" value="투표" class="btn btn-secondary p-1" onclick="vote()" id="voteButton">
-        </div>
-      </div>
-
-      <div class="row g-5">
-        <div class="col-lg">
-          <div class="post-entry-1 lg">
-            <div>
-              <input type="radio" id="vote-1" name="vote">
-              <label for="vote-1"><span class="date">후보 1</span></label>
-            </div>
-            <label for="vote-1"><img src="assets/img/post6.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
-            <div><label for="vote-1"><span>말하고싶은 비밀</span> <span>&bullet;</span> <span>홍길동</span></label></div>
-          </div>
-        </div>
-        <div class="col-lg">
-          <div class="post-entry-1 lg">
-            <div>
-              <input type="radio" id="vote-2" name="vote">
-              <label for="vote-2"><span class="date">후보 2</span></label>
-            </div>
-            <label for="vote-2"><img src="assets/img/post7.jpg" alt="" class="class="img-fluid" style="width: 100%;"></label>
-						<div><label for="vote-2"><span>괴물</span> <span>&bullet;</span> <span>홍길동</span></label></div>
-					</div>
-				</div>
-				<div class="col-lg">
-					<div class="post-entry-1 lg">
-						<div>
-							<input type="radio" id="vote-3" name="vote">
-							<label for="vote-3"><span class="date">후보 3</span></label>
-						</div>
-						<label for="vote-3"><img src="assets/img/post8.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
-						<div><label for="vote-3"><span>쏘우</span> <span>&bullet;</span> <span>제임스완</span></label></div>
-					</div>
-				</div>
-				<div class="col-lg">
-					<div class="post-entry-1 lg">
-						<div>
-							<input type="radio" id="vote-4" name="vote">
-							<label for="vote-4"><span class="date">후보 4</span></label>
-						</div>
-						<label for="vote-4"><img src="assets/img/post9.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
-						<div><label for="vote-4"><span>싱글인서울</span> <span>&bullet;</span> <span>홍길동</span></label></div>
-					</div>
-				</div>
-				<div class="col-lg">
-					<div class="post-entry-1 lg">
-						<div>
-							<input type="radio" id="vote-5" name="vote">
-							<label for="vote-5"><span class="date">후보 5</span></label>
-						</div>
-						<label for="vote-5"><img src="assets/img/post10.jpg" alt="" class="img-fluid" style="width: 100%;"></label>
-						<div><label for="vote-5"><span>나폴레옹</span> <span>&bullet;</span> <span>홍길동</span></label></div>
-					</div>
-				</div>
-			</div>
-			<!-- End .row -->
-		</div>
-	</section>
-	<!-- End Lifestyle Category Section -->
-	
+  
 
 
 
