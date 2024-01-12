@@ -87,6 +87,7 @@
 		   AND CI_IDX = #{ciIdx}
 		   AND MOV_TYPE = #{movType}
 		   AND SCH_IDX = #{schIdx}
+		   AND DATE_C = #{dateC}
 		   AND (
 		   <foreach collection="seatC.split(',')" item="seat" index="i" separator="OR">
 		   	   FIND_IN_SET(#{seat}, REPLACE(SEAT_C, ' ', '')) > 0

@@ -119,7 +119,7 @@ public class ResService {
 		resDAO = new ResDAO();
 		Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 		SeatDTO seatDTO = gson.fromJson(schDTO, SeatDTO.class);
-		
+		System.out.println(seatDTO);
 		return resDAO.isSameSeat(seatDTO);
 	}
 
