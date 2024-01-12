@@ -142,4 +142,12 @@ public class ResService {
 		resDAO.startPayTimer();
 	}
 
+	public String isTimeOver(String schDTO) {
+		resDAO = new ResDAO();
+		Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+		SeatDTO seatDTO = gson.fromJson(schDTO, SeatDTO.class);
+		
+		return resDAO.isTimeOver(seatDTO);
+	}
+
 }
