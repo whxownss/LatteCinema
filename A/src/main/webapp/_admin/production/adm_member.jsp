@@ -152,6 +152,7 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
                           <th>핸드폰 번호</th>
                           <th>E-mail</th>
                           <th>정지여부</th>
+                          <th>정지일</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -165,11 +166,24 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
                       		<td>${memberDTO.memPhone }</td>
                       		<td>${memberDTO.memEmail }</td>
 	                          <td>
-								<select>
-									<option value="N">N</option>
-									<option value="Y">Y</option>
-								</select>
+<!-- 								<select> -->
+<%-- 									<c:if test="${memberDTO.memStatus eq 0 }"> --%>
+<!-- 										<option value="0" selected>N</option> -->
+<!-- 										<option value="1">Y</option> -->
+<%-- 									</c:if> --%>
+<%-- 									<c:if test="${memberDTO.memStatus eq 1 }"> --%>
+<!-- 										<option value="0">N</option> -->
+<!-- 										<option value="1" selected>Y</option> -->
+<%-- 									</c:if> --%>
+<!-- 								</select> -->
+									<c:if test="${memberDTO.memStatus eq 0 }">
+										<a>No</a>
+									</c:if>
+									<c:if test="${memberDTO.memStatus eq 1 }">
+										<a>Yes</a>
+									</c:if>
 							  </td>
+							  <td>${memberDTO.memStopD }</td>
 						</tr>	  
                       	</c:forEach>
                         
