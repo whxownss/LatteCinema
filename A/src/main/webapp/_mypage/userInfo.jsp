@@ -210,11 +210,7 @@ $('#phoneChgBtn').on('click', function() {
 		text = "휴대폰번호 변경";
 		
 	$("#phoneChgBtn").text(text);
-// 	debugger;
-//     $('.change-phone-num-area > div input').val('');
-//     $('.change-phone-num-area > div:first button').text('인증번호 전송');
-//     $('#timeLimit').html('');
-//     clearInterval(interval);
+
 });
 // 새 휴대폰번호 정규식 검사 ()
 function checkPhone() {
