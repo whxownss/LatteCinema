@@ -71,10 +71,10 @@
 <!-- 					<button type="button" class="btn dropdown-toggle btn-default bs-placeholder" data-toggle="dropdown" role="button" data-id="custInqStatCd" title="전체"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">전체</div></div> </div><span class="bs-caret"><span class="caret"></span></span></button> -->
 					<div class="dropdown-menu open" role="combobox"><div class="inner open" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner "></ul></div></div></div>
 			
-					<div class="board-search ml07">
-						<input type="text" title="검색어를 입력해 주세요." placeholder="검색어를 입력해 주세요." class="input-text" id="searchTxt" value="">
-						<button type="button" class="btn-search-input" id="searchBtn">검색</button>
-					</div>
+<!-- 					<div class="board-search ml07"> -->
+<!-- 						<input type="text" title="검색어를 입력해 주세요." placeholder="검색어를 입력해 주세요." class="input-text" id="searchTxt" value=""> -->
+<!-- 						<button type="button" class="btn-search-input" id="searchBtn">검색</button> -->
+<!-- 					</div> -->
 				</div>
 			
 				<div class="table-wrap" id="tableWrap"><!-- table-wrap부분이 바뀌어야함. data-url이 바뀔 때 마다.  -->
