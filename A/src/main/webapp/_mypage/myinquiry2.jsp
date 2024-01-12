@@ -4,6 +4,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -111,7 +112,10 @@
 							        <c:if test="${! empty lostBoardDTO.responseUser }">
 							        	<td>답변완료</td>
 							        </c:if>
-							        <td>${lostBoardDTO.createDate }</td>
+							        <td>
+									<fmt:parseDate value="${lostBoardDTO.createDate}" pattern="yy-MM-dd HH:mm:ss" var="parsedDate"/>
+									<fmt:formatDate value="${parsedDate}" pattern="yy-MM-dd HH:mm:ss" />
+							        </td>
 								</tr>
 							</c:forEach>
 						</tbody>
