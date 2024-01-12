@@ -9,7 +9,6 @@
   <jsp:include page="../_common/meta.jsp"></jsp:include>
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
   <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js?autoload=false"></script>
-   <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
  
 </head>
@@ -33,7 +32,7 @@
 		
 			<div id="contents">
 				<h2 class="tit">나의 문의내역</h2>
-			
+			<input type="hidden" id="userId" value="${sessionScope.sId }">
 				<div class="tab-block">
 					<ul>
 						<li data-url="/mypage/myinquiry?cd=INQD01" class="on"><a href="#" class="btn" data-cd="INQD01" title="1:1 문의내역 탭으로 이동">1:1 문의내역</a></li>
@@ -62,17 +61,17 @@
 					<div class="dropdown bootstrap-select bs3"><select id="myQnaStatus" class="" tabindex="-98">
 						<option value="">전체</option>
 						
-								<option value="미답변">미답변</option>
-								<option value="답변완료">답변완료</option>
+								<option value="0">미답변</option>
+								<option value="1">답변완료</option>
 						
 					</select>
 <!-- 					<button type="button" class="btn dropdown-toggle btn-default bs-placeholder" data-toggle="dropdown" role="button" data-id="custInqStatCd" title="전체"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">전체</div></div> </div><span class="bs-caret"><span class="caret"></span></span></button> -->
 					<div class="dropdown-menu open" role="combobox"><div class="inner open" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner "></ul></div></div></div>
 			
-					<div class="board-search ml07">
-						<input type="text" title="검색어를 입력해 주세요." placeholder="검색어를 입력해 주세요." class="input-text" id="searchTxt" value="">
-						<button type="button" class="btn-search-input" id="searchBtn">검색</button>
-					</div>
+<!-- 					<div class="board-search ml07"> -->
+<!-- 						<input type="text" title="검색어를 입력해 주세요." placeholder="검색어를 입력해 주세요." class="input-text" id="searchTxt" value=""> -->
+<!-- 						<button type="button" class="btn-search-input" id="searchBtn">검색</button> -->
+<!-- 					</div> -->
 				</div>
 			
 				<div class="table-wrap" id="tableWrap"><!-- table-wrap부분이 바뀌어야함. data-url이 바뀔 때 마다.  -->
@@ -96,7 +95,7 @@
 								<th scope="col">등록일</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="tbody">
 <!-- 							<tr><td colspan="6">목록이 없습니다.</td></tr> -->
 							<c:forEach var="qnaBoardDTO" items="${qnaBoardList}">
 								<tr>
@@ -120,7 +119,7 @@
 				<section class="category-section" id="">
 						<div class="container" data-aos="fade-up">
 							<div class="pagination-container d-flex justify-content-center">
-							  <ul class="pagination">
+							  <ul class="pagination" id="searchPaging">
 								<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
 								    <li class="page-item disabled">
 								      <a class="page-link text-secondary" href="myinquiry.me?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
@@ -147,6 +146,7 @@
   </section>
 </main>
 <%@include file ="../_common/commonFooterStart.jsp" %>
+<script src="./jQuery/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	var cd = '';
 	var qnaDtlsYn = '';
@@ -305,26 +305,27 @@
 // 		});
 // 	}
 	$('#myQnaStatus').on("change",function(){
+		//debugger;
 	 $.ajax({
 	 	    url: 'myQnaStatus.me',  // 서버의 URL을 입력
 	 	    type: 'GET',  // 요청 유형을 'GET'으로 설정
 	 	    data: {
 	 	    	  //'loIdx': $('#locationSelect').val(),
 	 	    	  //'ciIdx': $('#cinemaSelect').val(),
-	 	    	  'lostStatus': $('#myLostStatusSel').val(),
+	 	    	  'qnaResponse': $('#myQnaStatus').val(),
 	 	    	  //'lostSubject': $('#lostSubject').val()
 	 	    },
 	 	    success: function(response) {
-	 	    	if($('#myLostStatusSel').val() ===''){
-	 	    		window.location.href = 'myinquiry2.me';
+	 	    	if($('#myQnaStatus').val() ===''){
+	 	    		window.location.href = 'myinquiry.me';
 	 	    		return;
 	 	    	}
 				// 'response' 객체에서 'lostBoardList'와 'pageDTO' 데이터 추출
-		        var lostBoardList = response.lostBoardList;
+		        var qnaBoardList = response.qnaBoardList;
 		        var pageDTO = response.pageDTO;
 				$('#tbody').empty();
-// 				debugger;
-				lostBoardList.forEach(function(search) {
+				//debugger;
+				qnaBoardList.forEach(function(search) {
 					// 날짜 형식 변경 (예: yyyy-MM-dd)
 					console.log('Received createDate:', search.createDate);
 	                var formattedDate = formatDate(search.createDate); // 'formatDate'는 날짜 형식을 변경하는 함수
@@ -332,13 +333,13 @@
 	                // 새로운 행(<tr>)을 생성하고 각 칼럼(<td>)에 데이터 추가
 	                var newRow = $('<tr></tr>');
 	                newRow.append($('<td></td>').text(search.rn));  
-	                newRow.append($('<td></td>').text(search.ciName));  
-	                newRow.append($('<td></td>').html('<a href="cs_lost_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + parseAndFormat + '">' + search.lostSubject + '</a>'));
+	                newRow.append($('<td></td>').text(search.qnaCategory));  
+	                newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + parseAndFormat + '">' + search.qnaSubject + '</a>'));
 
-	                if(search.lostStatus === '0'){
-	                	newRow.append($('<td></td>').val(search.lostStatus).text('미답변'));
+	                if(!search.responseUser){
+	                	newRow.append($('<td></td>').val('0').text('미답변'));
 	                } else {
-	                	newRow.append($('<td></td>').val(search.lostStatus).text('답변완료'));
+	                	newRow.append($('<td></td>').val('1').text('답변완료'));
 	                }
 	                newRow.append($('<td></td>').text(formattedDate));
 	                
@@ -350,7 +351,7 @@
 				    if(pageDTO.startPage > pageDTO.pageBlock) {
 				        $('#searchPaging').append(
 				            '<li class="page-item disabled">' +
-				         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage - pageDTO.pageBlock) + ', \'' + $('#userId').val() + '\', \'' + $('#myLostStatusSel').val() + '\'); return false;">' + '이전' + '</a>' +
+				         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage - pageDTO.pageBlock) + ', \'' + $('#userId').val() + '\', \'' + $('#myQnaStatus').val() + '\'); return false;">' + '이전' + '</a>' +
 				            '</li>'
 				        );
 				    }
@@ -358,7 +359,7 @@
 				    for(var i = pageDTO.startPage; i <= pageDTO.endPage; i++) {
 					    $('#searchPaging').append(
 				    		'<li class="page-item" aria-current="page">' +
-					    	    '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + i + ', \'' + $('#userId').val() + '\', \'' + $('#myLostStatusSel').val() + '\'); return false;">' + i + '</a>' +
+					    	    '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + i + ', \'' + $('#userId').val() + '\', \'' + $('#myQnaStatus').val() + '\'); return false;">' + i + '</a>' +
 					    	'</li>'
 					    );
 					}
@@ -366,7 +367,7 @@
 				    if(pageDTO.endPage < pageDTO.pageCount) {
 				        $('#searchPaging').append(
 				            '<li class="page-item">' +
-				         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage + pageDTO.pageBlock) + ', \'' + $('#userId').val() + '\', \'' + $('#myLostStatusSel').val() + '\'); return false;">' + '다음' + '</a>' +
+				         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage + pageDTO.pageBlock) + ', \'' + $('#userId').val() + '\', \'' + $('#myQnaStatus').val() + '\'); return false;">' + '다음' + '</a>' +
 				            '</li>'
 				        );
 				    }
@@ -377,16 +378,16 @@
 	 	});
 });
 
-    function searchPageNm(pageNum, createUser, lostStatus){
+    function searchPageNm(pageNum, createUser, qnaResponse){
         // AJAX 요청을 통해 서버로부터 새로운 페이징 데이터를 가져옴
 //         debugger;
         $.ajax({
-            url: 'myLostStatus.me',
+            url: 'myQnaStatus.me',
             type: 'GET',
             data: {
                 pageNum: pageNum
                ,createUser: createUser
-               ,lostStatus: lostStatus
+               ,qnaResponse: qnaResponse
             },
             success: function(response) {
                 // 서버로부터 받은 새로운 페이징 데이터로 '#searchPaging' 업데이트
@@ -403,57 +404,57 @@
     function updatePagination(response) {
 		// 'response' 객체에서 'lostBoardList'와 'pageDTO' 데이터 추출
 
-	       var lostBoardList = response.lostBoardList;
+	       var qnaBoardList = response.qnaBoardList;
 	       var pageDTO = response.pageDTO;
 	
-		$('#tbody').empty();
-//			debugger;
-		lostBoardList.forEach(function(search) {
-			// 날짜 형식 변경 (예: yyyy-MM-dd)
-			console.log('Received createDate:', search.createDate);
-            var formattedDate = formatDate(search.createDate); // 'formatDate'는 날짜 형식을 변경하는 함수
-            var parseAndFormat= parseAndFormatDate(search.createDate);
-            // 새로운 행(<tr>)을 생성하고 각 칼럼(<td>)에 데이터 추가
-            var newRow = $('<tr></tr>');
-            newRow.append($('<td></td>').text(search.rn));  
-            newRow.append($('<td></td>').text(search.ciName));  
-            newRow.append($('<td></td>').html('<a href="cs_lost_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + parseAndFormat + '">' + search.lostSubject + '</a>'));
+	       $('#tbody').empty();
+			//debugger;
+			qnaBoardList.forEach(function(search) {
+				// 날짜 형식 변경 (예: yyyy-MM-dd)
+				console.log('Received createDate:', search.createDate);
+               var formattedDate = formatDate(search.createDate); // 'formatDate'는 날짜 형식을 변경하는 함수
+               var parseAndFormat= parseAndFormatDate(search.createDate);
+               // 새로운 행(<tr>)을 생성하고 각 칼럼(<td>)에 데이터 추가
+               var newRow = $('<tr></tr>');
+               newRow.append($('<td></td>').text(search.rn));  
+               newRow.append($('<td></td>').text(search.qnaCategory));  
+               newRow.append($('<td></td>').html('<a href="cs_qna_content.cs?createUser=' + encodeURIComponent(search.createUser) + '&createDate=' + parseAndFormat + '">' + search.qnaSubject + '</a>'));
 
-            if(search.lostStatus === '0'){
-            	newRow.append($('<td></td>').val(search.lostStatus).text('미답변'));
-            } else {
-            	newRow.append($('<td></td>').val(search.lostStatus).text('답변완료'));
-            }
-            newRow.append($('<td></td>').text(formattedDate));
-            
-            // 완성된 행을 tbody에 추가
-            $('#tbody').append(newRow);
-        });
-		$('#searchPaging').empty();  // 페이지네이션 영역 비우기
-		    // '이전' 버튼
-		    if(pageDTO.startPage > pageDTO.pageBlock) {
-		        $('#searchPaging').append(
-		            '<li class="page-item disabled">' +
-		         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage - pageDTO.pageBlock) + ', \'' + $('#userId').val() + '\', \'' + $('#myLostStatusSel').val() + '\'); return false;">' + '이전' + '</a>' +
-		            '</li>'
-		        );
-		    }
-		    // 페이지 번호 버튼
-		    for(var i = pageDTO.startPage; i <= pageDTO.endPage; i++) {
-			    $('#searchPaging').append(
-		    		'<li class="page-item" aria-current="page">' +
-			    	    '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + i + ', \'' + $('#userId').val() + '\', \'' + $('#myLostStatusSel').val() + '\'); return false;">' + i + '</a>' +
-			    	'</li>'
-			    );
-			}
-		    // '다음' 버튼
-		    if(pageDTO.endPage < pageDTO.pageCount) {
-		        $('#searchPaging').append(
-		            '<li class="page-item">' +
-		         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage + pageDTO.pageBlock) + ', \'' + $('#userId').val() + '\', \'' + $('#myLostStatusSel').val() + '\'); return false;">' + '다음' + '</a>' +
-		            '</li>'
-		        );
-		    }
+               if(!search.responseUser){
+               	newRow.append($('<td></td>').val('0').text('미답변'));
+               } else {
+               	newRow.append($('<td></td>').val('1').text('답변완료'));
+               }
+               newRow.append($('<td></td>').text(formattedDate));
+               
+               // 완성된 행을 tbody에 추가
+               $('#tbody').append(newRow);
+           });
+			$('#searchPaging').empty();  // 페이지네이션 영역 비우기
+			    // '이전' 버튼
+			    if(pageDTO.startPage > pageDTO.pageBlock) {
+			        $('#searchPaging').append(
+			            '<li class="page-item disabled">' +
+			         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage - pageDTO.pageBlock) + ', \'' + $('#userId').val() + '\', \'' + $('#myQnaStatus').val() + '\'); return false;">' + '이전' + '</a>' +
+			            '</li>'
+			        );
+			    }
+			    // 페이지 번호 버튼
+			    for(var i = pageDTO.startPage; i <= pageDTO.endPage; i++) {
+				    $('#searchPaging').append(
+			    		'<li class="page-item" aria-current="page">' +
+				    	    '<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + i + ', \'' + $('#userId').val() + '\', \'' + $('#myQnaStatus').val() + '\'); return false;">' + i + '</a>' +
+				    	'</li>'
+				    );
+				}
+			    // '다음' 버튼
+			    if(pageDTO.endPage < pageDTO.pageCount) {
+			        $('#searchPaging').append(
+			            '<li class="page-item">' +
+			         	'<a class="page-link text-secondary" href="#" onclick="searchPageNm(' + (pageDTO.startPage + pageDTO.pageBlock) + ', \'' + $('#userId').val() + '\', \'' + $('#myQnaStatus').val() + '\'); return false;">' + '다음' + '</a>' +
+			            '</li>'
+			        );
+			    }
 	}	
 	
 		// 날짜 형식을 변경하는 함수

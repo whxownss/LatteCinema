@@ -187,6 +187,34 @@
 	 	  FROM QNABOARD
 	 	 WHERE CREATE_USER = #{createUser} 
 	</select>
+	<select id="myQnaStatusList" parameterType="map" resultType="QnaBoardDTO">
+		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
+	  	  FROM QNABOARD
+	  	 WHERE CREATE_USER = #{createUser} AND
+	  	 <choose>
+		    <when test="qnaResponse == 0">
+		        QNARESPONSE IS NULL
+		    </when>
+		    <otherwise>
+		        QNARESPONSE IS NOT NULL
+		    </otherwise>
+		</choose>
+ 		 ORDER BY CREATE_DATE  DESC 
+ 		 LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
+	</select>
+	<select id="myPageQnaStatusCount" parameterType="map" resultType="int">
+		SELECT COUNT(*) 
+	 	  FROM QNABOARD
+	 	 WHERE CREATE_USER = #{createUser} AND
+	 	 <choose>
+		    <when test="qnaResponse == 0">
+		        QNARESPONSE IS NULL
+		    </when>
+		    <otherwise>
+		        QNARESPONSE IS NOT NULL
+		    </otherwise>
+		</choose>
+	</select>
 	
 	<select id="getLostBoardList" resultType="LostBoardDTO" parameterType="PageDTO">
 		SELECT *,

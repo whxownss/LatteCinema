@@ -924,6 +924,46 @@ public class CSBoardDAO {
 		}
 		return count;
 	}//getLostBoardCount() mypage lostStatus
+
+	public ArrayList<QnaBoardDTO> getQnaBoardList(String createUser, PageDTO pageDTO, String qnaResponse) {
+		System.out.println("CSBoardDAO getQnaBoardList() mypage qnaResponse");
+		ArrayList<QnaBoardDTO> qnaBoardList = null;
+		
+		try {
+			session = sqlSessionFactory.openSession();
+			Map<String, Object> params = new HashMap<>();
+			params.put("createUser", createUser);
+			params.put("pageDTO", pageDTO);
+			params.put("qnaResponse", qnaResponse);
+
+			qnaBoardList = new ArrayList<QnaBoardDTO>(session.selectList("CsAdmin.myQnaStatusList", params));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return qnaBoardList;
+	}//getQnaBoardList() mypage qnaResponse
+
+	public int getQnaBoardCount(String createUser, String qnaResponse, String check) {
+		int count = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			Map<String, Object> params = new HashMap<>();
+			params.put("createUser", createUser);
+			params.put("qnaResponse", qnaResponse);
+			count = session.selectOne("CsAdmin.myPageQnaStatusCount",params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return count;
+	}//getQnaBoardCount() mypage qnaResponse
 	
 	
 	
