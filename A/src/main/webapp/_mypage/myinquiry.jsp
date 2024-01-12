@@ -1,5 +1,3 @@
-<%@page import="com.itwillbs.domain.QnaBoardDTO"%>
-<%@page import="com.itwillbs.domain.PageDTO"%>
 <%@page import="com.itwillbs.domain.PageDTO"%>
 <%@page import="com.itwillbs.domain.QnaBoardDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -30,15 +28,15 @@
       <!-- 이곳에 코드작성 -->
       <div class="inner-wrap">
         <jsp:include page="lnb.jsp"></jsp:include>
-        	
+        
+
+		
 			<div id="contents">
 				<h2 class="tit">나의 문의내역</h2>
 			
 				<div class="tab-block">
 					<ul>
 						<li data-url="/mypage/myinquiry?cd=INQD01" class="on"><a href="#" class="btn" data-cd="INQD01" title="1:1 문의내역 탭으로 이동">1:1 문의내역</a></li>
-						<li data-url="/mypage/myinquiry?cd=INQD03"><a href="#" class="btn" data-cd="INQD03" title="단체관람/대관 문의내역 탭으로 이동" style="width: 100%;">단체관람 문의내역</a></li>
-						<li data-url="/mypage/myinquiry?cd=INQD02"><a href="#" class="btn" data-cd="INQD02" title="분실물 문의내역 탭으로 이동">분실물 문의내역</a></li>
 						<li data-url="/mypage/myinquiry?cd=INQD03"><a href="#" class="btn" data-cd="INQD03" title="단체관람/대관 문의내역 탭으로 이동">단체관람/대관문의내역</a></li>
 						<li data-url="/mypage/myinquiry?cd=INQD02"><a href="myinquiry2.me" class="btn" data-cd="INQD02" title="분실물 문의내역 탭으로 이동">분실물 문의내역</a></li>
 					</ul>
@@ -68,7 +66,6 @@
 								<option value="INQST2">답변완료</option>
 						
 					</select>
-								<div class="board-search ml07">
 <!-- 					<button type="button" class="btn dropdown-toggle btn-default bs-placeholder" data-toggle="dropdown" role="button" data-id="custInqStatCd" title="전체"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">전체</div></div> </div><span class="bs-caret"><span class="caret"></span></span></button> -->
 					<div class="dropdown-menu open" role="combobox"><div class="inner open" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner "></ul></div></div></div>
 			
@@ -77,10 +74,6 @@
 						<button type="button" class="btn-search-input" id="searchBtn">검색</button>
 					</div>
 				</div>
-				
-				<br>
-				
-				<div class="table-wrap">
 			
 				<div class="table-wrap" id="tableWrap"><!-- table-wrap부분이 바뀌어야함. data-url이 바뀔 때 마다.  -->
 					<table class="board-list a-c">
@@ -214,15 +207,9 @@
 			var url = '';
 			var btnText = $(this).text();
 
-<<<<<<< HEAD
-			if(btnText == '1:1 문의하기') url = 'cs_qna.cs';
-			else if(btnText == '단체관람/대관 문의하기') url = 'cs_rent.cs';
-			else url = 'cs_lost.cs';
-=======
 			if(btnText == '1:1 문의하기') url = 'cs_qna_write.cs';
 			else if(btnText == '단체관람/대관 문의하기') url = 'cs_rent.cs';
 			else url = 'cs_lost_write.cs';
->>>>>>> branch 'hjwBranch' of https://github.com/whxownss/movieTest.git
 
 			location.href = url;
 		});

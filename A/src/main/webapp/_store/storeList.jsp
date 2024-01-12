@@ -74,7 +74,7 @@
 							</tr>
 							<tr class="border border-0 border-white">
 								<td scope="row" class="text-center" colspan="4">
-									<button class="btn btn-secondary btn-lg modal-dialog modal-dialog-centered modal-dialog-scrollable"
+									<button class="btn btn-secondary btn-lg"
 										style="text-align: center; padding-left: 60px; padding-right: 60px;">선물하기</button>
 									<button class="btn btn-danger btn-lg" onclick="requestPay()"
 										style="text-align: center; padding-left: 60px; padding-right: 60px;">구매하기</button>
