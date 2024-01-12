@@ -45,18 +45,19 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
 		
 		
 		     --%>
-		     
-		     <div class="section-header d-flex justify-content-between align-items-center mb-5">
+ <section class="category-section">
+    <div class="container" data-aos="fade-up">		     
+<div class="section-header d-flex justify-content-between align-items-center mb-5">
   <h3>1월의 라떼..</h3>
 </div>
 
 <div class="row g-5">
   <c:forEach var="movie" items="${lattePosterList}" varStatus="status">
-    <div class="col-lg">
+    <div class="col-lg-4">
       <div class="post-entry-1 lg">
         <div class="item position-relative" id="wrap">
           <!-- 각 영화의 포스터 이미지를 동적으로 출력 -->
-          <img src="<c:out value="${movie.poster}" />" style="width: 100%;">
+          <img src="<c:out value="${movie.poster}" />" style="width: 50%;">
           <div class="titlee">
             <a href="#" class="moree">예매하기</a>
             <!-- 상세정보로 페이지 이동 링크 -->
@@ -66,8 +67,9 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
        </div>
 	 </div>
 	</c:forEach>
-		     
-		     
+	</div>     
+	</div>
+  </section><  
 
     <!-- 일별 박스오피스 -->
 
@@ -91,15 +93,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
 		     </div>
 		        <div id="movie-names">영화제목자리</div>
 	       </div>
-	      
-
-
-
-
-	       
-	       
-	       
-	       
+	   
 	       
        </div>
      </section>
