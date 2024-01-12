@@ -2,11 +2,13 @@ package com.itwillbs.service;
 
 import java.nio.file.spi.FileSystemProvider;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.itwillbs.dao.MemberDAO;
 import com.itwillbs.domain.MemberDTO;
+import com.itwillbs.domain.PageDTO;
 
 public class MemberService {
 
@@ -26,6 +28,11 @@ public class MemberService {
 			String birth = request.getParameter("birth");
 			String email = request.getParameter("email");
 			Timestamp date = new Timestamp(System.currentTimeMillis());
+			
+			System.out.println("@@@@@@@@@@@@@@@@@@");
+			System.out.println(phone);
+			System.out.println(birth);
+			System.out.println(email);
 			
 			MemberDTO memberDTO = new MemberDTO();
 			memberDTO.setMemIdx(idx);
@@ -51,7 +58,7 @@ public class MemberService {
 	}// insertMember()
 	
 	//카카오간편로그인 관련
-	public void insertkakaoMember(HttpServletRequest request) {
+	public void insertSimpleMember(HttpServletRequest request) {
 		try {
 			request.setCharacterEncoding("UTF-8");
 			String idx = request.getParameter("idx");
@@ -254,6 +261,57 @@ public class MemberService {
 		
 		return memberDTO;
 	}//userFind()
+	
+	// 마이페이지 예약구매 페이지 페이징 작업
+	public ArrayList<MemberDTO> getBoardList(PageDTO pageDTO) {
+		
+		ArrayList<MemberDTO> memberList = null;
+		try {
+			// 시작하는 행번호 구하는 식 
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식 
+			int endRow = startRow + pageDTO.getPageSize()-1;
+			
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setEndRow(pageDTO.getPageSize());
+			
+			// BoardDAO 객체생성
+			memberDAO = new MemberDAO();
+			// getBoardList(startRow,pageSize) 메서드 호출
+			memberList = memberDAO.getBoardList(pageDTO);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return memberList;
+	}//getBoardList()
+
+	public int getBoardCount() {
+		int count = 0;
+		try {
+			memberDAO = new MemberDAO();
+			count = memberDAO.getBoardCount();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getBoardCount()
+
+	public String getSimpleId(HttpServletRequest request) {
+		String sId = null;
+		try {
+//			MemberDTO memberDTO = new MemberDTO();
+//			memberDTO.setMemEmail(request.getParameter("memEmail"));
+			
+			memberDAO = new MemberDAO();
+			sId = memberDAO.getSimpleId(request.getParameter("memEmail"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return sId;
+	}
 
 
 

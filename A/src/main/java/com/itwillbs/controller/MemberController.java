@@ -167,24 +167,23 @@ public class MemberController extends HttpServlet {
 		}//
 		
 		// 카카오로그인 
-		if(sPath.equals("/kakaologin.me")) {
-			System.out.println("/kakaologin.me/ controller");
+		if(sPath.equals("/simplelogin.me")) {
+			System.out.println("/simplelogin.me/ controller");
 			memberService = new MemberService();
 			//이메일 중복체크?
 			int result = memberService.checkEmail(request);
-			System.out.println("@@@@@@@@@@");
 			System.out.println(result);
-			System.out.println("@@@@@@@@@@");
-			// result 가 0일 때 중복된 email이 없으므로 가입가능 
-			if(result == 0)  memberService.insertkakaoMember(request);
-				
 			HttpSession session = request.getSession();
-//				session.setAttribute("sIdx", memberDTO.getMemIdx());
-			session.setAttribute("sId", request.getParameter("memId"));
-			session.setAttribute("sName", request.getParameter("memName"));
-				//회원가입 o 로그인 o  세션값??? > main.jsp ( 로그아웃 버튼에 function kakaoLogout())?
-//				response.sendRedirect("main.me");
-				
+			if(result == 1) {
+				session.setAttribute("sId", memberService.getSimpleId(request));
+				session.setAttribute("sName", request.getParameter("memName"));
+			}
+			// result 가 0일 때 중복된 email이 없으므로 가입가능 
+//			memberService.insertSimpleMember(request);
+//			session.setAttribute("sId", );
+			
+			
+			
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(result + "");
 				
@@ -562,7 +561,57 @@ public class MemberController extends HttpServlet {
 		}
 		
 		// 마이페이지 bookinglist(예매내역) 이동
+		// 화면에 보여줄 글개수 설정
 		if(sPath.equals("/bookinglist.me")) {
+			
+			request.setCharacterEncoding("utf-8");
+			
+			int pageSize = 10;
+			String pageNum = request.getParameter("pageNum");
+			
+			if(pageNum == null){
+				pageNum = "1";
+			}
+			
+			int currentPage= Integer.parseInt(pageNum);
+			
+			PageDTO pageDTO = new PageDTO();
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			
+			memberService = new MemberService();
+			
+			ArrayList<MemberDTO> boardList = 
+					memberService.getBoardList(pageDTO);
+			
+			// 예약구매 페이지 페이징 작업
+			// int 리턴할형 getBoardCount() 메서드 정의
+		   //  int count =  getBoardCount()메서드 호출
+			int count = memberService.getBoardCount();
+			// 한 화면에 보여줄 페이지 개수 설정
+			int pageBlock = 10;
+			// 시작하는 페이지 번호 구하기
+			int startPage= (currentPage-1)/pageBlock*pageBlock+1;
+			// 끝나는 페이지 번호 구하기
+			int endPage= startPage + pageBlock -1;
+			// 전체 페이지 수 구하기
+			int pageCount = count / pageSize + (count % pageSize==0?0:1);
+			if(endPage > pageCount){
+			 	endPage = pageCount;
+			}
+			// pageDTO에 페이징 관련값 저장
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
+			// request에 pageDTO 저장
+			request.setAttribute("pageDTO", pageDTO);
+			//request에 boardList 저장
+			request.setAttribute("boardList", boardList);
+			
 			dispatcher = request.getRequestDispatcher("_mypage/bookinglist.jsp");
 			dispatcher.forward(request, response);
 		}//

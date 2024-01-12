@@ -173,16 +173,8 @@
               <div class="time-year swiper-container-initialized swiper-container-horizontal">
                 <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
                   <!-- <div class="cell swiper-slide"><button type="button" class="btn">2007</button></div> -->
-                  <div class="cell swiper-slide swiper-slide-active" style="width: 86px;">
-                    <button type="button" class="btn" data-no="2019">2019</button>
-                  </div>
-                  <!-- <div class="cell swiper-slide"><button type="button" class="btn">2007</button></div> -->
                   <div class="cell swiper-slide swiper-slide-next" style="width: 86px;">
-                    <button type="button" class="btn" data-no="2020">2020</button>
-                  </div>
-                  <!-- <div class="cell swiper-slide"><button type="button" class="btn">2007</button></div> -->
-                  <div class="cell swiper-slide" style="width: 86px;">
-                    <button type="button" class="btn" data-no="2021">2021</button>
+                    <button type="button" class="btn" data-no="2023">2023</button>
                   </div>
                   <!-- <div class="cell swiper-slide"><button type="button" class="btn">2007</button></div> -->
                   <div class="cell swiper-slide" style="width: 86px;">
@@ -190,7 +182,11 @@
                   </div>
                   <!-- <div class="cell swiper-slide"><button type="button" class="btn">2007</button></div> -->
                   <div class="cell swiper-slide" style="width: 86px;">
-                    <button type="button" class="btn on" data-no="2023">2023</button>
+                    <button type="button" class="btn" data-no="2021">2021</button>
+                  </div>
+                  <!-- <div class="cell swiper-slide"><button type="button" class="btn">2007</button></div> -->
+                  <div class="cell swiper-slide" style="width: 86px;">
+                    <button type="button" class="btn on" data-no="2020">2020</button>
                   </div>
                 </div>
                 <span class="swiper-notification" aria-live="assertive" aria-atomic="true">

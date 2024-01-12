@@ -81,14 +81,14 @@
 											<th scope="row"><label for="birth">생년월일<!--생년월일--></label></th>
 											<td>
 												<input id="birth" maxlength="8" type="text" placeholder="생년월일 8자리" class="input-text w230px findInput" name="birth"><!--생년월일 8자리-->
-												<div id="schIdBirthDe-error-text" class="alert"></div>
+												<br><span id="schIdBirthDe-error-text" class="alert"></span>
 											</td>
 										</tr>
 										<tr>
 											<th scope="row"><label for="phone">휴대폰 번호<!--휴대폰 번호--></label></th>
 											<td>
 												<input id="phone"  maxlength="11" type="text" placeholder="'-' 없이 입력" class="input-text w230px findInput" name="phone"><!--'-' 없이 입력-->
-												<div id="schIdMblpNo-error-text" class="alert"></div>
+												<br><span id="schIdMblpNo-error-text" class="alert"></span>
 											</td>
 										</tr>
 									</tbody>

@@ -2,6 +2,7 @@ package com.itwillbs.dao;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.MemberDTO;
+import com.itwillbs.domain.PageDTO;
 import com.itwillbs.sql.SqlMapClient;
 
 public class MemberDAO {
@@ -97,6 +100,31 @@ public class MemberDAO {
 		System.out.println(memberDTO);
 		session.close();
 		return memberDTO;
+	}
+	
+	// 마이페이지 예약구매 페이지 페이징 작업
+	public ArrayList<MemberDTO> getBoardList(PageDTO pageDTO) {
+		ArrayList<MemberDTO> getMemberList = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		getMemberList = new ArrayList<MemberDTO>(session.selectList("Member.getBoardList", pageDTO));
+		session.close();
+		return getMemberList;
+	}//
+
+	public int getBoardCount() {
+		int count = 0;
+		SqlSession session = sqlSessionFactory.openSession();
+		count = session.selectOne("Member.getBoardCount");
+		session.close();
+		return count;
+	}//
+
+	// 간편로그인 관련 Id값 가져오기
+	public String getSimpleId(String memEmail) {
+		SqlSession session = sqlSessionFactory.openSession();
+		String sId = session.selectOne("Member.getSimpleId", memEmail);
+		session.close();
+		return sId;
 	}
 
 	

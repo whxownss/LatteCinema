@@ -173,7 +173,7 @@
 <%--                         <span name="postcode">${memberDTO.memAddress.split("/")[0]}</span> --%>
                         <a href="#none" id="addrBtn" class="button small gray-line ml10" title="우편번호 검색">우편번호 검색</a><br>
 <%--                         <p class="reset mt10" id="addr1" name="addr1">${memberDTO.memAddress.split("/")[1]}</p><br> --%>
-						<input class="reset mt10" id="addr1" name="addr1" value="${memberDTO.memAddress.split("/")[1]}">
+						<input class="reset mt10 w-100" id="addr1" name="addr1" value="${memberDTO.memAddress.split("/")[1]}"><br>
                         <input type="text" id="addr2" name="addr2" value="${memberDTO.memAddress.split('/')[2]}" placeholder="상세주소 입력" required>
                         
                       </td>
@@ -194,6 +194,115 @@
   </section>
 </main>
 <%@include file ="../_common/commonFooterStart.jsp" %>
+<script>
+
+
+// 휴대폰 인증
+$('#phoneBtn').on('click', function(e) {
+    e.preventDefault();
+
+    fn_selfCheck('phone');
+});
+
+// // 휴대폰번호 변경 클릭
+$('#phoneChgBtn').on('click', function() {
+    $('.change-phone-num-area > div input').val('');
+    $('.change-phone-num-area > div:first button').text('인증번호 전송');
+    $('#timeLimit').html('');
+    clearInterval(interval);
+});
+
+// 인증번호 발송 버튼 클릭
+// $('#sendNumberBtn').on('click', function() {
+//     var target = $('#sendNumberBtn');
+
+//     if(target.prev().val().trim() == '')
+//         return gfn_alertMsgBox('변경할 휴대폰 번호를 입력해 주세요.');
+
+//     if (!target.prev().val().isHpPhoneNo())
+//         return gfn_alertMsgBox('올바른 휴대폰 번호를 입력해 주세요.');
+
+
+//     if(target.prev().val() == $('[name=phoneNo]').val().replaceAll('-',''))
+//         return gfn_alertMsgBox('휴대폰 번호가 동일합니다.');
+
+//     $.ajaxMegaBox({
+//         url: '/on/oh/ohg/MbLogin/selectNonMbCertNoSend.rest',
+//         data: JSON.stringify({
+//             nonMbNm: $('.mbNmClass').text(),
+//             nonMbByymmdd: $('#mbByymmdd').val(),
+//             nonMbTelno: target.prev().val()
+//         }),
+//         success: function (d) {
+//             target.attr('data-key', d.resultMap.redisKey);
+
+//             $('.change-phone-num-area > div:first button').text('재전송');
+//             $('.change-phone-num-area > div:last').show();
+
+//             $('#chgBtn').prev().val('');
+//             $('#chkNum').val('');
+//             $("#chgBtn").removeClass("disabled");
+//             $("#chgBtn").attr("disabled", false);
+
+//             clearInterval(interval);
+
+
+//             gfn_alertMsgBoxSize('인증번호를 전송했습니다.\n인증번호가 도착하지 않았을 경우 재전송을 눌러 주세요.', 400, 250);
+
+//             m = 3;
+//             s = 0;
+
+//             $('#timeLimit').html(m + ':0' + s);
+//             interval = setInterval(fn_setTime, 1000);
+//         }
+//     });
+// });
+
+// 휴대폰번호 변경 완료 버튼
+// $('#chgBtn').on('click', function() {
+//     var telNo = $('#sendNumberBtn').prev().val();
+//     var certNo = $('#chkNum').val();
+
+//     var mbNo = MegaboxUtil.Form.getFormObjData($(document.forms.mbInfoForm)).mbNo;
+
+//     $.ajaxMegaBox({
+//         url: '/on/oh/ohg/MbLogin/selectNonMbCertNoCnfn.rest',
+//         data: JSON.stringify({
+//             redisKey: $('#sendNumberBtn').data('key'),
+//             //certNo: $(this).prev().val(),
+//             certNo: certNo,
+//             nonMbTelno: telNo,
+//             mbNo: parseInt(mbNo)
+//         }),
+//         success: function (d) {
+//             var data = d.resultMap;
+
+//             if(data.successAt == 'Y') {
+//                 gfn_alertMsgBoxSize('휴대폰 번호가 변경완료 되었습니다.', 400, 250);   //휴대폰 인증을 완료
+
+//                 var no = telNo.substr(0, 3) + '-' + telNo.substr(3, 4) + '-' + telNo.substr(7, 4);
+
+//                 $('.changeVal').html(no);
+//                 $('[name=phoneNo]').val(no);
+
+//                 $('#phoneChgBtn').click();
+
+//                 $('#phoneChgBtn').attr("style","display: none;");
+
+//             } else {
+//                 if(data.failCnt == 5) {
+//                     gfn_alertMsgBox({ msg: '인증번호가 5회 이상 잘못 입력되었습니다.\n처음부터 다시 시도해주세요.' , callback: fn_moveMain });
+//                 }
+//                 if(data.msg == 'ME019') gfn_alertMsgBox('인증번호가 일치하지 않습니다.\n인증번호를 다시 입력해주세요.'); // 인증번호 틀림
+//                 else if(data.msg == 'ME040') gfn_alertMsgBox('유효시간이 초과되었습니다.\n인증번호 재전송을 통해서 다시 인증해주세요.'); // 인증번호 유효시간 지남
+//                 else gfn_alertMsgBox('휴대폰번호 변경에 실패하였습니다.'); // 저장실패
+//             }
+//         }
+//     });
+// });
+
+</script>
+
 <script type="text/javascript">
     var interval;
     var m, s;
@@ -268,102 +377,102 @@
             fn_selfCheck('phone');
         });
 
-        // 휴대폰번호 변경 클릭
-        $('#phoneChgBtn').on('click', function() {
-            $('.change-phone-num-area > div input').val('');
-            $('.change-phone-num-area > div:first button').text('인증번호 전송');
-            $('#timeLimit').html('');
-            clearInterval(interval);
-        });
+//         // 휴대폰번호 변경 클릭
+//         $('#phoneChgBtn').on('click', function() {
+//             $('.change-phone-num-area > div input').val('');
+//             $('.change-phone-num-area > div:first button').text('인증번호 전송');
+//             $('#timeLimit').html('');
+//             clearInterval(interval);
+//         });
 
         // 인증번호 발송 버튼 클릭
-        $('#sendNumberBtn').on('click', function() {
-            var target = $('#sendNumberBtn');
+//         $('#sendNumberBtn').on('click', function() {
+//             var target = $('#sendNumberBtn');
 
-            if(target.prev().val().trim() == '')
-                return gfn_alertMsgBox('변경할 휴대폰 번호를 입력해 주세요.');
+//             if(target.prev().val().trim() == '')
+//                 return gfn_alertMsgBox('변경할 휴대폰 번호를 입력해 주세요.');
 
-            if (!target.prev().val().isHpPhoneNo())
-                return gfn_alertMsgBox('올바른 휴대폰 번호를 입력해 주세요.');
-
-
-            if(target.prev().val() == $('[name=phoneNo]').val().replaceAll('-',''))
-                return gfn_alertMsgBox('휴대폰 번호가 동일합니다.');
-
-            $.ajaxMegaBox({
-                url: '/on/oh/ohg/MbLogin/selectNonMbCertNoSend.rest',
-                data: JSON.stringify({
-                    nonMbNm: $('.mbNmClass').text(),
-                    nonMbByymmdd: $('#mbByymmdd').val(),
-                    nonMbTelno: target.prev().val()
-                }),
-                success: function (d) {
-                    target.attr('data-key', d.resultMap.redisKey);
-
-                    $('.change-phone-num-area > div:first button').text('재전송');
-                    $('.change-phone-num-area > div:last').show();
-
-                    $('#chgBtn').prev().val('');
-                    $('#chkNum').val('');
-                    $("#chgBtn").removeClass("disabled");
-                    $("#chgBtn").attr("disabled", false);
-
-                    clearInterval(interval);
+//             if (!target.prev().val().isHpPhoneNo())
+//                 return gfn_alertMsgBox('올바른 휴대폰 번호를 입력해 주세요.');
 
 
-                    gfn_alertMsgBoxSize('인증번호를 전송했습니다.\n인증번호가 도착하지 않았을 경우 재전송을 눌러 주세요.', 400, 250);
+//             if(target.prev().val() == $('[name=phoneNo]').val().replaceAll('-',''))
+//                 return gfn_alertMsgBox('휴대폰 번호가 동일합니다.');
 
-                    m = 3;
-                    s = 0;
+//             $.ajaxMegaBox({
+//                 url: '/on/oh/ohg/MbLogin/selectNonMbCertNoSend.rest',
+//                 data: JSON.stringify({
+//                     nonMbNm: $('.mbNmClass').text(),
+//                     nonMbByymmdd: $('#mbByymmdd').val(),
+//                     nonMbTelno: target.prev().val()
+//                 }),
+//                 success: function (d) {
+//                     target.attr('data-key', d.resultMap.redisKey);
 
-                    $('#timeLimit').html(m + ':0' + s);
-                    interval = setInterval(fn_setTime, 1000);
-                }
-            });
-        });
+//                     $('.change-phone-num-area > div:first button').text('재전송');
+//                     $('.change-phone-num-area > div:last').show();
+
+//                     $('#chgBtn').prev().val('');
+//                     $('#chkNum').val('');
+//                     $("#chgBtn").removeClass("disabled");
+//                     $("#chgBtn").attr("disabled", false);
+
+//                     clearInterval(interval);
+
+
+//                     gfn_alertMsgBoxSize('인증번호를 전송했습니다.\n인증번호가 도착하지 않았을 경우 재전송을 눌러 주세요.', 400, 250);
+
+//                     m = 3;
+//                     s = 0;
+
+//                     $('#timeLimit').html(m + ':0' + s);
+//                     interval = setInterval(fn_setTime, 1000);
+//                 }
+//             });
+//         });
 
         // 휴대폰번호 변경 완료 버튼
-        $('#chgBtn').on('click', function() {
-            var telNo = $('#sendNumberBtn').prev().val();
-            var certNo = $('#chkNum').val();
+//         $('#chgBtn').on('click', function() {
+//             var telNo = $('#sendNumberBtn').prev().val();
+//             var certNo = $('#chkNum').val();
 
-            var mbNo = MegaboxUtil.Form.getFormObjData($(document.forms.mbInfoForm)).mbNo;
+//             var mbNo = MegaboxUtil.Form.getFormObjData($(document.forms.mbInfoForm)).mbNo;
 
-            $.ajaxMegaBox({
-                url: '/on/oh/ohg/MbLogin/selectNonMbCertNoCnfn.rest',
-                data: JSON.stringify({
-                    redisKey: $('#sendNumberBtn').data('key'),
-                    //certNo: $(this).prev().val(),
-                    certNo: certNo,
-                    nonMbTelno: telNo,
-                    mbNo: parseInt(mbNo)
-                }),
-                success: function (d) {
-                    var data = d.resultMap;
+//             $.ajaxMegaBox({
+//                 url: '/on/oh/ohg/MbLogin/selectNonMbCertNoCnfn.rest',
+//                 data: JSON.stringify({
+//                     redisKey: $('#sendNumberBtn').data('key'),
+//                     //certNo: $(this).prev().val(),
+//                     certNo: certNo,
+//                     nonMbTelno: telNo,
+//                     mbNo: parseInt(mbNo)
+//                 }),
+//                 success: function (d) {
+//                     var data = d.resultMap;
 
-                    if(data.successAt == 'Y') {
-                        gfn_alertMsgBoxSize('휴대폰 번호가 변경완료 되었습니다.', 400, 250);   //휴대폰 인증을 완료
+//                     if(data.successAt == 'Y') {
+//                         gfn_alertMsgBoxSize('휴대폰 번호가 변경완료 되었습니다.', 400, 250);   //휴대폰 인증을 완료
 
-                        var no = telNo.substr(0, 3) + '-' + telNo.substr(3, 4) + '-' + telNo.substr(7, 4);
+//                         var no = telNo.substr(0, 3) + '-' + telNo.substr(3, 4) + '-' + telNo.substr(7, 4);
 
-                        $('.changeVal').html(no);
-                        $('[name=phoneNo]').val(no);
+//                         $('.changeVal').html(no);
+//                         $('[name=phoneNo]').val(no);
 
-                        $('#phoneChgBtn').click();
+//                         $('#phoneChgBtn').click();
 
-                        $('#phoneChgBtn').attr("style","display: none;");
+//                         $('#phoneChgBtn').attr("style","display: none;");
 
-                    } else {
-                        if(data.failCnt == 5) {
-                            gfn_alertMsgBox({ msg: '인증번호가 5회 이상 잘못 입력되었습니다.\n처음부터 다시 시도해주세요.' , callback: fn_moveMain });
-                        }
-                        if(data.msg == 'ME019') gfn_alertMsgBox('인증번호가 일치하지 않습니다.\n인증번호를 다시 입력해주세요.'); // 인증번호 틀림
-                        else if(data.msg == 'ME040') gfn_alertMsgBox('유효시간이 초과되었습니다.\n인증번호 재전송을 통해서 다시 인증해주세요.'); // 인증번호 유효시간 지남
-                        else gfn_alertMsgBox('휴대폰번호 변경에 실패하였습니다.'); // 저장실패
-                    }
-                }
-            });
-        });
+//                     } else {
+//                         if(data.failCnt == 5) {
+//                             gfn_alertMsgBox({ msg: '인증번호가 5회 이상 잘못 입력되었습니다.\n처음부터 다시 시도해주세요.' , callback: fn_moveMain });
+//                         }
+//                         if(data.msg == 'ME019') gfn_alertMsgBox('인증번호가 일치하지 않습니다.\n인증번호를 다시 입력해주세요.'); // 인증번호 틀림
+//                         else if(data.msg == 'ME040') gfn_alertMsgBox('유효시간이 초과되었습니다.\n인증번호 재전송을 통해서 다시 인증해주세요.'); // 인증번호 유효시간 지남
+//                         else gfn_alertMsgBox('휴대폰번호 변경에 실패하였습니다.'); // 저장실패
+//                     }
+//                 }
+//             });
+//         });
 
 
 
