@@ -36,7 +36,7 @@
 				<div class="tab-block">
 					<ul>
 						<li data-url="/mypage/myinquiry?cd=INQD01" class="on"><a href="#" class="btn" data-cd="INQD01" title="1:1 문의내역 탭으로 이동">1:1 문의내역</a></li>
-						<li data-url="/mypage/myinquiry?cd=INQD03"><a href="#" class="btn" data-cd="INQD03" title="단체관람/대관 문의내역 탭으로 이동">단체관람/대관문의내역</a></li>
+<!-- 						<li data-url="/mypage/myinquiry?cd=INQD03"><a href="#" class="btn" data-cd="INQD03" title="단체관람/대관 문의내역 탭으로 이동">단체관람/대관문의내역</a></li> -->
 						<li data-url="/mypage/myinquiry?cd=INQD02"><a href="myinquiry2.me" class="btn" data-cd="INQD02" title="분실물 문의내역 탭으로 이동">분실물 문의내역</a></li>
 					</ul>
 				</div>
