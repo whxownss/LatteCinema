@@ -175,7 +175,7 @@
             <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  <th>영화 인덱스</th>	
+                  <th>무비코드</th>	
                   <th>영화명</th>
                   <th>개봉일자</th>
                   <th>등급</th>
@@ -231,10 +231,10 @@
             </div>
             
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-title">인덱스<span class="required">*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-title">무비코드<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-               <input type="text" id="movie-movieidx" name="movieIdx" class="form-control col-md-7 col-xs-12">
+               <input type="text" id="movie-moviecode" name="movieCode" class="form-control col-md-7 col-xs-12">
               </div>
             </div>
 
@@ -388,8 +388,8 @@
        var poster   = button.data('poster')
        var actor    = button.data('actor')
        var rating   = button.data('rating')
-       var category = button.data('category')
-       var movieIdx = button.data('movieidx')
+       var movieCategory = $('#movie-category').val()
+       var movieCode = button.data('moviecode')
        var stillcut = button.data('stillcut')
        
        var modal = $(this)
@@ -397,7 +397,7 @@
        modal.find('#movie-title').val(title)
        modal.find('#movie-opendate').val(opendate)
        // kmdb only
-       modal.find('#movie-movieidx').val(movieIdx)
+       modal.find('#movie-moviecode').val(movieCode)
        modal.find('#movie-genre').val(genre)
        modal.find('#movie-rating').val(rating)
        modal.find('#movie-runtime').val(runtime)
@@ -410,9 +410,10 @@
        modal.find('#movie-director').val(director)
        modal.find('#movie-poster').val(poster)
        modal.find('#movie-actor').val(actor)
-       modal.find('#movie-category').val(category)
+       modal.find('#movie-category').val(movieCategory)
        modal.find('#movie-stillcut').val(stillcut)
        modal.find('#movie-preview').attr('src',poster) //포스터 미리보기 삽입
+       
      })
      
    })
@@ -443,7 +444,7 @@
         
         for (var i = 0; i < data.boxOfficeResult.dailyBoxOfficeList.length; i++) {
           var html = '';
-        	var movieIdx = data.boxOfficeResult.dailyBoxOfficeList[i].movieCd;
+        	var movieCode = data.boxOfficeResult.dailyBoxOfficeList[i].movieCd;
         	var rank = data.boxOfficeResult.dailyBoxOfficeList[i].rank;
         	var title = data.boxOfficeResult.dailyBoxOfficeList[i].movieNm;
         	var openDate = data.boxOfficeResult.dailyBoxOfficeList[i].openDt;
@@ -452,7 +453,7 @@
           html += '<td>'+ title + '</td>'
           html += '<td>'+ openDate + '</td>'
           html += '<td><button class="btn btn-success" type="button" data-toggle="modal" data-target="#movieModal"'+
-                  ' data-movieidx="'+ movieIdx + '"data-title="' + title + '"data-opendate="' + openDate +'"data-category="NOW">등록</button></td>';
+                  ' data-moviecode="'+ movieCode + '"data-title="' + title + '"data-opendate="' + openDate +'"data-movieCategory="NOW">등록</button></td>';
           html += '</tr>';
           
           $('.boxmovie').find('tbody').append(html)
@@ -482,9 +483,9 @@
         console.log(data)
         // 제목과 감독으로 검색한 결과가 있는지 검증
         if(data.movieListResult.totCnt != 0){ 
-          const movieCd = data.movieListResult.movieList[0].movieCd
-          if(movieCd !== undefined){
-            $('#movie-movieidx').val(movieCd)
+          const movieCode = data.movieListResult.movieList[0].movieCd
+          if(movieCode !== undefined){
+            $('#movie-moviecode').val(movieCode)
           }  
         }else{
           alert("해당 영화에 대한 정보를 찾을 수 없습니다.")  
@@ -547,10 +548,13 @@
     
     const data = detailSearch();
       
+      var movieCategory = $('#movie-category').val();
+      console.log('movieCategory :' , movieCategory)
+      
     for(var i=0; i<data.Data[0].Count ; i++){
       var info = data.Data[0].Result[i];
       var title = info.title.replace(/!HS | !HE /g, '').trim(); // 검색어에 !HS !HE 라는 글자가 같이 포함돼서 없애주는 작업  
-      var movieIdx = info.Codes.Code[0].CodeNo;
+      var movieCode = info.Codes.Code[0].CodeNo;
       var filmMade = info.company;
       // openDate를 YYYYMMDD 형식에서 YYYY-MM-DD 형식으로 변경
       // openDate가 ""일때 kmdb 등록일(regDate)을 대신 넣도록 함
@@ -585,7 +589,7 @@
       html += '<td>'+ openDate + '</td>'
       html += '<td>'+ director + '</td>'
       html += '<td>'+ genre + '</td>'
-      html += '<td><button class="btn btn-success" type="button" data-toggle="modal" data-target="#movieModal" data-movieidx="'+ movieIdx +
+      html += '<td><button class="btn btn-success" type="button" data-toggle="modal" data-target="#movieModal" data-moviecode="'+ movieCode +
               '"data-title="' + title +
               '"data-rating="'+ rating +
               '"data-runtime="'+ runtime +
@@ -598,8 +602,7 @@
               '"data-poster="'+ poster +
               '"data-actor="'+ actor +
               '"data-stillcut="'+ stillcut +
-              '"data-category="OLD">등록</button></td>';
-              
+              '"data-movieCategory="'+ movieCategory + '">등록</button></td>';
       html += '</tr>';
       
       $('.boxmovie').find('tbody').append(html)

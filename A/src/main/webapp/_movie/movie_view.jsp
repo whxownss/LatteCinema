@@ -1,4 +1,4 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -323,11 +323,11 @@
 <%@include file ="../_common/commonFooter.jsp" %>
 
 
-</html> --%>
+</html> 
 
 
 
-
+<%-- 
 
 <%@page import="com.itwillbs.domain.MovieDTO"%>
 <%@page import="com.itwillbs.service.MovieService"%>
@@ -383,4 +383,4 @@
 	
 <%@include file ="../_common/commonFooter.jsp" %>
 
-</html>
+</html> --%>

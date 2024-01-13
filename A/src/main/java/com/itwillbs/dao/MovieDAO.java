@@ -30,19 +30,39 @@ public class MovieDAO {
 		        // 매퍼 파일에 정의한 쿼리 호출
 		    	 resultDTOList = new ArrayList<MovieDTO>(session.selectList("Movie.getLattePoster",movieDTO));
 		    	 
-		    	 System.out.println("DAO 확인 : ");
 		        
 		        session.close();
 		    return resultDTOList;
 		}
 
 
-	public MovieDTO movieDetail(int movieIdx) {
-		 MovieDTO movieDTO = new MovieDTO();
-		 movieDTO.setMovieIdx(movieIdx);
-		 movieDTO.setTitle("영화 제목");
-		 movieDTO.setRating("영화 등급");
-	}
+	 public ArrayList<MovieDTO> getMovieDetail(MovieDTO movieDTO) {
+		 SqlSession session = sqlSessionFactory.openSession();
+		 ArrayList<MovieDTO> resultDTOList = null;
+
+		 // 매퍼 파일에 정의한 쿼리 호출
+		 resultDTOList = new ArrayList<MovieDTO>(session.selectList("Movie.getMovieDetail", movieDTO));
+
+		 System.out.println("DAO 확인 : ");
+
+		 session.close();
+		 return resultDTOList;
+
+	 }
+
+
+		public ArrayList<MovieDTO> getNowPoster(MovieDTO movieDTO) {
+			SqlSession session = sqlSessionFactory.openSession();
+			ArrayList<MovieDTO> resultDTOList = null;
+
+			// 매퍼 파일에 정의한 쿼리 호출
+			resultDTOList = new ArrayList<MovieDTO>(session.selectList("Movie.getNowPoster",movieDTO));
+
+			System.out.println("DAO 확인 : ");
+
+			session.close();
+			return resultDTOList;
+		}
 
 
 

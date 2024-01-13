@@ -31,7 +31,7 @@ public class MovieService {
 			movieDAO = new MovieDAO();
 			movieDTO = new MovieDTO();
 				
-			movieDTO.setMovieIdx(request.getParameter("movieIdx"));
+			movieDTO.setMovieCode(request.getParameter("movieCode"));
 			movieDTO.setTitle(request.getParameter("title"));
 			movieDTO.setRating(request.getParameter("rating"));
 			movieDTO.setRunTime(request.getParameter("runTime"));
@@ -43,6 +43,8 @@ public class MovieService {
 			movieDTO.setGenre(request.getParameter("genre"));
 			movieDTO.setPoster(request.getParameter("poster"));
 			movieDTO.setStartDate(request.getParameter("startDate"));
+			movieDTO.setMovieCategory(request.getParameter("movieCategory"));
+			
 			
 			System.out.println("!@#!@#!@#");
 			System.out.println(movieDTO);
@@ -58,7 +60,6 @@ public class MovieService {
 	}
 	
 		public List<MovieDTO> getLattePoster(MovieDTO movieDTO) {
-			System.out.println("MovieService getLattePoster()");
 			ArrayList<MovieDTO> LattePosterList = null;
 		    try {
 		        movieDAO = new MovieDAO();
@@ -72,24 +73,38 @@ public class MovieService {
 	
 		
 		
-		public MovieDTO movieDetail(int movieIdx) {
+		public List<MovieDTO> getMovieDetail(MovieDTO movieDTO) {
 			
 			System.out.println("movieDetail 서비스");
-				
+			ArrayList<MovieDTO> detailList = null;	
+			
 			try {
-				movieDTO = movieDAO.movieDetail(movieIdx);
+				movieDAO = new MovieDAO();
+				detailList = movieDAO.getMovieDetail(movieDTO);
 
 		        System.out.println("!@#!@#!@#");
 		        System.out.println(movieDTO);
-		        
-		        return movieDTO;
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
-			return null; 
+			return detailList; 
 					
+		}
+
+		public List<MovieDTO> getNowPoster(MovieDTO movieDTO) {
+			
+			System.out.println("MovieService getNowPoster()");
+			ArrayList<MovieDTO> posterNowList = null;
+		    try {
+		        movieDAO = new MovieDAO();
+		        posterNowList = movieDAO.getNowPoster(movieDTO);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		    return posterNowList;
+			
 		}
 		
 		

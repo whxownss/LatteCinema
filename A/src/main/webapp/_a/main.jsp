@@ -77,24 +77,25 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
 		<div class="container" data-aos="fade-up">
 		  <div class="section-header d-flex justify-content-between align-items-center mb-5">
 	        <h2>박스오피스</h2>
-	        <div><a href="movie_now.mo" class="more">2023.12.11 기준</a></div>
+	        <div><a href="movie_now.mo" class="more">상영작 보러가기</a></div>
 	      </div>
 		
 	      <div class="container" data-aos="fade-up">
 			<div class="owl-carousel owl-theme">
+				<c:forEach var="movie" items="${posterNowList}" varStatus="status">
 		        <div class="item position-relative" id="wrap">
-		          <img src="assets/img/post1.jpg" > img kmdb 들어올 곳
-		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">1</em>
+		          <img src="<c:out value="${movie.poster}" />" > 
+		          <!-- <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">1</em> -->
+		          <!-- 순위 매일 변동인데, 매일 뿌릴 방법이 없음 -->
+		          <!-- 라떼시네마 자체 누적 관객수로 랭킹 만드는게 차라리 나아보임 -->
 					<div class="titleee">
 						<a href="" class="moree">예매하기</a>
-						<a href="" class="moree">상세정보</a>
+						<a href="${pageContext.servletContext.contextPath}/movie_view.mo?movieCode=${movie.movieCode}" class="moree">상세정보</a>
 					</div>
 		        </div>
+	     	 	</c:forEach> 
 		     </div>
-		        <div id="movie-names">영화제목자리</div>
 	       </div>
-	   
-	       
        </div>
      </section>
      

@@ -18,7 +18,24 @@ public class MovieDTO {
 	private String nation;
 	private String runTime;
 	private String poster;
+	private String movieCode;
+	private String movieState;
 	
+	
+	
+	
+	public String getMovieState() {
+		return movieState;
+	}
+	public void setMovieState(String movieState) {
+		this.movieState = movieState;
+	}
+	public String getMovieCode() {
+		return movieCode;
+	}
+	public void setMovieCode(String movieCode) {
+		this.movieCode = movieCode;
+	}
 	public String getMovieCategory() {
 		return movieCategory;
 	}
