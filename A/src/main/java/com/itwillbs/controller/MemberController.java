@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -72,6 +73,21 @@ public class MemberController extends HttpServlet {
 		
 		// 로그인 페이지 이동
 		if(sPath.equals("/login.me")) {
+			MovieService movieService = new MovieService();
+			MovieDTO movieDTO = new MovieDTO();
+			List<MovieDTO> posterList = movieService.getLattePoster(movieDTO);
+			
+			//posterList의 포스터중 랜덤으로 1개이 이미지 뽑기
+			Random random = new Random();
+			int moviePosterNum = random.nextInt(posterList.size());
+			
+			System.out.println(posterList.get(moviePosterNum));
+//			System.out.println(movieDTO.getPoster());
+			request.setAttribute("moviePoster", posterList.get(moviePosterNum).getPoster());
+//			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@");
+//			System.out.println(posterList.get(1).getPoster());
+//			System.out.println(posterList.get(2));
+//			System.out.println(posterList.get(3));
 			dispatcher = request.getRequestDispatcher("_member/login.jsp");
 			dispatcher.forward(request, response);
 		}//
@@ -129,11 +145,15 @@ public class MemberController extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 			String receiver = request.getParameter("email");
 			
+			// 이메일 인증난수 생성 객체생성
 			EmailCode emailcode = new EmailCode();
+			// 난수생성메서드 content에 저장
 			String content = emailcode.randomizeCode();
 			System.out.println(receiver);
 //			System.out.println("--------------------"+content);
+			// Gamail 보내는 받는사람 인증번호 객체생성
 			SendGmail sendgmail = new SendGmail(receiver, content);
+			// 메일 보내기 실행
 			sendgmail.sendMail();
 			
 			response.getWriter().write(content + "");

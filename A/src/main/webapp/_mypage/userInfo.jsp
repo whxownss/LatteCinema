@@ -138,6 +138,7 @@
                             <button type="button" class="button small gray-line" id="sendNumberBtn">인증번호 전송</button>
                             <br><span id="CheckPhone"></span>
                           </div>
+                          
 <!--                           <div class="position" style="display: none;"> -->
 <!--                             <label for="chkNum" class="label">인증번호 입력</label> -->
 <!--                             <div class="chk-num small"> -->
@@ -148,6 +149,7 @@
 <!--                             </div> -->
 <!--                             <button type="button" class="button small gray-line" id="chgBtn">변경완료</button> -->
 <!--                           </div> -->
+
                         </div>
                       </td>
                     </tr>
