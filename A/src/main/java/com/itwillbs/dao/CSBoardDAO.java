@@ -964,6 +964,24 @@ public class CSBoardDAO {
 		}
 		return count;
 	}//getQnaBoardCount() mypage qnaResponse
+
+	public int updateMemStatus(MemberDTO memberDTO) {
+		System.out.println("CSBoardDAO updateMemStatus()");
+		int updateSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			updateSuccess = session.update("CsAdmin.updateMemStatus",memberDTO);
+			
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return updateSuccess;
+	}//updateMemStatus()
 	
 	
 	

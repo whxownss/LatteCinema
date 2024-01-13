@@ -506,4 +506,18 @@ LIMIT #{startRow}, #{pageSize}
 		  FROM RECOMMENDBOARD
 		 WHERE MOVIENAME LIKE '%${movieName}%' 
 	</select>
+	
+	<update id="updateMemStatus" parameterType="memberDTO">
+		UPDATE MEMBERS
+		   SET MEM_STATUS = #{memStatus}
+		 <choose>
+		    <when test="memStatus == 0">
+		        ,MEM_STOP_D = NULL
+		    </when>
+		    <otherwise>
+		        ,MEM_STOP_D = SYSDATE()
+		    </otherwise>
+		</choose>
+		 WHERE MEM_ID = #{memId}
+	</update>
 </mapper>

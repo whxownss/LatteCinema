@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.ExqBoardDTO;
 import com.itwillbs.domain.LostBoardDTO;
@@ -54,9 +55,38 @@ public class AdminController extends HttpServlet {
 			CSBoardService csBoardService = new CSBoardService();
 			ArrayList<MemberDTO> memberList = csBoardService.getMemberList();
 			request.setAttribute("memberList",memberList);
+			
+			String memStatusText = request.getParameter("memStatusText");
+			if(memStatusText == null) {
+				memStatusText = "";
+			}
+			if(!memStatusText.equals("")) {
+				// Gson 라이브러리를 사용하여 JSON으로 변환
+			    String json = new Gson().toJson(memberList);
+			    // 컨텐츠 타입 설정
+			    response.setContentType("application/json");
+			    response.setCharacterEncoding("utf-8");
+			    // JSON 문자열을 응답으로 작성
+			    response.getWriter().write(json);
+			    return;
+			}
+			
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_member.jsp");
 			dispatcher.forward(request, response);
-		}		
+		}
+		// 관리자 회원 정지 상태 변경
+		if(sPath.equals("/memStatusChange.ad")) {
+			System.out.println("주소비교 /memStatusChange.cs 일치");
+			request.setCharacterEncoding("utf-8");
+			
+			CSBoardService csBoardService = new CSBoardService();
+			String msg = "update fail";
+			if(csBoardService.updateMemStatus(request)) {
+				msg = "update success";
+			}
+			System.out.println(msg);
+			
+		}
 		
 		// 관리자 영화 관리 페이지 이동
 		if(sPath.equals("/adm_mv_inout.ad")) {

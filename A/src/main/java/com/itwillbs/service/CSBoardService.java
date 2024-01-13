@@ -1024,5 +1024,23 @@ public class CSBoardService {
 		return count;
 	}//getQnaBoardCount() mypage qnaResponse
 
+	public boolean updateMemStatus(HttpServletRequest request) {
+		System.out.println("CSBoardService updateMemStatus()");
+	    int updateSuccess = 0;
+	    try {
+	        MemberDTO memberDTO = new MemberDTO();
+	        String memId = request.getParameter("memId");
+	        String memStatus = request.getParameter("memStatus");
+	        
+	        memberDTO.setMemId(memId);
+	        memberDTO.setMemStatus(memStatus);
+	        csBoardDAO = new CSBoardDAO();
+	        updateSuccess = csBoardDAO.updateMemStatus(memberDTO);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return updateSuccess > 0;
+	}//updateMemStatus()
+
 	
 }//클래스
