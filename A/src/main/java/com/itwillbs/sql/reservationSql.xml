@@ -30,6 +30,7 @@
 		 	 , MOV_TYPE
 		 	 , MOV_IDX
 		 	 , MEM_ID
+		 	 , PAY_TIME
 		 	 )  
 		VALUES 
 			 ( LEFT(#{date} ,LENGTH(#{date}) - 4) 
@@ -56,6 +57,7 @@
 			 , #{movType}
 			 , #{movIdx}
 			 , "test1"
+			 , #{payTime}
 			 )
 	</insert>	
 	
@@ -151,7 +153,15 @@
 		   AND SEAT_C = REPLACE(#{seatC}, ',', ', ')
 	</select>
 	
-	
+	<delete id="deleteRes" parameterType="String">
+		DELETE 
+		  FROM RESERVATION
+		 WHERE 1 = 1 
+		   AND MERCHANT_UID = #{mid}
+<!-- 		   AND TIMESTAMPDIFF -->
+<!-- 		   	   (MINUTE, NOW() -->
+<!-- 		   	    , STR_TO_DATE(CONCAT_WS(' ', DATE_FORMAT(DATE, '%Y-%m-%d'), S_TIME), '%Y-%m-%d %H:%i')) > 810 -->
+	</delete>
 	
 	
 </mapper>

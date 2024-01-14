@@ -27,6 +27,7 @@ public class ReservationDTO {
 	private String resPayDate;
 	private String buyerName;  	// 구매자 이름
 	private String merchantUid;	// 주문번호
+	private String payTime;
 	
 	private String dateC;
 	
@@ -194,6 +195,13 @@ public class ReservationDTO {
 	public void setDateC(String dateC) {
 		this.dateC = dateC;
 	}
+	
+	public String getPayTime() {
+		return payTime;
+	}
+	public void setPayTime(String payTime) {
+		this.payTime = payTime;
+	}
 	@Override
 	public String toString() {
 		return "ReservationDTO [resIdx=" + resIdx + ", memId=" + memId + ", loIdx=" + loIdx + ", ciIdx=" + ciIdx
@@ -202,8 +210,9 @@ public class ReservationDTO {
 				+ ", p1=" + p1 + ", p2=" + p2 + ", p3=" + p3 + ", pSum=" + pSum + ", paidAmount=" + paidAmount
 				+ ", payMethod=" + payMethod + ", cardName=" + cardName + ", cardNumber=" + cardNumber + ", buyerTel="
 				+ buyerTel + ", success=" + success + ", resPayDate=" + resPayDate + ", buyerName=" + buyerName
-				+ ", merchantUid=" + merchantUid + ", dateC=" + dateC + "]";
+				+ ", merchantUid=" + merchantUid + ", payTime=" + payTime + ", dateC=" + dateC + "]";
 	}
+	
 	
 	
 	
