@@ -256,7 +256,7 @@ function checkEmail() {
 				return false;
 			}else if(data == '0'){
 				$("#CheckEmail").text("사용가능한 이메일입니다").css("color", "green");
-				debugger;
+// 				debugger;
 				$("#eamilAuthBtn").attr("disabled" , false);
 				
 				return true;
