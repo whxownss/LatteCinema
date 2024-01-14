@@ -26,13 +26,19 @@
     <link href="_admin/vendors/starrr/dist/starrr.css" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="_admin/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="_admin/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="_admin/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="_admin/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="_admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="_admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="_admin/build/css/custom.min.css" rel="stylesheet">
     <!-- jQuery -->  
     <script src="_admin/vendors/jquery/dist/jquery.min.js"></script>
   </head>
   <body class="nav-md">
-    <div class="container body">   
+    <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
@@ -145,7 +151,7 @@
                     </div>
                     <div class="x_content">
                       <p class="text-muted font-13 m-b-30"></p>
-                      <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap boxmovie" cellspacing="0" width="100%">
+                      <table id="" class="table table-striped table-bordered dt-responsive nowrap boxmovie" cellspacing="0" width="100%">
                         <thead></thead>
                         <tbody></tbody>
                       </table>
@@ -175,7 +181,7 @@
             <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  <th>무비코드</th>
+                  <th>무비코드</th>	
                   <th>영화명</th>
                   <th>개봉일자</th>
                   <th>등급</th>
@@ -268,7 +274,7 @@
             </div>
             
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-genre">장르<span">*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-genre">장르<span>*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                <input type="text" id="movie-genre" name="genre" class="form-control col-md-7 col-xs-12">
@@ -374,26 +380,52 @@
     
     /* 모달 활성화 됐을 때*/
      $('#movieModal').on('show.bs.modal', function (event) {
-       /*FIXME : 박스오피스에서 모달을 띄웠을때, 이전에 있던 포스터가 그대로 걸려있음 */
-       var button   = $(event.relatedTarget)
-       var title    = button.data('title')
-       var opendate = button.data('opendate')
-       var startdate= moment().format('YYYY-MM-DD')
-       var enddate  = moment(startdate).add(30,'days').format('YYYY-MM-DD')
-       var rating   = button.data('rating')
-       var runtime  = button.data('runtime')
-       var filmMade = button.data('filmmade')
-       var nation   = button.data('nation')
-       var synopsis = button.data('synopsis')
-       var director = button.data('director')
-       var genre    = button.data('genre')
-       var poster   = button.data('poster')
-       var actor    = button.data('actor')
-       var rating   = button.data('rating')
-       var movieCategory = $('#movie-category').val()
-       var movieCode = button.data('moviecode')
-       var stillcut = button.data('stillcut')
        
+       var button    = $(event.relatedTarget)
+       var category  = button.data('category')
+       var movieCode = button.data('moviecode')
+       var title     = button.data('title')
+       var opendate  = button.data('opendate')
+
+       
+       var rating    = button.data('rating')
+       var runtime   = button.data('runtime')
+       var filmMade  = button.data('filmmade')
+       var nation    = button.data('nation')
+       var synopsis  = button.data('synopsis')
+       var director  = button.data('director')
+       var genre     = button.data('genre')
+       var poster    = button.data('poster')
+       var actor     = button.data('actor')
+       var rating    = button.data('rating')
+       var stillcut  = button.data('stillcut')
+       var startdate = moment().format('YYYY-MM-DD')
+       var enddate   = moment(startdate).add(30,'days').format('YYYY-MM-DD')    	   
+   	   var rating    = button.data('rating')
+       //박스오피스에서 접근할 때 kmdb 검색
+       if(category === "NOW"){
+    	   const result = detailSearch(title)
+ 		     var info = result.Data[0].Result[0];
+ 		     filmMade = info.company;
+ 		     poster = info.posters.split('|')[0];
+ 		     nation = info.nation;
+ 		     synopsis = info.plots.plot[0].plotText;
+ 		     rating = info.rating.includes("전체")? "all" :
+ 		                   info.rating.includes("12")  ? "12"  : 
+ 		                   info.rating.includes("15")  ? "15"  :
+ 		                   info.rating.includes("18")  ? "18"  : "";
+ 		     director = info.directors.director[0].directorNm;
+ 		     runtime = info.runtime;
+ 		     genre = info.genre;
+ 		     const actorArr = [];
+ 		     let count = info.actors.actor.length > 3 ? 3 : info.actors.actor.length;
+ 		     for(let i = 0; i < count ; i++){
+ 		       actorArr.push(info.actors.actor[i].actorNm);
+ 		     }
+ 		     actor = actorArr.join(', ');
+ 		     stillcut = info.stlls;
+       }
+       stillcut = stillcut.replace(/thm\/01/g, "still").replace(/tn_/g,"").replace(/.jpg|.JPG/g,"_01.jpg")
        var modal = $(this)
        // 박스오피스 only
        modal.find('#movie-title').val(title)
@@ -412,7 +444,7 @@
        modal.find('#movie-director').val(director)
        modal.find('#movie-poster').val(poster)
        modal.find('#movie-actor').val(actor)
-       modal.find('#movie-category').val(movieCategory)
+       modal.find('#movie-category').val(category)
        modal.find('#movie-stillcut').val(stillcut)
        modal.find('#movie-preview').attr('src',poster) //포스터 미리보기 삽입
        
@@ -424,7 +456,7 @@
 	  function openBoxOffice() {
 	  $('.movie_contents').css('display','block')
 	  $('.boxmovie').find('tbody').html('');
-	  
+	  var category = "NOW";
 		$.ajax({
 			url : 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json',
 			type : 'GET',
@@ -455,7 +487,7 @@
           html += '<td>'+ title + '</td>'
           html += '<td>'+ openDate + '</td>'
           html += '<td><button class="btn btn-success" type="button" data-toggle="modal" data-target="#movieModal"'+
-                  ' data-moviecode="'+ movieCode + '"data-title="' + title + '"data-opendate="' + openDate +'"data-movieCategory="NOW">등록</button></td>';
+                  ' data-moviecode="'+ movieCode + '"data-title="' + title + '"data-opendate="' + openDate +'"data-category="'+ category +'">등록</button></td>';
           html += '</tr>';
           
           $('.boxmovie').find('tbody').append(html)
@@ -501,10 +533,9 @@
   }
   /**
   ajax 분리
-  FIXME : 분리하는 과정에서 무조건 OLD 넣게 설정되어버렸는데, 수정 필요함
+  @param title
   */
-  function detailSearch(){
-    var keyword = $('.input-movie-title').val();
+  function detailSearch(title){
     var result = '';
     $.ajax({
       url : 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp',
@@ -512,7 +543,7 @@
         collection : 'kmdb_new2',                   //고정값
         ServiceKey : 'N6BL7Q77SG0M41244297',        //키
         sort : 'prodYear,1',     //정렬옵션 제작년도 정렬이 그나마 제일 정확한 것 같음
-        title : keyword,
+        title : title,
       },
       type : 'GET',
       dataType: 'json',
@@ -535,6 +566,7 @@
   function openSearchMovie(){
     $('.movie_contents').css('display','block')
     $('.boxmovie').find('tbody').html('');
+    var category = "OLD";
     
     var moviesearchhead = `
       <tr>
@@ -548,10 +580,9 @@
       </tr>`
     $('.boxmovie').find('thead').html(moviesearchhead)
     
-    const data = detailSearch();
+    const data = detailSearch($('.input-movie-title').val());
       
-      var movieCategory = $('#movie-category').val();
-      console.log('movieCategory :' , movieCategory)
+    
       
     for(var i=0; i<data.Data[0].Count ; i++){
       var info = data.Data[0].Result[i];
@@ -604,7 +635,7 @@
               '"data-poster="'+ poster +
               '"data-actor="'+ actor +
               '"data-stillcut="'+ stillcut +
-              '"data-movieCategory="NOW">등록</button></td>';
+              '"data-category="'+ category + '">등록</button></td>';
       html += '</tr>';
       
       $('.boxmovie').find('tbody').append(html)
@@ -646,9 +677,25 @@
     <script src="_admin/vendors/nprogress/nprogress.js"></script>
     <!-- iCheck -->
     <script src="_admin/vendors/iCheck/icheck.min.js"></script>
-    <!-- Custom Theme Scripts -->
-    <script src="_admin/build/js/custom.min.js"></script>
     <!-- bootstrap-daterangepicker -->
     <script src="_admin/vendors/moment/min/moment.min.js"></script>
+    <!-- Datatables -->
+    <script src="_admin/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="_admin/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="_admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="_admin/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="_admin/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="_admin/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="_admin/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="_admin/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="_admin/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="_admin/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="_admin/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="_admin/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="_admin/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="_admin/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="_admin/vendors/pdfmake/build/vfs_fonts.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="_admin/build/js/custom.min.js"></script>
   </body>
 </html>
