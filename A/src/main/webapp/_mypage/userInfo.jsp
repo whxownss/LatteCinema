@@ -134,7 +134,7 @@
                         <div  id="phoneChange"class="change-phone-num-area" style="display: none">
                           <div class="position">
                             <label for="newPhone" class="label">변경할 휴대폰</label>
-                            <input onblur="checkPhone()" type="TEXT" id="newPhone" name="newPhone" class="input-text w160px numType" placeholder="'-'없이 입력가능" title="변경할 휴대폰 번호 입력" maxlength="11">
+                            <input onblur="checkPhone()" type="TEXT" id="newPhone" name="newPhone" class="input-text w160px numType" placeholder="'-'없이 입력가능" title="변경할 휴대폰 번호 입력" maxlength="15">
                             <button type="button" class="button small gray-line" id="sendNumberBtn">인증번호 전송</button>
                             <br><span id="CheckPhone"></span>
                           </div>
@@ -215,22 +215,37 @@ $('#phoneChgBtn').on('click', function() {
 
 });
 // 새 휴대폰번호 정규식 검사 ()
-function checkPhone() {
-	var phone = $("#newPhone").val();
-	var text = "** 연락처 입력 필수! **"
-		var color = "red";
+// function checkPhone() {
+// 	var phone = $("#newPhone").val();
+// 	var text = "** 연락처 입력 필수! **"
+// 		var color = "red";
 		
-		if(phone != ""){
-			text = "** 알맞은 연락처 형식으로 입력! '-' 생략가능!! **";
+// 		if(phone != ""){
+// 			text = "** 알맞은 연락처 형식으로 입력! '-' 생략가능!! **";
 			
-			if(phoneRegex.test(phone)){
-				text = "** 알맞은 연락처 형식! ** ";
-				color = "green";
-			}
-		}
-		$("#CheckPhone").text(text).css("color",color);
-	}
+// 			if(phoneRegex.test(phone)){
+// 				text = "** 알맞은 연락처 형식! ** ";
+// 				color = "green";
+// 			}
+// 		}
+// 		$("#CheckPhone").text(text).css("color",color);
+// 	}
 	
+// 인증번호 발송 버튼 클릭
+$('#sendNumberBtn').on('click', function() {
+	var target = $('#sendNumberBtn');
+ 	if(target.prev().val().trim() == '')
+ 		return $("#CheckPhone").text('변경할 휴대폰 번호를 입력해 주세요.').css("color", "red");
+
+	if (!phoneRegex.test(target.prev().val().trim()))
+ 		return $("#CheckPhone").text('올바른 휴대폰 번호를 입력해 주세요.').css("color", "red");
+
+	if(target.prev().val() == $('[name=phoneNo]').val().replaceAll('-',''))
+		return $("#CheckPhone").text('휴대폰 번호가 동일합니다.').css("color", "red");
+	
+	
+});
+
 //유효성 체크 후 submit
 function checkSubmit() {
 	
@@ -248,10 +263,6 @@ function checkSubmit() {
 	
 	return ((flag == 0) ? false : true);
 }	
-// 인증번호 발송 버튼 클릭
-// $('#sendNumberBtn').on('click', function() {
-	
-// });
 // 인증번호 발송 버튼 클릭
 // $('#sendNumberBtn').on('click', function() {
 //     var target = $('#sendNumberBtn');
