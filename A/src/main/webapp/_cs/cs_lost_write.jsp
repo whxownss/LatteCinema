@@ -43,7 +43,7 @@ String createUser = "MEMBER2477";
 					    </tr>
 					    <tr>
 					      <td class="table-secondary">아이디</td>
-					      <td colspan="3"><input class="form-control" name="createUser" type="text" value="<%=createUser%>" readonly></td>
+					      <td colspan="3"><input class="form-control" name="createUser" type="text" value="${sessionScope.sId }" readonly></td>
 					    </tr>
 <!-- 					    <tr> -->
 <!-- 					      <td class="table-secondary">연락처</td> -->

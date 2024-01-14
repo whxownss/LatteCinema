@@ -1,11 +1,16 @@
 package com.itwillbs.service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.itwillbs.dao.MemberDAO;
 import com.itwillbs.dao.MovieDAO;
+import com.itwillbs.domain.CenterBoardDTO;
+import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.MovieDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -16,42 +21,32 @@ public class MovieService {
 	MovieDTO movieDTO = null;
 
 	public MovieDTO insertMovie(HttpServletRequest request) {
-		
+			
 		System.out.println("insertMovie() 서비스");
-		
+			
 		try {
 			request.setCharacterEncoding("UTF-8");
-			
-			String uploadPath = request.getServletContext().getRealPath("/upload");
-			
-			System.out.println(uploadPath);
-			
-			int maxSize =10*1024*1024;
-			
-			MultipartRequest multi 												//중복) 업로드 파일 이름 같은 경우 변환
-			= new MultipartRequest(request, uploadPath, maxSize, "utf-8", new DefaultFileRenamePolicy());
-			
+				
+				
 			movieDAO = new MovieDAO();
 			movieDTO = new MovieDTO();
+				
+			movieDTO.setMovieIdx(request.getParameter("movieIdx"));
+			movieDTO.setTitle(request.getParameter("title"));
+			movieDTO.setRating(request.getParameter("rating"));
+			movieDTO.setRunTime(request.getParameter("runTime"));
+			movieDTO.setFilmMade(request.getParameter("filmMade"));
+			movieDTO.setNation(request.getParameter("nation"));
+			movieDTO.setSynopsis(request.getParameter("synopsis"));
+			movieDTO.setOpenDate(request.getParameter("openDate"));
+			movieDTO.setDirector(request.getParameter("director"));
+			movieDTO.setGenre(request.getParameter("genre"));
+			movieDTO.setPoster(request.getParameter("poster"));
+			movieDTO.setStartDate(request.getParameter("startDate"));
 			
-			movieDTO.setMovieIdx(multi.getParameter("movieIdx"));
-            movieDTO.setTitle(multi.getParameter("title"));
-            movieDTO.setRating(multi.getParameter("rating"));
-            movieDTO.setRunTime(multi.getParameter("runtime"));
-            movieDTO.setFilmMade(multi.getParameter("filmMade"));
-            movieDTO.setNation(multi.getParameter("nation"));
-            movieDTO.setSynopsis(multi.getParameter("synopsis"));
-            movieDTO.setOpenDate(multi.getParameter("openDate"));
-            movieDTO.setDirector(multi.getParameter("director"));
-            movieDTO.setGenre(multi.getParameter("genre"));
-            movieDTO.setPoster(multi.getParameter("poster"));
-           
-            File posterFile = multi.getFile("poster");
-            if (posterFile != null) {
-                String posterFileName = posterFile.getName();
-                movieDTO.setPoster(posterFileName);
-            }
-   
+			System.out.println("!@#!@#!@#");
+			System.out.println(movieDTO);
+			   
 			movieDAO.insertMovie(movieDTO);
 			
 		} catch (Exception e) {
@@ -59,7 +54,20 @@ public class MovieService {
 		}
 		
 		return null; 
-		
+				
 	}
-
-}
+	
+		public List<MovieDTO> getLattePoster(MovieDTO movieDTO) {
+			System.out.println("MovieService getLattePoster()");
+			ArrayList<MovieDTO> LattePosterList = null;
+		    try {
+		        movieDAO = new MovieDAO();
+		        LattePosterList = movieDAO.getLattePoster(movieDTO);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		    return LattePosterList;
+		}
+		
+	
+	}

@@ -82,6 +82,13 @@
 		
 	</select>
 	
+	<!--간편로그인 id값 가져오기  -->
+	<select id="getSimpleId" parameterType="String" resultType="String">
+		SELECT MEM_ID
+		FROM MEMBERS
+		WHERE MEM_EMAIL = #{memEmail}
+	</select>	
+	
 <!-- 	회원 아이디/비밀번호 찾기 -->
 	<select id="userFind" parameterType="MemberDTO" resultType="MemberDTO">
 		SELECT *
@@ -152,18 +159,22 @@
 <!-- 	</delete> -->
 	
 	
-	<select id="getBoardList" parameterType="MemberDTO">
-		SELECT *
-		FROM MEMBERS
-		ORDER BY MEM_ID DESC
-		LIMIT #{startRow}, #{pageSize}
-	</select>
+<!-- 	<select id="getBoardList" parameterType="MemberDTO"> -->
+<!-- 		SELECT * -->
+<!-- 		FROM MEMBERS -->
+<!-- 		ORDER BY MEM_ID DESC -->
+<!-- 		LIMIT #{startRow}, #{pageSize} -->
+<!-- 	</select> -->
 	
-	<select id="getBoardCount" parameterType="MemberDTO">
+	<select id="getBoardCount" resultType="Integer">
 		SELECT COUNT(*)
 		FROM MEMBERS
 	</select>
 	
-	
+	<select id="getBoardList" parameterType="map" resultType="MemberDTO">
+		SELECT *
+		  FROM MEMBERS
+		LIMIT #{startRow}, #{pageSize}
+	</select>
 	
 </mapper>

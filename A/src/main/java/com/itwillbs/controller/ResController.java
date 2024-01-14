@@ -102,8 +102,12 @@ public class ResController extends HttpServlet {
 		}
 		// 같은 자리 선택 했는지
 		if(sPath.equals("/res2ProCS.re")) {
+			System.out.println("???????????????????????????");
 			resService = new ResService();
 			String result = resService.isSameSeat(request.getParameter("schDTO"));
+			System.out.println("~~~~~~~~~~~~~~~~~~");
+			System.out.println(result);
+			System.out.println("~~~~~~~~~~~~~~~~~~");
 			
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(result); // 같은자리면 null, 아니면 "noSameSeat"
@@ -126,7 +130,7 @@ public class ResController extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(result);
 		}
-
+		
 		// 예약3 페이지 이동
 		if(sPath.equals("/res3.re")) {
 			resService = new ResService();
@@ -144,7 +148,15 @@ public class ResController extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(msg);
 		}
-		
+
+		// 결제전 시간이 지났는지 확인 (지났으면 결제 취소, 안지났으면 스케줄러 shutdown)
+		if(sPath.equals("/res3ProSE.re")) {
+			resService = new ResService();
+			String result = resService.isTimeOver(request.getParameter("schDTO"));	
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result);
+		}
 
 		// 예약4 페이지 이동
 		if(sPath.equals("/res4.re")) {

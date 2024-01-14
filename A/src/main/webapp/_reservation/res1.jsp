@@ -482,8 +482,10 @@ $(function(){
 				"ci_idx"   : ciIdx,
 				"sch_idx"  : schIdx,
 				"mov_type" : movType,
-				"mov_idx"   : movIdx
+				"mov_idx"  : movIdx,
+				"date_c"   : date.slice(0, -4)
 		}
+		debugger;
 		$("#schDTO").val(JSON.stringify(schDTO));
 		$("#modalTitle").text(sTime + " ~ " + eTime + " (" + sIdx + ")");
 		$("#modalSeat .cSeat").text(cSeat);

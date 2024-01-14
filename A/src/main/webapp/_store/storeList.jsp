@@ -4,7 +4,7 @@
 <%@include file="../_common/commonHeaderStart.jsp"%>
 <%@include file="../_common/commonHeaderEnd.jsp"%>
 
-<c:set var="storeItem" value="${requestScope.storeItemDTO}" />
+<c:set var="storeItem" value="${requestScope.storeItemJson}" />
 
 <main id="main">
 
@@ -15,8 +15,8 @@
 
 			<section class="contents d-flex">
 				<div class="col-6" style="display: flex; justify-content: center;">
-					<img
-						src="${storeItem.itemImage}"
+					<img id="itemImage"
+						src=""
 						alt="스위트콤보 상품이미지">
 				</div>
 				<article class="col-4">
@@ -29,7 +29,7 @@
 							<tr>
 								<th scope="row" class="text-center border-bottom-0" colspan="4">
 									<h3 class="section-header fs-1" id="itemName">
-										<i>${storeItem.itemName}</i>
+										<i></i>
 									</h3>
 								</th>
 							</tr>
@@ -37,11 +37,11 @@
 						<tbody>
 							<tr>
 								<th colspan="2" scope="row" class="text-center"><span
-									class="fs-3" id="price">${storeItem.itemPrice}</span>원</th>
+									class="fs-3" id="price"></span>원</th>
 							</tr>
 							<tr>
 								<th scope="row">구성품</th>
-								<td class="text-end">${storeItem.itemDetail}</td>
+								<td class="text-end" id="detail"></td>
 							</tr>
 							<tr>
 								<th scope="row">구매제한</th>
@@ -176,15 +176,11 @@
 <!-- ///// 자바스크립트 ///// -->
 
 <%@include file="../_common/commonFooterStart.jsp"%>
-
 <script src="jQuery/jquery-3.6.0.js"></script>
-
 <!-- iamport.payment.js -->
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<!-- <script src="https://cdn.iamport.kr/v1/iamport.js"></script> -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-
 <script type="text/javascript">
-
 // 가맹점 식별코드
 var IMP = window.IMP;
 IMP.init("imp20121707"); 
@@ -221,7 +217,7 @@ IMP.init("imp20121707");
           pay_method: "card",	// 지불수단
           merchant_uid: "STO" + merchant_uid,   // 주문번호
           name: itemName,	// 상품명
-          amount: 100,    // 가격	price
+          amount: 100,    // 가격		price
           buyer_email: "gildong@gmail.com",	// 구매자 이메일
           buyer_name: "홍길동",	// 구매자 이름
           buyer_tel: "010-4242-4242",	// 구매자 연락처
@@ -244,16 +240,16 @@ IMP.init("imp20121707");
     }
     
     // 결제된 데이터
-  app.get('/payments/status/all',(req,res)=>{
-      iamport.payment.getByStatus({
-        payment_status: 'paid' 
-      }).then(function(result){
-          res.render('payments_list',{list:result.list});
-      }).catch(function(error){
-          console.log(error);
-          red.send(error);
-      })
-});
+//   app.get('/payments/status/all',(req,res)=>{
+//       iamport.payment.getByStatus({
+//         payment_status: 'paid' 
+//       }).then(function(result){
+//           res.render('payments_list',{list:result.list});
+//       }).catch(function(error){
+//           console.log(error);
+//           red.send(error);
+//       })
+// });
     
 // 	//주문번호 만들기
 // 	  function createOrderNum(){
@@ -306,12 +302,21 @@ IMP.init("imp20121707");
 //       });
 //   }
 
-</script>
-
-   <script>
-	  // 수량 옵션
+		// 이부분 보시면 됩니다 형 *********************************************************
+    	var storeItem = ${storeItem};
+	  // 수량 옵션 
       $(function(){
-    	  var price = ${storeItem.itemPrice} + "";
+    	  debugger;
+    		$("#itemImage").attr("src", storeItem.itemImage);
+    		$("#itemName i").text(storeItem.itemName);
+    		$("#price").text(storeItem.itemPrice);
+    		$("#detail").text(storeItem.itemDetail);
+    		debugger;
+    		// 이부분 보시면 됩니다 형 *********************************************************	
+    		
+    		
+    		
+    	  var price = storeItem.itemPrice + "";
     	  $("#sPrice").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     	  
          $('._count :button').on({

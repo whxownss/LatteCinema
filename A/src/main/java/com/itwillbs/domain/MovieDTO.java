@@ -115,14 +115,13 @@ public class MovieDTO {
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
-	
-	
-
-	
-	
-	
-	
-
-	
+	@Override
+	public String toString() {
+		return "MovieDTO [movieCategory=" + movieCategory + ", movieIdx=" + movieIdx + ", title=" + title
+				+ ", director=" + director + ", actor=" + actor + ", genre=" + genre + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", openDate=" + openDate + ", rating=" + rating + ", totalView=" + totalView
+				+ ", synopsis=" + synopsis + ", filmMade=" + filmMade + ", nation=" + nation + ", runTime=" + runTime
+				+ ", poster=" + poster + "]";
+	}
 	
 }

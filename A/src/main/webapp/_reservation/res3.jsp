@@ -227,9 +227,35 @@ var milliseconds = today.getMilliseconds();
 // var makeMerchantUid = `${hours}` + `${minutes}` + `${seconds}` + `${milliseconds}`;        이거 왜 안 먹지?
 var makeMerchantUid = "" + hours + minutes + seconds + milliseconds;
 
+
 function kakaoPay(useremail, username) {
- if (confirm("구매 하시겠습니까?")) { // 구매 클릭시 한번 더 확인하기
-     if (1 == 1) { // 회원만 결제 가능
+	debugger;
+	var isTimeOver = false;
+	// 내가 결제중에 SEAT테이블에 정보가 사라질 때 ******************************
+	$.ajax({
+		type: "GET",
+		url: "res3ProSE.re",
+		data: {schDTO: JSON.stringify(schDTO)},
+		dataType: "text",
+		async: false
+	})
+	.done(function(data){
+		if(data == "true") {
+			isTimeOver = true;
+			alert('시간이 만료되었습니다.');
+		}
+		debugger;
+	})
+	.fail(function(){
+		debugger;
+	})
+	if(isTimeOver) return;
+	
+	
+	debugger;
+	
+	if (confirm("구매 하시겠습니까?")) { // 구매 클릭시 한번 더 확인하기
+    if (1 == 1) { // 회원만 결제 가능
 //          const emoticonName = document.getElementById('title').innerText
 
          IMP.init("imp16802722"); // 가맹점 식별코드
@@ -302,6 +328,7 @@ function kakaoPay(useremail, username) {
 var schDTO = JSON.parse(localStorage.getItem("schDTO"));
 debugger;
 $(function(){
+	
 	// schDTO 그리기
 	$(".rating").attr("src", "_assets/img/grade_" + schDTO.rating + ".png");
 	$(".title").text(schDTO.title);

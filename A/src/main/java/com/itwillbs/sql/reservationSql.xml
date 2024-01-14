@@ -87,11 +87,12 @@
 		   AND CI_IDX = #{ciIdx}
 		   AND MOV_TYPE = #{movType}
 		   AND SCH_IDX = #{schIdx}
-		   AND SEAT_C IN (
-		   <foreach collection="seatC.split(',')" item="seat" index="i" separator=",">
-		   	   #{seat}
+		   AND DATE_C = #{dateC}
+		   AND (
+		   <foreach collection="seatC.split(',')" item="seat" index="i" separator="OR">
+		   	   FIND_IN_SET(#{seat}, REPLACE(SEAT_C, ' ', '')) > 0
 		   </foreach>
-		   )
+		   	   )
 	</select>
 	
 	<insert id="insertSeatInfo" parameterType="SeatDTO">
@@ -138,5 +139,19 @@
 		   AND TIMESTAMPDIFF(SECOND, S.INSERT_TIME, NOW()) >= 45
 		 </if>
 	</delete>
+	
+	<select id="selectTimeOverSeat" parameterType="SeatDTO" resultType="Integer">
+		SELECT COUNT(*)
+		  FROM SEAT
+		 WHERE 1 = 1
+		   AND LO_IDX = #{loIdx}
+		   AND CI_IDX = #{ciIdx}
+		   AND MOV_TYPE = #{movType}
+		   AND DATE_C = #{dateC}
+		   AND SEAT_C = REPLACE(#{seatC}, ',', ', ')
+	</select>
+	
+	
+	
 	
 </mapper>

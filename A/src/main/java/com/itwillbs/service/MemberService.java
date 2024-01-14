@@ -3,6 +3,8 @@ package com.itwillbs.service;
 import java.nio.file.spi.FileSystemProvider;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,6 +31,11 @@ public class MemberService {
 			String email = request.getParameter("email");
 			Timestamp date = new Timestamp(System.currentTimeMillis());
 			
+			System.out.println("@@@@@@@@@@@@@@@@@@");
+			System.out.println(phone);
+			System.out.println(birth);
+			System.out.println(email);
+			
 			MemberDTO memberDTO = new MemberDTO();
 			memberDTO.setMemIdx(idx);
 			memberDTO.setMemId(id);
@@ -53,7 +60,7 @@ public class MemberService {
 	}// insertMember()
 	
 	//카카오간편로그인 관련
-	public void insertkakaoMember(HttpServletRequest request) {
+	public void insertSimpleMember(HttpServletRequest request) {
 		try {
 			request.setCharacterEncoding("UTF-8");
 			String idx = request.getParameter("idx");
@@ -273,7 +280,13 @@ public class MemberService {
 			// BoardDAO 객체생성
 			memberDAO = new MemberDAO();
 			// getBoardList(startRow,pageSize) 메서드 호출
-			memberList = memberDAO.getBoardList(pageDTO);
+//			memberList = memberDAO.getBoardList(pageDTO);
+			
+			Map<String, Integer> paramMap = new HashMap<String, Integer>();
+			paramMap.put("startRow", startRow);
+			paramMap.put("pageSize", pageDTO.getPageSize());
+			
+			memberList = memberDAO.getBoardList(paramMap);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -292,6 +305,21 @@ public class MemberService {
 		}
 		return count;
 	}//getBoardCount()
+
+	public String getSimpleId(HttpServletRequest request) {
+		String sId = null;
+		try {
+//			MemberDTO memberDTO = new MemberDTO();
+//			memberDTO.setMemEmail(request.getParameter("memEmail"));
+			
+			memberDAO = new MemberDAO();
+			sId = memberDAO.getSimpleId(request.getParameter("memEmail"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return sId;
+	}
 
 
 

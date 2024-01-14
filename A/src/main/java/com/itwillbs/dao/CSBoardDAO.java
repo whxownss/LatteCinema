@@ -16,6 +16,7 @@ import com.itwillbs.domain.LostBoardDTO;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
+import com.itwillbs.domain.RecommendDTO;
 import com.itwillbs.domain.ResponseDataDTO;
 import com.itwillbs.sql.SqlMapClient;
 
@@ -688,6 +689,241 @@ public class CSBoardDAO {
 		}
 		return responseList;
 	}//getResponseList()
+
+	public int insertRecommend(RecommendDTO recommendDTO) {
+		System.out.println("CSBoardDAO insertRecommend()");
+		int insertSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			insertSuccess = session.insert("CsAdmin.insertRecommend", recommendDTO);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return insertSuccess;
+	}//insertRecommend()
+
+	public ArrayList<RecommendDTO> getRecommendList(PageDTO pageDTO) {
+		System.out.println("CSBoardDAO getRecommendList()");
+		ArrayList<RecommendDTO> recommendList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			recommendList = new ArrayList<RecommendDTO>(session.selectList("CsAdmin.getRecommendList", pageDTO));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return recommendList;
+	}//getRecommendList()
+
+	public int plusRecoCount(String createUser,String recommendIdx,String recoUser) {
+		System.out.println("CSBoardDAO plusRecoCount()");
+		int updateSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			Map<String, Object> params = new HashMap<>();
+	        params.put("createUser", createUser);
+	        params.put("recommendIdx", recommendIdx);
+	        params.put("recoUser", recoUser);
+			updateSuccess = session.update("CsAdmin.plusRecoCount",params);
+			session.insert("CsAdmin.insertRecoUser",params);
+			
+			session.commit();
+		} catch (Exception e) {
+			session.rollback();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return updateSuccess;
+	}
+
+	public int deleteRecoData(int recommendIdx) {
+		System.out.println("CSBoardDAO deleteRecoData()");
+		int deleteSuccess = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			deleteSuccess = session.delete("CsAdmin.deleteRecoData", recommendIdx);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return deleteSuccess;
+	}//deleteRecoData()
+
+	public int getRecoBoardCount() {
+		System.out.println("CSBoardDAO getRecoBoardCount()");
+		int count = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			count = session.selectOne("CsAdmin.getRecoBoardCount");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return count;
+	}//getRecoBoardCount
+
+	public ArrayList<RecommendDTO> getRecommendList(PageDTO pageDTO, String movieName) {
+		System.out.println("CSBoardDAO getRecommendList() search");
+		ArrayList<RecommendDTO> recommendList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			Map<String, Object> params = new HashMap<>();
+			params.put("pageDTO", pageDTO);
+			params.put("movieName", movieName);
+
+			recommendList = new ArrayList<RecommendDTO>(session.selectList("CsAdmin.searchRecoList", params));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return recommendList;
+	}//getRecommendList() search
+
+	public int getRecoBoardCount(String movieName) {
+		System.out.println("CSBoardDAO getRecoBoardCount() search");
+		int count = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			count = session.selectOne("CsAdmin.getRecoSrchCount",movieName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return count;
+	}//getRecoBoardCount() search
+
+	public ArrayList<QnaBoardDTO> getQnaBoardList(String createUser, PageDTO pageDTO) {
+		System.out.println("CSBoardDAO getQnaBoardList() mypage");
+		ArrayList<QnaBoardDTO> qnaBoardList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			Map<String, Object> params = new HashMap<>();
+			params.put("pageDTO", pageDTO);
+			params.put("createUser", createUser);
+
+			qnaBoardList = new ArrayList<QnaBoardDTO>(session.selectList("CsAdmin.myPageQnaBoardList", params));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return qnaBoardList;
+	}//getQnaBoardList() mypage
+
+	public int getQnaBoardCount(String createUser, String check) {
+		int count = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			count = session.selectOne("CsAdmin.getMyPageQnaCount",createUser);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return count;
+	}//getQnaBoardCount() mypage
+
+	public ArrayList<LostBoardDTO> getLostBoardList(PageDTO pageDTO, String createUser) {
+		System.out.println("CSBoardDAO getLostBoardList() mypage");
+		ArrayList<LostBoardDTO> lostBoardList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			Map<String, Object> params = new HashMap<>();
+			params.put("pageDTO", pageDTO);
+			params.put("createUser", createUser);
+
+			lostBoardList = new ArrayList<LostBoardDTO>(session.selectList("CsAdmin.myPageLostBoardList", params));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return lostBoardList;
+	}//getLostBoardList() mypage
+
+	public int getLostBoardCount(String createUser, String check) {
+		int count = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			count = session.selectOne("CsAdmin.getMyPageLostCount",createUser);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return count;
+	}//getLostBoardCount() mypage
+
+	public ArrayList<LostBoardDTO> getLostBoardList(PageDTO pageDTO, String createUser, String lostStatus) {
+		System.out.println("CSBoardDAO getLostBoardList() mypage lostStatus");
+		ArrayList<LostBoardDTO> lostBoardList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			Map<String, Object> params = new HashMap<>();
+			params.put("pageDTO", pageDTO);
+			params.put("createUser", createUser);
+			params.put("lostStatus", lostStatus);
+
+			lostBoardList = new ArrayList<LostBoardDTO>(session.selectList("CsAdmin.myLostStatusList", params));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return lostBoardList;
+	}//getLostBoardList() mypage lostStatus
+
+	public int getLostBoardCount(String createUser, String check, String lostStatus) {
+		int count = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			Map<String, Object> params = new HashMap<>();
+			params.put("createUser", createUser);
+			params.put("lostStatus", lostStatus);
+			count = session.selectOne("CsAdmin.myPageLostStatusCount",params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return count;
+	}//getLostBoardCount() mypage lostStatus
 	
 	
 	

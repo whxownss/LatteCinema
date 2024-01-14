@@ -4,6 +4,7 @@ package com.itwillbs.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -102,11 +103,11 @@ public class MemberDAO {
 		return memberDTO;
 	}
 	
-	// 마이페이지 예약구매 페이지 페이징 작업
-	public ArrayList<MemberDTO> getBoardList(PageDTO pageDTO) {
+	// 마이페이지 예약구매 페이지 페이징 작업         PageDTO pageDTO
+	public ArrayList<MemberDTO> getBoardList(Map<String, Integer> paramMap) { 
 		ArrayList<MemberDTO> getMemberList = null;
 		SqlSession session = sqlSessionFactory.openSession();
-		getMemberList = new ArrayList<MemberDTO>(session.selectList("Member.getBoardList", pageDTO));
+		getMemberList = new ArrayList<MemberDTO>(session.selectList("Member.getBoardList", paramMap));
 		session.close();
 		return getMemberList;
 	}//
@@ -118,6 +119,14 @@ public class MemberDAO {
 		session.close();
 		return count;
 	}//
+
+	// 간편로그인 관련 Id값 가져오기
+	public String getSimpleId(String memEmail) {
+		SqlSession session = sqlSessionFactory.openSession();
+		String sId = session.selectOne("Member.getSimpleId", memEmail);
+		session.close();
+		return sId;
+	}
 
 	
 }
