@@ -114,14 +114,17 @@
 					
 				</div>
 
-
-			<div ><button onclick='cancelPay()'>환불하기</button></div>
+			<div ><button id="payInfo">결제정보</button></div>
+			<div ><button id="refund">환불하기</button></div>
 			</div>
 		</section>
 	</main>
 <%@include file="../_common/commonFooterStart.jsp"%>	
 <script src="jQuery/jquery-3.6.0.js"></script>
 <script>
+
+debugger;
+
 // var schDTO = JSON.parse(localStorage.getItem("schDTO"));
 var rsp = JSON.parse(localStorage.getItem("rsp"));
 // function cancelPay() {
@@ -140,7 +143,33 @@ var rsp = JSON.parse(localStorage.getItem("rsp"));
 //   }
 
 $(function(){
-	debugger;
+	
+	$("#refund").on("click", function(){
+		$.ajax({
+			type: "GET",
+			url: "res4Pro.re",
+			data: {mid: rsp.merchant_uid},
+			dataType: "text"
+		})
+		.done(function(data){
+			debugger;
+			if(data == "환불 성공"){
+// 				$.ajax({
+// 					type: "POST",
+// 					url: "res4ProRF.re",
+// 					data: {mid: rsp.merchant_uid},
+// 					datType: "text"
+// 				})
+// 				.done(function(data){
+					
+// 				})
+// 				.fail(function(){})
+			}
+		})
+		.fail(function(){})
+	});
+	
+	
 	$(".buyerName").text(rsp.buyer_name);
 	$(".resIdx").text(rsp.merchant_uid);
 	$(".sTime").text(rsp.s_time);
