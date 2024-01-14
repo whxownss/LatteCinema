@@ -70,4 +70,11 @@
 		where ITEM_IDX = #{idx}
 	</select>
 	
+	<!-- 회원가입 휴대폰 번호 존재확인 -->
+	<select id="checkPhone" parameterType="String" resultType="Integer"> 
+		SELECT COUNT(*)
+		FROM MEMBERS
+		WHERE MEM_PHONE = #{phone}
+	</select>
+	
 </mapper>
