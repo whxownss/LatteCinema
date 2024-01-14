@@ -243,7 +243,7 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
 $(document).ready(function() {
 	
 });//document ready 끝
-	$("#datatable-responsive tbody").on("click","tr a",function(e) {
+	$("#datatable-responsive tbody").on("click","tr a",function(e) { //동일한 "tr a" 선택자를 다른 이벤트에도 사용해야 할 경우 선택자를 중복해서 작성하지 않아도 됩니다.
 	    e.preventDefault(); // 앵커 태그의 기본 동작을 막습니다.
 	    // 클릭한 앵커 태그와 연관된 가장 가까운 테이블 행 (tr)을 찾습니다.
 	    var $row = $(this).closest("tr");
