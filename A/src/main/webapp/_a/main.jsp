@@ -61,7 +61,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
           <div class="titlee">
             <a href="#" class="moree">예매하기</a>
             <!-- 상세정보로 페이지 이동 링크 -->
-            <a href="<c:url value='/movie/detail/${movie.movieIdx}' />" class="moree">상세정보</a>
+            <a href="${pageContext.servletContext.contextPath}/movie_view.mo?movieCode=${movie.movieCode}>" class="moree">상세정보</a>
           </div>
         </div>
        </div>

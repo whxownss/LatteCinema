@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,7 +32,7 @@
     <script src="_admin/vendors/jquery/dist/jquery.min.js"></script>
   </head>
   <body class="nav-md">
-    <div class="container body">
+    <div class="container body">   
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
@@ -175,7 +175,7 @@
             <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  <th>무비코드</th>	
+                  <th>무비코드</th>
                   <th>영화명</th>
                   <th>개봉일자</th>
                   <th>등급</th>
@@ -184,14 +184,16 @@
                 </tr>
               </thead>
               <tbody>
+              <c:forEach var="movie" items="${movieList }">
               	<tr>
-              		<td>1</td>
-              		<td>집에 보내줘</td>
-              		<td>2023/12/25</td>
-              		<td>전체관람가</td>
-              		<td>상영중 <!-- 상영종료일보다 이전인 날짜엔 상영중으로 보이고 지나면 상영종료로 보이게  --></td>
-              		<td>now</td>
+              		<td>${movie.movieCode}</td>
+              		<td>${movie.title}</td>
+              		<td>${movie.openDate}</td>
+              		<td>${movie.rating}</td>
+              		<td>${movie.movieState}</td>  <!-- 상영종료일보다 이전인 날짜엔 상영중으로 보이고 지나면 상영종료로 보이게  -->
+              		<td>${movie.movieCategory}</td>
               	</tr>
+              </c:forEach>
               </tbody>
             </table>
           </div>
@@ -242,7 +244,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-category">카테고리<span>*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-              <select id="movie-category" class="form-control" required>
+              <select id="movie-category" class="form-control" name="movieCategory" required>
                   <option value="NOW">NOW</option>
                   <option value="OLD">OLD</option>
                 </select>
@@ -579,7 +581,7 @@
       for(let i = 0; i < count ; i++){
         actorArr.push(info.actors.actor[i].actorNm);
       }
-      var actor = actorArr.join('|');
+      var actor = actorArr.join(', ');
       var stillcut = info.stlls;
       
       html += '<tr>'
@@ -602,7 +604,7 @@
               '"data-poster="'+ poster +
               '"data-actor="'+ actor +
               '"data-stillcut="'+ stillcut +
-              '"data-movieCategory="'+ movieCategory + '">등록</button></td>';
+              '"data-movieCategory="NOW">등록</button></td>';
       html += '</tr>';
       
       $('.boxmovie').find('tbody').append(html)
@@ -624,6 +626,7 @@
        if($('#movie-nation').val() === ""){ alert("제작국가 입력해 주세요"); return false; }
        if($('#movie-startdate').val() === ""){ alert("상영시작을 입력해 주세요"); return false; }
        if($('#movie-opendate').val() === ""){ alert("상영일을 입력해 주세요"); return false; }
+       if($('#movie-endDate').val() === ""){ alert("종영일을 입력해 주세요"); return false; }
        if($('#movie-synopsis').val() === ""){ alert("줄거리를 입력해 주세요"); return false; }
        if($('#movie-director').val() === ""){ alert("감독을 입력해 주세요"); return false; }
        if($('#movie-poster').val() === ""){ alert("등록된 포스터가 없습니다.");}

@@ -11,6 +11,8 @@
 		 	 ( 
 		 	   MOVIE_CODE
 		 	 , TITLE
+		 	 , ACTOR
+		 	 , STILLCUT
 		 	 , MOVIE_CATEGORY
 		 	 , DIRECTOR
 		 	 , GENRE
@@ -27,6 +29,8 @@
 		VALUES (
 			  #{movieCode}
 		  	, #{title}
+		  	, #{actor}
+		  	, #{stillcut}
 		  	, #{movieCategory}
 		  	, #{director}
 		  	, #{genre}
@@ -81,19 +85,21 @@
 		 	 , FILM_MADE
 		 	 , NATION
 		 	 , RUN_TIME
+		 	 , STILLCUT
+		 	 , ACTOR
 	FROM MOVIE 
 	WHERE MOVIE_CODE = #{movieCode};
 
 	</select>
 	
-	<select id="movieAll" resultType="MovieDTO" parameterType="MovieDTO">
+	<select id="getMovieList" resultType="MovieDTO" parameterType="MovieDTO">
 		SELECT 
 		  		   MOVIE_CODE
 			 	 , TITLE
 			 	 , DIRECTOR
 			 	 , OPENDATE
 			 	 , RATING
-		         , STATE
+		         , MOVIE_STATE
 				 , MOVIE_CATEGORY
 		
 		FROM MOVIE			 

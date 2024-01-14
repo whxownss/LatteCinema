@@ -36,49 +36,43 @@ public class MovieDAO {
 		}
 
 
-	 public ArrayList<MovieDTO> getMovieDetail(MovieDTO movieDTO) {
+	 public MovieDTO getMovieDetail(MovieDTO movieDTO) {
 		 SqlSession session = sqlSessionFactory.openSession();
-		 ArrayList<MovieDTO> resultDTOList = null;
+		 MovieDTO resultDTO = null;
 
 		 // 매퍼 파일에 정의한 쿼리 호출
-		 resultDTOList = new ArrayList<MovieDTO>(session.selectList("Movie.getMovieDetail", movieDTO));
-
-		 System.out.println("DAO 확인 : ");
+		 resultDTO = session.selectOne("Movie.getMovieDetail", movieDTO);
 
 		 session.close();
-		 return resultDTOList;
+		 return resultDTO;
 
 	 }
 
 
-		public ArrayList<MovieDTO> getNowPoster(MovieDTO movieDTO) {
-			SqlSession session = sqlSessionFactory.openSession();
-			ArrayList<MovieDTO> resultDTOList = null;
+	public ArrayList<MovieDTO> getNowPoster(MovieDTO movieDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		ArrayList<MovieDTO> resultDTOList = null;
 
-			// 매퍼 파일에 정의한 쿼리 호출
-			resultDTOList = new ArrayList<MovieDTO>(session.selectList("Movie.getNowPoster",movieDTO));
+		// 매퍼 파일에 정의한 쿼리 호출
+		resultDTOList = new ArrayList<MovieDTO>(session.selectList("Movie.getNowPoster",movieDTO));
 
-			System.out.println("DAO 확인 : ");
-
-			session.close();
-			return resultDTOList;
-		}
+		session.close();
+		return resultDTOList;
+	}
 
 
+	public ArrayList<MovieDTO> getMovieList() {
 
+		SqlSession session = sqlSessionFactory.openSession();
+		ArrayList<MovieDTO> resultDTOList = null;
+		
 
-		/*
-		 * public MovieDTO getNowPoster(MovieDTO movieDTO) { SqlSession session =
-		 * sqlSessionFactory.openSession(); try { // 매퍼 파일에 정의한 쿼리 호출 MovieDTO resultDTO
-		 * = session.selectOne("Movie.selectNowPoster", movieDTO);
-		 * 
-		 * // 결과를 받아온 DTO에 설정 if (resultDTO != null) {
-		 * movieDTO.setPoster(resultDTO.getPoster());
-		 * movieDTO.setTitle(resultDTO.getTitle()); } } finally { session.close(); }
-		 * 
-		 * return movieDTO; }
-		 * 
-		 */
+		// 매퍼 파일에 정의한 쿼리 호출
+		resultDTOList = new ArrayList<MovieDTO>(session.selectList("Movie.getMovieList"));
+
+		session.close();
+		return resultDTOList;
+	}
 	 
 }
 

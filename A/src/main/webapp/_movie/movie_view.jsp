@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="stillcutArray" value="${fn:split(detail.stillcut, '|')}" />
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -13,21 +16,11 @@
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/front.js"></script>
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/app.js"></script>
 
+
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
  
   
 <main>
-
-<%
- String movieName = "노량: 죽음의 바다";
- String movieEngName = "Noryang: Deadly Sea";
- String grade = "12세이상관람가";
- String date = "2023.12.20";
- String genre = "액션,드라마";
- String runTime = "152분";
- String totalView = "2,659,893명";
- String synopsys = "";
-%>
 
 <!-- // 영화관찾기 레이어 -->
 <div class="mv-info-wrap" style="margin-top:70px;">
@@ -39,24 +32,26 @@
           <!-- <a href="#" class="btn-type1 movie-open" data-poster="https://img.dtryx.com/poster/2023/12/D3ED4691-3003-4A40-BA15-E029AC980BEF.small.jpg" data-source="https://img.dtryx.com/video/2023/12/45030FA5-DC2D-4702-A4B8-731108559CBA.mp4">예고편 보기</a> -->
           </div>
         <div class="poster">
-          <img src="https://img.dtryx.com/poster/2023/12/5E0206A2-7177-4466-A25F-2B6726844F6A.small.jpg" onerror="this.src='/resources/img/common/no-poster.png';">
-          <i class="age12"></i>
+          <img src="${detail.poster}">
+         <%--  <i class="age12">${detail.rating}</i> --%>
+          ${detail.rating}
         </div>
         <div class="mobile mb15">
           <a href="javascript:goLink('/totalView/movie.do', 'MovieCd=023901');" class="btn-type0" style="border-radius:0">예매하기</a>
         </div>
-        <i class="age12"></i>
-        <h3 class="h3"><%=movieName %></h3>
-        <h4 class="h4"><%=movieEngName %></h4>
+        <%--  <i class="age12">${detail.rating}</i> --%>
+         ${detail.rating}
+        <h3 class="h3">${detail.title}</h3>
+        <%-- <h4 class="h4"><%=movieEngName %></h4> --%>
         <div class="etc">
-          <span><%=movieName %></span>
-          <span><%=date %></span>
-          <span><%=genre %></span>
-          <span><%=runTime %></span>
+          <span>${detail.title}</span>
+          <span>${detail.openDate}</span>
+          <span>${detail.genre}</span>
+          <span>${detail.runTime}분</span>
         </div>
-        <div class="grade">
-          누적 관객 수<strong><%=totalView %></strong>
-        </div>
+        <%--<div class="grade">
+          누적 관객 수<strong> <%=totalView %> </strong>
+        </div>--%>
         <div class="btns only-m">
           <a href="javascript:goLink('/totalView/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기</a>
           <a href="#" class="btn-type1 movie-open" data-poster="https://img.dtryx.com/poster/2023/12/D3ED4691-3003-4A40-BA15-E029AC980BEF.small.jpg" data-source="https://img.dtryx.com/video/2023/12/45030FA5-DC2D-4702-A4B8-731108559CBA.mp4">예고편 보기</a></div>
@@ -64,18 +59,19 @@
       
       <div class="float-info ">
         <div class="sticky">
-          <div class="img"><img src="https://img.dtryx.com/poster/2023/12/5E0206A2-7177-4466-A25F-2B6726844F6A.small.jpg" style="width: 80%;" onerror="this.src='/resources/img/common/no-poster.png';"/></div>
+          <div class="img"><img src="${detail.poster}" style="width: 80%;" onerror="this.src='/resources/img/common/no-poster.png';"/></div>
           <div class="info">
-            <i class="age12"></i>
-            <h3 class="h3"><%=movieName %></h3>
-            <h4 class="h4"><%=movieEngName %></h4>
+            <!-- <i class="age12"></i> -->
+              ${detail.rating}
+            <h3 class="h3">${detail.title}</h3>
+            <%-- <h4 class="h4"><%=movieEngName %></h4> --%>
             <div class="btns">
               <a href="javascript:goLink('/totalView/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기</a>
               <!-- <a href="#" class="btn-type1 movie-open" data-poster="https://img.dtryx.com/poster/2023/12/D3ED4691-3003-4A40-BA15-E029AC980BEF.small.jpg" data-source="https://img.dtryx.com/video/2023/12/45030FA5-DC2D-4702-A4B8-731108559CBA.mp4">예고편 보기</a> -->
             </div>
           </div>
         </div>
-      </div>
+      </div> 
     </div>
   </div>
   
@@ -88,60 +84,42 @@
             <div class="col">
               <div class="tit">줄거리</div>
               <div class="txt">
-                <span style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">임진왜란 발발로부터 7년이 지난 1598년 12월.</span>
+                <span style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">${detail.synopsis}</span>
+<!--                 <span style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">임진왜란 발발로부터 7년이 지난 1598년 12월.</span> -->
                 <br style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">
-                <span style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">이순신(김윤석)은 왜군의 수장이던 도요토미 히데요시가 갑작스럽게 사망한 뒤</span>
-                <br style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">
-                <span style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">왜군들이 조선에서 황급히 퇴각하려 한다는 것을 알게 된다.</span>
-                <br style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">
-                <br style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">
-                <span style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">“절대 이렇게 전쟁을 끝내서는 안 된다”</span>
-                <br style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">
-                <br style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">
-                <span style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">왜군을 완벽하게 섬멸하는 것이 이 전쟁을 올바르게 끝나는 것이라 생각한 이순신은</span>
-                <br style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">
-                <span style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">명나라와 조명연합함대를 꾸려 왜군의 퇴각로를 막고 적들을 섬멸하기로 결심한다.</span>
-                <br style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">
-                <br style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">
-                <span style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">하지만 왜군의 뇌물 공세에 넘어간 명나라 도독 진린(정재영)은 왜군에게 퇴로를 열어주려 하고,</span>
-                <br style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">
-                <span style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">설상가상으로 왜군 수장인 시마즈(백윤식)의 살마군까지 왜군의 퇴각을 돕기 위해 노량으로 향하는데…</span>
-                <br style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">
-                <br style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">
-                <span style="color: rgb(85, 85, 85); font-family: &quot;Noto Sans KR&quot;, sans-serif; font-size: 14px;">2023년 12월, 모두를 압도할 최후의 전투가 시작된다!</span></div>
+              </div>
             </div>
             <div class="col">
               <div class="tit">배우/제작진</div>
               <div class="txt">
                 <dl>
                   <dt>감독</dt>
-                  <dd>김한민</dd>
+                  <dd>${detail.director}</dd>
                 </dl>
                 <dl>
                   <dt>배우</dt>
-                  <dd> 김윤석 | 백윤식 | 정재영 </dd>
+                  <dd>${detail.actor}</dd>
                 </dl>
                 <dl>
                   <dt>배급사</dt>
-                  <dd>(주)롯데컬처웍스</dd>
+                  <dd>${detail.filmMade}</dd>
                 </dl>
               </div>
             </div>
           </div>
           
-            <div class="tit">스틸컷 <span class="pc">(9)</span></div>
+            <div class="tit">스틸컷 <span class="pc"></span></div>
               <div class="slider1 mb60 pc">
                 <div class="swiper-container gallery-top">
                   <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/122850C6-D716-4BF1-95F1-09AD1B0FCA8C.Large.jpg"></div>
-                    <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/BF923A35-B169-4291-9058-C62D2773F2DA.Large.jpg"></div>
-                    <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/D3ED4691-3003-4A40-BA15-E029AC980BEF.Large.jpg"></div>
-                    <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/4782C053-7A5B-4EF0-8BAD-7F537A2FF3D7.Large.jpg"></div>
-                    <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/37D42A9E-24A6-493B-B7E8-A5A86FDD23BE.Large.jpg"></div>
-                    <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/F8C17E52-2B94-4C68-9C36-84F8EEF0006E.Large.jpg"></div>
-                    <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/731D4061-7BE0-478E-8460-64235578A0DA.Large.jpg"></div>
-                    <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/515A4746-48B7-4000-B1BA-15810D452A78.Large.jpg"></div>
-                    <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/15C6633D-B037-408B-886B-9753BC91289F.Large.jpg"></div>
+                  
+                  <c:forEach var="stillcut"  items="${stillcutArray}">
+                    <div class="swiper-slide">
+                    <img src="${stillcut}">
+                    </div>
+                    </c:forEach>  
+                   <!--  <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/BF923A35-B169-4291-9058-C62D2773F2DA.Large.jpg"></div> -->
+                   
                     </div>
                   <!-- Add Arrows -->
                   <div class="swiper-button-next"></div>
@@ -153,15 +131,21 @@
                   <div class="swiper-button-prev"></div>
                   <div class="swiper-container">
                     <div class="swiper-wrapper">
-                      <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/122850C6-D716-4BF1-95F1-09AD1B0FCA8C.small.jpg"></div>
-                      <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/BF923A35-B169-4291-9058-C62D2773F2DA.small.jpg"></div>
-                      <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/D3ED4691-3003-4A40-BA15-E029AC980BEF.small.jpg"></div>
-                      <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/4782C053-7A5B-4EF0-8BAD-7F537A2FF3D7.small.jpg"></div>
-                      <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/37D42A9E-24A6-493B-B7E8-A5A86FDD23BE.small.jpg"></div>
-                      <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/F8C17E52-2B94-4C68-9C36-84F8EEF0006E.small.jpg"></div>
-                      <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/731D4061-7BE0-478E-8460-64235578A0DA.small.jpg"></div>
-                      <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/515A4746-48B7-4000-B1BA-15810D452A78.small.jpg"></div>
-                      <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/15C6633D-B037-408B-886B-9753BC91289F.small.jpg"></div>
+                    
+               		<c:forEach var="stillcut"  items="${stillcutArray}">
+                    <div class="swiper-slide">
+                    <img src="${stillcut}">
+                    </div>
+                    </c:forEach>  
+                    
+<!--                       <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/122850C6-D716-4BF1-95F1-09AD1B0FCA8C.small.jpg"></div> -->
+<!--                       <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/BF923A35-B169-4291-9058-C62D2773F2DA.small.jpg"></div> -->
+<!--                       <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/D3ED4691-3003-4A40-BA15-E029AC980BEF.small.jpg"></div> -->
+<!--                       <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/4782C053-7A5B-4EF0-8BAD-7F537A2FF3D7.small.jpg"></div> -->
+<!--                       <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/37D42A9E-24A6-493B-B7E8-A5A86FDD23BE.small.jpg"></div> -->
+<!--                       <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/F8C17E52-2B94-4C68-9C36-84F8EEF0006E.small.jpg"></div> -->
+<!--                       <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/731D4061-7BE0-478E-8460-64235578A0DA.small.jpg"></div> -->
+<!--                       <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/515A4746-48B7-4000-B1BA-15810D452A78.small.jpg"></div> -->
                       </div>
                   </div>
                 </div>
@@ -191,16 +175,13 @@
     <div class="in">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-          <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/122850C6-D716-4BF1-95F1-09AD1B0FCA8C.Large.jpg"></div>
-          <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/BF923A35-B169-4291-9058-C62D2773F2DA.Large.jpg"></div>
-          <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/D3ED4691-3003-4A40-BA15-E029AC980BEF.Large.jpg"></div>
-          <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/4782C053-7A5B-4EF0-8BAD-7F537A2FF3D7.Large.jpg"></div>
-          <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/37D42A9E-24A6-493B-B7E8-A5A86FDD23BE.Large.jpg"></div>
-          <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/F8C17E52-2B94-4C68-9C36-84F8EEF0006E.Large.jpg"></div>
-          <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/731D4061-7BE0-478E-8460-64235578A0DA.Large.jpg"></div>
-          <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/515A4746-48B7-4000-B1BA-15810D452A78.Large.jpg"></div>
-          <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/15C6633D-B037-408B-886B-9753BC91289F.Large.jpg"></div>
-          </div>
+        <c:set var="stillcutArray" value="${fn:split(detail.stillcut, '|')}" />
+        <c:forEach var="stillcut"  items="${stillcutArray}">
+        	<div class="swiper-slide">
+            <img src="${stillcut}">
+            </div>
+        </c:forEach>  
+       	</div>
       </div>
       <div class="swiper-pagination"></div>
       <div class="swiper-button-prev"></div>

@@ -20,9 +20,7 @@ public class MovieDTO {
 	private String poster;
 	private String movieCode;
 	private String movieState;
-	
-	
-	
+	private String stillcut;
 	
 	public String getMovieState() {
 		return movieState;
@@ -139,6 +137,12 @@ public class MovieDTO {
 				+ ", endDate=" + endDate + ", openDate=" + openDate + ", rating=" + rating + ", totalView=" + totalView
 				+ ", synopsis=" + synopsis + ", filmMade=" + filmMade + ", nation=" + nation + ", runTime=" + runTime
 				+ ", poster=" + poster + "]";
+	}
+	public String getStillcut() {
+		return stillcut;
+	}
+	public void setStillcut(String stillcut) {
+		this.stillcut = stillcut;
 	}
 	
 }
