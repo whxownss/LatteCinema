@@ -11,8 +11,6 @@
   </welcome-file-list>
   
   
-  
-  
   <!-- 메인, 로그인, 회원가입, 마이페이지 등 -->
   <servlet-mapping>
   	<servlet-name>MemberController</servlet-name>

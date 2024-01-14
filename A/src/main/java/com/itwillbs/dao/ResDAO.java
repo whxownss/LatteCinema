@@ -137,4 +137,13 @@ public class ResDAO {
 		
 		return seatCnt > 0 ? "false" : "true";
 	}
+
+	public String refund(String mid) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int deleteCnt = session.delete("Reservation.deleteRes", mid);
+		session.commit();
+		session.close();
+		
+		return deleteCnt > 0 ? "true" : "";
+	}
 }
