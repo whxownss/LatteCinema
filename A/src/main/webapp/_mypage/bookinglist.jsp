@@ -78,21 +78,23 @@
 								</colgroup>
 								<thead>
 									<tr>
-										<th scope="col">구매일시</th>
-										<th scope="col">영화/상품명</th>
-										<th scope="col">극장</th>
-										<th scope="col">상영 일시</th>
-										<th scope="col">구매금액</th>
+										<th scope="col" class="text-center">구매일시</th>
+										<th scope="col" class="text-center">영화/상품명</th>
+										<th scope="col" class="text-center">극장</th>
+										<th scope="col" class="text-center">상영 일시</th>
+										<th scope="col" class="text-center">구매금액</th>
+										<th scope="col" class="text-center">환불</th>
 									</tr>
 								</thead>
 								<tbody>
 								<c:forEach var="boardList" items="${boardList}">
 									<tr>
-										<td>${boardList.memId}</td>
-										<th scope="row">${boardList.memId}</th>
-										<td scope="row" style="text-align: left;">${boardList.memId}</td>
-										<td scope="row" style="text-align: left;">${boardList.memId}</td>
-										<td><span class="font-blue">${boardList.memId}</span></td>
+										<td class="text-center">${boardList.memId}</td>
+										<th scope="row" class="text-center">${boardList.memId}</th>
+										<td scope="row" class="text-center">${boardList.memId}</td>
+										<td scope="row" class="text-center">${boardList.memId}</td>
+										<td><span class="font-blue text-center">${boardList.memId}</span></td>
+										<td><button class="btn btn-dark" type="button">환불</button></td>
 									</tr>
 								</c:forEach>
 								</tbody>
