@@ -208,6 +208,7 @@ $('#phoneChgBtn').on('click', function() {
 	$("#newPhone").attr("readonly", false);
 	$("#phoneChange").toggle();
 	$("#newPhone").val('');
+	$("#CheckPhone").text('');
 	var text = "변경취소"
 	if($("#phoneChgBtn").text() == text) 
 		text = "휴대폰번호 변경";
@@ -437,18 +438,19 @@ function checkSubmit() {
         });
         
         // 주소변경시 상세주소 change
-        $('#addr1').on('change', function (e) {
+        $('#addr1').on('change', function(e) {
+        	debugger;
             $('#addr2').val('');
-        	
 		});
         
         
         
         
-        $('#addr1').on('DOMSubtreeModified', function (e) {
-            $('#addr2').val('');
+//         $('#addr1').on('DOMSubtreeModified', function (e) {
+//         	debugger;
+//             $('#addr2').val('');
         	
-		});
+// 		});
 
 
         // IPIN 인증

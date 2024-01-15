@@ -70,7 +70,8 @@
 <%-- 					<c:forEach var="movie" items="${lattePosterList}" varStatus="status"> --%>
 					<div class="col-4">
 						<div class="login-ad" id="영화포스터">
-							<a href="main.me" target="_blank">
+<!-- 							<a href="main.me" target="_blank"> -->
+							<a href="movie_view.mo?movieCode=${requestScope.movieCode}">
 <!-- 								<img id="해당영화포스타" src="assets/img/post20.jpg" alt="영화포스터" clickthrough="" style="height: 450px"> -->
 								<img id="해당영화포스타" src="<c:out value='${requestScope.moviePoster}' />" alt="영화포스터" clickthrough="" style="height: 450px">
 							</a>
