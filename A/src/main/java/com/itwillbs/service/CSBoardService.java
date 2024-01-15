@@ -1042,5 +1042,17 @@ public class CSBoardService {
 	    return updateSuccess > 0;
 	}//updateMemStatus()
 
+	public int getMemCount() {
+		System.out.println("CSBoardService getMemCount()");
+		int count = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getMemCount();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getMemCount()
+
 	
 }//클래스

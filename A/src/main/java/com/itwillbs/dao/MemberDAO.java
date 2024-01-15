@@ -3,6 +3,7 @@ package com.itwillbs.dao;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
+import com.itwillbs.domain.QnaBoardDTO;
+import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.sql.SqlMapClient;
 
 public class MemberDAO {
@@ -103,22 +106,22 @@ public class MemberDAO {
 		return memberDTO;
 	}
 	
-	// 마이페이지 예약구매 페이지 페이징 작업         PageDTO pageDTO
-	public ArrayList<MemberDTO> getBoardList(Map<String, Integer> paramMap) { 
-		ArrayList<MemberDTO> getMemberList = null;
-		SqlSession session = sqlSessionFactory.openSession();
-		getMemberList = new ArrayList<MemberDTO>(session.selectList("Member.getBoardList", paramMap));
-		session.close();
-		return getMemberList;
-	}//
-
-	public int getBoardCount() {
-		int count = 0;
-		SqlSession session = sqlSessionFactory.openSession();
-		count = session.selectOne("Member.getBoardCount");
-		session.close();
-		return count;
-	}//
+//	// 마이페이지 예약구매 페이지 페이징 작업         PageDTO pageDTO
+//	public ArrayList<MemberDTO> getBoardList(Map<String, Integer> paramMap) { 
+//		ArrayList<MemberDTO> getMemberList = null;
+//		SqlSession session = sqlSessionFactory.openSession();
+//		getMemberList = new ArrayList<MemberDTO>(session.selectList("Member.getBoardList", paramMap));
+//		session.close();
+//		return getMemberList;
+//	}//
+//
+//	public int getBoardCount() {
+//		int count = 0;
+//		SqlSession session = sqlSessionFactory.openSession();
+//		count = session.selectOne("Member.getBoardCount");
+//		session.close();
+//		return count;
+//	}//
 
 	// 간편로그인 관련 Id값 가져오기
 	public String getSimpleId(String memEmail) {
@@ -127,6 +130,41 @@ public class MemberDAO {
 		session.close();
 		return sId;
 	}
+
+	public ArrayList<ReservationDTO> getResBoardList(PageDTO pageDTO, String memId) {
+		System.out.println("MemberDAO getResBoardList() search");
+		ArrayList<ReservationDTO> resBoardList = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			Map<String, Object> params = new HashMap<>();
+			params.put("pageDTO", pageDTO);
+			params.put("memId", memId);
+
+			resBoardList = new ArrayList<ReservationDTO>(session.selectList("CsAdmin.getResBoardList", params));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return resBoardList;
+	}//getResBoardList()
+
+	public int getResBoardCount(String memId) {
+		int count = 0;
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			count = session.selectOne("CsAdmin.getResBoardCount",memId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return count;
+	}//getResBoardCount()
 
 	
 }

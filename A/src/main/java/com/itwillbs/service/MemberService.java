@@ -8,9 +8,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.itwillbs.dao.CSBoardDAO;
 import com.itwillbs.dao.MemberDAO;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
+import com.itwillbs.domain.QnaBoardDTO;
+import com.itwillbs.domain.ReservationDTO;
 
 public class MemberService {
 
@@ -264,47 +267,47 @@ public class MemberService {
 		return memberDTO;
 	}//userFind()
 	
-	// 마이페이지 예약구매 페이지 페이징 작업
-	public ArrayList<MemberDTO> getBoardList(PageDTO pageDTO) {
-		
-		ArrayList<MemberDTO> memberList = null;
-		try {
-			// 시작하는 행번호 구하는 식 
-			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
-			// 끝나는 행번호 구하는 식 
-			int endRow = startRow + pageDTO.getPageSize()-1;
-			
-			pageDTO.setStartRow(startRow-1);
-			pageDTO.setEndRow(pageDTO.getPageSize());
-			
-			// BoardDAO 객체생성
-			memberDAO = new MemberDAO();
-			// getBoardList(startRow,pageSize) 메서드 호출
-//			memberList = memberDAO.getBoardList(pageDTO);
-			
-			Map<String, Integer> paramMap = new HashMap<String, Integer>();
-			paramMap.put("startRow", startRow);
-			paramMap.put("pageSize", pageDTO.getPageSize());
-			
-			memberList = memberDAO.getBoardList(paramMap);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return memberList;
-	}//getBoardList()
-
-	public int getBoardCount() {
-		int count = 0;
-		try {
-			memberDAO = new MemberDAO();
-			count = memberDAO.getBoardCount();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return count;
-	}//getBoardCount()
+//	// 마이페이지 예약구매 페이지 페이징 작업
+//	public ArrayList<MemberDTO> getBoardList(PageDTO pageDTO) {
+//		
+//		ArrayList<MemberDTO> memberList = null;
+//		try {
+//			// 시작하는 행번호 구하는 식 
+//			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+//			// 끝나는 행번호 구하는 식 
+//			int endRow = startRow + pageDTO.getPageSize()-1;
+//			
+//			pageDTO.setStartRow(startRow-1);
+//			pageDTO.setEndRow(pageDTO.getPageSize());
+//			
+//			// BoardDAO 객체생성
+//			memberDAO = new MemberDAO();
+//			// getBoardList(startRow,pageSize) 메서드 호출
+////			memberList = memberDAO.getBoardList(pageDTO);
+//			
+//			Map<String, Integer> paramMap = new HashMap<String, Integer>();
+//			paramMap.put("startRow", startRow);
+//			paramMap.put("pageSize", pageDTO.getPageSize());
+//			
+//			memberList = memberDAO.getBoardList(paramMap);
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return memberList;
+//	}//getBoardList()
+//
+//	public int getBoardCount() {
+//		int count = 0;
+//		try {
+//			memberDAO = new MemberDAO();
+//			count = memberDAO.getBoardCount();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return count;
+//	}//getBoardCount()
 
 	public String getSimpleId(HttpServletRequest request) {
 		String sId = null;
@@ -320,6 +323,37 @@ public class MemberService {
 		
 		return sId;
 	}
+
+	public ArrayList<ReservationDTO> getResBoardList(PageDTO pageDTO, String memId) {
+		System.out.println("MemberService getResBoardList()");
+		ArrayList<ReservationDTO> resBoardList = null;
+		try {
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			MemberDAO memberDAO = new MemberDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			resBoardList = memberDAO.getResBoardList(pageDTO,memId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resBoardList;
+	}//getResBoardList()
+
+	public int getResBoardCount(String memId) {
+		System.out.println("CSBoardService getResBoardCount()");
+		int count = 0;
+		try {
+			MemberDAO memberDAO = new MemberDAO();
+			count = memberDAO.getResBoardCount(memId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getResBoardCount()
 
 
 

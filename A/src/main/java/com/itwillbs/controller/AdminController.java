@@ -42,8 +42,10 @@ public class AdminController extends HttpServlet {
 			request.setCharacterEncoding("utf-8");
 			CSBoardService csBoardService = new CSBoardService();
 			ArrayList<ResponseDataDTO> responseList = csBoardService.getResponseList();
+			int memCount = csBoardService.getMemCount();
 			
 			request.setAttribute("responseList", responseList);
+			request.setAttribute("memCount", memCount);
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_home.jsp");
 			dispatcher.forward(request, response);
 		}

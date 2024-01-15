@@ -85,7 +85,8 @@
 			          </div>
 			          <div class="form-group mb-3">
 			            <label for="poster">포스터</label>
-			            <input type="text" class="form-control" id="poster" name="poster" placeholder=""  autocomplete="off" readonly>
+			            <input type="hidden" class="form-control" id="poster" name="poster" placeholder=""  autocomplete="off" readonly>
+			            <img alt="영화 포스터" src="" style="width: 100%;" id="posterImg">
 			          </div>
 			          <div class="form-group mb-3">
 			            <label for="agreement">신청 시 주의 사항</label>
@@ -226,6 +227,13 @@ $('#movieName').on("change", function() {
                     var poster = posterParts[0];
                     console.log("Poster URL: " + poster);
                     $('#poster').val(poster);
+                    
+	                // 이미지 요소에 대한 jQuery 선택자
+                    var posterImg = $("#posterImg");
+                    // 동적으로 src 속성 설정
+                    var imageUrl = "이미지의 URL을 여기에 입력하세요"; // 이미지의 URL을 지정합니다
+                    posterImg.attr("src", poster);
+
                 });
             },
             error: function(xhr, status, error) {

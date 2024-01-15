@@ -361,7 +361,11 @@
 		  FROM MEMBERS
 		 WHERE MEM_IDX IS NOT NULL
 	</select>
-	
+	<select id="getMemCount" resultType="int">
+		SELECT COUNT(*) 
+	 	  FROM MEMBERS
+	 	 WHERE MEM_IDX IS NOT NULL
+	</select>
 <!-- 	<insert id="insertQnaRes" parameterType="QnaBoardDTO"> -->
 <!-- 		INSERT INTO RESPONSEDATA (QNAIDX, SUBJECT, RESPONSE, RESPONSE_USER, RESPONSE_DATE) -->
 <!-- 		VALUES( -->
@@ -520,4 +524,17 @@ LIMIT #{startRow}, #{pageSize}
 		</choose>
 		 WHERE MEM_ID = #{memId}
 	</update>
+	
+	<select id="getResBoardList" parameterType="map" resultType="ReservationDTO">
+		SELECT R.MERCHANT_UID, R.PAY_TIME, R.TITLE, R.CINEMA, R.SCR_IDX,R.P1,R.P2,R.P3,R.SEAT,DATE_FORMAT(R.DATE,'%y-%m-%d') AS 'DATE',R.S_TIME,DATE_FORMAT(S.SCH_ETIME,'%H:%i') AS SCH_ETIME,R.PAID_AMOUNT
+		  FROM RESERVATION R JOIN SCHEDULE S
+		    ON R.LO_IDX = S.LO_IDX AND R.CI_IDX = S.CI_IDX AND R.SCH_IDX = S.SCH_IDX AND LEFT(R.SCR_IDX,1) = S.SCR_IDX AND R.MOV_TYPE = S.SCH_MOV_TYPE
+		 WHERE R.MEM_ID = #{memId} AND R.SUCCESS = 'TRUE'
+	</select>
+	<select id="getResBoardCount" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		  FROM RESERVATION R JOIN SCHEDULE S
+		    ON R.LO_IDX = S.LO_IDX AND R.CI_IDX = S.CI_IDX AND R.SCH_IDX = S.SCH_IDX AND LEFT(R.SCR_IDX,1) = S.SCR_IDX AND R.MOV_TYPE = S.SCH_MOV_TYPE
+		 WHERE R.MEM_ID = #{memId} AND R.SUCCESS = 'TRUE'
+	</select>
 </mapper>

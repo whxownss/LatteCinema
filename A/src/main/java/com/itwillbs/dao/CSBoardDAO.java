@@ -982,6 +982,22 @@ public class CSBoardDAO {
 		}
 		return updateSuccess;
 	}//updateMemStatus()
+
+	public int getMemCount() {
+		System.out.println("CSBoardDAO getMemCount()");
+		int count = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			count = session.selectOne("CsAdmin.getMemCount");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return count;
+	}
 	
 	
 	

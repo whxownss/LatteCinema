@@ -31,6 +31,9 @@ public class ReservationDTO {
 	
 	private String dateC;
 	
+	//예매 내역 페이지를 위해 추가한 것
+	private String schEtime;
+	
 	public String getResIdx() {
 		return resIdx;
 	}
@@ -202,6 +205,12 @@ public class ReservationDTO {
 	public void setPayTime(String payTime) {
 		this.payTime = payTime;
 	}
+	public String getSchEtime() {
+		return schEtime;
+	}
+	public void setSchEtime(String schEtime) {
+		this.schEtime = schEtime;
+	}
 	@Override
 	public String toString() {
 		return "ReservationDTO [resIdx=" + resIdx + ", memId=" + memId + ", loIdx=" + loIdx + ", ciIdx=" + ciIdx
@@ -210,8 +219,10 @@ public class ReservationDTO {
 				+ ", p1=" + p1 + ", p2=" + p2 + ", p3=" + p3 + ", pSum=" + pSum + ", paidAmount=" + paidAmount
 				+ ", payMethod=" + payMethod + ", cardName=" + cardName + ", cardNumber=" + cardNumber + ", buyerTel="
 				+ buyerTel + ", success=" + success + ", resPayDate=" + resPayDate + ", buyerName=" + buyerName
-				+ ", merchantUid=" + merchantUid + ", payTime=" + payTime + ", dateC=" + dateC + "]";
+				+ ", merchantUid=" + merchantUid + ", payTime=" + payTime + ", dateC=" + dateC + ", schEtime="
+				+ schEtime + "]";
 	}
+	
 	
 	
 	
