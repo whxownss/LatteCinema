@@ -247,6 +247,7 @@ public class MemberController extends HttpServlet {
 			memberService = new MemberService();
 			MemberDTO memberDTO = memberService.userFind(request);	
 			
+			String result= "0";
 			if(memberDTO != null) {
 				System.out.println(memberDTO);
 				System.out.println("입력한 회원 존재");
