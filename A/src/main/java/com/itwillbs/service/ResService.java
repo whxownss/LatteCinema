@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,6 +16,7 @@ import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.domain.ScheduleDTO;
+import com.itwillbs.domain.ScreenDTO;
 import com.itwillbs.domain.SeatDTO;
 
 public class ResService {
@@ -154,6 +157,23 @@ public class ResService {
 		resDAO = new ResDAO();
 		
 		return resDAO.refund(mid);
+	}
+
+	// 관리자 꺼
+	public String getScreen(HttpServletRequest request) {
+		resDAO = new ResDAO();
+		String location = request.getParameter("location");
+		String cinema = request.getParameter("cinema");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("location", location);
+		map.put("cinema", cinema);
+		
+		Gson gson = new Gson();
+		String screenListJson = gson.toJson(resDAO.getScreen(map));
+		
+		System.out.println();
+		
+		return screenListJson;
 	}
 
 }
