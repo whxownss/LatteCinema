@@ -63,11 +63,17 @@ public class MemberController extends HttpServlet {
 			// request에 boardList 저장
 			request.setAttribute("centerBoardList", centerBoardList);
 			
-			// 영화 포스터 넣는 부분 
+			// 영화 old 포스터 넣는 부분 
 			MovieService movieService = new MovieService();
 		    MovieDTO movieDTO = new MovieDTO();
 			List<MovieDTO> posterList = movieService.getLattePoster(movieDTO);
 			request.setAttribute("lattePosterList", posterList);
+			
+			
+			// 영화 now 포스터 넣는 부분 
+			List<MovieDTO> posterNowList = movieService.getNowPoster(movieDTO);
+			request.setAttribute("posterNowList", posterNowList);
+			
 			
 			
 			dispatcher = request.getRequestDispatcher("_a/main.jsp");

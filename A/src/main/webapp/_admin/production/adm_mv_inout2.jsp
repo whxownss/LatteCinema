@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,8 +26,16 @@
     <link href="_admin/vendors/starrr/dist/starrr.css" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="_admin/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="_admin/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="_admin/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="_admin/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="_admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="_admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="_admin/build/css/custom.min.css" rel="stylesheet">
+    <!-- jQuery -->  
+    <script src="_admin/vendors/jquery/dist/jquery.min.js"></script>
   </head>
   <body class="nav-md">
     <div class="container body">
@@ -143,7 +151,7 @@
                     </div>
                     <div class="x_content">
                       <p class="text-muted font-13 m-b-30"></p>
-                      <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap boxmovie" cellspacing="0" width="100%">
+                      <table id="" class="table table-striped table-bordered dt-responsive nowrap boxmovie" cellspacing="0" width="100%">
                         <thead></thead>
                         <tbody></tbody>
                       </table>
@@ -173,7 +181,7 @@
             <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  <th>영화 인덱스</th>	
+                  <th>무비코드</th>	
                   <th>영화명</th>
                   <th>개봉일자</th>
                   <th>등급</th>
@@ -182,14 +190,16 @@
                 </tr>
               </thead>
               <tbody>
+              <c:forEach var="movie" items="${movieList }">
               	<tr>
-              		<td>1</td>
-              		<td>집에 보내줘</td>
-              		<td>2023/12/25</td>
-              		<td>전체관람가</td>
-              		<td>상영중 <!-- 상영종료일보다 이전인 날짜엔 상영중으로 보이고 지나면 상영종료로 보이게  --></td>
-              		<td>now</td>
+              		<td>${movie.movieCode}</td>
+              		<td>${movie.title}</td>
+              		<td>${movie.openDate}</td>
+              		<td>${movie.rating}</td>
+              		<td>${movie.movieState}</td>  <!-- 상영종료일보다 이전인 날짜엔 상영중으로 보이고 지나면 상영종료로 보이게  -->
+              		<td>${movie.movieCategory}</td>
               	</tr>
+              </c:forEach>
               </tbody>
             </table>
           </div>
@@ -211,12 +221,12 @@
           </button>
         </div>
         <div class="modal-body">
-          <form id="modal-form" action="movie_insert.mo" data-parsley-validate class="form-horizontal form-label-left" onsubmit="return registMovie()">
+          <form id="modal-form" action="movie_insert.mo" method="post" data-parsley-validate class="form-horizontal form-label-left" onsubmit="return registMovie()">
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12">포스터 미리보기</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-               <img src="assets/img/post22.jpg" style="width: inherit;">
+               <img id="movie-preview" style="width: inherit;">
               </div>
             </div>
   
@@ -227,12 +237,20 @@
                <input type="text" id="movie-title" name="title" class="form-control col-md-7 col-xs-12">
               </div>
             </div>
+            
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-title">무비코드<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+               <input type="text" id="movie-moviecode" name="movieCode" class="form-control col-md-7 col-xs-12">
+              </div>
+            </div>
 
              <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-category">카테고리<span>*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-              <select id="movie-category" class="form-control" required>
+              <select id="movie-category" class="form-control" name="movieCategory" required>
                   <option value="NOW">NOW</option>
                   <option value="OLD">OLD</option>
                 </select>
@@ -256,11 +274,19 @@
             </div>
             
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-genre">장르<span">*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-genre">장르<span>*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                <input type="text" id="movie-genre" name="genre" class="form-control col-md-7 col-xs-12">
               </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-opendate">개봉일<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="date" id="movie-opendate" name="openDate" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 230921">
+              </div> 
             </div>
             
             <div class="form-group">
@@ -272,30 +298,23 @@
             </div>
             
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-enddate">상영종료일<span class="required">*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-enddate" data-toggle="tooltip" data-placement="bottom" title="상영일로부터 30일이 기본값입니다.">상영종료일<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="date" id="movie-enddate" name="endDate" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 231021">
               </div> 
             </div>
 
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-opendate">개봉일<span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="date" id="movie-opendate" name="openDate" required="required" class="form-control col-md-7 col-xs-12" placeholder="ex) 230921">
-              </div> 
-            </div>
             
              <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-rating">관람등급<span>*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
               <select id="movie-rating" class="form-control" name="rating" required>
-                  <option value="전체관람가">전체관람가</option>
-                  <option value="12세 이상 관람가">12세 이상 관람가</option>
-                  <option value="15세 이상 관람가">15세 이상 관람가</option>
-                  <option value="청소년 관람불가">청소년 관람불가</option>
+                  <option value="all">전체관람가</option>
+                  <option value="12">12세 이상 관람가</option>
+                  <option value="15">15세 관람가</option>
+                  <option value="18">청소년 관람불가</option>
                 </select>
                </div> 
             </div>
@@ -309,10 +328,17 @@
             </div>
             
             <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-filmmade">제작사</label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+               <input type="text" id="movie-filmmade" name="filmMade" required="required" class="form-control col-md-7 col-xs-12">
+              </div>
+            </div>
+            
+            <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-runtime">상영시간<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-               <input type="text" id="movie-runtime" name="runtime" required="required" class="form-control col-md-7 col-xs-12">
+               <input type="text" id="movie-runtime" name="runTime" required="required" class="form-control col-md-7 col-xs-12">
               </div>
             </div>
             
@@ -325,14 +351,16 @@
             
             <div class="form-group">
               <input type="hidden" id="movie-poster" name="poster">
+              <input type="hidden" id="movie-stillcut" name="stillcut">
             </div>
             
           </form>
         </div>
         <div class="modal-footer">
           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-2">
-            <button class="btn btn-primary" type="button">취소</button>
+            <button class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="제목과 감독명으로 재조회합니다." onclick="searchMovieIndex()">상세조회</button>
             <button class="btn btn-success btn-regist" type="submit" form="modal-form">등록</button>
+            <button class="btn btn-primary" type="button" data-dismiss="modal">취소</button>
           </div>
         </div>
       </div>
@@ -340,9 +368,6 @@
   </div>
    
 </div> 
-    
-  <!-- jQuery -->
- <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
  
  <script type="text/javascript">
    $(function(){
@@ -353,39 +378,75 @@
        }
      });
     
-    
     /* 모달 활성화 됐을 때*/
      $('#movieModal').on('show.bs.modal', function (event) {
-       var button = $(event.relatedTarget)
-       var title = button.data('title')
-       var opendate = button.data('opendate')
        
-       console.log(opendate)
+       var button    = $(event.relatedTarget)
+       var category  = button.data('category')
+       var movieCode = button.data('moviecode')
+       var title     = button.data('title')
+       var opendate  = button.data('opendate')
+
        
-       var rating = button.data('rating')
-       var runtime = button.data('runtime')
-       var filmMade = button.data('filmmade')
-       var nation = button.data('nation')
-       var synopsis = button.data('synopsis')
-       var director = button.data('director')
-       var genre = button.data('genre')
-       var poster = button.data('poster')
-       
+       var rating    = button.data('rating')
+       var runtime   = button.data('runtime')
+       var filmMade  = button.data('filmmade')
+       var nation    = button.data('nation')
+       var synopsis  = button.data('synopsis')
+       var director  = button.data('director')
+       var genre     = button.data('genre')
+       var poster    = button.data('poster')
+       var actor     = button.data('actor')
+       var rating    = button.data('rating')
+       var stillcut  = button.data('stillcut')
+       var startdate = moment().format('YYYY-MM-DD')
+       var enddate   = moment(startdate).add(30,'days').format('YYYY-MM-DD')    	   
+   	   var rating    = button.data('rating')
+       //박스오피스에서 접근할 때 kmdb 검색
+       if(category === "NOW"){
+    	   const result = detailSearch(title)
+ 		     var info = result.Data[0].Result[0];
+ 		     filmMade = info.company;
+ 		     poster = info.posters.split('|')[0];
+ 		     nation = info.nation;
+ 		     synopsis = info.plots.plot[0].plotText;
+ 		     rating = info.rating.includes("전체")? "all" :
+ 		                   info.rating.includes("12")  ? "12"  : 
+ 		                   info.rating.includes("15")  ? "15"  :
+ 		                   info.rating.includes("18")  ? "18"  : "";
+ 		     director = info.directors.director[0].directorNm;
+ 		     runtime = info.runtime;
+ 		     genre = info.genre;
+ 		     const actorArr = [];
+ 		     let count = info.actors.actor.length > 3 ? 3 : info.actors.actor.length;
+ 		     for(let i = 0; i < count ; i++){
+ 		       actorArr.push(info.actors.actor[i].actorNm);
+ 		     }
+ 		     actor = actorArr.join(', ');
+ 		     stillcut = info.stlls;
+       }
+       stillcut = stillcut.replace(/thm\/01/g, "still").replace(/tn_/g,"").replace(/.jpg|.JPG/g,"_01.jpg")
        var modal = $(this)
        // 박스오피스 only
        modal.find('#movie-title').val(title)
        modal.find('#movie-opendate').val(opendate)
        // kmdb only
+       modal.find('#movie-moviecode').val(movieCode)
        modal.find('#movie-genre').val(genre)
        modal.find('#movie-rating').val(rating)
        modal.find('#movie-runtime').val(runtime)
        modal.find('#movie-filmmade').val(filmMade)
        modal.find('#movie-nation').val(nation)
-       modal.find('#movie-startdate').val(opendate)   //상영일 : 개봉일을 디폴트값으로 넣었음
+       modal.find('#movie-startdate').val(startdate)   //상영일(startdate) : 개봉일(opendate)을 디폴트값으로 넣었음
        modal.find('#movie-opendate').val(opendate)
+       modal.find('#movie-enddate').val(enddate)
        modal.find('#movie-synopsis').val(synopsis)
        modal.find('#movie-director').val(director)
        modal.find('#movie-poster').val(poster)
+       modal.find('#movie-actor').val(actor)
+       modal.find('#movie-category').val(category)
+       modal.find('#movie-stillcut').val(stillcut)
+       modal.find('#movie-preview').attr('src',poster) //포스터 미리보기 삽입
        
      })
      
@@ -395,7 +456,7 @@
 	  function openBoxOffice() {
 	  $('.movie_contents').css('display','block')
 	  $('.boxmovie').find('tbody').html('');
-	  
+	  var category = "NOW";
 		$.ajax({
 			url : 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json',
 			type : 'GET',
@@ -403,7 +464,7 @@
 					key : "ee9ed756bb3f15468dceccf766e69e7b",
 					targetDt : "20190900"                         //날짜형식이 틀리면 최신날짜를 보여주는걸로 알고있음
 			},
-			async : false,                              //비동기식인 ajax를 동기식으로 만들어줌 만약 출력해야될 결과가 많거나 제대로 출력되지 않을때, 이 옵션을 사용
+			async : false,                                    //비동기식인 ajax를 동기식으로 만들어줌 만약 출력해야될 결과가 많거나 제대로 출력되지 않을때, 이 옵션을 사용
 			success : function(data) {                        //data에 들어오는 값들은 앞에서 출력되던 예시와 같음
 			  console.log(data)
 			  var boxofficehead = `
@@ -417,7 +478,7 @@
         
         for (var i = 0; i < data.boxOfficeResult.dailyBoxOfficeList.length; i++) {
           var html = '';
-        	var movieIdx = data.boxOfficeResult.dailyBoxOfficeList[i].movieCd;
+        	var movieCode = data.boxOfficeResult.dailyBoxOfficeList[i].movieCd;
         	var rank = data.boxOfficeResult.dailyBoxOfficeList[i].rank;
         	var title = data.boxOfficeResult.dailyBoxOfficeList[i].movieNm;
         	var openDate = data.boxOfficeResult.dailyBoxOfficeList[i].openDt;
@@ -426,7 +487,7 @@
           html += '<td>'+ title + '</td>'
           html += '<td>'+ openDate + '</td>'
           html += '<td><button class="btn btn-success" type="button" data-toggle="modal" data-target="#movieModal"'+
-                  ' data-movieidx="'+ movieIdx + '"data-title="' + title + '"data-opendate="' + openDate +'">등록</button></td>';
+                  ' data-moviecode="'+ movieCode + '"data-title="' + title + '"data-opendate="' + openDate +'"data-category="'+ category +'">등록</button></td>';
           html += '</tr>';
           
           $('.boxmovie').find('tbody').append(html)
@@ -435,88 +496,152 @@
 			}
 		});
 	}
-   /*검색 영화 조회*/
-  function openSearchMovie(){
-    var keyword = $('.input-movie-title').val();
-    $('.movie_contents').css('display','block')
-    $('.boxmovie').find('tbody').html('');
+  /**
+  *kmdb에서 검색한 결과에서 누락된 결과를 조회하기 위해서
+  *kobis에 영화제목과 영화감독명으로 재조회하는 기능
+  */
+  function searchMovieIndex(){
+    const title = $('#movie-title').val()
+    const director = $('#movie-director').val()
+    $.ajax({
+      url : 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json',
+      type : 'GET',
+      data : {
+          key : "ee9ed756bb3f15468dceccf766e69e7b",
+          movieNm : title,
+          itemPerPage : "1",                            //결과 ROW의 개수
+          directorNm : director
+      },
+      async : false,
+      success : function(data) {
+        console.log(data)
+        // 제목과 감독으로 검색한 결과가 있는지 검증
+        if(data.movieListResult.totCnt != 0){ 
+          const movieCode = data.movieListResult.movieList[0].movieCd
+          if(movieCode !== undefined){
+            $('#movie-moviecode').val(movieCode)
+          }  
+        }else{
+          alert("해당 영화에 대한 정보를 찾을 수 없습니다.")  
+        }
+      },
+      error : function(){
+        alert("해당 영화에 대한 정보를 찾을 수 없습니다.")
+      }
+    });
     
+  }
+  /**
+  ajax 분리
+  @param title
+  */
+  function detailSearch(){
+    var keyword = $('.input-movie-title').val();
+    var result = '';
     $.ajax({
       url : 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp',
       data : {
         collection : 'kmdb_new2',                   //고정값
         ServiceKey : 'N6BL7Q77SG0M41244297',        //키
         sort : 'prodYear,1',     //정렬옵션 제작년도 정렬이 그나마 제일 정확한 것 같음
-        title : keyword,
+        title : title,
       },
       type : 'GET',
       dataType: 'json',
+      async : false,
+      timeout : 3000,                                   //KMDB 서버가 불안정해서 3초 이내 응답 받을 수 있도록
       success : function(data) {
-        console.log(data);
-        var moviesearchhead = `
-          <tr>
-          <td>제목</td>
-          <td>국가</td>
-          <td>관람등급</td>
-          <td>개봉일</td>
-          <td>감독</td>
-          <td>장르</td>
-          <td>등록</td>
-          </tr>`
-        $('.boxmovie').find('thead').html(moviesearchhead)
-          
-          
-        for(var i=0; i<data.Data[0].Count ; i++){
-          var info = data.Data[0].Result[i];
-          var title = info.title.replace(/!HS | !HE /g, '');  
-          // 검색어에 !HS !HE 라는 글자가 같이 포함돼서 없애주는 작업
-          //var actors = '';                                  
-          var movieIdx = info.Codes.Code[0].CodeNo;
-          var filmMade = info.company;
-          var openDate = info.repRlsDate;
-          console.log(openDate)
-          var poster = info.posters.split('|')[0];
-          var nation = info.nation;
-          var synopsis = info.plots.plot[0].plotText;
-          var rating = info.rating;
-          var director = info.directors.director[0].directorNm;
-          var runtime = info.runtime;
-          var genre = info.genre;
-          var html = '';
-       // openDate를 YYYYMMDD 형식에서 YYYY-MM-DD 형식으로 변경
- 			openDate = openDate.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3');  
-          
-          html += '<tr data-movieIdx="'+ movieIdx+'">'
-          html += '<td>'+ title + '</td>'
-          html += '<td>'+ nation + '</td>'
-          html += '<td>'+ rating + '</td>'
-          html += '<td>'+ openDate + '</td>'
-          html += '<td>'+ director + '</td>'
-          html += '<td>'+ genre + '</td>'
-          html += '<td><button class="btn btn-success" type="button" data-toggle="modal" data-target="#movieModal" data-movieidx="'+ movieIdx +
-                  '"data-title="' + title +
-                  '"data-rating="'+ rating +
-                  '"data-runtime="'+ runtime +
-                  '"data-filmmade="'+ filmMade +
-                  '"data-nation="'+ nation +
-                  '"data-synopsis="'+ synopsis +
-                  '"data-opendate="'+ openDate +
-                  '"data-director="'+ director +
-                  '"data-genre="'+ genre +
-                  '"data-poster="'+ poster +
-                  '">등록</button></td>';
-          html += '</tr>';
-          
-        /* html += '<td><img src="'+ info.posters.split('|')[0] + '"></td>'  */  // 첫번째 포스터만
-       /*    html += '<td><img src="'+ info.stlls.split('|')[0] + '"></td>'      */     // 첫번째 스틸컷만
-          $('.boxmovie').find('tbody').append(html)
-        }
-
+        console.log(data)
+        result = data;
        },
-      error:function(){
-        alert("상영 정보가 확실하지 않습니다.")  
+      error:function(xhr, status, error){
+        console.log(xhr.statusText)
+        alert("서버와 연결할 수 없습니다.\n" + xhr.statusText)  
       }
     });
+    return result;
+  }
+   
+   
+   /*검색 영화 조회*/
+  function openSearchMovie(){
+    $('.movie_contents').css('display','block')
+    $('.boxmovie').find('tbody').html('');
+    var category = "OLD";
+    
+    var moviesearchhead = `
+      <tr>
+      <td>제목</td>
+      <td>국가</td>
+      <td>관람등급</td>
+      <td>개봉일</td>
+      <td>감독</td>
+      <td>장르</td>
+      <td>등록</td>
+      </tr>`
+    $('.boxmovie').find('thead').html(moviesearchhead)
+    
+    const data = detailSearch($('.input-movie-title').val());
+      
+    
+      
+    for(var i=0; i<data.Data[0].Count ; i++){
+      var info = data.Data[0].Result[i];
+      var title = info.title.replace(/!HS | !HE /g, '').trim(); // 검색어에 !HS !HE 라는 글자가 같이 포함돼서 없애주는 작업  
+      var movieCode = info.Codes.Code[0].CodeNo;
+      var filmMade = info.company;
+      // openDate를 YYYYMMDD 형식에서 YYYY-MM-DD 형식으로 변경
+      // openDate가 ""일때 kmdb 등록일(regDate)을 대신 넣도록 함
+      var openDate = (info.repRlsDate !== "") ? moment(info.repRlsDate).format("YYYY-MM-DD")
+                      : (info.regDate !== "") ? moment(info.regDate).format("YYYY-MM-DD") : "";
+                                               
+      var poster = info.posters.split('|')[0];
+      var nation = info.nation;
+      var synopsis = info.plots.plot[0].plotText;
+      // rating : kmdb에서 받는 값이 15세미만불가, 15세관람가 등 일관성이 없어서 해당하는 숫자가 포함되는지 따지기로 함
+      var rating = info.rating.includes("전체")? "all" :
+                   info.rating.includes("12")  ? "12"  : 
+                   info.rating.includes("15")  ? "15"  :
+                   info.rating.includes("18")  ? "18"  : "";
+      var director = info.directors.director[0].directorNm;
+      var runtime = info.runtime;
+      var genre = info.genre;
+      var html = '';
+      
+      var actorArr = [];
+      let count = info.actors.actor.length > 3 ? 3 : info.actors.actor.length;
+      for(let i = 0; i < count ; i++){
+        actorArr.push(info.actors.actor[i].actorNm);
+      }
+      var actor = actorArr.join(', ');
+      var stillcut = info.stlls;
+      
+      html += '<tr>'
+      html += '<td>'+ title + '</td>'
+      html += '<td>'+ nation + '</td>'
+      html += '<td>'+ rating + '</td>'
+      html += '<td>'+ openDate + '</td>'
+      html += '<td>'+ director + '</td>'
+      html += '<td>'+ genre + '</td>'
+      html += '<td><button class="btn btn-success" type="button" data-toggle="modal" data-target="#movieModal" data-moviecode="'+ movieCode +
+              '"data-title="' + title +
+              '"data-rating="'+ rating +
+              '"data-runtime="'+ runtime +
+              '"data-filmmade="'+ filmMade +
+              '"data-nation="'+ nation +
+              '"data-synopsis="'+ synopsis +
+              '"data-opendate="'+ openDate +
+              '"data-director="'+ director +
+              '"data-genre="'+ genre +
+              '"data-poster="'+ poster +
+              '"data-actor="'+ actor +
+              '"data-stillcut="'+ stillcut +
+              '"data-category="'+ category + '">등록</button></td>';
+      html += '</tr>';
+      
+      $('.boxmovie').find('tbody').append(html)
+  }
+      
   }
   /**
    유효성 검사하는 로직 작성
@@ -533,17 +658,18 @@
        if($('#movie-nation').val() === ""){ alert("제작국가 입력해 주세요"); return false; }
        if($('#movie-startdate').val() === ""){ alert("상영시작을 입력해 주세요"); return false; }
        if($('#movie-opendate').val() === ""){ alert("상영일을 입력해 주세요"); return false; }
+       if($('#movie-endDate').val() === ""){ alert("종영일을 입력해 주세요"); return false; }
        if($('#movie-synopsis').val() === ""){ alert("줄거리를 입력해 주세요"); return false; }
        if($('#movie-director').val() === ""){ alert("감독을 입력해 주세요"); return false; }
        if($('#movie-poster').val() === ""){ alert("등록된 포스터가 없습니다.");}
+       if($('#movie-actor').val() === ""){ alert("등록된 배우가 없습니다.");}
       return true;
     }
-
+    return false;
   }
   
 	</script>
-    <!-- jQuery -->  
-    <script src="_admin/vendors/jquery/dist/jquery.min.js"></script>
+
     <!-- Bootstrap -->
     <script src="_admin/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
@@ -552,6 +678,24 @@
     <script src="_admin/vendors/nprogress/nprogress.js"></script>
     <!-- iCheck -->
     <script src="_admin/vendors/iCheck/icheck.min.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="_admin/vendors/moment/min/moment.min.js"></script>
+    <!-- Datatables -->
+    <script src="_admin/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="_admin/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="_admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="_admin/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="_admin/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="_admin/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="_admin/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="_admin/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="_admin/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="_admin/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="_admin/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="_admin/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="_admin/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="_admin/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="_admin/vendors/pdfmake/build/vfs_fonts.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="_admin/build/js/custom.min.js"></script>
   </body>

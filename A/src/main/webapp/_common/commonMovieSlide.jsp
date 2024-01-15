@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 
+
+
 <!-- ======= Hero Slider Section ======= -->
 <!-- <section id="hero-slider" class="hero-slider"> -->
 	<div class="" data-aos="fade-in">
@@ -70,4 +72,4 @@
 		</div>
 	</div>
 <!-- </section> -->
-<!-- End Hero Slider Section -->
+<!-- End Hero Slider Section --> 
