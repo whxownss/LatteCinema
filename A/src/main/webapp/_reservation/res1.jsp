@@ -424,8 +424,9 @@ $(function(){
 		
 	// 날짜 표시
 	var date = new Date();
+	debugger;
 	// 맨처음 달력에 날짜 표시
-	$("#myCalendar").val(date.toISOString().substring(0, 10));
+	$("#myCalendar").val(new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().substring(0, 10));
 	// 맨처음 상단에 날짜 표시
 	writeDate(date);  												// **일단은 처음에는 날짜 표시 안되게끔.
 	// 당일 날짜 기준으로 범위 설정

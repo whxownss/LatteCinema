@@ -150,4 +150,10 @@ public class ResService {
 		return resDAO.isTimeOver(seatDTO);
 	}
 
+	public String refund(String mid) {
+		resDAO = new ResDAO();
+		
+		return resDAO.refund(mid);
+	}
+
 }
