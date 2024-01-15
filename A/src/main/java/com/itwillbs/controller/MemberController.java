@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.users.SparseUserDatabase;
+
 import com.google.gson.Gson;
 import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.LostBoardDTO;
@@ -27,6 +29,7 @@ import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.service.CSBoardService;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.MovieService;
+import com.itwillbs.sms.SendSms;
 
 
 public class MemberController extends HttpServlet {
@@ -322,6 +325,32 @@ public class MemberController extends HttpServlet {
 			dispatcher.forward(request, response);
 
 		}//
+		
+		// 휴대폰번호 변경 sms보내기 관련
+		if(sPath.equals("/phoneSms.me")) {
+			System.out.println("주소일치 : phonedSms.me");
+			
+			response.setCharacterEncoding("utf-8");
+			String receiver = request.getParameter("newPhone");
+			
+			//인증번호 숫자 4자리 생성코드
+			Random code = new Random();
+			String content ="";
+			for(int i=0; i<4; i++) {
+				String num = Integer.toString(code.nextInt(10));
+				content += num;
+			}
+			System.out.println(receiver);
+			System.out.println(content);
+			//sms이메일 보내는 SendSms객체생성 (문자 받는이, 인증번호)
+			SendSms sendsms = new SendSms(receiver, content);
+			
+			// sms인증번호 보내기 makeMsg()메서드 호출
+			sendsms.makeMsg();
+			response.getWriter().write(content + "");
+			
+		}//
+		
 		
 		// 마이페이지 userInfoPro(정보수정)
 		if(sPath.equals("/userInfoPro.me")) {

@@ -126,7 +126,7 @@
                       </th>
                       <td>
                         <div class="clearfix">
-                          <p class="reset float-l w170px lh32 changeVal" data-name="phoneNo">${memberDTO.memPhone }</p>
+                          <p class="reset float-l w170px lh32 changeVal" data-name="phone">${memberDTO.memPhone }</p>
                           <div class="float-l">
                             <button type="button" class="button small gray-line change-phone-num" id="phoneChgBtn" title="휴대폰번호 변경">휴대폰번호 변경</button>
                           </div>
@@ -139,16 +139,16 @@
                             <br><span id="CheckPhone"></span>
                           </div>
                           
-<!--                           <div class="position" style="display: none;"> -->
-<!--                             <label for="chkNum" class="label">인증번호 입력</label> -->
-<!--                             <div class="chk-num small"> -->
-<!--                               <div class="line"> -->
-<!--                                 <input type="text" id="chkNum" class="input-text w180px" title="인증번호 입력" placeholder="인증번호를 입력해 주세요" maxlength="4"> -->
+                          <div id ="checkSms"class="position" style="display: none;">
+                            <label for="chkNum" class="label">인증번호 입력</label>
+                            <div class="chk-num small">
+                              <div class="line">
+                                <input type="text" id="chkNum" class="input-text w180px" title="인증번호 입력" placeholder="인증번호를 입력해 주세요" maxlength="4">
 <!--                                 <div class="time-limit" id="timeLimit">3:00</div> -->
-<!--                               </div> -->
-<!--                             </div> -->
-<!--                             <button type="button" class="button small gray-line" id="chgBtn">변경완료</button> -->
-<!--                           </div> -->
+                              </div>
+                            </div>
+                            <button type="button" class="button small gray-line" id="changePhBtn">변경완료</button>
+                          </div>
 
                         </div>
                       </td>
@@ -205,6 +205,7 @@ var phoneRegex =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/; 
 // // 휴대폰번호 변경 클릭
 $('#phoneChgBtn').on('click', function() {
 // 	debugger;
+	$("#newPhone").attr("readonly", false);
 	$("#phoneChange").toggle();
 	$("#newPhone").val('');
 	var text = "변경취소"
@@ -231,7 +232,9 @@ $('#phoneChgBtn').on('click', function() {
 // 		$("#CheckPhone").text(text).css("color",color);
 // 	}
 	
+	
 // 인증번호 발송 버튼 클릭
+var checkSmsCode;
 $('#sendNumberBtn').on('click', function() {
 	var target = $('#sendNumberBtn');
  	if(target.prev().val().trim() == '')
@@ -240,11 +243,42 @@ $('#sendNumberBtn').on('click', function() {
 	if (!phoneRegex.test(target.prev().val().trim()))
  		return $("#CheckPhone").text('올바른 휴대폰 번호를 입력해 주세요.').css("color", "red");
 
-	if(target.prev().val() == $('[name=phoneNo]').val().replaceAll('-',''))
+	if(target.prev().val().trim() == $('[name=phone]').val().replaceAll('-',''))
 		return $("#CheckPhone").text('휴대폰 번호가 동일합니다.').css("color", "red");
 	
-	
+	var newphone = $("#newPhone").val();
+	 $.ajax({
+		 type : "post",
+		 url : "phoneSms.me",
+		 dataType : "text",
+		 data : {newPhone : newphone},
+		 success:function(data){
+			 debugger;
+			 alert("sms문자 보내기 성공");
+			 checkSmsCode = data;
+			 $("#checkSms").css("display", "block");
+			 $("#newPhone").attr("readonly", true);
+		 },
+		 error:function(){
+			 alert("sms문자 보내기 실패");
+		 }
+		 
+	 });//ajax
+		
 });
+
+$("#changePhBtn").on("click",function(){
+	debugger;
+	if($("#chkNum").val() == checkSmsCode){
+		alert('인증번호 일치');
+	}else{
+		alert('인증번호가 일치하지 않습니다');
+		$("#updateBtn").attr("disabled", true);
+	}
+});
+
+
+
 
 //유효성 체크 후 submit
 function checkSubmit() {
@@ -411,10 +445,10 @@ function checkSubmit() {
         
         
         
-//         $('#addr1').on('DOMSubtreeModified', function (e) {
-//             $('#addr2').val('');
+        $('#addr1').on('DOMSubtreeModified', function (e) {
+            $('#addr2').val('');
         	
-// 		});
+		});
 
 
         // IPIN 인증
@@ -587,7 +621,7 @@ function checkSubmit() {
 //                  }
 //             });
 //         });
-//     });
+    });
 
 //     function fn_moveMain(){
 //         location.href = "/main";
