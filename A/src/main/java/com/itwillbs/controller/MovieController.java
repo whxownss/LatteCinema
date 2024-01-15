@@ -77,7 +77,7 @@ public class MovieController extends HttpServlet {
 			movieDTO.setMovieCode(movieCode);
 			
 			MovieService movieService = new MovieService();
-			MovieDTO detail = movieService.getMovieDetail(movieDTO);
+			MovieDTO detail = movieService.getMovieDetail(request);
 			
 			request.setAttribute("detail", detail);
 			
@@ -100,7 +100,7 @@ public class MovieController extends HttpServlet {
 		
 		
 		
-		if(sPath.equals("/movie_update.mo")) {
+		if(sPath.equals("/movie_update.mo")) { 
 			
 			System.out.println("movie_update 오는지");
 			
@@ -109,6 +109,41 @@ public class MovieController extends HttpServlet {
 			
 			response.sendRedirect("adm_mv_inout.ad");
 		} // update 
+
+		
+		if(sPath.equals("/movie_detail.mo")) { 
+			
+			System.out.println("movie_detial 오는지");
+			
+			System.out.println(request);
+		
+		movieService = new MovieService();
+		MovieDTO movieDTO = movieService.getMovieDetail(request);
+		
+		System.out.println("movieDTO"+movieDTO);
+		
+		Map<String, Object> responseData = new HashMap<>();
+		responseData.put("movieDTO", movieDTO);
+		
+		// Gson 라이브러리를 사용하여 JSON으로 변환
+	    String json = new Gson().toJson(movieDTO);
+
+	    // 컨텐츠 타입 설정
+	    response.setContentType("application/json");
+	    response.setCharacterEncoding("utf-8");
+
+	    // JSON 문자열을 응답으로 작성
+	    response.getWriter().write(json);
+		
+		} // movie_detial 
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		if(sPath.equals("/movie_delete.mo")) {
