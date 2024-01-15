@@ -1,167 +1,134 @@
+<%@page import="com.itwillbs.domain.MemberDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- Meta, title, CSS, favicons, etc. -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Latte Cinema</title>
+    <title>Latte Cinema</title>
+  
+    <!-- Bootstrap -->
+    <link href="_admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="_admin/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="_admin/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="_admin/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="_admin/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="_admin/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="_admin/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="_admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="_admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!-- Custom Theme Style -->
+    <link href="_admin/build/css/custom.min.css" rel="stylesheet">
+  </head>
+<%
+ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("memberList");
+%>
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="adm_home.ad" class="site_title"><i class="fa fa-film"></i> <span>Latte Cinema!</span></a>
+            </div>
 
-<!-- Bootstrap -->
-<link href="_admin/vendors/bootstrap/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- Font Awesome -->
-<link href="_admin/vendors/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-<!-- NProgress -->
-<link href="_admin/vendors/nprogress/nprogress.css" rel="stylesheet">
-<!-- iCheck -->
-<link href="_admin/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-<!-- bootstrap-wysiwyg -->
-<link href="_admin/vendors/google-code-prettify/bin/prettify.min.css"
-	rel="stylesheet">
-<!-- Select2 -->
-<link href="_admin/vendors/select2/dist/css/select2.min.css"
-	rel="stylesheet">
-<!-- Switchery -->
-<link href="_admin/vendors/switchery/dist/switchery.min.css"
-	rel="stylesheet">
-<!-- starrr -->
-<link href="_admin/vendors/starrr/dist/starrr.css" rel="stylesheet">
-<!-- bootstrap-daterangepicker -->
-<link
-	href="_admin/vendors/bootstrap-daterangepicker/daterangepicker.css"
-	rel="stylesheet">
+            <div class="clearfix"></div>
 
-<!-- Custom Theme Style -->
-<link href="_admin/build/css/custom.min.css" rel="stylesheet">
-</head>
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="_admin/production/images/img.jpg" alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Welcome,</span>
+                <h2>admin</h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
 
-<body class="nav-md">
-<c:set var="locationList" value="${requestScope.locationList}" />
-<c:set var="cinemaListJson" value="${requestScope.cinemaListJson}" />
+            <br />
 
-	<div class="container body">
-		<div class="main_container">
-			<div class="col-md-3 left_col">
-				<div class="left_col scroll-view">
-					<div class="navbar nav_title" style="border: 0;">
-						<a href="adm_home.ad" class="site_title"><i class="fa fa-film"></i>
-							<span>Latte Cinema!</span></a>
-					</div>
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>General</h3>
+                <ul class="nav side-menu">
+                  <li><a href="adm_home.ad"><i class="fa fa-home"></i> Home</a></li>
+                  <li><a href="adm_member.ad"><i class="fa fa-user"></i> 회원관리</a></li>
+                  <li><a href="adm_mv_inout.ad"><i class="fa fa-edit"></i>영화 통합 추가/제거</a></li>
+                  <li><a href="adm_store.ad"><i class="fa fa-beer"></i>스토어 관리</a></li>
+                  <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
+                </ul>
+              </div>
+              <div class="menu_section">
+                <h3>메인 페이지 관리</h3>
+                <ul class="nav side-menu">
+                  <li><a href="adm_cs_center.ad"><i class="fa fa-bullhorn"></i> 공지사항</a></li>
+                  <li><a href="adm_cs_exque.ad"><i class="fa fa-question"></i> 자주찾는질문</a></li>
+                  <li><a href="adm_cs_qna.ad"><i class="fa fa-comments"></i> 1:1문의</a></li>
+                  <li><a href="adm_cs_lost.ad"><i class="fa fa-search"></i> 분실물 문의</a></li>                     
+                </ul>
+              </div>
 
-					<div class="clearfix"></div>
+            </div>
+            <!-- /sidebar menu -->
 
-					<!-- menu profile quick info -->
-					<div class="profile clearfix">
-						<div class="profile_pic">
-							<img src="_admin/production/images/img.jpg" alt="..."
-								class="img-circle profile_img">
-						</div>
-						<div class="profile_info">
-							<span>Welcome,</span>
-							<h2>admin</h2>
-						</div>
-					</div>
-					<!-- /menu profile quick info -->
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
 
-					<br />
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
 
-					<!-- sidebar menu -->
-					<div id="sidebar-menu"
-						class="main_menu_side hidden-print main_menu">
-						<div class="menu_section">
-							<h3>General</h3>
-							<ul class="nav side-menu">
-								<li><a href="adm_home.ad"><i class="fa fa-home"></i>
-										Home</a></li>
-								<li><a href="adm_member.ad"><i class="fa fa-user"></i>
-										회원관리</a></li>
-								<li><a href="adm_mv_inout.ad"><i class="fa fa-edit"></i>영화
-										통합 추가/제거</a></li>
-								<li><a href="adm_store.ad"><i class="fa fa-beer"></i>스토어
-										관리</a></li>
-								<li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>영화관
-										관리</a></li>
-							</ul>
-						</div>
-						<div class="menu_section">
-							<h3>메인 페이지 관리</h3>
-							<ul class="nav side-menu">
-								<li><a href="adm_cs_center.ad"><i
-										class="fa fa-bullhorn"></i> 공지사항</a></li>
-								<li><a href="adm_cs/cs_exque.ad"><i
-										class="fa fa-question"></i> 자주찾는질문</a></li>
-								<li><a href="adm_cs_qna.ad"><i class="fa fa-comments"></i>
-										1:1문의</a></li>
-								<li><a href="adm_cs_lost.ad"><i class="fa fa-search"></i>
-										분실물 문의</a></li>
-							</ul>
-						</div>
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+          
+            <div class="page-title">
+              <div class="title_left">
+              <h3>스케줄 관리</h3>
+              </div>
+            </div>
 
-					</div>
-					<!-- /sidebar menu -->
+            <div class="clearfix"></div>
 
-					<!-- /menu footer buttons -->
-					<div class="sidebar-footer hidden-small">
-						<a data-toggle="tooltip" data-placement="top" title="Settings">
-							<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-						</a> <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-							<span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-						</a> <a data-toggle="tooltip" data-placement="top" title="Lock"> <span
-							class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-						</a> <a data-toggle="tooltip" data-placement="top" title="Logout"
-							href="login.jsp"> <span class="glyphicon glyphicon-off"
-							aria-hidden="true"></span>
-						</a>
-					</div>
-					<!-- /menu footer buttons -->
-				</div>
-			</div>
-		</div>
-		<!-- top navigation -->
-		<div class="top_nav">
-			<div class="nav_menu">
-				<nav>
-					<div class="nav toggle">
-						<a id="menu_toggle"><i class="fa fa-bars"></i></a>
-					</div>
-				</nav>
-			</div>
-		</div>
-		<!-- /top navigation -->
-
-		<!-- page content -->
-		<div class="right_col" role="main">
-			<div class="">
-				<div class="page-title">
-					<div class="title_left">
-						<h3>영화관 관리</h3>
-					</div>
-
-					<div class="title_right">
-						<div
-							class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-							<div class="input-group">
-								<!--                     <input type="text" class="form-control" placeholder="Search for..."> -->
-								<!--                     <span class="input-group-btn"> -->
-								<!--                       <button class="btn btn-default" type="button">Go!</button> -->
-								<!--                     </span> -->
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-
-
-
-				<div class="row">
+              <div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="x_panel">
 							<div class="x_title">
@@ -186,9 +153,9 @@
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<select id="location" name="location" class="form-control" required>
-												<option value="lo0">지역을 선택해 주세요</option>
+												<option value="0">지역을 선택해 주세요</option>
 												<c:forEach var="location" items="${locationList}" varStatus="status">
-													<option value="lo${status.index + 1}">${location.loName}</option>
+													<option value="${status.index + 1}">${location.loName}</option>
 												</c:forEach>
 											</select>
 										</div>
@@ -213,7 +180,7 @@
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<select id="screen" name="screen" class="form-control" required>
-												<option value="sc0">영화관을 먼저 선택해 주세요</option>
+												<option value="0">영화관을 먼저 선택해 주세요</option>
 											</select>
 										</div>
 									</div>
@@ -299,16 +266,52 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
 
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
 
+    <!-- jQuery -->
+    <script src="_admin/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="_admin/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="_admin/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="_admin/vendors/nprogress/nprogress.js"></script>
+    <!-- iCheck -->
+    <script src="_admin/vendors/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="_admin/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="_admin/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="_admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="_admin/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="_admin/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="_admin/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="_admin/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="_admin/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="_admin/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="_admin/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="_admin/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="_admin/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="_admin/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="_admin/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="_admin/vendors/pdfmake/build/vfs_fonts.js"></script>
 
+    <!-- Custom Theme Scripts -->
 
-
-<script src="jQuery/jquery-3.6.0.js"></script>
-<script>
+<script src="_admin/build/js/custom.min.js"></script>
+<script type="text/javascript">
 var cinemaList = ${cinemaListJson};
 
 $(function(){
@@ -318,19 +321,40 @@ $(function(){
 		$("#cinema").empty();
 		// 지역 선택하면 영화관 뿌려주기
 		if(loIdx == 0) {
-			$("#cinema").append("<option value='ci0'>지역을 먼저 선택해 주세요</option>");
+			$("#cinema").append("<option value='0'>지역을 먼저 선택해 주세요</option>");
 			return;
 		}
-		$("#cinema").append("<option value='ci0'>영화관을 선택해 주세요</option>");
+		$("#cinema").append("<option value='0'>영화관을 선택해 주세요</option>");
 		$.each(cinemaList, (i, e) => {
 			if(loIdx != e.loIdx) return;
-			$("#cinema").append("<option value=''>" + e.ciName + " (" + e.ciOc + ")</option>");
+			$("#cinema").append("<option value='" + e.ciIdx + "'>" + e.ciName + " (" + e.ciOc + ")</option>");
 		});
 	});
 	
 	// 영화관 선택하면 상영관 뿌려주기
 	$("#cinema").on("change", function(e){
 		var ciIdx = e.currentTarget.selectedIndex;
+		$("#screen").empty()
+		if(ciIdx == 0){
+			$("#screen").append("<option value='0'>영화관을 먼저 선택해 주세요</option>");
+			return;
+		}
+		$.ajax({
+			type: "GET",
+			url: "adm_cinemaPro.ad",
+			data: {location: $("#location option:selected").val(),
+				   cinema: $("#cinema option:selected").val()},
+			dataType: "json"
+		})
+		.done(function(data){
+			$("#screen").append("<option value='0'>상영관을 선택해 주세요</option>");
+			$.each(data, function(i, e){
+				$("#screen").append("<option value='" + e.scrIdx + "'>" + e.scrIdx + "관</option>");
+			});
+		})
+		.fail(function(){})
+		
+		
 		debugger;
 	});
 	
@@ -348,7 +372,5 @@ $(function(){
 });
 </script>
 
-
-
-</body>
+  </body>
 </html>

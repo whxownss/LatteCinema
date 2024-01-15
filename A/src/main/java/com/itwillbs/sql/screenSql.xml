@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Screen">
+
+	<select id="select" parameterType="map" resultType="ScreenDTO">
+		SELECT LO_IDX
+			 , CI_IDX
+			 , SCR_IDX
+			 , SCR_SEAT
+		  FROM SCREEN
+		 WHERE 1 = 1
+		   AND LO_IDX = #{location}
+		   AND CI_IDX = #{cinema}
+	</select>
+
+
+
+</mapper>

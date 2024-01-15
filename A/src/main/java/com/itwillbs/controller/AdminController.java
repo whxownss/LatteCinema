@@ -161,7 +161,16 @@ public class AdminController extends HttpServlet {
 			
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_cinema.jsp");
 			dispatcher.forward(request, response);
-		}	
+		}
+		// 
+		if(sPath.equals("/adm_cinemaPro.ad")) {
+			ResService resService = new ResService();
+			String screenListJson = resService.getScreen(request);
+			
+			response.setContentType("application/json");
+			response.setCharacterEncoding("utf-8");
+		    response.getWriter().write(screenListJson);
+		}		
 		
 		
 	}//doProcess()	
