@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.itwillbs.dao.StoreDAO;
 import com.itwillbs.domain.StoreItemDTO;
+import com.itwillbs.service.MemberService;
 import com.itwillbs.service.StoreService;
 
 public class StoreController extends HttpServlet{
@@ -49,11 +50,23 @@ public class StoreController extends HttpServlet{
 			storeService = new StoreService();
 			
 			String storeItemJson = storeService.getItemInfo(idx);
-//			StoreItemDTO storeItemDTO = storeService.getItemInfo(idx);
 			
 			request.setAttribute("storeItemJson", storeItemJson);
+			
 			dispatcher = request.getRequestDispatcher("_store/storeList.jsp");
 			dispatcher.forward(request, response);
+		}//
+		
+		// store 선물하기 전화번호 유무 체크
+		if(sPath.equals("/checkphone.st")) {
+			System.out.println("1231231231231");
+			storeService = new StoreService();
+			
+			int result = storeService.checkPhone(request);
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result + "");
+
 		}//
 		
 	} // doProcess
