@@ -26,6 +26,7 @@ import com.itwillbs.email.SendGmail;
 import com.itwillbs.email.EmailCode;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
+import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.service.CSBoardService;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.MovieService;
@@ -640,12 +641,87 @@ public class MemberController extends HttpServlet {
 //			dispatcher = request.getRequestDispatcher("_mypage/myinquiry2.jsp");
 //			dispatcher.forward(request, response);
 		}
+		// 마이페이지 1대1문의 답변 미답변 서치
+		if(sPath.equals("/myQnaStatus.me")) {
+			request.setCharacterEncoding("utf-8");
+			CSBoardService csBoardService = new CSBoardService();
+			HttpSession session = request.getSession();
+			String createUser = (String) session.getAttribute("sId");
+			String check = "";
+			String qnaResponse = request.getParameter("qnaResponse");
+			//System.out.println("@@@@@@@@@@@@@@@@");
+			//System.out.println(qnaResponse);
+			// cs_center.cs
+			// cs_center.cs?pageNum=2
+			// 한 화면에 보여줄 글개수 설정
+			int pageSize = 10;
+			// 현 페이지 번호
+			String pageNum = request.getParameter("pageNum");
+			//페이지 번호가 없으면 1로 페이지 설정
+			if(pageNum == null) {
+				pageNum = "1";
+			}
+			// pageNum => 정수형 변경
+			int currentPage = Integer.parseInt(pageNum);
+			// PageDTO 객체생성 
+			PageDTO pageDTO = new PageDTO();
+			// set메서드 호출해서 값을 저장
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			
+			ArrayList<QnaBoardDTO> qnaBoardList = csBoardService.getQnaBoardList(createUser,pageDTO,qnaResponse);
+			
+			// 페이징 작업
+			// int 리턴할 형 getBoardCount() 메서드 정의
+			// int count = getBoardCount() 메서드 호출
+			int count = csBoardService.getQnaBoardCount(createUser,qnaResponse,check);
+			// 한 화면에 보여줄 페이지 개수 설정
+			int pageBlock = 10;
+			// 시작하는 페이지 번호 구하기
+			int startPage = (currentPage-1)/pageBlock*pageBlock+1;
+			// 끝나는 페이지 번호 구하기
+			int endPage = startPage + pageBlock -1;
+			// 전체 페이지 수 구하기
+			int pageCount = count / pageSize + (count % pageSize == 0?0:1);
+			if(endPage > pageCount) {
+				endPage = pageCount;
+			}
+			
+			//pageDTO에 페이징 관련값 저장
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
+			 // 리스트와 PageDTO를 모두 포함할 Map 또는 사용자 정의 객체 생성
+		    Map<String, Object> responseData = new HashMap<>();
+		    responseData.put("qnaBoardList", qnaBoardList);
+		    responseData.put("pageDTO", pageDTO);
+
+		    // Map 또는 사용자 정의 객체 직렬화
+		    String json = new Gson().toJson(responseData);
+
+		    // 컨텐츠 타입과 인코딩 설정
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("utf-8");
+		    
+		    // JSON 문자열을 응답으로 작성
+		    response.getWriter().write(json);
+//			request.setAttribute("lostBoardList",lostBoardList);
+//			request.setAttribute("pageDTO", pageDTO);
+//			dispatcher = request.getRequestDispatcher("_mypage/myinquiry2.jsp");
+//			dispatcher.forward(request, response);
+		}
 		
 		// 마이페이지 bookinglist(예매내역) 이동
 		// 화면에 보여줄 글개수 설정
 		if(sPath.equals("/bookinglist.me")) {
 			
 			request.setCharacterEncoding("utf-8");
+			HttpSession session = request.getSession();
+			String memId = (String) session.getAttribute("sId");
 			
 			int pageSize = 5;
 			String pageNum = request.getParameter("pageNum");
@@ -663,13 +739,13 @@ public class MemberController extends HttpServlet {
 			
 			memberService = new MemberService();
 			
-			ArrayList<MemberDTO> boardList = 
-					memberService.getBoardList(pageDTO);
+			ArrayList<ReservationDTO> resBoardList = 
+					memberService.getResBoardList(pageDTO,memId);
 			
 			// 예약구매 페이지 페이징 작업
 			// int 리턴할형 getBoardCount() 메서드 정의
 		   //  int count =  getBoardCount()메서드 호출
-			int count = memberService.getBoardCount();
+			int count = memberService.getResBoardCount(memId);
 			// 한 화면에 보여줄 페이지 개수 설정
 			int pageBlock = 5;
 			// 시작하는 페이지 번호 구하기
@@ -689,13 +765,72 @@ public class MemberController extends HttpServlet {
 			pageDTO.setPageCount(pageCount);
 			
 			System.out.println(pageDTO);
-			
+			System.out.println(resBoardList);
 			// request에 pageDTO 저장
 			request.setAttribute("pageDTO", pageDTO);
 			//request에 boardList 저장
-			request.setAttribute("boardList", boardList);
+			request.setAttribute("resBoardList", resBoardList);
 			
 			dispatcher = request.getRequestDispatcher("_mypage/bookinglist.jsp");
+			dispatcher.forward(request, response);
+		}//
+		// 마이페이지 bookinglist(예매내역) 이동
+		// 화면에 보여줄 글개수 설정
+		if(sPath.equals("/bookinglist2.me")) {
+			
+			request.setCharacterEncoding("utf-8");
+			HttpSession session = request.getSession();
+			String memId = (String) session.getAttribute("sId");
+			
+			int pageSize = 5;
+			String pageNum = request.getParameter("pageNum");
+			
+			if(pageNum == null){
+				pageNum = "1";
+			}
+			
+			int currentPage= Integer.parseInt(pageNum);
+			
+			PageDTO pageDTO = new PageDTO();
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			
+			memberService = new MemberService();
+			
+			ArrayList<ReservationDTO> resBoardList = 
+					memberService.getResBoardList(pageDTO,memId);
+			
+			// 예약구매 페이지 페이징 작업
+			// int 리턴할형 getBoardCount() 메서드 정의
+		   //  int count =  getBoardCount()메서드 호출
+			int count = memberService.getResBoardCount(memId);
+			// 한 화면에 보여줄 페이지 개수 설정
+			int pageBlock = 5;
+			// 시작하는 페이지 번호 구하기
+			int startPage= (currentPage-1)/pageBlock*pageBlock+1;
+			// 끝나는 페이지 번호 구하기
+			int endPage= startPage + pageBlock -1;
+			// 전체 페이지 수 구하기
+			int pageCount = count / pageSize + (count % pageSize==0?0:1);
+			if(endPage > pageCount){
+			 	endPage = pageCount;
+			}
+			// pageDTO에 페이징 관련값 저장
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
+			System.out.println(pageDTO);
+			System.out.println(resBoardList);
+			// request에 pageDTO 저장
+			request.setAttribute("pageDTO", pageDTO);
+			//request에 boardList 저장
+			request.setAttribute("resBoardList", resBoardList);
+			
+			dispatcher = request.getRequestDispatcher("_mypage/bookinglist2.jsp");
 			dispatcher.forward(request, response);
 		}//
 		
