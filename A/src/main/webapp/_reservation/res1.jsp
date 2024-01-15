@@ -241,9 +241,9 @@ var showSchedule = function(param, date){
 			}
 			$("#" + id).find(".list-time")
 			   		   .append("<a class='btn btn-light ms-1 me-1 mt-1 mb-1 pt-0 pb-0 border border-dark-subtle modalBtn'" 
-					    	   + "href='#' role='button' style='width: 100px;'" 
-					    	   + "data-bs-toggle='modal' data-bs-target='#staticBackdrop'>" // 모달모달모달모달모달모달모달모달모달모달모달모달모달모달 
-					   		   + "<span class='fs-5 starTime'>" + value.schStime + "</span>" + "<br>" 
+					    	   + "href='#' role='button' style='width: 100px;'>" 
+// 					    	   + "data-bs-toggle='modal' data-bs-target='#staticBackdrop'>" // 모달모달모달모달모달모달모달모달모달모달모달모달모달모달 
+					   		   + "<span class='fs-5 startTime'>" + value.schStime + "</span>" + "<br>" 
 					   		   + "<span class='seat' style='font-size: small'><span class='cSeat'>" 
 					   		   + value.scrSeatAvail + "</span>/<span class='aSeat'>" 
 					   		   + value.scrSeat + "</span></span>&nbsp;&nbsp;&nbsp;&nbsp;" 
@@ -453,7 +453,19 @@ $(function(){
 		var selector = ($(this).parents("#nowSch").length == 0) ? "#OLD" : "#NOW";
 		$(selector).trigger("click");
 		
-		var sTime = $(this).find(".starTime").text();				   // 시작 시간
+		// 시작 시간 30분 남은거는 선택 안되게끔
+		var nowDate = new Date();
+		var movDate = new Date($("#myCalendar").val() + " " + $(this).find(".startTime").text());
+		debugger;
+		if(new Date(nowDate .getTime() - (nowDate .getTimezoneOffset() * 60000)).toISOString().substring(0, 10) == $("#myCalendar").val()
+				&& (movDate.getTime() - nowDate.getTime()) / (60 * 1000) < 120 ) {
+			alert('상영 시작 30분 전부터는 현장에서만 구매 가능합니다.');
+// 			$('#staticBackdrop').modal('hide');
+			return;
+		}
+		// 시작 시간 30분 남은거는 선택 안되게끔
+		
+		var sTime = $(this).find(".startTime").text();				   // 시작 시간
 		var cSeat = $(this).find(".cSeat").text();					   // 남은 자리
 		var aSeat = $(this).find(".aSeat").text();					   // 모든 자리
 		var sIdx = $(this).find(".scrIdx").text();					   // 몇관 번호
@@ -507,6 +519,8 @@ $(function(){
 		$(".ratingText").text(ratingText);
 		$(".ratingText").css("text-decoration","underline").css("color", ratingColor);
 		$(".subText").text(subTitle);
+		
+		$('#staticBackdrop').modal('show');
 	});
 	
 	

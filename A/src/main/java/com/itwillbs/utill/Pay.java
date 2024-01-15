@@ -28,6 +28,7 @@ public class Pay {
 	// 아임포트 인증(토큰)을 받아주는 함수 
     public String getImportToken() { 
         String result = ""; 
+        
         HttpClient client = HttpClientBuilder.create().build();
         HttpPost post = new HttpPost(IMPORT_TOKEN_URL); 
         Map<String,String> m = new HashMap<String,String>(); 
@@ -60,7 +61,8 @@ public class Pay {
             ClassicHttpResponse res = (ClassicHttpResponse)client.execute(post); 
             ObjectMapper mapper = new ObjectMapper(); 
             String enty = EntityUtils.toString(res.getEntity()); 
-            JsonNode rootNode = mapper.readTree(enty); asd = rootNode.get("response").asText();
+            JsonNode rootNode = mapper.readTree(enty); 
+            asd = rootNode.get("response").asText();
         } catch (Exception e) { 
             e.printStackTrace(); 
         } if (asd.equals("null")) { 

@@ -262,7 +262,7 @@ function kakaoPay(useremail, username) {
          IMP.request_pay({
              pg: 'html5_inicis.INIpayTest', // PG사 코드표에서 선택
              pay_method: 'card', // 결제 방식
-             merchant_uid: "IMP" + makeMerchantUid, // 결제 고유 번호
+             merchant_uid: "MOV" + makeMerchantUid, // 결제 고유 번호
              name: '라떼시네마', // 제품명
              amount: 100, // 가격  parseInt($("#rsPrice").text().replace("," , ""))
              //구매자 정보 ↓

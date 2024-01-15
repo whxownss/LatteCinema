@@ -2,6 +2,7 @@ package com.itwillbs.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,11 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.ExqBoardDTO;
+import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.LostBoardDTO;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.domain.ResponseDataDTO;
 import com.itwillbs.service.CSBoardService;
+import com.itwillbs.service.ResService;
 
 public class AdminController extends HttpServlet {
 	
@@ -112,6 +115,13 @@ public class AdminController extends HttpServlet {
 		
 		// 관리자 영화관 관리 페이지 이동
 		if(sPath.equals("/adm_cinema.ad")) {
+			ResService resService = new ResService();
+			List<LocationDTO> locationList = resService.getLocations();
+			String cinemaListJson = resService.getCinemas();
+			
+			request.setAttribute("locationList", locationList);
+			request.setAttribute("cinemaListJson", cinemaListJson);
+			
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_cinema.jsp");
 			dispatcher.forward(request, response);
 		}	
