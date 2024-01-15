@@ -33,14 +33,13 @@
           </div>
         <div class="poster">
           <img src="${detail.poster}">
-         <%--  <i class="age12">${detail.rating}</i> --%>
-          ${detail.rating}
+        <i class="age${detaile.rating}"></i>
         </div>
         <div class="mobile mb15">
           <a href="javascript:goLink('/totalView/movie.do', 'MovieCd=023901');" class="btn-type0" style="border-radius:0">예매하기</a>
         </div>
-        <%--  <i class="age12">${detail.rating}</i> --%>
-         ${detail.rating}
+        <i class="age${detail.rating}"></i> 
+    
         <h3 class="h3">${detail.title}</h3>
         <%-- <h4 class="h4"><%=movieEngName %></h4> --%>
         <div class="etc">
@@ -61,8 +60,7 @@
         <div class="sticky">
           <div class="img"><img src="${detail.poster}" style="width: 80%;" onerror="this.src='/resources/img/common/no-poster.png';"/></div>
           <div class="info">
-            <!-- <i class="age12"></i> -->
-              ${detail.rating}
+   			 <i class="age${detail.rating}"></i> 
             <h3 class="h3">${detail.title}</h3>
             <%-- <h4 class="h4"><%=movieEngName %></h4> --%>
             <div class="btns">
@@ -151,6 +149,9 @@
                 </div>
                 
               </div>
+              
+              
+              
             <!-- // 스틸컬 슬라이더 PC -->
 <!--           <div class="tit">상영 영화관 (48)</div> -->
 <!--             <div class="cines"> -->

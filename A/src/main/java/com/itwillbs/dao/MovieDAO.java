@@ -5,6 +5,8 @@ package com.itwillbs.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -14,7 +16,7 @@ import com.itwillbs.sql.SqlMapClient;
 public class MovieDAO {
 
 	private SqlSessionFactory sqlSessionFactory = SqlMapClient.getSqlSession();
-
+	SqlSession session = null;
 	 public void insertMovie(MovieDTO movieDTO) {
 			SqlSession session = sqlSessionFactory.openSession();
 	            int result = session.insert("Movie.insertMovie", movieDTO);
@@ -72,6 +74,32 @@ public class MovieDAO {
 
 		session.close();
 		return resultDTOList;
+	}
+	
+	public void updateMovie(MovieDTO movieDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+            int result = session.insert("Movie.updateMovie", movieDTO);
+            session.commit();
+            session.close();
+        }
+
+
+	public int deleteMovie(MovieDTO movieDTO) {
+		System.out.println("deleteMovie()");
+		int deleteSuccess = 0;
+		try {
+			System.out.println("movie 딜리트 dao");
+			session = sqlSessionFactory.openSession();
+			deleteSuccess = session.delete("Movie.deleteMovie", movieDTO);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return deleteSuccess;
 	}
 	 
 }
