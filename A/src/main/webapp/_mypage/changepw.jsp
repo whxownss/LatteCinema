@@ -78,7 +78,7 @@
 				</ul>
 			
 				<div class="btn-group pt40">
-					<button class="button large" id="cancelBtn">취소</button>
+					<button class="button large" id="cancelBtn" onclick="history.back()">취소</button>
 					<button class="button purple large" type="submit" id="updateBtn">수정</button>
 				</div>
 			</div>

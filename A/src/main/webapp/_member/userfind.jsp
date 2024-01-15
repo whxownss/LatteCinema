@@ -74,21 +74,21 @@
 										<tr>
 											<th scope="row"><label for="name">이름<!--이름--></label></th>
 											<td>
-												<input id="name" maxlength="20" type="text" placeholder="이름" class="input-text w230px findInput" name="name"><!--이름-->
+												<input id="name" maxlength="20" type="text" placeholder="이름" class="input-text w240px findInput" name="name"><!--이름-->
 											</td>
 										</tr>
 										<tr>
 											<th scope="row"><label for="birth">생년월일<!--생년월일--></label></th>
 											<td>
-												<input id="birth" maxlength="8" type="text" placeholder="생년월일 8자리" class="input-text w230px findInput" name="birth"><!--생년월일 8자리-->
-												<br><span id="schIdBirthDe-error-text" class="alert"></span>
+												<input id="birth" maxlength="8" type="text" placeholder="생년월일 8자리" class="input-text w240px findInput" name="birth"><!--생년월일 8자리-->
+												<span id="schIdBirthDe-error-text" class="alert"></span>
 											</td>
 										</tr>
 										<tr>
 											<th scope="row"><label for="phone">휴대폰 번호<!--휴대폰 번호--></label></th>
 											<td>
-												<input id="phone"  maxlength="11" type="text" placeholder="'-' 없이 입력" class="input-text w230px findInput" name="phone"><!--'-' 없이 입력-->
-												<br><span id="schIdMblpNo-error-text" class="alert"></span>
+												<input id="phone"  maxlength="11" type="text" placeholder="'-' 없이 입력" class="input-text w240px findInput" name="phone"><!--'-' 없이 입력-->
+												<span id="schIdMblpNo-error-text" class="alert"></span>
 											</td>
 										</tr>
 									</tbody>
@@ -129,7 +129,7 @@
 	
 <%@include file ="../_common/commonFooterStart.jsp" %>
 <script type="text/javascript">
-$(function () {
+// $(function () {
 	/* 이름 입력 */
 	$("#name").on("keyup", function () {
 		var partton = /[^가-힣\s]{2,5}$/g; 
@@ -142,6 +142,7 @@ $(function () {
 	/* 생년월일 입력 */
 	$("#birth").on("blur", function(e){
 		var partton = /[^0-9]/g;
+		$('#schIdBirthDe-error-text').text('');
 		if($("#birth").val() == ""){
 			$('#schIdBirthDe-error-text').text('생년월일을 입력해주세요.');
 			return false;
@@ -157,6 +158,7 @@ $(function () {
 	/* 연락처 입력 */
 	$("#phone").on("blur", function(e){
 		var partton = /[^0-9]/g;
+		$('#schIdMblpNo-error-text').text('');
 		if($("#phone").val() == ""){
 			$('#schIdMblpNo-error-text').text('연락처 입력해주세요.');
 			return false;
@@ -237,7 +239,7 @@ $(function () {
 			
 	});
 
-});
+// });
 </script>
 
 

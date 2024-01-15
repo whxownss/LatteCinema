@@ -20,7 +20,7 @@
       <!-- 이곳에 코드작성 -->
       <div class="inner-wrap">
         <jsp:include page="lnb.jsp"></jsp:include>
-        <form id="moveFrm" method="post" action="userInfoPro.me">
+        <form id="moveFrm" method="post" action="userInfoPro.me" onsubmit="return checkSubmit()">
           <div id="contents" class="">
             <h2 class="tit">개인정보 수정</h2>
             <ul class="dot-list mb10">
@@ -126,27 +126,30 @@
                       </th>
                       <td>
                         <div class="clearfix">
-                          <p class="reset float-l w170px lh32 changeVal" data-name="phoneNo">${memberDTO.memPhone }</p>
+                          <p class="reset float-l w170px lh32 changeVal" data-name="phone">${memberDTO.memPhone }</p>
                           <div class="float-l">
                             <button type="button" class="button small gray-line change-phone-num" id="phoneChgBtn" title="휴대폰번호 변경">휴대폰번호 변경</button>
                           </div>
                         </div>
-                        <div class="change-phone-num-area">
+                        <div  id="phoneChange"class="change-phone-num-area" style="display: none">
                           <div class="position">
-                            <label for="chPhone" class="label">변경할 휴대폰</label>
-                            <input type="text" id="chPhone" class="input-text w160px numType" placeholder="'-'없이 입력해 주세요" title="변경할 휴대폰 번호 입력" maxlength="11">
+                            <label for="newPhone" class="label">변경할 휴대폰</label>
+                            <input onblur="checkPhone()" type="TEXT" id="newPhone" name="newPhone" class="input-text w160px numType" placeholder="'-'없이 입력가능" title="변경할 휴대폰 번호 입력" maxlength="15">
                             <button type="button" class="button small gray-line" id="sendNumberBtn">인증번호 전송</button>
+                            <br><span id="CheckPhone"></span>
                           </div>
-                          <div class="position" style="display: none;">
+                          
+                          <div id ="checkSms"class="position" style="display: none;">
                             <label for="chkNum" class="label">인증번호 입력</label>
                             <div class="chk-num small">
                               <div class="line">
                                 <input type="text" id="chkNum" class="input-text w180px" title="인증번호 입력" placeholder="인증번호를 입력해 주세요" maxlength="4">
-                                <div class="time-limit" id="timeLimit">3:00</div>
+<!--                                 <div class="time-limit" id="timeLimit">3:00</div> -->
                               </div>
                             </div>
-                            <button type="button" class="button small gray-line" id="chgBtn">변경완료</button>
+                            <button type="button" class="button small gray-line" id="changePhBtn">변경완료</button>
                           </div>
+
                         </div>
                       </td>
                     </tr>
@@ -169,12 +172,13 @@
                     <tr>
                       <th scope="row">주소</th>
                       <td>
-                      	<input type="text" id="postcode" name="postcode" value="${memberDTO.memAddress.split("/")[0]}">
+                      	<input type="text" id="postcode" name="postcode" class="input-text w150px" value="${memberDTO.memAddress.split("/")[0]}">
 <%--                         <span name="postcode">${memberDTO.memAddress.split("/")[0]}</span> --%>
                         <a href="#none" id="addrBtn" class="button small gray-line ml10" title="우편번호 검색">우편번호 검색</a><br>
 <%--                         <p class="reset mt10" id="addr1" name="addr1">${memberDTO.memAddress.split("/")[1]}</p><br> --%>
-						<input class="reset mt10 w-100" id="addr1" name="addr1" value="${memberDTO.memAddress.split("/")[1]}"><br>
-                        <input type="text" id="addr2" name="addr2" value="${memberDTO.memAddress.split('/')[2]}" placeholder="상세주소 입력" required>
+						<input class="input-text mt10 w-100" id="addr1" name="addr1" value="${memberDTO.memAddress.split("/")[1]}"><br>
+<%-- 						<input class="reset mt10 w-100" id="addr1" name="addr1" value="${memberDTO.memAddress.split("/")[1]}"><br> --%>
+                        <input class="input-text mt10 w150px" type="text" id="addr2" name="addr2"  value="${memberDTO.memAddress.split('/')[2]}" placeholder="상세주소 입력" required>
                         
                       </td>
                     </tr>
@@ -185,7 +189,7 @@
 
             <div class="btn-group mt40">
               <button class="button large" id="cancelBtn">취소</button>
-              <button class="button purple large" id="updateBtn">등록</button>
+              <button class="button purple large" id="updateBtn" type="submit">등록</button>
             </div>
           </div>
         </form>
@@ -197,21 +201,103 @@
 <script>
 
 
-// 휴대폰 인증
-$('#phoneBtn').on('click', function(e) {
-    e.preventDefault();
-
-    fn_selfCheck('phone');
-});
-
+var phoneRegex =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/; // 모든 전화번호 규칙 (연락처)
 // // 휴대폰번호 변경 클릭
 $('#phoneChgBtn').on('click', function() {
-    $('.change-phone-num-area > div input').val('');
-    $('.change-phone-num-area > div:first button').text('인증번호 전송');
-    $('#timeLimit').html('');
-    clearInterval(interval);
+// 	debugger;
+	$("#newPhone").attr("readonly", false);
+	$("#phoneChange").toggle();
+	$("#newPhone").val('');
+	$("#CheckPhone").text('');
+	var text = "변경취소"
+	if($("#phoneChgBtn").text() == text) 
+		text = "휴대폰번호 변경";
+		
+	$("#phoneChgBtn").text(text);
+
+});
+// 새 휴대폰번호 정규식 검사 ()
+// function checkPhone() {
+// 	var phone = $("#newPhone").val();
+// 	var text = "** 연락처 입력 필수! **"
+// 		var color = "red";
+		
+// 		if(phone != ""){
+// 			text = "** 알맞은 연락처 형식으로 입력! '-' 생략가능!! **";
+			
+// 			if(phoneRegex.test(phone)){
+// 				text = "** 알맞은 연락처 형식! ** ";
+// 				color = "green";
+// 			}
+// 		}
+// 		$("#CheckPhone").text(text).css("color",color);
+// 	}
+	
+	
+// 인증번호 발송 버튼 클릭
+var checkSmsCode;
+$('#sendNumberBtn').on('click', function() {
+	var target = $('#sendNumberBtn');
+ 	if(target.prev().val().trim() == '')
+ 		return $("#CheckPhone").text('변경할 휴대폰 번호를 입력해 주세요.').css("color", "red");
+
+	if (!phoneRegex.test(target.prev().val().trim()))
+ 		return $("#CheckPhone").text('올바른 휴대폰 번호를 입력해 주세요.').css("color", "red");
+
+	if(target.prev().val().trim() == $('[name=phone]').val().replaceAll('-',''))
+		return $("#CheckPhone").text('휴대폰 번호가 동일합니다.').css("color", "red");
+	
+	var newphone = $("#newPhone").val();
+	 $.ajax({
+		 type : "post",
+		 url : "phoneSms.me",
+		 dataType : "text",
+		 data : {newPhone : newphone},
+		 success:function(data){
+			 debugger;
+			 alert("sms문자 보내기 성공");
+			 checkSmsCode = data;
+			 $("#checkSms").css("display", "block");
+			 $("#newPhone").attr("readonly", true);
+		 },
+		 error:function(){
+			 alert("sms문자 보내기 실패");
+		 }
+		 
+	 });//ajax
+		
 });
 
+$("#changePhBtn").on("click",function(){
+	debugger;
+	if($("#chkNum").val() == checkSmsCode){
+		alert('인증번호 일치');
+	}else{
+		alert('인증번호가 일치하지 않습니다');
+		$("#updateBtn").attr("disabled", true);
+	}
+});
+
+
+
+
+//유효성 체크 후 submit
+function checkSubmit() {
+	
+	var color = $('#moveFrm span');
+	
+	var flag = 1;
+	
+	$.each(color, function(i, v){
+		if(this.style.color == "red") {
+			flag = 0;
+			alert("정보수정 양식을 확인해 주세요.")
+			return false;
+		}
+	});
+	
+	return ((flag == 0) ? false : true);
+}	
 // 인증번호 발송 버튼 클릭
 // $('#sendNumberBtn').on('click', function() {
 //     var target = $('#sendNumberBtn');
@@ -310,12 +396,12 @@ $('#phoneChgBtn').on('click', function() {
     $(function() {
 
         // 포인트 비밀번호 set
-        $('#pwSetBtn').on('click', function(e) {
-            var form = MegaboxUtil.Form.createForm();
-            form.append($('<input>').attr({ 'type': 'hidden', 'name': 'setPointPw', 'value': 'Y' }));
-            form.attr('action', "/mypage/point-password");
-            form.submit();
-        });
+//         $('#pwSetBtn').on('click', function(e) {
+//             var form = MegaboxUtil.Form.createForm();
+//             form.append($('<input>').attr({ 'type': 'hidden', 'name': 'setPointPw', 'value': 'Y' }));
+//             form.attr('action', "/mypage/point-password");
+//             form.submit();
+//         });
 
         // 주소검색 버튼
         $('#addrBtn').on('click', function(e) {
@@ -352,30 +438,34 @@ $('#phoneChgBtn').on('click', function() {
         });
         
         // 주소변경시 상세주소 change
-        $('#addr1').on('change', function (e) {
+        $('#addr1').on('change', function(e) {
+        	debugger;
             $('#addr2').val('');
-        	
 		});
         
+        
+        
+        
 //         $('#addr1').on('DOMSubtreeModified', function (e) {
+//         	debugger;
 //             $('#addr2').val('');
         	
 // 		});
 
 
         // IPIN 인증
-        $('#ipinBtn').on('click', function(e) {
-            e.preventDefault();
+//         $('#ipinBtn').on('click', function(e) {
+//             e.preventDefault();
 
-            fn_selfCheck('ipin');
-        });
+//             fn_selfCheck('ipin');
+//         });
 
         // 휴대폰 인증
-        $('#phoneBtn').on('click', function(e) {
-            e.preventDefault();
+//         $('#phoneBtn').on('click', function(e) {
+//             e.preventDefault();
 
-            fn_selfCheck('phone');
-        });
+//             fn_selfCheck('phone');
+//         });
 
 //         // 휴대폰번호 변경 클릭
 //         $('#phoneChgBtn').on('click', function() {
@@ -478,297 +568,297 @@ $('#phoneChgBtn').on('click', function() {
 
 
         // 취소 버튼
-        $('#cancelBtn').on('click', function(e) {
-            location.href = '/mypage';
-        });
+//         $('#cancelBtn').on('click', function(e) {
+//             location.href = '/mypage';
+//         });
 
         // 등록 버튼
-        $('#updateBtn').on('click', function() {
-            var form = $(document.forms.mbInfoForm);
-            var validObj = [
+//         $('#updateBtn').on('click', function() {
+//             var form = $(document.forms.mbInfoForm);
+//             var validObj = [
                 
-                { target: '[name=phoneNo]', msg: '휴대폰 번호를 입력 해주세요.' },
-                { target: '[name=mbEmail]', msg: '이메일을 입력 해주세요.' }
-            ];
+//                 { target: '[name=phoneNo]', msg: '휴대폰 번호를 입력 해주세요.' },
+//                 { target: '[name=mbEmail]', msg: '이메일을 입력 해주세요.' }
+//             ];
 
-            if (!$('input[name="mbEmail"]').val().isEmail()) {
-                gfn_alertMsgBox('이메일 형식이 잘못 되었습니다.');
-                return false
-            }
+//             if (!$('input[name="mbEmail"]').val().isEmail()) {
+//                 gfn_alertMsgBox('이메일 형식이 잘못 되었습니다.');
+//                 return false
+//             }
 
-            if(!MegaboxUtil.Form.validRegForm(validObj))
-                return false;
+//             if(!MegaboxUtil.Form.validRegForm(validObj))
+//                 return false;
 
-            $('[name=phoneNo]').val($.trim($('.changeVal').text()));
+//             $('[name=phoneNo]').val($.trim($('.changeVal').text()));
 
-            var data = MegaboxUtil.Form.getFormObjData(form);
-            data.kioskByymmddLoginSetAt = $('[name=kioskset]:checked').val();
-            data.redisKey = $('#sendNumberBtn').data('key');
-            data.usePointPwAt = $('[name=usePointPwAt]:checked').val();
+//             var data = MegaboxUtil.Form.getFormObjData(form);
+//             data.kioskByymmddLoginSetAt = $('[name=kioskset]:checked').val();
+//             data.redisKey = $('#sendNumberBtn').data('key');
+//             data.usePointPwAt = $('[name=usePointPwAt]:checked').val();
 
-            // 스페셜 멤버십 가입 해지 체크
-            var removeMbshipCds = '';
-            var mbshipLength = $('.userMbshipList .clearfix').length - 1;
+//             // 스페셜 멤버십 가입 해지 체크
+//             var removeMbshipCds = '';
+//             var mbshipLength = $('.userMbshipList .clearfix').length - 1;
 
-            $.each($('.userMbshipList .clearfix'), function(i, v) {
-                if($(v).find('input[type=radio]:checked').val() == 'N') {
-                    removeMbshipCds += $(v).data('cd');
+//             $.each($('.userMbshipList .clearfix'), function(i, v) {
+//                 if($(v).find('input[type=radio]:checked').val() == 'N') {
+//                     removeMbshipCds += $(v).data('cd');
 
-                    if(i < mbshipLength) removeMbshipCds += ',';
-                }
-            });
+//                     if(i < mbshipLength) removeMbshipCds += ',';
+//                 }
+//             });
 
-            if(removeMbshipCds.length > 0) data.removeMbshipCds = removeMbshipCds;
+//             if(removeMbshipCds.length > 0) data.removeMbshipCds = removeMbshipCds;
 
-            $.ajaxMegaBox({
-                 url: '/on/oh/ohh/Mypage/updateUserInfo.do',
-                 data: JSON.stringify(data),
-                 clickLmtChk: true, //중복클릭 방지 실행
-                 success: function(d) {
-                    if(d.result == 'notEq') gfn_alertMsgBox('회원정보가 일치 하지않습니다.');
-                    else gfn_alertMsgBox({ msg: '회원정보가 수정되었습니다.', callback: fn_mypageHome });
-                 },complete: function(xhr){
-                    //중복제한 초기화
-                    clearLmt();
-                 }
-            });
-        });
+//             $.ajaxMegaBox({
+//                  url: '/on/oh/ohh/Mypage/updateUserInfo.do',
+//                  data: JSON.stringify(data),
+//                  clickLmtChk: true, //중복클릭 방지 실행
+//                  success: function(d) {
+//                     if(d.result == 'notEq') gfn_alertMsgBox('회원정보가 일치 하지않습니다.');
+//                     else gfn_alertMsgBox({ msg: '회원정보가 수정되었습니다.', callback: fn_mypageHome });
+//                  },complete: function(xhr){
+//                     //중복제한 초기화
+//                     clearLmt();
+//                  }
+//             });
+//         });
     });
 
-    function fn_moveMain(){
-        location.href = "/main";
-    }
+//     function fn_moveMain(){
+//         location.href = "/main";
+//     }
 
-    // 페이지 새로고침
-    function fn_reload() {
-        location.reload();
-    };
+//     // 페이지 새로고침
+//     function fn_reload() {
+//         location.reload();
+//     };
 
-    function fn_mypageHome(){
-        location.href="/mypage";
-    };
+//     function fn_mypageHome(){
+//         location.href="/mypage";
+//     };
 
     // 인증번호 3분 타이머
-    function fn_setTime() {
-        if(m == 0 && s == 0) {
-            gfn_alertMsgBox('유효시간이 초과되었습니다.\n인증번호 재전송을 통해서 다시 인증해주세요.'); // 인증번호 유효시간 지남
-            $("#chgBtn").attr("disabled", true);    //인증확인버튼 비활성
-            $("#chgBtn").addClass("disabled");      //인증확인버튼 비활성
+//     function fn_setTime() {
+//         if(m == 0 && s == 0) {
+//             gfn_alertMsgBox('유효시간이 초과되었습니다.\n인증번호 재전송을 통해서 다시 인증해주세요.'); // 인증번호 유효시간 지남
+//             $("#chgBtn").attr("disabled", true);    //인증확인버튼 비활성
+//             $("#chgBtn").addClass("disabled");      //인증확인버튼 비활성
 
-            return clearInterval(interval);
-        }
+//             return clearInterval(interval);
+//         }
 
-        if(s == 0) {
-            s = 59;
-            m -= 1;
-        } else {
-            s -= 1;
-        }
+//         if(s == 0) {
+//             s = 59;
+//             m -= 1;
+//         } else {
+//             s -= 1;
+//         }
 
-        s = s < 10 ? '0' + s : s;
+//         s = s < 10 ? '0' + s : s;
 
-        $('#timeLimit').html(m + ':' + s);
-    }
+//         $('#timeLimit').html(m + ':' + s);
+//     }
 
     // 본인인증 완료 후 호출
-    function fn_MbSelfCertCmpl(d) {
+//     function fn_MbSelfCertCmpl(d) {
 
-        var newNm = d.newNm;
-        var megaCertCi = d.megaCertCi;
-        var niceCertCi = d.niceCertCi;
+//         var newNm = d.newNm;
+//         var megaCertCi = d.megaCertCi;
+//         var niceCertCi = d.niceCertCi;
 
-        if (megaCertCi != niceCertCi) {
-            gfn_alertMsgBox('이름 변경 대상정보가 회원님과 일치하지 않습니다.');
-        } else if(newNm != undefined && newNm != $('.mbNmClass').text()) {
-            $('[name=mbNm]').val(newNm);
-            $('.mbNmClass').text(newNm);
+//         if (megaCertCi != niceCertCi) {
+//             gfn_alertMsgBox('이름 변경 대상정보가 회원님과 일치하지 않습니다.');
+//         } else if(newNm != undefined && newNm != $('.mbNmClass').text()) {
+//             $('[name=mbNm]').val(newNm);
+//             $('.mbNmClass').text(newNm);
 
-            gfn_alertMsgBox('이름이 변경되었습니다.');
-        } else {
-            gfn_alertMsgBox('이름이 동일합니다.');
-        }
+//             gfn_alertMsgBox('이름이 변경되었습니다.');
+//         } else {
+//             gfn_alertMsgBox('이름이 동일합니다.');
+//         }
 
-        $('.btn-modal-close').click();
-    }
+//         $('.btn-modal-close').click();
+//     }
 
     //메세지 표시
-    function fn_MbSelfCertMessage(param){
-        var options       = {};
-        options.msg       = param;
-        options.callback  = fn_submit;
-        options.param     = {confirm:'/main'};
-        options.minWidth  = 400;
-        options.minHeight = 250;
-        gfn_alertMsgBox(options);
-        return;
-    }
+//     function fn_MbSelfCertMessage(param){
+//         var options       = {};
+//         options.msg       = param;
+//         options.callback  = fn_submit;
+//         options.param     = {confirm:'/main'};
+//         options.minWidth  = 400;
+//         options.minHeight = 250;
+//         gfn_alertMsgBox(options);
+//         return;
+//     }
 
     // 본인인증
-    function fn_selfCheck(type) {
-        var form = type == 'ipin' ? $('#ipinFrm') : $('#phoneFrm');
-        var param = MegaboxUtil.Form.getInputString(form);
-        var url;
+//     function fn_selfCheck(type) {
+//         var form = type == 'ipin' ? $('#ipinFrm') : $('#phoneFrm');
+//         var param = MegaboxUtil.Form.getInputString(form);
+//         var url;
 
-        if(type == 'ipin') url = 'https://cert.vno.co.kr/ipin.cb';
-        else url = 'https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb';
+//         if(type == 'ipin') url = 'https://cert.vno.co.kr/ipin.cb';
+//         else url = 'https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb';
 
-        window.open('', 'selfCheck', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
+//         window.open('', 'selfCheck', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
 
-        form.find('[name=param_r1]').val(param);
-        form.attr('target', 'selfCheck');
-        form.attr('action', url);
-        form.submit();
-    }
+//         form.find('[name=param_r1]').val(param);
+//         form.attr('target', 'selfCheck');
+//         form.attr('action', url);
+//         form.submit();
+//     }
 
     // 첨부파일 삭제 이벤트
-    function fn_bindDelBtnCheck() {
-        $('.btn-del').off();
-        $('.btn-del').on('click', function() {
-            var idx = $(this).parent().index();
+//     function fn_bindDelBtnCheck() {
+//         $('.btn-del').off();
+//         $('.btn-del').on('click', function() {
+//             var idx = $(this).parent().index();
 
-            $.ajaxMegaBox({
-                url: '/on/coc/FileUpload/deleteFileUpload.do',
-                data: JSON.stringify({
-                    fileNo: $(this).data('no'),
-                    fileSn: $(this).data('sn'),
-                    physicFileDelYn: 'Y'
-                }),
-                success: function (d) {
-                    if (Number(d.deleteCnt) > 0) {
-                        $('#imgList p').eq(idx).remove();
-                    }
-                }
-            });
-        });
-    }
+//             $.ajaxMegaBox({
+//                 url: '/on/coc/FileUpload/deleteFileUpload.do',
+//                 data: JSON.stringify({
+//                     fileNo: $(this).data('no'),
+//                     fileSn: $(this).data('sn'),
+//                     physicFileDelYn: 'Y'
+//                 }),
+//                 success: function (d) {
+//                     if (Number(d.deleteCnt) > 0) {
+//                         $('#imgList p').eq(idx).remove();
+//                     }
+//                 }
+//             });
+//         });
+//     }
 </script>
 <script type="text/javascript">
-var fn_ConnWithCallBack = function(paramData){
-    var connTy = lnkgInfoObj.attr("connTy");
-    var logUrl = "";
-    if ( connTy == "conn") {
-        logUrl = "/on/oc/ocz/SimpleLogin/insertSimpleLogin.do";
-    }
-    //else {
-    //    logUrl = "/on/oc/ocz/SimpleLogin/deleteSimpleLogin.do";
-    //}
-    $.ajaxMegaBox({
-        url: logUrl,
-        type: "POST",
-        contentType: "application/json;charset=UTF-8",
-        dataType: "json",
-        data: JSON.stringify(paramData),
-        success: function (data, textStatus, jqXHR) {
-            if ( connTy == "conn") {
-                var loginInfo = "";
-                var accessToken = "";
+// var fn_ConnWithCallBack = function(paramData){
+//     var connTy = lnkgInfoObj.attr("connTy");
+//     var logUrl = "";
+//     if ( connTy == "conn") {
+//         logUrl = "/on/oc/ocz/SimpleLogin/insertSimpleLogin.do";
+//     }
+//     //else {
+//     //    logUrl = "/on/oc/ocz/SimpleLogin/deleteSimpleLogin.do";
+//     //}
+//     $.ajaxMegaBox({
+//         url: logUrl,
+//         type: "POST",
+//         contentType: "application/json;charset=UTF-8",
+//         dataType: "json",
+//         data: JSON.stringify(paramData),
+//         success: function (data, textStatus, jqXHR) {
+//             if ( connTy == "conn") {
+//                 var loginInfo = "";
+//                 var accessToken = "";
 
-                if ( lnkgInfoObj.attr("lnkgTy") == "FACEBOOK" ) {
-                    if (data.hashMap.facebookLoginName != null) {
-                        loginInfo = data.hashMap.facebookLoginName;
-                    }
-                    if (data.hashMap.facebookLoginEmail != null) {
-                        loginInfo += ((loginInfo == '') ? '' : ', ') + data.hashMap.facebookLoginEmail;
-                    }
-                    if (data.hashMap.facebookRegDt != null) {
-                        loginInfo += ((loginInfo == '') ? '' : ', ') + data.hashMap.facebookRegDt;
-                    }
-                    accessToken = data.hashMap.facebookAccessToken;
-                } else if ( lnkgInfoObj.attr("lnkgTy") == "KAKAO" ) {
-                    if (data.hashMap.kakaoLoginName != null) {
-                        loginInfo = data.hashMap.kakaoLoginName;
-                    }
-                    if (data.hashMap.kakaoLoginEmail != null) {
-                        loginInfo += ((loginInfo == '') ? '' : ', ') + data.hashMap.kakaoLoginEmail;
-                    }
-                    if (data.hashMap.kakaoRegDt != null) {
-                        loginInfo += ((loginInfo == '') ? '' : ', ') + data.hashMap.kakaoRegDt;
-                    }
-                    accessToken = data.hashMap.kakaoAccessToken;
-                } else if ( lnkgInfoObj.attr("lnkgTy") == "NAVER" ) {
-                    if (data.hashMap.naverLoginName != null) {
-                        loginInfo = data.hashMap.naverLoginName;
-                    }
-                    if (data.hashMap.naverLoginEmail != null) {
-                        loginInfo += ((loginInfo == '') ? '' : ', ') + data.hashMap.naverLoginEmail;
-                    }
-                    if (data.hashMap.naverRegDt != null) {
-                        loginInfo += ((loginInfo == '') ? '' : ', ') + data.hashMap.naverRegDt;
-                    }
-                    accessToken = data.hashMap.naverAccessToken;
-                } else if ( lnkgInfoObj.attr("lnkgTy") == "PAYCO" ) {
-                    if (data.hashMap.paycoLoginName != null) {
-                        loginInfo = data.hashMap.paycoLoginName;
-                    }
-                    if (data.hashMap.paycoLoginEmail != null) {
-                        loginInfo += ((loginInfo == '') ? '' : ', ') + data.hashMap.paycoLoginEmail;
-                    }
-                    if (data.hashMap.paycoRegDt != null) {
-                        loginInfo += ((loginInfo == '') ? '' : ', ') + data.hashMap.paycoRegDt;
-                    }
-                    accessToken = data.hashMap.paycoAccessToken;
-                }
-                lnkgInfoObj.removeClass("gray").addClass("gray-line").attr("connTy","disconn").text("해제").parent().prev().text("로그인 연동(" + loginInfo + ")");
-                lnkgInfoObj.attr("accessToken", accessToken);
+//                 if ( lnkgInfoObj.attr("lnkgTy") == "FACEBOOK" ) {
+//                     if (data.hashMap.facebookLoginName != null) {
+//                         loginInfo = data.hashMap.facebookLoginName;
+//                     }
+//                     if (data.hashMap.facebookLoginEmail != null) {
+//                         loginInfo += ((loginInfo == '') ? '' : ', ') + data.hashMap.facebookLoginEmail;
+//                     }
+//                     if (data.hashMap.facebookRegDt != null) {
+//                         loginInfo += ((loginInfo == '') ? '' : ', ') + data.hashMap.facebookRegDt;
+//                     }
+//                     accessToken = data.hashMap.facebookAccessToken;
+//                 } else if ( lnkgInfoObj.attr("lnkgTy") == "KAKAO" ) {
+//                     if (data.hashMap.kakaoLoginName != null) {
+//                         loginInfo = data.hashMap.kakaoLoginName;
+//                     }
+//                     if (data.hashMap.kakaoLoginEmail != null) {
+//                         loginInfo += ((loginInfo == '') ? '' : ', ') + data.hashMap.kakaoLoginEmail;
+//                     }
+//                     if (data.hashMap.kakaoRegDt != null) {
+//                         loginInfo += ((loginInfo == '') ? '' : ', ') + data.hashMap.kakaoRegDt;
+//                     }
+//                     accessToken = data.hashMap.kakaoAccessToken;
+//                 } else if ( lnkgInfoObj.attr("lnkgTy") == "NAVER" ) {
+//                     if (data.hashMap.naverLoginName != null) {
+//                         loginInfo = data.hashMap.naverLoginName;
+//                     }
+//                     if (data.hashMap.naverLoginEmail != null) {
+//                         loginInfo += ((loginInfo == '') ? '' : ', ') + data.hashMap.naverLoginEmail;
+//                     }
+//                     if (data.hashMap.naverRegDt != null) {
+//                         loginInfo += ((loginInfo == '') ? '' : ', ') + data.hashMap.naverRegDt;
+//                     }
+//                     accessToken = data.hashMap.naverAccessToken;
+//                 } else if ( lnkgInfoObj.attr("lnkgTy") == "PAYCO" ) {
+//                     if (data.hashMap.paycoLoginName != null) {
+//                         loginInfo = data.hashMap.paycoLoginName;
+//                     }
+//                     if (data.hashMap.paycoLoginEmail != null) {
+//                         loginInfo += ((loginInfo == '') ? '' : ', ') + data.hashMap.paycoLoginEmail;
+//                     }
+//                     if (data.hashMap.paycoRegDt != null) {
+//                         loginInfo += ((loginInfo == '') ? '' : ', ') + data.hashMap.paycoRegDt;
+//                     }
+//                     accessToken = data.hashMap.paycoAccessToken;
+//                 }
+//                 lnkgInfoObj.removeClass("gray").addClass("gray-line").attr("connTy","disconn").text("해제").parent().prev().text("로그인 연동(" + loginInfo + ")");
+//                 lnkgInfoObj.attr("accessToken", accessToken);
 
-                gfn_alertMsgBoxSize('정상적으로 연동 되었습니다.', 400, 200);
-            }
-            //else {
-            //    lnkgInfoObj.removeClass("gray-line").addClass("gray").attr("connTy","conn").text("연동").parent().prev().text("연결된 계정정보가 없습니다.");
-            //   gfn_alertMsgBoxSize('정상적으로 연동 해제 되었습니다.', 400, 200);
-            //}
+//                 gfn_alertMsgBoxSize('정상적으로 연동 되었습니다.', 400, 200);
+//             }
+//             //else {
+//             //    lnkgInfoObj.removeClass("gray-line").addClass("gray").attr("connTy","conn").text("연동").parent().prev().text("연결된 계정정보가 없습니다.");
+//             //   gfn_alertMsgBoxSize('정상적으로 연동 해제 되었습니다.', 400, 200);
+//             //}
 
-        },
-        error: function(xhr,status,error){
-            var err = JSON.parse(xhr.responseText);
-            alert(xhr.status);
-            alert(err.message);
-        }
-    });
-}
+//         },
+//         error: function(xhr,status,error){
+//             var err = JSON.parse(xhr.responseText);
+//             alert(xhr.status);
+//             alert(err.message);
+//         }
+//     });
+// }
 
 // 연동 해제
-function deleteSimpleLogin(simpleLoginTyCd, accessToken) {
-    var logUrl = "/on/oc/ocz/SimpleLogin/deleteSimpleLogin.do";
+// function deleteSimpleLogin(simpleLoginTyCd, accessToken) {
+//     var logUrl = "/on/oc/ocz/SimpleLogin/deleteSimpleLogin.do";
 
-    var paramData = {
-            simpleLoginTyCd     : simpleLoginTyCd
-           ,simpleLoginTokenVal : accessToken
-   };
+//     var paramData = {
+//             simpleLoginTyCd     : simpleLoginTyCd
+//            ,simpleLoginTokenVal : accessToken
+//    };
 
-    $.ajaxMegaBox({
-        url: logUrl,
-        type: "POST",
-        contentType: "application/json;charset=UTF-8",
-        dataType: "json",
-        data: JSON.stringify(paramData),
-        success: function (data, textStatus, jqXHR) {
-            lnkgInfoObj.removeClass("gray-line").addClass("gray").attr("connTy","conn").text("연동").parent().prev().text("연결된 계정정보가 없습니다.");
-            gfn_alertMsgBoxSize('정상적으로 연동 해제 되었습니다.', 400, 200);
-        },
-        error: function(xhr,status,error){
-            var err = JSON.parse(xhr.responseText);
-            alert(xhr.status);
-            alert(err.message);
-        }
-    });
-}
+//     $.ajaxMegaBox({
+//         url: logUrl,
+//         type: "POST",
+//         contentType: "application/json;charset=UTF-8",
+//         dataType: "json",
+//         data: JSON.stringify(paramData),
+//         success: function (data, textStatus, jqXHR) {
+//             lnkgInfoObj.removeClass("gray-line").addClass("gray").attr("connTy","conn").text("연동").parent().prev().text("연결된 계정정보가 없습니다.");
+//             gfn_alertMsgBoxSize('정상적으로 연동 해제 되었습니다.', 400, 200);
+//         },
+//         error: function(xhr,status,error){
+//             var err = JSON.parse(xhr.responseText);
+//             alert(xhr.status);
+//             alert(err.message);
+//         }
+//     });
+// }
 
-$(function(){
-    $("tbody#lnkgInfoTbody button").off("click").on("click",function(){
-        var accessToken = '';
-        var simpleLoginTyCd = '';
-        lnkgInfoObj = $(this);
+// $(function(){
+//     $("tbody#lnkgInfoTbody button").off("click").on("click",function(){
+//         var accessToken = '';
+//         var simpleLoginTyCd = '';
+//         lnkgInfoObj = $(this);
 
-        if ( lnkgInfoObj.attr("connTy") == "conn" ) { // 연동
-            simpleLoginWith($(this).attr("lnkgTy"));
-        } else { // 해제
-            simpleLoginTyCd = lnkgInfoObj.attr("lnkgTy");
-            accessToken = lnkgInfoObj.attr("accessToken");
+//         if ( lnkgInfoObj.attr("connTy") == "conn" ) { // 연동
+//             simpleLoginWith($(this).attr("lnkgTy"));
+//         } else { // 해제
+//             simpleLoginTyCd = lnkgInfoObj.attr("lnkgTy");
+//             accessToken = lnkgInfoObj.attr("accessToken");
 
-            deleteSimpleLogin(simpleLoginTyCd, accessToken);
-        }
-    });
-});
+//             deleteSimpleLogin(simpleLoginTyCd, accessToken);
+//         }
+//     });
+// });
 </script>
 <%@include file ="../_common/commonFooterEnd.jsp" %>

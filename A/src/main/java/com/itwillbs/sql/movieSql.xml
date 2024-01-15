@@ -9,8 +9,10 @@
 	<insert id="insertMovie">
 			INSERT INTO MOVIE
 		 	 ( 
-		 	   MOVIE_IDX
+		 	   MOVIE_CODE
 		 	 , TITLE
+		 	 , ACTOR
+		 	 , STILLCUT
 		 	 , MOVIE_CATEGORY
 		 	 , DIRECTOR
 		 	 , GENRE
@@ -22,10 +24,13 @@
 		 	 , NATION
 		 	 , RUN_TIME
 		 	 , START_DATE
-		 	 , END_DATE)
+		 	 , END_DATE
+		 	 , MOVIE_STATE)
 		VALUES (
-			  #{movieIdx}
+			  #{movieCode}
 		  	, #{title}
+		  	, #{actor}
+		  	, #{stillcut}
 		  	, #{movieCategory}
 		  	, #{director}
 		  	, #{genre}
@@ -38,13 +43,13 @@
 		  	, #{runTime}
 		  	, SUBSTRING(#{startDate}, 1, 10)
 		  	, SUBSTRING(#{endDate}, 1, 10)
-		  	)
+		  	, #{movieState})
 	</insert>
 
 	
 	<!-- 라떼 영화 포스터 불러오는 sql -->
 	<select id="getLattePoster" resultType="MovieDTO" parameterType="MovieDTO">
-	SELECT POSTER, TITLE
+	SELECT POSTER, TITLE, MOVIE_CODE
 	FROM MOVIE 
 	WHERE MOVIE_CATEGORY = 'OLD' 
  <![CDATA[
@@ -53,19 +58,23 @@
 		   ]]>
 	</select>
 
-	<!-- 현재 상영 영화 포스터 불러오는 sql -->
-	<select id="selectNowPoster" resultType="MovieDTO" parameterType="MovieDTO">
-	SELECT POSTER, TITLE
+	<!-- 현재 상영 영화 포스터 불러오는 sql 박스오피스 -->
+	<select id="getNowPoster" resultType="MovieDTO" parameterType="MovieDTO">
+	SELECT POSTER, TITLE, MOVIE_CODE
 	FROM MOVIE 
 	WHERE MOVIE_CATEGORY = 'NOW'
+	 <![CDATA[
+	AND START_DATE <= NOW() 
+	AND END_DATE > NOW() 
+		   ]]>
 
 	</select>
 
 
     <!--  영화 상세 정보 불러오는 sql -->
-	<select id="movieDetail" resultType="MovieDTO" parameterType="MovieDTO">
+	<select id="getMovieDetail" resultType="MovieDTO" parameterType="MovieDTO">
 	SELECT 
-	  		   MOVIE_IDX
+	  		   MOVIE_CODE
 		 	 , TITLE
 		 	 , DIRECTOR
 		 	 , GENRE
@@ -76,15 +85,24 @@
 		 	 , FILM_MADE
 		 	 , NATION
 		 	 , RUN_TIME
+		 	 , STILLCUT
+		 	 , ACTOR
 	FROM MOVIE 
+	WHERE MOVIE_CODE = #{movieCode};
 
 	</select>
 	
-	<select id="movieAll" resultType="MovieDTO" parameterType="MovieDTO">
-	SELECT POSTER, TITLE
-	FROM MOVIE 
-	
-
+	<select id="getMovieList" resultType="MovieDTO" parameterType="MovieDTO">
+		SELECT 
+		  		   MOVIE_CODE
+			 	 , TITLE
+			 	 , DIRECTOR
+			 	 , OPENDATE
+			 	 , RATING
+		         , MOVIE_STATE
+				 , MOVIE_CATEGORY
+		
+		FROM MOVIE			 
 	</select>
 
 

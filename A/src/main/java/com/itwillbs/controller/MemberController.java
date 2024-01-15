@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.users.SparseUserDatabase;
 
 import com.google.gson.Gson;
 import com.itwillbs.domain.CenterBoardDTO;
@@ -26,6 +29,7 @@ import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.service.CSBoardService;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.MovieService;
+import com.itwillbs.sms.SendSms;
 
 
 public class MemberController extends HttpServlet {
@@ -59,11 +63,17 @@ public class MemberController extends HttpServlet {
 			// request에 boardList 저장
 			request.setAttribute("centerBoardList", centerBoardList);
 			
-			// 영화 포스터 넣는 부분 
+			// 영화 old 포스터 넣는 부분 
 			MovieService movieService = new MovieService();
 		    MovieDTO movieDTO = new MovieDTO();
 			List<MovieDTO> posterList = movieService.getLattePoster(movieDTO);
 			request.setAttribute("lattePosterList", posterList);
+			
+			
+			// 영화 now 포스터 넣는 부분 
+			List<MovieDTO> posterNowList = movieService.getNowPoster(movieDTO);
+			request.setAttribute("posterNowList", posterNowList);
+			
 			
 			
 			dispatcher = request.getRequestDispatcher("_a/main.jsp");
@@ -72,9 +82,49 @@ public class MemberController extends HttpServlet {
 		
 		// 로그인 페이지 이동
 		if(sPath.equals("/login.me")) {
+			MovieService movieService = new MovieService();
+			MovieDTO movieDTO = new MovieDTO();
+			List<MovieDTO> posterList = movieService.getLattePoster(movieDTO);
+			
+			//posterList의 포스터중 랜덤으로 1개이 이미지 뽑기
+			Random random = new Random();
+			int moviePosterNum = random.nextInt(posterList.size());
+			
+			System.out.println(posterList.get(moviePosterNum));
+//			System.out.println(movieDTO.getPoster());
+			request.setAttribute("moviePoster", posterList.get(moviePosterNum).getPoster());
+			request.setAttribute("movieCode", posterList.get(moviePosterNum).getMovieCode());
+			System.out.println(posterList.get(moviePosterNum).getMovieCode());
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@");
+//			System.out.println(posterList.get(1).getPoster());
+//			System.out.println(posterList.get(2));
+//			System.out.println(posterList.get(3));
 			dispatcher = request.getRequestDispatcher("_member/login.jsp");
 			dispatcher.forward(request, response);
 		}//
+		
+		
+		
+//		// 로그인 페이지 이동
+//		if(sPath.equals("/login.me")) {
+//			MovieService movieService = new MovieService();
+//			MovieDTO movieDTO = new MovieDTO();
+//			List<MovieDTO> posterList = movieService.getLattePoster(movieDTO);
+//			
+//			//posterList의 포스터중 랜덤으로 1개이 이미지 뽑기
+//			Random random = new Random();
+//			int moviePosterNum = random.nextInt(posterList.size());
+//			
+//			System.out.println(posterList.get(moviePosterNum));
+////			System.out.println(movieDTO.getPoster());
+//			request.setAttribute("moviePoster", posterList.get(moviePosterNum).getPoster());
+////			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@");
+////			System.out.println(posterList.get(1).getPoster());
+////			System.out.println(posterList.get(2));
+////			System.out.println(posterList.get(3));
+//			dispatcher = request.getRequestDispatcher("_member/login.jsp");
+//			dispatcher.forward(request, response);
+//		}//
 		
 		// 로그아웃 session값 제거
 		if(sPath.equals("/logout.me")) {
@@ -129,11 +179,15 @@ public class MemberController extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 			String receiver = request.getParameter("email");
 			
+			// 이메일 인증난수 생성 객체생성
 			EmailCode emailcode = new EmailCode();
+			// 난수생성메서드 content에 저장
 			String content = emailcode.randomizeCode();
 			System.out.println(receiver);
 //			System.out.println("--------------------"+content);
+			// Gamail 보내는 받는사람 인증번호 객체생성
 			SendGmail sendgmail = new SendGmail(receiver, content);
+			// 메일 보내기 실행
 			sendgmail.sendMail();
 			
 			response.getWriter().write(content + "");
@@ -227,6 +281,7 @@ public class MemberController extends HttpServlet {
 			memberService = new MemberService();
 			MemberDTO memberDTO = memberService.userFind(request);	
 			
+			String result= "0";
 			if(memberDTO != null) {
 				System.out.println(memberDTO);
 				System.out.println("입력한 회원 존재");
@@ -301,6 +356,32 @@ public class MemberController extends HttpServlet {
 			dispatcher.forward(request, response);
 
 		}//
+		
+		// 휴대폰번호 변경 sms보내기 관련
+		if(sPath.equals("/phoneSms.me")) {
+			System.out.println("주소일치 : phonedSms.me");
+			
+			response.setCharacterEncoding("utf-8");
+			String receiver = request.getParameter("newPhone");
+			
+			//인증번호 숫자 4자리 생성코드
+			Random code = new Random();
+			String content ="";
+			for(int i=0; i<4; i++) {
+				String num = Integer.toString(code.nextInt(10));
+				content += num;
+			}
+			System.out.println(receiver);
+			System.out.println(content);
+			//sms이메일 보내는 SendSms객체생성 (문자 받는이, 인증번호)
+			SendSms sendsms = new SendSms(receiver, content);
+			
+			// sms인증번호 보내기 makeMsg()메서드 호출
+			sendsms.makeMsg();
+			response.getWriter().write(content + "");
+			
+		}//
+		
 		
 		// 마이페이지 userInfoPro(정보수정)
 		if(sPath.equals("/userInfoPro.me")) {

@@ -1,17 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 <script src="jQuery/jquery-3.6.0.js"></script>
-<!-- <script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script> -->
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-<!-- <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 주소 api  -->
-<!-- <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script> -->
-<!--   <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script> -->
-<!--   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script> -->
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
@@ -72,14 +66,18 @@
 						
 <!-- 						</div> -->
 					</div>
+<%-- 					<% List<MovieDTO> posterList = (List<MovieDTO>)request.getAttribute("lattePosterList") %> --%>
+<%-- 					<c:forEach var="movie" items="${lattePosterList}" varStatus="status"> --%>
 					<div class="col-4">
 						<div class="login-ad" id="영화포스터">
-							<a href="main.me" target="_blank">
-								<img id="해당영화포스타" src="assets/img/post20.jpg" alt="영화포스터" clickthrough="" style="height: 450px">
+<!-- 							<a href="main.me" target="_blank"> -->
+							<a href="movie_view.mo?movieCode=${requestScope.movieCode}">
+<!-- 								<img id="해당영화포스타" src="assets/img/post20.jpg" alt="영화포스터" clickthrough="" style="height: 450px"> -->
+								<img id="해당영화포스타" src="<c:out value='${requestScope.moviePoster}' />" alt="영화포스터" clickthrough="" style="height: 450px">
 							</a>
 						</div>					
 					</div>
-					
+<%-- 					</c:forEach> --%>
 				</div>
 				
 				

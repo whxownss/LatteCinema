@@ -15,10 +15,12 @@ import com.itwillbs.domain.ExqBoardDTO;
 import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.LostBoardDTO;
 import com.itwillbs.domain.MemberDTO;
+import com.itwillbs.domain.MovieDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.domain.ResponseDataDTO;
 import com.itwillbs.service.CSBoardService;
 import com.itwillbs.service.ResService;
+import com.itwillbs.service.MovieService;
 
 public class AdminController extends HttpServlet {
 	
@@ -64,6 +66,9 @@ public class AdminController extends HttpServlet {
 		// 관리자 영화 관리 페이지 이동
 		if(sPath.equals("/adm_mv_inout.ad")) {
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_mv_inout.jsp");
+			MovieService movieService = new MovieService();
+			ArrayList<MovieDTO> movieList = movieService.getMovieList();
+			request.setAttribute("movieList",movieList);
 			dispatcher.forward(request, response);
 		}	
 		

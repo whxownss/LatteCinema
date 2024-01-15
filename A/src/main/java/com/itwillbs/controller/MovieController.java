@@ -2,6 +2,7 @@ package com.itwillbs.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -66,6 +67,19 @@ public class MovieController extends HttpServlet {
 		
 		// 영화 상세 페이지
 		if(sPath.equals("/movie_view.mo")) {
+			
+			String movieCode = request.getParameter("movieCode");
+			
+			MovieDTO movieDTO = new MovieDTO();
+			movieDTO.setMovieCode(movieCode);
+			
+			MovieService movieService = new MovieService();
+			MovieDTO detail = movieService.getMovieDetail(movieDTO);
+			
+			request.setAttribute("detail", detail);
+			
+			System.out.println("detail"+detail);
+		
 			dispatcher = request.getRequestDispatcher("_movie/movie_view.jsp");
 			dispatcher.forward(request, response);	
 			
@@ -78,8 +92,7 @@ public class MovieController extends HttpServlet {
 			movieService = new MovieService();
 			MovieDTO movieDTO = movieService.insertMovie(request);
 			
-			System.out.println(request);
-			System.out.println("movieDTO : "+movieDTO);
+			response.sendRedirect("adm_mv_inout.ad");
 			
 		}
 	}	
