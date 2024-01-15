@@ -93,7 +93,9 @@
 			, PAY_TIME
 			, ITEM_CNT
 			, NAME
+			<if test="giftMsg != null || giftMsg != ''">
 			, GIFT_MSG
+			</if>
 			<if test="giftTel != null || giftTel != ''">
 			, GIFT_TEL	
 			</if>
@@ -115,7 +117,9 @@
 			, NOW()
 			, #{itemCnt}
 			, #{name}
+			<if test="giftMsg != null || giftMsg != ''">
 			, #{giftMsg}
+			</if>
 			<if test="giftTel != null || giftTel != ''">
 			, #{giftTel}	
 			</if>

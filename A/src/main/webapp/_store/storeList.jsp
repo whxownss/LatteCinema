@@ -96,7 +96,7 @@
 								<div class="modal-body">
 									<form onsubmit="return false">
 										<div class="form-floating mb-3">
-											<input type="number" class="form-control" id="phone"
+											<input type="tel" class="form-control" id="phone"
 												placeholder="연락처" onblur="checkPhone()" required>
 												<label for="phone">받으시는 분 (휴대폰 번호)
 												<span id="checkPhone"></span>
@@ -105,7 +105,7 @@
 										<div class="mb-3">
 											<label for="message-text" class="col-form-label">
 											보내는 메세지 :</label>
-											<textarea class="form-control" rows="5" id="message-text"
+											<textarea class="form-control" rows="5" id="msg"
 												placeholder="즐거운 관람 되세요~"></textarea>
 										</div>
 									</form>
@@ -260,9 +260,6 @@ function checkPhone() {
 			}
 		});
 		
-		// 전화번호가 있을시 버튼클릭 가능
-		
-		
 	}
 	
 <!-- 결제 API -->
@@ -273,7 +270,8 @@ IMP.init("imp20121707");
 
 // 포트원 api
   function requestPay(param) {
-	debugger;
+	
+	// 선물하기 모달창 전화번호 없이 결제불가
 	var checkPhone = document.getElementById('checkPhone');
 	if(param == 'gift' && (checkPhone.style.color == 'red' || $("#checkPhone").text() == '')){
 		alert('휴대폰 번호를 확인해주세요.');
@@ -320,8 +318,8 @@ IMP.init("imp20121707");
     	  	  rsp["item_cnt"] = $(".inpp").text();
     	  	  
     	  	  if(param == 'gift'){
-    	  		  debugger;
-    	  		rsp["gift_tel"] = $("#checkPhone").text();	  		  
+    	  		rsp["gift_tel"] = $("#checkPhone").text();		// 전화번호 확인
+    	  		rsp["gift_msg"] = $("#checkPhone").text();		// 메시지 확인
     	  	  }
     		  
     		  $.ajax({
