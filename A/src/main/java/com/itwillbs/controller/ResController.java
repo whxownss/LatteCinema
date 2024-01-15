@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.LocationDTO;
-import com.itwillbs.domain.ScheduleDTO;
 import com.itwillbs.service.ResService;
+import com.itwillbs.utill.Pay;
+import com.itwillbs.utill.Token;
 
 public class ResController extends HttpServlet {
 	RequestDispatcher dispatcher = null;
@@ -163,7 +163,34 @@ public class ResController extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("_reservation/res4.jsp");
 			dispatcher.forward(request, response);
 		}
-		
+		// 환불 (포트원 작업가기전에 DB에서 시간 먼저 확인 후 DELETE -> 포트원에서 실제 환불)
+		if(sPath.equals("/res4Pro.re")) {
+			resService = new ResService();
+			String mid = request.getParameter("mid"); 
+			String result = resService.refund(mid);   // 환불 시간 지났는지 확인후 db 작업
+			
+			String msg = "상영 시간 30분 전까지만 환불이 가능합니다.";
+			if(result.equals("true")) {
+				msg = "환불 성공";
+				Pay pay = new Pay();
+				String token = pay.getImportToken();  
+				
+				int result_delete = pay.cancelPay(token, mid);  // 포트원 환불
+				if(result_delete == -1) msg = "환불 실패";
+			}
+	        
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(msg);
+		}
+		// 환불 DB 
+//		if(sPath.equals("/res4ProRF.re")) {
+//			resService = new ResService();
+//			String mid = request.getParameter("mid");
+//			resService.refund(mid);
+//	        
+//			response.setCharacterEncoding("utf-8");
+//			response.getWriter().write(msg);
+//		}
 		
 	}
 }

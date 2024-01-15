@@ -16,7 +16,6 @@
 			<section class="contents d-flex">
 				<div class="col-6" style="display: flex; justify-content: center;">
 					<img id="itemImage"
-						src=""
 						alt="스위트콤보 상품이미지">
 				</div>
 				<article class="col-4">
@@ -29,7 +28,6 @@
 							<tr>
 								<th scope="row" class="text-center border-bottom-0" colspan="4">
 									<h3 class="section-header fs-1" id="itemName">
-										<i></i>
 									</h3>
 								</th>
 							</tr>
@@ -74,14 +72,49 @@
 							</tr>
 							<tr class="border border-0 border-white">
 								<td scope="row" class="text-center" colspan="4">
-									<button class="btn btn-secondary btn-lg"
-										style="text-align: center; padding-left: 60px; padding-right: 60px;">선물하기</button>
+									<button class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"
+										style="text-align: center;">
+										 <img src="assets/img/free-icon-gift-box-4108395.png" alt="gift"
+												width="30" height="30"/></button>
 									<button class="btn btn-danger btn-lg" onclick="requestPay()"
-										style="text-align: center; padding-left: 60px; padding-right: 60px;">구매하기</button>
+										style="text-align: center; padding:10px; padding-left: 130px; padding-right: 130px;"><b>구매하기</b></button>
 								</td>
 							</tr>
 						</tbody>
 					</table>
+					
+					<!-- 선물하기 모달 내용 -->
+					<div class="modal fade" id="exampleModal" tabindex="-1"
+						aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-2" id="exampleModalLabel">선물하기</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<form>
+										<div class="form-floating mb-3">
+								<input type="tel" class="form-control" id="phone" placeholder="연락처" required
+										onblur="checkPhone();" name="phone">
+								<label for="phone">받으시는 분 (휴대폰 번호)<span id="CheckPhone"></span></label>
+							</div>
+										<div class="mb-3">
+											<label for="message-text" class="col-form-label">보내는 메세지 :</label>
+											<textarea class="form-control" rows="5" id="message-text" placeholder="즐거운 관람 되세요~"></textarea>
+										</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal">닫기</button>
+									<button type="button" class="btn btn-danger" onclick="requestPay()">선물보내기</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</article>
 			</section>
 		</div>
@@ -98,7 +131,7 @@
 						<button class="accordion-button collapsed fw-bold" type="button"
 							data-bs-toggle="collapse" data-bs-target="#collapseOne"
 							aria-expanded="false" aria-controls="collapseOne">
-							<font style="vertical-align: inherit;"><h3>사용방법</h3></font>
+							<font style="vertical-align: inherit;">사용방법</font>
 						</button>
 					</h2>
 					<div id="collapseOne" class="accordion-collapse collapse"
@@ -116,7 +149,7 @@
 										- 스토어 상품은 회원만 구매할 수 있습니다.<br>- 일반관람권의 경우 2D 일반영화에 사용
 										가능합니다. (스페셜관 및 특수좌석 사용 불가)<br>- 영화관람권은 L.POINT 적립이 불가합니다.<br>-
 										유효기간은 24개월로 관람일 기준입니다.<br>- 구매한 영화관람권은 마이시네마 &gt; 나의
-										쿠폰함에서 확인 후 롯데시네마 홈페이지, 모바일 웹/앱에서 사용 가능합니다.<br>- 선물한
+										쿠폰함에서 확인 후 라떼시네마 홈페이지, 모바일 웹/앱에서 사용 가능합니다.<br>- 선물한
 										영화관람권은 문자쿠폰(MMS)으로 발송되며 롯데시네마 홈페이지, 모바일 웹/앱에서 사용 가능합니다.<br>-
 										선물한 상품은 마이시네마 &gt; 예매/구매내역 &gt; 선물내역 메뉴에서 30일 내 1회 재발송 가능합니다.
 										단, 받는 사람 번호는 변경 불가합니다.<br>- 관람권 사용 시 VIP 승급금액은 관람권 구매금액으로
@@ -133,7 +166,7 @@
 						<button class="accordion-button collapsed fw-bold" type="button"
 							data-bs-toggle="collapse" data-bs-target="#collapseTwo"
 							aria-expanded="false" aria-controls="collapseTwo">
-							<font style="vertical-align: inherit;"><h3>유의사항</h3></font>
+							<font style="vertical-align: inherit;">유의사항</font>
 						</button>
 					</h2>
 					<div id="collapseTwo" class="accordion-collapse collapse"
@@ -178,15 +211,73 @@
 <%@include file="../_common/commonFooterStart.jsp"%>
 <script src="jQuery/jquery-3.6.0.js"></script>
 <!-- iamport.payment.js -->
-<!-- <script src="https://cdn.iamport.kr/v1/iamport.js"></script> -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script type="text/javascript">
+
+var storeItem = ${storeItem};
+
+//연락처 정규식 체크
+function checkPhone() {
+	var phone = $("#phone").val();
+	var text = "** 연락처 입력 필수! **"
+	var color = "red";
+	var phoneRegex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+	
+	if(phone != ""){
+		text = "** 알맞은 연락처 형식으로 입력! '-' 생략가능!! **";
+		
+		if(phoneRegex.test(phone)){
+			text = "** 알맞은 연락처 형식! ** ";
+			color = "green";
+		}
+	}
+	$("#CheckPhone").text(text).css("color",color);
+	var checkPhone = document.getElementById('CheckPhone');
+	if(checkPhone.style.color == 'red') return;   
+// 	debugger;
+// 	if(id==""){
+// 		$("#CheckPhone").text("전화번호를 입력하세요").css("color", "red");
+// 		return false;			
+// 	}
+
+		// 연락처 유무 체크
+		$.ajax({
+			type : "post",
+			data : {memPhone : phone}, //입력한 값 변수에 담기
+			url : "checkphone.st", 
+			dataType: "text",
+			success:function(data){
+				if(data == '1'){
+					$("#CheckPhone").text("선물가능한 번호입니다.").css("color", "green");
+					return false;
+				}else if(data == '0'){
+					$("#CheckPhone").text("선물할수없는 번호입니다.").css("color", "red");
+					return true;
+				 }		
+			},
+			error: function(){
+			}
+		});
+	}
+
+
+<!-- 결제 API -->
+
 // 가맹점 식별코드
 var IMP = window.IMP;
 IMP.init("imp20121707"); 
 
 // 포트원 api
   function requestPay() {
+// 	  var checkPhone = document.getElementById('CheckPhone');
+// 		if(checkPhone.style.color == 'red') {
+// 			alert('존재하지않는 회원입니다.');
+// 			return;
+// 		}   
+	if($("#CheckPhone").text() != "선물가능한 번호입니다."){
+		alert('휴대폰 번호를 확인해주세요.');
+		return;
+	}
 	
 // 	// 로그인 체크
 //       if (!isLogin) {
@@ -209,7 +300,7 @@ IMP.init("imp20121707");
         const merchant_uid = make_merchant_uid()
         
 	
-	var itemName = $("#itemName i").text();
+	var itemName = $("#itemName").text();
 	var price = parseInt($("#sPrice").text().replace(",", "")); 
 	
       IMP.request_pay({ 
@@ -303,21 +394,20 @@ IMP.init("imp20121707");
 //   }
 
 		// 이부분 보시면 됩니다 형 *********************************************************
-    	var storeItem = ${storeItem};
 	  // 수량 옵션 
       $(function(){
-    	  debugger;
     		$("#itemImage").attr("src", storeItem.itemImage);
-    		$("#itemName i").text(storeItem.itemName);
+    		$("#itemName").text(storeItem .itemName);
     		$("#price").text(storeItem.itemPrice);
     		$("#detail").text(storeItem.itemDetail);
-    		debugger;
     		// 이부분 보시면 됩니다 형 *********************************************************	
     		
     		
     		
     	  var price = storeItem.itemPrice + "";
-    	  $("#sPrice").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+//     	  alert(JSON.stringify(${storeItem}));
+    	  
+    	 $("#sPrice").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     	  
          $('._count :button').on({
              'click' : function(e){

@@ -67,5 +67,12 @@ public class StoreDAO {
 		session.close();
 		return storeItem;
 	}//
+
+	public int checkPhone(String phone) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int result = session.selectOne("StoreItem.checkPhone", phone);
+		session.close();
+		return result;
+	}
 	
 }

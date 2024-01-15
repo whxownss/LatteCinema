@@ -279,36 +279,52 @@ function kakaoPay(useremail, username) {
 //          		 localStorage.setItem('schDTO', JSON.stringify(schDTO));
 //          		 window.location = "res4.re";
 
-			$.each(schDTO, (k, v) => {
-				if(k == "seat"){
-					v = v.join(", ");
-				}
-				rsp[k] = v;
-			})
-			debugger;
-			
-			// 결제 정보 db에 insert
-			$.ajax({
-				type: "GET",
-				url: "res3Pro.re",
-				data: {rsp: JSON.stringify(rsp)},
-				dataType: "text" 
-			})
-			.done(function(data){
-				alert(data);
-				localStorage.setItem('rsp', JSON.stringify(rsp));
-        		window.location = "res4.re";
-			})
-			.fail(function(){
-			})
-                 //결제 성공시 프로젝트 DB저장 요청
-//                  if (response.status == 200) { // DB저장 성공시
-//                      alert('결제 완료!')
-//                      window.location.reload();
-//                  } else { // 결제완료 후 DB저장 실패시
-//                      alert(`error:[${response.status}]\n결제요청이 승인된 경우 관리자에게 문의바랍니다.`);
-//                      // DB저장 실패시 status에 따라 추가적인 작업 가능성
-//                  }
+				$.each(schDTO, (k, v) => {
+					if(k == "seat"){
+						v = v.join(", ");
+					}
+					rsp[k] = v;
+				})
+				// 이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?
+				var date = new Date();
+				var month = date.getMonth() + 1;
+				var day = date.getDate();
+				var hour = date.getHours();
+				var minute = date.getMinutes();
+				var second = date.getSeconds();
+	
+		        month = month >= 10 ? month : '0' + month;
+		        day = day >= 10 ? day : '0' + day;
+		        hour = hour >= 10 ? hour : '0' + hour;
+		        minute = minute >= 10 ? minute : '0' + minute;
+		        second = second >= 10 ? second : '0' + second;
+		
+				// 이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?	
+				rsp["pay_time"] = date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+				debugger;
+				
+				// 결제 정보 db에 insert
+				$.ajax({
+					type: "GET",
+					url: "res3Pro.re",
+					data: {rsp: JSON.stringify(rsp)},
+					dataType: "text" 
+				})
+				.done(function(data){
+					alert(data);
+					localStorage.setItem('rsp', JSON.stringify(rsp));
+	        		window.location = "res4.re";
+				})
+				.fail(function(){
+				})
+	                 //결제 성공시 프로젝트 DB저장 요청
+	//                  if (response.status == 200) { // DB저장 성공시
+	//                      alert('결제 완료!')
+	//                      window.location.reload();
+	//                  } else { // 결제완료 후 DB저장 실패시
+	//                      alert(`error:[${response.status}]\n결제요청이 승인된 경우 관리자에게 문의바랍니다.`);
+	//                      // DB저장 실패시 status에 따라 추가적인 작업 가능성
+	//                  }
              } else if (rsp.success == false) { // 결제 실패시
                  alert(rsp.error_msg)
              }

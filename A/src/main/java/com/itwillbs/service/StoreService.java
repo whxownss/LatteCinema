@@ -5,7 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.gson.Gson;
+import com.itwillbs.dao.MemberDAO;
 import com.itwillbs.dao.StoreDAO;
+import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.StoreItemDTO;
 
 public class StoreService {
@@ -35,5 +37,20 @@ public class StoreService {
 		
 		return storeItemJson;
 	}//
+	
+	public int checkPhone(HttpServletRequest request) {
+		MemberDTO memberDTO = new MemberDTO();
+		int result = 0;
+		try {
+			String phone = request.getParameter("memPhone");
+			storeDAO = new StoreDAO();
+			result = storeDAO.checkPhone(phone);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result; 
+	}
 	
 }
