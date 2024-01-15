@@ -77,4 +77,49 @@
 		WHERE MEM_PHONE = #{phone}
 	</select>
 	
+	<insert id="buyerInsert" parameterType="StoreItemDTO">
+		INSERT INTO STORE_PAY
+			( PAY_IDX
+			, MEM_ID
+			, PAID_AMOUNT
+			, PAY_METHOD
+			, CARD_NAME
+			, CARD_NUMBER
+			, BUYER_TEL
+			, SUCCESS
+			, STATUS
+			, BUYER_NAME
+			, MERCHANT_UID
+			, PAY_TIME
+			, ITEM_CNT
+			, NAME
+			, GIFT_MSG
+			<if test="giftTel != null || giftTel != ''">
+			, GIFT_TEL	
+			</if>
+			) 
+		VALUES(
+			  (SELECT *
+				 FROM (SELECT IFNULL(MAX(CAST(PAY_IDX as unsigned)), 0) + 1
+						 FROM STORE_PAY) A)
+			, #{memId}
+			, #{paidAmount}
+			, #{payMethod}
+			, #{cardName}
+			, #{cardNumber}
+			, #{buyerTel}
+			, #{success}
+			, #{status}
+			, #{buyerName}
+			, #{merchantUid}
+			, NOW()
+			, #{itemCnt}
+			, #{name}
+			, #{giftMsg}
+			<if test="giftTel != null || giftTel != ''">
+			, #{giftTel}	
+			</if>
+			)
+	</insert>
+	
 </mapper>
