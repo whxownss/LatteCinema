@@ -8,8 +8,9 @@
 
 	<insert id="insertMovie">
 			INSERT INTO MOVIE
-		 	 ( 
-		 	   MOVIE_CODE
+		 	 (
+		 	   MOVIE_IDX 
+		 	 , MOVIE_CODE
 		 	 , TITLE
 		 	 , ACTOR
 		 	 , STILLCUT
@@ -26,7 +27,11 @@
 		 	 , START_DATE
 		 	 , END_DATE)
 		VALUES (
-			  #{movieCode}
+			  (
+			  	SELECT *
+		   		  FROM (SELECT IFNULL(MAX(CAST(MOVIE_IDX as unsigned)), 0) + 1
+				   		  FROM MOVIE) M)	
+			, #{movieCode}
 		  	, #{title}
 		  	, #{actor}
 		  	, #{stillcut}

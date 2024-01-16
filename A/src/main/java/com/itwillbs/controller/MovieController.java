@@ -43,6 +43,16 @@ public class MovieController extends HttpServlet {
 
 		// 현재상영작 페이지 이동
 		if(sPath.equals("/movie_now.mo")) {
+			
+			MovieService movieService = new MovieService();
+		    MovieDTO movieDTO = new MovieDTO();
+		    
+			List<MovieDTO> posterList = movieService.getLattePoster(movieDTO);
+			request.setAttribute("lattePosterList", posterList);
+			// 영화 now 포스터 넣는 부분 
+			List<MovieDTO> posterNowList = movieService.getNowPoster(movieDTO);
+			request.setAttribute("posterNowList", posterNowList);
+			
 			dispatcher = request.getRequestDispatcher("_a/movie_now.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -57,6 +67,11 @@ public class MovieController extends HttpServlet {
 
 		// 옛날영화 페이지 이동
 		if(sPath.equals("/movie_latte.mo")) {
+			MovieService movieService = new MovieService();
+		    MovieDTO movieDTO = new MovieDTO();
+			List<MovieDTO> posterList = movieService.getLattePoster(movieDTO);
+			request.setAttribute("lattePosterList", posterList);
+			
 			dispatcher = request.getRequestDispatcher("_a/movie_latte.jsp");
 			dispatcher.forward(request, response);
 		}
