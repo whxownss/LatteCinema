@@ -121,7 +121,7 @@
 			, #{giftMsg}
 			</if>
 			<if test="giftTel != null || giftTel != ''">
-			, #{giftTel}	
+			, #{giftTel}
 			</if>
 			)
 	</insert>

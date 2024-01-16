@@ -97,14 +97,13 @@
 									<form onsubmit="return false">
 										<div class="form-floating mb-3">
 											<input type="tel" class="form-control" id="phone"
-												placeholder="연락처" onblur="checkPhone()" required>
-												<label for="phone">받으시는 분 (휴대폰 번호)
-												<span id="checkPhone"></span>
+												placeholder="연락처" onblur="checkPhone()" required> <label
+												for="phone">받으시는 분 (휴대폰 번호) <span id="checkPhone"></span>
 											</label>
 										</div>
 										<div class="mb-3">
 											<label for="message-text" class="col-form-label">
-											보내는 메세지 :</label>
+												메시지 (최대 70글자) :</label>
 											<textarea class="form-control" rows="5" id="msg"
 												placeholder="즐거운 관람 되세요~"></textarea>
 										</div>
@@ -221,7 +220,7 @@
 
 var storeItem = ${storeItem};
 
-//연락처 정규식 체크
+// 연락처 정규식 체크
 function checkPhone() {
 	var phone = $("#phone").val();
 	var text = "** 연락처 입력 필수! **"
@@ -318,8 +317,9 @@ IMP.init("imp20121707");
     	  	  rsp["item_cnt"] = $(".inpp").text();
     	  	  
     	  	  if(param == 'gift'){
-    	  		rsp["gift_tel"] = $("#checkPhone").text();		// 전화번호 확인
-    	  		rsp["gift_msg"] = $("#checkPhone").text();		// 메시지 확인
+    	  		rsp["gift_tel"] = $("#phone").val();		// 전화번호 확인
+    	  		var msg = ($("#msg").val() == '') ? $('#msg').attr('placeholder') : $("#msg").val();
+    	  		rsp["gift_msg"] = msg;		// 메시지 확인
     	  	  }
     		  
     		  $.ajax({
@@ -332,6 +332,10 @@ IMP.init("imp20121707");
     			  
     			  if(data == "true"){
     				  alert("결제가 완료되었습니다.")
+    				  $('#checkPhone').text('');
+    				  $('#phone').val('');
+            		  $('#msg').val('');
+    				  $("#exampleModal").modal('hide');
     			  }
     		  })
     		  .fail(function(){})    		  

@@ -159,25 +159,6 @@
 		</div>
 	</section>
 	
-	<!-- 하단 광고 이미지 -->
-
-	<section class="category-section fs-5">
-		<div class="container w-100%" data-aos="fade-up">
-			<span class="anchor"
-				style="display: block; height: 20px; margin-top: 20px; visibility: hidden;"></span>
-			<div class="banner_01">
-				<!-- 영화 : 트롤 -->
-				<!-- <a href="#"><img -->
-				<!-- 	src="https://cf2.lottecinema.co.kr/lotte_image/2023/Trolls_BandTogether/1220/Trolls_BandTogether_980180.jpg" -->
-				<!-- 	alt="트롤: 밴드 투게더 절찬상영중 전체관람가 12월, 가장 짜릿한 컴백 무대의 시작!" width="100%"></a> -->
-				<!-- 영화 : 노량 -->
-				<a href="#"><img
-					src="https://cf2.lottecinema.co.kr/lotte_image/2023/Noryang_DeadlySea/1220/Noryang_DeadlySea_980180.jpg"
-					alt="노량: 죽음의 바다 절찬상영중 12세이상관람가 2023년 12월, 모두를 압도할 최후의 전투가 시작된다"
-					width="100%"></a>	
-			</div>
-	</section>
-
 </main>
 
 <%@include file="../_common/commonFooterStart.jsp"%>
