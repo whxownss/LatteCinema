@@ -47,7 +47,7 @@
 							<div  style="margin-top: 4%; margin-bottom: 4%;">
 								<div class="d-flex justify-content-center">
 								  <div class="p-2">
-								  	<img src="assets/img/post1.jpg" style="height: 200px">
+								  	<img src="" class="poster" style="height: 200px">
 								  </div>
 								  <div class="p-2">
 										<table class="h-100">
@@ -184,6 +184,7 @@ $(function(){
 	if(rsp["p3"] != "0") personType.push("경로 " + rsp["p3"]);
 	debugger;
 	$(".personType").append("<span>" + personType.join(', ') + "</span>")
+	$(".poster").attr("src", rsp.poster);
 	
 })
 

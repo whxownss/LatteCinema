@@ -18,6 +18,7 @@
 			 , M.TITLE							 "TITLE"
 			 , SC.SCR_SEAT						 "SCR_SEAT"
 			 , M.RATING							 "RATING"
+			 , M.POSTER							 "POSTER"
 			 , IFNULL(CAST(SC.SCR_SEAT AS UNSIGNED) - 
 			 		  CAST((SELECT SUM(P_SUM)
 			 	  		 	  FROM RESERVATION

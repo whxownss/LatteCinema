@@ -62,7 +62,7 @@
 								<div class="row hErrorC">  <!-- hErrorC --> 
 									<div class="d-flex flex-column">
 									  <div class="p-2">
-									  	<img src="assets/img/post1.jpg" style="height: 200px">
+									  	<img src="" class="poster" style="height: 200px">
 									  </div>
 									  <div class="p-2 d-flex flex-column text-start">
 										<span class="mb-1">
@@ -366,6 +366,7 @@ $(function(){
 	$("#pTP1").text(schDTO["p1"] * 12000);
 	$("#pTP2").text(schDTO["p2"] * 7000);
 	$("#pTP3").text(schDTO["p3"] * 5000);
+	$(".poster").attr("src", schDTO.poster);
 	
 	
 	// 할인받기전 금액 합
