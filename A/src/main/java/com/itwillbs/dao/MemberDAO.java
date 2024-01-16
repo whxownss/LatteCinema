@@ -17,6 +17,7 @@ import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.domain.ReservationDTO;
+import com.itwillbs.domain.StorePayDTO;
 import com.itwillbs.sql.SqlMapClient;
 
 public class MemberDAO {
@@ -132,7 +133,7 @@ public class MemberDAO {
 	}
 
 	public ArrayList<ReservationDTO> getResBoardList(PageDTO pageDTO, String memId) {
-		System.out.println("MemberDAO getResBoardList() search");
+		System.out.println("MemberDAO getResBoardList()");
 		ArrayList<ReservationDTO> resBoardList = null;
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
@@ -152,6 +153,7 @@ public class MemberDAO {
 	}//getResBoardList()
 
 	public int getResBoardCount(String memId) {
+		System.out.println("MemberDAO getResBoardCount()");
 		int count = 0;
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
@@ -165,6 +167,42 @@ public class MemberDAO {
 		}
 		return count;
 	}//getResBoardCount()
+
+	public ArrayList<StorePayDTO> getStoreBoardList(PageDTO pageDTO, String memId) {
+		System.out.println("MemberDAO getStoreBoardList()");
+		ArrayList<StorePayDTO> storeBoardList = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			Map<String, Object> params = new HashMap<>();
+			params.put("pageDTO", pageDTO);
+			params.put("memId", memId);
+
+			storeBoardList = new ArrayList<StorePayDTO>(session.selectList("CsAdmin.getStoreBoardList", params));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return storeBoardList;
+	}//getStoreBoardList()
+
+	public int getStoreBoardCount(String memId) {
+		System.out.println("MemberDAO getStoreBoardCount()");
+		int count = 0;
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			count = session.selectOne("CsAdmin.getStoreBoardCount",memId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return count;
+	}//getStoreBoardCount()
 
 	
 }

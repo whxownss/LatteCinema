@@ -1,3 +1,4 @@
+<%@page import="com.itwillbs.domain.StorePayDTO"%>
 <%@page import="com.itwillbs.domain.ReservationDTO"%>
 <%@page import="com.itwillbs.domain.PageDTO"%>
 <%@page import="com.itwillbs.domain.MemberDTO"%>
@@ -63,7 +64,7 @@
 						<!-- 예매 조회 조건 End -->
 			
 		<%
-		ArrayList<ReservationDTO> resBoardList = (ArrayList<ReservationDTO>)request.getAttribute("resBoardList");
+		ArrayList<StorePayDTO> storeBoardList = (ArrayList<StorePayDTO>)request.getAttribute("storeBoardList");
 		PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
 		%>
 						
@@ -80,8 +81,8 @@
 									<col style="width:90px;">
 <%-- 									<col style="width:90px;"> --%>
 <%-- 									<col style="width:90px;"> --%>
-<%-- 									<col style="width:70px;"> --%>
-<%-- 									<col style="width:105px;"> --%>
+									<col style="width:70px;">
+									<col style="width:70px;">
 									<col style="width:70px;">
 									<col style="width:75px;">
 								</colgroup>
@@ -92,24 +93,34 @@
 										<th scope="col" class="text-center">상품명</th>
 <!-- 										<th scope="col" class="text-center">상영관</th> -->
 <!-- 										<th scope="col" class="text-center">관람인원</th> -->
-<!-- 										<th scope="col" class="text-center">좌석</th> -->
-<!-- 										<th scope="col" class="text-center">상영일시</th> -->
+										<th scope="col" class="text-center">선물여부</th>
+										<th scope="col" class="text-center">수신자</th>
 										<th scope="col" class="text-center">금액</th>
 										<th scope="col" class="text-center">환불</th>
 									</tr>
 								</thead>
 								<tbody id="tbody">
-								<c:forEach var="reservationDTO" items="${resBoardList}">
+								<c:forEach var="storePayDTO" items="${storeBoardList}">
 									<tr>
-										<td class="text-center align-middle">${reservationDTO.merchantUid}</td>
-										<td scope="row" class="text-center align-middle">${reservationDTO.payTime}</td>
-										<td scope="row" class="text-center align-middle">${reservationDTO.title}</td>
+										<td class="text-center align-middle">${storePayDTO.merchantUid}</td>
+										<td scope="row" class="text-center align-middle">${storePayDTO.payTime}</td>
+										<td scope="row" class="text-center align-middle">${storePayDTO.name}</td>
 <%-- 										<td scope="row" class="text-center align-middle">${reservationDTO.cinema} ${reservationDTO.scrIdx }</td> --%>
 <%-- 										<td scope="row" class="text-center align-middle">성인${reservationDTO.p1}명 청소년${reservationDTO.p2}명 경로${reservationDTO.p3}명</td> --%>
-<%-- 										<td scope="row" class="text-center align-middle">${reservationDTO.seat}</td> --%>
-<%-- 										<td scope="row" class="text-center align-middle">${reservationDTO.date} ${reservationDTO.sTime}~${reservationDTO.schEtime}</td> --%>
-										<td scope="row" class="text-center align-middle">${reservationDTO.paidAmount}</td>
-										<td scope="row" class="text-center align-middle"><button class="btn btn-dark" type="button">환불</button></td>
+										<c:if test="${ empty storePayDTO.giftTel }">
+											<td scope="row" class="text-center align-middle">X</td>
+										</c:if>
+										<c:if test="${ !empty storePayDTO.giftTel }">
+											<td scope="row" class="text-center align-middle">O</td>
+										</c:if>
+										<td scope="row" class="text-center align-middle">${storePayDTO.memName }</td>
+										<td scope="row" class="text-center align-middle">${storePayDTO.paidAmount}</td>
+										<c:if test="${ empty storePayDTO.giftTel }">
+											<td scope="row" class="text-center align-middle"><button class="btn btn-dark" type="button">환불</button></td>
+										</c:if>
+										<c:if test="${ !empty storePayDTO.giftTel }">
+											<td scope="row" class="text-center align-middle">환불 불가</td>
+										</c:if>
 									</tr>
 								</c:forEach>
 								</tbody>
@@ -122,17 +133,17 @@
 								  <ul class="pagination" id="searchPaging">
 									<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
 									    <li class="page-item ">
-									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
+									      <a class="page-link text-secondary" href="bookinglist2.me?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
 									    </li>
 								    </c:if>	
 								    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
 									    <li class="page-item" aria-current="page">
-									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${i }">${i }</a>
+									      <a class="page-link text-secondary" href="bookinglist2.me?pageNum=${i }">${i }</a>
 									    </li>
 								    </c:forEach>
 						    		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
 									    <li class="page-item">
-									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
+									      <a class="page-link text-secondary" href="bookinglist2.me?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
 									    </li>
 								    </c:if>	
 								  </ul>
@@ -260,8 +271,8 @@
 <script type="text/javascript">
 $("#tbody").on("click","button",function() {
 	 var $row = $(this).closest("tr");
-    // 해당 행 안에 있는 'mid' 셀의 텍스트 내용
-    var mid = $row.find("td:first-child").text();
+    // 해당 행 안에 있는 'merchantUid' 셀의 텍스트 내용
+    var merchantUid = $row.find("td:first-child").text();
 	alert('이벤트연결' + mid);
 	if(confirm('정말 취소하시겠습니까?')){
 		alert('취소하러가자')

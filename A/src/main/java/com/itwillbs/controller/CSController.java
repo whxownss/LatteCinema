@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.itwillbs.domain.CenterBoardDTO;
@@ -582,6 +583,14 @@ public class CSController extends HttpServlet  {
 		// 1:1문의 글쓰기 페이지 이동
 		if(sPath.equals("/cs_qna_write.cs")) {
 			System.out.println("주소비교 /cs_qna_write.cs 일치");
+			
+			HttpSession session = request.getSession();
+			String memId = (String) session.getAttribute("sId");
+			if(memId == null) {
+				response.sendRedirect("login.me");
+				return;
+			}
+			
 			dispatcher = request.getRequestDispatcher("_cs/cs_qna_write.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -673,6 +682,14 @@ public class CSController extends HttpServlet  {
 		// 분실물 글쓰기 페이지 이동
 		if(sPath.equals("/cs_lost_write.cs")) {
 			System.out.println("주소비교 /cs_lost_write.cs 일치");
+			
+			HttpSession session = request.getSession();
+			String memId = (String) session.getAttribute("sId");
+			if(memId == null) {
+				response.sendRedirect("login.me");
+				return;
+			}
+			
 			dispatcher = request.getRequestDispatcher("_cs/cs_lost_write.jsp");
 			dispatcher.forward(request, response);
 		}

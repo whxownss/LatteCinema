@@ -14,6 +14,7 @@ import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.domain.ReservationDTO;
+import com.itwillbs.domain.StorePayDTO;
 
 public class MemberService {
 
@@ -361,6 +362,37 @@ public class MemberService {
 		}
 		return count;
 	}//getResBoardCount()
+
+	public ArrayList<StorePayDTO> getStoreBoardList(PageDTO pageDTO, String memId) {
+		System.out.println("MemberService getStoreBoardList()");
+		ArrayList<StorePayDTO> storeBoardList = null;
+		try {
+			// 시작하는 행번호 구하는 식
+			int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+			// 끝나는 행번호 구하는 식
+			int endRow = startRow + pageDTO.getPageSize() -1;			
+			MemberDAO memberDAO = new MemberDAO();
+			pageDTO.setStartRow(startRow-1);
+			pageDTO.setPageSize(pageDTO.getPageSize());
+			
+			storeBoardList = memberDAO.getStoreBoardList(pageDTO,memId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return storeBoardList;
+	}//getStoreBoardList()
+
+	public int getStoreBoardCount(String memId) {
+		System.out.println("CSBoardService getStoreBoardCount()");
+		int count = 0;
+		try {
+			MemberDAO memberDAO = new MemberDAO();
+			count = memberDAO.getStoreBoardCount(memId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}//getStoreBoardCount()
 
 
 

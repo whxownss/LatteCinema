@@ -18,6 +18,9 @@ public class StorePayDTO {
 	private String name;
 	private String giftMsg;
 	private String giftTel;
+	//마이페이지 구매내역을 위한 추가 작업
+	private String payTime;
+	private String memName;
 	
 	public String getMemId() {
 		return memId;
@@ -109,14 +112,26 @@ public class StorePayDTO {
 	public void setGiftTel(String giftTel) {
 		this.giftTel = giftTel;
 	}
-	
+	public String getPayTime() {
+		return payTime;
+	}
+	public void setPayTime(String payTime) {
+		this.payTime = payTime;
+	}
+	public String getMemName() {
+		return memName;
+	}
+	public void setMemName(String memName) {
+		this.memName = memName;
+	}
 	@Override
 	public String toString() {
 		return "StorePayDTO [memId=" + memId + ", payIdx=" + payIdx + ", paidAmount=" + paidAmount + ", payMethod="
 				+ payMethod + ", cardName=" + cardName + ", cardNumber=" + cardNumber + ", buyerTel=" + buyerTel
 				+ ", success=" + success + ", status=" + status + ", buyerName=" + buyerName + ", merchantUid="
 				+ merchantUid + ", itemCnt=" + itemCnt + ", name=" + name + ", giftMsg=" + giftMsg + ", giftTel="
-				+ giftTel + "]";
+				+ giftTel + ", payTime=" + payTime + ", memName=" + memName + "]";
 	}
+		
 	
 }

@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.itwillbs.domain.CenterBoardDTO;
@@ -44,6 +45,14 @@ public class AdminController extends HttpServlet {
 		// 관리자 홈 페이지 이동
 		if(sPath.equals("/adm_home.ad")) {
 			System.out.println("주소비교 /adm_home.ad 일치");
+			
+			HttpSession session = request.getSession();
+			String memId = (String) session.getAttribute("sId");
+			if(memId == null) {
+				response.sendRedirect("login.me");
+				return;
+			}
+			
 			request.setCharacterEncoding("utf-8");
 			CSBoardService csBoardService = new CSBoardService();
 			ArrayList<ResponseDataDTO> responseList = csBoardService.getResponseList();
@@ -58,6 +67,14 @@ public class AdminController extends HttpServlet {
 		// 관리자 회원관리 페이지 이동
 		if(sPath.equals("/adm_member.ad")) {
 			System.out.println("주소비교 /adm_member.ad 일치");
+			
+			HttpSession session = request.getSession();
+			String memId = (String) session.getAttribute("sId");
+			if(memId == null) {
+				response.sendRedirect("login.me");
+				return;
+			}
+			
 			request.setCharacterEncoding("utf-8");
 			CSBoardService csBoardService = new CSBoardService();
 			ArrayList<MemberDTO> memberList = csBoardService.getMemberList();
@@ -112,6 +129,14 @@ public class AdminController extends HttpServlet {
 
 		// 관리자 공지사항 페이지 이동
 		if(sPath.equals("/adm_cs_center.ad")) {
+			
+			HttpSession session = request.getSession();
+			String memId = (String) session.getAttribute("sId");
+			if(memId == null) {
+				response.sendRedirect("login.me");
+				return;
+			}
+			
 			CSBoardService csBoardService = new CSBoardService();
 			ArrayList<CenterBoardDTO> centerBoardList = csBoardService.getCenterBoardList();
 			request.setAttribute("centerBoardList", centerBoardList);
@@ -122,6 +147,14 @@ public class AdminController extends HttpServlet {
 
 		// 관리자 자주찾는질문 페이지 이동
 		if(sPath.equals("/adm_cs_exque.ad")) {
+			
+			HttpSession session = request.getSession();
+			String memId = (String) session.getAttribute("sId");
+			if(memId == null) {
+				response.sendRedirect("login.me");
+				return;
+			}
+			
 			CSBoardService csBoardService = new CSBoardService();
 			ArrayList<ExqBoardDTO> exqBoardList = csBoardService.getExqBoardList();
 			request.setAttribute("exqBoardList",exqBoardList);
@@ -132,6 +165,14 @@ public class AdminController extends HttpServlet {
 	 
 		// 관리자 1:1문의 페이지 이동
 		if(sPath.equals("/adm_cs_qna.ad")) {
+			
+			HttpSession session = request.getSession();
+			String memId = (String) session.getAttribute("sId");
+			if(memId == null) {
+				response.sendRedirect("login.me");
+				return;
+			}
+			
 			CSBoardService csBoardService = new CSBoardService();
 			ArrayList<QnaBoardDTO> qnaBoardList = csBoardService.getQnaBoardList();
 			request.setAttribute("qnaBoardList", qnaBoardList);
@@ -142,6 +183,14 @@ public class AdminController extends HttpServlet {
 		
 		// 관리자 분실물 페이지 이동
 		if(sPath.equals("/adm_cs_lost.ad")) {
+			
+			HttpSession session = request.getSession();
+			String memId = (String) session.getAttribute("sId");
+			if(memId == null) {
+				response.sendRedirect("login.me");
+				return;
+			}
+			
 			CSBoardService csBoardService = new CSBoardService();
 			ArrayList<LostBoardDTO> lostBoardList = csBoardService.getLostBoardList();
 			request.setAttribute("lostBoardList",lostBoardList);
