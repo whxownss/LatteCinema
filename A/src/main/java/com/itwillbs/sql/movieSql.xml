@@ -24,8 +24,7 @@
 		 	 , NATION
 		 	 , RUN_TIME
 		 	 , START_DATE
-		 	 , END_DATE
-		 	 , MOVIE_STATE)
+		 	 , END_DATE)
 		VALUES (
 			  #{movieCode}
 		  	, #{title}
@@ -42,8 +41,7 @@
 		  	, #{nation}
 		  	, #{runTime}
 		  	, SUBSTRING(#{startDate}, 1, 10)
-		  	, SUBSTRING(#{endDate}, 1, 10)
-		  	, #{movieState})
+		  	, SUBSTRING(#{endDate}, 1, 10))
 	</insert>
 
 	
@@ -88,7 +86,8 @@
 		 	 , STILLCUT
 		 	 , ACTOR
 	FROM MOVIE 
-	WHERE MOVIE_CODE = #{movieCode};
+	WHERE MOVIE_CODE = #{movieCode}
+	 
 
 	</select>
 	
@@ -99,7 +98,6 @@
 			 	 , DIRECTOR
 			 	 , OPENDATE
 			 	 , RATING
-		         , MOVIE_STATE
 				 , MOVIE_CATEGORY
 		
 		FROM MOVIE			 
@@ -123,8 +121,8 @@
 			 <!--    START_DATE = SUBSTRING(#{startDate}, 1, 10),
 			    END_DATE = SUBSTRING(#{endDate}, 1, 10), -->
 			    START_DATE = #{startDate},
-			    END_DATE = #{endDate},
-			    MOVIE_STATE = #{movieState}	
+			    END_DATE = #{endDate}
+			   
 			    
 	    WHERE	MOVIE_CODE = #{movieCode} 
 	</update>

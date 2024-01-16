@@ -185,7 +185,6 @@
                   <th>영화명</th>
                   <th>개봉일자</th>
                   <th>등급</th>
-                  <th>상영상태</th>
                   <th>영화분류</th>
                   <th>관리</th>
                 </tr>
@@ -197,10 +196,9 @@
               		<td>${movie.title}</td>
               		<td>${movie.openDate}</td>
               		<td>${movie.rating}</td>
-              		<td>${movie.movieState}</td>  <!-- 상영종료일보다 이전인 날짜엔 상영중으로 보이고 지나면 상영종료로 보이게  -->
               		<td>${movie.movieCategory}</td>
                   <th><button class="btn btn-success" type="button" data-toggle="modal" data-target="#movieModal" data-moviecode="${movie.movieCode}" 
-                              data-title="${movie.title}" data-opendate="${movie.openDate}" data-rating="${movie.rating}" data-moviestate="${movie.movieState}"
+                              data-title="${movie.title}" data-opendate="${movie.openDate}" data-rating="${movie.rating}" 
                               data-category="${movie.movieCategory}" data-type="MODIFY">수정</button>
                   </th>
               	</tr>
@@ -389,6 +387,8 @@
        var button    = $(event.relatedTarget)
        var category  = button.data('category')
        var movieCode = button.data('moviecode')
+       
+       console.log(movieCode)
        var title     = button.data('title')
        var opendate  = button.data('opendate')
        var rating    = button.data('rating')
@@ -413,22 +413,33 @@
    	   // 수정버튼 눌러서 실행했을때 실행되는 로직
        if(button.data('type') === "MODIFY"){
          $.ajax({
-           url : 'movie_detial.mo',
+           url : 'movie_detail.mo',
            type : 'GET',
-           data : movieCode,
+           data : {movieCode:movieCode},
+           async : false,
            success : function(movie){
              /* title 나오는지 확인하고 나오면 다른 input 항목도 똑같이 변수 값 지정해주기 */
              console.log(movie)
              
              title = movie.title;
-             console.log(title)
+             opendate = movie.openDate;
+             rating = movie.rating;
+             runtime = movie.runtime;
+             filmMade = movie.filmMade;
+             nation = movie.nation;
+             synopsis = movie.synopsis;
+             director = movie.director;
+             actor = movie.actor;
+             genre = movie.genre;
+             runtime = movie.runTime;
+             
+             
+             
            },
            error : function(){
              console.log("상세조회 ajax 실패")
            }
          })
-         modal.find('#movie-title').attr("disabled", true)
-         modal.find('#movie-moviecode').attr("disabled", true)
          modal.find('.btn-regist').attr("formaction","movie_update.mo")
          modal.find('.btn-delete').css("display","")
       //박스오피스일때 KMDB 조회하고 가공
@@ -467,7 +478,6 @@
        modal.find('#movie-filmmade').val(filmMade)
        modal.find('#movie-nation').val(nation)
        modal.find('#movie-startdate').val(startdate)   //상영일(startdate) : 개봉일(opendate)을 디폴트값으로 넣었음
-       modal.find('#movie-opendate').val(opendate)
        modal.find('#movie-enddate').val(enddate)
        modal.find('#movie-synopsis').val(synopsis)
        modal.find('#movie-director').val(director)
@@ -689,10 +699,10 @@
     }
     return false;
   }
-  function deleteMovie(){
+   function deleteMovie(){
     if(confirm("등록된 영화를 삭제하시겠습니까?")){
       location.href="movie_delete.mo?movieCode="+$('#movie-moviecode').val()
-    }
+    } 
   }
   
 	</script>

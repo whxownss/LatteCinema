@@ -65,14 +65,19 @@ public class MovieService {
 	
 		
 		
-		public MovieDTO getMovieDetail(MovieDTO movieDTO) {
+		public MovieDTO getMovieDetail(HttpServletRequest request) {
 			
 			System.out.println("movieDetail 서비스");
 			MovieDTO detail = null;	
+			movieDTO = new MovieDTO();
 			
 			try {
+				
 				movieDAO = new MovieDAO();
+				movieDTO.setMovieCode(request.getParameter("movieCode"));
+				
 				detail = movieDAO.getMovieDetail(movieDTO);
+				
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -136,7 +141,7 @@ public class MovieService {
 				movieDTO.setActor(request.getParameter("actor"));
 				movieDTO.setStillcut(request.getParameter("stillcut"));
 				   
-				movieDAO.insertMovie(movieDTO);
+				movieDAO.updateMovie(movieDTO);
 				
 			} catch (Exception e) {
 				e.printStackTrace();
