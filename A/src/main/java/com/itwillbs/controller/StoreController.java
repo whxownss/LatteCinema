@@ -69,6 +69,7 @@ public class StoreController extends HttpServlet{
 
 		}//
 		
+		// 결제완료
 		if(sPath.equals("/storeListPro.st")){
 			
 			String rsp = request.getParameter("rsp");
@@ -81,6 +82,7 @@ public class StoreController extends HttpServlet{
 			
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(buyerInfo);
+			
 		}//
 		
 	} // doProcess
