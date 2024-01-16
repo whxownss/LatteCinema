@@ -254,7 +254,8 @@ var showSchedule = function(param, date){
 					   		   + "<input type='hidden' class='ciIdx' value='" + value.ciIdx + "'>"
 					   		   + "<input type='hidden' class='schIdx' value='" + value.schIdx + "'>"
 					   		   + "<input type='hidden' class='movType' value='" + value.schMovType + "'>"
-					   		   + "<input type='hidden' class='movIdx' value='" + value.schMovIdx + "'>");
+					   		   + "<input type='hidden' class='movIdx' value='" + value.schMovIdx + "'>"
+					   		   + "<input type='hidden' class='poster' value='" + value.poster + "'>");
 		})
 	})
 	.fail(function(){
@@ -453,16 +454,16 @@ $(function(){
 		var selector = ($(this).parents("#nowSch").length == 0) ? "#OLD" : "#NOW";
 		$(selector).trigger("click");
 		
-		// 시작 시간 30분 남은거는 선택 안되게끔
-		var nowDate = new Date();
-		var movDate = new Date($("#myCalendar").val() + " " + $(this).find(".startTime").text());
-		debugger;
-		if(new Date(nowDate .getTime() - (nowDate .getTimezoneOffset() * 60000)).toISOString().substring(0, 10) == $("#myCalendar").val()
-				&& (movDate.getTime() - nowDate.getTime()) / (60 * 1000) < 120 ) {
-			alert('상영 시작 30분 전부터는 현장에서만 구매 가능합니다.');
-// 			$('#staticBackdrop').modal('hide');
-			return;
-		}
+		// 시작 시간 30분 남은거는 선택 안되게끔  *******************************나중에 꼭 풀것
+// 		var nowDate = new Date();
+// 		var movDate = new Date($("#myCalendar").val() + " " + $(this).find(".startTime").text());
+// 		debugger;
+// 		if(new Date(nowDate .getTime() - (nowDate .getTimezoneOffset() * 60000)).toISOString().substring(0, 10) == $("#myCalendar").val()
+// 				&& (movDate.getTime() - nowDate.getTime()) / (60 * 1000) < 120 ) {
+// 			alert('상영 시작 30분 전부터는 현장에서만 구매 가능합니다.');
+// // 			$('#staticBackdrop').modal('hide');
+// 			return;
+// 		}
 		// 시작 시간 30분 남은거는 선택 안되게끔
 		
 		var sTime = $(this).find(".startTime").text();				   // 시작 시간
@@ -480,6 +481,7 @@ $(function(){
 		var schIdx = $(this).find(".schIdx").val();
 		var movType = $(this).find(".movType").val();
 		var movIdx = $(this).find(".movIdx").val();
+		var poster = $(this).find(".poster").val();
 		// 포스터도 담아야함
 		var schDTO = {
 				"rating"   : rating,
@@ -496,7 +498,8 @@ $(function(){
 				"sch_idx"  : schIdx,
 				"mov_type" : movType,
 				"mov_idx"  : movIdx,
-				"date_c"   : date.slice(0, -4)
+				"date_c"   : date.slice(0, -4),
+				"poster"   : poster
 		}
 		debugger;
 		$("#schDTO").val(JSON.stringify(schDTO));

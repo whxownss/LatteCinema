@@ -132,7 +132,7 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="x_panel">
 							<div class="x_title">
-								<h2>Save Movie House</h2>
+								<h2>스케줄 추가</h2>
 								<ul class="nav navbar-right panel_toolbox">
 									<li><a class="collapse-link"><i
 											class="fa fa-chevron-up"></i></a></li>
@@ -185,15 +185,7 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
 										</div>
 									</div>
 
-									<div class="form-group">
-										<label class="control-label col-md-3 col-sm-3 col-xs-12"
-											for="movie-space">상영관<span class="required">*</span>
-										</label>
-										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="movie-space" required="required"
-												class="form-control col-md-7 col-xs-12">
-										</div>
-									</div>
+									
 
 									<!--  영화관 위치가 아니라 영화관 위치 설명 파일이면 다른 곳에 있어야 할듯 -->
 
@@ -208,15 +200,6 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
 							</div>
                         </div>
                       </div> -->
-									<div class="form-group">
-										<label class="control-label col-md-3 col-sm-3 col-xs-12"
-											for="total-seat">총좌석수<span class="required">*</span>
-										</label>
-										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="total-seat" required="required"
-												class="form-control col-md-7 col-xs-12">
-										</div>
-									</div>
 
 
 									<div class="form-group">
@@ -229,6 +212,8 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
 												placeholder="ex) 230921">
 										</div>
 									</div>
+									
+									
 
 
 
@@ -266,8 +251,86 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
 						</div>
 					</div>
 				</div>
+				
+<!-- 				<div class="clearfix"></div> -->
+				
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>스케줄 조회</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <p class="text-muted font-13 m-b-30">
+                    </p>
+				<form action="#" id="memManage" name="memManage" method="post">	
+                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                      <thead>
+                        <tr>
+                          <th>지역</th>
+                          <th>영화관</th>
+                          <th>번호</th>
+                          <th>상영관</th>
+                          <th>영화타입</th>
+                          <th>영화제목</th>
+                          <th>러닝타임</th>
+                          <th>시작시간</th>
+                          <th>종료시간</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tbody">
+                      	<c:forEach var="memberDTO" items="${memberList }">
+                      	<tr>
+                      		<td>${memberDTO.memId }</td>
+                      		<td>${memberDTO.memName }</td>
+                      		<td>${memberDTO.memAddress }</td>
+                      		<td>${memberDTO.memBirthD }</td>
+                      		<td>${memberDTO.memJoinD }</td>
+                      		<td>${memberDTO.memPhone }</td>
+                      		<td>${memberDTO.memEmail }</td>
+	                          <td>
+<!-- 								<select> -->
+<%-- 									<c:if test="${memberDTO.memStatus eq 0 }"> --%>
+<!-- 										<option value="0" selected>N</option> -->
+<!-- 										<option value="1">Y</option> -->
+<%-- 									</c:if> --%>
+<%-- 									<c:if test="${memberDTO.memStatus eq 1 }"> --%>
+<!-- 										<option value="0">N</option> -->
+<!-- 										<option value="1" selected>Y</option> -->
+<%-- 									</c:if> --%>
+<!-- 								</select> -->
+									<c:if test="${memberDTO.memStatus eq 0 }">
+										<a>No</a>
+									</c:if>
+									<c:if test="${memberDTO.memStatus eq 1 }">
+										<a>Yes</a>
+									</c:if>
+							  </td>
+							  <td>${memberDTO.memStopD }</td>
+						</tr>	  
+                      	</c:forEach>
+                        
+                      </tbody>
+                    </table>
+				</form>	
+					
+                  </div>
+                </div>
+              </div>
+				</div>
+				
+				
             </div>
           </div>
+          
+          
+          
+          
         </div>
         <!-- /page content -->
 
