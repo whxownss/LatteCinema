@@ -19,7 +19,9 @@ public class ScheduleDTO {
 	private String scrSeat;
 	private String rating;
 	
+	private String poster;
 	private String pSum;
+	
 	
 	
 	public String getLoIdx() {
@@ -114,13 +116,22 @@ public class ScheduleDTO {
 	public void setpSum(String pSum) {
 		this.pSum = pSum;
 	}
+	
+	public String getPoster() {
+		return poster;
+	}
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
 	@Override
 	public String toString() {
 		return "ScheduleDTO [loIdx=" + loIdx + ", ciIdx=" + ciIdx + ", schIdx=" + schIdx + ", schDate=" + schDate
 				+ ", schMovType=" + schMovType + ", schMovIdx=" + schMovIdx + ", schStime=" + schStime + ", schRun="
 				+ schRun + ", schEtime=" + schEtime + ", scrIdx=" + scrIdx + ", scrSeatAvail=" + scrSeatAvail
-				+ ", title=" + title + ", scrSeat=" + scrSeat + ", rating=" + rating + ", pSum=" + pSum + "]";
+				+ ", title=" + title + ", scrSeat=" + scrSeat + ", rating=" + rating + ", poster=" + poster + ", pSum="
+				+ pSum + "]";
 	}
+	
 	
 	
 	
