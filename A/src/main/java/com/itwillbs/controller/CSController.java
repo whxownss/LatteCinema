@@ -832,7 +832,7 @@ public class CSController extends HttpServlet  {
 			System.out.println(msg);
 			//response.sendRedirect("cs_center.cs");
 			response.sendRedirect("adm_cs_lost.ad");
-		}//
+		}//  
 		
 		// 추천 게시판
 		if(sPath.equals("/cs_recommend.cs")) {
