@@ -156,4 +156,12 @@ public class ResDAO {
 		
 		return screenList;
 	}
+
+	public List<ScheduleDTO> getAllSchedules() {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<ScheduleDTO> allSchedules = session.selectList("Schedule.selectAll");
+		session.close();
+		
+		return allSchedules;
+	}
 }

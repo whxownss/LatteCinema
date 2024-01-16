@@ -176,4 +176,13 @@ public class ResService {
 		return screenListJson;
 	}
 
+	// 관리자 꺼
+	public List<ScheduleDTO> getAllSchedules() {
+		resDAO = new ResDAO();
+		Gson gson = new Gson();
+		String allSchedulesJson = gson.toJson(resDAO.getAllSchedules());
+		
+		return resDAO.getAllSchedules();
+	}
+
 }
