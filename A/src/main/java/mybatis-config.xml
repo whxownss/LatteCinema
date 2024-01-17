@@ -27,7 +27,6 @@
         <typeAlias type="com.itwillbs.domain.RecommendDTO" alias="RecommendDTO"/>
         <typeAlias type="com.itwillbs.domain.ScreenDTO" alias="ScreenDTO"/>
         <typeAlias type="com.itwillbs.domain.StorePayDTO" alias="StorePayDTO"/>
-        <typeAlias type="com.itwillbs.domain.SeatDTO" alias="SeatDTO"/>
         <typeAlias type="com.itwillbs.domain.ReviewDTO" alias="ReviewDTO"/>
     </typeAliases>
 
