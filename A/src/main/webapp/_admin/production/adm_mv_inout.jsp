@@ -537,6 +537,7 @@
     /* 저장 모달*/
      $('#movieModal').on('show.bs.modal', function (event) {
 
+    	debugger;
        var button    = $(event.relatedTarget)
        var modal = $(this)
        var movieCode = button.data('moviecode')
@@ -784,11 +785,7 @@
       var poster = info.posters.split('|')[0];
       var nation = info.nation;
       var synopsis = info.plots.plot[0].plotText;
-      // rating : kmdb에서 받는 값이 15세미만불가, 15세관람가 등 일관성이 없어서 해당하는 숫자가 포함되는지 따지기로 함
-      var rating = info.rating.includes("전체")? "all" :
-                   info.rating.includes("12")  ? "12"  : 
-                   info.rating.includes("15")  ? "15"  :
-                   info.rating.includes("18")  ? "18"  : "";
+      var rating = info.rating.includes("전체") ? "all" : info.rating.substr(0,2); 
       var director = info.directors.director[0].directorNm;
       var runtime = info.runtime;
       var genre = info.genre;
