@@ -147,48 +147,48 @@
 			)
 	</insert>
 	
-	<!-- 스토어 관리자 상품 등록 -->
-	<select resultType="StoreItemDTO" id="selectItemAdAdd" parameterType="String">
-		INSERT INTO STORE_ITEM
-			 ( ITEM_NAME
-			 , ITEM_DETAIL
-			 , ITEM_PRICE
-			 , ITEM_IMAGE)
-		VALUES
-			 ( #{itemName}
-			 , #{itemDetail}
-			 , #{itemPrice}
-			 , #{itemImage})
-	</select>
+<!-- 	<!-- 스토어 관리자 상품 등록 --> -->
+<!-- 	<select resultType="StoreItemDTO" id="selectItemAdAdd" parameterType="String"> -->
+<!-- 		INSERT INTO STORE_ITEM -->
+<!-- 			 ( ITEM_NAME -->
+<!-- 			 , ITEM_DETAIL -->
+<!-- 			 , ITEM_PRICE -->
+<!-- 			 , ITEM_IMAGE) -->
+<!-- 		VALUES -->
+<!-- 			 ( #{itemName} -->
+<!-- 			 , #{itemDetail} -->
+<!-- 			 , #{itemPrice} -->
+<!-- 			 , #{itemImage}) -->
+<!-- 	</select> -->
 	
 	<!-- 스토어 관리자 상품 수정 -->
-	<select resultType="StoreItemDTO" id="selectItemAdAdd" parameterType="String">
-		UPDETE STORE_ITEM
-		   SET
-		     ( ITEM_NAME
-			 , ITEM_DETAIL
-			 , ITEM_PRICE
-			 , ITEM_IMAGE)
-	</select>
+<!-- 	<select resultType="StoreItemDTO" id="selectItemAdAdd" parameterType="String"> -->
+<!-- 		UPDETE STORE_ITEM -->
+<!-- 		   SET -->
+<!-- 		     ( ITEM_NAME -->
+<!-- 			 , ITEM_DETAIL -->
+<!-- 			 , ITEM_PRICE -->
+<!-- 			 , ITEM_IMAGE) -->
+<!-- 	</select> -->
 	
 	<!-- 스토어 관리자 상품 삭제 -->
-	<select resultType="StoreItemDTO" id="selectItemAdAdd" parameterType="String">
-		DELETE FROM STORE_ITEM
-		 WHERE ITEM_NAME = ?????
-	</select>
+<!-- 	<select resultType="StoreItemDTO" id="selectItemAdAdd" parameterType="String"> -->
+<!-- 		DELETE FROM STORE_ITEM -->
+<!-- 		 WHERE ITEM_NAME = ????? -->
+<!-- 	</select> -->
 	
 	<!-- 스토어 관리자 구매내역 -->
-	<select resultType="StorePayDTO" id="selectItemAdInfo" parameterType="String">
-		select MERCHANT_UID
-			 , BUYER_NAME
-			 , NAME
-			 , ITEM_CNT
-			 , PAID_AMOUNT
-			 , PAY_TIME
-<!-- 			 , cs??? -->
-			 , BUYER_TEL
-		  from STORE_ITEM
-		 where ITEM_IDX = #{idx}
-	</select>
+<!-- 	<select resultType="StorePayDTO" id="selectItemAdInfo" parameterType="String"> -->
+<!-- 		select MERCHANT_UID -->
+<!-- 			 , BUYER_NAME -->
+<!-- 			 , NAME -->
+<!-- 			 , ITEM_CNT -->
+<!-- 			 , PAID_AMOUNT -->
+<!-- 			 , PAY_TIME -->
+<!-- <!-- 			 , cs??? --> -->
+<!-- 			 , BUYER_TEL -->
+<!-- 		  from STORE_ITEM -->
+<!-- 		 where ITEM_IDX = #{idx} -->
+<!-- 	</select> -->
 	
 </mapper>
