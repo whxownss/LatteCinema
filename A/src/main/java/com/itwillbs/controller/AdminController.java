@@ -20,9 +20,12 @@ import com.itwillbs.domain.MovieDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.domain.ResponseDataDTO;
 import com.itwillbs.domain.ScheduleDTO;
+import com.itwillbs.domain.StoreItemDTO;
+import com.itwillbs.domain.StorePayDTO;
 import com.itwillbs.service.AdminService;
 import com.itwillbs.service.CSBoardService;
 import com.itwillbs.service.ResService;
+import com.itwillbs.service.StoreService;
 import com.itwillbs.service.MovieService;
 
 public class AdminController extends HttpServlet {
@@ -106,12 +109,45 @@ public class AdminController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}	
 		
-		// 관리자 영화 및 영화관 관리 페이지 이동
+		// 관리자 스토어 페이지 이동 
 		if(sPath.equals("/adm_store.ad")) {
+			request.setCharacterEncoding("utf-8");
+			StoreService storeService = new StoreService();
+			
+			// 스토어상품 이름 리스트
+			List<StoreItemDTO> itemNameList = storeService.itemNameList();
+			
+			// 구매내역
+			ArrayList<StorePayDTO> storeList = storeService.getStoreBuyList();
+			
+			request.setAttribute("itemNameList",itemNameList);
+			request.setAttribute("storeList",storeList);
+			
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_store.jsp");
 			dispatcher.forward(request, response);
-		}		  
-
+		}//
+		
+		// 관리자 스토어 상품 추가
+		if(sPath.equals("/adm_storeBuyList.ad")) {
+			StoreService storeService = new StoreService();
+			
+			storeService.insertStore(request);
+			
+			response.sendRedirect("adm_store.ad");
+		}//
+		
+		// 관리자 스토어 상품 삭제
+		if(sPath.equals("/adm_storeDel.ad")) {
+			String name = request.getParameter("name");
+			
+			StoreService storeService = new StoreService();
+			
+			storeService.deleteItem(name);
+			
+			response.sendRedirect("adm_store.ad");
+		}//
+		
+		
 		// 관리자 공지사항 페이지 이동
 		if(sPath.equals("/adm_cs_center.ad")) {
 			CSBoardService csBoardService = new CSBoardService();
