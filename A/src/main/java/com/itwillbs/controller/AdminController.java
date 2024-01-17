@@ -192,12 +192,5 @@ public class AdminController extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 		    response.getWriter().write(result);
 		}		
-		
-		
 	}//doProcess()	
-	
-	
-	
-	
-	
 }//클래스 끝

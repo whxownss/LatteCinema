@@ -1,0 +1,1 @@
+var schDTO = JSON.parse(localStorage.getItem("schDTO"));
