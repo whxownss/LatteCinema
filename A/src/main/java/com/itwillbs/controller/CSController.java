@@ -413,13 +413,18 @@ public class CSController extends HttpServlet  {
 			if(qnaCategory == null) {
 				qnaCategory = "";
 			}
-			
-			int count = csBoardService.getQnaBoardCount();
-			ArrayList<QnaBoardDTO> qnaBoardList = csBoardService.getQnaBoardList(pageDTO);
+			int count = 0;
+			ArrayList<QnaBoardDTO> qnaBoardList = null;
+			//int count = csBoardService.getQnaBoardCount();
+			//ArrayList<QnaBoardDTO> qnaBoardList = csBoardService.getQnaBoardList(pageDTO);
+			//select 2번 안하려고 if else로 한다.
 			if(!qnaCategory.equals("")) {
 				System.out.println("@@@@@@@@@@ cs_qna서치페이징");
 				qnaBoardList = csBoardService.getQnaBoardList(pageDTO,qnaCategory);
 				count = csBoardService.getQnaBoardCount(qnaCategory);
+			} else {
+				count = csBoardService.getQnaBoardCount();
+				qnaBoardList = csBoardService.getQnaBoardList(pageDTO);
 			}
 			//추가한 부분
 
