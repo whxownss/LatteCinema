@@ -141,7 +141,7 @@ public class ResDAO {
 
 	public String refund(String mid) {
 		SqlSession session = sqlSessionFactory.openSession();
-		int deleteCnt = session.delete("Reservation.deleteRes", mid);
+		int deleteCnt = session.update("Reservation.refundRes", mid);
 		session.commit();
 		session.close();
 		

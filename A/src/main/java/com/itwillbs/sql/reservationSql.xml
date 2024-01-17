@@ -69,6 +69,7 @@
 		   AND S_TIME = #{sTime}
 		   AND TITLE = #{title}
 		   AND CINEMA = #{cinema}
+ 		   AND SUCCESS != 'false'       <!-- 환불 del -> upd 변경후 --><!-- 환불 del -> upd 변경후 --><!-- 환불 del -> upd 변경후 --><!-- 환불 del -> upd 변경후 -->
 		 UNION
 		SELECT SEAT_C "SEAT"
 		  FROM SEAT
@@ -133,6 +134,7 @@
 		   AND S.SEAT_C = R.SEAT
 		 WHERE 1 = 1 
 		   AND R.SEAT IS NULL
+		   AND R.SUCCESS != 'false' <!-- 환불 del -> upd 변경후 --><!-- 환불 del -> upd 변경후 --><!-- 환불 del -> upd 변경후 --><!-- 환불 del -> upd 변경후 -->
 		 <if test="memId != null">
 		   AND S.MEM_ID = #{memId}
 		 </if>
@@ -152,9 +154,9 @@
 		   AND SEAT_C = REPLACE(#{seatC}, ',', ', ')
 	</select>
 	
-	<delete id="deleteRes" parameterType="String">
-		DELETE 
-		  FROM RESERVATION
+	<delete id="refundRes" parameterType="String">
+		UPDATE RESERVATION
+		   SET SUCCESS = 'false'
 		 WHERE 1 = 1 
 		   AND MERCHANT_UID = #{mid}
 <!-- 		   AND TIMESTAMPDIFF -->
