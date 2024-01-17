@@ -14,6 +14,7 @@ public class StorePayDTO {
 	private String status;
 	private String buyerName;
 	private String merchantUid;
+	private String payTime;
 	private String itemCnt;
 	private String name;
 	private String giftMsg;
@@ -85,6 +86,12 @@ public class StorePayDTO {
 	public void setMerchantUid(String merchantUid) {
 		this.merchantUid = merchantUid;
 	}
+	public String getPayTime() {
+		return payTime;
+	}
+	public void setPayTime(String payTime) {
+		this.payTime = payTime;
+	}
 	public String getItemCnt() {
 		return itemCnt;
 	}
@@ -115,8 +122,8 @@ public class StorePayDTO {
 		return "StorePayDTO [memId=" + memId + ", payIdx=" + payIdx + ", paidAmount=" + paidAmount + ", payMethod="
 				+ payMethod + ", cardName=" + cardName + ", cardNumber=" + cardNumber + ", buyerTel=" + buyerTel
 				+ ", success=" + success + ", status=" + status + ", buyerName=" + buyerName + ", merchantUid="
-				+ merchantUid + ", itemCnt=" + itemCnt + ", name=" + name + ", giftMsg=" + giftMsg + ", giftTel="
-				+ giftTel + "]";
+				+ merchantUid + ", payTime=" + payTime + ", itemCnt=" + itemCnt + ", name=" + name + ", giftMsg="
+				+ giftMsg + ", giftTel=" + giftTel + "]";
 	}
 	
 }

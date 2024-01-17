@@ -313,7 +313,7 @@ IMP.init("imp20121707");
       }, function (rsp) { // callback
     	  console.log(rsp);
     	  if (rsp.success) {	// 결제성공
-    		  rsp["mem_id"] = 'ksy123';   
+    		  rsp["mem_id"] = 'asd';   
     	  	  rsp["item_cnt"] = $(".inpp").text();
     	  	  
     	  	  if(param == 'gift'){
