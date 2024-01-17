@@ -28,8 +28,24 @@ public class AdminService {
 		scheduleDTO.setSchDate(java.sql.Timestamp.valueOf(schDate + " 00:00:00"));   // 이부분 다시 확인
 		scheduleDTO.setSchStime(schStime);
 		
+		System.out.println("!@#!@#");
+		System.out.println(scheduleDTO);
+		
 		AdminDAO adminDAO = new AdminDAO();
 		adminDAO.insertSchedule(scheduleDTO);
+	}
+
+	public String deleteSchedule(HttpServletRequest request) {
+		ScheduleDTO scheduleDTO = new ScheduleDTO();
+		scheduleDTO.setLoIdx(request.getParameter("loIdx"));
+		scheduleDTO.setCiIdx(request.getParameter("ciIdx"));
+		scheduleDTO.setSchMovType(request.getParameter("movType"));
+		scheduleDTO.setSchIdx(request.getParameter("schIdx"));
+		System.out.println("==================");
+		System.out.println(scheduleDTO);
+		System.out.println("==================");
+		AdminDAO adminDAO = new AdminDAO();
+		return adminDAO.deleteSchedule(scheduleDTO);
 	}
 
 }

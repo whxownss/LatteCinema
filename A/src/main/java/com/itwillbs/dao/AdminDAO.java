@@ -16,4 +16,13 @@ public class AdminDAO {
 		session.close();
 	}
 
+	public String deleteSchedule(ScheduleDTO scheduleDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int deleteCnt = session.delete("Schedule.delete", scheduleDTO);
+		session.commit();
+		session.close();
+		
+		return deleteCnt > 0 ? "true" : "false";
+	}
+
 }
