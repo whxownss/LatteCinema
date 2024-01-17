@@ -4,11 +4,13 @@ package com.itwillbs.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.itwillbs.domain.MovieDTO;
+import com.itwillbs.domain.ReviewDTO;
 import com.itwillbs.sql.SqlMapClient;
 
 public class MovieDAO {
@@ -73,7 +75,30 @@ public class MovieDAO {
 		session.close();
 		return resultDTOList;
 	}
-	 
+
+	// 한줄평 작성 가능 유무 
+	public int checkWrite(Map<String, String> map) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int result = session.selectOne("Movie.checkWrite", map);
+		session.close();
+		
+		return result;
+		
+	}
+
+	// 한줄평 리뷰테이블 insert
+	public int reviewInsert(ReviewDTO reviewDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int result = session.insert("Movie.reviewInsert", reviewDTO);
+		session.commit();
+		session.close();
+		
+		return result;
+	}
+	
+	
+	
+	
 }
 
 

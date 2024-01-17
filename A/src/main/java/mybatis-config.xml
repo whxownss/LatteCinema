@@ -26,6 +26,7 @@
         <typeAlias type="com.itwillbs.domain.MovieDTO" alias="movieDTO"/>
         <typeAlias type="com.itwillbs.domain.RecommendDTO" alias="RecommendDTO"/>
         <typeAlias type="com.itwillbs.domain.SeatDTO" alias="SeatDTO"/>
+        <typeAlias type="com.itwillbs.domain.ReviewDTO" alias="ReviewDTO"/>
     </typeAliases>
 
 	<environments default="development">

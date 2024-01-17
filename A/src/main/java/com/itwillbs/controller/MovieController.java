@@ -95,5 +95,26 @@ public class MovieController extends HttpServlet {
 			response.sendRedirect("adm_mv_inout.ad");
 			
 		}
+		
+		// 한줄평 작성 가능 유무
+		if(sPath.equals("/checkWrite.mo")) { 
+			movieService = new MovieService();
+			int result = movieService.checkWrite(request);
+
+			System.out.println("@@@@@@@@@@@@@@@@@");
+			System.out.println(result);
+			System.out.println("@@@@@@@@@@@@@@@@@");
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result + "");
+			
+		}
+		
+		// 한줄평 데이터 넣기
+		if(sPath.equals("/reviewInsert.mo")) {
+			
+			movieService = new MovieService();
+			int result = movieService.reviewInsert(request);
+			
+		}//
 	}	
 }

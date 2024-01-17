@@ -87,6 +87,8 @@
 		 	 , RUN_TIME
 		 	 , STILLCUT
 		 	 , ACTOR
+		 	 , MOVIE_IDX
+		 	 , MOVIE_CATEGORY
 	FROM MOVIE 
 	WHERE MOVIE_CODE = #{movieCode};
 
@@ -105,7 +107,44 @@
 		FROM MOVIE			 
 	</select>
 
-
+<!--한줄평 작성 가능 유무  -->								<!--c  -->
+	<select id="checkWrite" parameterType="map" resultType="Integer">
+		SELECT COUNT(*)
+		  FROM RESERVATION R 
+		  JOIN SCHEDULE S 
+			ON R.LO_IDX = S.LO_IDX		
+		   AND R.CI_IDX = S.CI_IDX
+   		   AND R.SCH_IDX = S.SCH_IDX
+   		   AND R.MOV_TYPE = S.SCH_MOV_TYPE
+   		   AND R.MOV_IDX = S.SCH_MOV_IDX
+   		 WHERE R.MEM_ID = #{memId}
+   		   AND R.MOV_IDX = #{movIdx}
+   		   AND R.MOV_TYPE = #{movType}
+<!-- 	   		   AND NOW() > CONCAT(DATE_FORMAT(R.DATE, '%Y-%m-%d'), ' ', S.SCH_ETIME) -->
+	</select> 
+	
+	<!--한줄평 담기  -->
+	<insert id="reviewInsert" parameterType="ReviewDTO">
+		INSERT INTO REVIEWS
+			( REV_NUM
+			, REV_COMMENT
+			, REV_DATE
+			, TITLE
+			, MEM_ID
+			, MOV_IDX
+			, MOV_TYPE)
+		VALUES (
+			(SELECT *
+				FROM (SELECT IFNULL(MAX(CAST(REV_NUM AS UNSIGNED)), 0) +1
+						FROM REVIEWS) A)		
+			, #{revComment}
+			, #{revDate}
+			, #{title}
+			, #{memId}
+			, #{movIdx}
+			, #{movType}
+			)
+	</insert>
 
 	
 </mapper>
