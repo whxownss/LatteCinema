@@ -104,6 +104,8 @@
 			 	 , OPENDATE
 			 	 , RATING
 				 , MOVIE_CATEGORY
+				 , RUN_TIME
+				 , MOVIE_IDX
 		
 		FROM MOVIE			 
 	</select>

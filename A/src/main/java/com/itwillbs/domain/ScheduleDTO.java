@@ -19,7 +19,14 @@ public class ScheduleDTO {
 	private String scrSeat;
 	private String rating;
 	
+	private String poster;
 	private String pSum;
+	
+	private String loName;
+	private String ciName;
+	
+	
+	
 	
 	
 	public String getLoIdx() {
@@ -114,13 +121,36 @@ public class ScheduleDTO {
 	public void setpSum(String pSum) {
 		this.pSum = pSum;
 	}
+	
+	public String getPoster() {
+		return poster;
+	}
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+	
+	public String getLoName() {
+		return loName;
+	}
+	public void setLoName(String loName) {
+		this.loName = loName;
+	}
+	public String getCiName() {
+		return ciName;
+	}
+	public void setCiName(String ciName) {
+		this.ciName = ciName;
+	}
 	@Override
 	public String toString() {
 		return "ScheduleDTO [loIdx=" + loIdx + ", ciIdx=" + ciIdx + ", schIdx=" + schIdx + ", schDate=" + schDate
 				+ ", schMovType=" + schMovType + ", schMovIdx=" + schMovIdx + ", schStime=" + schStime + ", schRun="
 				+ schRun + ", schEtime=" + schEtime + ", scrIdx=" + scrIdx + ", scrSeatAvail=" + scrSeatAvail
-				+ ", title=" + title + ", scrSeat=" + scrSeat + ", rating=" + rating + ", pSum=" + pSum + "]";
+				+ ", title=" + title + ", scrSeat=" + scrSeat + ", rating=" + rating + ", poster=" + poster + ", pSum="
+				+ pSum + ", loName=" + loName + ", ciName=" + ciName + "]";
 	}
+	
+	
 	
 	
 	

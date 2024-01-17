@@ -19,6 +19,8 @@ import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.MovieDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.domain.ResponseDataDTO;
+import com.itwillbs.domain.ScheduleDTO;
+import com.itwillbs.service.AdminService;
 import com.itwillbs.service.CSBoardService;
 import com.itwillbs.service.ResService;
 import com.itwillbs.service.MovieService;
@@ -153,11 +155,17 @@ public class AdminController extends HttpServlet {
 		// 관리자 영화관 관리 페이지 이동
 		if(sPath.equals("/adm_cinema.ad")) {
 			ResService resService = new ResService();
+			MovieService movieServie = new MovieService();
+			
 			List<LocationDTO> locationList = resService.getLocations();
 			String cinemaListJson = resService.getCinemas();
+			List<ScheduleDTO> allSchedules = resService.getAllSchedules();
+			ArrayList<MovieDTO> movieList = movieServie.getMovieList();
 			
 			request.setAttribute("locationList", locationList);
 			request.setAttribute("cinemaListJson", cinemaListJson);
+			request.setAttribute("allSchedules", allSchedules);
+			request.setAttribute("movieList", movieList);
 			
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_cinema.jsp");
 			dispatcher.forward(request, response);
@@ -170,6 +178,12 @@ public class AdminController extends HttpServlet {
 			response.setContentType("application/json");
 			response.setCharacterEncoding("utf-8");
 		    response.getWriter().write(screenListJson);
+		}
+		if(sPath.equals("/adm_cinemaProIS.ad")) {
+			AdminService adminService = new AdminService();
+			adminService.insertSchedule(request);
+			
+			response.sendRedirect("adm_cinema.ad");
 		}		
 		
 		
