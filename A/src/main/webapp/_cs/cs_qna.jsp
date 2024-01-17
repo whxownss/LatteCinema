@@ -111,7 +111,7 @@
 				        <c:if test="${empty qnaBoardDTO.responseUser }">
 				        	<td>미답변</td>
 				        </c:if>
-				        <c:if test="${! empty qnaBoardDTO.responseUser }">
+				        <c:if test="${!empty qnaBoardDTO.responseUser }">
 				        	<td>답변완료</td>
 				        </c:if>
 				        <td class="name">${qnaBoardDTO.createUser }</td>

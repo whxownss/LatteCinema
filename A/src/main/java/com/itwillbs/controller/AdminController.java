@@ -54,6 +54,11 @@ public class AdminController extends HttpServlet {
 				response.sendRedirect("login.me");
 				return;
 			}
+			boolean containsAdmin = memId.startsWith("admin");
+			if(!containsAdmin) {
+				response.sendRedirect("main.me");
+				return;
+			}
 			
 			request.setCharacterEncoding("utf-8");
 			CSBoardService csBoardService = new CSBoardService();
@@ -74,6 +79,11 @@ public class AdminController extends HttpServlet {
 			String memId = (String) session.getAttribute("sId");
 			if(memId == null) {
 				response.sendRedirect("login.me");
+				return;
+			}
+			boolean containsAdmin = memId.startsWith("admin");
+			if(!containsAdmin) {
+				response.sendRedirect("main.me");
 				return;
 			}
 			
@@ -138,6 +148,11 @@ public class AdminController extends HttpServlet {
 				response.sendRedirect("login.me");
 				return;
 			}
+			boolean containsAdmin = memId.startsWith("admin");
+			if(!containsAdmin) {
+				response.sendRedirect("main.me");
+				return;
+			}
 			
 			CSBoardService csBoardService = new CSBoardService();
 			ArrayList<CenterBoardDTO> centerBoardList = csBoardService.getCenterBoardList();
@@ -154,6 +169,11 @@ public class AdminController extends HttpServlet {
 			String memId = (String) session.getAttribute("sId");
 			if(memId == null) {
 				response.sendRedirect("login.me");
+				return;
+			}
+			boolean containsAdmin = memId.startsWith("admin");
+			if(!containsAdmin) {
+				response.sendRedirect("main.me");
 				return;
 			}
 			
@@ -174,6 +194,11 @@ public class AdminController extends HttpServlet {
 				response.sendRedirect("login.me");
 				return;
 			}
+			boolean containsAdmin = memId.startsWith("admin");
+			if(!containsAdmin) {
+				response.sendRedirect("main.me");
+				return;
+			}
 			
 			CSBoardService csBoardService = new CSBoardService();
 			ArrayList<QnaBoardDTO> qnaBoardList = csBoardService.getQnaBoardList();
@@ -190,6 +215,11 @@ public class AdminController extends HttpServlet {
 			String memId = (String) session.getAttribute("sId");
 			if(memId == null) {
 				response.sendRedirect("login.me");
+				return;
+			}
+			boolean containsAdmin = memId.startsWith("admin");
+			if(!containsAdmin) {
+				response.sendRedirect("main.me");
 				return;
 			}
 			

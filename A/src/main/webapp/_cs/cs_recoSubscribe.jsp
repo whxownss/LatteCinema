@@ -285,7 +285,7 @@ $('#movieYear').on("change",function(){
             type: 'GET',
             dataType: 'json',
             success: function(response) {
-				debugger;
+				//debugger;
                 response.Data[0].Result.forEach(function(item) {
                     var title = item.title;
                     $('#movieList').append($('<option>').text(title));

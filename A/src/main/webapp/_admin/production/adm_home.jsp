@@ -920,12 +920,13 @@
                       <tbody>
                       <c:forEach var="responseDataDTO" items="${responseList }">
                       <tr>
-                      	  <c:if test="${empty responseDataDTO.qnaIdx }">
-                      	  <th>분실물</th>	
-                      	  </c:if>
-                      	  <c:if test="${empty responseDataDTO.lostIdx }">
-                      	  <th>1:1문의</th>	
-                      	  </c:if>
+<%--                       	  <c:if test="${empty responseDataDTO.qnaIdx }"> --%>
+<!--                       	  	<th>분실물</th>	 -->
+<%--                       	  </c:if> --%>
+<%--                       	  <c:if test="${empty responseDataDTO.lostIdx }"> --%>
+<!--                       	  	<th>1:1문의</th>	 -->
+<%--                       	  </c:if> --%>
+                      	  <th>${responseDataDTO.boardGB}</th>
                           <th>${responseDataDTO.createUser }</th>
                           <th>${responseDataDTO.createDate }</th>
                           <th>${responseDataDTO.subject }</th>
