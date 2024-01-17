@@ -74,7 +74,7 @@
 								<td scope="row" class="text-center" colspan="4">
 									<button class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"
 										style="text-align: center;">
-										 <img src="assets/img/free-icon-gift-box-4108395.png" alt="gift"
+										 <img src="assets/img/free-icon-gift-box-4108395.png" alt="선물하기"
 												width="30" height="30"/></button>
 									<button class="btn btn-danger btn-lg" onclick="requestPay()"
 										style="text-align: center; padding:10px; padding-left: 130px; padding-right: 130px;"><b>구매하기</b></button>
@@ -94,22 +94,27 @@
 										aria-label="Close"></button>
 								</div>
 								<div class="modal-body">
-									<form>
+									<form onsubmit="return false">
 										<div class="form-floating mb-3">
-								<input type="tel" class="form-control" id="phone" placeholder="연락처" required
-										onblur="checkPhone();" name="phone">
-								<label for="phone">받으시는 분 (휴대폰 번호)<span id="CheckPhone"></span></label>
-							</div>
+											<input type="number" class="form-control" id="phone"
+												placeholder="연락처" onblur="checkPhone()" required>
+												<label for="phone">받으시는 분 (휴대폰 번호)
+												<span id="checkPhone"></span>
+											</label>
+										</div>
 										<div class="mb-3">
-											<label for="message-text" class="col-form-label">보내는 메세지 :</label>
-											<textarea class="form-control" rows="5" id="message-text" placeholder="즐거운 관람 되세요~"></textarea>
+											<label for="message-text" class="col-form-label">
+											보내는 메세지 :</label>
+											<textarea class="form-control" rows="5" id="message-text"
+												placeholder="즐거운 관람 되세요~"></textarea>
 										</div>
 									</form>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
 										data-bs-dismiss="modal">닫기</button>
-									<button type="button" class="btn btn-danger" onclick="requestPay()">선물보내기</button>
+									<button type="button" id="btn_gift" class="btn btn-danger"
+										onclick="requestPay('gift')">선물보내기</button>
 								</div>
 							</div>
 						</div>
@@ -224,21 +229,17 @@ function checkPhone() {
 	var phoneRegex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 	
 	if(phone != ""){
-		text = "** 알맞은 연락처 형식으로 입력! '-' 생략가능!! **";
+		text = "** 알맞은 연락처 형식으로 입력! ' - ' 생략가능!! **";
 		
 		if(phoneRegex.test(phone)){
 			text = "** 알맞은 연락처 형식! ** ";
 			color = "green";
 		}
 	}
-	$("#CheckPhone").text(text).css("color",color);
-	var checkPhone = document.getElementById('CheckPhone');
+	
+	$("#checkPhone").text(text).css("color",color);
+	var checkPhone = document.getElementById('checkPhone');
 	if(checkPhone.style.color == 'red') return;   
-// 	debugger;
-// 	if(id==""){
-// 		$("#CheckPhone").text("전화번호를 입력하세요").css("color", "red");
-// 		return false;			
-// 	}
 
 		// 연락처 유무 체크
 		$.ajax({
@@ -248,19 +249,22 @@ function checkPhone() {
 			dataType: "text",
 			success:function(data){
 				if(data == '1'){
-					$("#CheckPhone").text("선물가능한 번호입니다.").css("color", "green");
+					$("#checkPhone").text("선물가능한 번호입니다.").css("color", "green");
 					return false;
 				}else if(data == '0'){
-					$("#CheckPhone").text("선물할수없는 번호입니다.").css("color", "red");
+					$("#checkPhone").text("선물할수없는 번호입니다.").css("color", "red");
 					return true;
 				 }		
 			},
 			error: function(){
 			}
 		});
+		
+		// 전화번호가 있을시 버튼클릭 가능
+		
+		
 	}
-
-
+	
 <!-- 결제 API -->
 
 // 가맹점 식별코드
@@ -268,13 +272,10 @@ var IMP = window.IMP;
 IMP.init("imp20121707"); 
 
 // 포트원 api
-  function requestPay() {
-// 	  var checkPhone = document.getElementById('CheckPhone');
-// 		if(checkPhone.style.color == 'red') {
-// 			alert('존재하지않는 회원입니다.');
-// 			return;
-// 		}   
-	if($("#CheckPhone").text() != "선물가능한 번호입니다."){
+  function requestPay(param) {
+	debugger;
+	var checkPhone = document.getElementById('checkPhone');
+	if(param == 'gift' && (checkPhone.style.color == 'red' || $("#checkPhone").text() == '')){
 		alert('휴대폰 번호를 확인해주세요.');
 		return;
 	}
@@ -287,171 +288,114 @@ IMP.init("imp20121707");
 	
 	//주문번호 만들기
 	const make_merchant_uid = () => {
-            const current_time = new Date();
-            const year = current_time.getFullYear().toString();
-            const month = (current_time.getMonth()+1).toString();
-            const day = current_time.getDate().toString();
-            const hour = current_time.getHours().toString();
-            const minute = current_time.getMinutes().toString();
-            const second = current_time.getSeconds().toString();
-            const merchant_uid = 'MIHEE' + year + month + day + hour + minute + second;
-            return merchant_uid;
-        };
-        const merchant_uid = make_merchant_uid()
-        
+        const current_time = new Date();
+        const year = current_time.getFullYear().toString();
+        const month = (current_time.getMonth()+1).toString();
+        const day = current_time.getDate().toString();
+        const hour = current_time.getHours().toString();
+        const minute = current_time.getMinutes().toString();
+        const second = current_time.getSeconds().toString();
+        const merchant_uid = hour + minute + second;
+        return merchant_uid;
+    };
+    const merchant_uid = make_merchant_uid()
 	
 	var itemName = $("#itemName").text();
 	var price = parseInt($("#sPrice").text().replace(",", "")); 
 	
+	// 결제 및 정보
       IMP.request_pay({ 
           pg: "html5_inicis.INIpayTest",	// PG사
           pay_method: "card",	// 지불수단
           merchant_uid: "STO" + merchant_uid,   // 주문번호
           name: itemName,	// 상품명
           amount: 100,    // 가격		price
-          buyer_email: "gildong@gmail.com",	// 구매자 이메일
-          buyer_name: "홍길동",	// 구매자 이름
-          buyer_tel: "010-4242-4242",	// 구매자 연락처
+          buyer_email: "duqdlduq2@naver.com",	// 구매자 이메일
+          buyer_name: "김성엽",	// 구매자 이름
+          buyer_tel: "010-5125-1365",	// 구매자 연락처
       }, function (rsp) { // callback
     	  console.log(rsp);
-    	  debugger;
     	  if (rsp.success) {	// 결제성공
-    		  var msg = '결제가 완료되었습니다.';
-    	        msg += '고유ID : ' + rsp.imp_uid;
-    	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-    	        msg += '결제 금액 : ' + rsp.paid_amount;
-    	        msg += '카드 승인번호 : ' + rsp.apply_num;
-    	    } else {	// 결제실패
-    	    	var msg = '결제에 실패하였습니다.';
-    	        msg += '에러내용 : ' + rsp.error_msg;
-    	    }
-    	  alert(msg);
-      });
-      
-    }
-    
-    // 결제된 데이터
-//   app.get('/payments/status/all',(req,res)=>{
-//       iamport.payment.getByStatus({
-//         payment_status: 'paid' 
-//       }).then(function(result){
-//           res.render('payments_list',{list:result.list});
-//       }).catch(function(error){
-//           console.log(error);
-//           red.send(error);
-//       })
-// });
-    
-// 	//주문번호 만들기
-// 	  function createOrderNum(){
-// 	  	const date = new Date();
-// 	  	const year = date.getFullYear();
-// 	  	const month = String(date.getMonth() + 1).padStart(2, "0");
-// 	  	const day = String(date.getDate()).padStart(2, "0");
-	  	
-// 	  	let orderNum = year + month + day;
-// 	  	for(let i=0;i<10;i++) {
-// 	  		orderNum += Math.floor(Math.random() * 8);	
-// 	  	}
-// 	  	return orderNum;
-// 	  }
-    
-// //현재 사용자의 정보를 가져오는 함수
-//   function getCurrentUserInfo() {
-//       $.ajax({
-//           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-//           url: "/users/getCurrentUser",
-//           type: "get",
-//           async:false, // 동기방식(전역변수에 값 저장하려면 필요)
-//           dataType : "json",
-//           success : function(data) {
-//               buyer_name = data.name;
-//               buyer_tel = data.tel;
-//           },
-//           error: function(request,status,error){ 
-//               alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); 
-//               console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-//           }
-//       });
-//   }
-  
-//   function removePayAuth(removePayAuthId) {
-//       $.ajax({
-//           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-//           url: "/pay/removePayAuth",
-//           method: "POST",
-//           dataType : "text",
-//           data: {
-//               removePayAuthId : removePayAuthId
-//           },
-//           success: function() {
-              
-//           },
-//           error: function(request, status, error) {
-//               console.log("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
-//           }
-//       });
-//   }
+    		  rsp["mem_id"] = 'ksy123';   
+    	  	  rsp["item_cnt"] = $(".inpp").text();
+    	  	  
+    	  	  if(param == 'gift'){
+    	  		  debugger;
+    	  		rsp["gift_tel"] = $("#checkPhone").text();	  		  
+    	  	  }
+    		  
+    		  $.ajax({
+    			  type: "POST",
+    			  data: {rsp : JSON.stringify(rsp)},
+    			  url: "storeListPro.st",
+    			  dataType: "text"
+    		  })
+    		  .done(function(data){
+    			  
+    			  if(data == "true"){
+    				  alert("결제가 완료되었습니다.")
+    			  }
+    		  })
+    		  .fail(function(){})    		  
+      	 }
+	});
+}
 
-		// 이부분 보시면 됩니다 형 *********************************************************
 	  // 수량 옵션 
       $(function(){
-    		$("#itemImage").attr("src", storeItem.itemImage);
-    		$("#itemName").text(storeItem .itemName);
-    		$("#price").text(storeItem.itemPrice);
-    		$("#detail").text(storeItem.itemDetail);
-    		// 이부분 보시면 됩니다 형 *********************************************************	
+ 		$("#itemImage").attr("src", storeItem.itemImage);
+ 		$("#itemName").text(storeItem .itemName);
+ 		$("#price").text(storeItem.itemPrice);
+ 		$("#detail").text(storeItem.itemDetail);
     		
-    		
-    		
-    	  var price = storeItem.itemPrice + "";
-//     	  alert(JSON.stringify(${storeItem}));
+    	var price = storeItem.itemPrice + "";
     	  
-    	 $("#sPrice").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    	$("#sPrice").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     	  
-         $('._count :button').on({
-             'click' : function(e){
+        $('._count :button').on({
+            'click' : function(e){
 
-                 e.preventDefault();
-                 var count = $(this).parent('._count').find('.inpp').text();
-                 var now = parseInt(count);
-                 var min = 1;
-                 var max = 5;
-                 var num = now;
-                 
-                 if($(this).hasClass('minus')){
-                     var type = 'm';
-                 }else{
-                     var type = 'p';
-                 }
-                 if(type=='m'){
-                     if(now>min){
-                         num = now - 1;
-                     }
-                 }else{
-                     if(now<max){
-                         num = now + 1;
-                     }
-                 }
-                 if(num != now){
-                     $(this).parent('._count').find('.inpp').text(num);
-                 }
-             }
-         });
+               e.preventDefault();
+               var count = $(this).parent('._count').find('.inpp').text();
+               var now = parseInt(count);
+               var min = 1;
+               var max = 5;
+               var num = now;
+               
+               if($(this).hasClass('minus')){
+                   var type = 'm';
+               }else{
+                   var type = 'p';
+               }
+               if(type=='m'){
+                   if(now>min){
+                       num = now - 1;
+                   }
+               }else{
+                   if(now<max){
+                       num = now + 1;
+                   }
+               }
+               
+               if(num != now){
+                   $(this).parent('._count').find('.inpp').text(num);
+               }
+           }
+       });
          
          // 상품금액
          $(".inpp").on("DOMSubtreeModified", function(){
         	 
-				var p1 = parseInt($("#price").text().replace(/[^\d]+/g, ""));
-				var p2 = parseInt($(".inpp").text());
-				
-				var sum = p1 * p2;
-				
-				var sPrice = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-				
-				$("#sPrice").text(sPrice);
-				
-			});
+			var p1 = parseInt($("#price").text().replace(/[^\d]+/g, ""));
+			var p2 = parseInt($(".inpp").text());
+			
+			var sum = p1 * p2;
+			
+			var sPrice = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			
+			$("#sPrice").text(sPrice);
+			
+		});
 		
          // 3자리 콤마(,)
          var price = $('#price').text();

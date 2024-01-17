@@ -30,24 +30,24 @@
 				</div>
 			</div>
 		</section>
-		  
-		<section class="category-section" id="">
-			<div class="container" data-aos="fade-up">
-				<!-- 이곳에 코드작성 -->
-				  <div class="row">
-				    <div class="col-md-6 offset-md-3">
-				      <div class="bg-light">
-				        <ul class="d-flex flex-wrap justify-content-between list-unstyled">
-				          <li><a href="cs_center.cs">공지사항</a></li>
-				          <li><a href="cs_exque.cs">자주찾는질문</a></li>
-				          <li><a href="cs_qna.cs">1:1문의</a></li>
-				          <li><a href="cs_lost.cs">분실물</a></li>
-				        </ul>
-				      </div>
-				    </div>
-				  </div>
-			</div>
-		</section>
+		       
+<!-- 		<section class="category-section" id=""> -->
+<!-- 			<div class="container" data-aos="fade-up"> -->
+<!-- 				이곳에 코드작성 -->
+<!-- 				  <div class="row"> -->
+<!-- 				    <div class="col-md-6 offset-md-3"> -->
+<!-- 				      <div class="bg-light"> -->
+<!-- 				        <ul class="d-flex flex-wrap justify-content-between list-unstyled"> -->
+<!-- 				          <li><a href="cs_center.cs">공지사항</a></li> -->
+<!-- 				          <li><a href="cs_exque.cs">자주찾는질문</a></li> -->
+<!-- 				          <li><a href="cs_qna.cs">1:1문의</a></li> -->
+<!-- 				          <li><a href="cs_lost.cs">분실물</a></li> -->
+<!-- 				        </ul> -->
+<!-- 				      </div> -->
+<!-- 				    </div> -->
+<!-- 				  </div> -->
+<!-- 			</div> -->
+<!-- 		</section> -->
 
 		<!-- 진행상태, 신청영화, 감독, 신청자, 신청일, 추천수, 추천하기버튼, 수정버튼  -->
 		<input type="hidden" name="recoUser" id="recoUser" value="${sessionScope.sId }">

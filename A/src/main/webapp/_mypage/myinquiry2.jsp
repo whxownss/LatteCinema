@@ -4,6 +4,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -38,7 +39,7 @@
 					<ul>
 <!-- 						<li data-url="/mypage/myinquiry?cd=INQD01"><a href="myinquiry.me" class="btn" data-cd="INQD01" title="1:1 문의내역 탭으로 이동">1:1 문의내역</a></li> -->
 						<li><a href="myinquiry.me" class="btn" title="1:1 문의내역 탭으로 이동">1:1 문의내역</a></li>
-						<li data-url="/mypage/myinquiry?cd=INQD03"><a href="#" class="btn" data-cd="INQD03" title="단체관람/대관 문의내역 탭으로 이동">단체관람/대관문의내역</a></li>
+<!-- 						<li data-url="/mypage/myinquiry?cd=INQD03"><a href="#" class="btn" data-cd="INQD03" title="단체관람/대관 문의내역 탭으로 이동">단체관람/대관문의내역</a></li> -->
 						<li data-url="/mypage/myinquiry?cd=INQD02" class="on"><a href="#" class="btn" data-cd="INQD02" title="분실물 문의내역 탭으로 이동">분실물 문의내역</a></li>
 					</ul>
 				</div>
@@ -111,7 +112,10 @@
 							        <c:if test="${! empty lostBoardDTO.responseUser }">
 							        	<td>답변완료</td>
 							        </c:if>
-							        <td>${lostBoardDTO.createDate }</td>
+							        <td>
+									<fmt:parseDate value="${lostBoardDTO.createDate}" pattern="yy-MM-dd HH:mm:ss" var="parsedDate"/>
+									<fmt:formatDate value="${parsedDate}" pattern="yy-MM-dd HH:mm:ss" />
+							        </td>
 								</tr>
 							</c:forEach>
 						</tbody>

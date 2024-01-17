@@ -74,7 +74,7 @@
 						</div>
 						<div class="d-flex justify-content-between">  
 							<div class="p-2 flex-shrink-2 d-flex">
-								<div><img src="assets/img/post1.jpg" style="height: 100px"></div>
+								<div><img src="" style="height: 100px" class="poster"></div>
 								<div class="d-flex flex-column p-2 text-start">
 									<span>
 										<img src="" class="rating">
@@ -192,6 +192,7 @@ $(function(){
 	$(".sTime").text(schDTO.s_time + " ~ ");
 	$(".eTime").text(schDTO.eTime);
 	$(".sIdx").text(schDTO.scr_idx);
+	$(".poster").attr("src", schDTO.poster);
 	
 	// 좌석 그리기
 	var aSeat = parseInt(schDTO.aSeat);

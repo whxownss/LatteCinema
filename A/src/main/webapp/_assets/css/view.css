@@ -981,10 +981,10 @@ body.cinema-on:after { content: ''; position: fixed; left: 0; right:0; top:80px;
   빠른예매 PC
 ****************************************************************************************************************************************/
 button { border: 0; outline: none; background: none;  text-align: left; }
-.age12 { display: inline-block; vertical-align: middle; background: url(../img/common/age-12.png) no-repeat 0 0; width:24px; height: 24px; }
-.age15 { display: inline-block; vertical-align: middle; background: url(../img/common/age-15.png) no-repeat 0 0; width:24px; height: 24px; }
-.age19 { display: inline-block; vertical-align: middle; background: url(../img/common/age-19.png) no-repeat 0 0; width:24px; height: 24px; }
-.ageall { display: inline-block; vertical-align: middle; background: url(../img/common/ageall.png) no-repeat 0 0; width:24px; height: 24px; }
+.age12 { display: inline-block; vertical-align: middle; background: url(../img/grade_12.png) no-repeat 0 0; width:24px; height: 24px; }
+.age15 { display: inline-block; vertical-align: middle; background: url(../img/grade_15.png) no-repeat 0 0; width:24px; height: 24px; }
+.age18 { display: inline-block; vertical-align: middle; background: url(../img/grade_18.png) no-repeat 0 0; width:24px; height: 24px; }
+.ageall { display: inline-block; vertical-align: middle; background: url(../img/grade_all.png) no-repeat 0 0; width:24px; height: 24px; }
 .agelimit { display: inline-block; vertical-align: middle; background: url(../img/common/agelimit.png) no-repeat 0 0; width:24px; height: 24px; }
 
 

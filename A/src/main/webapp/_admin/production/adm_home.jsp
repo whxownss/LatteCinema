@@ -52,7 +52,7 @@
     <link href="_admin/build/css/custom.min.css" rel="stylesheet">
   </head>
 <%
-	int totalCount = 10000;
+	int memCount = (int)request.getAttribute("memCount");
 	int monthlyAudi = 120;
 	
 	ArrayList<ResponseDataDTO> responseList = (ArrayList<ResponseDataDTO>)request.getAttribute("responseList");
@@ -211,13 +211,13 @@
           <div class="row tile_count">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> 총 회원수</span>
-              <div class="count"><%=totalCount %></div>
-              <span class="count_bottom"><i class="green">4% </i> From last Month</span>
+              <div class="count">${memCount }</div>
+<!--               <span class="count_bottom"><i class="green">4% </i> From last Month</span> -->
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> 월별 관객수</span>
               <div class="count"><%=monthlyAudi %></div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Month</span>
+<!--               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Month</span> -->
             </div>
 <!--             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count"> -->
 <!--               <span class="count_top"><i class="fa fa-user"></i> 남성 회원</span> -->
@@ -232,7 +232,7 @@
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> 월별 매출</span>
               <div class="count">2,315</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Month</span>
+<!--               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Month</span> -->
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
 <!--               <span class="count_top"><i class="fa fa-user"></i> Total Connections</span> -->

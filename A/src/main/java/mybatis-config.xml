@@ -27,6 +27,7 @@
         <typeAlias type="com.itwillbs.domain.RecommendDTO" alias="RecommendDTO"/>
         <typeAlias type="com.itwillbs.domain.SeatDTO" alias="SeatDTO"/>
         <typeAlias type="com.itwillbs.domain.ReviewDTO" alias="ReviewDTO"/>
+        <typeAlias type="com.itwillbs.domain.ScreenDTO" alias="ScreenDTO"/>
     </typeAliases>
 
 	<environments default="development">
@@ -50,6 +51,7 @@
 		<mapper resource="com/itwillbs/sql/reservationSql.xml"/>
 		<mapper resource="com/itwillbs/sql/scheduleSql.xml"/>
 		<mapper resource="com/itwillbs/sql/movieSql.xml"/>
+		<mapper resource="com/itwillbs/sql/screenSql.xml"/>
 	</mappers>
 
     

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.itwillbs.dao.CSBoardDAO;
 import com.itwillbs.dao.MovieDAO;
 import com.itwillbs.domain.MovieDTO;
 import com.itwillbs.domain.ReviewDTO;
@@ -16,6 +17,7 @@ public class MovieService {
 	
 	MovieDAO movieDAO = null;
 	MovieDTO movieDTO = null;
+	
 
 	public MovieDTO insertMovie(HttpServletRequest request) {
 		
@@ -113,7 +115,6 @@ public class MovieService {
 				
 			}
 		
-		
 
 		//한줄평 작성 가능 유무
 		public int checkWrite(HttpServletRequest request) {
@@ -164,7 +165,55 @@ public class MovieService {
 		
 		
 		
-		
-		
-		
+		public MovieDTO updateMovie(HttpServletRequest request) {
+			try {
+				request.setCharacterEncoding("UTF-8");
+					
+					
+				movieDAO = new MovieDAO();
+				movieDTO = new MovieDTO();
+					
+				movieDTO.setMovieCode(request.getParameter("movieCode"));
+				movieDTO.setTitle(request.getParameter("title"));
+				movieDTO.setRating(request.getParameter("rating"));
+				movieDTO.setRunTime(request.getParameter("runTime"));
+				movieDTO.setFilmMade(request.getParameter("filmMade"));
+				movieDTO.setNation(request.getParameter("nation"));
+				movieDTO.setSynopsis(request.getParameter("synopsis"));
+				movieDTO.setOpenDate(request.getParameter("openDate"));
+				movieDTO.setEndDate(request.getParameter("endDate"));
+				movieDTO.setDirector(request.getParameter("director"));
+				movieDTO.setGenre(request.getParameter("genre"));
+				movieDTO.setPoster(request.getParameter("poster"));
+				movieDTO.setStartDate(request.getParameter("startDate"));
+				movieDTO.setMovieCategory(request.getParameter("movieCategory"));
+				movieDTO.setActor(request.getParameter("actor"));
+				movieDTO.setStillcut(request.getParameter("stillcut"));
+				   
+				movieDAO.insertMovie(movieDTO);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+				
+			return null;
+		}
+
+		public boolean deleteMovie(HttpServletRequest request) {
+			System.out.println("movieService deleteMovie()");
+			int deleteSuccess = 0;
+			try {
+				System.out.println("deleteMovie 무비서비스");
+				movieDTO = new MovieDTO();
+				String movieCode = request.getParameter("movieCode");
+				movieDTO.setMovieCode(movieCode);
+				movieDAO = new MovieDAO();
+		        deleteSuccess = movieDAO.deleteMovie(movieDTO);
+		        
+		        
+		    } catch (Exception e) {
+				e.printStackTrace();
+			}
+			return deleteSuccess > 0;
+		}
 	}

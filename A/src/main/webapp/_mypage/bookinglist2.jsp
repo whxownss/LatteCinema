@@ -49,11 +49,11 @@
 									<tr>
 										<th scope="row">구분 </th>
 										<td>
-											<input type="radio" id="radBokd01" name="radBokd" value="B" checked="checked">
+											<input type="radio" id="radBokd01" name="radBokd" value="B">
 											<label for="radBokd01"><b> 예매내역 </b><small>  </small></label>
 										</td>
 										<td>
-											<input type="radio" id="radBokd02" name="radBokd" value="C">
+											<input type="radio" id="radBokd02" name="radBokd" value="C" checked="checked">
 											<label for="radBokd02"><b> 상품구매내역 </b><small>  </small></label>
 										</td>
 									</tr>
@@ -78,22 +78,22 @@
 									<col style="width:120px;">
 									<col style="width:110px;">
 									<col style="width:90px;">
-									<col style="width:90px;">
-									<col style="width:90px;">
-									<col style="width:70px;">
-									<col style="width:105px;">
+<%-- 									<col style="width:90px;"> --%>
+<%-- 									<col style="width:90px;"> --%>
+<%-- 									<col style="width:70px;"> --%>
+<%-- 									<col style="width:105px;"> --%>
 									<col style="width:70px;">
 									<col style="width:75px;">
 								</colgroup>
 								<thead>
 									<tr>
-										<th scope="col" class="text-center">예매번호</th>
+										<th scope="col" class="text-center">구매번호</th>
 										<th scope="col" class="text-center">구매일시</th>
-										<th scope="col" class="text-center">영화명</th>
-										<th scope="col" class="text-center">상영관</th>
-										<th scope="col" class="text-center">관람인원</th>
-										<th scope="col" class="text-center">좌석</th>
-										<th scope="col" class="text-center">상영일시</th>
+										<th scope="col" class="text-center">상품명</th>
+<!-- 										<th scope="col" class="text-center">상영관</th> -->
+<!-- 										<th scope="col" class="text-center">관람인원</th> -->
+<!-- 										<th scope="col" class="text-center">좌석</th> -->
+<!-- 										<th scope="col" class="text-center">상영일시</th> -->
 										<th scope="col" class="text-center">금액</th>
 										<th scope="col" class="text-center">환불</th>
 									</tr>
@@ -104,10 +104,10 @@
 										<td class="text-center align-middle">${reservationDTO.merchantUid}</td>
 										<td scope="row" class="text-center align-middle">${reservationDTO.payTime}</td>
 										<td scope="row" class="text-center align-middle">${reservationDTO.title}</td>
-										<td scope="row" class="text-center align-middle">${reservationDTO.cinema} ${reservationDTO.scrIdx }</td>
-										<td scope="row" class="text-center align-middle">성인${reservationDTO.p1}명 청소년${reservationDTO.p2}명 경로${reservationDTO.p3}명</td>
-										<td scope="row" class="text-center align-middle">${reservationDTO.seat}</td>
-										<td scope="row" class="text-center align-middle">${reservationDTO.date} ${reservationDTO.sTime}~${reservationDTO.schEtime}</td>
+<%-- 										<td scope="row" class="text-center align-middle">${reservationDTO.cinema} ${reservationDTO.scrIdx }</td> --%>
+<%-- 										<td scope="row" class="text-center align-middle">성인${reservationDTO.p1}명 청소년${reservationDTO.p2}명 경로${reservationDTO.p3}명</td> --%>
+<%-- 										<td scope="row" class="text-center align-middle">${reservationDTO.seat}</td> --%>
+<%-- 										<td scope="row" class="text-center align-middle">${reservationDTO.date} ${reservationDTO.sTime}~${reservationDTO.schEtime}</td> --%>
 										<td scope="row" class="text-center align-middle">${reservationDTO.paidAmount}</td>
 										<td scope="row" class="text-center align-middle"><button class="btn btn-dark" type="button">환불</button></td>
 									</tr>
@@ -188,17 +188,17 @@
 								  <ul class="pagination" id="searchPaging">
 									<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
 									    <li class="page-item ">
-									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
+									      <a class="page-link text-secondary" href="bookinglist2.me?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
 									    </li>
 								    </c:if>	
 								    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
 									    <li class="page-item" aria-current="page">
-									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${i }">${i }</a>
+									      <a class="page-link text-secondary" href="bookinglist2.me?pageNum=${i }">${i }</a>
 									    </li>
 								    </c:forEach>
 						    		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
 									    <li class="page-item">
-									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
+									      <a class="page-link text-secondary" href="bookinglist2.me?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
 									    </li>
 								    </c:if>	
 								  </ul>
@@ -260,7 +260,7 @@
 <script type="text/javascript">
 $("#tbody").on("click","button",function() {
 	 var $row = $(this).closest("tr");
-    // 해당 행 안에 있는 'memId' 셀의 텍스트 내용
+    // 해당 행 안에 있는 'mid' 셀의 텍스트 내용
     var mid = $row.find("td:first-child").text();
 	alert('이벤트연결' + mid);
 	if(confirm('정말 취소하시겠습니까?')){
@@ -271,8 +271,8 @@ $("#tbody").on("click","button",function() {
 	}
     
 });
-$("#radBokd02").on("click",function(){
-	window.location.href="bookinglist2.me";
+$("#radBokd01").on("click",function(){
+	window.location.href="bookinglist.me";
 });
 </script>
 <%@include file ="../_common/commonFooterEnd.jsp" %>

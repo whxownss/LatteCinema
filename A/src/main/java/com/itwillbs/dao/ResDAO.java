@@ -14,6 +14,7 @@ import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.domain.ScheduleDTO;
+import com.itwillbs.domain.ScreenDTO;
 import com.itwillbs.domain.SeatDTO;
 import com.itwillbs.sql.SqlMapClient;
 
@@ -145,5 +146,22 @@ public class ResDAO {
 		session.close();
 		
 		return deleteCnt > 0 ? "true" : "";
+	}
+
+	// 관리자꺼
+	public List<ScreenDTO> getScreen(Map<String, String> map) {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<ScreenDTO> screenList = session.selectList("Screen.select", map);
+		session.close();
+		
+		return screenList;
+	}
+
+	public List<ScheduleDTO> getAllSchedules() {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<ScheduleDTO> allSchedules = session.selectList("Schedule.selectAll");
+		session.close();
+		
+		return allSchedules;
 	}
 }

@@ -187,6 +187,7 @@
                   <th>등급</th>
                   <th>상영상태</th>
                   <th>영화분류</th>
+                  <th>관리</th>
                 </tr>
               </thead>
               <tbody>
@@ -198,6 +199,10 @@
               		<td>${movie.rating}</td>
               		<td>${movie.movieState}</td>  <!-- 상영종료일보다 이전인 날짜엔 상영중으로 보이고 지나면 상영종료로 보이게  -->
               		<td>${movie.movieCategory}</td>
+                  <th><button class="btn btn-success" type="button" data-toggle="modal" data-target="#movieModal" data-moviecode="${movie.movieCode}" 
+                              data-title="${movie.title}" data-opendate="${movie.openDate}" data-rating="${movie.rating}" data-moviestate="${movie.movieState}"
+                              data-category="${movie.movieCategory}" data-type="MODIFY">수정</button>
+                  </th>
               	</tr>
               </c:forEach>
               </tbody>
@@ -221,7 +226,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form id="modal-form" action="movie_insert.mo" method="post" data-parsley-validate class="form-horizontal form-label-left" onsubmit="return registMovie()">
+          <form id="modal-form" method="post" data-parsley-validate class="form-horizontal form-label-left" onsubmit="return registMovie()">
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12">포스터 미리보기</label>
@@ -358,7 +363,7 @@
         </div>
         <div class="modal-footer">
           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-2">
-            <button class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="제목과 감독명으로 재조회합니다." onclick="searchMovieIndex()">상세조회</button>
+            <button class="btn btn-danger btn-delete" type="button" form="modal-form" onclick="deleteMovie()" style="display:none">삭제</button>
             <button class="btn btn-success btn-regist" type="submit" form="modal-form">등록</button>
             <button class="btn btn-primary" type="button" data-dismiss="modal">취소</button>
           </div>
@@ -380,14 +385,12 @@
     
     /* 모달 활성화 됐을 때*/
      $('#movieModal').on('show.bs.modal', function (event) {
-       
+
        var button    = $(event.relatedTarget)
        var category  = button.data('category')
        var movieCode = button.data('moviecode')
        var title     = button.data('title')
        var opendate  = button.data('opendate')
-
-       
        var rating    = button.data('rating')
        var runtime   = button.data('runtime')
        var filmMade  = button.data('filmmade')
@@ -402,35 +405,61 @@
        var startdate = moment().format('YYYY-MM-DD')
        var enddate   = moment(startdate).add(30,'days').format('YYYY-MM-DD')    	   
    	   var rating    = button.data('rating')
-       //박스오피스에서 접근할 때 kmdb 검색
-       if(category === "NOW"){
-    	   const result = detailSearch(title)
- 		     var info = result.Data[0].Result[0];
- 		     filmMade = info.company;
- 		     poster = info.posters.split('|')[0];
- 		     nation = info.nation;
- 		     synopsis = info.plots.plot[0].plotText;
- 		     rating = info.rating.includes("전체")? "all" :
- 		                   info.rating.includes("12")  ? "12"  : 
- 		                   info.rating.includes("15")  ? "15"  :
- 		                   info.rating.includes("18")  ? "18"  : "";
- 		     director = info.directors.director[0].directorNm;
- 		     runtime = info.runtime;
- 		     genre = info.genre;
- 		     const actorArr = [];
- 		     let count = info.actors.actor.length > 3 ? 3 : info.actors.actor.length;
- 		     for(let i = 0; i < count ; i++){
- 		       actorArr.push(info.actors.actor[i].actorNm);
- 		     }
- 		     actor = actorArr.join(', ');
- 		     stillcut = info.stlls;
+   	   var modal = $(this)
+       modal.find('#movie-title').attr("disabled", false)
+       modal.find('#movie-moviecode').attr("disabled", false)
+       modal.find('.btn-regist').attr("formaction","movie_insert.mo")
+       modal.find('.btn-delete').css("display","none")
+   	   // 수정버튼 눌러서 실행했을때 실행되는 로직
+       if(button.data('type') === "MODIFY"){
+         $.ajax({
+           url : 'movie_detial.mo',
+           type : 'GET',
+           data : movieCode,
+           success : function(movie){
+             /* title 나오는지 확인하고 나오면 다른 input 항목도 똑같이 변수 값 지정해주기 */
+             console.log(movie)
+             
+             title = movie.title;
+             console.log(title)
+           },
+           error : function(){
+             console.log("상세조회 ajax 실패")
+           }
+         })
+         modal.find('#movie-title').attr("disabled", true)
+         modal.find('#movie-moviecode').attr("disabled", true)
+         modal.find('.btn-regist').attr("formaction","movie_update.mo")
+         modal.find('.btn-delete').css("display","")
+      //박스오피스일때 KMDB 조회하고 가공
+       }else if(button.data('type') === "NOW"){
+         const result = detailSearch(title)
+         var info = result.Data[0].Result[0];
+         filmMade = info.company;
+         poster = info.posters.split('|')[0];
+         nation = info.nation;
+         synopsis = info.plots.plot[0].plotText;
+         rating = info.rating.includes("전체")? "all" :
+                       info.rating.includes("12")  ? "12"  : 
+                       info.rating.includes("15")  ? "15"  :
+                       info.rating.includes("18")  ? "18"  : "";
+         director = info.directors.director[0].directorNm;
+         runtime = info.runtime;
+         genre = info.genre;
+         const actorArr = [];
+         let count = info.actors.actor.length > 3 ? 3 : info.actors.actor.length;
+         for(let i = 0; i < count ; i++){
+           actorArr.push(info.actors.actor[i].actorNm);
+         }
+         actor = actorArr.join(', ');
+         stillcut = info.stlls.replace(/thm\/01/g, "still").replace(/tn_/g,"").replace(/.jpg|.JPG/g,"_01.jpg");
+      //검색일때 영화코드 조회 
+       }else if(button.data('type') === "OLD"){
+         searchMovieIndex()
        }
-       stillcut = stillcut.replace(/thm\/01/g, "still").replace(/tn_/g,"").replace(/.jpg|.JPG/g,"_01.jpg")
-       var modal = $(this)
-       // 박스오피스 only
+       
        modal.find('#movie-title').val(title)
        modal.find('#movie-opendate').val(opendate)
-       // kmdb only
        modal.find('#movie-moviecode').val(movieCode)
        modal.find('#movie-genre').val(genre)
        modal.find('#movie-rating').val(rating)
@@ -486,7 +515,7 @@
           html += '<td>'+ rank + '</td>'
           html += '<td>'+ title + '</td>'
           html += '<td>'+ openDate + '</td>'
-          html += '<td><button class="btn btn-success" type="button" data-toggle="modal" data-target="#movieModal"'+
+          html += '<td><button class="btn btn-success" type="button" data-toggle="modal" data-target="#movieModal" data-type="NOW"'+
                   ' data-moviecode="'+ movieCode + '"data-title="' + title + '"data-opendate="' + openDate +'"data-category="'+ category +'">등록</button></td>';
           html += '</tr>';
           
@@ -521,8 +550,6 @@
           if(movieCode !== undefined){
             $('#movie-moviecode').val(movieCode)
           }  
-        }else{
-          alert("해당 영화에 대한 정보를 찾을 수 없습니다.")  
         }
       },
       error : function(){
@@ -582,8 +609,6 @@
     
     const data = detailSearch($('.input-movie-title').val());
       
-    
-      
     for(var i=0; i<data.Data[0].Count ; i++){
       var info = data.Data[0].Result[i];
       var title = info.title.replace(/!HS | !HE /g, '').trim(); // 검색어에 !HS !HE 라는 글자가 같이 포함돼서 없애주는 작업  
@@ -613,7 +638,7 @@
         actorArr.push(info.actors.actor[i].actorNm);
       }
       var actor = actorArr.join(', ');
-      var stillcut = info.stlls;
+      var stillcut = info.stlls.replace(/thm\/01/g, "still").replace(/tn_/g,"").replace(/.jpg|.JPG/g,"_01.jpg");
       
       html += '<tr>'
       html += '<td>'+ title + '</td>'
@@ -622,7 +647,7 @@
       html += '<td>'+ openDate + '</td>'
       html += '<td>'+ director + '</td>'
       html += '<td>'+ genre + '</td>'
-      html += '<td><button class="btn btn-success" type="button" data-toggle="modal" data-target="#movieModal" data-moviecode="'+ movieCode +
+      html += '<td><button class="btn btn-success" type="button" data-toggle="modal" data-target="#movieModal" data-type="OLD" data-moviecode="'+ movieCode +
               '"data-title="' + title +
               '"data-rating="'+ rating +
               '"data-runtime="'+ runtime +
@@ -660,11 +685,14 @@
        if($('#movie-endDate').val() === ""){ alert("종영일을 입력해 주세요"); return false; }
        if($('#movie-synopsis').val() === ""){ alert("줄거리를 입력해 주세요"); return false; }
        if($('#movie-director').val() === ""){ alert("감독을 입력해 주세요"); return false; }
-       if($('#movie-poster').val() === ""){ alert("등록된 포스터가 없습니다.");}
-       if($('#movie-actor').val() === ""){ alert("등록된 배우가 없습니다.");}
       return true;
     }
     return false;
+  }
+  function deleteMovie(){
+    if(confirm("등록된 영화를 삭제하시겠습니까?")){
+      location.href="movie_delete.mo?movieCode="+$('#movie-moviecode').val()
+    }
   }
   
 	</script>

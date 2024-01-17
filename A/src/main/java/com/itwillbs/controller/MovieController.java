@@ -2,7 +2,9 @@ package com.itwillbs.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.itwillbs.domain.MovieDTO;
 import com.itwillbs.service.MovieService;
 
@@ -93,8 +96,32 @@ public class MovieController extends HttpServlet {
 			MovieDTO movieDTO = movieService.insertMovie(request);
 			
 			response.sendRedirect("adm_mv_inout.ad");
+		} // 인서트 페이지 
+		
+		
+		
+		if(sPath.equals("/movie_update.mo")) {
+			System.out.println("movie_update 오는지");
 			
-		}
+			movieService = new MovieService();
+			MovieDTO movieDTO = movieService.updateMovie(request);
+			
+			response.sendRedirect("adm_mv_inout.ad");
+		} // update 
+		
+		if(sPath.equals("/movie_delete.mo")) {
+			request.setCharacterEncoding("utf-8");
+			System.out.println("movie_delete 오는지");
+			movieService = new MovieService();
+			System.out.println(request);
+			String msg = "delete fail";
+			if(movieService.deleteMovie(request)) {
+				msg = "delete success";
+			}
+			System.out.println(msg);
+			response.sendRedirect("adm_mv_inout.ad");
+		} // delete
+		
 		
 		// 한줄평 작성 가능 유무
 		if(sPath.equals("/checkWrite.mo")) { 
@@ -116,5 +143,8 @@ public class MovieController extends HttpServlet {
 			int result = movieService.reviewInsert(request);
 			
 		}//
+			
+	
+		
 	}	
 }

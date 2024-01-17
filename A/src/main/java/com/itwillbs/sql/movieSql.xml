@@ -101,8 +101,9 @@
 			 	 , DIRECTOR
 			 	 , OPENDATE
 			 	 , RATING
-		         , MOVIE_STATE
 				 , MOVIE_CATEGORY
+				 , RUN_TIME
+				 , MOVIE_IDX
 		
 		FROM MOVIE			 
 	</select>
@@ -146,5 +147,40 @@
 			)
 	</insert>
 
+	<update id="updateMovie">
+	  UPDATE MOVIE
+	    SET
+			    ACTOR = #{actor},
+			    MOVIE_CATEGORY = #{movieCategory},
+			    DIRECTOR = #{director},
+			    GENRE = #{genre},
+			    RATING = #{rating},
+			    SYNOPSIS = #{synopsis},
+			    POSTER = #{poster},
+			    FILM_MADE = #{filmMade},
+			    NATION = #{nation},
+			    RUN_TIME = #{runTime},
+			 <!--    START_DATE = SUBSTRING(#{startDate}, 1, 10),
+			    END_DATE = SUBSTRING(#{endDate}, 1, 10), -->
+			    START_DATE = #{startDate},
+			    END_DATE = #{endDate},
+			    MOVIE_STATE = #{movieState}	
+			    
+	    WHERE	MOVIE_CODE = #{movieCode} 
+	</update>
+
+
+	<delete id="deleteMovie">
+	
+	  DELETE 
+	  FROM MOVIE
+	  WHERE MOVIE_CODE = #{movieCode}
+	  
+	</delete>
+	
+	
+	
+
+	
 	
 </mapper>

@@ -59,7 +59,7 @@ public class StoreController extends HttpServlet{
 		
 		// store 선물하기 전화번호 유무 체크
 		if(sPath.equals("/checkphone.st")) {
-			System.out.println("1231231231231");
+			
 			storeService = new StoreService();
 			
 			int result = storeService.checkPhone(request);
@@ -69,7 +69,20 @@ public class StoreController extends HttpServlet{
 
 		}//
 		
+		if(sPath.equals("/storeListPro.st")){
+			
+			String rsp = request.getParameter("rsp");
+			
+			storeService = new StoreService();
+			
+			String buyerInfo = storeService.buyerInfo(rsp);
+			
+			request.setAttribute("buyerInfo", buyerInfo);
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(buyerInfo);
+		}//
+		
 	} // doProcess
-	
 	
 }

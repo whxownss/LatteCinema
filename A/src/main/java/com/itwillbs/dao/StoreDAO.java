@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.itwillbs.domain.StoreItemDTO;
+import com.itwillbs.domain.StorePayDTO;
 import com.itwillbs.sql.SqlMapClient;
 
 public class StoreDAO {
@@ -73,6 +74,15 @@ public class StoreDAO {
 		int result = session.selectOne("StoreItem.checkPhone", phone);
 		session.close();
 		return result;
-	}
+	}//
+
+	public String buyerInfo(StorePayDTO storePayDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int insertinfo = session.insert("StoreItem.buyerInsert", storePayDTO);
+		session.commit();
+		session.close();
+		
+		return insertinfo > 0 ? "true" : "false";
+	}//
 	
-}
+}//StoreDAO

@@ -62,7 +62,7 @@
 								<div class="row hErrorC">  <!-- hErrorC --> 
 									<div class="d-flex flex-column">
 									  <div class="p-2">
-									  	<img src="assets/img/post1.jpg" style="height: 200px">
+									  	<img src="" class="poster" style="height: 200px">
 									  </div>
 									  <div class="p-2 d-flex flex-column text-start">
 										<span class="mb-1">
@@ -262,7 +262,7 @@ function kakaoPay(useremail, username) {
          IMP.request_pay({
              pg: 'html5_inicis.INIpayTest', // PG사 코드표에서 선택
              pay_method: 'card', // 결제 방식
-             merchant_uid: "IMP" + makeMerchantUid, // 결제 고유 번호
+             merchant_uid: "MOV" + makeMerchantUid, // 결제 고유 번호
              name: '라떼시네마', // 제품명
              amount: 100, // 가격  parseInt($("#rsPrice").text().replace("," , ""))
              //구매자 정보 ↓
@@ -366,6 +366,7 @@ $(function(){
 	$("#pTP1").text(schDTO["p1"] * 12000);
 	$("#pTP2").text(schDTO["p2"] * 7000);
 	$("#pTP3").text(schDTO["p3"] * 5000);
+	$(".poster").attr("src", schDTO.poster);
 	
 	
 	// 할인받기전 금액 합
