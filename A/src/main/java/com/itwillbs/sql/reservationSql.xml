@@ -4,7 +4,7 @@
 
 <mapper namespace="Reservation">
 	<insert id="insert" parameterType="ReservationDTO">
-		INSERT INTO RESERVATION
+		INSERT INTO RESERVATION 
 		 	 ( DATE 
 		 	 , TITLE
 		 	 , CINEMA

@@ -43,6 +43,18 @@ public class MovieController extends HttpServlet {
 
 		// 현재상영작 페이지 이동
 		if(sPath.equals("/movie_now.mo")) {
+			
+			MovieService movieService = new MovieService();
+		    MovieDTO movieDTO = new MovieDTO();
+		    
+			List<MovieDTO> posterList = movieService.getLattePoster(movieDTO);
+			request.setAttribute("lattePosterList", posterList);
+			// 영화 now 포스터 넣는 부분 
+			List<MovieDTO> posterNowList = movieService.getNowPoster(movieDTO);
+			request.setAttribute("posterNowList", posterNowList);
+			
+			System.out.println(posterNowList.size());
+			
 			dispatcher = request.getRequestDispatcher("_a/movie_now.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -57,6 +69,11 @@ public class MovieController extends HttpServlet {
 
 		// 옛날영화 페이지 이동
 		if(sPath.equals("/movie_latte.mo")) {
+			MovieService movieService = new MovieService();
+		    MovieDTO movieDTO = new MovieDTO();
+			List<MovieDTO> posterList = movieService.getLattePoster(movieDTO);
+			request.setAttribute("lattePosterList", posterList);
+			
 			dispatcher = request.getRequestDispatcher("_a/movie_latte.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -77,7 +94,7 @@ public class MovieController extends HttpServlet {
 			movieDTO.setMovieCode(movieCode);
 			
 			MovieService movieService = new MovieService();
-			MovieDTO detail = movieService.getMovieDetail(movieDTO);
+			MovieDTO detail = movieService.getMovieDetail(request);
 			
 			request.setAttribute("detail", detail);
 			
@@ -100,7 +117,7 @@ public class MovieController extends HttpServlet {
 		
 		
 		
-		if(sPath.equals("/movie_update.mo")) {
+		if(sPath.equals("/movie_update.mo")) { 
 			System.out.println("movie_update 오는지");
 			
 			movieService = new MovieService();
@@ -108,6 +125,41 @@ public class MovieController extends HttpServlet {
 			
 			response.sendRedirect("adm_mv_inout.ad");
 		} // update 
+
+		
+		if(sPath.equals("/movie_detail.mo")) { 
+			
+			System.out.println("movie_detial 오는지");
+			
+			System.out.println(request);
+		
+		movieService = new MovieService();
+		MovieDTO movieDTO = movieService.getMovieDetail(request);
+		
+		System.out.println("movieDTO"+movieDTO);
+		
+		Map<String, Object> responseData = new HashMap<>();
+		responseData.put("movieDTO", movieDTO);
+		
+		// Gson 라이브러리를 사용하여 JSON으로 변환
+	    String json = new Gson().toJson(movieDTO);
+
+	    // 컨텐츠 타입 설정
+	    response.setContentType("application/json");
+	    response.setCharacterEncoding("utf-8");
+
+	    // JSON 문자열을 응답으로 작성
+	    response.getWriter().write(json);
+		
+		} // movie_detial 
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		if(sPath.equals("/movie_delete.mo")) {
 			request.setCharacterEncoding("utf-8");

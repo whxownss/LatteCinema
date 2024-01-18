@@ -345,13 +345,34 @@ $(function(){
 				
 				
 						<!-- 영화관 위치 -->
-						<div class="place">
-
-							<h2 class="tit mt40">영화관 위치</h2>
-
-							<div class="theater-box"> 주소: 부산광역시 부산진구 부전동 동천로 109 삼한골든게이트 </div>
-
-						</div>
+							<div class="place">
+							 
+							        <h2 class="tit mt40">영화관 위치</h2>
+							        <!-- 영화관 정보 -->
+							        <div class="theater-place">
+							            <h3 class="tit">서면(전포동)</h3>
+							            <dl class="theater_info">
+							                <dt>총 상영관 수</dt>
+							                <dd>6개관</dd>
+							                <dt>총 좌석수</dt>
+							                <dd>1,232석</dd>
+							                <dt class="adr">주소</dt>
+							                <dd class="adr">부산 부산진구 동천로 92 (전포동)</dd>
+							            </dl>
+							            <ul class="pop_wrap">
+							                <li><a href="#layerLocationPublic" title="대중교통 안내" class=""><img src="assets/img/location_subway_40.png" alt="대중교통 안내"><span>대중교통 안내</span></a></li>
+							                <li><a href="#layerLocationCar" title="자가용/주차안내"><img src="assets/img/location_car_40.png" alt="자가용/주차안내"><span>자가용/주차안내</span></a></li>
+							                <li><a href="#layerLocationMap" title="지도보기"><img src="assets/img/location_map_40.png" alt="지도보기"><span>지도보기</span></a></li>
+							            </ul>
+							            <div class="notice_wrap_emp"></div>
+							        </div>
+							
+							        <!-- 다른 컨텐츠 (rcm_wrap) -->
+							        <div class="rcm_wrap">
+							            <!-- 이곳에 다른 내용을 추가하시면 됩니다. -->
+							        </div>
+							    </div>
+							</div>
 						
 						
 						<!-- 영화예매창 위치 -->

@@ -8,8 +8,9 @@
 
 	<insert id="insertMovie">
 			INSERT INTO MOVIE
-		 	 ( 
-		 	   MOVIE_CODE
+		 	 (
+		 	   MOVIE_IDX 
+		 	 , MOVIE_CODE
 		 	 , TITLE
 		 	 , ACTOR
 		 	 , STILLCUT
@@ -24,10 +25,13 @@
 		 	 , NATION
 		 	 , RUN_TIME
 		 	 , START_DATE
-		 	 , END_DATE
-		 	 , MOVIE_STATE)
+		 	 , END_DATE)
 		VALUES (
-			  #{movieCode}
+			  (
+			  	SELECT *
+		   		  FROM (SELECT IFNULL(MAX(CAST(MOVIE_IDX as unsigned)), 0) + 1
+				   		  FROM MOVIE) M)	
+			, #{movieCode}
 		  	, #{title}
 		  	, #{actor}
 		  	, #{stillcut}
@@ -42,8 +46,7 @@
 		  	, #{nation}
 		  	, #{runTime}
 		  	, SUBSTRING(#{startDate}, 1, 10)
-		  	, SUBSTRING(#{endDate}, 1, 10)
-		  	, #{movieState})
+		  	, SUBSTRING(#{endDate}, 1, 10))
 	</insert>
 
 	
@@ -90,7 +93,8 @@
 		 	 , MOVIE_IDX
 		 	 , MOVIE_CATEGORY
 	FROM MOVIE 
-	WHERE MOVIE_CODE = #{movieCode};
+	WHERE MOVIE_CODE = #{movieCode}
+	 
 
 	</select>
 	
@@ -163,8 +167,8 @@
 			 <!--    START_DATE = SUBSTRING(#{startDate}, 1, 10),
 			    END_DATE = SUBSTRING(#{endDate}, 1, 10), -->
 			    START_DATE = #{startDate},
-			    END_DATE = #{endDate},
-			    MOVIE_STATE = #{movieState}	
+			    END_DATE = #{endDate}
+			   
 			    
 	    WHERE	MOVIE_CODE = #{movieCode} 
 	</update>

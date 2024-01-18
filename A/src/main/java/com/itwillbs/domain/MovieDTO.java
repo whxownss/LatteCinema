@@ -12,22 +12,15 @@ public class MovieDTO {
 	private String endDate;
 	private String openDate;
 	private String rating;
-	private String totalView;
 	private String synopsis;
 	private String filmMade;
 	private String nation;
 	private String runTime;
 	private String poster;
 	private String movieCode;
-	private String movieState;
 	private String stillcut;
 	
-	public String getMovieState() {
-		return movieState;
-	}
-	public void setMovieState(String movieState) {
-		this.movieState = movieState;
-	}
+	
 	public String getMovieCode() {
 		return movieCode;
 	}
@@ -94,12 +87,6 @@ public class MovieDTO {
 	public void setRating(String rating) {
 		this.rating = rating;
 	}
-	public String getTotalView() {
-		return totalView;
-	}
-	public void setTotalView(String totalView) {
-		this.totalView = totalView;
-	}
 	public String getSynopsis() {
 		return synopsis;
 	}
@@ -140,10 +127,9 @@ public class MovieDTO {
 	public String toString() {
 		return "MovieDTO [movieCategory=" + movieCategory + ", movieIdx=" + movieIdx + ", title=" + title
 				+ ", director=" + director + ", actor=" + actor + ", genre=" + genre + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", openDate=" + openDate + ", rating=" + rating + ", totalView=" + totalView
+				+ ", endDate=" + endDate + ", openDate=" + openDate + ", rating=" + rating 
 				+ ", synopsis=" + synopsis + ", filmMade=" + filmMade + ", nation=" + nation + ", runTime=" + runTime
-				+ ", poster=" + poster + ", movieCode=" + movieCode + ", movieState=" + movieState + ", stillcut="
-				+ stillcut + "]";
+				+ ", poster=" + poster + ", movieCode=" + movieCode + ", stillcut=" + stillcut + "]";
 	}
 	
 	
