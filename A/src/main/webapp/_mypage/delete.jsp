@@ -4,10 +4,7 @@
 <head>
   <jsp:include page="../_common/meta.jsp"></jsp:include>
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
-  <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js?autoload=false"></script>
-   <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
- 
 </head>
 
 <body>
@@ -97,5 +94,5 @@
   </section>
 </main>
 <%@include file ="../_common/commonFooterStart.jsp" %>
-
+<script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
 <%@include file ="../_common/commonFooterEnd.jsp" %>
