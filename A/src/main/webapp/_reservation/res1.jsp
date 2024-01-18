@@ -26,7 +26,7 @@
         <div class="text-center mt-5 mb-5 fw-bold">영화관을 선택해 주십시오.</div>
       </div>
       <div class="modal-footer ps-0 pe-0 pt-0 pb-0">
-        <button type="button" class="btn btn-light w-100 ms-0 me-0 mt-0 mb-0"" data-bs-dismiss="modal">확인</button>
+        <button type="button" class="btn btn-light w-100 ms-0 me-0 mt-0 mb-0" data-bs-dismiss="modal">확인</button>
       </div>
     </div>
   </div>
