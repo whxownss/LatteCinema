@@ -49,16 +49,30 @@ public class StoreController extends HttpServlet{
 		// storeitem 내용 표시
 		if(sPath.equals("/storeList.st")) {
 			
-			String idx = request.getParameter("itemIdx");
-			
-			storeService = new StoreService();
-			
-			String storeItemJson = storeService.getItemInfo(idx);
-			
-			request.setAttribute("storeItemJson", storeItemJson);
+//			String idx = request.getParameter("itemIdx");
+//			
+//			storeService = new StoreService();
+//			
+//			String storeItemJson = storeService.getItemInfo(idx);
+//			
+//			request.setAttribute("storeItemJson", storeItemJson);
 			
 			dispatcher = request.getRequestDispatcher("_store/storeList.jsp");
 			dispatcher.forward(request, response);
+		}//
+		// storeItemJson 가져오기
+		if(sPath.equals("/storeListview.st")) {
+			
+			String idx = request.getParameter("itemIdx");
+			storeService = new StoreService();
+			
+			String storeItemJson = "";
+			storeItemJson = storeService.getItemInfo(idx);
+			
+			response.setContentType("application/json");
+			response.setContentType("text/html; charset=utf-8");
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(storeItemJson);
 		}//
 		
 		// store 선물하기 전화번호 유무 체크

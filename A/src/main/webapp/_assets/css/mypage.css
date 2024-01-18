@@ -27219,7 +27219,7 @@ body.body-iframe .modal-layer2 {
 .my-megabox-main .link-movie-story {
     overflow: hidden;
     height: 100px;
-    padding: 20px 10px;
+    padding: 30px 10px;
     text-align: center
 }
 
@@ -27229,7 +27229,7 @@ body.body-iframe .modal-layer2 {
     width: calc(25% - 10px);
     height: 100%;
     margin: 0 5px;
-    padding: 5px 5px 0 5px;
+    padding: 7px 5px 0 5px;
     line-height: 1.1;
     text-decoration: none
 }

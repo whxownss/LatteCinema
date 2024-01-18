@@ -156,7 +156,9 @@ ArrayList<StorePayDTO> storeList =
                   </div>
                   <div class="x_content">
                     <br />
-                    <form action="adm_storeBuyList.ad" id="demo-form1" data-parsley-validate class="form-horizontal form-label-left">
+                    <form action="adm_storeBuyList.ad" id="demo-form1" enctype="multipart/form-data" 
+                    	method="post" data-parsley-validate class="form-horizontal form-label-left">
+                    
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="store-name">상품 번호<span class="required">*</span>
@@ -193,7 +195,7 @@ ArrayList<StorePayDTO> storeList =
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           	<div class="btn-group">
 								<a class="btn" title="Insert picture (or just drag &amp; drop)" id="pictureBtn"><i class="fa fa-picture-o"></i></a>
-								<input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage">
+								<input type="file" name="itemImage" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage">
 							</div>
                         </div>
                       </div>
@@ -232,10 +234,10 @@ ArrayList<StorePayDTO> storeList =
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="store_name2">상품<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                        	<select name="delName" id="store_name2" class="form-control" required>
+                        	<select name="name" id="store_name2" class="form-control" required>
 		                        <option value="none">=== 선택 ===</option>
 		                        <c:forEach var="storeItem" items="${itemNameList }" varStatus="s">
-		                            <option value="${s.index}">${storeItem.itemName }</option>
+		                            <option value="${storeItem.itemName}">${storeItem.itemName}</option>
 		                        </c:forEach>
                           	</select>
                         </div> 

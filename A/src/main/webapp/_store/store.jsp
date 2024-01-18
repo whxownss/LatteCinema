@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@include file="../_common/commonHeaderStart.jsp"%>
 <%@include file="../_common/commonHeaderEnd.jsp"%>
 <!-- 상단 이미지 -->
@@ -76,7 +76,17 @@
 					<div class="col-lg-4">
 						<a href="storeList.st?itemIdx=${itemB.itemIdx}" class="text-center">
 							<div class="itm_img">
-								<img src="${itemB.itemImage}" alt="${itemB.itemName}">
+								<c:choose>
+									<c:when test="${fn:startsWith(itemB.itemImage, 'https://')}">
+										<img src="${itemB.itemImage}" alt="${itemB.itemName}">
+									</c:when>
+									
+									<c:otherwise>
+										<img src="_assets/img/${itemB.itemImage}" alt="${itemB.itemName}"
+										style="width: 280px; height: 250px; margin: 20px;">
+									</c:otherwise>
+								</c:choose>
+								
 							</div>
 							<div class="itm_tit">
 								<h4>${itemB.itemName}</h4>

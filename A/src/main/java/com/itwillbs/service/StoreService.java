@@ -81,14 +81,14 @@ public class StoreService {
 	public void insertStore(HttpServletRequest request) {
 		try {
 			//업로드 물리적 경로
-			String uploadPath = request.getRealPath("../assets/img");
+			String uploadPath = request.getRealPath("/_assets/img");
 			System.out.println(uploadPath);
 			//파일 최대크기 10M
 			int maxSize = 10*1024*1024;
 			//파일 이름 같을시 파일이름 변경 DefaultFileRenamePolicy()
 			MultipartRequest multi = 
 new MultipartRequest(request, uploadPath, maxSize, "utf-8", new DefaultFileRenamePolicy());
-			
+			System.out.println(multi);
 			String itemIdx = multi.getParameter("itemIdx");
 			String itemName = multi.getParameter("itemName");
 			String itemDetail = multi.getParameter("itemDetail");
