@@ -121,7 +121,7 @@
    		 WHERE R.MEM_ID = #{memId}
    		   AND R.MOV_IDX = #{movIdx}
    		   AND R.MOV_TYPE = #{movType}
-<!-- 	   		   AND NOW() > CONCAT(DATE_FORMAT(R.DATE, '%Y-%m-%d'), ' ', S.SCH_ETIME) -->
+	   	   AND NOW() > CONCAT(DATE_FORMAT(R.DATE, '%Y-%m-%d'), ' ', S.SCH_ETIME)
 	</select> 
 	
 	<!--한줄평 담기  -->
@@ -133,7 +133,8 @@
 			, TITLE
 			, MEM_ID
 			, MOV_IDX
-			, MOV_TYPE)
+			, MOV_TYPE
+			, MOV_CODE)
 		VALUES (
 			(SELECT *
 				FROM (SELECT IFNULL(MAX(CAST(REV_NUM AS UNSIGNED)), 0) +1
@@ -144,8 +145,19 @@
 			, #{memId}
 			, #{movIdx}
 			, #{movType}
+			, #{movCode}
 			)
 	</insert>
+	
+
+	<!--한줄평 가져오기  -->
+	<select id="getReview" resultType="ReviewDTO" parameterType="String">
+		SELECT*
+		 FROM REVIEWS
+		 WHERE MOV_CODE = ${movCode}
+		 ORDER BY REV_NUM DESC;
+	
+	</select>
 
 	<update id="updateMovie">
 	  UPDATE MOVIE
@@ -175,6 +187,7 @@
 	  DELETE 
 	  FROM MOVIE
 	  WHERE MOVIE_CODE = #{movieCode}
+
 	  
 	</delete>
 	

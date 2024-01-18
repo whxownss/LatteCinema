@@ -55,5 +55,5 @@
     </section>
 	</main>
 <%@include file ="../_common/commonFooterStart.jsp" %>
-<link href="_assets/js/myInfo.js">
+<!-- <link href="_assets/js/myInfo.js"> -->
 <%@include file ="../_common/commonFooterEnd.jsp" %>

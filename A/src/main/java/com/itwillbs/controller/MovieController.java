@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.itwillbs.domain.MovieDTO;
+import com.itwillbs.domain.ReviewDTO;
 import com.itwillbs.service.MovieService;
 
 public class MovieController extends HttpServlet {
@@ -82,7 +83,11 @@ public class MovieController extends HttpServlet {
 			request.setAttribute("detail", detail);
 			
 			System.out.println("detail"+detail);
-		
+			
+			// 한줄평 출력
+			ArrayList<ReviewDTO> reviewList = movieService.getReview(movieCode);
+			request.setAttribute("reviewList", reviewList);
+			
 			dispatcher = request.getRequestDispatcher("_movie/movie_view.jsp");
 			dispatcher.forward(request, response);	
 			
