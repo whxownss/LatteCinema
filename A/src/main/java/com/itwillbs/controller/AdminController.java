@@ -109,6 +109,7 @@ public class AdminController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}	
 		
+		
 		// 관리자 스토어 페이지 이동 
 		if(sPath.equals("/adm_store.ad")) {
 			request.setCharacterEncoding("utf-8");

@@ -235,7 +235,7 @@ ArrayList<StorePayDTO> storeList =
                         	<select name="delName" id="store_name2" class="form-control" required>
 		                        <option value="none">=== 선택 ===</option>
 		                        <c:forEach var="storeItem" items="${itemNameList }" varStatus="s">
-		                            <option value="${s.count}">${storeItem.itemName }</option>
+		                            <option value="${s.index}">${storeItem.itemName }</option>
 		                        </c:forEach>
                           	</select>
                         </div> 
