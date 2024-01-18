@@ -208,7 +208,6 @@
 												</select>
 											</div>
 										</div>
-
 										<div class="form-group">
 											<label class="control-label col-md-3 col-sm-3 col-xs-12"
 												for="area-detail">영화<span class="required">*</span>
@@ -335,24 +334,25 @@
 													<th>러닝타임</th>
 													<th>시작시간</th>
 													<th>종료시간</th>
+													<th>기타</th>
 												</tr>
 											</thead>
 											<tbody id="tbody">
 												<c:forEach var="sch" items="${allSchedules}">
 													<tr>
-														<td>${sch.loName}</td>
-														<td>${sch.ciName}</td>
-														<td>${sch.schDate}</td>
-														<td>${sch.schIdx}</td>
-														<td>${sch.scrIdx}</td>
-														<td>${sch.schMovType}</td>
-														<td>${sch.title}</td>
-														<td>${sch.schRun}</td>
-														<td>${sch.schStime}</td>
-														<td>${sch.schEtime}</td>
+														<td class="lo${sch.loIdx}">${sch.loName}</td>
+														<td class="ci${sch.ciIdx}">${sch.ciName}</td>
+														<td class="">${sch.schDate}</td>
+														<td class="schIdx">${sch.schIdx}</td>
+														<td class="">${sch.scrIdx}</td>
+														<td class="movType">${sch.schMovType}</td>
+														<td class="">${sch.title}</td>
+														<td class="">${sch.schRun}</td>
+														<td class="">${sch.schStime}</td>
+														<td class="">${sch.schEtime}</td>
+														<td><button class="btn btn-primary deleteSchBtn" type="button">삭제</button></td>
 													</tr>
 												</c:forEach>
-
 											</tbody>
 										</table>
 									</form>
@@ -428,6 +428,10 @@
 var cinemaList = ${cinemaListJson};
 
 $(function(){
+	//
+// 	$("#location option:eq(6)").prop("selected", true);
+	
+	//
 	
 	$("#location").on("change", function(e){
 		var loIdx = e.currentTarget.selectedIndex;
@@ -484,14 +488,39 @@ $(function(){
 		date.setHours(h);
 		date.setMinutes(m);
 		var runTime = parseInt($("#movie").val().split("/")[1]);
-		date.setMinutes(date.getMinutes() + runTime);
-		$("#movie-endTime").val((date.getHours()+"").padStart(2, 0) + ":" + date.getMinutes());
+		date.setMinutes(date.getMinutes() + runTime); 
+		$("#movie-endTime").val((date.getHours()+"").padStart(2, 0) + ":" + (date.getMinutes()+"").padStart(2, 0));
 	})
 	
 	// 스케줄 등록 (유효성 체크해야됨)
-	$("#insertSchBtn").on("click", function(){
-		debugger;
+	$(".deleteSchBtn").on("click", function(){
+		debugger;	
+		var loIdx = $(this).parent().parent().find("[class^='lo']").attr('class').split(" ")[0].substr(2);
+		var ciIdx = $(this).parent().parent().find("[class^='ci']").attr('class').substr(2);
+		var schIdx = $(this).parent().parent().find(".schIdx").text();
+		var movType = $(this).parent().parent().find(".movType").text();
+		debugger;	
 		
+		$.ajax({
+			type: "POST",
+			url: "adm_cinemaProDS.ad",
+			data: {
+				loIdx: loIdx,
+				ciIdx: ciIdx,
+				schIdx: schIdx,
+				movType: movType
+			},
+			dataType: "text"
+		})
+		.done(function(data){
+			if(data == "false"){
+				alert("스케줄 삭제에 오류가 발생했습니다.");
+				return;
+			}
+			location.reload();	
+			
+		})
+		.fail(function(){})
 	})
 });
 </script>

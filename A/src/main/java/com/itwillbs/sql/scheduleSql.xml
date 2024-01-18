@@ -84,6 +84,8 @@
 			 , S.SCH_RUN		"SCH_RUN"
 			 , S.SCH_STIME		"SCH_STIME"
 			 , S.SCH_ETIME		"SCH_ETIME"
+			 , S.LO_IDX			"LO_IDX"
+			 , S.CI_IDX			"CI_IDX"
 		  FROM SCHEDULE S
 		  JOIN LOCATION L
 		    ON S.LO_IDX = L.LO_IDX
@@ -93,11 +95,12 @@
 		  JOIN MOVIE M
 		    ON S.SCH_MOV_TYPE = M.MOVIE_CATEGORY
 		   AND S.SCH_MOV_IDX = M.MOVIE_IDX
-		 ORDER BY 1, 2, 7, S.SCR_IDX * 1, 5 DESC, 6
+		 ORDER BY 1, 2, 7, S.SCH_IDX * 1, S.SCR_IDX * 1, 5 DESC, 6
 	</select>
 	
 	
 	<insert id="insert" parameterType="ScheduleDTO">
+		-- insert
 		INSERT
 		  INTO SCHEDULE
 		  	 ( LO_IDX
@@ -114,7 +117,10 @@
 		VALUES 
 			 ( #{loIdx}
 			 , #{ciIdx}
-			 , #{schIdx}
+			 , (SELECT *
+		   		  FROM (SELECT IFNULL(MAX(CAST(SCH_IDX as unsigned)), 0) + 1
+				   		  FROM SCHEDULE
+				 		 WHERE SCH_MOV_TYPE = #{schMovType}) S)
 			 , #{schDate}
 			 , #{schMovType}
 			 , #{schMovIdx}
@@ -125,7 +131,15 @@
 			 )
 	</insert>
 	
-	
+	<delete id="delete" parameterType="ScheduleDTO">
+		DELETE
+		  FROM SCHEDULE
+		 WHERE 1 = 1
+		   AND LO_IDX = #{loIdx}
+		   AND CI_IDX = #{ciIdx}
+		   AND SCH_MOV_TYPE = #{schMovType}
+		   AND SCH_IDX = #{schIdx}
+	</delete>
 	
 	
 	

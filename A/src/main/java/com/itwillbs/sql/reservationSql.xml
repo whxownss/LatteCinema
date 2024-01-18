@@ -69,6 +69,7 @@
 		   AND S_TIME = #{sTime}
 		   AND TITLE = #{title}
 		   AND CINEMA = #{cinema}
+ 		   AND SUCCESS != 'false'       <!-- 환불 del -> upd 변경후 -->
 		 UNION
 		SELECT SEAT_C "SEAT"
 		  FROM SEAT
@@ -124,7 +125,9 @@
 		DELETE S
 		  FROM SEAT S
 		  LEFT
-		  JOIN RESERVATION R
+		  JOIN (SELECT *				<!-- 환불 del -> upd 변경후 -->
+				  FROM RESERVATION
+				 WHERE SUCCESS != 'false') R  
 		    ON S.MEM_ID = R.MEM_ID
 		   AND S.LO_IDX = R.LO_IDX
 		   AND S.CI_IDX = R.CI_IDX
@@ -152,9 +155,9 @@
 		   AND SEAT_C = REPLACE(#{seatC}, ',', ', ')
 	</select>
 	
-	<delete id="deleteRes" parameterType="String">
-		DELETE 
-		  FROM RESERVATION
+	<delete id="refundRes" parameterType="String">
+		UPDATE RESERVATION
+		   SET SUCCESS = 'false'
 		 WHERE 1 = 1 
 		   AND MERCHANT_UID = #{mid}
 <!-- 		   AND TIMESTAMPDIFF -->

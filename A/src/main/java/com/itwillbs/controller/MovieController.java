@@ -101,7 +101,6 @@ public class MovieController extends HttpServlet {
 		
 		
 		if(sPath.equals("/movie_update.mo")) {
-			
 			System.out.println("movie_update 오는지");
 			
 			movieService = new MovieService();
@@ -109,7 +108,6 @@ public class MovieController extends HttpServlet {
 			
 			response.sendRedirect("adm_mv_inout.ad");
 		} // update 
-		
 		
 		if(sPath.equals("/movie_delete.mo")) {
 			request.setCharacterEncoding("utf-8");
@@ -124,6 +122,28 @@ public class MovieController extends HttpServlet {
 			response.sendRedirect("adm_mv_inout.ad");
 		} // delete
 		
+		
+		// 한줄평 작성 가능 유무
+		if(sPath.equals("/checkWrite.mo")) { 
+			movieService = new MovieService();
+			int result = movieService.checkWrite(request);
+
+			System.out.println("@@@@@@@@@@@@@@@@@");
+			System.out.println(result);
+			System.out.println("@@@@@@@@@@@@@@@@@");
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result + "");
+			
+		}
+		
+		// 한줄평 데이터 넣기
+		if(sPath.equals("/reviewInsert.mo")) {
+			
+			movieService = new MovieService();
+			int result = movieService.reviewInsert(request);
+			
+		}//
+			
 	
 		
 	}	

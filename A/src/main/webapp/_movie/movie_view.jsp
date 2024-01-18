@@ -166,7 +166,81 @@
       </div>
       <!-- // cont-box -->
     </div>
+    <!-- 관람평 쓰기 -->
+		<section class="category-section" id="">
+			<div class="container" data-aos="fade-up">
+				<!-- 이곳에 코드작성 -->
+				<div class="section-header d-flex justify-content-between align-items-center mb-5">
+					<h2>한줄평</h2>
+					<div>
+						<a href="cs_center.cs" class="more" style="font-size: 17px;">
+							나가기
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="category-section" id="">
+<div class="container bg-light aos-init aos-animate" data-aos="fade-up">
+				<!-- 이곳에 코드작성 -->
+				<div class="row justify-content-center">
+				<div>
+			      <!-- <div class="col-lg-4 col-md-8 col-sm-10"> -->
+			        <form action="reviewInsert.mo" name="revfr" id="revfr">
+			          <div class="form-group mb-3">
+<!-- 			            <label for="agreement">관람평 쓰기</label> -->
+			            <div>
+				            <textarea class="form-control" id="viewComment" name="viewComment" style="overflow: auto; height: 200px; font-size : 25px;"  placeholder="10자 이상 한줄평 쓰기"></textarea>
+			            </div>
+			          </div>
+
+					  <div class="d-flex justify-content-around">
+				          <div class="form-group mb-3 d-flex justify-content-center">
+							  <button type="button" id="write" class="btn-type0" style="width: 100px;">작성</button>
+						  </div>
+						   <div class="form-group mb-3 d-flex justify-content-center">
+							  <button type="reset" class="btn-type0" style="width: 100px;">취소</button>
+						  </div>
+			          </div>	
+			        </form>
+			      </div>
+				<!--관람평 게시판 -->
+
+
+		<section class="category-section" id="">
+			<div class="container" data-aos="fade-up">
+				<table class="table">
+				  <thead>
+				    <tr class="table-secondary" style="text-align: center;">
+				      <th scope="col" style="width: 50px; ">#</th>
+				      <th scope="col" style="width: 150px;">아이디</th>
+				      <th scope="col">관람평</th>
+				      <th scope="col" style="width: 100px;">등록일</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				      <th scope="row">1</th>
+				      <td>aaa아이디</td>
+				      <td><div id="titleArea">bbb 한줄평</div></td>
+				      <td><fmt:formatDate value="${centerBoardDTO.createDate }" pattern="yyyy-MM-dd"/></td>
+				    </tr>
+				    <tr>
+				    	<td colspan="4">
+				    		<div class="d-flex justify-content-around">
+					            <button id="editButton" class="btn-type0" style="width: 100px; type="button">수정</button> 
+					            <button id="deleteButton" class="btn-type0" style="width: 100px; type="button">삭제</button> 
+					        </div>
+				    	</td>
+				    </tr>
+				  </tbody>
+				</table>
+			</div>
+		</section> 
+
   </div>
+  
 </div>
 
 <!-- // mv-info-wrap-->
@@ -268,6 +342,65 @@
   }
   
   $(function() {
+		// 관람평=====================================================================
+		$("#write").on("click", function(){
+			debugger;
+			var viewcomment = $("#viewComment").val()
+	<%-- 		<%=session.getAttribute("sId") %> --%>
+			var sessionId = "test1" 
+			var title = "${detail.title}";
+			var movIdx = ${detail.movieIdx};
+			var movType = "${detail.movieCategory}";
+			if(sessionId == null){
+				alert('로그인 후 작성 가능합니다.');
+				return;
+			}
+			
+			debugger;
+			$.ajax({
+				type: "GET",
+				url: "checkWrite.mo",
+				data: {
+					movIdx: movIdx,
+					movType: movType,
+					memId: sessionId
+				},
+				dateType: "text"
+			})
+			.done(function(data){
+				debugger;
+				if(data != '0'){
+					$.ajax({
+						type: "post",
+						url: "reviewInsert.mo",
+						data: {
+							revComment : viewcomment,
+							memID : sessionId,
+							movType: movType,
+							movIdx: movIdx,
+							title : title,
+						},
+						dataType: "text"
+					})
+					
+					.done(function(data){
+						if(data == '0'){
+							alert('한줄평 작성 오류발생')
+							return
+						}
+						location.reload();
+					})
+					
+				}else{
+					alert('관람내역이 없습니다 실관람 이후 작성가능합니다.')
+				}
+			})
+			.fail(function(){
+				debugger;
+			})
+		});  
+		// 관람평=====================================================================	  
+	  
     $(".btn-prev").on("click", function(e) {
       history.back();
     });

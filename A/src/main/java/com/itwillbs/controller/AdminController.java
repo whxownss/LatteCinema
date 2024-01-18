@@ -263,13 +263,13 @@ public class AdminController extends HttpServlet {
 			adminService.insertSchedule(request);
 			
 			response.sendRedirect("adm_cinema.ad");
+		}
+		if(sPath.equals("/adm_cinemaProDS.ad")) {
+			AdminService adminService = new AdminService();
+			String result = adminService.deleteSchedule(request);
+			
+			response.setCharacterEncoding("utf-8");
+		    response.getWriter().write(result);
 		}		
-		
-		
 	}//doProcess()	
-	
-	
-	
-	
-	
 }//클래스 끝
