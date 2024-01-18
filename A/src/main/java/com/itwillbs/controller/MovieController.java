@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.itwillbs.domain.MovieDTO;
+import com.itwillbs.domain.RecommendDTO;
+import com.itwillbs.service.CSBoardService;
 import com.itwillbs.service.MovieService;
 
 public class MovieController extends HttpServlet {
@@ -74,8 +76,14 @@ public class MovieController extends HttpServlet {
 			List<MovieDTO> posterList = movieService.getLattePoster(movieDTO);
 			request.setAttribute("lattePosterList", posterList);
 			
+			CSBoardService csService = new CSBoardService();
+			ArrayList<RecommendDTO> recommendList = csService.getRecommendListOrdered();
+			
+			request.setAttribute("recommendList", recommendList);
 			dispatcher = request.getRequestDispatcher("_a/movie_latte.jsp");
 			dispatcher.forward(request, response);
+			
+			
 		}
 			
 		// 관리자 영화 추가 페이지에서 search버튼 누르면 뜨는 창
