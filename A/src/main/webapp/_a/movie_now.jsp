@@ -1,5 +1,8 @@
+<%@page import="com.itwillbs.domain.MovieDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 	<link rel="stylesheet" href="_assets/css/hover.css">
@@ -9,227 +12,87 @@
 	
 		<%@include file="../_common/commonMovieSlide.jsp"%>
 			
-			 <section class="category-section">
-    <div class="container" data-aos="fade-up">
-
-      <div class="section-header d-flex justify-content-between align-items-center mb-5">
-        <h3>1월의 라떼..</h3>
-      </div>
-
-      <div class="row g-5">
-        <div class="col-lg-4">
-          <div class="post-entry-1 lg">
-            <div class="item position-relative" id="wrap">
-              <img src="assets/img/post20.jpg" style="width: 100%;">
-              <div class="titlee">
-                <a href="" class="moree">예매하기</a>
-                <a href="" class="moree">상세정보</a>
-              </div>
-            </div>
-            <div class="post-meta"><span class="date">영화제목1</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '97</span></div>
-          </div>
-        </div>
-
-        <div class="col-lg-4">
-          <div class="post-entry-1 lg">
-            <div class="item position-relative" id="wrap">
-              <img src="assets/img/post21.jpg" style="width: 100%;">
-              <div class="titlee">
-                <a href="" class="moree">예매하기</a>
-                <a href="" class="moree">상세정보</a>
-              </div>
-            </div>
-            <div class="post-meta"><span class="date">영화제목2</span> <span class="mx-1">&bullet;</span> <span>Jan 15th '99</span></div>
-          </div>
-        </div>
-
-        <div class="col-lg-4">
-          <div class="post-entry-1 lg">
-            <div class="item position-relative" id="wrap">
-              <img src="assets/img/post22.jpg" style="width: 100%;">
-              <div class="titlee">
-                <a href="" class="moree">예매하기</a>
-                <a href="" class="moree">상세정보</a>
-              </div>
-            </div>
-            <div class="post-meta"><span class="date">영화제목3</span> <span class="mx-1">&bullet;</span> <span>Feb 7th '02</span></div>
-          </div>
-        </div>
-
-      </div> <!-- End .row -->
-    </div>
-  </section><!-- End Lifestyle Category Section -->
-			
-		<section class="category-section">
-		<div class="container" data-aos="fade-up">
-			<div
-				class="section-header d-flex justify-content-between align-items-center mb-5">
-				<h3>최신 상영작</h3>
-				<!-- <div>
-					<a href="movie_will.mo" class="more">상영 예정작 &gt;</a>
-				</div> -->
+	<% List<MovieDTO> lattePosterList = (List<MovieDTO>)request.getAttribute("lattePosterList");%>	
+	<% List<MovieDTO> posterNowList = (List<MovieDTO>)request.getAttribute("posterNowList");%>
+	
+	 <section class="category-section">
+	  <div class="container" data-aos="fade-up">		     
+			<div class="section-header d-flex justify-content-between align-items-center mb-5">
+	  		<h3>1월의 라떼..</h3>
 			</div>
-
+				
 			<div class="row g-5">
-				<div class="col-lg">
-					<div class="post-entry-1 lg">
-						<div class="item position-relative" id="wrap">
-			          <img src="assets/img/post1.jpg" style="width: 100%;">
-						<div class="titleeee">
-							<a href="" class="moree">예매하기</a>
-							<a href="" class="moree">상세정보</a>
-						</div>
-		        	</div>
-						<div class="post-meta">
-							<span class="date">영화제목1</span> <span class="mx-1">&bullet;</span>
-							<span>Jul 5th '97</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg">
-					<div class="post-entry-1 lg">
-						<div class="item position-relative" id="wrap">
-			          <img src="assets/img/post2.jpg" style="width: 100%;">
-						<div class="titleeee">
-							<a href="" class="moree">예매하기</a>
-							<a href="" class="moree">상세정보</a>
-						</div>
-		        	</div>
-						<div class="post-meta">
-							<span class="date">영화제목2</span> <span class="mx-1">&bullet;</span>
-							<span>Jan 15th '99</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg">
-					<div class="post-entry-1 lg">
-						<div class="item position-relative" id="wrap">
-			          <img src="assets/img/post3.jpg" style="width: 100%;">
-						<div class="titleeee">
-							<a href="" class="moree">예매하기</a>
-							<a href="" class="moree">상세정보</a>
-						</div>
-		        	</div>
-						<div class="post-meta">
-							<span class="date">영화제목3</span> <span class="mx-1">&bullet;</span>
-							<span>Feb 7th '02</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg">
-					<div class="post-entry-1 lg">
-						<div class="item position-relative" id="wrap">
-			          <img src="assets/img/post4.jpg" style="width: 100%;">
-						<div class="titleeee">
-							<a href="" class="moree">예매하기</a>
-							<a href="" class="moree">상세정보</a>
-						</div>
-		        	</div>
-						<div class="post-meta">
-							<span class="date">영화제목1</span> <span class="mx-1">&bullet;</span>
-							<span>Jul 5th '97</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg">
-					<div class="post-entry-1 lg">
-						<div class="item position-relative" id="wrap">
-			          <img src="assets/img/post5.jpg" style="width: 100%;">
-						<div class="titleeee">
-							<a href="" class="moree">예매하기</a>
-							<a href="" class="moree">상세정보</a>
-						</div>
-		        	</div>
-						<div class="post-meta">
-							<span class="date">영화제목1</span> <span class="mx-1">&bullet;</span>
-							<span>Jul 5th '97</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- End .row -->
-			<div class="row g-5">
-				<div class="col-lg">
-					<div class="post-entry-1 lg">
-						<div class="item position-relative" id="wrap">
-			          <img src="assets/img/post1.jpg" style="width: 100%;">
-						<div class="titleeee">
-							<a href="" class="moree">예매하기</a>
-							<a href="" class="moree">상세정보</a>
-						</div>
-		        	</div>
-						<div class="post-meta">
-							<span class="date">영화제목1</span> <span class="mx-1">&bullet;</span>
-							<span>Jul 5th '97</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg">
-					<div class="post-entry-1 lg">
-						<div class="item position-relative" id="wrap">
-			          <img src="assets/img/post2.jpg" style="width: 100%;">
-						<div class="titleeee">
-							<a href="" class="moree">예매하기</a>
-							<a href="" class="moree">상세정보</a>
-						</div>
-		        	</div>
-						<div class="post-meta">
-							<span class="date">영화제목2</span> <span class="mx-1">&bullet;</span>
-							<span>Jan 15th '99</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg">
-					<div class="post-entry-1 lg">
-						<div class="item position-relative" id="wrap">
-			          <img src="assets/img/post3.jpg" style="width: 100%;">
-						<div class="titleeee">
-							<a href="" class="moree">예매하기</a>
-							<a href="" class="moree">상세정보</a>
-						</div>
-		        	</div>
-						<div class="post-meta">
-							<span class="date">영화제목3</span> <span class="mx-1">&bullet;</span>
-							<span>Feb 7th '02</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg">
-					<div class="post-entry-1 lg">
-						<div class="item position-relative" id="wrap">
-			          <img src="assets/img/post4.jpg" style="width: 100%;">
-						<div class="titleeee">
-							<a href="" class="moree">예매하기</a>
-							<a href="" class="moree">상세정보</a>
-						</div>
-		        	</div>
-						<div class="post-meta">
-							<span class="date">영화제목1</span> <span class="mx-1">&bullet;</span>
-							<span>Jul 5th '97</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg">
-					<div class="post-entry-1 lg">
-						<div class="item position-relative" id="wrap">
-			          <img src="assets/img/post5.jpg" style="width: 100%;">
-						<div class="titleeee">
-							<a href="" class="moree">예매하기</a>
-							<a href="" class="moree">상세정보</a>
-						</div>
-		        	</div>
-						<div class="post-meta">
-							<span class="date">영화제목1</span> <span class="mx-1">&bullet;</span>
-							<span>Jul 5th '97</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-			
+			  <c:forEach var="movie" items="${lattePosterList}" varStatus="status">
+			    <div class="col-lg-4">
+			      <div class="post-entry-1 lg">
+			        <div class="item position-relative" id="wrap">
+			          <!-- 각 영화의 포스터 이미지를 동적으로 출력 -->
+			          <img src="${movie.poster}" style="width: 100%;">
+			          <div class="titlee">
+			            <a href="#" class="moree">예매하기</a>
+			            <!-- 상세정보로 페이지 이동 링크 -->
+			            <a href="movie_view.mo?movieCode=${movie.movieCode}" class="moree">상세정보</a>
+			          </div>
+			        </div>
+			      </div>
+				 </div>
+				</c:forEach>
+			</div>     
 		</div>
-	</section>
-	<!-- End Lifestyle Category Section -->
+	</section> 
+			
+
+	<%-- <section class="category-section">
+		<div class="container" data-aos="fade-up">
+		  <div class="section-header d-flex justify-content-between align-items-center mb-5">
+	        <h2>박스오피스</h2>
+	        <div><a href="movie_now.mo" class="more">상영작 보러가기</a></div>
+	      </div>
+		
+	      <div class="container" data-aos="fade-up">
+			<div class="owl-carousel owl-theme">
+				<c:forEach var="movie" items="${posterNowList}" varStatus="status">
+		        <div class="item position-relative" id="wrap">
+		          <img src="<c:out value="${movie.poster}" />" > 
+					<div class="titleee">
+						<a href="" class="moree">예매하기</a>
+						<a href="${pageContext.servletContext.contextPath}/movie_view.mo?movieCode=${movie.movieCode}" class="moree">상세정보</a>
+					</div>
+		        </div>
+	     	 	</c:forEach> 
+		     </div>
+	       </div>
+       </div>
+     </section>
+	 --%>
+	 
+	 <section class="category-section">
+    <div class="container" data-aos="fade-up">
+        <div class="section-header d-flex justify-content-between align-items-center mb-5">
+            <h3>최신 상영작</h3>
+        </div>
+        
+	            <div class="row g-5">
+	            <c:forEach var="movie" items="${posterNowList}" varStatus="loop">
+		                <!-- 수정된 부분: col-lg를 col-lg-2로 변경, 2번째 줄부터는 offset-lg-1 클래스 추가 -->
+		                <div class="col-lg-2 <%-- ${loop.index > 4 ? 'offset-lg-1' : ''} --%>">
+		                    <div class="post-entry-1 lg">
+		                        <div class="item position-relative" id="wrap">
+		                            <!-- 각 영화의 포스터 이미지를 동적으로 출력 -->
+		                            <img src="${movie.poster}" style="width: 100%;">
+		                            <div class="titleeee">
+		                                <a href="#" class="moree">예매하기</a>
+		                                <!-- 상세정보로 페이지 이동 링크 -->
+		                                <a href="movie_view.mo?movieCode=${movie.movieCode}" class="moree">상세정보</a>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+	            </c:forEach>
+	        	</div>
+        	
+    </div>
+</section>
 	
 	</main>
 	

@@ -100,7 +100,7 @@ public class MovieDAO {
 	
 	public void updateMovie(MovieDTO movieDTO) {
 		SqlSession session = sqlSessionFactory.openSession();
-            int result = session.insert("Movie.updateMovie", movieDTO);
+            int result = session.update("Movie.updateMovie", movieDTO);
             session.commit();
             session.close();
         }

@@ -47,7 +47,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
 		     --%>
 	 <section class="category-section">
 	  <div class="container" data-aos="fade-up">		     
-			<div class="section-header d-flex justify-content-between align-items-center mb-5">
+		<div class="section-header d-flex justify-content-between align-items-center mb-5">
 	  		<h3>1월의 라떼..</h3>
 			</div>
 	
@@ -57,7 +57,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
 			      <div class="post-entry-1 lg">
 			        <div class="item position-relative" id="wrap">
 			          <!-- 각 영화의 포스터 이미지를 동적으로 출력 -->
-			          <img src="${movie.poster}" style="width: 50%;">
+			          <img src="${movie.poster}" style="width: 100%;">
 			          <div class="titlee">
 			            <a href="#" class="moree">예매하기</a>
 			            <!-- 상세정보로 페이지 이동 링크 -->
