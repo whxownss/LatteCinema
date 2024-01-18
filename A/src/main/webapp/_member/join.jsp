@@ -2,11 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@include file="../_common/commonHeaderStart.jsp"%>
-	
 <link rel="stylesheet" href="_assets/css/signup4.css">
-<script src="jQuery/jquery-3.6.0.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 주소 api  -->
-
 <%@include file="../_common/commonHeaderEnd.jsp"%>
 
 <main id="main">
@@ -109,11 +105,10 @@
 </main>
 
 <%@include file="../_common/commonFooterStart.jsp"%>
+<script src="jQuery/jquery-3.6.0.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 주소 api  -->
 <script>
-	
 	$(function(){
-		
-		
 		$("#find_button").on('click', function() {
 		    new daum.Postcode({
 		        oncomplete: function(data) {
@@ -161,12 +156,9 @@
 		
 		
 	});
-
 </script>
 
 <script>
-
-
 // 회원가입 정규식
 var empJ = /\s/g; // 공백 정규식
 var RegexID = /^[a-zA-Z0-9]{5,16}$/; // 영문 대소문자 숫자 특수문자 5~16자 규칙(아이디)
@@ -425,10 +417,6 @@ function checkSubmit() {
 	
 	return ((flag == 0) ? false : true);
 }	
-
-
-
-
 
 </script>
 <%@include file="../_common/commonFooterEnd.jsp"%>

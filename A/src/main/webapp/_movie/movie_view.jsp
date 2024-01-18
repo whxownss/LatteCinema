@@ -224,13 +224,13 @@
 				      <th scope="row">1</th>
 				      <td>aaa아이디</td>
 				      <td><div id="titleArea">bbb 한줄평</div></td>
-				      <td><fmt:formatDate value="${centerBoardDTO.createDate }" pattern="yyyy-MM-dd"/></td>
+				      <td>asdasd</td>
 				    </tr>
 				    <tr>
 				    	<td colspan="4">
 				    		<div class="d-flex justify-content-around">
-					            <button id="editButton" class="btn-type0" style="width: 100px; type="button">수정</button> 
-					            <button id="deleteButton" class="btn-type0" style="width: 100px; type="button">삭제</button> 
+					            <button id="editButton" class="btn-type0" style="width: 100px;" >수정</button> 
+					            <button id="deleteButton" class="btn-type0" style="width: 100px;" >삭제</button> 
 					        </div>
 				    	</td>
 				    </tr>
