@@ -428,6 +428,10 @@
 var cinemaList = ${cinemaListJson};
 
 $(function(){
+	//
+// 	$("#location option:eq(6)").prop("selected", true);
+	
+	//
 	
 	$("#location").on("change", function(e){
 		var loIdx = e.currentTarget.selectedIndex;
