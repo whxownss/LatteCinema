@@ -53,6 +53,8 @@ public class MovieController extends HttpServlet {
 			List<MovieDTO> posterNowList = movieService.getNowPoster(movieDTO);
 			request.setAttribute("posterNowList", posterNowList);
 			
+			System.out.println(posterNowList.size());
+			
 			dispatcher = request.getRequestDispatcher("_a/movie_now.jsp");
 			dispatcher.forward(request, response);
 		}
