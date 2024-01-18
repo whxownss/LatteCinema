@@ -13,10 +13,11 @@ $(function(){
 		$.ajax({
 			type: "GET",
 			url: "res1ProGC.re",
-			dataTye: "json",
+			dataType: "json",
 			async: false
 		})
 		.done(function(data){
+			debugger;
 			cinemaList = data;
 		})
 		.fail(function(){})

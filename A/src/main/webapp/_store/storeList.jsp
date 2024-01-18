@@ -15,8 +15,7 @@
 
 			<section class="contents d-flex">
 				<div class="col-6" style="display: flex; justify-content: center;">
-					<img id="itemImage"
-						alt="스위트콤보 상품이미지">
+					<img id="itemImage" alt="itemName">
 				</div>
 				<article class="col-4">
 					<table class="pd_table fs-5 table table-sm">
@@ -47,7 +46,7 @@
 							</tr>
 							<tr>
 								<th scope="row">유효기간</th>
-								<td class="text-end">24 개월</td>
+								<td class="text-end">무제한</td>
 							</tr>
 							<tr>
 								<th scope="col" style="padding-top: 3%">총 상품금액</th>
@@ -103,8 +102,8 @@
 										</div>
 										<div class="mb-3">
 											<label for="message-text" class="col-form-label">
-												메시지 (최대 70글자) :</label>
-											<textarea class="form-control" rows="5" id="msg"
+												메시지 (최대 100글자) :</label>
+											<textarea class="form-control" rows="5" id="msg" maxlength="100"
 												placeholder="즐거운 관람 되세요~"></textarea>
 										</div>
 									</form>
@@ -213,198 +212,7 @@
 <!-- ///// 자바스크립트 ///// -->
 
 <%@include file="../_common/commonFooterStart.jsp"%>
-<script src="jQuery/jquery-3.6.0.js"></script>
-<!-- iamport.payment.js -->
+<script type="text/javascript" src="${pageContext.servletContext.contextPath}/jQuery/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath}/_assets/js/storeJS/storeList.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-<script type="text/javascript">
-
-var storeItem = ${storeItem};
-
-// 연락처 정규식 체크
-function checkPhone() {
-	var phone = $("#phone").val();
-	var text = "** 연락처 입력 필수! **"
-	var color = "red";
-	var phoneRegex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-	
-	if(phone != ""){
-		text = "** 알맞은 연락처 형식으로 입력! ' - ' 생략가능!! **";
-		
-		if(phoneRegex.test(phone)){
-			text = "** 알맞은 연락처 형식! ** ";
-			color = "green";
-		}
-	}
-	
-	$("#checkPhone").text(text).css("color",color);
-	var checkPhone = document.getElementById('checkPhone');
-	if(checkPhone.style.color == 'red') return;   
-
-		// 연락처 유무 체크
-		$.ajax({
-			type : "post",
-			data : {memPhone : phone}, //입력한 값 변수에 담기
-			url : "checkphone.st", 
-			dataType: "text",
-			success:function(data){
-				if(data == '1'){
-					$("#checkPhone").text("선물가능한 번호입니다.").css("color", "green");
-					return false;
-				}else if(data == '0'){
-					$("#checkPhone").text("선물할수없는 번호입니다.").css("color", "red");
-					return true;
-				 }		
-			},
-			error: function(){
-			}
-		});
-		
-	}
-	
-<!-- 결제 API -->
-
-// 가맹점 식별코드
-var IMP = window.IMP;
-IMP.init("imp20121707"); 
-
-// 포트원 api
-  function requestPay(param) {
-	
-	// 선물하기 모달창 전화번호 없이 결제불가
-	var checkPhone = document.getElementById('checkPhone');
-	if(param == 'gift' && (checkPhone.style.color == 'red' || $("#checkPhone").text() == '')){
-		alert('휴대폰 번호를 확인해주세요.');
-		return;
-	}
-	
-// 	// 로그인 체크
-//       if (!isLogin) {
-//           alert("로그인 후 이용할 수 있습니다.");
-//           return;
-//       }
-	
-	//주문번호 만들기
-	const make_merchant_uid = () => {
-        const current_time = new Date();
-        const year = current_time.getFullYear().toString();
-        const month = (current_time.getMonth()+1).toString();
-        const day = current_time.getDate().toString();
-        const hour = current_time.getHours().toString();
-        const minute = current_time.getMinutes().toString();
-        const second = current_time.getSeconds().toString();
-        const merchant_uid = hour + minute + second;
-        return merchant_uid;
-    };
-    const merchant_uid = make_merchant_uid()
-	
-	var itemName = $("#itemName").text();
-	var price = parseInt($("#sPrice").text().replace(",", "")); 
-	
-	// 결제 및 정보
-      IMP.request_pay({ 
-          pg: "html5_inicis.INIpayTest",	// PG사
-          pay_method: "card",	// 지불수단
-          merchant_uid: "STO" + merchant_uid,   // 주문번호
-          name: itemName,	// 상품명
-          amount: 100,    // 가격		price
-          buyer_email: "duqdlduq2@naver.com",	// 구매자 이메일
-          buyer_name: "김성엽",	// 구매자 이름
-          buyer_tel: "010-5125-1365",	// 구매자 연락처
-      }, function (rsp) { // callback
-    	  console.log(rsp);
-    	  if (rsp.success) {	// 결제성공
-    		  rsp["mem_id"] = 'asd';   
-    	  	  rsp["item_cnt"] = $(".inpp").text();
-    	  	  
-    	  	  if(param == 'gift'){
-    	  		rsp["gift_tel"] = $("#phone").val();		// 전화번호 확인
-    	  		var msg = ($("#msg").val() == '') ? $('#msg').attr('placeholder') : $("#msg").val();
-    	  		rsp["gift_msg"] = msg;		// 메시지 확인
-    	  	  }
-    		  
-    		  $.ajax({
-    			  type: "POST",
-    			  data: {rsp : JSON.stringify(rsp)},
-    			  url: "storeListPro.st",
-    			  dataType: "text"
-    		  })
-    		  .done(function(data){
-    			  
-    			  if(data == "true"){
-    				  alert("결제가 완료되었습니다.")
-    				  $('#checkPhone').text('');
-    				  $('#phone').val('');
-            		  $('#msg').val('');
-    				  $("#exampleModal").modal('hide');
-    			  }
-    		  })
-    		  .fail(function(){})    		  
-      	 }
-	});
-}
-
-	  // 수량 옵션 
-      $(function(){
- 		$("#itemImage").attr("src", storeItem.itemImage);
- 		$("#itemName").text(storeItem .itemName);
- 		$("#price").text(storeItem.itemPrice);
- 		$("#detail").text(storeItem.itemDetail);
-    		
-    	var price = storeItem.itemPrice + "";
-    	  
-    	$("#sPrice").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-    	  
-        $('._count :button').on({
-            'click' : function(e){
-
-               e.preventDefault();
-               var count = $(this).parent('._count').find('.inpp').text();
-               var now = parseInt(count);
-               var min = 1;
-               var max = 5;
-               var num = now;
-               
-               if($(this).hasClass('minus')){
-                   var type = 'm';
-               }else{
-                   var type = 'p';
-               }
-               if(type=='m'){
-                   if(now>min){
-                       num = now - 1;
-                   }
-               }else{
-                   if(now<max){
-                       num = now + 1;
-                   }
-               }
-               
-               if(num != now){
-                   $(this).parent('._count').find('.inpp').text(num);
-               }
-           }
-       });
-         
-         // 상품금액
-         $(".inpp").on("DOMSubtreeModified", function(){
-        	 
-			var p1 = parseInt($("#price").text().replace(/[^\d]+/g, ""));
-			var p2 = parseInt($(".inpp").text());
-			
-			var sum = p1 * p2;
-			
-			var sPrice = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-			
-			$("#sPrice").text(sPrice);
-			
-		});
-		
-         // 3자리 콤마(,)
-         var price = $('#price').text();
-         var money = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-         $('#price').text(money);
-         
-      });
-   </script>
-
 <%@include file="../_common/commonFooterEnd.jsp"%>

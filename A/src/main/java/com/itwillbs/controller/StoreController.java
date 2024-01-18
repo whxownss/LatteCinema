@@ -10,8 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.itwillbs.dao.StoreDAO;
+import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.StoreItemDTO;
+import com.itwillbs.domain.StorePayDTO;
+import com.itwillbs.service.CSBoardService;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.StoreService;
 
@@ -45,16 +49,30 @@ public class StoreController extends HttpServlet{
 		// storeitem 내용 표시
 		if(sPath.equals("/storeList.st")) {
 			
-			String idx = request.getParameter("itemIdx");
-			
-			storeService = new StoreService();
-			
-			String storeItemJson = storeService.getItemInfo(idx);
-			
-			request.setAttribute("storeItemJson", storeItemJson);
+//			String idx = request.getParameter("itemIdx");
+//			
+//			storeService = new StoreService();
+//			
+//			String storeItemJson = storeService.getItemInfo(idx);
+//			
+//			request.setAttribute("storeItemJson", storeItemJson);
 			
 			dispatcher = request.getRequestDispatcher("_store/storeList.jsp");
 			dispatcher.forward(request, response);
+		}//
+		// storeItemJson 가져오기
+		if(sPath.equals("/storeListview.st")) {
+			
+			String idx = request.getParameter("itemIdx");
+			storeService = new StoreService();
+			
+			String storeItemJson = "";
+			storeItemJson = storeService.getItemInfo(idx);
+			
+			response.setContentType("application/json");
+			response.setContentType("text/html; charset=utf-8");
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(storeItemJson);
 		}//
 		
 		// store 선물하기 전화번호 유무 체크
@@ -84,6 +102,8 @@ public class StoreController extends HttpServlet{
 			response.getWriter().write(buyerInfo);
 			
 		}//
+		
+		// 관리자 스토어 AdminController에서 시작 111
 		
 	} // doProcess
 	
