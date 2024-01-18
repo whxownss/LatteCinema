@@ -119,74 +119,7 @@
 			</div>
 		</section>
 	</main>
-<%@include file="../_common/commonFooterStart.jsp"%>	
-<script src="jQuery/jquery-3.6.0.js"></script>
-<script>
-
-debugger;
-
-// var schDTO = JSON.parse(localStorage.getItem("schDTO"));
-var rsp = JSON.parse(localStorage.getItem("rsp"));
-// function cancelPay() {
-//     jQuery.ajax({
-//       // 예: http://www.myservice.com/payments/cancel
-//       "url": "{환불정보를 수신할 가맹점 서비스 URL}", 
-//       "type": "POST",
-//       "contentType": "application/json",
-//       "data": JSON.stringify({
-//         "merchant_uid": "{결제건의 주문번호}", // 예: ORD20180131-0000011
-//         "cancel_request_amount": 2000, // 환불금액
-//         "reason": "테스트 결제 환불" // 환불사유
-//       }),
-//       "dataType": "json"
-//     });
-//   }
-
-$(function(){
-	
-	$("#refund").on("click", function(){
-		$.ajax({
-			type: "GET",
-			url: "res4Pro.re",
-			data: {mid: rsp.merchant_uid},
-			dataType: "text"
-		})
-		.done(function(data){
-			debugger;
-			if(data == "환불 성공"){
-// 				$.ajax({
-// 					type: "POST",
-// 					url: "res4ProRF.re",
-// 					data: {mid: rsp.merchant_uid},
-// 					datType: "text"
-// 				})
-// 				.done(function(data){
-					
-// 				})
-// 				.fail(function(){})
-			}
-		})
-		.fail(function(){})
-	});
-	
-	
-	$(".buyerName").text(rsp.buyer_name);
-	$(".resIdx").text(rsp.merchant_uid);
-	$(".sTime").text(rsp.s_time);
-	$(".eTime").text(rsp.eTime);
-	$(".sIdx").text(rsp.scr_idx);
-	$(".seat").text(rsp.seat);
-	$(".date").text(rsp.date);
-	$(".cinema").text(rsp.cinema);
-	var personType = [];
-	if(rsp["p1"] != "0") personType.push("성인 " + rsp["p1"]);
-	if(rsp["p2"] != "0") personType.push("청소년 " + rsp["p2"]);
-	if(rsp["p3"] != "0") personType.push("경로 " + rsp["p3"]);
-	debugger;
-	$(".personType").append("<span>" + personType.join(', ') + "</span>")
-	$(".poster").attr("src", rsp.poster);
-	
-})
-
-</script>
+<%@include file="../_common/commonFooterStart.jsp"%>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath}/jQuery/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath}/_assets/js/resJS/res4.js"></script>
 <%@include file="../_common/commonFooterEnd.jsp"%>
