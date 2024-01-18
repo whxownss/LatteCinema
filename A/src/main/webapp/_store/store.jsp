@@ -86,7 +86,6 @@
 										style="width: 280px; height: 250px; margin: 20px;">
 									</c:otherwise>
 								</c:choose>
-								
 							</div>
 							<div class="itm_tit">
 								<h4>${itemB.itemName}</h4>
@@ -119,7 +118,16 @@
 					<div class="col-lg-4">
 						<a href="storeList.st?itemIdx=${itemS.itemIdx}" class="text-center">
 							<div class="itm_img">
-								<img src="${itemS.itemImage}" alt="${itemS.itemName}">
+								<c:choose>
+									<c:when test="${fn:startsWith(itemS.itemImage, 'https://')}">
+										<img src="${itemS.itemImage}" alt="${itemS.itemName}">
+									</c:when>
+									
+									<c:otherwise>
+										<img src="_assets/img/${itemS.itemImage}" alt="${itemS.itemName}"
+										style="width: 280px; height: 250px; margin: 20px;">
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="itm_tit">
 								<h4>${itemS.itemName}</h4>
@@ -152,7 +160,16 @@
 					<div class="col-lg-4">
 						<a href="storeList.st?itemIdx=${itemT.itemIdx}" class="text-center">
 							<div class="itm_img">
-								<img src="${itemT.itemImage}" alt="${itemT.itemName}">
+								<c:choose>
+									<c:when test="${fn:startsWith(itemT.itemImage, 'https://')}">
+										<img src="${itemT.itemImage}" alt="${itemT.itemName}">
+									</c:when>
+									
+									<c:otherwise>
+										<img src="_assets/img/${itemT.itemImage}" alt="${itemT.itemName}"
+										style="width: 280px; height: 250px; margin: 20px;">
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="itm_tit">
 								<h4>${itemT.itemName}</h4>

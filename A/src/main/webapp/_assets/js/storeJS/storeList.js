@@ -4,7 +4,7 @@ document.write('<script type="text/javascript" '+
 	  // 수량 옵션 
       $(function(){
 		  
-		  var storeItem;
+		 var storeItem;
 		$.ajax({
 			type: "GET",
 			url: "storeListview.st",
@@ -16,8 +16,11 @@ document.write('<script type="text/javascript" '+
 			 storeItem = JSON.parse(data);
 		})
 		.fail(function(){})
-		  
- 		$("#itemImage").attr("src", storeItem.itemImage);
+		
+		if(storeItem.itemImage.slice(0, 8)) {
+			$("#itemImage").attr("src", storeItem.itemImage);
+		}
+ 		
  		$("#itemName").text(storeItem .itemName);
  		$("#price").text(storeItem.itemPrice);
  		$("#detail").text(storeItem.itemDetail);

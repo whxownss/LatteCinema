@@ -1,4 +1,8 @@
+<%@page import="com.itwillbs.domain.StorePayDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.itwillbs.domain.PageDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,14 +27,17 @@
                   <div class="my-magabox-info ">
                     <!-- top -->
                     <div class="top2" style="back-ground color: #dc3545;">
-                      <div class="mbimg"></div>
                       <div class="mb_name">안녕하세요! ${sessionScope.sName}님</div>
-                      <div class="link"><a href="myInfo.me" title="개인정보수정 페이지로 이동">개인정보수정</a>
-                      </div>
                     </div>
                     <!--// top -->
                   </div>
                     <!--// my-info -->
+                    
+                    <%
+                    ArrayList<StorePayDTO> storeList = 
+            			(ArrayList<StorePayDTO>)request.getAttribute("storeList");
+					PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
+					%>
                     
                     <!-- column -->
                     <div class="myStory">
@@ -38,24 +45,74 @@
                         <h2 class="tit small"><b>나의 라떼시네마</b></h2>
                       </div>
                       <div class="box-border link-movie-story align-middle">
-                        <a href="#" title="관람한 영화 후기 탭으로 이동"><span>예매/구매 내역</span></a>
-                        <a href="#" title="보고 싶은 영화 탭으로 이동"><span>나의 문의 내역</span></a>
-                        <a href="#" title="OLD MOVIE 제안 게시판 탭으로 이동"><span>개인정보수정</span>
+                        <a href="bookinglist.me" title="예매/구매 내역 탭으로 이동"><span>예매/구매 내역</span></a>
+                        <a href="myinquiry.me" title="나의 문의 내역 탭으로 이동"><span>나의 문의 내역</span></a>
+                        <a href="myInfo.me" title="개인정보수정 탭으로 이동"><span>개인정보수정</span>
                         </a>
                       </div>
                     </div>
             
                     <div class="myInq">
                       <div class="tit-util mt70">
-                        <h2 class="tit small"><b>문의내역</b></h2>
+                        <h2 class="tit small"><b>선물내역</b></h2>
                       </div>
                       <div class="brd-list">
-                        <ul>
-                            <%if(true){ %>
-                            <!--  결과 없을 때  -->
-                            <li class="no-result">문의내역이 없습니다.</li>
-                            <%} %>
-                        </ul>
+                      <div class="table-relative mt10">
+							<table class="table table-bordered border-Info">
+								<thead>
+									<tr>
+										<th scope="col" class="text-center">결제번호</th>
+										<th scope="col" class="text-center">상품명</th>
+										<th scope="col" class="text-center">수량</th>
+										<th scope="col" class="text-center">보낸사람</th>
+										<th scope="col" class="text-center">받은날짜</th>
+									</tr>
+								</thead>
+								<tbody id="tbody">
+								<c:forEach var="storeList" items="${storeList }">
+			                      	<tr>
+			                      		<td>${storeList.merchantUid }</td>
+			                      		<td>${storeList.name }</td>
+			                      		<td>${storeList.itemCnt }</td>
+			                      		<td>${storeList.buyerName }</td>
+			                      		<td>${storeList.payTime }</td>
+			                      	</tr>
+			                      </c:forEach>
+								</tbody>
+							</table>
+							
+							<!-- 페이징 처리 -->
+							<section class="category-section" id="">
+							<div class="container" data-aos="fade-up">
+								<div class="pagination-container d-flex justify-content-center">
+								  <ul class="pagination" id="searchPaging">
+									<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+									    <li class="page-item ">
+									      <a class="page-link text-secondary" href="myPage.me?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
+									    </li>
+								    </c:if>	
+								    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+									    <li class="page-item" aria-current="page">
+									      <a class="page-link text-secondary" href="myPage.me?pageNum=${i }">${i }</a>
+									    </li>
+								    </c:forEach>
+						    		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+									    <li class="page-item">
+									      <a class="page-link text-secondary" href="myPage.me?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
+									    </li>
+								    </c:if>	
+								  </ul>
+								</div>
+							</div>
+						</section>
+		
+						</div>
+<!--                         <ul> -->
+<%--                             <%if(true){ %> --%>
+<!--                              결과 없을 때  -->
+<!--                             <li class="no-result">선물받은 내역이 없습니다.</li> -->
+<%--                             <%} %> --%>
+<!--                         </ul> -->
                       </div>
                     </div>
                     <!--// column -->
