@@ -394,6 +394,18 @@ public class MemberService {
 		return count;
 	}//getStoreBoardCount()
 
+	public ArrayList<ReservationDTO> getResRefundList(String memId) {
+		System.out.println("MemberService getResRefundList()");
+		ArrayList<ReservationDTO> resRefundList = null;
+		try {
+			MemberDAO memberDAO = new MemberDAO();
+			resRefundList = memberDAO.getResRefundList(memId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resRefundList;
+	}//getResRefundList()
+
 
 
 //	public MemberDTO kakaoCheck(HttpServletRequest request) {

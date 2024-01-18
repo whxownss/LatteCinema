@@ -204,6 +204,22 @@ public class MemberDAO {
 		return count;
 	}//getStoreBoardCount()
 
+	public ArrayList<ReservationDTO> getResRefundList(String memId) {
+		System.out.println("MemberDAO getResRefundList()");
+		ArrayList<ReservationDTO> resRefundList = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			resRefundList = new ArrayList<ReservationDTO>(session.selectList("CsAdmin.getResRefundList",memId));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return resRefundList;
+	}//getResRefundList()
+
 	
 }
 

@@ -750,6 +750,8 @@ public class MemberController extends HttpServlet {
 			
 			ArrayList<ReservationDTO> resBoardList = 
 					memberService.getResBoardList(pageDTO,memId);
+			ArrayList<ReservationDTO> resRefundList =
+					memberService.getResRefundList(memId);
 			
 			// 예약구매 페이지 페이징 작업
 			// int 리턴할형 getBoardCount() 메서드 정의
@@ -779,6 +781,7 @@ public class MemberController extends HttpServlet {
 			request.setAttribute("pageDTO", pageDTO);
 			//request에 boardList 저장
 			request.setAttribute("resBoardList", resBoardList);
+			request.setAttribute("resRefundList", resRefundList);
 			
 			dispatcher = request.getRequestDispatcher("_mypage/bookinglist.jsp");
 			dispatcher.forward(request, response);

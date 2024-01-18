@@ -19,6 +19,7 @@ import com.itwillbs.domain.LostBoardDTO;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.MovieDTO;
 import com.itwillbs.domain.QnaBoardDTO;
+import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.domain.ResponseDataDTO;
 import com.itwillbs.domain.ScheduleDTO;
 import com.itwillbs.service.AdminService;
@@ -63,9 +64,11 @@ public class AdminController extends HttpServlet {
 			request.setCharacterEncoding("utf-8");
 			CSBoardService csBoardService = new CSBoardService();
 			ArrayList<ResponseDataDTO> responseList = csBoardService.getResponseList();
+			ArrayList<ReservationDTO> resBoardList = csBoardService.getResBoardList();
 			int memCount = csBoardService.getMemCount();
 			
 			request.setAttribute("responseList", responseList);
+			request.setAttribute("resBoardList", resBoardList);
 			request.setAttribute("memCount", memCount);
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_home.jsp");
 			dispatcher.forward(request, response);
