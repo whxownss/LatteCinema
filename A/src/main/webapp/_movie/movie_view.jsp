@@ -54,7 +54,7 @@
         </div>--%>
         <div class="btns only-m">
           <a href="javascript:goLink('/totalView/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기</a>
-          <a href="#" class="btn-type1 movie-open" data-poster="https://img.dtryx.com/poster/2023/12/D3ED4691-3003-4A40-BA15-E029AC980BEF.small.jpg" data-source="https://img.dtryx.com/video/2023/12/45030FA5-DC2D-4702-A4B8-731108559CBA.mp4">예고편 보기</a></div>
+          </div>
       </div>
       
       <div class="float-info ">
@@ -105,17 +105,22 @@
                 </dl>
               </div>
             </div>
-          </div>
-          
-            <div class="tit">스틸컷 <span class="pc"></span></div>
-              <div class="slider1 mb60 pc">
+     	 </div>
+
+
+		
+		<c:if test="${not empty stillcutArray}">
+		<div class="tit">스틸컷 <span class="pc"></span></div>
+		<div class="slider1 mb60 pc">
+		
                 <div class="swiper-container gallery-top">
                   <div class="swiper-wrapper">
-                  
+                    
                   <c:forEach var="stillcut"  items="${stillcutArray}">
-                    <div class="swiper-slide">
-                    <img src="${stillcut}">
-                    </div>
+			          <!-- 값이 null이 아닌 경우에만 이미지 노출 -->
+			          <div class="swiper-slide">
+			            <img src="${stillcut}">
+			          </div>
                     </c:forEach>  
                    <!--  <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/BF923A35-B169-4291-9058-C62D2773F2DA.Large.jpg"></div> -->
                    
@@ -136,21 +141,11 @@
                     <img src="${stillcut}">
                     </div>
                     </c:forEach>  
-                    
-<!--                       <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/122850C6-D716-4BF1-95F1-09AD1B0FCA8C.small.jpg"></div> -->
-<!--                       <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/BF923A35-B169-4291-9058-C62D2773F2DA.small.jpg"></div> -->
-<!--                       <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/D3ED4691-3003-4A40-BA15-E029AC980BEF.small.jpg"></div> -->
-<!--                       <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/4782C053-7A5B-4EF0-8BAD-7F537A2FF3D7.small.jpg"></div> -->
-<!--                       <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/37D42A9E-24A6-493B-B7E8-A5A86FDD23BE.small.jpg"></div> -->
-<!--                       <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/F8C17E52-2B94-4C68-9C36-84F8EEF0006E.small.jpg"></div> -->
-<!--                       <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/731D4061-7BE0-478E-8460-64235578A0DA.small.jpg"></div> -->
-<!--                       <div class="swiper-slide"><img src="https://img.dtryx.com/poster/2023/12/515A4746-48B7-4000-B1BA-15810D452A78.small.jpg"></div> -->
                       </div>
                   </div>
                 </div>
-                
               </div>
-              
+              </c:if>
               
               
             <!-- // 스틸컬 슬라이더 PC -->
@@ -251,6 +246,8 @@
 </div>
 
 <!-- // mv-info-wrap-->
+
+<c:if test="${not empty stillcutArray}">
 <div class="stillcut-fixed" style="display: none">
   <div class="bg"></div>
   <div class="layer">
@@ -272,6 +269,7 @@
     <button class="btn-close"></button>
   </div>
 </div>
+</c:if>
 
 <div class="movie-popup" style="display: none">
   <div class="bg"></div>
