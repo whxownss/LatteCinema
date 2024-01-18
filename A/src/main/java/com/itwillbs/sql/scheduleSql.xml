@@ -40,10 +40,11 @@
 		   AND (S.LO_IDX, S.CI_IDX) = (SELECT LO_IDX, CI_IDX
 		   								 FROM CINEMA
 		   								WHERE CI_NAME = #{CINEMA})
-		   <![CDATA[
-		   AND M.START_DATE <= #{DATE}
-		   AND M.END_DATE > #{DATE}
-		   ]]>
+		   AND S.SCH_DATE = #{DATE}								
+<!-- 		   <![CDATA[ -->
+<!-- 		   AND M.START_DATE <= #{DATE} -->
+<!-- 		   AND M.END_DATE > #{DATE} -->
+<!-- 		   ]]> -->
 		<if test="!PARAM.equals('all')">
 		   AND M.TITLE = #{PARAM} 
 		</if>
@@ -62,21 +63,83 @@
 		    ON (M.MOVIE_IDX = S.SCH_MOV_IDX and M.MOVIE_CATEGORY = S.SCH_MOV_TYPE)
 		 WHERE 1 = 1 
 <!-- 		   AND S.SCH_MOV_TYPE = #{movType} -->
-		   <![CDATA[
-		   AND M.START_DATE <= #{DATE}
-		   AND M.END_DATE > #{DATE}
-		   ]]>
+		   AND S.SCH_DATE = #{DATE}
+<!-- 		   <![CDATA[ -->
+<!-- 		   AND M.START_DATE <= #{DATE} -->
+<!-- 		   AND M.END_DATE > #{DATE} -->
+<!-- 		   ]]> -->
 		   AND C.CI_NAME = #{CINEMA}
 	</select>
 	
 	
 	
+	<select id="selectAll" resultType="ScheduleDTO">
+		SELECT L.LO_NAME		"LO_NAME"
+			 , C.CI_NAME		"CI_NAME"
+			 , S.SCH_IDX		"SCH_IDX"
+			 , S.SCR_IDX		"SCR_IDX"
+			 , S.SCH_MOV_TYPE	"SCH_MOV_TYPE"
+			 , M.TITLE			"TITLE"
+			 , S.SCH_DATE		"SCH_DATE"
+			 , S.SCH_RUN		"SCH_RUN"
+			 , S.SCH_STIME		"SCH_STIME"
+			 , S.SCH_ETIME		"SCH_ETIME"
+			 , S.LO_IDX			"LO_IDX"
+			 , S.CI_IDX			"CI_IDX"
+		  FROM SCHEDULE S
+		  JOIN LOCATION L
+		    ON S.LO_IDX = L.LO_IDX
+		  JOIN CINEMA C
+		    ON S.LO_IDX = C.LO_IDX
+		   AND S.CI_IDX = C.CI_IDX
+		  JOIN MOVIE M
+		    ON S.SCH_MOV_TYPE = M.MOVIE_CATEGORY
+		   AND S.SCH_MOV_IDX = M.MOVIE_IDX
+		 ORDER BY 1, 2, 7, S.SCH_IDX * 1, S.SCR_IDX * 1, 5 DESC, 6
+	</select>
 	
 	
+	<insert id="insert" parameterType="ScheduleDTO">
+		-- insert
+		INSERT
+		  INTO SCHEDULE
+		  	 ( LO_IDX
+		  	 , CI_IDX
+		  	 , SCH_IDX
+		  	 , SCH_DATE
+		  	 , SCH_MOV_TYPE
+		  	 , SCH_MOV_IDX
+		  	 , SCH_STIME
+		  	 , SCH_RUN
+		  	 , SCH_ETIME
+		  	 , SCR_IDX
+		  	 )
+		VALUES 
+			 ( #{loIdx}
+			 , #{ciIdx}
+			 , (SELECT *
+		   		  FROM (SELECT IFNULL(MAX(CAST(SCH_IDX as unsigned)), 0) + 1
+				   		  FROM SCHEDULE
+				 		 WHERE SCH_MOV_TYPE = #{schMovType}) S)
+			 , #{schDate}
+			 , #{schMovType}
+			 , #{schMovIdx}
+			 , #{schStime}
+			 , #{schRun}
+			 , DATE_ADD(SCH_STIME, INTERVAL SCH_RUN MINUTE)
+			 , #{scrIdx}
+			 )
+	</insert>
 	
-	
-	
-	
+	<delete id="delete" parameterType="ScheduleDTO">
+		DELETE
+		  FROM SCHEDULE
+		 WHERE 1 = 1
+		   AND LO_IDX = #{loIdx}
+		   AND CI_IDX = #{ciIdx}
+		   AND SCH_MOV_TYPE = #{schMovType}
+		   AND SCH_IDX = #{schIdx}
+	</delete>
 	
 	
 	

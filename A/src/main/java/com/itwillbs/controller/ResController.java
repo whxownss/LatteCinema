@@ -45,6 +45,15 @@ public class ResController extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("_reservation/res1.jsp");
 			dispatcher.forward(request, response);
 		}
+		// cinemaList 가져오기 (js 파일에서 jstl 사용이 안 돼서 이렇게 수정)
+		if(sPath.equals("/res1ProGC.re")) {
+			resService = new ResService();
+			String cinemaListJson = resService.getCinemas();
+			
+			response.setContentType("application/json");
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(cinemaListJson);
+		}
 		// 스케줄 정보 비동기로 가져오기
 		if(sPath.equals("/res1Pro.re")) {
 			resService = new ResService();
@@ -125,6 +134,11 @@ public class ResController extends HttpServlet {
 		if(sPath.equals("/res2ProRS.re")) {
 			resService = new ResService();
 			String memId = request.getParameter("memId");
+			
+			System.out.println("=123=1231=23");
+			System.out.println(memId);
+			System.out.println("=123=1231=23");
+			
 			String result = resService.isPaidSeat(memId);
 			
 			response.setCharacterEncoding("utf-8");

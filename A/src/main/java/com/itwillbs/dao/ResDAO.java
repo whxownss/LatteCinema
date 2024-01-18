@@ -141,7 +141,7 @@ public class ResDAO {
 
 	public String refund(String mid) {
 		SqlSession session = sqlSessionFactory.openSession();
-		int deleteCnt = session.delete("Reservation.deleteRes", mid);
+		int deleteCnt = session.update("Reservation.refundRes", mid);
 		session.commit();
 		session.close();
 		
@@ -155,5 +155,13 @@ public class ResDAO {
 		session.close();
 		
 		return screenList;
+	}
+
+	public List<ScheduleDTO> getAllSchedules() {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<ScheduleDTO> allSchedules = session.selectList("Schedule.selectAll");
+		session.close();
+		
+		return allSchedules;
 	}
 }

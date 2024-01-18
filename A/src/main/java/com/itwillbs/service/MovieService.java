@@ -1,13 +1,17 @@
 package com.itwillbs.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.itwillbs.dao.CSBoardDAO;
 import com.itwillbs.dao.MovieDAO;
 import com.itwillbs.domain.MovieDTO;
+import com.itwillbs.domain.ReviewDTO;
 
 public class MovieService {
 	
@@ -65,14 +69,19 @@ public class MovieService {
 	
 		
 		
-		public MovieDTO getMovieDetail(MovieDTO movieDTO) {
+		public MovieDTO getMovieDetail(HttpServletRequest request) {
 			
 			System.out.println("movieDetail 서비스");
 			MovieDTO detail = null;	
+			movieDTO = new MovieDTO();
 			
 			try {
+				
 				movieDAO = new MovieDAO();
+				movieDTO.setMovieCode(request.getParameter("movieCode"));
+				
 				detail = movieDAO.getMovieDetail(movieDTO);
+				
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -110,7 +119,57 @@ public class MovieService {
 			    return movieList;
 				
 			}
+		
 
+		//한줄평 작성 가능 유무
+		public int checkWrite(HttpServletRequest request) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("movIdx", request.getParameter("movIdx"));
+			map.put("memId", request.getParameter("memId"));
+			map.put("movType", request.getParameter("movType"));
+			
+			int result = 0;
+			
+			movieDAO = new MovieDAO();
+			result = movieDAO.checkWrite(map);
+			
+			return result;
+		}
+		
+		// 한줄평 데이터 넣기
+		public int reviewInsert(HttpServletRequest request) {
+			int result = 0;
+			try {
+				request.setCharacterEncoding("UTF-8");
+				String revComment = request.getParameter("revComment");
+				String memId = request.getParameter("memId");
+				String movType = request.getParameter("movType");
+				String movIdx = request.getParameter("movIdx");
+				String title = request.getParameter("title");
+				Timestamp date = new Timestamp(System.currentTimeMillis());
+
+				ReviewDTO reviewDTO = new ReviewDTO();
+				reviewDTO.setRevComment(revComment);
+				reviewDTO.setMemId(memId);
+				reviewDTO.setMovType(movType);
+				reviewDTO.setMovIdx(movIdx);
+				reviewDTO.setTitle(title);
+				reviewDTO.setRevDate(date);
+				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+				System.out.println(reviewDTO);
+				movieDAO = new MovieDAO();
+				
+				result = movieDAO.reviewInsert(reviewDTO);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return result;
+			
+		}
+		
+		
+		
 		public MovieDTO updateMovie(HttpServletRequest request) {
 			try {
 				request.setCharacterEncoding("UTF-8");
@@ -136,7 +195,7 @@ public class MovieService {
 				movieDTO.setActor(request.getParameter("actor"));
 				movieDTO.setStillcut(request.getParameter("stillcut"));
 				   
-				movieDAO.insertMovie(movieDTO);
+				movieDAO.updateMovie(movieDTO);
 				
 			} catch (Exception e) {
 				e.printStackTrace();
