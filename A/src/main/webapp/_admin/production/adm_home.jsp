@@ -314,7 +314,7 @@
                           <th>예매상태</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="tbody">
                       	<c:forEach var="reservationDTO" items="${resBoardList }">
                       		<tr>
                    			  <th>${reservationDTO.merchantUid }</th>	
@@ -328,10 +328,12 @@
 	                          <th>
 	                          	<select name="bookSelect">
 	                          	<c:if test="${reservationDTO.success eq true }">
-									<option value="true">Y</option>
+									<option value="true" selected>Y</option>
+									<option value="false">N</option>
 	                          	</c:if>
 	                          	<c:if test="${reservationDTO.success ne true }">
-									<option value="false">N</option>
+									<option value="true">Y</option>
+									<option value="false" selected>N</option>
 	                          	</c:if>
 								</select>
 	                          </th>
@@ -590,9 +592,14 @@
 		// 데이터 변경, 데이터셋 추가/삭제 등 다른 버튼 클릭 이벤트 핸들러들은 여기에 작성됩니다...
 		$(document).ready(function() {
 		  // 셀렉트박스의 onchange 이벤트 핸들러
-		  $('select[name="bookSelect"]').on('change', function() {
-			 console.log("이벤트 연결");
-		    $('#bookStatus').submit(); // 폼 제출
+// 		  $('select[name="bookSelect"]').on('change', function() {
+// 			 console.log("이벤트 연결");
+// 		    $('#bookStatus').submit(); // 폼 제출
+// 		  });
+		  $('#tbody').on('change','select',function(){
+			var $row = $(this).closest("tr");
+			var mid = $row.find("th:first-child").text();
+			alert('이벤트연결' + mid);
 		  });
 		});
         

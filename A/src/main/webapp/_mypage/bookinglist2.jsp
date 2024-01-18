@@ -14,6 +14,7 @@
   <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js?autoload=false"></script>
    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 </head>
 <body>
 
@@ -161,7 +162,7 @@
 			
 						<!-- 취소한 예매 영화 목록 -->
 						<div class="table-wrap mt10">
-							<table class="board-list" summary="취소일시, 영화명, 극장, 상영일시, 취소금액 항목을 가진 취소내역 목록 표">
+							<table class="board-list" summary="취소일시, 영화명, 극장, 상영일시, 취소금액 항목을 가진 취소내역 목록 표" id="refundItem">
 								<caption>취소일시, 영화명, 극장, 상영일시, 취소금액 항목을 가진 취소내역 목록 표</caption>
 								<colgroup>
 									<col style="width:160px;">
@@ -192,31 +193,6 @@
 								</tbody>
 							</table>
 							
-							<!-- 페이징 처리 -->
-							<section class="category-section" id="">
-							<div class="container" data-aos="fade-up">
-								<div class="pagination-container d-flex justify-content-center">
-								  <ul class="pagination" id="searchPaging">
-									<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-									    <li class="page-item ">
-									      <a class="page-link text-secondary" href="bookinglist2.me?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
-									    </li>
-								    </c:if>	
-								    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
-									    <li class="page-item" aria-current="page">
-									      <a class="page-link text-secondary" href="bookinglist2.me?pageNum=${i }">${i }</a>
-									    </li>
-								    </c:forEach>
-						    		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-									    <li class="page-item">
-									      <a class="page-link text-secondary" href="bookinglist2.me?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
-									    </li>
-								    </c:if>	
-								  </ul>
-								</div>
-							</div>
-						</section>
-		
 						</div>
 			
 <!-- 						<nav class="pagination" id="navBokd"><strong class="active">1</strong> </nav> -->
@@ -268,7 +244,14 @@
   </section>
 </main>
 <%@include file ="../_common/commonFooterStart.jsp" %>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 <script type="text/javascript">
+$(function(){
+	$('#refundItem').DataTable({
+		pagingType: 'full_numbers'
+	});
+});//document ready
 $("#tbody").on("click","button",function() {
 	 var $row = $(this).closest("tr");
     // 해당 행 안에 있는 'merchantUid' 셀의 텍스트 내용
