@@ -1,3 +1,5 @@
+<%@page import="com.itwillbs.domain.ReviewDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -15,8 +17,7 @@
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/swiper.min.js"></script>
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/front.js"></script>
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/app.js"></script>
-
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
  
   
@@ -177,7 +178,7 @@
 		</section>
 
 		<section class="category-section" id="">
-<div class="container bg-light aos-init aos-animate" data-aos="fade-up">
+			<div class="container bg-light aos-init aos-animate" data-aos="fade-up">
 				<!-- 이곳에 코드작성 -->
 				<div class="row justify-content-center">
 				<div>
@@ -186,11 +187,15 @@
 			          <div class="form-group mb-3">
 <!-- 			            <label for="agreement">관람평 쓰기</label> -->
 			            <div>
-				            <textarea class="form-control" id="viewComment" name="viewComment" style="overflow: auto; height: 200px; font-size : 25px;"  placeholder="10자 이상 한줄평 쓰기"></textarea>
+							
+				            <textarea class="form-control" id="viewComment" name="viewComment" style="overflow: auto; height: 200px; font-size : 25px;"  placeholder="10자 이상 한줄평 쓰기">
+				            	${myReview.revComment }
+				            </textarea>
+			            
 			            </div>
 			          </div>
 
-					  <div class="d-flex justify-content-around">
+					  <div class="d-flex justify-content-around" name="revbtn" id="revbtn">
 				          <div class="form-group mb-3 d-flex justify-content-center">
 							  <button type="button" id="write" class="btn-type0" style="width: 100px;">작성</button>
 						  </div>
@@ -201,36 +206,46 @@
 			        </form>
 			      </div>
 				<!--관람평 게시판 -->
-
-
+				</div>
+			</div>
+		</section>
+<%ArrayList<ReviewDTO> boardList = (ArrayList<ReviewDTO>) request.getAttribute("reviewList"); %>
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
-				<table class="table">
+				<table class="table" id="revTable">
 				  <thead>
-				    <tr class="table-secondary" style="text-align: center;">
-				      <th scope="col" style="width: 50px; ">#</th>
-				      <th scope="col" style="width: 150px;">아이디</th>
-				      <th scope="col">관람평</th>
-				      <th scope="col" style="width: 100px;">등록일</th>
+				    <tr class="table-secondary" style="text-align: center; ">
+				      <th scope="col" style="width: 25px; ">#</th>
+				      <th scope="col" style="width: 150px; text-align: center;">아이디</th>
+				      <th scope="col" STYLE="text-align: center;">한줄평</th>
+				      <th scope="col" style="width: 130px; text-align: center;">등록일</th>
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>aaa아이디</td>
-				      <td><div id="titleArea">bbb 한줄평</div></td>
-				      <td><fmt:formatDate value="${centerBoardDTO.createDate }" pattern="yyyy-MM-dd"/></td>
+				  <c:forEach var="reviewDTO" items="${reviewList}">
+				    <tr  style="height: 70px; vertical-align:middle; border-bottom: 1px solid black; text-align: center;">
+				      <th scope="row" style="text-align: center;">${reviewDTO.revNum }</th>
+				      <td style="text-align: center;">${reviewDTO.memId }</td>
+				      <td><div id="titleArea">${reviewDTO.revComment }</div></td>
+				      <td style="text-align: center;">${reviewDTO.revDate }</td>
 				    </tr>
-				    <tr>
-				    	<td colspan="4">
-				    		<div class="d-flex justify-content-around">
-					            <button id="editButton" class="btn-type0" style="width: 100px; type="button">수정</button> 
-					            <button id="deleteButton" class="btn-type0" style="width: 100px; type="button">삭제</button> 
-					        </div>
-				    	</td>
-				    </tr>
-				  </tbody>
+				</c:forEach>
+<!-- 							<tr> -->
+<!-- 								<td colspan="4"> -->
+<!-- 									<div class="d-flex justify-content-around"> -->
+<!-- 										<button id="editButton" class="btn-type0" -->
+<!-- 											style="width: 100px;">수정</button> -->
+<!-- 										<button id="deleteButton" class="btn-type0" -->
+<!-- 											style="width: 100px;">삭제</button> -->
+<!-- 									</div> -->
+<!-- 								</td> -->
+<!-- 							</tr> -->
+						</tbody>
 				</table>
+<!-- 					<div class="d-flex justify-content-around CENTER" STYLE="margin-top: 20PX;">
+						<button id="editButton" class="btn-type0" style="width: 100px;">한줄평 수정</button>
+						<button id="deleteButton" class="btn-type0"style="width: 100px;">한줄평 삭제</button>
+					</div> -->
 			</div>
 		</section> 
 
@@ -281,7 +296,8 @@
 </div>
 
 </main>
-
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 <script type="text/javascript">
   var galleryThumbs = new Swiper(".gallery-thumbs .swiper-container", {
     spaceBetween: 10,
@@ -341,10 +357,19 @@
   
   $(function() {
 		// 관람평=====================================================================
+		
+		// 페이징처리작업
+		$('#revTable').DataTable({
+			pagingType: 'full_numbers',
+			order: [[0, 'desc']]
+		});	
+		
+		// 한줄평 작성가능 유무 판단
 		$("#write").on("click", function(){
 			debugger;
 			var viewcomment = $("#viewComment").val()
-	<%-- 		<%=session.getAttribute("sId") %> --%>
+			// 세션값 
+<%-- 			var sessionId = <%=session.getAttribute("sId") %> --%>
 			var sessionId = "test1" 
 			var title = "${detail.title}";
 			var movIdx = ${detail.movieIdx};
@@ -366,6 +391,7 @@
 				dateType: "text"
 			})
 			.done(function(data){
+				//한줄평 데이터 넣기
 				debugger;
 				if(data != '0'){
 					$.ajax({
@@ -373,10 +399,11 @@
 						url: "reviewInsert.mo",
 						data: {
 							revComment : viewcomment,
-							memID : sessionId,
+							memId : sessionId,
 							movType: movType,
 							movIdx: movIdx,
 							title : title,
+							movCode: new URL(window.location.href).searchParams.get('movieCode')
 						},
 						dataType: "text"
 					})
@@ -396,8 +423,16 @@
 			.fail(function(){
 				debugger;
 			})
+			
+			// 한줄평 수정 및 삭제
+			
+			
+			
+// 			$("#titleArea")
+			
+			//$("#staticBackdrop").modal("show");
 		});  
-		// 관람평=====================================================================	  
+		// 한줄평=====================================================================	  
 	  
     $(".btn-prev").on("click", function(e) {
       history.back();

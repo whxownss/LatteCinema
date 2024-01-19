@@ -10,6 +10,7 @@ public class ResponseDataDTO {
 	private String response;
 	private String responseUser;
 	private String responseDate;
+	private String boardGB;
 	public int getResDataIdx() {
 		return resDataIdx;
 	}
@@ -64,12 +65,20 @@ public class ResponseDataDTO {
 	public void setResponseDate(String responseDate) {
 		this.responseDate = responseDate;
 	}
+	public String getBoardGB() {
+		return boardGB;
+	}
+	public void setBoardGB(String boardGB) {
+		this.boardGB = boardGB;
+	}
 	@Override
 	public String toString() {
 		return "ResponseDataDTO [resDataIdx=" + resDataIdx + ", qnaIdx=" + qnaIdx + ", lostIdx=" + lostIdx
 				+ ", createUser=" + createUser + ", createDate=" + createDate + ", subject=" + subject + ", response="
-				+ response + ", responseUser=" + responseUser + ", responseDate=" + responseDate + "]";
+				+ response + ", responseUser=" + responseUser + ", responseDate=" + responseDate + ", boardGB="
+				+ boardGB + "]";
 	}
+	
 	
 	
 }

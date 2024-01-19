@@ -147,8 +147,10 @@ public class MovieService {
 				String movIdx = request.getParameter("movIdx");
 				String title = request.getParameter("title");
 				Timestamp date = new Timestamp(System.currentTimeMillis());
+				
 
 				ReviewDTO reviewDTO = new ReviewDTO();
+				reviewDTO.setMovCode(request.getParameter("movCode"));
 				reviewDTO.setRevComment(revComment);
 				reviewDTO.setMemId(memId);
 				reviewDTO.setMovType(movType);
@@ -220,5 +222,40 @@ public class MovieService {
 				e.printStackTrace();
 			}
 			return deleteSuccess > 0;
+		}
+
+		// 한줄평 가져오기
+		public ArrayList<ReviewDTO> getReview(String movieCode) {
+			System.out.println("movieService getReview()");
+			ArrayList<ReviewDTO> reviewList = null;
+			try {
+				reviewList = movieDAO.getReview(movieCode);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return reviewList;
+		}
+
+		
+		// 내가 해당영화에 쓴 댓글 가져오기
+		public ReviewDTO myReview(HttpServletRequest request) {
+			System.out.println("movieService myReview");
+			ReviewDTO reviewDTO = null;
+			try {
+				String id = request.getParameter("sId");
+				String movieCode = request.getParameter("movieCode");
+				movieDAO = new MovieDAO();
+				reviewDTO.setMemId(id);
+				reviewDTO.setMovCode(movieCode);
+				
+				reviewDTO = movieDAO.myReview(reviewDTO);
+				
+				
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			return reviewDTO;
 		}
 	}

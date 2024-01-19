@@ -4,7 +4,6 @@
 <head>
   <jsp:include page="../_common/meta.jsp"></jsp:include>
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
-	<link href="_assets/js/myInfo.js">
 </head>
 <body>
 <jsp:include page="../_common/header.jsp"></jsp:include>
@@ -56,5 +55,5 @@
     </section>
 	</main>
 <%@include file ="../_common/commonFooterStart.jsp" %>
-
+<!-- <link href="_assets/js/myInfo.js"> -->
 <%@include file ="../_common/commonFooterEnd.jsp" %>

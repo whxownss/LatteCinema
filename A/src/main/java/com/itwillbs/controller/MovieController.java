@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.itwillbs.domain.MovieDTO;
+import com.itwillbs.domain.ReviewDTO;
+import com.itwillbs.domain.RecommendDTO;
+import com.itwillbs.service.CSBoardService;
 import com.itwillbs.service.MovieService;
 
 public class MovieController extends HttpServlet {
@@ -74,8 +77,14 @@ public class MovieController extends HttpServlet {
 			List<MovieDTO> posterList = movieService.getLattePoster(movieDTO);
 			request.setAttribute("lattePosterList", posterList);
 			
+			CSBoardService csService = new CSBoardService();
+			ArrayList<RecommendDTO> recommendList = csService.getRecommendListOrdered();
+			
+			request.setAttribute("recommendList", recommendList);
 			dispatcher = request.getRequestDispatcher("_a/movie_latte.jsp");
 			dispatcher.forward(request, response);
+			
+			
 		}
 			
 		// 관리자 영화 추가 페이지에서 search버튼 누르면 뜨는 창
@@ -99,7 +108,20 @@ public class MovieController extends HttpServlet {
 			request.setAttribute("detail", detail);
 			
 			System.out.println("detail"+detail);
-		
+			
+			// 한줄평 출력
+			ArrayList<ReviewDTO> reviewList = movieService.getReview(movieCode);
+			request.setAttribute("reviewList", reviewList);
+			
+			// 내가 해당 영화에 한줄평 가져오기
+			
+			ReviewDTO myReview = new ReviewDTO();
+			myReview = movieService.myReview(request);
+			request.setAttribute("myReview", myReview);
+			System.out.println("@@@@@@@@@@@@@@@@");
+			System.out.println(myReview);
+			
+			
 			dispatcher = request.getRequestDispatcher("_movie/movie_view.jsp");
 			dispatcher.forward(request, response);	
 			

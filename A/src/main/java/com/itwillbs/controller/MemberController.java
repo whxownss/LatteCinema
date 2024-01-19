@@ -27,9 +27,11 @@ import com.itwillbs.email.EmailCode;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.domain.ReservationDTO;
+import com.itwillbs.domain.StorePayDTO;
 import com.itwillbs.service.CSBoardService;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.MovieService;
+import com.itwillbs.service.StoreService;
 import com.itwillbs.sms.SendSms;
 
 
@@ -199,6 +201,14 @@ public class MemberController extends HttpServlet {
 			memberService = new MemberService();
 			MemberDTO memberDTO = memberService.userCheck(request);
 			
+			if(memberDTO != null && memberDTO.getMemStatus().equals("1")) {
+				String memStopD = memberDTO.getMemStopD();
+				System.out.println("정지된날: "+memStopD);
+				request.setAttribute("memStopD", memStopD);
+				dispatcher = request.getRequestDispatcher("_member/msg2.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
 			//리턴받은 값이 null 아니면 => 아이디 비밀번호 일치
 			//리턴받은 값이 null 이면 => 아이디 비밀번호 틀림
 			if(memberDTO != null) {
@@ -309,6 +319,15 @@ public class MemberController extends HttpServlet {
 		
 		// 마이페이지 (마이페이지 기본메인화면) 이동
 		if(sPath.equals("/myPage.me")) {
+			StoreService storeService = new StoreService();
+			HttpSession session = request.getSession();
+			String sId = (String)session.getAttribute("sId");
+			System.out.println(sId);
+			ArrayList<StorePayDTO> storeGiftList = storeService.getstoreGiftList(sId);
+			request.setAttribute("storeGiftList",storeGiftList);
+			System.out.println("===============");
+			System.out.println(storeGiftList);
+			System.out.println("===============");
 			dispatcher = request.getRequestDispatcher("_mypage/myPage.jsp");
 			dispatcher.forward(request, response);
 		}//
@@ -741,6 +760,8 @@ public class MemberController extends HttpServlet {
 			
 			ArrayList<ReservationDTO> resBoardList = 
 					memberService.getResBoardList(pageDTO,memId);
+			ArrayList<ReservationDTO> resRefundList =
+					memberService.getResRefundList(memId);
 			
 			// 예약구매 페이지 페이징 작업
 			// int 리턴할형 getBoardCount() 메서드 정의
@@ -770,6 +791,7 @@ public class MemberController extends HttpServlet {
 			request.setAttribute("pageDTO", pageDTO);
 			//request에 boardList 저장
 			request.setAttribute("resBoardList", resBoardList);
+			request.setAttribute("resRefundList", resRefundList);
 			
 			dispatcher = request.getRequestDispatcher("_mypage/bookinglist.jsp");
 			dispatcher.forward(request, response);
@@ -798,13 +820,13 @@ public class MemberController extends HttpServlet {
 			
 			memberService = new MemberService();
 			
-			ArrayList<ReservationDTO> resBoardList = 
-					memberService.getResBoardList(pageDTO,memId);
+			ArrayList<StorePayDTO> storeBoardList = 
+					memberService.getStoreBoardList(pageDTO,memId);
 			
 			// 예약구매 페이지 페이징 작업
 			// int 리턴할형 getBoardCount() 메서드 정의
 		   //  int count =  getBoardCount()메서드 호출
-			int count = memberService.getResBoardCount(memId);
+			int count = memberService.getStoreBoardCount(memId);
 			// 한 화면에 보여줄 페이지 개수 설정
 			int pageBlock = 5;
 			// 시작하는 페이지 번호 구하기
@@ -824,17 +846,16 @@ public class MemberController extends HttpServlet {
 			pageDTO.setPageCount(pageCount);
 			
 			System.out.println(pageDTO);
-			System.out.println(resBoardList);
+			System.out.println(storeBoardList);
 			// request에 pageDTO 저장
 			request.setAttribute("pageDTO", pageDTO);
 			//request에 boardList 저장
-			request.setAttribute("resBoardList", resBoardList);
+			request.setAttribute("storeBoardList", storeBoardList);
 			
 			dispatcher = request.getRequestDispatcher("_mypage/bookinglist2.jsp");
 			dispatcher.forward(request, response);
 		}//
 		
-
 		
 	}
 }

@@ -123,6 +123,29 @@ public class MovieDAO {
 		}
 		return deleteSuccess;
 	}
+
+	// 한줄평 가져오기
+	public ArrayList<ReviewDTO> getReview(String movieCode) {
+		System.out.println("MovieDAO.getReview()");
+		SqlSession session = sqlSessionFactory.openSession();
+		ArrayList<ReviewDTO> reviewList = null;
+		reviewList = new ArrayList<ReviewDTO>(session.selectList("Movie.getReview", movieCode)); 
+		
+		session.close();
+		
+		return reviewList;
+	}
+
+	// 내가 해당영화에 쓴 댓글 가져오기
+	public ReviewDTO myReview(ReviewDTO reviewDTO) {
+		System.out.println("MovieDAO.myReview()");
+		SqlSession session = sqlSessionFactory.openSession();
+		reviewDTO = session.selectOne("Movie.myReview", reviewDTO);
+		
+		session.close();
+		
+		return reviewDTO;
+	}
 	 
 }
 

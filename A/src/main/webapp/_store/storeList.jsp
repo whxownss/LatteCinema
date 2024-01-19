@@ -15,7 +15,7 @@
 
 			<section class="contents d-flex">
 				<div class="col-6" style="display: flex; justify-content: center;">
-					<img id="itemImage" alt="itemName">
+					<img id="itemImage" alt="itemName" style="width: 400px; height: 450px;">
 				</div>
 				<article class="col-4">
 					<table class="pd_table fs-5 table table-sm">
@@ -41,8 +41,8 @@
 								<td class="text-end" id="detail"></td>
 							</tr>
 							<tr>
-								<th scope="row">구매제한</th>
-								<td class="text-end">제한없음</td>
+								<th scope="row">사용방법</th>
+								<td class="text-end">오프라인</td>
 							</tr>
 							<tr>
 								<th scope="row">유효기간</th>

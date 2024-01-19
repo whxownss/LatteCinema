@@ -50,17 +50,17 @@ public class StoreDAO {
 		return storeItemListS;
 	}//
 	
-	public List<StoreItemDTO> selectStoreItemT() {
+	public List<StoreItemDTO> selectStoreItemC() {
 		SqlSession session = sqlSessionFactory.openSession();
 		
-		List<StoreItemDTO> storeItemListT = session.selectList("StoreItem.selectStoreItemT");
+		List<StoreItemDTO> storeItemListC = session.selectList("StoreItem.selectStoreItemC");
 		session.close();
 		
-		for(StoreItemDTO t : storeItemListT) {
-			System.out.println(t);
+		for(StoreItemDTO c : storeItemListC) {
+			System.out.println(c);
 		}
 		
-		return storeItemListT;
+		return storeItemListC;
 	}//
 
 	public StoreItemDTO getItemInfo(String idx) {
@@ -125,5 +125,20 @@ public class StoreDAO {
 		session.close();
 		return delete > 0 ? true : false;
 	}//
+
+	public ArrayList<StorePayDTO> getstoreGiftList(String sId) {
+		ArrayList<StorePayDTO> storeGift = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			storeGift = new ArrayList<StorePayDTO>(session.selectList("StoreItem.getstoreGiftList", sId));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return storeGift;
+	}
 
 }//StoreDAO

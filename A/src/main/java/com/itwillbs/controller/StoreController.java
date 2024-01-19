@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.itwillbs.dao.StoreDAO;
@@ -40,7 +41,7 @@ public class StoreController extends HttpServlet{
 		if(sPath.equals("/store.st")) {
 			request.setAttribute("storeItemListB", storeService.storeListB());
 			request.setAttribute("storeItemListS", storeService.storeListS());
-			request.setAttribute("storeItemListT", storeService.storeListT());
+			request.setAttribute("storeItemListC", storeService.storeListC());
 		
 			dispatcher = request.getRequestDispatcher("_store/store.jsp");
 			dispatcher.forward(request, response);
@@ -102,6 +103,8 @@ public class StoreController extends HttpServlet{
 			response.getWriter().write(buyerInfo);
 			
 		}//
+		
+		
 		
 		// 관리자 스토어 AdminController에서 시작 111
 		

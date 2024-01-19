@@ -17,6 +17,7 @@ import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.domain.RecommendDTO;
+import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.domain.ResponseDataDTO;
 import com.itwillbs.sql.SqlMapClient;
 
@@ -998,7 +999,42 @@ public class CSBoardDAO {
 		}
 		return count;
 	}
+
+	public ArrayList<ReservationDTO> getResBoardList() {
+		System.out.println("CSBoardDAO getResBoardList()");
+		ArrayList<ReservationDTO> resBoardList = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			resBoardList = new ArrayList<ReservationDTO>(session.selectList("CsAdmin.admResBoardList"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return resBoardList;
+	}//getResBoardList()
 	
+	
+	/**
+	 * 추천 게시판에서 조회수 순으로 5개 뽑아옴
+	 * */
+	public ArrayList<RecommendDTO> getRecommendListOrdered() {
+		System.out.println("CSBoardDAO getRecommendListOrdered()");
+		ArrayList<RecommendDTO> recommendList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			recommendList = new ArrayList<RecommendDTO>(session.selectList("CsAdmin.getRecommendListOrdered"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return recommendList;
+	}
 	
 	
 }//클래스

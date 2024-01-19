@@ -17,9 +17,12 @@ document.write('<script type="text/javascript" '+
 		})
 		.fail(function(){})
 		
-		if(storeItem.itemImage.slice(0, 8)) {
+		if(storeItem.itemImage.slice(0, 8) == "https://") {
 			$("#itemImage").attr("src", storeItem.itemImage);
+		} else {
+			$("#itemImage").attr("src", "_assets/img/" + storeItem.itemImage);
 		}
+		
  		
  		$("#itemName").text(storeItem .itemName);
  		$("#price").text(storeItem.itemPrice);

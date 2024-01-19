@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.google.gson.Gson;
 import com.itwillbs.dao.CSBoardDAO;
+import com.itwillbs.dao.MemberDAO;
 import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ExqBoardDTO;
@@ -20,6 +21,7 @@ import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.domain.RecommendDTO;
+import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.domain.ResponseDataDTO;
 
 public class CSBoardService {
@@ -1054,5 +1056,31 @@ public class CSBoardService {
 		return count;
 	}//getMemCount()
 
+	public ArrayList<ReservationDTO> getResBoardList() {
+		System.out.println("CSBoardService getResRefundList()");
+		ArrayList<ReservationDTO> resBoardList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			resBoardList = csBoardDAO.getResBoardList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resBoardList;
+	}//getResBoardList()
+
+	/**
+	 * 추천순 5개 뽑아옴
+	 * */
+	public ArrayList<RecommendDTO> getRecommendListOrdered() {
+		System.out.println("CSBoardService getRecommendListOrdered()");
+		ArrayList<RecommendDTO> recommendList = null;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			recommendList = csBoardDAO.getRecommendListOrdered();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return recommendList;
+	}
 	
 }//클래스
