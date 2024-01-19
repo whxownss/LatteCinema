@@ -187,11 +187,15 @@
 			          <div class="form-group mb-3">
 <!-- 			            <label for="agreement">관람평 쓰기</label> -->
 			            <div>
-				            <textarea class="form-control" id="viewComment" name="viewComment" style="overflow: auto; height: 200px; font-size : 25px;"  placeholder="10자 이상 한줄평 쓰기"></textarea>
+							
+				            <textarea class="form-control" id="viewComment" name="viewComment" style="overflow: auto; height: 200px; font-size : 25px;"  placeholder="10자 이상 한줄평 쓰기">
+				            	${myReview.revComment }
+				            </textarea>
+			            
 			            </div>
 			          </div>
 
-					  <div class="d-flex justify-content-around">
+					  <div class="d-flex justify-content-around" name="revbtn" id="revbtn">
 				          <div class="form-group mb-3 d-flex justify-content-center">
 							  <button type="button" id="write" class="btn-type0" style="width: 100px;">작성</button>
 						  </div>
@@ -421,7 +425,10 @@
 			})
 			
 			// 한줄평 수정 및 삭제
-			$("#titleArea")
+			
+			
+			
+// 			$("#titleArea")
 			
 			//$("#staticBackdrop").modal("show");
 		});  
