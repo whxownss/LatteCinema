@@ -10,11 +10,25 @@ public class ReviewDTO {
 	private String memId;
 	private String movType;
 	private String movIdx;
+	private String movCode;
 	
+
+
 	@Override
 	public String toString() {
 		return "ReviewDTO [revNum=" + revNum + ", revComment=" + revComment + ", revDate=" + revDate + ", title="
-				+ title + ", memId=" + memId + ", movType=" + movType + ", movIdx=" + movIdx + "]";
+				+ title + ", memId=" + memId + ", movType=" + movType + ", movIdx=" + movIdx + ", movieCode="
+				+ movCode + "]";
+	}
+	
+
+	public String getMovCode() {
+		return movCode;
+	}
+
+
+	public void setMovCode(String movCode) {
+		this.movCode = movCode;
 	}
 
 	public String getRevNum() {

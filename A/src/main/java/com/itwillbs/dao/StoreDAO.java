@@ -1,6 +1,8 @@
 package com.itwillbs.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -11,6 +13,7 @@ import com.itwillbs.sql.SqlMapClient;
 
 public class StoreDAO {
 	private SqlSessionFactory sqlSessionFactory = SqlMapClient.getSqlSession();
+	SqlSession session = null;
 
 	public boolean insert(StoreItemDTO sidto) {
 		SqlSession session = sqlSessionFactory.openSession();
@@ -84,5 +87,43 @@ public class StoreDAO {
 		
 		return insertinfo > 0 ? "true" : "false";
 	}//
+
+	public ArrayList<StorePayDTO> getStoreBuyList() {
+		ArrayList<StorePayDTO> storeList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			storeList = new ArrayList<StorePayDTO>(session.selectList("StoreItem.getStoreBuyList"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return storeList;
+	}//
+
+	public boolean insertStore(StoreItemDTO storeItemDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int insertitem = session.insert("StoreItem.insertStore", storeItemDTO);
+		session.commit();
+		session.close();
+		return insertitem > 0 ? true : false;
+	}//
 	
+	public List<StoreItemDTO> itemNameList() {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<StoreItemDTO> itemNameList = session.selectList("StoreItem.itemNameList");
+		session.close();
+		return itemNameList;
+	}//
+	
+	public boolean deleteItem(String name) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int delete = session.delete("StoreItem.deleteItem", name);
+		session.commit();
+		session.close();
+		return delete > 0 ? true : false;
+	}//
+
 }//StoreDAO
