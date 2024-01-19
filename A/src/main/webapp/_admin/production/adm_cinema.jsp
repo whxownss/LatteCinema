@@ -1,8 +1,9 @@
 <%@page import="com.itwillbs.domain.MemberDTO"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,41 +12,31 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Latte Cinema</title>
-
 <!-- Bootstrap -->
-<link href="_admin/vendors/bootstrap/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="_admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Font Awesome -->
-<link href="_admin/vendors/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
+<link href="_admin/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <!-- NProgress -->
 <link href="_admin/vendors/nprogress/nprogress.css" rel="stylesheet">
 <!-- iCheck -->
 <link href="_admin/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
 <!-- Datatables -->
-<link
-	href="_admin/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css"
-	rel="stylesheet">
-<link
-	href="_admin/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css"
-	rel="stylesheet">
-<link
-	href="_admin/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"
-	rel="stylesheet">
-<link
-	href="_admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css"
-	rel="stylesheet">
-<link
-	href="_admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<link href="_admin/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<link href="_admin/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+<link href="_admin/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+<link href="_admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+<link href="_admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <!-- Custom Theme Style -->
 <link href="_admin/build/css/custom.min.css" rel="stylesheet">
 </head>
 <body class="nav-md">
+
+<c:if test="${sessionScope.sId == null || ! fn:startsWith(sessionScope.sId, 'admin')}">
+	<c:redirect url="login.me" />
+</c:if>
+
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">

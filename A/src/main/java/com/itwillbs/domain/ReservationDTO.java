@@ -28,6 +28,7 @@ public class ReservationDTO {
 	private String buyerName;  	// 구매자 이름
 	private String merchantUid;	// 주문번호
 	private String payTime;
+	private String refundTime;
 	
 	private String dateC;
 	
@@ -205,6 +206,13 @@ public class ReservationDTO {
 	public void setPayTime(String payTime) {
 		this.payTime = payTime;
 	}
+	
+	public String getRefundTime() {
+		return refundTime;
+	}
+	public void setRefundTime(String refundTime) {
+		this.refundTime = refundTime;
+	}
 	public String getSchEtime() {
 		return schEtime;
 	}
@@ -219,9 +227,10 @@ public class ReservationDTO {
 				+ ", p1=" + p1 + ", p2=" + p2 + ", p3=" + p3 + ", pSum=" + pSum + ", paidAmount=" + paidAmount
 				+ ", payMethod=" + payMethod + ", cardName=" + cardName + ", cardNumber=" + cardNumber + ", buyerTel="
 				+ buyerTel + ", success=" + success + ", resPayDate=" + resPayDate + ", buyerName=" + buyerName
-				+ ", merchantUid=" + merchantUid + ", payTime=" + payTime + ", dateC=" + dateC + ", schEtime="
-				+ schEtime + "]";
+				+ ", merchantUid=" + merchantUid + ", payTime=" + payTime + ", refundTime=" + refundTime + ", dateC="
+				+ dateC + ", schEtime=" + schEtime + "]";
 	}
+	
 	
 	
 	

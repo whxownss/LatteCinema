@@ -5,6 +5,10 @@
 	<link rel="stylesheet" href="_assets/css/res_1.css">
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
+<c:if test="${sessionScope.sId == null}">
+	<c:redirect url="login.me" />
+</c:if>
+
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -103,7 +107,7 @@
 												<table class="w-100">
 													<tr>
 														<th class="text-start">보유 포인트</th>
-														<td class="text-end"><span id="nowPoint">23,000</span></td>
+														<td class="text-end"><span id="nowPoint">${requestScope.memPoint}</span></td>
 													</tr>
 													
 													<tr>
@@ -122,12 +126,12 @@
 										</div>
 									
 										<div class="row" style="height:350px;">
-											<div class="text-start mt-2" style="height:20px;">결제수단</div>
-											<div class="d-flex flex-row mt-2" style="height:100%;">
-											  <button type="button" class="btn btn-light btn-outline-secondary me-1 payType">신용/체크카드</button>
-											  <button type="button" class="btn btn-light btn-outline-secondary me-1 payType">카카오페이</button>
-											  <button type="button" class="btn btn-light btn-outline-secondary payType">토스페이</button>
-											</div>
+<!-- 											<div class="text-start mt-2" style="height:20px;">결제수단</div> -->
+<!-- 											<div class="d-flex flex-row mt-2" style="height:100%;"> -->
+<!-- 											  <button type="button" class="btn btn-light btn-outline-secondary me-1 payType">신용/체크카드</button> -->
+<!-- 											  <button type="button" class="btn btn-light btn-outline-secondary me-1 payType">카카오페이</button> -->
+<!-- 											  <button type="button" class="btn btn-light btn-outline-secondary payType">토스페이</button> -->
+<!-- 											</div> -->
 										</div>
 									</div>
 									
@@ -186,6 +190,11 @@
 <!-- 														<th class="text-end" id="rsPrice" style=""></th> -->
 														<th class="text-end"><span id="rsPrice"></span>원</th>
 													</tr>
+													<tr>
+														<th>적립 예정 포인트</th>
+<!-- 														<th class="text-end" id="rsPrice" style=""></th> -->
+														<th class="text-end"><span id="accPoint"></span>p</th>
+													</tr>
 												</table>
 											</div>
 											<div id="lastPay" class="mca myMouse" style="heigth:40px;">결제하기</div>
@@ -200,7 +209,6 @@
 				</div>
 			</div>
 				
-			<div ><a href="res4.re" style="margin-left: 100%;"><button>res4 이동</button></a></div>
 			</div>
 		</section>
 	
