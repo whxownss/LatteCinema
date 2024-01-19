@@ -149,7 +149,7 @@ public class MovieDAO {
 		return reviewDTO;
 	}
 
-
+	// 한줄평 수정하기
 	public String reviewUpdate(ReviewDTO reviewDTO) {
 		SqlSession session = sqlSessionFactory.openSession();
 		int updateCnt = session.update("Movie.reviewUpdate", reviewDTO);
@@ -157,6 +157,16 @@ public class MovieDAO {
 		session.close();
 		
 		return updateCnt > 0 ? "true" : "false";
+	}
+
+	// 한줄평 삭제하기
+	public String reviewDelete(ReviewDTO reviewDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int deleteCnt = session.delete("Movie.reviewDelete", reviewDTO);
+		session.commit();
+		session.close();
+		
+		return deleteCnt > 0 ? "true" : "fasle" ;
 	}
 	 
 }

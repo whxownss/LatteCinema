@@ -199,7 +199,7 @@
 							  <button type="button" id="write" name="revbtn" class="btn-type0" style="width: 100px;">작성</button>
 						  </div>
 						   <div class="form-group mb-3 d-flex justify-content-center">
-							  <button type="button" id="revDelete" name="revDelete" class="btn-type0" style="width: 100px;" disabled="disabled">삭제</button>
+							  <button type="button" id="revDelete" name="revDelete" class="btn-type0" style="width: 100px; " disabled="disabled">삭제</button>
 						  </div>
 			          </div>	
 			        </form>
@@ -355,7 +355,8 @@
   }
   
   $(function() {
-	  
+	 			var sessionId = '<%=(String)session.getAttribute("sId")%>' 
+	  // 한줄평 수정
 	  if($("#viewComment").val() != ''){
 		  $("button[name=revbtn]").attr('id','update')
 		  $("button[name=revbtn]").text("수정");
@@ -365,8 +366,7 @@
 				debugger;
 				var viewcomment = $("#viewComment").val()
 				// 세션값 
-	<%-- 			var sessionId = <%=session.getAttribute("sId") %> --%>
-				var sessionId = "test1" 
+// 				var sessionId = "test1" 
 				var title = "${detail.title}";
 				var movIdx = ${detail.movieIdx};
 				var movType = "${detail.movieCategory}";
@@ -391,7 +391,28 @@
 				})
 
 		  })
-
+		
+		  //한줄평 삭제
+		  $("#revDelete").on("click", function(){
+			  debugger;
+			  $.ajax({
+				  type: "post",
+				  url: "reviewDelete.mo",
+				  data:{
+					  memId : sessionId
+				  },
+				  dateType: "text"
+			  })
+			  .done(function(data){
+				  debugger;
+				  if(data == 'false'){
+					  alert('한줄평 삭제 오류발생')
+					  return
+				  }
+				  location.reload();
+			  })
+		  })
+		  
 	  }
 		// 관람평=====================================================================
 		
@@ -406,12 +427,12 @@
 			debugger;
 			var viewcomment = $("#viewComment").val()
 			// 세션값 
-<%-- 			var sessionId = <%=session.getAttribute("sId") %> --%>
-			var sessionId = "test1" 
+			var sessionId = '<%=(String)session.getAttribute("sId")%>' 
+// 			var sessionId = "test1" 
 			var title = "${detail.title}";
 			var movIdx = ${detail.movieIdx};
 			var movType = "${detail.movieCategory}";
-			if(sessionId == null){
+			if(sessionId == 'null'){
 				alert('로그인 후 작성 가능합니다.');
 				return;
 			}
@@ -463,11 +484,6 @@
 			
 			// 한줄평 수정 및 삭제
 			
-			
-			
-// 			$("#titleArea")
-			
-			//$("#staticBackdrop").modal("show");
 		});  
 		// 한줄평=====================================================================	  
 	  

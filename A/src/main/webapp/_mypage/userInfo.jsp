@@ -1,5 +1,6 @@
 <%@page import="com.itwillbs.domain.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%MemberDTO memberDTO = (MemberDTO)request.getAttribute("memberDTO"); %>
 <html lang="ko">
@@ -11,7 +12,9 @@
 <body>
 <jsp:include page="../_common/header.jsp"></jsp:include>
 
-
+<c:if test="${sessionScope.sId == null }">
+<c:redirect url="main.me"/>
+</c:if>
 <main id="main">
   <section class="category-section">
     <div class="container has-lnb" data-aos="fade-up">

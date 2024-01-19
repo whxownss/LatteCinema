@@ -227,6 +227,17 @@ public class MovieController extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(result + "");
 		}
+		
+		// 한줄평 삭제하기
+		if(sPath.equals("/reviewDelete.mo")) {
+			ReviewDTO reviewDTO = new ReviewDTO();
+			movieService = new MovieService();
+			String result = movieService.reviewDelete(request);
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result + "");
+			
+		}
 	
 		
 	}	

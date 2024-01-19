@@ -125,7 +125,10 @@
    		 WHERE R.MEM_ID = #{memId}
    		   AND R.MOV_IDX = #{movIdx}
    		   AND R.MOV_TYPE = #{movType}
-	   	   AND NOW() > CONCAT(DATE_FORMAT(R.DATE, '%Y-%m-%d'), ' ', S.SCH_ETIME)
+	   	   AND NOW() >  (CASE WHEN S.SCH_ETIME >= "24:00"
+						THEN  CONCAT(DATE_FORMAT(DATE_ADD(R.DATE, INTERVAL 1 DAY), '%Y-%m-%d'), ' ', DATE_FORMAT(S.SCH_ETIME, "%h:%i"))
+						ELSE CONCAT(DATE_FORMAT(R.DATE, '%Y-%m-%d'), ' ', S.SCH_ETIME) END)
+
 	</select> 
 	
 	<!--한줄평 담기  -->
@@ -201,7 +204,7 @@
 	
 	
 	
-	
+		<!-- 한줄평 수정하기  -->
 	<update id="reviewUpdate" parameterType="ReviewDTO">
 		UPDATE REVIEWS
 		   SET REV_COMMENT = #{revComment}
@@ -209,7 +212,16 @@
 		   AND MEM_ID = #{memId}
 		   AND MOV_CODE = #{movCode} 
 	</update>
-
+	
+	
+	<!-- 한줄평 수정하기  -->
+	<delete id="reviewDelete" parameterType="ReviewDTO">
+		DELETE 
+		 FROM REVIEWS
+		WHERE 1=1
+		 AND MEM_ID = #{memId}
+	
+	</delete>
 	
 	
 </mapper>

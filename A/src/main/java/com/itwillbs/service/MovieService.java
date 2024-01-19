@@ -262,7 +262,8 @@ public class MovieService {
 			
 			return reviewDTO;
 		}
-
+		
+		// 한줄평 수정하기
 		public String reviewUpdate(HttpServletRequest request) {
 			ReviewDTO reviewDTO = new ReviewDTO();
 			reviewDTO.setMemId(request.getParameter("memId"));
@@ -272,6 +273,16 @@ public class MovieService {
 			movieDAO = new MovieDAO();
 			String result = movieDAO.reviewUpdate(reviewDTO);
 			
+			return result;
+		}
+
+		// 한줄평 삭제하기
+		public String reviewDelete(HttpServletRequest request) {
+			ReviewDTO reviewDTO = new ReviewDTO();
+			reviewDTO.setMemId(request.getParameter("memId"));
+			
+			movieDAO = new MovieDAO();
+			String result = movieDAO.reviewDelete(reviewDTO);
 			return result;
 		}
 	}
