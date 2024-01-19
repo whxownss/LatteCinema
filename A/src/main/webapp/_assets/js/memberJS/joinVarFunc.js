@@ -46,7 +46,7 @@ function checkId() {
 			success:function(data){
 // 				debugger;
 
-				// 중요 복습필수
+				// 중요 복습필수(지우지마시오)
 // 				$("#CheckId").text(data.text).css("color", data.color);
 // 				return data.bool
 

@@ -211,15 +211,15 @@
 				<table class="table" id="revTable">
 				  <thead>
 				    <tr class="table-secondary" style="text-align: center; ">
-				      <th scope="col" style="width: 50px; ">#</th>
-				      <th scope="col" style="width: 150px;">아이디</th>
-				      <th scope="col">한줄평</th>
-				      <th scope="col" style="width: 100px;">등록일</th>
+				      <th scope="col" style="width: 25px; ">#</th>
+				      <th scope="col" style="width: 150px; text-align: center;">아이디</th>
+				      <th scope="col" STYLE="text-align: center;">한줄평</th>
+				      <th scope="col" style="width: 130px; text-align: center;">등록일</th>
 				    </tr>
 				  </thead>
 				  <tbody>
 				  <c:forEach var="reviewDTO" items="${reviewList}">
-				    <tr  style="height: 70px; vertical-align:middle; border-bottom: 1px solid black;">
+				    <tr  style="height: 70px; vertical-align:middle; border-bottom: 1px solid black; text-align: center;">
 				      <th scope="row" style="text-align: center;">${reviewDTO.revNum }</th>
 				      <td style="text-align: center;">${reviewDTO.memId }</td>
 				      <td><div id="titleArea">${reviewDTO.revComment }</div></td>
@@ -238,6 +238,10 @@
 <!-- 							</tr> -->
 						</tbody>
 				</table>
+<!-- 					<div class="d-flex justify-content-around CENTER" STYLE="margin-top: 20PX;">
+						<button id="editButton" class="btn-type0" style="width: 100px;">한줄평 수정</button>
+						<button id="deleteButton" class="btn-type0"style="width: 100px;">한줄평 삭제</button>
+					</div> -->
 			</div>
 		</section> 
 
@@ -349,13 +353,14 @@
   
   $(function() {
 		// 관람평=====================================================================
+		
 		// 페이징처리작업
 		$('#revTable').DataTable({
 			pagingType: 'full_numbers',
 			order: [[0, 'desc']]
 		});	
 		
-		
+		// 한줄평 작성가능 유무 판단
 		$("#write").on("click", function(){
 			debugger;
 			var viewcomment = $("#viewComment").val()
@@ -382,6 +387,7 @@
 				dateType: "text"
 			})
 			.done(function(data){
+				//한줄평 데이터 넣기
 				debugger;
 				if(data != '0'){
 					$.ajax({
@@ -413,8 +419,13 @@
 			.fail(function(){
 				debugger;
 			})
+			
+			// 한줄평 수정 및 삭제
+			$("#titleArea")
+			
+			//$("#staticBackdrop").modal("show");
 		});  
-		// 관람평=====================================================================	  
+		// 한줄평=====================================================================	  
 	  
     $(".btn-prev").on("click", function(e) {
       history.back();
