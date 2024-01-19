@@ -235,4 +235,27 @@ public class MovieService {
 			}
 			return reviewList;
 		}
+
+		
+		// 내가 해당영화에 쓴 댓글 가져오기
+		public ReviewDTO myReview(HttpServletRequest request) {
+			System.out.println("movieService myReview");
+			ReviewDTO reviewDTO = null;
+			try {
+				String id = request.getParameter("sId");
+				String movieCode = request.getParameter("movieCode");
+				movieDAO = new MovieDAO();
+				reviewDTO.setMemId(id);
+				reviewDTO.setMovCode(movieCode);
+				
+				reviewDTO = movieDAO.myReview(reviewDTO);
+				
+				
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			return reviewDTO;
+		}
 	}

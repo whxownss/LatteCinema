@@ -135,6 +135,17 @@ public class MovieDAO {
 		
 		return reviewList;
 	}
+
+	// 내가 해당영화에 쓴 댓글 가져오기
+	public ReviewDTO myReview(ReviewDTO reviewDTO) {
+		System.out.println("MovieDAO.myReview()");
+		SqlSession session = sqlSessionFactory.openSession();
+		reviewDTO = session.selectOne("Movie.myReview", reviewDTO);
+		
+		session.close();
+		
+		return reviewDTO;
+	}
 	 
 }
 
