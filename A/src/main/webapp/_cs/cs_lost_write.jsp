@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
-			
+<c:if test="${sessionScope.sId == null}">
+   <c:redirect url="login.me" />
+</c:if>		
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
 				<!-- 이곳에 코드작성 -->

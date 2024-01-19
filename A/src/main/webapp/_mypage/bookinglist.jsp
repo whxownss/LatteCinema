@@ -3,6 +3,7 @@
 <%@page import="com.itwillbs.domain.MemberDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -16,9 +17,11 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 </head>
 <body>
-
 <jsp:include page="../_common/header.jsp"></jsp:include>
 <main id="main">
+<c:if test="${sessionScope.sId == null}">
+   <c:redirect url="login.me" />
+</c:if>
   <section class="category-section">
     <div class="container has-lnb" data-aos="fade-up">
       <!-- 이곳에 코드작성 -->
