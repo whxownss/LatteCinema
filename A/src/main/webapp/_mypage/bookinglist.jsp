@@ -284,6 +284,7 @@ $("#tbody").on("click","button",function() {
 			.done(function(data){
 				debugger;
 				if(data == "환불 성공"){
+					window.location.href="bookinglist.me";
 //	 				$.ajax({
 //	 					type: "POST",
 //	 					url: "res4ProRF.re",
