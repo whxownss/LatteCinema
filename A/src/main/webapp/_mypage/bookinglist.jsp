@@ -13,6 +13,7 @@
   <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js?autoload=false"></script>
    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 </head>
 <body>
 
@@ -64,6 +65,7 @@
 			
 		<%
 		ArrayList<ReservationDTO> resBoardList = (ArrayList<ReservationDTO>)request.getAttribute("resBoardList");
+		ArrayList<ReservationDTO> resRefundList = (ArrayList<ReservationDTO>)request.getAttribute("resRefundList");
 		PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
 		%>
 						
@@ -150,7 +152,7 @@
 			
 						<!-- 취소한 예매 영화 목록 -->
 						<div class="table-wrap mt10">
-							<table class="board-list" summary="취소일시, 영화명, 극장, 상영일시, 취소금액 항목을 가진 취소내역 목록 표">
+							<table class="board-list" summary="취소일시, 영화명, 극장, 상영일시, 취소금액 항목을 가진 취소내역 목록 표" id="refundTable">
 								<caption>취소일시, 영화명, 극장, 상영일시, 취소금액 항목을 가진 취소내역 목록 표</caption>
 								<colgroup>
 									<col style="width:160px;">
@@ -161,50 +163,50 @@
 								</colgroup>
 								<thead>
 									<tr>
-										<th scope="col">취소일시</th>
-										<th scope="col">영화/상품명</th>
-										<th scope="col">극장</th>
-										<th scope="col">상영/구매 일시</th>
-										<th scope="col">취소금액</th>
+										<th scope="col" class="text-center">취소일시</th>
+										<th scope="col" class="text-center">영화명</th>
+										<th scope="col" class="text-center">상영관</th>
+										<th scope="col" class="text-center">상영일시</th>
+										<th scope="col" class="text-center">취소금액</th>
 									</tr>
 								</thead>
 								<tbody>
-<%-- 								<c:forEach var="boardList" items="${boardList}"> --%>
-<!-- 									<tr> -->
-<%-- 										<td>${boardList.memId}</td> --%>
-<%-- 										<th scope="row">${boardList.memId}</th> --%>
-<%-- 										<td scope="row" style="text-align: left;">${boardList.memId}</td> --%>
-<%-- 										<td scope="row" style="text-align: left;">${boardList.memId}</td> --%>
-<%-- 										<td><span class="font-red">${boardList.memId}</span></td> --%>
-<!-- 									</tr> -->
-<%-- 								</c:forEach> --%>
+								<c:forEach var="reservationDTO" items="${resRefundList}">
+									<tr>
+										<td>취소날짜들어갈곳</td>
+										<td>${reservationDTO.title}</td>
+										<td>${reservationDTO.cinema} ${reservationDTO.scrIdx }</td>
+										<td>${reservationDTO.date} ${reservationDTO.sTime}~${reservationDTO.schEtime}</td>
+										<td>${reservationDTO.paidAmount}</td>
+									</tr>
+								</c:forEach>
 								</tbody>
 							</table>
 							
 							<!-- 페이징 처리 -->
-							<section class="category-section" id="">
-							<div class="container" data-aos="fade-up">
-								<div class="pagination-container d-flex justify-content-center">
-								  <ul class="pagination" id="searchPaging">
-									<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-									    <li class="page-item ">
-									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a>
-									    </li>
-								    </c:if>	
-								    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
-									    <li class="page-item" aria-current="page">
-									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${i }">${i }</a>
-									    </li>
-								    </c:forEach>
-						    		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-									    <li class="page-item">
-									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a>
-									    </li>
-								    </c:if>	
-								  </ul>
-								</div>
-							</div>
-						</section>
+<!-- 							<section class="category-section" id=""> -->
+<!-- 							<div class="container" data-aos="fade-up"> -->
+<!-- 								<div class="pagination-container d-flex justify-content-center"> -->
+<!-- 								  <ul class="pagination" id="searchPaging"> -->
+<%-- 									<c:if test="${pageDTO.startPage > pageDTO.pageBlock}"> --%>
+<!-- 									    <li class="page-item "> -->
+<%-- 									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a> --%>
+<!-- 									    </li> -->
+<%-- 								    </c:if>	 --%>
+<%-- 								    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1"> --%>
+<!-- 									    <li class="page-item" aria-current="page"> -->
+<%-- 									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${i }">${i }</a> --%>
+<!-- 									    </li> -->
+<%-- 								    </c:forEach> --%>
+<%-- 						    		<c:if test="${pageDTO.endPage < pageDTO.pageCount}"> --%>
+<!-- 									    <li class="page-item"> -->
+<%-- 									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a> --%>
+<!-- 									    </li> -->
+<%-- 								    </c:if>	 --%>
+<!-- 								  </ul> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</section> -->
 		
 						</div>
 			
@@ -257,7 +259,14 @@
   </section>
 </main>
 <%@include file ="../_common/commonFooterStart.jsp" %>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 <script type="text/javascript">
+$(function(){
+	$('#refundTable').DataTable({
+		pagingType: 'full_numbers'
+	});
+});//document ready
 $("#tbody").on("click","button",function() {
 	 var $row = $(this).closest("tr");
     // 해당 행 안에 있는 'memId' 셀의 텍스트 내용
@@ -266,6 +275,28 @@ $("#tbody").on("click","button",function() {
 	if(confirm('정말 취소하시겠습니까?')){
 		alert('취소하러가자')
 		//window.location.href="";//여기서 res로 가도 되나?
+		$.ajax({
+				type: "GET",
+				url: "res4Pro.re",
+				data: {mid: mid},
+				dataType: "text"
+			})
+			.done(function(data){
+				debugger;
+				if(data == "환불 성공"){
+//	 				$.ajax({
+//	 					type: "POST",
+//	 					url: "res4ProRF.re",
+//	 					data: {mid: rsp.merchant_uid},
+//	 					datType: "text"
+//	 				})
+//	 				.done(function(data){
+						
+//	 				})
+//	 				.fail(function(){})
+				}
+			})
+			.fail(function(){})
 	}else {
 		alert('취소 싫어')
 	}

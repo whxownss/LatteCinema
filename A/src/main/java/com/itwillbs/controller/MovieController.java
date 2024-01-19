@@ -113,6 +113,15 @@ public class MovieController extends HttpServlet {
 			ArrayList<ReviewDTO> reviewList = movieService.getReview(movieCode);
 			request.setAttribute("reviewList", reviewList);
 			
+			// 내가 해당 영화에 한줄평 가져오기
+			
+			ReviewDTO myReview = new ReviewDTO();
+			myReview = movieService.myReview(request);
+			request.setAttribute("myReview", myReview);
+			System.out.println("@@@@@@@@@@@@@@@@");
+			System.out.println(myReview);
+			
+			
 			dispatcher = request.getRequestDispatcher("_movie/movie_view.jsp");
 			dispatcher.forward(request, response);	
 			

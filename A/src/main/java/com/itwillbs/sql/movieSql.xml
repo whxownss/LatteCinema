@@ -162,7 +162,13 @@
 		 ORDER BY REV_NUM DESC;
 	
 	</select>
-
+	
+	<!-- 내가 해당영화에 쓴 댓글 가져오기  -->
+	<select id="myReview" resultType="ReviewDTO" parameterType="ReviewDTO">
+		SELECT*
+		 FROM REVIEWS
+		 WHERE MEM_ID = ${value}
+	</select>
 	<update id="updateMovie">
 	  UPDATE MOVIE
 	    SET
@@ -187,13 +193,11 @@
 
 
 	<delete id="deleteMovie">
-	
 	  DELETE 
 	  FROM MOVIE
 	  WHERE MOVIE_CODE = #{movieCode}
-
-	  
 	</delete>
+	
 	
 	
 	
