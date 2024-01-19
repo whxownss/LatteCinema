@@ -140,11 +140,23 @@ public class MovieDAO {
 	public ReviewDTO myReview(ReviewDTO reviewDTO) {
 		System.out.println("MovieDAO.myReview()");
 		SqlSession session = sqlSessionFactory.openSession();
+		// reviewDTO = 	
 		reviewDTO = session.selectOne("Movie.myReview", reviewDTO);
-		
 		session.close();
+		System.out.println("12312312asdsd");
+		System.out.println(reviewDTO);
 		
 		return reviewDTO;
+	}
+
+
+	public String reviewUpdate(ReviewDTO reviewDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int updateCnt = session.update("Movie.reviewUpdate", reviewDTO);
+		session.commit();
+		session.close();
+		
+		return updateCnt > 0 ? "true" : "false";
 	}
 	 
 }

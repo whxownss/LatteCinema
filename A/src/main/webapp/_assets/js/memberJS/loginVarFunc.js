@@ -111,7 +111,10 @@ function checkSubmit() {
 	return ((flag == 0) ? false : true);
 }	
 //http://c2d2309t2.itwillbs.com/A/login.me
+//ChGI_ZlTbCS_3gIpvFOZ
+
 //http://localhost:8080/A/login.me
+//IeY1eBbgIyceSk3XnoEy
 
 // 네이버 로그인 api
 var naverLogin = new naver.LoginWithNaverId({

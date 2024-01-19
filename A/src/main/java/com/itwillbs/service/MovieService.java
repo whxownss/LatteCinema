@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.itwillbs.dao.CSBoardDAO;
 import com.itwillbs.dao.MovieDAO;
@@ -240,10 +241,13 @@ public class MovieService {
 		// 내가 해당영화에 쓴 댓글 가져오기
 		public ReviewDTO myReview(HttpServletRequest request) {
 			System.out.println("movieService myReview");
-			ReviewDTO reviewDTO = null;
+			ReviewDTO reviewDTO = new ReviewDTO();
 			try {
-				String id = request.getParameter("sId");
+				HttpSession session = request.getSession();
+				String id = session.getAttribute("sId").toString();
+				System.out.println("sid: " + id);
 				String movieCode = request.getParameter("movieCode");
+				System.out.println("sid: " + movieCode);
 				movieDAO = new MovieDAO();
 				reviewDTO.setMemId(id);
 				reviewDTO.setMovCode(movieCode);
@@ -257,5 +261,17 @@ public class MovieService {
 			}
 			
 			return reviewDTO;
+		}
+
+		public String reviewUpdate(HttpServletRequest request) {
+			ReviewDTO reviewDTO = new ReviewDTO();
+			reviewDTO.setMemId(request.getParameter("memId"));
+			reviewDTO.setRevComment(request.getParameter("reComment"));
+			reviewDTO.setMovCode(request.getParameter("movCode"));
+
+			movieDAO = new MovieDAO();
+			String result = movieDAO.reviewUpdate(reviewDTO);
+			
+			return result;
 		}
 	}

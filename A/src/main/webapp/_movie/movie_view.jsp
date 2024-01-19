@@ -188,19 +188,18 @@
 <!-- 			            <label for="agreement">관람평 쓰기</label> -->
 			            <div>
 							
-				            <textarea class="form-control" id="viewComment" name="viewComment" style="overflow: auto; height: 200px; font-size : 25px;"  placeholder="10자 이상 한줄평 쓰기">
-				            	${myReview.revComment }
-				            </textarea>
+				            <textarea class="form-control" id="viewComment" name="viewComment" style="overflow: auto; height: 200px; font-size : 25px;"  
+				            placeholder="10자 이상 한줄평 쓰기">${myReview.revComment}</textarea>
 			            
 			            </div>
 			          </div>
 
-					  <div class="d-flex justify-content-around" name="revbtn" id="revbtn">
+					  <div class="d-flex justify-content-around" name="revsubmit" id="revsubmit">
 				          <div class="form-group mb-3 d-flex justify-content-center">
-							  <button type="button" id="write" class="btn-type0" style="width: 100px;">작성</button>
+							  <button type="button" id="write" name="revbtn" class="btn-type0" style="width: 100px;">작성</button>
 						  </div>
 						   <div class="form-group mb-3 d-flex justify-content-center">
-							  <button type="reset" class="btn-type0" style="width: 100px;">취소</button>
+							  <button type="button" id="revDelete" name="revDelete" class="btn-type0" style="width: 100px;" disabled="disabled">삭제</button>
 						  </div>
 			          </div>	
 			        </form>
@@ -356,6 +355,44 @@
   }
   
   $(function() {
+	  
+	  if($("#viewComment").val() != ''){
+		  $("button[name=revbtn]").attr('id','update')
+		  $("button[name=revbtn]").text("수정");
+		  $("#revDelete").attr("disabled" , false)
+		  // 한줄평 수정
+		  $("#update").on("click", function(){
+				debugger;
+				var viewcomment = $("#viewComment").val()
+				// 세션값 
+	<%-- 			var sessionId = <%=session.getAttribute("sId") %> --%>
+				var sessionId = "test1" 
+				var title = "${detail.title}";
+				var movIdx = ${detail.movieIdx};
+				var movType = "${detail.movieCategory}";
+			  	
+				$.ajax({
+					type: "post",
+					url: "reviewUpdate.mo",
+					data:{
+						reComment : viewcomment,
+						memId : sessionId,
+						movCode: new URL(window.location.href).searchParams.get('movieCode')
+					},
+					dataType: "text"
+				})
+				.done(function(data){
+					debugger;
+					if(data == 'false'){
+						alert('한줄평 수정 오류발생')
+						return
+					}
+					location.reload();
+				})
+
+		  })
+
+	  }
 		// 관람평=====================================================================
 		
 		// 페이징처리작업

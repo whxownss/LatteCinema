@@ -158,16 +158,17 @@
 	<select id="getReview" resultType="ReviewDTO" parameterType="String">
 		SELECT*
 		 FROM REVIEWS
-		 WHERE MOV_CODE = ${movCode}
+		 WHERE MOV_CODE = #{movCode}
 		 ORDER BY REV_NUM DESC;
 	
 	</select>
 	
 	<!-- 내가 해당영화에 쓴 댓글 가져오기  -->
 	<select id="myReview" resultType="ReviewDTO" parameterType="ReviewDTO">
-		SELECT*
+		SELECT REV_COMMENT
 		 FROM REVIEWS
-		 WHERE MEM_ID = ${value}
+		 WHERE MEM_ID = #{memId}
+		 AND MOV_CODE = #{movCode}
 	</select>
 	<update id="updateMovie">
 	  UPDATE MOVIE
@@ -201,6 +202,13 @@
 	
 	
 	
+	<update id="reviewUpdate" parameterType="ReviewDTO">
+		UPDATE REVIEWS
+		   SET REV_COMMENT = #{revComment}
+		 WHERE 1 = 1
+		   AND MEM_ID = #{memId}
+		   AND MOV_CODE = #{movCode} 
+	</update>
 
 	
 	
