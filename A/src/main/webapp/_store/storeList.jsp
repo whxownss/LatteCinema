@@ -15,7 +15,7 @@
 
 			<section class="contents d-flex">
 				<div class="col-6" style="display: flex; justify-content: center;">
-					<img id="itemImage" alt="itemName">
+					<img id="itemImage" alt="itemName" style="width: 400px; height: 450px;">
 				</div>
 				<article class="col-4">
 					<table class="pd_table fs-5 table table-sm">
