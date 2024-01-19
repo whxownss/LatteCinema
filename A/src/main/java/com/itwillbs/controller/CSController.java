@@ -892,6 +892,7 @@ public class CSController extends HttpServlet  {
 				endPage = pageCount;
 			}
 			
+			
 			//pageDTO에 페이징 관련값 저장
 			pageDTO.setCount(count);
 			pageDTO.setPageBlock(pageBlock);

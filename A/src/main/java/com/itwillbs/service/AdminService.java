@@ -24,7 +24,7 @@ public class AdminService {
 		scheduleDTO.setSchMovIdx(schMovIdx);
 		scheduleDTO.setSchMovType(schMovType);
 		scheduleDTO.setSchRun(schRun);
-		System.out.println(schDate + " " + schDate);
+		System.out.println(schDate + " , " + schDate);
 		scheduleDTO.setSchDate(java.sql.Timestamp.valueOf(schDate + " 00:00:00"));   // 이부분 다시 확인
 		scheduleDTO.setSchStime(schStime);
 		

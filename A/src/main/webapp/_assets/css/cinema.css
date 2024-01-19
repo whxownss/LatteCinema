@@ -23,6 +23,7 @@
 }
 
 h2.tit {
+	font-family: "Noto Sans KR", "Roboto", "dotum", "sans-serif";
     padding: 0 0 26px 0;
     font-size: 1.8666em;
     font-weight: 400;
@@ -204,4 +205,29 @@ li{
 body{
 	  overflow: auto;
 	  overflow-y : scroll; 
+}
+
+
+
+
+/* 추가 하는 중 */
+
+.contents_theater_detail .theater_top_wrap {
+    position: relative;
+    margin: 18px 0 0 22px;
+}
+
+.contents_theater_detail .theater_top_wrap .info_wrap .pop_wrap>li a span {
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+body, input, button, select, textarea {
+    font-family: "Noto Sans KR", "Roboto", "dotum", "sans-serif";
+    font-size: 12px;
+    color: #000;
+}
+
+.contents_theater_detail .theater_top_wrap .info_wrap .theater_info {
+    margin-bottom: 15px;
 }
