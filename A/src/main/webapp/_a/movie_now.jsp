@@ -42,30 +42,6 @@
 	</section> 
 			
 
-	<%-- <section class="category-section">
-		<div class="container" data-aos="fade-up">
-		  <div class="section-header d-flex justify-content-between align-items-center mb-5">
-	        <h2>박스오피스</h2>
-	        <div><a href="movie_now.mo" class="more">상영작 보러가기</a></div>
-	      </div>
-		
-	      <div class="container" data-aos="fade-up">
-			<div class="owl-carousel owl-theme">
-				<c:forEach var="movie" items="${posterNowList}" varStatus="status">
-		        <div class="item position-relative" id="wrap">
-		          <img src="<c:out value="${movie.poster}" />" > 
-					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
-						<a href="${pageContext.servletContext.contextPath}/movie_view.mo?movieCode=${movie.movieCode}" class="moree">상세정보</a>
-					</div>
-		        </div>
-	     	 	</c:forEach> 
-		     </div>
-	       </div>
-       </div>
-     </section>
-	 --%>
-	 
 	 <section class="category-section">
     <div class="container" data-aos="fade-up">
         <div class="section-header d-flex justify-content-between align-items-center mb-5">
@@ -123,4 +99,5 @@
 	
 	</main>
 	
-<%@include file ="../_common/commonFooter.jsp" %>
+<%@include file ="../_common/commonFooterStart.jsp" %>
+<%@include file ="../_common/commonFooterEnd.jsp" %>

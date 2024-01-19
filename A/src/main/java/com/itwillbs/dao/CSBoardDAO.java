@@ -1000,5 +1000,24 @@ public class CSBoardDAO {
 	}
 	
 	
+	/**
+	 * 추천 게시판에서 조회수 순으로 5개 뽑아옴
+	 * */
+	public ArrayList<RecommendDTO> getRecommendListOrdered() {
+		System.out.println("CSBoardDAO getRecommendListOrdered()");
+		ArrayList<RecommendDTO> recommendList = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			recommendList = new ArrayList<RecommendDTO>(session.selectList("CsAdmin.getRecommendListOrdered"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return recommendList;
+	}
+	
 	
 }//클래스
