@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -28,9 +29,9 @@ public class StoreService {
 		return storeDAO.selectStoreItemS();
 	}//
 	
-	public List<StoreItemDTO> storeListT() {
+	public List<StoreItemDTO> storeListC() {
 		
-		return storeDAO.selectStoreItemT();
+		return storeDAO.selectStoreItemC();
 	}//
 
 	public String getItemInfo(String idx) {
@@ -123,5 +124,16 @@ new MultipartRequest(request, uploadPath, maxSize, "utf-8", new DefaultFileRenam
 		storeDAO = new StoreDAO();
 		storeDAO.deleteItem(name);
 	}//
+
+	public ArrayList<StorePayDTO> getstoreGiftList(String sId) {
+		ArrayList<StorePayDTO> storeGift = null;
+		try {
+			storeDAO = new StoreDAO();
+			storeGift = storeDAO.getstoreGiftList(sId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return storeGift;
+	}
 	
 }//StoreService

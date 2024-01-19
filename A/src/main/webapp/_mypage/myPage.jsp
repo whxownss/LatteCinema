@@ -34,8 +34,8 @@
                     <!--// my-info -->
                     
                     <%
-                    ArrayList<StorePayDTO> storeList = 
-            			(ArrayList<StorePayDTO>)request.getAttribute("storeList");
+                    ArrayList<StorePayDTO> storeGiftList = 
+            			(ArrayList<StorePayDTO>)request.getAttribute("storeGiftList");
 					PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
 					%>
                     
@@ -61,21 +61,23 @@
 							<table class="table table-bordered border-Info">
 								<thead>
 									<tr>
+										<th scope="col" class="text-center">보내신분</th>
 										<th scope="col" class="text-center">결제번호</th>
 										<th scope="col" class="text-center">상품명</th>
 										<th scope="col" class="text-center">수량</th>
-										<th scope="col" class="text-center">보낸사람</th>
 										<th scope="col" class="text-center">받은날짜</th>
+										<th scope="col" class="text-center">받은메시지</th>
 									</tr>
 								</thead>
 								<tbody id="tbody">
-								<c:forEach var="storeList" items="${storeList }">
+								<c:forEach var="storeGiftList" items="${storeGiftList }">
 			                      	<tr>
-			                      		<td>${storeList.merchantUid }</td>
-			                      		<td>${storeList.name }</td>
-			                      		<td>${storeList.itemCnt }</td>
-			                      		<td>${storeList.buyerName }</td>
-			                      		<td>${storeList.payTime }</td>
+			                      		<td scope="row" class="text-center align-middle">${storeGiftList.buyerName }</td>
+			                      		<td scope="row" class="text-center align-middle">${storeGiftList.merchantUid }</td>
+			                      		<td scope="row" class="text-center align-middle">${storeGiftList.name }</td>
+			                      		<td scope="row" class="text-center align-middle">${storeGiftList.itemCnt }</td>
+			                      		<td scope="row" class="text-center align-middle">${storeGiftList.payTime }</td>
+			                      		<td scope="row" class="text-center align-middle"><button>메시지보기</button></td>
 			                      	</tr>
 			                      </c:forEach>
 								</tbody>

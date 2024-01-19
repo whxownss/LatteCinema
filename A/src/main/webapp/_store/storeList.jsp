@@ -41,8 +41,8 @@
 								<td class="text-end" id="detail"></td>
 							</tr>
 							<tr>
-								<th scope="row">구매제한</th>
-								<td class="text-end">제한없음</td>
+								<th scope="row">사용방법</th>
+								<td class="text-end">오프라인</td>
 							</tr>
 							<tr>
 								<th scope="row">유효기간</th>

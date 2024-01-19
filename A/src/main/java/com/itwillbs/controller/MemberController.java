@@ -27,9 +27,11 @@ import com.itwillbs.email.EmailCode;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.domain.ReservationDTO;
+import com.itwillbs.domain.StorePayDTO;
 import com.itwillbs.service.CSBoardService;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.MovieService;
+import com.itwillbs.service.StoreService;
 import com.itwillbs.sms.SendSms;
 
 
@@ -309,6 +311,15 @@ public class MemberController extends HttpServlet {
 		
 		// 마이페이지 (마이페이지 기본메인화면) 이동
 		if(sPath.equals("/myPage.me")) {
+			StoreService storeService = new StoreService();
+			HttpSession session = request.getSession();
+			String sId = (String)session.getAttribute("sId");
+			System.out.println(sId);
+			ArrayList<StorePayDTO> storeGiftList = storeService.getstoreGiftList(sId);
+			request.setAttribute("storeGiftList",storeGiftList);
+			System.out.println("===============");
+			System.out.println(storeGiftList);
+			System.out.println("===============");
 			dispatcher = request.getRequestDispatcher("_mypage/myPage.jsp");
 			dispatcher.forward(request, response);
 		}//
@@ -834,7 +845,6 @@ public class MemberController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}//
 		
-
 		
 	}
 }
