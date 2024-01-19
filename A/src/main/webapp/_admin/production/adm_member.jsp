@@ -153,6 +153,7 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
                           <th>E-mail</th>
                           <th>정지여부</th>
                           <th>정지일</th>
+                          <th>탈퇴일</th>
                         </tr>
                       </thead>
                       <tbody id="tbody">
@@ -166,24 +167,30 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
                       		<td>${memberDTO.memPhone }</td>
                       		<td>${memberDTO.memEmail }</td>
 	                          <td>
-<!-- 								<select> -->
-<%-- 									<c:if test="${memberDTO.memStatus eq 0 }"> --%>
-<!-- 										<option value="0" selected>N</option> -->
-<!-- 										<option value="1">Y</option> -->
-<%-- 									</c:if> --%>
-<%-- 									<c:if test="${memberDTO.memStatus eq 1 }"> --%>
-<!-- 										<option value="0">N</option> -->
-<!-- 										<option value="1" selected>Y</option> -->
-<%-- 									</c:if> --%>
-<!-- 								</select> -->
+	                          <c:if test="${empty memberDTO.memDeleteD }">
+								<select>
 									<c:if test="${memberDTO.memStatus eq 0 }">
-										<a>No</a>
+										<option value="No" selected>No</option>
+										<option value="Yes">Yes</option>
 									</c:if>
 									<c:if test="${memberDTO.memStatus eq 1 }">
-										<a>Yes</a>
+										<option value="No">No</option>
+										<option value="Yes" selected>Yes</option>
 									</c:if>
+								</select>
+								</c:if>
+								<c:if test="${!empty memberDTO.memDeleteD }">
+									
+								</c:if>
+<%-- 									<c:if test="${memberDTO.memStatus eq 0 }"> --%>
+<!-- 										<a>No</a> -->
+<%-- 									</c:if> --%>
+<%-- 									<c:if test="${memberDTO.memStatus eq 1 }"> --%>
+<!-- 										<a>Yes</a> -->
+<%-- 									</c:if> --%>
 							  </td>
 							  <td>${memberDTO.memStopD }</td>
+							  <td>${memberDTO.memDeleteD }</td>
 						</tr>	  
                       	</c:forEach>
                         

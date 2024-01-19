@@ -14,7 +14,7 @@ public class MemberDTO {
 	private Timestamp memJoinD;
 	private String memStatus;
 	private String memStopD;
-	
+	private String memDeleteD;
 	
 	public String getMemIdx() {
 		return memIdx;
@@ -82,21 +82,21 @@ public class MemberDTO {
 	public void setMemStopD(String memStopD) {
 		this.memStopD = memStopD;
 	}
+	
+	public String getMemDeleteD() {
+		return memDeleteD;
+	}
+	public void setMemDeleteD(String memDeleteD) {
+		this.memDeleteD = memDeleteD;
+	}
 	@Override
 	public String toString() {
 		return "MemberDTO [memIdx=" + memIdx + ", memId=" + memId + ", memPass=" + memPass + ", memName=" + memName
 				+ ", memPhone=" + memPhone + ", memAddress=" + memAddress + ", memBirthD=" + memBirthD + ", memEmail="
-				+ memEmail + ", memJoinD=" + memJoinD + ", memStatus=" + memStatus + ", memStopD=" + memStopD + "]";
+				+ memEmail + ", memJoinD=" + memJoinD + ", memStatus=" + memStatus + ", memStopD=" + memStopD
+				+ ", memDeleteD=" + memDeleteD + "]";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-
 	
 		
 	
