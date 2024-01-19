@@ -211,16 +211,17 @@ public class MemberController extends HttpServlet {
 			}
 			
 			// 회원 탈퇴
-			String memDeleteD = memberDTO.getMemDeleteD();
-			if(memDeleteD != null) {
-				memDeleteD = memberDTO.getMemDeleteD();
-				System.out.println("탈퇴한날: " + memDeleteD);
-				request.setAttribute("memDeleteD", memDeleteD);
-				dispatcher = request.getRequestDispatcher("_member/msg3.jsp");
-				dispatcher.forward(request, response);
-				return;
-			} else {
-				memDeleteD = "";
+			if(memberDTO != null) {
+			    String memDeleteD = memberDTO.getMemDeleteD();
+			    if(memDeleteD != null) {
+			        System.out.println("탈퇴한날: " + memDeleteD);
+			        request.setAttribute("memDeleteD", memDeleteD);
+			        dispatcher = request.getRequestDispatcher("_member/msg3.jsp");
+			        dispatcher.forward(request, response);
+			        return;
+			    } else {
+			    	memDeleteD = "";
+			    }
 			}
 
 			//리턴받은 값이 null 아니면 => 아이디 비밀번호 일치
