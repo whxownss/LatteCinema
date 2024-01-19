@@ -1,5 +1,6 @@
 package com.itwillbs.service;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -46,6 +47,23 @@ public class ResService {
 		map.put("PARAM", param);
 		map.put("DATE", date);
 		List<ScheduleDTO> scheduleList = resDAO.selectSchedule(map);
+		
+		// 종료시간이 익일일 경우
+		for(ScheduleDTO sch : scheduleList) {
+			String t1 = sch.getSchStime();
+			String t2 = sch.getSchEtime();
+			
+			int hour = Integer.parseInt(t1.split(":")[0]);
+			int minute = Integer.parseInt(t1.split(":")[1]);
+			int hour2 = Integer.parseInt(t2.split(":")[0]);
+			int minute2 = Integer.parseInt(t2.split(":")[1]);
+			
+			LocalTime lt = LocalTime.of(hour, minute);
+			LocalTime lt2 = LocalTime.of(hour2, minute2);
+			
+			if(lt2.compareTo(lt) == -1) 
+				sch.setSchEtime("*" + sch.getSchEtime());
+		}
 		
 		Gson gson = new Gson();
 		String scheduleListJson = gson.toJson(scheduleList);

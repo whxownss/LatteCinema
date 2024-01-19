@@ -62,6 +62,8 @@ public class ResController extends HttpServlet {
 			String date = request.getParameter("date");
 			String scheduleListJson = resService.getSchedules(cinema, param, date);
 			
+			System.out.println(scheduleListJson);
+			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(scheduleListJson);
