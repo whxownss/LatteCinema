@@ -177,4 +177,16 @@
 		LIMIT #{startRow}, #{pageSize}
 	</select>
 	
+	
+	<select id="getMemPoint" parameterType="String" resultType="String">
+		SELECT FORMAT(MEM_POINT, 0)
+		  FROM MEMBERS
+		 WHERE MEM_ID = #{value}
+	</select>
+	
+	<update id="setPoint" parameterType="MemberDTO">
+		UPDATE MEMBERS
+		   SET MEM_POINT = CAST(MEM_POINT AS UNSIGNED) + CAST(#{memPoint} AS SIGNED)
+		 WHERE MEM_ID = #{memId}
+	</update>
 </mapper>
