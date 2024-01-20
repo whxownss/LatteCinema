@@ -46,10 +46,14 @@ var IMP = window.IMP;
 
 // 포트원 api
   function requestPay(sId, param) {
+	debugger;
 	
 	if(sId == null || sId == ''){
 		location.href="login.me";
+		return;
 	}
+	
+	debugger;
 	
 	// 선물하기 모달창 전화번호 없이 결제불가
 	var checkPhone = document.getElementById('checkPhone');
