@@ -42,7 +42,7 @@
 			<div class="col-md-3 left_col">
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
-						<a href="adm_home.ad" class="site_title"><i class="fa fa-film"></i>
+						<a href="main.me" class="site_title"><i class="fa fa-film"></i>
 							<span>Latte Cinema!</span></a>
 					</div>
 
@@ -69,16 +69,11 @@
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a href="adm_home.ad"><i class="fa fa-home"></i>
-										Home</a></li>
-								<li><a href="adm_member.ad"><i class="fa fa-user"></i>
-										회원관리</a></li>
-								<li><a href="adm_mv_inout.ad"><i class="fa fa-edit"></i>영화
-										통합 추가/제거</a></li>
-								<li><a href="adm_store.ad"><i class="fa fa-beer"></i>스토어
-										관리</a></li>
-								<li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>영화관
-										관리</a></li>
+								<li><a href="adm_home.ad"><i class="fa fa-home"></i>Home</a></li>
+								<li><a href="adm_member.ad"><i class="fa fa-user"></i>회원관리</a></li>
+								<li><a href="adm_mv_inout.ad"><i class="fa fa-edit"></i>영화 통합 추가/제거</a></li>
+								<li><a href="adm_store.ad"><i class="fa fa-beer"></i>스토어 관리</a></li>
+								<li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>스케줄 관리</a></li>
 							</ul>
 						</div>
 						<div class="menu_section">
@@ -119,7 +114,7 @@
 			<div class="top_nav">
 				<div class="nav_menu">
 					<nav>
-						<div class="nav toggle">
+						<div class="nav toggle" style="padding-top: 8px; padding-bottom: 8px">
 							<a id="menu_toggle"><i class="fa fa-bars"></i></a>
 						</div>
 					</nav>
