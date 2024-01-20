@@ -50,14 +50,6 @@ public class StoreController extends HttpServlet{
 		// storeitem 내용 표시
 		if(sPath.equals("/storeList.st")) {
 			
-//			String idx = request.getParameter("itemIdx");
-//			
-//			storeService = new StoreService();
-//			
-//			String storeItemJson = storeService.getItemInfo(idx);
-//			
-//			request.setAttribute("storeItemJson", storeItemJson);
-			
 			dispatcher = request.getRequestDispatcher("_store/storeList.jsp");
 			dispatcher.forward(request, response);
 		}//
@@ -104,7 +96,7 @@ public class StoreController extends HttpServlet{
 			
 		}//
 		
-		
+		// 마이페이지 선물내역 MemberController에서 시작 321
 		
 		// 관리자 스토어 AdminController에서 시작 111
 		

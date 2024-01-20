@@ -321,13 +321,14 @@ public class MemberController extends HttpServlet {
 		if(sPath.equals("/myPage.me")) {
 			StoreService storeService = new StoreService();
 			HttpSession session = request.getSession();
+			
 			String sId = (String)session.getAttribute("sId");
 			System.out.println(sId);
+			
 			ArrayList<StorePayDTO> storeGiftList = storeService.getstoreGiftList(sId);
+			
 			request.setAttribute("storeGiftList",storeGiftList);
-			System.out.println("===============");
-			System.out.println(storeGiftList);
-			System.out.println("===============");
+			
 			dispatcher = request.getRequestDispatcher("_mypage/myPage.jsp");
 			dispatcher.forward(request, response);
 		}//

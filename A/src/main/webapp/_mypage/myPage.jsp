@@ -77,7 +77,16 @@
 			                      		<td scope="row" class="text-center align-middle">${storeGiftList.name }</td>
 			                      		<td scope="row" class="text-center align-middle">${storeGiftList.itemCnt }</td>
 			                      		<td scope="row" class="text-center align-middle">${storeGiftList.payTime }</td>
-			                      		<td scope="row" class="text-center align-middle"><button>메시지보기</button></td>
+			                      		<td scope="row" class="text-center align-middle">
+											<div class="dropdown">
+											  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+											    메시지보기
+											  </button>
+											  <ul class="dropdown-menu">
+											    <li><p class="dropdown-item text-center"> ${storeGiftList.giftMsg }</p></li>
+											  </ul>
+											</div>  
+			                      		</td>
 			                      	</tr>
 			                      </c:forEach>
 								</tbody>
@@ -126,5 +135,4 @@
 		</section>
 	</main>
 <%@include file ="../_common/commonFooterStart.jsp" %>
-
 <%@include file ="../_common/commonFooterEnd.jsp" %>
