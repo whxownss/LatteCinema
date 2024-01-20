@@ -406,6 +406,22 @@ public class MemberService {
 		return resRefundList;
 	}//getResRefundList()
 
+	
+	// 예약3 페이지에서 포인트 정보 가져올 때 
+	public String getMemPoint(String sId) {
+		memberDAO = new MemberDAO();
+		return memberDAO.getMemPoint(sId);
+	}
+
+	// 예약3 결제하고 포인트 적립
+	public void setPoint(String sId, String point) {
+		memberDAO = new MemberDAO();
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setMemId(sId);
+		memberDTO.setMemPoint(point);
+		memberDAO.setPoint(memberDTO);
+	}
+
 
 
 //	public MemberDTO kakaoCheck(HttpServletRequest request) {

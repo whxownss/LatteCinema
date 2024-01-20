@@ -5,6 +5,10 @@
 	<link rel="stylesheet" href="_assets/css/res_1.css">
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
+<c:if test="${sessionScope.sId == null}">
+	<c:redirect url="login.me" />
+</c:if>
+
 <!-- 인원 선택 Modal1 -->
 <div class="modal fade" id="warning" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -116,14 +120,6 @@
 										    <button type="button" class="plus d-flex justify-content-center pmBtn">+</button>
 										</div>
 									</li>
-									<li class="d-flex flex-row ms-3">
-										<span class="me-1 d-flex align-items-center">장애인 </span>
-										<div class="count-wrap _count">
-										    <button type="button" class="minus d-flex justify-content-center pmBtn">-</button>
-										    <span class="inpp align-middle cntPerson" id="pCase4">0</span>
-										    <button type="button" class="plus d-flex justify-content-center pmBtn">+</button>
-										</div>
-									</li>
 								</ul>
 							</div>
 						</div>
@@ -143,7 +139,6 @@
 					
 				</div>
 			</div>
-			<div ><a href="res3.re" style="margin-left: 100%;"><button>res3 이동</button></a></div>
 			</div>
 		</section>
 	

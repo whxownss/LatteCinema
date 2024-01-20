@@ -51,7 +51,7 @@ public class MemberController extends HttpServlet {
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String sPath = request.getServletPath();
-	
+		
 		// 메인 페이지 이동
 		if(sPath.equals("/main.me")) {
 			// 메인화면 최근글 3개 가져오기

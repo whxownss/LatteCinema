@@ -57,7 +57,7 @@ $(function(){
 			if(e.schMovType != id) return;
 				$(".showMovies").append("<li class='list-group-item border border-0 myMouse' id='" 
 										+ id + "movie" + (i+1) + "'>" 
-										+ "<img src='_assets/img/grade_" + e.rating + ".png' class='pb-1'/>"
+										+ "<img src='_assets/img/grade_" + e.rating + ".png' class='pb-1 pe-1'/>"
 										+ e.title + "</li>");
 		});			
 		

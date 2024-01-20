@@ -68,8 +68,7 @@ $(function(){
 	    	var p1 = parseInt($("#pCase1").text());
 			var p2 = parseInt($("#pCase2").text());
 			var p3 = parseInt($("#pCase3").text());
-			var p4 = parseInt($("#pCase4").text());
-	    	var pSum = p1 + p2 + p3 + p4;
+	    	var pSum = p1 + p2 + p3;
 			// 8 넘는 경우 || 0 인거 -버튼 눌렀을때	    	
 	    	if(pSum >= 8 && $(this).hasClass('plus') || $(this).hasClass('minus') && $(this).next().text() == "0") return;
 	    	
@@ -126,8 +125,7 @@ $(function(){
 		var p1 = parseInt($("#pCase1").text());
 		var p2 = parseInt($("#pCase2").text());
 		var p3 = parseInt($("#pCase3").text());
-		var p4 = parseInt($("#pCase4").text());
-    	var pSum = p1 + p2 + p3 + p4;
+    	var pSum = p1 + p2 + p3;
 		
     	if(pSum == 0) {
     		$("#warning").modal("show");
@@ -156,8 +154,7 @@ $(function(){
 			var p1 = parseInt($("#pCase1").text());
 			var p2 = parseInt($("#pCase2").text());
 			var p3 = parseInt($("#pCase3").text());
-			var p4 = parseInt($("#pCase4").text());
-			var sum = p1 * 12000 + p2 * 7000 + p3 * 5000 + p4 * 4000;
+			var sum = p1 * 15000 + p2 * 12000 + p3 * 9000;
 			
 			$("#mPrice").text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		} else{
@@ -166,6 +163,7 @@ $(function(){
 			  		  .removeClass("btn-secondary")
 			  		  .addClass("btn-light")
 			  		  .prop("disabled", false);
+			$("#mPrice").text("0");
 		}
 	});
 	

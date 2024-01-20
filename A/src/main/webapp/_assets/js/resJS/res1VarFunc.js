@@ -154,5 +154,6 @@ var letsGoSchedule = function(p){
 	if($(p).find(".bi-check-lg").length == 0 && $(p).attr("id").includes("movie")){
 		param = $(p).text();
 	}
+	debugger;
 	showSchedule(param);
 }
