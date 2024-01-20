@@ -114,17 +114,17 @@
           </div>
         </div>
 
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-            </nav>
-          </div>
+       <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle" style="padding-top: 8px; padding-bottom: 8px">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+          </nav>
         </div>
-        <!-- /top navigation -->
+      </div>
+      <!-- /top navigation -->
 <%
 List<StoreItemDTO> itemNameList = 
 		(List<StoreItemDTO>)request.getAttribute("itemNameList");
