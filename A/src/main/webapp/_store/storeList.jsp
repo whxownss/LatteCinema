@@ -75,7 +75,7 @@
 										style="text-align: center;">
 										 <img src="assets/img/free-icon-gift-box-4108395.png" alt="선물하기"
 												width="30" height="30"/></button>
-									<button class="btn btn-danger btn-lg" onclick="requestPay()"
+									<button class="btn btn-danger btn-lg" onclick="requestPay('${sessionScope.sId}')"
 										style="text-align: center; padding:10px; padding-left: 130px; padding-right: 130px;"><b>구매하기</b></button>
 								</td>
 							</tr>
@@ -112,7 +112,7 @@
 									<button type="button" class="btn btn-secondary"
 										data-bs-dismiss="modal">닫기</button>
 									<button type="button" id="btn_gift" class="btn btn-danger"
-										onclick="requestPay('gift')">선물보내기</button>
+										onclick="requestPay('${sessionScope.sId}', 'gift')">선물보내기</button>
 								</div>
 							</div>
 						</div>
