@@ -128,7 +128,7 @@
 	   	   AND NOW() >  (CASE WHEN S.SCH_ETIME >= "24:00"
 						THEN  CONCAT(DATE_FORMAT(DATE_ADD(R.DATE, INTERVAL 1 DAY), '%Y-%m-%d'), ' ', DATE_FORMAT(S.SCH_ETIME, "%h:%i"))
 						ELSE CONCAT(DATE_FORMAT(R.DATE, '%Y-%m-%d'), ' ', S.SCH_ETIME) END)
-
+		   AND R.SUCCESS != "false"
 	</select> 
 	
 	<!--한줄평 담기  -->

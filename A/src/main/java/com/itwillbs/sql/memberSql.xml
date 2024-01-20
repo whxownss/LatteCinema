@@ -74,6 +74,13 @@
 		WHERE MEM_EMAIL = #{email}
 	</select>
 	
+	<!-- 	회원가입 연락처 중복확인 -->
+	<select id="checkPhone" parameterType="String"   resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBERS
+		WHERE MEM_PHONE = #{memPhone}
+	</select>
+	
 	<select id="userCheck" parameterType="MemberDTO" resultType="MemberDTO">
 		SELECT *
 		FROM MEMBERS
@@ -148,6 +155,15 @@
 		  , MEM_ADDRESS = #{memAddress}
 		WHERE MEM_ID = #{memId}
 	</update>
+	
+	<!-- 비밀번호 변경시 현재 비밀번호 일치 유무확인 -->
+	<select id="changePassCheck" parameterType="MemberDTO" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBERS
+		WHERE MEM_Id = #{memId}
+		AND MEM_PASS = #{memPass}	
+	
+	</select>	
 	
 	<!-- 비밀번호 변경 -->
 	<update id="updatePasswd" parameterType="MemberDTO">

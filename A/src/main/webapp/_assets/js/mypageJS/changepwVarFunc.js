@@ -66,7 +66,7 @@ function checkSubmit() {
 	$.each(color, function(i, v){
 		if(this.style.color == "red") {
 			flag = 0;
-			alert("비밀번호 양식을 확인해 주세요.")
+			alert("현재 비밀번호와 새비밀번호 양식을 확인해주세요.")
 			return false;
 		}
 	});

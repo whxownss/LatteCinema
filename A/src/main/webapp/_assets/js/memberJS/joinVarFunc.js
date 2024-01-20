@@ -212,10 +212,30 @@ function checkPhone() {
 	
 	if(phone != ""){
 		text = "** 알맞은 연락처 형식으로 입력! '-' 생략가능!! **";
-		
+		debugger;
+		// 정규식 유효성 일치 > 연락처 중복체크
 		if(phoneRegex.test(phone)){
-			text = "** 알맞은 연락처 형식! ** ";
-			color = "green";
+			debugger;
+			$.ajax({
+				type : "post",
+				data : {memPhone : phone},
+				url : "checkPhone.me",
+				dataType: "text",
+				// 동기식으로 변경 async
+				async: false
+				
+			})
+			.done(function(data){
+				debugger;
+				text = "** 사용가능한 연락처! ** ";
+				color = "green";
+				if(data == '1'){
+					text= "** 이미 사용중인 연락처 입니다. ** ";
+					color= "red";
+					return
+				}
+			})
+
 		}
 	}
 	$("#CheckPhone").text(text).css("color",color);

@@ -234,6 +234,27 @@ public class MemberDAO {
 		session.commit();
 		session.close();
 	}
+	
+	// 회원가입 연락처 중복체크
+	public int checkPhone(String parameter) {
+		SqlSession session = sqlSessionFactory.openSession();
+		System.out.println(parameter);
+		int result = session.selectOne("Member.checkPhone", parameter);
+		session.close();
+		return result;
+		
+	}
+	
+	// 비밀번호 변경 현재비밀번호 일치유무 확인
+	public int changePassCheck(MemberDTO memberDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		System.out.println(memberDTO);
+		int result = session.selectOne("Member.changePassCheck", memberDTO);
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+		System.out.println(result);
+		session.close();
+		return result;
+	}
 
 	
 }

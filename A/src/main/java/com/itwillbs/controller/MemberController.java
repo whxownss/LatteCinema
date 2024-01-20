@@ -177,6 +177,16 @@ public class MemberController extends HttpServlet {
 
 		}//
 		
+		// 회원가입 연락처 중복체크 checkPhone.me
+		if(sPath.equals("/checkPhone.me")) {
+			memberService = new MemberService();
+			
+			int result = memberService.checkPhone(request);
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result + "");
+		}//
+		
 		// 회원가입 이메일 인증번호 보내기 checkemail.me
 		if(sPath.equals("/emailCode.me")) {
 			response.setCharacterEncoding("utf-8");
@@ -467,6 +477,18 @@ public class MemberController extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("_mypage/changepw.jsp");
 			dispatcher.forward(request, response);
 		}//
+		
+		// 현재 비밀번호 확인작업 changePassCheck.me
+		if(sPath.equals("/changePassCheck.me")) {
+			memberService =  new MemberService();
+			
+			int result = memberService.changePassCheck(request);
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result + "");
+			
+		}
+		
 		
 		// 비밀번호 변경 changepwPro
 		if(sPath.equals("/changepwPro.me")) {
