@@ -127,6 +127,7 @@
 <!--                     </ul> -->
                   </li>
                   
+				   <li><a href="adm_location.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
                    <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>스케줄 관리</a></li>
                  
                 </ul>

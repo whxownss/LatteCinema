@@ -206,5 +206,10 @@ public class ResService {
 		return resDAO.getAllSchedules();
 	}
 
+	public void refundPoint(String sId, String mid) {
+		resDAO = new ResDAO();
+		resDAO.refundPoint(sId, mid);
+	}
+
 
 }

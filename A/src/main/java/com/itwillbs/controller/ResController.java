@@ -171,6 +171,7 @@ public class ResController extends HttpServlet {
 		// 결제정보 저장, 포인트처리
 		if(sPath.equals("/res3Pro.re")) {
 			String rsp = request.getParameter("rsp");
+			System.out.println("rsp : " + rsp);
 			resService = new ResService();
 			HttpSession session = request.getSession();
 			String sId = (String)session.getAttribute("sId");
@@ -180,9 +181,10 @@ public class ResController extends HttpServlet {
 			// 포인트
 			MemberService memberService = new MemberService();
 			System.out.println("1231231323");
-			System.out.println(request.getParameter("point"));
+			System.out.println(request.getParameter("minusPoint"));
+			System.out.println(request.getParameter("plusPoint"));
 			System.out.println("1231231323");
-			memberService.setPoint(sId, request.getParameter("point"));
+			memberService.setPoint(rsp, sId, request);         
 			
 			
 			response.setCharacterEncoding("utf-8");
@@ -217,6 +219,16 @@ public class ResController extends HttpServlet {
 				
 				int result_delete = pay.cancelPay(token, mid);  // 포트원 환불
 				if(result_delete == -1) msg = "환불 실패";
+				
+				
+				
+				// 포인트 환불
+				HttpSession session = request.getSession();
+				String sId = (String)session.getAttribute("sId");
+				resService.refundPoint(sId, mid);
+				
+				
+				
 			}
 	        
 			response.setCharacterEncoding("utf-8");

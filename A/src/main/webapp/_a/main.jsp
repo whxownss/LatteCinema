@@ -19,7 +19,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
     
 
     <!-- ======= Culture Category Section ======= -->
-    <  <!-- ======= Culture Category Section ======= -->
+      <!-- ======= Culture Category Section ======= -->
  <%--  <section class="category-section">
     <div class="container" data-aos="fade-up">
 

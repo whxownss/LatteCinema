@@ -84,16 +84,17 @@ function kakaoPay(useremail, username) {
 				// 이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?	
 				rsp["pay_time"] = date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 				// 결제 정보 db에 insert, 포인트 처리
+				debugger;
 				$.ajax({
 					type: "GET",
 					url: "res3Pro.re",
 					data: {rsp: JSON.stringify(rsp),
-						   point: (parseInt($("#accPoint").text().replace(",", "")) - parseInt($("#salePrice").text()) + "")
+						   minusPoint: parseInt($("#salePrice").text()) + "",
+						   plusPoint: parseInt($("#accPoint").text().replace(",", "")) + ""
 					},
 					dataType: "text" 
 				})
 				.done(function(data){
-					
 					alert(data);
 					localStorage.setItem('rsp', JSON.stringify(rsp));
 	        		window.location = "res4.re";
