@@ -209,9 +209,9 @@ $(function(){
 								<dt>총 상영관 수</dt>
 								<dd>6개관</dd>
 								<dt>총 좌석수</dt>
-								<dd>1,232석</dd>
+								<dd>250석</dd>
 								<dt class="adr">주소</dt>
-								<dd class="adr">부산 부산진구 동천로 92 (전포동)</dd>
+								<dd class="adr">부산광역시 부산진구 동천로 109</dd>
 							</dl>
 							</div>
 							
@@ -241,15 +241,15 @@ $(function(){
       <ul class="list_txt">
         <li>
           <span class="tit">1, 2호선 서면역 </span>
-          <span class="txt"> 8번 출구 (도보 직진 200미터 &gt; 대각선 횡단보도 이용 &gt; 건물 진입 후 엘리베이터 이용 6층)</span>
+          <span class="txt"> 8번 출구 (도보 직진 268미터 &gt; 세븐일레븐에서 좌회전 70m &gt; 건물 진입 후 엘리베이터 이용 7층)</span>
         </li>
-      </ul>
+      </ul> 
     </div>
     <div class="article_location ty_bus">
       <h5 class="tit_article">버스로 오시는 길</h5>
       <ul class="list_txt">
         <li>
-          <span class="tit">NC서면점, 서면교차로, 부전도서관 정류장 하차 후 도보 100~200m 내 도착</span>
+          <span class="tit">NC서면점, 서면교차로, 부전도서관 정류장 하차 후 도보 200~300m 내 도착</span>
           <span class="txt"></span>
         </li>
       </ul>
@@ -269,7 +269,7 @@ $(function(){
       <ul class="list_txt">
         <li>
           <span class="tit">주소 </span>
-          <span class="txt"> 부산광역시 부산진구 동천로 92 (NC백화점 6층)</span>
+          <span class="txt"> 부산광역시 부산진구 동천로 92</span>
         </li>
       </ul>
     </div>
@@ -317,7 +317,7 @@ $(function(){
   </div>
   <div class="layer_contents">
     <div class="article_location">
-      <p class="tit_map">부산 부산진구 동천로 92 (전포동)</p>
+      <p class="tit_map">부산광역시 부산진구 동천로 109</p>
       <div class="area_map">
         <div id="cinemaMap" style="height: 480px; width: 100%;" class="tmMap">
           <div id="Tmap_Map_7_Tmap_ViewPort" class="tmMapViewport tmControlDragPanActive tmControlZoomBoxActive tmControlPinchZoomActive tmControlNavigationActive" style="position: relative; overflow: hidden; width: 100%; height: 100%;">

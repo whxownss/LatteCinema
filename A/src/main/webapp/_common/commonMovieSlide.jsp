@@ -23,7 +23,7 @@
 
 						<div class="swiper-slide">
 							<a href="#" class="img-bg d-flex align-items-end"
-								style="background-image: url('assets/img/mainSlide2-1.jpg');">
+								style="background-image: url('assets/img/mainSlide2.jpg');">
 								<div class="img-bg-inner">
 									<!--                      <h2>17 Pictures of Medium Length Hair in Layers That Will Inspire Your New Haircut</h2>-->
 									<!--                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>-->
@@ -33,7 +33,7 @@
 
 						<div class="swiper-slide">
 							<a href="#" class="img-bg d-flex align-items-end"
-								style="background-image: url('assets/img/mainSlide3-2.jpg');">
+								style="background-image: url('assets/img/mainSlide3.jpg');">
 								<div class="img-bg-inner">
 									<!--                      <h2>13 Amazing Poems from Shel Silverstein with Valuable Life Lessons</h2>-->
 									<!--                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>-->
