@@ -156,12 +156,12 @@ public class CSController extends HttpServlet  {
 		// 공지사항 글쓰기 페이지 이동
 		if(sPath.equals("/cs_center_write.cs")) {
 			System.out.println("주소비교 /cs_center_write.cs 일치");
-			HttpSession session = request.getSession();
-			String memId = (String) session.getAttribute("sId");
-			if(memId == null) {
-				response.sendRedirect("login.me");
-				return;
-			}
+//			HttpSession session = request.getSession();
+//			String memId = (String) session.getAttribute("sId");
+//			if(memId == null) {
+//				response.sendRedirect("main.me");
+//				return;
+//			}
 			dispatcher = request.getRequestDispatcher("_cs/cs_center_write.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -559,6 +559,18 @@ public class CSController extends HttpServlet  {
 			String createUser = request.getParameter("createUser");
 			String createDate = request.getParameter("createDate");
 			
+			HttpSession session = request.getSession();
+			String memId = (String) session.getAttribute("sId");
+			if(memId == null) {
+				memId = "";
+			}
+			if(!memId.equalsIgnoreCase("admin")) {
+				if(!memId.equalsIgnoreCase(createUser)) {
+					response.sendRedirect("login.me");
+					return;
+				}
+			}
+			
 			csBoardService = new CSBoardService();
 			QnaBoardDTO qnaBoardDTO = csBoardService.getQnaBoard(createUser,createDate);
 			request.setAttribute("qnaBoardDTO", qnaBoardDTO);
@@ -595,12 +607,12 @@ public class CSController extends HttpServlet  {
 		if(sPath.equals("/cs_qna_write.cs")) {
 			System.out.println("주소비교 /cs_qna_write.cs 일치");
 			
-			HttpSession session = request.getSession();
-			String memId = (String) session.getAttribute("sId");
-			if(memId == null) {
-				response.sendRedirect("login.me");
-				return;
-			}
+//			HttpSession session = request.getSession();
+//			String memId = (String) session.getAttribute("sId");
+//			if(memId == null) {
+//				response.sendRedirect("main.me");
+//				return;
+//			}
 			
 			dispatcher = request.getRequestDispatcher("_cs/cs_qna_write.jsp");
 			dispatcher.forward(request, response);
@@ -694,12 +706,12 @@ public class CSController extends HttpServlet  {
 		if(sPath.equals("/cs_lost_write.cs")) {
 			System.out.println("주소비교 /cs_lost_write.cs 일치");
 			
-			HttpSession session = request.getSession();
-			String memId = (String) session.getAttribute("sId");
-			if(memId == null) {
-				response.sendRedirect("login.me");
-				return;
-			}
+//			HttpSession session = request.getSession();
+//			String memId = (String) session.getAttribute("sId");
+//			if(memId == null) {
+//				response.sendRedirect("main.me");
+//				return;
+//			}
 			
 			dispatcher = request.getRequestDispatcher("_cs/cs_lost_write.jsp");
 			dispatcher.forward(request, response);
@@ -908,12 +920,12 @@ public class CSController extends HttpServlet  {
 		}
 		// 추천 게시판 영화 신청 페이지로 가기
 		if(sPath.equals("/cs_recoSubscribe.cs")) {
-			HttpSession session = request.getSession();
-			String memId = (String) session.getAttribute("sId");
-			if(memId == null) {
-				response.sendRedirect("login.me");
-				return;
-			}
+//			HttpSession session = request.getSession();
+//			String memId = (String) session.getAttribute("sId");
+//			if(memId == null) {
+//				response.sendRedirect("main.me");
+//				return;
+//			}
 			dispatcher = request.getRequestDispatcher("_cs/cs_recoSubscribe.jsp");
 			dispatcher.forward(request, response);
 		}

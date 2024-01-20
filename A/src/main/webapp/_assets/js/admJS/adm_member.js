@@ -28,7 +28,7 @@ document.write('<script src="_admin/build/js/custom.min.js"></script>');
 
 
 
-	$("#datatable-responsive tbody").on("click","tr a",function(e) { //동일한 "tr a" 선택자를 다른 이벤트에도 사용해야 할 경우 선택자를 중복해서 작성하지 않아도 됩니다.
+	$("#datatable-responsive tbody").on("change","select",function(e) { //동일한 "tr a" 선택자를 다른 이벤트에도 사용해야 할 경우 선택자를 중복해서 작성하지 않아도 됩니다.
 	    e.preventDefault(); // 앵커 태그의 기본 동작을 막습니다.
 	    // 클릭한 앵커 태그와 연관된 가장 가까운 테이블 행 (tr)을 찾습니다.
 	    var $row = $(this).closest("tr");
@@ -36,15 +36,15 @@ document.write('<script src="_admin/build/js/custom.min.js"></script>');
 	    var memId = $row.find("td:first-child").text();
 	    // 이제 'memId' 변수에 클릭된 행의 'memId'가 포함되어 있습니다.
 	    //alert("클릭한 memId: " + memId);
+	    //var memDeleteD = $row.find("td:last-child").text();
 	    // 클릭한 앵커 태그의 텍스트 내용을 가져옵니다.
-	    var memStatusText = $(this).text();
+	    var memStatusText = $(this).val();
 	    // 이제 'clickedText' 변수에 클릭한 앵커 태그의 텍스트가 포함되어 있습니다.
 	    //alert("클릭한 앵커 태그의 텍스트: " + memStatus);
-	    
 	    // 데이터를 JavaScript 객체에 저장합니다.
 	    var msg = '';
 	    var memStatus = '1';
-	    if(memStatusText === 'Yes'){
+	    if(memStatusText === 'No'){
 	    	msg = '해제';
 	    	memStatus = '0';
 	    }
@@ -55,6 +55,7 @@ document.write('<script src="_admin/build/js/custom.min.js"></script>');
 	    };
 	    if(!confirm(memId+'회원을 정지'+msg+' 하시겠습니까?')){
 	    	alert('취소하셨습니다.');	
+	    	window.location.href="adm_member.ad";
 	    	return;
 	    }
 		// AJAX 요청을 생성
@@ -74,32 +75,48 @@ document.write('<script src="_admin/build/js/custom.min.js"></script>');
         	  success: function(userList) {
         		  $('#tbody').empty();
         		  userList.forEach(function(user){
-        		      var memId = user.memId;
-        		      var memName = user.memName;
-        		      var memAddress = user.memAddress;
-        		      var memBirthD = user.memBirthD;
-        		      var memJoinD = user.memJoinD;
-        		      var memPhone = user.memPhone;
-        		      var memEmail = user.memEmail;
-        		      var memStatus = user.memStatus;
-        		      if(memStatus == '0'){
-        		    	  memStatus = 'No';
-        		      } else {
-        		    	  memStatus = 'Yes';
-        		      }
-        		      var memStopD = user.memStopD;
-        		      
-        		      var newRow = $('<tr></tr>');
-        		      newRow.append($('<td></td>').text(memId));  
-        		      newRow.append($('<td></td>').text(memName));  
-        		      newRow.append($('<td></td>').text(memAddress));  
-        		      newRow.append($('<td></td>').text(memBirthD));  
-        		      newRow.append($('<td></td>').text(memJoinD));  
-        		      newRow.append($('<td></td>').text(memPhone));  
-        		      newRow.append($('<td></td>').text(memEmail));  
-        		      newRow.append($('<td></td>').html("<a>"+memStatus+"</a>"));  
-        		      newRow.append($('<td></td>').text(memStopD));  
-        		      $('#tbody').append(newRow);
+					var memId = user.memId;
+					var memName = user.memName;
+					var memAddress = user.memAddress;
+					var memBirthD = user.memBirthD;
+					var memJoinD = user.memJoinD;
+					var memPhone = user.memPhone;
+					var memEmail = user.memEmail;
+					var memStatus = user.memStatus;
+					var selectHtml = "";
+					var memDeleteD = user.memDeleteD;
+					if(memDeleteD != undefined) memStatus = "2"
+						
+						selectHtml += '<select>';
+						console.log("memStatus 값:", memStatus);
+						if (memStatus === "0") {
+						    selectHtml += '<option value="No" selected>No</option>';
+						    selectHtml += '<option value="Yes">Yes</option>';
+						    selectHtml += '</select>';
+						} else if (memStatus === "1") {
+						    selectHtml += '<option value="No">No</option>';
+						    selectHtml += '<option value="Yes" selected>Yes</option>';
+						    selectHtml += '</select>';
+						} else {
+							selectHtml = ""
+						}
+						//selectHtml += '</select>';
+						console.log("생성된 select HTML:", selectHtml);
+					 
+					var memStopD = user.memStopD;
+					  
+					var newRow = $('<tr></tr>');
+					newRow.append($('<td></td>').text(memId));  
+					newRow.append($('<td></td>').text(memName));  
+					newRow.append($('<td></td>').text(memAddress));  
+					newRow.append($('<td></td>').text(memBirthD));  
+					newRow.append($('<td></td>').text(memJoinD));  
+					newRow.append($('<td></td>').text(memPhone));  
+					newRow.append($('<td></td>').text(memEmail));  
+					newRow.append($('<td></td>').html(selectHtml));  
+					newRow.append($('<td></td>').text(memStopD));  
+					newRow.append($('<td></td>').text(memDeleteD));  
+					$('#tbody').append(newRow);
 
         		  });
         	  },

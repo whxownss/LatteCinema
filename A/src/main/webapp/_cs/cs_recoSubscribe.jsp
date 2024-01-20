@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
-
+<c:if test="${sessionScope.sId == null}">
+   <c:redirect url="login.me" />
+</c:if>
 	<main id="main">
 			
 		<section class="category-section" id="">

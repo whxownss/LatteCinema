@@ -4,6 +4,7 @@
 <%@page import="com.itwillbs.domain.MemberDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -20,6 +21,9 @@
 
 <jsp:include page="../_common/header.jsp"></jsp:include>
 <main id="main">
+<c:if test="${sessionScope.sId == null}">
+   <c:redirect url="login.me" />
+</c:if>
   <section class="category-section">
     <div class="container has-lnb" data-aos="fade-up">
       <!-- 이곳에 코드작성 -->
@@ -82,7 +86,7 @@
 									<col style="width:90px;">
 <%-- 									<col style="width:90px;"> --%>
 <%-- 									<col style="width:90px;"> --%>
-									<col style="width:70px;">
+<%-- 									<col style="width:70px;"> --%>
 									<col style="width:70px;">
 									<col style="width:70px;">
 									<col style="width:75px;">
@@ -94,8 +98,8 @@
 										<th scope="col" class="text-center">상품명</th>
 <!-- 										<th scope="col" class="text-center">상영관</th> -->
 <!-- 										<th scope="col" class="text-center">관람인원</th> -->
-										<th scope="col" class="text-center">선물여부</th>
-										<th scope="col" class="text-center">수신자</th>
+<!-- 										<th scope="col" class="text-center">선물여부</th> -->
+										<th scope="col" class="text-center">선물 수신자</th>
 										<th scope="col" class="text-center">금액</th>
 										<th scope="col" class="text-center">환불</th>
 									</tr>
@@ -108,12 +112,12 @@
 										<td scope="row" class="text-center align-middle">${storePayDTO.name}</td>
 <%-- 										<td scope="row" class="text-center align-middle">${reservationDTO.cinema} ${reservationDTO.scrIdx }</td> --%>
 <%-- 										<td scope="row" class="text-center align-middle">성인${reservationDTO.p1}명 청소년${reservationDTO.p2}명 경로${reservationDTO.p3}명</td> --%>
-										<c:if test="${ empty storePayDTO.giftTel }">
-											<td scope="row" class="text-center align-middle">X</td>
-										</c:if>
-										<c:if test="${ !empty storePayDTO.giftTel }">
-											<td scope="row" class="text-center align-middle">O</td>
-										</c:if>
+<%-- 										<c:if test="${ empty storePayDTO.giftTel }"> --%>
+<!-- 											<td scope="row" class="text-center align-middle">X</td> -->
+<%-- 										</c:if> --%>
+<%-- 										<c:if test="${ !empty storePayDTO.giftTel }"> --%>
+<!-- 											<td scope="row" class="text-center align-middle">O</td> -->
+<%-- 										</c:if> --%>
 										<td scope="row" class="text-center align-middle">${storePayDTO.memName }</td>
 										<td scope="row" class="text-center align-middle">${storePayDTO.paidAmount}</td>
 										<c:if test="${ empty storePayDTO.giftTel }">

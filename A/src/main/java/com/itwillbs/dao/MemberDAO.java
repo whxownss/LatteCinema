@@ -60,7 +60,8 @@ public class MemberDAO {
 	// 회워탈퇴
 	public boolean deleteMember(MemberDTO memberDTO) {
 		SqlSession session = sqlSessionFactory.openSession();
-		int deleteResult = session.delete("Member.deleteMember", memberDTO);
+		//int deleteResult = session.delete("Member.deleteMember", memberDTO);
+		int deleteResult = session.update("Member.deleteMember", memberDTO);
 		session.commit();
 		session.close();
 		

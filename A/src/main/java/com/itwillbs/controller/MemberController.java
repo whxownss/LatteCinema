@@ -201,6 +201,7 @@ public class MemberController extends HttpServlet {
 			memberService = new MemberService();
 			MemberDTO memberDTO = memberService.userCheck(request);
 			
+			// 회원 정지
 			if(memberDTO != null && memberDTO.getMemStatus().equals("1")) {
 				String memStopD = memberDTO.getMemStopD();
 				System.out.println("정지된날: "+memStopD);
@@ -209,6 +210,21 @@ public class MemberController extends HttpServlet {
 				dispatcher.forward(request, response);
 				return;
 			}
+			
+			// 회원 탈퇴
+			if(memberDTO != null) {
+			    String memDeleteD = memberDTO.getMemDeleteD();
+			    if(memDeleteD != null) {
+			        System.out.println("탈퇴한날: " + memDeleteD);
+			        request.setAttribute("memDeleteD", memDeleteD);
+			        dispatcher = request.getRequestDispatcher("_member/msg3.jsp");
+			        dispatcher.forward(request, response);
+			        return;
+			    } else {
+			    	memDeleteD = "";
+			    }
+			}
+
 			//리턴받은 값이 null 아니면 => 아이디 비밀번호 일치
 			//리턴받은 값이 null 이면 => 아이디 비밀번호 틀림
 			if(memberDTO != null) {
