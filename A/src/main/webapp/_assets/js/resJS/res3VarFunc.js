@@ -50,7 +50,7 @@ function kakaoPay(useremail, username) {
              amount: 100, // 가격  parseInt($("#rsPrice").text().replace("," , ""))
              //구매자 정보 ↓
              buyer_email: `${useremail}`,
-             buyer_name: '조조태준'
+             buyer_name: "서비스 단에서 세션 이름 줄거임"
              // buyer_tel : '010-1234-5678',
              // buyer_addr : '서울특별시 강남구 삼성동',
              // buyer_postcode : '123-456'
@@ -83,15 +83,17 @@ function kakaoPay(useremail, username) {
 		
 				// 이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?	
 				rsp["pay_time"] = date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-				
-				// 결제 정보 db에 insert
+				// 결제 정보 db에 insert, 포인트 처리
 				$.ajax({
 					type: "GET",
 					url: "res3Pro.re",
-					data: {rsp: JSON.stringify(rsp)},
+					data: {rsp: JSON.stringify(rsp),
+						   point: (parseInt($("#accPoint").text().replace(",", "")) - parseInt($("#salePrice").text()) + "")
+					},
 					dataType: "text" 
 				})
 				.done(function(data){
+					
 					alert(data);
 					localStorage.setItem('rsp', JSON.stringify(rsp));
 	        		window.location = "res4.re";

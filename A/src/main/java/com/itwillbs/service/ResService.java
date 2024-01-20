@@ -1,5 +1,6 @@
 package com.itwillbs.service;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -47,6 +48,23 @@ public class ResService {
 		map.put("DATE", date);
 		List<ScheduleDTO> scheduleList = resDAO.selectSchedule(map);
 		
+		// 종료시간이 익일일 경우
+		for(ScheduleDTO sch : scheduleList) {
+			String t1 = sch.getSchStime();
+			String t2 = sch.getSchEtime();
+			
+			int hour = Integer.parseInt(t1.split(":")[0]);
+			int minute = Integer.parseInt(t1.split(":")[1]);
+			int hour2 = Integer.parseInt(t2.split(":")[0]);
+			int minute2 = Integer.parseInt(t2.split(":")[1]);
+			
+			LocalTime lt = LocalTime.of(hour, minute);
+			LocalTime lt2 = LocalTime.of(hour2, minute2);
+			
+			if(lt2.compareTo(lt) == -1) 
+				sch.setSchEtime("*" + sch.getSchEtime());
+		}
+		
 		Gson gson = new Gson();
 		String scheduleListJson = gson.toJson(scheduleList);
 		
@@ -78,12 +96,14 @@ public class ResService {
 		return movieListJson;
 	}
 
-	public String setResInfo(String rsp) {
+	public String setResInfo(String rsp, String sId, String sName) {
 		resDAO = new ResDAO();
 		
 //		Gson gson = new Gson();
 		Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 		ReservationDTO reservationDTO = gson.fromJson(rsp, ReservationDTO.class);
+		reservationDTO.setMemId(sId);
+		reservationDTO.setBuyerName(sName);
 		System.out.println("@@@@@@@@@@@@@@@");
 		System.out.println(rsp);
 		System.out.println(reservationDTO);
@@ -126,10 +146,11 @@ public class ResService {
 		return resDAO.isSameSeat(seatDTO);
 	}
 
-	public String setSeatInfo(String schDTO) {
+	public String setSeatInfo(String schDTO, String sId) {
 		resDAO = new ResDAO();
 		Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 		SeatDTO seatDTO = gson.fromJson(schDTO, SeatDTO.class);
+		seatDTO.setMemId(sId);
 		 
 		return resDAO.setSeatInfo(seatDTO);
 	}
@@ -184,5 +205,6 @@ public class ResService {
 		
 		return resDAO.getAllSchedules();
 	}
+
 
 }

@@ -8,8 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.itwillbs.domain.LocationDTO;
+import com.itwillbs.service.MemberService;
 import com.itwillbs.service.ResService;
 import com.itwillbs.utill.Pay;
 import com.itwillbs.utill.Token;
@@ -61,6 +63,8 @@ public class ResController extends HttpServlet {
 			String param = request.getParameter("param");
 			String date = request.getParameter("date");
 			String scheduleListJson = resService.getSchedules(cinema, param, date);
+			
+			System.out.println(scheduleListJson);
 			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("utf-8");
@@ -125,7 +129,9 @@ public class ResController extends HttpServlet {
 		if(sPath.equals("/res2ProIS.re")) {
 			resService = new ResService();
 			String schDTO = request.getParameter("schDTO");
-			String result = resService.setSeatInfo(schDTO);
+			HttpSession session = request.getSession();
+			String sId = (String)session.getAttribute("sId");
+			String result = resService.setSeatInfo(schDTO, sId);
 			
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(result);
@@ -133,7 +139,9 @@ public class ResController extends HttpServlet {
 		// SEAT테이블에 내 자리가 결제 내역에 없을 때 delete
 		if(sPath.equals("/res2ProRS.re")) {
 			resService = new ResService();
-			String memId = request.getParameter("memId");
+//			String memId = request.getParameter("memId");
+			HttpSession session = request.getSession();
+			String memId = (String)session.getAttribute("sId");
 			
 			System.out.println("=123=1231=23");
 			System.out.println(memId);
@@ -148,16 +156,34 @@ public class ResController extends HttpServlet {
 		// 예약3 페이지 이동
 		if(sPath.equals("/res3.re")) {
 			resService = new ResService();
-			resService.startPayTimer();	
+			resService.startPayTimer();
+			
+			// 회원 포인트 가져오기 위해
+			HttpSession session = request.getSession();
+			MemberService memberService = new MemberService();
+			String memPoint = memberService.getMemPoint((String)session.getAttribute("sId"));
+			
+			request.setAttribute("memPoint", memPoint);
 			
 			dispatcher = request.getRequestDispatcher("_reservation/res3.jsp");
 			dispatcher.forward(request, response);
 		}
-		// 결제정보 저장
+		// 결제정보 저장, 포인트처리
 		if(sPath.equals("/res3Pro.re")) {
 			String rsp = request.getParameter("rsp");
 			resService = new ResService();
-			String msg = resService.setResInfo(rsp);
+			HttpSession session = request.getSession();
+			String sId = (String)session.getAttribute("sId");
+			String sName = (String)session.getAttribute("sName");
+			String msg = resService.setResInfo(rsp, sId, sName);
+			
+			// 포인트
+			MemberService memberService = new MemberService();
+			System.out.println("1231231323");
+			System.out.println(request.getParameter("point"));
+			System.out.println("1231231323");
+			memberService.setPoint(sId, request.getParameter("point"));
+			
 			
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(msg);

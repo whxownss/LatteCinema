@@ -132,6 +132,7 @@ public class StorePayDTO {
 				+ merchantUid + ", itemCnt=" + itemCnt + ", name=" + name + ", giftMsg=" + giftMsg + ", giftTel="
 				+ giftTel + ", payTime=" + payTime + ", memName=" + memName + "]";
 	}
+	
 		
 	
 }

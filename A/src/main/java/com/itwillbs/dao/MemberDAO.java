@@ -221,6 +221,20 @@ public class MemberDAO {
 		return resRefundList;
 	}//getResRefundList()
 
+	public String getMemPoint(String sId) {
+		SqlSession session = sqlSessionFactory.openSession();
+		String memPoint = session.selectOne("Member.getMemPoint", sId);
+        session.close();
+        return memPoint;
+	}
+
+	public void setPoint(MemberDTO memberDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		session.update("Member.setPoint", memberDTO);
+		session.commit();
+		session.close();
+	}
+
 	
 }
 
