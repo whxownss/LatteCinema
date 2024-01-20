@@ -45,7 +45,11 @@ function checkPhone() {
 var IMP = window.IMP;
 
 // 포트원 api
-  function requestPay(param) {
+  function requestPay(sId, param) {
+	
+	if(sId == null || sId == ''){
+		location.href="login.me";
+	}
 	
 	// 선물하기 모달창 전화번호 없이 결제불가
 	var checkPhone = document.getElementById('checkPhone');
@@ -53,12 +57,6 @@ var IMP = window.IMP;
 		alert('휴대폰 번호를 확인해주세요.');
 		return;
 	}
-	
-// 	// 로그인 체크
-//       if (!isLogin) {
-//           alert("로그인 후 이용할 수 있습니다.");
-//           return;
-//       }
 	
 	//주문번호 만들기
 	const make_merchant_uid = () => {
