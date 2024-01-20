@@ -52,6 +52,8 @@ var IMP = window.IMP;
 		return;
 	}
 	
+	debugger;
+	
 	// 선물하기 모달창 전화번호 없이 결제불가
 	var checkPhone = document.getElementById('checkPhone');
 	if(param == 'gift' && (checkPhone.style.color == 'red' || $("#checkPhone").text() == '')){
