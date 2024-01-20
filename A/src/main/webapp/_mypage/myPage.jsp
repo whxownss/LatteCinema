@@ -78,14 +78,12 @@
 			                      		<td scope="row" class="text-center align-middle">${storeGiftList.itemCnt }</td>
 			                      		<td scope="row" class="text-center align-middle">${storeGiftList.payTime }</td>
 			                      		<td scope="row" class="text-center align-middle">
-											<div class="dropdown">
-											  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-											    메시지보기
-											  </button>
-											  <ul class="dropdown-menu">
-											    <li><p class="dropdown-item text-center"> ${storeGiftList.giftMsg }</p></li>
-											  </ul>
-											</div>  
+										  <button type="button" class="btn btn-primary" id="liveToastBtn">
+										    메시지보기
+										  </button>
+											
+											
+<%-- 											 ${storeGiftList.giftMsg } --%>
 			                      		</td>
 			                      	</tr>
 			                      </c:forEach>
