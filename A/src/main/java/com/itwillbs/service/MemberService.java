@@ -453,7 +453,17 @@ public class MemberService {
 		return memberDAO.getPointList(sId);
 	}
 
-
+	public ArrayList<StorePayDTO> getStoreRefundList(String memId) {
+		System.out.println("MemberService getStoreRefundList()");
+		ArrayList<StorePayDTO> storeRefundList = null;
+		try {
+			MemberDAO memberDAO = new MemberDAO();
+			storeRefundList = memberDAO.getStoreRefundList(memId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return storeRefundList;
+	}
 
 
 //	public MemberDTO kakaoCheck(HttpServletRequest request) {

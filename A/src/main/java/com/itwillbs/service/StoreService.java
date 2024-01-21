@@ -59,10 +59,12 @@ public class StoreService {
 		return result; 
 	}//
 
-	public String buyerInfo(String rsp) {
+	public String buyerInfo(String rsp, String sId, String sName) {
 		storeDAO = new StoreDAO();
 		Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 		StorePayDTO storePayDTO = gson.fromJson(rsp, StorePayDTO.class);
+		storePayDTO.setMemId(sId);
+		storePayDTO.setBuyerName(sName);
 		
 		return storeDAO.buyerInfo(storePayDTO);
 	}//
@@ -134,6 +136,12 @@ new MultipartRequest(request, uploadPath, maxSize, "utf-8", new DefaultFileRenam
 			e.printStackTrace();
 		}
 		return storeGift;
+	}
+
+	public String refund(String mid) {
+		storeDAO = new StoreDAO();
+		
+		return storeDAO.refund(mid);
 	}
 	
 }//StoreService
