@@ -6,7 +6,7 @@
   <jsp:include page="../_common/meta.jsp"></jsp:include>
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <jsp:include page="../_common/header.jsp"></jsp:include>
 <c:if test="${sessionScope.sId == null }">
 <c:redirect url="main.me"/>

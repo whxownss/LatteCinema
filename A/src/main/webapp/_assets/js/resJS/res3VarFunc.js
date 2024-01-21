@@ -12,10 +12,8 @@ var today = new Date();
 var hours = today.getHours();
 var minutes = today.getMinutes();
 var seconds = today.getSeconds();
-var milliseconds = today.getMilliseconds();
-// var makeMerchantUid = `${hours}` + `${minutes}` + `${seconds}` + `${milliseconds}`;        이거 왜 안 먹지?
+var milliseconds = String(today.getMilliseconds()).slice(0, 1);
 var makeMerchantUid = "" + hours + minutes + seconds + milliseconds;
-
 
 function kakaoPay(useremail, username) {
 	var isTimeOver = false;
