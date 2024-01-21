@@ -127,6 +127,7 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
           
             <div class="page-title">
               <div class="title_left">
+              	<h3>회원 관리</h3>
               </div>
             </div>
 
@@ -135,7 +136,7 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Member Management</h2>
+                    <h2>회원 목록</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>

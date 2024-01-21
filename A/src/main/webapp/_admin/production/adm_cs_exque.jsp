@@ -136,6 +136,13 @@ ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribu
         <div class="right_col" role="main">
           <div class="">
           	<!-- 임시  -->
+          	<!-- //임시  -->          	
+            <div class="page-title">
+              <div class="title_left">
+              	<h3>자주찾는질문</h3>
+              </div>
+            </div>
+            
 			<div class="container">
 			  <!-- Modal -->
 			 <form action="cs_exqueUpdate.cs" method="get" name="frChange"> 
@@ -224,18 +231,14 @@ ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribu
 			  
 			</div>
 		</form>
-          	<!-- //임시  -->          	
-            <div class="page-title">
-              <div class="title_left">
-              </div>
-            </div>
-
+          	
+<!-- 			//  !@#!@ -->
             <div class="clearfix"></div>
 
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>자주 찾는 질문<small><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal2">추가</button></small></h2>
+                    <h2>글 목록<small><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal2">추가</button></small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>

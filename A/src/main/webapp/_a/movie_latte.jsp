@@ -4,9 +4,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@include file ="../_common/commonHeaderStart.jsp" %>>
+<%@include file ="../_common/commonHeaderStart.jsp" %>
   <link rel="stylesheet" href="_assets/css/hover.css">
-  
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 <main id="main">

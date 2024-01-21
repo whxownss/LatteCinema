@@ -127,6 +127,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
           
             <div class="page-title">
               <div class="title_left">
+              	<h3>공지사항</h3>
               </div>
             </div>
 						  <!-- Modal -->
@@ -171,7 +172,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>공지사항<small><button type="button" class="btn btn-secondary" id="insertCenterBoard">추가</button></small></h2>
+                    <h2>글 목록<small><button type="button" class="btn btn-secondary" id="insertCenterBoard">추가</button></small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
