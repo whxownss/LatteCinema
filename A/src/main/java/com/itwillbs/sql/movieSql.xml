@@ -31,8 +31,9 @@
 			  	SELECT *
 		   		  FROM (SELECT IFNULL(MAX(CAST(MOVIE_IDX as unsigned)), 0) + 1
 				   		  FROM MOVIE
-				   		  WHERE MOVIE_CATEGORY = #{movieCategory}) M
-				   		  )	
+				   		 WHERE MOVIE_CATEGORY = #{movieCategory}) M
+			  )	
+
 			, #{movieCode}
 		  	, #{title}
 		  	, #{actor}

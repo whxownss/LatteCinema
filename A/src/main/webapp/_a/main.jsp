@@ -15,36 +15,8 @@
 <%
 ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.getAttribute("centerBoardList");
 %>	
-	    
-    
-
-    <!-- ======= Culture Category Section ======= -->
-    <  <!-- ======= Culture Category Section ======= -->
- <%--  <section class="category-section">
-    <div class="container" data-aos="fade-up">
-
-      <div class="section-header d-flex justify-content-between align-items-center mb-5">
-        <h3>1월의 라떼..</h3>
-      </div>
-
-		<div class="row g-5">
-		  <c:forEach var="movie" items="${lattePosterList}" varStatus="status">
-		    <div class="col-lg">
-		      <div class="post-entry-1 lg">
-		        <div class="item position-relative" id="wrap">
-		          <!-- 각 영화의 포스터 이미지를 동적으로 출력 -->
-		          <img src="<c:out value="${movie.poster}" />" style="width: 100%;">
-		          <div class="titlee">
-		            <a href="#" class="moree">예매하기</a>
-		            <a href="#" class="moree">상세정보</a>
-		          </div>
-		        </div>
-		      </div>
-		    </div>
-		  </c:forEach>
-		
-		
-		     --%>
+	
+		 
 	 <section class="category-section">
 	  <div class="container" data-aos="fade-up">		     
 		<div class="section-header d-flex justify-content-between align-items-center mb-5">
@@ -84,10 +56,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
 			<div class="owl-carousel owl-theme">
 				<c:forEach var="movie" items="${posterNowList}" varStatus="status">
 		        <div class="item position-relative" id="wrap">
-		          <img src="<c:out value="${movie.poster}" />"> 
-		          <!-- <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">1</em> -->
-		          <!-- 순위 매일 변동인데, 매일 뿌릴 방법이 없음 -->
-		          <!-- 라떼시네마 자체 누적 관객수로 랭킹 만드는게 차라리 나아보임 -->
+		          <img src="<c:out value="${movie.poster}" />" >
 					<div class="titleee">
 						<a href="" class="moree">예매하기</a>
 						<a href="${pageContext.servletContext.contextPath}/movie_view.mo?movieCode=${movie.movieCode}" class="moree">상세정보</a>

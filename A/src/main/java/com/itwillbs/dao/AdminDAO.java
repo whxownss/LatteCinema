@@ -1,8 +1,11 @@
 package com.itwillbs.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ScheduleDTO;
 import com.itwillbs.sql.SqlMapClient;
 
@@ -23,6 +26,14 @@ public class AdminDAO {
 		session.close();
 		
 		return deleteCnt > 0 ? "true" : "false";
+	}
+
+	public List<CinemaDTO> getAllCinema() {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<CinemaDTO> cinemaList = session.selectList("Cinema.selectAllCinema");
+		session.close();
+		
+		return cinemaList;
 	}
 
 }
