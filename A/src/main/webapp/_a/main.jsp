@@ -6,12 +6,8 @@
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 	<link rel="stylesheet" href="_assets/css/hover.css">
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
-
-
   <main id="main">
-
     <%@include file="../_common/commonMovieSlide.jsp"%>
-	
 <%
 ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.getAttribute("centerBoardList");
 %>	
@@ -85,12 +81,12 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
 				<c:forEach var="movie" items="${posterNowList}" varStatus="status">
 		        <div class="item position-relative" id="wrap">
 		          <img src="<c:out value="${movie.poster}" />" >
-<%-- 		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">${status.index + 1}</em>  --%>
+		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">${status.index + 1}</em> 
 		          <!-- <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">1</em> -->
 		          <!-- 순위 매일 변동인데, 매일 뿌릴 방법이 없음 -->
 		          <!-- 라떼시네마 자체 누적 관객수로 랭킹 만드는게 차라리 나아보임 -->
 					<div class="titleee">
-						<a href="" class="moree">예매하기</a>
+						<a href="${pageContext.servletContext.contextPath}/res1.re?movieCode=${movie.movieCode}" class="moree">예매하기</a>
 						<a href="${pageContext.servletContext.contextPath}/movie_view.mo?movieCode=${movie.movieCode}" class="moree">상세정보</a>
 					</div>
 		        </div>
