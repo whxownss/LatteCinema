@@ -3,12 +3,14 @@
 <%@page import="com.itwillbs.domain.PageDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <jsp:include page="../_common/meta.jsp"></jsp:include>
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
   <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">  
 </head>
 <body>
  <jsp:include page="../_common/header.jsp"></jsp:include>
@@ -17,6 +19,9 @@
    int count3 = 1;
  %>
 	<main id="main">
+<c:if test="${sessionScope.sId == null}">
+   <c:redirect url="login.me" />
+</c:if>	
 		<section class="category-section">
 			<div class="container has-lnb" data-aos="fade-up">
         <div class="inner-wrap">
@@ -52,6 +57,35 @@
                       </div>
                     </div>
             
+            		<div class="myInq">
+                      <div class="tit-util mt70">
+                        <h2 class="tit small"><b>적립내역</b></h2>
+                      </div>
+                      <div class="brd-list">
+                      <div class="table-relative mt10">
+							<table class="table table-bordered border-Info" id="pointTable">
+								<thead>
+									<tr>
+										<th scope="col" class="text-center">날짜</th>
+										<th scope="col" class="text-center">적립</th>
+										<th scope="col" class="text-center">사용</th>
+										<th scope="col" class="text-center">내용</th>
+									</tr>
+								</thead>
+								<tbody>
+			                      	<tr>
+			                      		<td scope="row" class="text-center align-middle">날짜들어갈곳</td>
+			                      		<td scope="row" class="text-center align-middle">적립금</td>
+			                      		<td scope="row" class="text-center align-middle">사용적립금</td>
+			                      		<td scope="row" class="text-center align-middle">내용이들어갈곳</td>
+			                      	</tr>
+								</tbody>
+							</table>
+		
+						</div>
+                      </div>
+                    </div>
+            		
                     <div class="myInq">
                       <div class="tit-util mt70">
                         <h2 class="tit small"><b>선물내역</b></h2>
@@ -135,4 +169,13 @@
 		</section>
 	</main>
 <%@include file ="../_common/commonFooterStart.jsp" %>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#pointTable').DataTable({
+		pagingType: 'full_numbers'
+	});
+});//document ready
+</script>
 <%@include file ="../_common/commonFooterEnd.jsp" %>
