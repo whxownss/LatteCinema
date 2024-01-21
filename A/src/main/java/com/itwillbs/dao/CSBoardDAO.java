@@ -805,6 +805,7 @@ public class CSBoardDAO {
 		try {
 			session = sqlSessionFactory.openSession();
 			deleteSuccess = session.delete("CsAdmin.deleteRecoData", recommendIdx);
+			session.delete("CsAdmin.deleteRecoDupli", recommendIdx);
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

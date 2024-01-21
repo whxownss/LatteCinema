@@ -530,6 +530,10 @@
 		DELETE FROM RECOMMENDBOARD
  		 WHERE RECOMMENDIDX = #{recommendIdx}
 	</delete>
+	<delete id="deleteRecoDupli" parameterType="int">
+		DELETE FROM RECODUPLICHK2
+ 		 WHERE RECOMMENDIDX = #{recommendIdx}
+	</delete>
 	<select id="getRecoBoardCount" resultType="int">
 		SELECT COUNT(*) 
 		  FROM RECOMMENDBOARD
