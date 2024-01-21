@@ -78,12 +78,14 @@
 			                      		<td scope="row" class="text-center align-middle">${storeGiftList.itemCnt }</td>
 			                      		<td scope="row" class="text-center align-middle">${storeGiftList.payTime }</td>
 			                      		<td scope="row" class="text-center align-middle">
-										  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+										  <button button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
 										    메시지보기
 										  </button>
-										  <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+										  
+										  <!-- 오프캔버스 -->
+										  <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
 											  <div class="offcanvas-header">
-											    <h2 class="offcanvas-title" id="offcanvasScrollingLabel">받은 메시지</h2>
+											    <h1 class="offcanvas-title" id="offcanvasScrollingLabel">받은 메시지</h1>
 											    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 											  </div>
 											  <div class="offcanvas-body">
@@ -91,8 +93,6 @@
 											  </div>
 											</div>
 											
-											
-<%-- 											 ${storeGiftList.giftMsg } --%>
 			                      		</td>
 			                      	</tr>
 			                      </c:forEach>
