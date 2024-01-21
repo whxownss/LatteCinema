@@ -25,7 +25,18 @@
 		   AND C.CI_OC = "Y"
 	</select>	
 	
-	
+	<select id="selectAllCinema" resultType="CinemaDTO">
+		SELECT L.LO_IDX
+			 , CI_IDX
+			 , CI_NAME
+			 , CI_OC
+			 , CI_ADDR
+			 , CI_S_NUM
+			 , LO_NAME
+  		  FROM CINEMA C
+  		  JOIN LOCATION L
+    		ON L.LO_IDX = C.LO_IDX
+	</select>
 	
 	
 	

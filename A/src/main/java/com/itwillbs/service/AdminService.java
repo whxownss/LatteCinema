@@ -1,8 +1,12 @@
 package com.itwillbs.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.gson.Gson;
 import com.itwillbs.dao.AdminDAO;
+import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ScheduleDTO;
 
 public class AdminService {
@@ -46,6 +50,12 @@ public class AdminService {
 		System.out.println("==================");
 		AdminDAO adminDAO = new AdminDAO();
 		return adminDAO.deleteSchedule(scheduleDTO);
+	}
+
+	public List<CinemaDTO> getAllCinema() {
+		AdminDAO adminDAO = new AdminDAO();
+		
+		return  adminDAO.getAllCinema();
 	}
 
 }

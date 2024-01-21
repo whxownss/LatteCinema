@@ -15,6 +15,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
+import com.itwillbs.domain.PointDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.domain.StorePayDTO;
@@ -28,6 +29,7 @@ public class MemberDAO {
 	public boolean insertMember(MemberDTO memberDTO) {
 		SqlSession session = sqlSessionFactory.openSession();
 		int insertResult = session.insert("Member.insertMember", memberDTO); // namespace.id
+		session.insert("Member.joinPoint", memberDTO.getMemId());
 		session.commit();
 		session.close();
 		return insertResult > 0 ? true : false;
@@ -231,6 +233,25 @@ public class MemberDAO {
 	public void setPoint(MemberDTO memberDTO) {
 		SqlSession session = sqlSessionFactory.openSession();
 		session.update("Member.setPoint", memberDTO);
+		session.commit();
+		session.close();
+	}
+
+	public List<PointDTO> getPointList(String sId) {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<PointDTO> pointList = session.selectList("Member.getPointList", sId);
+		session.close();
+		
+		return pointList;
+	}
+
+	public void setPointInfo(PointDTO pointDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		System.out.println("dao()");
+		System.out.println(pointDTO.getPointMinus());
+		System.out.println(pointDTO.getPointPlus());
+		System.out.println("dao()");
+		session.insert("Member.setPointInfo", pointDTO);
 		session.commit();
 		session.close();
 	}
