@@ -173,6 +173,7 @@ window.addEventListener('load', function () {
 	});
 });
 
+//0d672c167b969825c42ff0ebb3f3631d
 
 // 카카오로그인 api
 Kakao.init('44bd94c9c9fc31fcac5bd17dd86e5cba'); // 여기에 애플리케이션에서 발급받은 키를 넣어주세요.
