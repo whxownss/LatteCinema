@@ -130,7 +130,7 @@ window.addEventListener('load', function () {
 	naverLogin.getLoginStatus(function(status) {
 		if (status) {
 			debugger;
-			var naverid = naverLogin.user.getId();
+//			var naverid = naverLogin.user.getId();
 			var naveremail = naverLogin.user.getEmail();
 			var navername = naverLogin.user.getName();
 			var naverday = naverLogin.user.getBirthday().replaceAll("-","").trim();
