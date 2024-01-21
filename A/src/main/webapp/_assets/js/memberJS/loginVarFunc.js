@@ -186,7 +186,7 @@ console.log(Kakao.isInitialized()); // sdk초기화여부판단
                     success: function (response) {
 //                         alert(JSON.stringify(response))
                         console.log(response)
-                        var kakaoid = response.id;
+//                        var kakaoid = response.id;
 						var kakaoemail = response.kakao_account.email;
                         var kakaoname = response.kakao_account.name;
                         var kakaobirthyear = response.kakao_account.birthyear;
