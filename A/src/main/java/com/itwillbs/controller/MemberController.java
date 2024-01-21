@@ -98,7 +98,6 @@ public class MemberController extends HttpServlet {
 			request.setAttribute("moviePoster", posterList.get(moviePosterNum).getPoster());
 			request.setAttribute("movieCode", posterList.get(moviePosterNum).getMovieCode());
 			System.out.println(posterList.get(moviePosterNum).getMovieCode());
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@");
 //			System.out.println(posterList.get(1).getPoster());
 //			System.out.println(posterList.get(2));
 //			System.out.println(posterList.get(3));
