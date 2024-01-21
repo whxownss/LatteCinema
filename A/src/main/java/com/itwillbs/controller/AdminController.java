@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.itwillbs.domain.CenterBoardDTO;
+import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ExqBoardDTO;
 import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.LostBoardDTO;
@@ -271,7 +272,7 @@ public class AdminController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}	
 		
-		// 관리자 영화관 관리 페이지 이동
+		// 관리자 스케줄 관리 페이지 이동
 		if(sPath.equals("/adm_cinema.ad")) {
 			ResService resService = new ResService();
 			MovieService movieServie = new MovieService();
@@ -310,6 +311,18 @@ public class AdminController extends HttpServlet {
 			
 			response.setCharacterEncoding("utf-8");
 		    response.getWriter().write(result);
-		}		
+		}	
+		
+		
+		// 관리자 영화관 관리 페이지 이동
+		if(sPath.equals("/adm_location.ad")) {
+			AdminService adminService = new AdminService();
+			List<CinemaDTO> cinemaList = adminService.getAllCinema();
+			
+			request.setAttribute("cinemaList", cinemaList);
+			
+			dispatcher = request.getRequestDispatcher("_admin/production/adm_location.jsp");
+			dispatcher.forward(request, response);
+		}
 	}//doProcess()	
 }//클래스 끝

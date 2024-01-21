@@ -63,6 +63,8 @@ $(function(){
 		var nTmp = parseInt($("#nowPoint").text().replace(/[^\d]+/g, ""));
 
 		$("#resultPoint").text("포인트를 다시 입력해주세요.");
+		$("#salePrice").text("0");
+		$("#rsPrice").text($("#sumPrice").text());
 		
 		if(isNaN(iTmp)) iTmp = 0;
 		

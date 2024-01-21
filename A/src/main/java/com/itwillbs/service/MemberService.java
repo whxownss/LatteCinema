@@ -4,14 +4,19 @@ import java.nio.file.spi.FileSystemProvider;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.itwillbs.dao.CSBoardDAO;
 import com.itwillbs.dao.MemberDAO;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
+import com.itwillbs.domain.PointDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.domain.StorePayDTO;
@@ -414,13 +419,34 @@ public class MemberService {
 	}
 
 	// 예약3 결제하고 포인트 적립
-	public void setPoint(String sId, String point) {
+	public void setPoint(String rsp, String sId, HttpServletRequest request) {
 		memberDAO = new MemberDAO();
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setMemId(sId);
-		memberDTO.setMemPoint(point);
+		int minusPoint = Integer.parseInt(request.getParameter("minusPoint"));
+		int plusPoint = Integer.parseInt(request.getParameter("plusPoint"));
+		memberDTO.setMemPoint((plusPoint - minusPoint) + "");
 		memberDAO.setPoint(memberDTO);
+
+		System.out.println("service()");
+		System.out.println(minusPoint);
+		System.out.println(plusPoint);
+		System.out.println("service()");
+		// 포인트 테이블
+		Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+		ReservationDTO reservationDTO = gson.fromJson(rsp, ReservationDTO.class);
+		PointDTO pointDTO = new PointDTO();
+		pointDTO.setMemId(sId);
+		pointDTO.setPointMinus(minusPoint + "");
+		pointDTO.setPointPlus(plusPoint + "");
+		pointDTO.setMerchantUid(reservationDTO.getMerchantUid());
+		System.out.println("service()");
+		System.out.println(pointDTO.getPointMinus());
+		System.out.println(pointDTO.getPointPlus());
+		System.out.println("service()");
+		memberDAO.setPointInfo(pointDTO);
 	}
+
 
 	// 회원가입 연락처 중복체크
 	public int checkPhone(HttpServletRequest request) {
@@ -443,6 +469,14 @@ public class MemberService {
 		
 		return result;
 	}
+
+	public List<PointDTO> getPointList(String sId) {
+		memberDAO = new MemberDAO();
+		
+		return memberDAO.getPointList(sId);
+	}
+
+
 
 
 

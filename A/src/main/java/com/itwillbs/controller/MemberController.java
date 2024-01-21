@@ -2,6 +2,7 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +26,7 @@ import com.itwillbs.domain.MovieDTO;
 import com.itwillbs.email.SendGmail;
 import com.itwillbs.email.EmailCode;
 import com.itwillbs.domain.PageDTO;
+import com.itwillbs.domain.PointDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.domain.StorePayDTO;
@@ -351,8 +353,15 @@ public class MemberController extends HttpServlet {
 			System.out.println(sId);
 			
 			ArrayList<StorePayDTO> storeGiftList = storeService.getstoreGiftList(sId);
-			
 			request.setAttribute("storeGiftList",storeGiftList);
+			
+			memberService = new MemberService();
+			List<PointDTO> pointList = memberService.getPointList(sId);
+			request.setAttribute("pointList",pointList);
+			
+			String memPoint =  memberService.getMemPoint(sId);
+			request.setAttribute("memPoint",memPoint);
+			
 			
 			dispatcher = request.getRequestDispatcher("_mypage/myPage.jsp");
 			dispatcher.forward(request, response);

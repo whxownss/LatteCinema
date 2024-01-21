@@ -45,7 +45,8 @@
 		 	 , MEM_JOIN_D
 		 	 , MEM_EMAIL  
 		 	 , MEM_BIRTH_D
-		 	 , MEM_ADDRESS)
+		 	 , MEM_ADDRESS
+		 	 , MEM_POINT)
 		VALUES (
 				(SELECT *
 				  FROM (SELECT IFNULL(MAX(CAST(MEM_IDX as unsigned)), 0) + 1
@@ -57,7 +58,8 @@
 			 , #{memJoinD}
 			 , #{memEmail}
 			 , #{memBirthD}
-			 , #{memAddress})
+			 , #{memAddress}
+			 , 3000)
 	</insert>
 	
 <!-- 	회원가입 아이디 중복확인 -->
@@ -210,4 +212,106 @@
 		   SET MEM_POINT = CAST(MEM_POINT AS UNSIGNED) + CAST(#{memPoint} AS SIGNED)
 		 WHERE MEM_ID = #{memId}
 	</update>
+	
+	
+	<!-- 	회원가입시 포인트 적립 -->
+	<insert id="joinPoint" parameterType="String">
+		INSERT
+		  INTO POINT
+		  	 ( 
+		  	   MEM_ID
+		  	 , POINT_PLUS
+		  	 , POINT_DETAIL
+		  	 , POINT_DATE
+		  	 )
+		VALUES
+			 (
+			   #{value}
+			 , 3000
+			 , "회원가입 축하 지급"	
+			 , NOW()
+			 ) 
+	</insert>
+	
+	<select id="getPointList" parameterType="String" resultType="PointDTO">
+		SELECT MEM_ID
+			 , POINT_PLUS
+			 , POINT_MINUS
+			 , POINT_DETAIL
+			 , POINT_DATE
+		  FROM POINT
+		 WHERE 1 = 1
+		   AND MEM_ID = #{value}
+	</select>
+	
+	<insert id="setPointInfo" parameterType="PointDTO">
+		INSERT
+		  INTO POINT
+		     (
+		       MEM_ID
+		     , POINT_PLUS
+		     , POINT_MINUS
+		     , POINT_DETAIL
+		     , MERCHANT_UID
+		     , POINT_DATE
+		     )
+		VALUES
+		<if test='!pointPlus.equals("0")' >
+			 ( 
+			   #{memId}
+			 , #{pointPlus}
+			 , NULL
+			<if test='pointDetail != null and pointDetail.equals("환불")'>
+			 , #{pointDetail}
+			</if>
+			<if test='pointDetail == null || !pointDetail.equals("환불")'>
+			 , '영화 예매'
+			</if>
+		     , #{merchantUid}
+			 , NOW()
+			 )
+		</if>
+		<if test='!pointPlus.equals("0") and !pointMinus.equals("0")'>
+			,
+		</if>	 
+		<if test='!pointMinus.equals("0")' >
+			( 
+			   #{memId}
+			 , NULL
+			 , #{pointMinus}
+			<if test='pointDetail != null and pointDetail.equals("환불")'>
+			 , #{pointDetail}
+			</if>
+			<if test='pointDetail == null || !pointDetail.equals("환불")'>
+			 , '영화 예매'
+			</if>
+		     , #{merchantUid}
+			 , NOW()
+			 )
+		</if>
+	</insert>
+	
+	
+	<select id="selectPointPlus" parameterType="String" resultType="String">
+		SELECT POINT_PLUS
+		  FROM POINT
+		 WHERE 1 = 1 
+		   AND MERCHANT_UID = #{mid}
+		   AND POINT_PLUS IS NOT NULL
+		   
+	</select>
+	<select id="selectPointMinus" parameterType="String" resultType="String">
+		SELECT IFNULL(POINT_MINUS, '0')  -- IFNULL 필요없긴함
+		  FROM POINT
+		 WHERE 1 = 1 
+		   AND MERCHANT_UID = #{mid}
+		   AND POINT_MINUS IS NOT NULL
+	</select>
+	
+	
+	
+	
+	
+	
+	
 </mapper>
