@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="com.itwillbs.domain.PointDTO"%>
 <%@page import="com.itwillbs.domain.StorePayDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.itwillbs.domain.PageDTO"%>
@@ -12,7 +14,7 @@
   <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">  
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
  <jsp:include page="../_common/header.jsp"></jsp:include>
  <% int count1 = 1;
    int count2 = 1;
@@ -42,6 +44,7 @@
                     ArrayList<StorePayDTO> storeGiftList = 
             			(ArrayList<StorePayDTO>)request.getAttribute("storeGiftList");
 					PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
+					List<PointDTO> pointList = (List<PointDTO>)request.getAttribute("pointList");
 					%>
                     
                     <!-- column -->
@@ -59,7 +62,7 @@
             
             		<div class="myInq">
                       <div class="tit-util mt70">
-                        <h2 class="tit small"><b>적립내역</b></h2>
+                        <h2 class="tit small"><b>포인트</b> (보유 포인트&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;${requestScope.memPoint}p)</h2>
                       </div>
                       <div class="brd-list">
                       <div class="table-relative mt10">
@@ -73,12 +76,14 @@
 									</tr>
 								</thead>
 								<tbody>
-			                      	<tr>
-			                      		<td scope="row" class="text-center align-middle">날짜들어갈곳</td>
-			                      		<td scope="row" class="text-center align-middle">적립금</td>
-			                      		<td scope="row" class="text-center align-middle">사용적립금</td>
-			                      		<td scope="row" class="text-center align-middle">내용이들어갈곳</td>
-			                      	</tr>
+			                      	<c:forEach var="point" items="${pointList}">
+			                      		<tr>
+				                      		<td scope="row" class="text-center align-middle">${point.pointDate}</td>
+				                      		<td scope="row" class="text-center align-middle"><c:if test="${point.pointPlus != null}">+</c:if>${point.pointPlus}</td>
+				                      		<td scope="row" class="text-center align-middle"><c:if test="${point.pointMinus != null}">-</c:if>${point.pointMinus}</td>
+				                      		<td scope="row" class="text-center align-middle">${point.pointDetail}</td>
+			                      		</tr>
+			                      	</c:forEach>
 								</tbody>
 							</table>
 		

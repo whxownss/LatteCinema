@@ -127,7 +127,8 @@
 <!--                     </ul> -->
                   </li>
                   
-                   <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
+				   <li><a href="adm_location.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
+                   <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>스케줄 관리</a></li>
                  
                 </ul>
               </div>
@@ -199,17 +200,17 @@
           </div>
         </div>
 
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-            </nav>
-          </div>
+       <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle" style="padding-top: 8px; padding-bottom: 8px">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+          </nav>
         </div>
-        <!-- /top navigation -->
+      </div>
+      <!-- /top navigation -->
 
         <!-- page content -->
         <div class="right_col" role="main">

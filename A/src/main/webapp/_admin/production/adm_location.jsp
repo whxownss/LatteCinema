@@ -36,6 +36,7 @@
 <c:if test="${sessionScope.sId == null || ! fn:startsWith(sessionScope.sId, 'admin')}">
 	<c:redirect url="login.me" />
 </c:if>
+<c:set var="cinemaList" value="${requestScope.cinemaList}" />
 
 	<div class="container body">
 		<div class="main_container">
@@ -73,6 +74,7 @@
 								<li><a href="adm_member.ad"><i class="fa fa-user"></i>회원관리</a></li>
 								<li><a href="adm_mv_inout.ad"><i class="fa fa-edit"></i>영화 통합 추가/제거</a></li>
 								<li><a href="adm_store.ad"><i class="fa fa-beer"></i>스토어 관리</a></li>
+								<li><a href="adm_location.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
 								<li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>스케줄 관리</a></li>
 							</ul>
 						</div>
@@ -123,234 +125,70 @@
 			<!-- /top navigation -->
 
 			<!-- page content -->
-			<div class="right_col" role="main">
-				<div class="">
+        <div class="right_col" role="main">
+          <div class="">
+          
+            <div class="page-title">
+              <div class="title_left">
+					<h3>영화관 관리</h3>
+              </div>
+            </div>
 
-					<div class="page-title">
-						<div class="title_left">
-							<h3>스케줄 관리</h3>
-						</div>
-					</div>
+            <div class="clearfix"></div>
 
-					<div class="clearfix"></div>
-
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<div class="x_panel">
-								<div class="x_title">
-									<h2>스케줄 추가</h2>
-									<ul class="nav navbar-right panel_toolbox">
-										<li><a class="collapse-link"><i
-												class="fa fa-chevron-up"></i></a></li>
-										<li class="dropdown"></li>
-									</ul>
-									<div class="clearfix"></div>
-								</div>
-								<div class="x_content">
-									<br />
-									<form id="demo-form2" data-parsley-validate
-										class="form-horizontal form-label-left"
-										action="adm_cinemaProIS.ad">
-
-
-
-										<div class="form-group">
-											<label class="control-label col-md-3 col-sm-3 col-xs-12"
-												for="area">지역<span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 col-xs-12">
-												<select id="location" name="location" class="form-control"
-													required>
-													<option value="0">지역을 선택해 주세요</option>
-													<c:forEach var="location" items="${locationList}" varStatus="status">
-														<option value="${status.index + 1}">${location.loName}</option>
-													</c:forEach>
-												</select>
-											</div>
-										</div>
-
-
-
-										<div class="form-group">
-											<label class="control-label col-md-3 col-sm-3 col-xs-12"
-												for="area">영화관<span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 col-xs-12">
-												<select id="cinema" name="cinema" class="form-control"
-													required>
-													<option value="ci0">지역을 먼저 선택해 주세요</option>
-												</select>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="control-label col-md-3 col-sm-3 col-xs-12"
-												for="area-detail">상영관<span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 col-xs-12">
-												<select id="screen" name="screen" class="form-control"
-													required>
-													<option value="0">영화관을 먼저 선택해 주세요</option>
-												</select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="control-label col-md-3 col-sm-3 col-xs-12"
-												for="area-detail">영화<span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 col-xs-12">
-												<select id="movie" name="movie" class="form-control"
-													required>
-													<option value="0">영화를 선택해 주세요</option>
-													<optgroup label="OLD">
-														<c:forEach var="movie" items="${movieList}" varStatus="status">
-															<c:if test="${movie.movieCategory == 'OLD'}">
-																<option value="OLD${movie.movieIdx}/${movie.runTime}">${movie.title} (${movie.runTime}분)
-																</option>
-															</c:if>
-														</c:forEach>
-													</optgroup>
-													<optgroup label="NOW">
-														<c:forEach var="movie" items="${movieList}" varStatus="status">
-															<c:if test="${movie.movieCategory == 'NOW'}">
-																<option value="NOW${movie.movieIdx}/${movie.runTime}">${movie.title} (${movie.runTime}분)
-																</option>
-															</c:if>
-														</c:forEach>
-													</optgroup>
-												</select>
-											</div>
-										</div>
-
-										<!--  영화관 위치가 아니라 영화관 위치 설명 파일이면 다른 곳에 있어야 할듯 -->
-
-										<!--  <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movie-position">영화관 위치<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        	<input type="text" id="movie-position" required="required" class="form-control col-md-7 col-xs-12">
-                          	<div class="btn-group">
-								<a class="btn" title="Insert picture (or just drag &amp; drop)" id="pictureBtn"><i class="fa fa-picture-o"></i></a>
-								<input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage">
-							</div>
-                        </div>
-                      </div> -->
-										
-
-
-										<div class="form-group">
-											<label class="control-label col-md-3 col-sm-3 col-xs-12"
-												for="movie-startDate">상영일<span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 col-xs-12">
-												<input type="date" id="movie-startDate" required="required"
-													class="form-control col-md-7 col-xs-12" name="date"
-													placeholder="ex) 230921">
-											</div>
-										</div>
-
-
-
-										<div class="form-group">
-											<label class="control-label col-md-3 col-sm-3 col-xs-12"
-												for="movie-startTime">시작시간<span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 col-xs-12">
-												<input type="time" id="movie-startTime" required="required"
-													class="form-control col-md-7 col-xs-12" name="sTime"
-													placeholder="ex) 09:00">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="control-label col-md-3 col-sm-3 col-xs-12"
-												for="movie-endTime">종료시간<span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 col-xs-12">
-												<input type="time" id="movie-endTime" required="required"
-													class="form-control col-md-7 col-xs-12"
-													placeholder="ex) 13:00" readonly>
-											</div>
-										</div>
-
-										<div class="ln_solid"></div>
-										<div class="form-group">
-											<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-												<button class="btn btn-primary" type="button">취소</button>
-												<button class="btn btn-primary" type="reset">초기화</button>
-												<button class="btn btn-success" type="submit" id="insertSchBtn">등록</button>
-											</div>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-
-
-					<!-- 				<div class="clearfix"></div> -->
-
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<div class="x_panel">
-								<div class="x_title">
-									<h2>스케줄 조회</h2>
-									<ul class="nav navbar-right panel_toolbox">
-										<li><a class="collapse-link"><i
-												class="fa fa-chevron-up"></i></a></li>
-									</ul>
-									<div class="clearfix"></div>
-								</div>
-								<div class="x_content">
-									<p class="text-muted font-13 m-b-30"></p>
-									<form action="#" id="memManage" name="memManage" method="post">
-										<table id="datatable-responsive"
-											class="table table-striped table-bordered dt-responsive nowrap"
-											cellspacing="0" width="100%">
-											<thead>
-												<tr>
-													<th>지역</th>
-													<th>영화관</th>
-													<th>상영날짜</th>
-													<th>번호</th>
-													<th>상영관</th>
-													<th>영화타입</th>
-													<th>영화제목</th>
-													<th>러닝타임</th>
-													<th>시작시간</th>
-													<th>종료시간</th>
-													<th>기타</th>
-												</tr>
-											</thead>
-											<tbody id="tbody">
-												<c:forEach var="sch" items="${allSchedules}">
-													<tr>
-														<td class="lo${sch.loIdx}">${sch.loName}</td>
-														<td class="ci${sch.ciIdx}">${sch.ciName}</td>
-														<td class="">${sch.schDate}</td>
-														<td class="schIdx">${sch.schIdx}</td>
-														<td class="">${sch.scrIdx}</td>
-														<td class="movType">${sch.schMovType}</td>
-														<td class="">${sch.title}</td>
-														<td class="">${sch.schRun}</td>
-														<td class="">${sch.schStime}</td>
-														<td class="">${sch.schEtime}</td>
-														<td><button class="btn btn-primary deleteSchBtn" type="button">삭제</button></td>
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-									</form>
-
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-				</div>
-			</div>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>영화관 목록</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <p class="text-muted font-13 m-b-30">
+                    </p>
+				<form action="#" id="memManage" name="memManage" method="post">	
+                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                      <thead>
+                        <tr>
+                          <th>지역</th>
+                          <th>영화관</th>
+                          <th>상영관 수</th>
+                          <th>오픈 여부</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tbody">
+                      	<c:forEach var="cinema" items="${cinemaList }">
+                      	<tr>
+                      		<td>${cinema.loName }</td>
+                      		<td>${cinema.ciName }</td>
+                      		<td>${cinema.ciSNum }</td>
+	                          <td>
+								<select>
+									<c:if test="${cinema.ciOc == 'N' }">
+										<option value="N" selected>N</option>
+										<option value="Y">Y</option>
+									</c:if>
+									<c:if test="${cinema.ciOc == 'Y' }">
+										<option value="N">N</option>
+										<option value="Y" selected>Y</option>
+									</c:if>
+								</select>
+							  </td>
+						</tr>	  
+                      	</c:forEach>
+                        
+                      </tbody>
+                    </table>
+				</form>	
+					
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
 
 

@@ -12,10 +12,8 @@ var today = new Date();
 var hours = today.getHours();
 var minutes = today.getMinutes();
 var seconds = today.getSeconds();
-var milliseconds = today.getMilliseconds();
-// var makeMerchantUid = `${hours}` + `${minutes}` + `${seconds}` + `${milliseconds}`;        이거 왜 안 먹지?
+var milliseconds = String(today.getMilliseconds()).slice(0, 1);
 var makeMerchantUid = "" + hours + minutes + seconds + milliseconds;
-
 
 function kakaoPay(useremail, username) {
 	var isTimeOver = false;
@@ -84,16 +82,17 @@ function kakaoPay(useremail, username) {
 				// 이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?이거 함수로 ?	
 				rsp["pay_time"] = date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 				// 결제 정보 db에 insert, 포인트 처리
+				debugger;
 				$.ajax({
 					type: "GET",
 					url: "res3Pro.re",
 					data: {rsp: JSON.stringify(rsp),
-						   point: (parseInt($("#accPoint").text().replace(",", "")) - parseInt($("#salePrice").text()) + "")
+						   minusPoint: parseInt($("#salePrice").text()) + "",
+						   plusPoint: parseInt($("#accPoint").text().replace(",", "")) + ""
 					},
 					dataType: "text" 
 				})
 				.done(function(data){
-					
 					alert(data);
 					localStorage.setItem('rsp', JSON.stringify(rsp));
 	        		window.location = "res4.re";

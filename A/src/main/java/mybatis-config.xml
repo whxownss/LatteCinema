@@ -28,6 +28,7 @@
         <typeAlias type="com.itwillbs.domain.ScreenDTO" alias="ScreenDTO"/>
         <typeAlias type="com.itwillbs.domain.StorePayDTO" alias="StorePayDTO"/>
         <typeAlias type="com.itwillbs.domain.ReviewDTO" alias="ReviewDTO"/>
+        <typeAlias type="com.itwillbs.domain.PointDTO" alias="PointDTO"/>
     </typeAliases>
 
 	<environments default="development">
