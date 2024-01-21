@@ -128,7 +128,7 @@
             <ul>
               <li><a href="store.st#store1">베스트</a></li>
               <li><a href="store.st#store2">스낵음료</a></li>
-              <li><a href="store.st#store3">관람권</a></li>
+              <li><a href="store.st#store3">커피</a></li>
             </ul>
           </li>
           
