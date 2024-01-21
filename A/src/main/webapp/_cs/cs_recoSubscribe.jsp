@@ -84,7 +84,7 @@
 			          </div>
 			          <div class="form-group mb-3">
 			            <label for="director">감독</label>
-			            <input type="text" class="form-control" id="director" name="director" placeholder="감독명 입력"  autocomplete="off">
+			            <input type="text" class="form-control" id="director" name="director" placeholder="감독명 입력"  autocomplete="off" readonly>
 			          </div>
 			          <div class="form-group mb-3">
 			            <label for="poster">포스터</label>

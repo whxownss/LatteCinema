@@ -46,7 +46,7 @@
                     </div>
                   </div>
                   <div class="btn-group">
-                    <button class="button large" id="cancelBtn" title="취소">취소</button>
+                    <button class="button large" id="cancelBtn" title="취소" type="button">취소</button>
                     <button class="button large purple" id="ckBtn" title="확인" name="pass" >확인</button>
                   </div>
                     
@@ -59,4 +59,6 @@
 	</main>
 <%@include file ="../_common/commonFooterStart.jsp" %>
 <!-- <link href="_assets/js/myInfo.js"> -->
+<script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath}/_assets/js/mypageJS/myInfo.js"></script>
 <%@include file ="../_common/commonFooterEnd.jsp" %>

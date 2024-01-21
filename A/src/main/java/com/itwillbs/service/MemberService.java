@@ -447,6 +447,29 @@ public class MemberService {
 		memberDAO.setPointInfo(pointDTO);
 	}
 
+
+	// 회원가입 연락처 중복체크
+	public int checkPhone(HttpServletRequest request) {
+		
+		int result = 0;
+		memberDAO = new MemberDAO();
+		result = memberDAO.checkPhone(request.getParameter("memPhone"));
+		
+		return result;
+	}
+
+	// 비밀번호 변경 현재비밀번호 일치 유무
+	public int changePassCheck(HttpServletRequest request) {
+		int result = 0;
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setMemId(request.getParameter("memId"));
+		memberDTO.setMemPass(request.getParameter("memPass"));
+		memberDAO = new MemberDAO();
+		result = memberDAO.changePassCheck(memberDTO);
+		
+		return result;
+	}
+
 	public List<PointDTO> getPointList(String sId) {
 		memberDAO = new MemberDAO();
 		
@@ -464,6 +487,7 @@ public class MemberService {
 		}
 		return storeRefundList;
 	}
+
 
 
 //	public MemberDTO kakaoCheck(HttpServletRequest request) {

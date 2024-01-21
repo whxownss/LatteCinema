@@ -559,17 +559,17 @@ public class CSController extends HttpServlet  {
 			String createUser = request.getParameter("createUser");
 			String createDate = request.getParameter("createDate");
 			
-			HttpSession session = request.getSession();
-			String memId = (String) session.getAttribute("sId");
-			if(memId == null) {
-				memId = "";
-			}
-			if(!memId.equalsIgnoreCase("admin")) {
-				if(!memId.equalsIgnoreCase(createUser)) {
-					response.sendRedirect("login.me");
-					return;
-				}
-			}
+//			HttpSession session = request.getSession();
+//			String memId = (String) session.getAttribute("sId");
+//			if(memId == null) {
+//				memId = "";
+//			}
+//			if(!memId.equalsIgnoreCase("admin")) {
+//				if(!memId.equalsIgnoreCase(createUser)) {
+//					response.sendRedirect("login.me");
+//					return;
+//				}
+//			}
 			
 			csBoardService = new CSBoardService();
 			QnaBoardDTO qnaBoardDTO = csBoardService.getQnaBoard(createUser,createDate);

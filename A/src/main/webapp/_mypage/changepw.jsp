@@ -40,7 +40,8 @@
 							<tr>
 								<th scope="row"><label for="pass">현재 비밀번호</label></th>
 								<td>
-									<input type="password" name="pass" class="input-text w150px" >
+									<input type="password" name="pass" id="pass" class="input-text w150px"  >
+									<span id="checkNowPass"></span><br>
 								</td>
 							</tr>
 							<tr>
@@ -72,7 +73,7 @@
 				</ul>
 			
 				<div class="btn-group pt40">
-					<button class="button large" id="cancelBtn" onclick="history.back()">취소</button>
+					<button class="button large" id="cancelBtn" type="button">취소</button>
 					<button class="button purple large" type="submit" id="updateBtn">수정</button>
 				</div>
 			</div>

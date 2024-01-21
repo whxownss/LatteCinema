@@ -49,6 +49,8 @@ QnaBoardDTO qnaBoardDTO = (QnaBoardDTO)request.getAttribute("qnaBoardDTO");
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
 			<form id="editForm">
+				<input type="hidden" id="sessionId" value="${sessionScope.sId }">
+				<input type="hidden" id="qnaSecret" value="${qnaBoardDTO.qnaSecret }">
 				<table class="table">
 				  <thead>
 				    <tr class="table-secondary">
