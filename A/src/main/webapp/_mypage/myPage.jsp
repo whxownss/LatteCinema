@@ -14,7 +14,7 @@
   <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">  
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
  <jsp:include page="../_common/header.jsp"></jsp:include>
  <% int count1 = 1;
    int count2 = 1;

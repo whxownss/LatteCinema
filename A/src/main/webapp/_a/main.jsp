@@ -84,7 +84,8 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
 			<div class="owl-carousel owl-theme">
 				<c:forEach var="movie" items="${posterNowList}" varStatus="status">
 		        <div class="item position-relative" id="wrap">
-		          <img src="<c:out value="${movie.poster}" />" > 
+		          <img src="<c:out value="${movie.poster}" />" >
+<%-- 		          <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">${status.index + 1}</em>  --%>
 		          <!-- <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">1</em> -->
 		          <!-- 순위 매일 변동인데, 매일 뿌릴 방법이 없음 -->
 		          <!-- 라떼시네마 자체 누적 관객수로 랭킹 만드는게 차라리 나아보임 -->
