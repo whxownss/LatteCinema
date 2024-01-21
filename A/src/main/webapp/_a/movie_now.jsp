@@ -27,7 +27,7 @@
 			      <div class="post-entry-1 lg">
 			        <div class="item position-relative" id="wrap">
 			          <!-- 각 영화의 포스터 이미지를 동적으로 출력 -->
-			          <img src="${movie.poster}" style="width: 100%;">
+			          <img src="${movie.poster}" style="width:300px; height: 400px;">
 			          <div class="titlee">
 			            <a href="#" class="moree">예매하기</a>
 			            <!-- 상세정보로 페이지 이동 링크 -->
