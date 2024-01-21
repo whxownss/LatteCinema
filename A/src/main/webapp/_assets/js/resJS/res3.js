@@ -65,6 +65,7 @@ $(function(){
 		$("#resultPoint").text("포인트를 다시 입력해주세요.");
 		$("#salePrice").text("0");
 		$("#rsPrice").text($("#sumPrice").text());
+		$("#accPoint").text( (parseInt($("#rsPrice").text().replace(/[^\d]+/g, "")) * 0.1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
 		
 		if(isNaN(iTmp)) iTmp = 0;
 		
