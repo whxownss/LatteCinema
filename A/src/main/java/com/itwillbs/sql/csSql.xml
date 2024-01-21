@@ -662,7 +662,7 @@
 		FROM RECOMMENDBOARD
 		ORDER BY COUNTRECO DESC
 		LIMIT 5
-	</select>
+	</select>  
 	
 	
 	
