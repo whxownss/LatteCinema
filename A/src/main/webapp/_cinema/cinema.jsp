@@ -317,48 +317,7 @@ $(function(){
     </section>
 </main>
 
-
-<<<<<<< HEAD
-								<div class="theater-list">
-								<ul>
-                  <li>서귀포</li>
-                  <li>제주아라</li>
-                  <li>제주연동</li>
-                </ul>
-								</div>
-							</li>
-						
-					</ul>
-				</div>
-				</div>
-				
-				
-				
-		<!-- 영화관 위치 -->
-			<div class="place" style="display: none">
-			        <h2 class="tit mt40">영화관 위치</h2>
-			        영화관 정보
-			        <div class="theater-place">
-			            <h3 class="tit">서면</h3>
-			            <dl class="theater_info">
-			                <dt>총 상영관 수</dt>
-			                <dd>5개관</dd>
-			                <dt>총 좌석수</dt>
-			                <dd>500석</dd>
-			                <dt class="adr">주소</dt>
-			                <dd class="adr">부산광역시 부산진구 부전동 동천로 109 삼한골든게이트 7층</dd>
-			            </dl>
-			            <ul class="pop_wrap">
-			                <li><a href="#layerLocationPublic" title="대중교통 안내" class=""><img src="assets/img/location_subway_40.png" alt="대중교통 안내"><span>대중교통 안내</span></a></li>
-			                <li><a href="#layerLocationCar" title="자가용/주차안내"><img src="assets/img/location_car_40.png" alt="자가용/주차안내"><span>자가용/주차안내</span></a></li>
-			                <li><a href="#layerLocationMap" title="지도보기"><img src="assets/img/location_map_40.png" alt="지도보기"><span>지도보기</span></a></li>
-			            </ul>
-			        </div>
-			  </div>
-			</div>
-    </div>
-  </div>
-</section>
+	
 
 <script>
 //When the user clicks on <div>, open the popup
@@ -369,9 +328,9 @@ popup.classList.toggle("show");
 
 </script>
 
-<div class="popup" onclick="myFunction()">Click me!
+<!-- <div class="popup" onclick="myFunction()">Click me!
   <span class="popuptext" id="myPopup">Pop_up text...</span>
-</div>
+</div> -->
 
 	</main>
 
