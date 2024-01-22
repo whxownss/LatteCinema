@@ -282,7 +282,6 @@
                           <th>구매수량</th>
                           <th>가격</th>
                           <th>구매일</th>
-                          <th>핸드폰 번호</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -294,7 +293,6 @@
                       		<td>${storeList.itemCnt }</td>
                       		<td>${storeList.paidAmount }</td>
                       		<td>${storeList.payTime }</td>
-                      		<td>${storeList.buyerTel }</td>
                       	</tr>
                       </c:forEach>
                       </tbody>
