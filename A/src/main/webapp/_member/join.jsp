@@ -6,7 +6,9 @@
 <%@include file="../_common/commonHeaderEnd.jsp"%>
 
 <main id="main">
-
+<c:if test="${sessionScope.sId != null }">
+<c:redirect url="main.me"/>
+</c:if>
 	<section class="category-section">
 		<div class="container col-5" data-aos="fade-up">
 			<div class="section-header d-flex justify-content-between align-items-center mb-5">

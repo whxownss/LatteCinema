@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -13,11 +14,14 @@
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
  
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 
 <jsp:include page="../_common/header.jsp"></jsp:include>
 <main id="main">
+<c:if test="${sessionScope.sId == null}">
+   <c:redirect url="login.me" />
+</c:if>
   <section class="category-section">
     <div class="container has-lnb" data-aos="fade-up">
     <%

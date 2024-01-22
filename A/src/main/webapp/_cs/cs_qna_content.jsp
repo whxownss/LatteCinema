@@ -2,10 +2,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
+<c:if test="${sessionScope.sId == null}">
+   <c:redirect url="login.me" />
+</c:if>
 <%
 QnaBoardDTO qnaBoardDTO = (QnaBoardDTO)request.getAttribute("qnaBoardDTO");
 %>	
@@ -45,6 +49,8 @@ QnaBoardDTO qnaBoardDTO = (QnaBoardDTO)request.getAttribute("qnaBoardDTO");
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
 			<form id="editForm">
+				<input type="hidden" id="sessionId" value="${sessionScope.sId }">
+				<input type="hidden" id="qnaSecret" value="${qnaBoardDTO.qnaSecret }">
 				<table class="table">
 				  <thead>
 				    <tr class="table-secondary">

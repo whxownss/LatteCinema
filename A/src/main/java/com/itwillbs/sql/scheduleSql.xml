@@ -26,7 +26,8 @@
 			 	  		  	   AND CI_IDX = S.CI_IDX
 			 	   		  	   AND SCH_IDX = S.SCH_IDX
 			 	   		  	   AND DATE_FORMAT(DATE, "%Y-%m-%d") = #{DATE}
-			 	   		       AND MOV_TYPE = S.SCH_MOV_TYPE) AS UNSIGNED)
+			 	   		       AND MOV_TYPE = S.SCH_MOV_TYPE
+			 	   		       AND SUCCESS != 'false') AS UNSIGNED)
 			 	   	  , SC.SCR_SEAT) "SCR_SEAT_AVAIL"
 		  FROM SCHEDULE S
 		  JOIN MOVIE M
@@ -40,7 +41,8 @@
 		   AND (S.LO_IDX, S.CI_IDX) = (SELECT LO_IDX, CI_IDX
 		   								 FROM CINEMA
 		   								WHERE CI_NAME = #{CINEMA})
-		   AND S.SCH_DATE = #{DATE}								
+		   AND S.SCH_DATE = #{DATE}
+		    								
 <!-- 		   <![CDATA[ -->
 <!-- 		   AND M.START_DATE <= #{DATE} -->
 <!-- 		   AND M.END_DATE > #{DATE} -->
@@ -56,6 +58,7 @@
 		SELECT DISTINCT TITLE
 			 , S.SCH_MOV_TYPE "SCH_MOV_TYPE"
 			 , M.RATING
+			 , M.MOVIE_CODE
 		  FROM SCHEDULE S
 		  JOIN CINEMA C
 		    ON (C.LO_IDX = S.LO_IDX and C.CI_IDX = S.CI_IDX)

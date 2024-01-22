@@ -2,6 +2,16 @@ document.write('<script type="text/javascript" '+
 						'src="/' + window.location.pathname.split("/")[1] + '/_assets/js/resJS/res4VarFunc.js"></script>');
 
 $(function(){
+	$("#goBL").on("click", function(){
+		location.href = "bookinglist.me"
+	});
+	$("#goMain").on("click", function(){
+		location.href = "main.me"
+	});
+	
+	
+	
+	// ? 이거 지워도 되지 않나??
 	$("#refund").on("click", function(){
 		$.ajax({
 			type: "GET",
@@ -27,7 +37,7 @@ $(function(){
 	});
 	
 	
-	$(".buyerName").text(rsp.buyer_name);
+//	$(".buyerName").text(rsp.buyer_name);  '서비스단에서 세션 줄거' 이렇게 나옴
 	$(".resIdx").text(rsp.merchant_uid);
 	$(".sTime").text(rsp.s_time);
 	$(".eTime").text(rsp.eTime);

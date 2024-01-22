@@ -27,9 +27,9 @@
 			      <div class="post-entry-1 lg">
 			        <div class="item position-relative" id="wrap">
 			          <!-- 각 영화의 포스터 이미지를 동적으로 출력 -->
-			          <img src="${movie.poster}" style="width: 100%;">
+			          <img src="${movie.poster}" style="width:400px; height: 600px;">
 			          <div class="titlee">
-			            <a href="#" class="moree">예매하기</a>
+			            <a href="${pageContext.servletContext.contextPath}/res1.re?movieCode=${movie.movieCode}" class="moree">예매하기</a>
 			            <!-- 상세정보로 페이지 이동 링크 -->
 			            <a href="movie_view.mo?movieCode=${movie.movieCode}" class="moree">상세정보</a>
 			          </div>
@@ -59,7 +59,7 @@
 				                            <!-- 각 영화의 포스터 이미지를 동적으로 출력 -->
 				                            <img src="${movie.poster}" style="width: 100%;">
 				                            <div class="titleeee">
-				                                <a href="#" class="moree">예매하기</a>
+				                                <a href="${pageContext.servletContext.contextPath}/res1.re?movieCode=${movie.movieCode}" class="moree">예매하기</a>
 				                                <!-- 상세정보로 페이지 이동 링크 -->
 				                                <a href="movie_view.mo?movieCode=${movie.movieCode}" class="moree">상세정보</a>
 				                            </div>

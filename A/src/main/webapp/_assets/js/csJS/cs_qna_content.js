@@ -2,8 +2,17 @@
  * 
  */
     $(document).ready(function() {
+		var qnaSecret = $('#qnaSecret').val();
+		var sessionId = $('#sessionId').val();
+		var fullName = $('#userName').text(); // '김철수'라고 가정
+		if(qnaSecret == '1'){
+			debugger;
+			if(sessionId != fullName && sessionId != "admin"){
+				window.location.href = "login.me";
+			}
+		}
         // 사용자 이름을 변수로 받음
-        var fullName = $('#userName').text(); // '김철수'라고 가정
+        
         // 첫 글자를 제외하고 나머지 글자를 '*'로 변환하는 함수
         function anonymizeName(name) {
             if(name.length > 1) {

@@ -14,18 +14,10 @@ public class MemberDTO {
 	private Timestamp memJoinD;
 	private String memStatus;
 	private String memStopD;
+	private String memDeleteD;
 	private String memPoint;
 	private String memGift;
-	private Timestamp memDeleteD;
 	
-	
-	
-	public Timestamp getMemDeleteD() {
-		return memDeleteD;
-	}
-	public void setMemDeleteD(Timestamp memDeleteD) {
-		this.memDeleteD = memDeleteD;
-	}
 	public String getMemPoint() {
 		return memPoint;
 	}
@@ -104,23 +96,22 @@ public class MemberDTO {
 	public void setMemStopD(String memStopD) {
 		this.memStopD = memStopD;
 	}
+	
+	public String getMemDeleteD() {
+		return memDeleteD;
+	}
+	public void setMemDeleteD(String memDeleteD) {
+		this.memDeleteD = memDeleteD;
+	}
 	@Override
 	public String toString() {
 		return "MemberDTO [memIdx=" + memIdx + ", memId=" + memId + ", memPass=" + memPass + ", memName=" + memName
 				+ ", memPhone=" + memPhone + ", memAddress=" + memAddress + ", memBirthD=" + memBirthD + ", memEmail="
 				+ memEmail + ", memJoinD=" + memJoinD + ", memStatus=" + memStatus + ", memStopD=" + memStopD
-				+ ", memPoint=" + memPoint + ", memGift=" + memGift + ", memDeleteD=" + memDeleteD + "]";
+				+ ", memDeleteD=" + memDeleteD + ", memPoint=" + memPoint + ", memGift=" + memGift + "]";
 	}
 
 	
-	
-	
-	
-	
-	
-	
-	
-
 	
 		
 	

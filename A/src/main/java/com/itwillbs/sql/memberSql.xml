@@ -45,7 +45,8 @@
 		 	 , MEM_JOIN_D
 		 	 , MEM_EMAIL  
 		 	 , MEM_BIRTH_D
-		 	 , MEM_ADDRESS)
+		 	 , MEM_ADDRESS
+		 	 , MEM_POINT)
 		VALUES (
 				(SELECT *
 				  FROM (SELECT IFNULL(MAX(CAST(MEM_IDX as unsigned)), 0) + 1
@@ -57,7 +58,8 @@
 			 , #{memJoinD}
 			 , #{memEmail}
 			 , #{memBirthD}
-			 , #{memAddress})
+			 , #{memAddress}
+			 , 3000)
 	</insert>
 	
 <!-- 	회원가입 아이디 중복확인 -->
@@ -72,6 +74,13 @@
 		SELECT COUNT(*)
 		FROM MEMBERS
 		WHERE MEM_EMAIL = #{email}
+	</select>
+	
+	<!-- 	회원가입 연락처 중복확인 -->
+	<select id="checkPhone" parameterType="String"   resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBERS
+		WHERE MEM_PHONE = #{memPhone}
 	</select>
 	
 	<select id="userCheck" parameterType="MemberDTO" resultType="MemberDTO">
@@ -128,10 +137,15 @@
 	</select>	
 
 <!-- 회원탈퇴 -->
-	<delete id="deleteMember" parameterType="MemberDTO">
-		DELETE FROM MEMBERS
-		 WHERE MEM_ID = #{memId}
-	</delete>
+<!-- 	<delete id="deleteMember" parameterType="MemberDTO"> -->
+<!-- 		DELETE FROM MEMBERS -->
+<!-- 		 WHERE MEM_ID = #{memId} -->
+<!-- 	</delete> -->
+	<update id="deleteMember" parameterType="MemberDTO">
+		UPDATE MEMBERS
+		   SET MEM_DELETE_D = SYSDATE()
+		 WHERE MEM_ID = #{memId};
+	</update>
 	
 <!-- 	회원정보수정 -->
 	<update id="updateMember" parameterType="MemberDTO">
@@ -143,6 +157,15 @@
 		  , MEM_ADDRESS = #{memAddress}
 		WHERE MEM_ID = #{memId}
 	</update>
+	
+	<!-- 비밀번호 변경시 현재 비밀번호 일치 유무확인 -->
+	<select id="changePassCheck" parameterType="MemberDTO" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBERS
+		WHERE MEM_Id = #{memId}
+		AND MEM_PASS = #{memPass}	
+	
+	</select>	
 	
 	<!-- 비밀번호 변경 -->
 	<update id="updatePasswd" parameterType="MemberDTO">
@@ -176,5 +199,119 @@
 		  FROM MEMBERS
 		LIMIT #{startRow}, #{pageSize}
 	</select>
+	
+	
+	<select id="getMemPoint" parameterType="String" resultType="String">
+		SELECT FORMAT(MEM_POINT, 0)
+		  FROM MEMBERS
+		 WHERE MEM_ID = #{value}
+	</select>
+	
+	<update id="setPoint" parameterType="MemberDTO">
+		UPDATE MEMBERS
+		   SET MEM_POINT = CAST(MEM_POINT AS UNSIGNED) + CAST(#{memPoint} AS SIGNED)
+		 WHERE MEM_ID = #{memId}
+	</update>
+	
+	
+	<!-- 	회원가입시 포인트 적립 -->
+	<insert id="joinPoint" parameterType="String">
+		INSERT
+		  INTO POINT
+		  	 ( 
+		  	   MEM_ID
+		  	 , POINT_PLUS
+		  	 , POINT_DETAIL
+		  	 , POINT_DATE
+		  	 )
+		VALUES
+			 (
+			   #{value}
+			 , 3000
+			 , "회원가입 축하 지급"	
+			 , NOW()
+			 ) 
+	</insert>
+	
+	<select id="getPointList" parameterType="String" resultType="PointDTO">
+		SELECT MEM_ID
+			 , POINT_PLUS
+			 , POINT_MINUS
+			 , POINT_DETAIL
+			 , POINT_DATE
+		  FROM POINT
+		 WHERE 1 = 1
+		   AND MEM_ID = #{value}
+	</select>
+	
+	<insert id="setPointInfo" parameterType="PointDTO">
+		INSERT
+		  INTO POINT
+		     (
+		       MEM_ID
+		     , POINT_PLUS
+		     , POINT_MINUS
+		     , POINT_DETAIL
+		     , MERCHANT_UID
+		     , POINT_DATE
+		     )
+		VALUES
+		<if test='!pointPlus.equals("0")' >
+			 ( 
+			   #{memId}
+			 , #{pointPlus}
+			 , NULL
+			<if test='pointDetail != null and pointDetail.equals("환불")'>
+			 , #{pointDetail}
+			</if>
+			<if test='pointDetail == null || !pointDetail.equals("환불")'>
+			 , '영화 예매'
+			</if>
+		     , #{merchantUid}
+			 , NOW()
+			 )
+		</if>
+		<if test='!pointPlus.equals("0") and !pointMinus.equals("0")'>
+			,
+		</if>	 
+		<if test='!pointMinus.equals("0")' >
+			( 
+			   #{memId}
+			 , NULL
+			 , #{pointMinus}
+			<if test='pointDetail != null and pointDetail.equals("환불")'>
+			 , #{pointDetail}
+			</if>
+			<if test='pointDetail == null || !pointDetail.equals("환불")'>
+			 , '영화 예매'
+			</if>
+		     , #{merchantUid}
+			 , NOW()
+			 )
+		</if>
+	</insert>
+	
+	
+	<select id="selectPointPlus" parameterType="String" resultType="String">
+		SELECT POINT_PLUS
+		  FROM POINT
+		 WHERE 1 = 1 
+		   AND MERCHANT_UID = #{mid}
+		   AND POINT_PLUS IS NOT NULL
+		   
+	</select>
+	<select id="selectPointMinus" parameterType="String" resultType="String">
+		SELECT IFNULL(POINT_MINUS, '0')  -- IFNULL 필요없긴함
+		  FROM POINT
+		 WHERE 1 = 1 
+		   AND MERCHANT_UID = #{mid}
+		   AND POINT_MINUS IS NOT NULL
+	</select>
+	
+	
+	
+	
+	
+	
 	
 </mapper>

@@ -3,7 +3,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%> 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -61,6 +62,9 @@
 %>
 
   <body class="nav-md">
+<c:if test="${sessionScope.sId == null || ! fn:startsWith(sessionScope.sId, 'admin')}">
+   <c:redirect url="login.me" />
+</c:if>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -91,14 +95,14 @@
                 <h3>General</h3>
                 <ul class="nav side-menu">
                   	
-                  <li><a href="adm_home.ad"><i class="fa fa-home"></i> Home</a>
+                  <li><a href="adm_home.ad"><i class="fa fa-home"></i>Home</a>
 <!--                     <ul class="nav child_menu"> -->
 <!--                       <li><a href="index.html">Dashboard</a></li> -->
 <!--                       <li><a href="index2.html">Dashboard2</a></li> -->
 <!--                       <li><a href="index3.html">Dashboard3</a></li> -->
 <!--                     </ul> -->
                   </li>
-                  <li><a href="adm_member.ad"><i class="fa fa-user"></i> 회원관리</a></li>
+                  <li><a href="adm_member.ad"><i class="fa fa-user"></i>회원관리</a></li>
                   <li><a href="adm_mv_inout.ad"><i class="fa fa-edit"></i>영화 통합 추가/제거</a>
 <!--                     <ul class="nav child_menu"> -->
 <!--                       <li><a href="form.html">General Form</a></li> -->
@@ -123,7 +127,8 @@
 <!--                     </ul> -->
                   </li>
                   
-                   <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
+				   <li><a href="adm_location.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
+                   <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>스케줄 관리</a></li>
                  
                 </ul>
               </div>
@@ -195,17 +200,17 @@
           </div>
         </div>
 
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-            </nav>
-          </div>
+       <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle" style="padding-top: 8px; padding-bottom: 8px">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+          </nav>
         </div>
-        <!-- /top navigation -->
+      </div>
+      <!-- /top navigation -->
 
         <!-- page content -->
         <div class="right_col" role="main">
@@ -244,34 +249,34 @@
           </div>
           <!-- /top tiles -->
 
-          <div class="row">
-            <div class="col-md-8 col-sm-8 col-xs-8">
-              <div class="dashboard_graph">
+<!--           <div class="row"> -->
+<!--             <div class="col-md-8 col-sm-8 col-xs-8"> -->
+<!--               <div class="dashboard_graph"> -->
 
-<!--                 <div class="row x_title"> -->
-<!--                   <div class="col-md-6"> -->
-<!--                     <h3>Network Activities <small>Graph title sub-title</small></h3> -->
-<!--                   </div> -->
-<!--                   <div class="col-md-6"> -->
-<!--                     <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc"> -->
-<!--                       <i class="glyphicon glyphicon-calendar fa fa-calendar"></i> -->
-<!--                       <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b> -->
-<!--                     </div> -->
-<!--                   </div> -->
-<!--                 </div> -->
+<!-- <!--                 <div class="row x_title"> --> 
+<!-- <!--                   <div class="col-md-6"> --> 
+<!-- <!--                     <h3>Network Activities <small>Graph title sub-title</small></h3> --> 
+<!-- <!--                   </div> --> 
+<!-- <!--                   <div class="col-md-6"> --> 
+<!-- <!--                     <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc"> --> 
+<!-- <!--                       <i class="glyphicon glyphicon-calendar fa fa-calendar"></i> --> 
+<!-- <!--                       <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b> --> 
+<!-- <!--                     </div> --> 
+<!-- <!--                   </div> --> 
+<!-- <!--                 </div> --> 
 
-<!--                 <div class="col-md-9 col-sm-9 col-xs-12"> -->
-<!--                   <div id="chart_plot_01" class="demo-placeholder"></div> -->
-<!--                 </div> -->
-				    <div style="width:75%;">
-				        <canvas id="canvas"></canvas>
-				    </div>
-                <div class="clearfix"></div>
-              </div>
-            </div>
+<!-- <!--                 <div class="col-md-9 col-sm-9 col-xs-12"> --> 
+<!-- <!--                   <div id="chart_plot_01" class="demo-placeholder"></div> --> 
+<!-- <!--                 </div> --> 
+<!-- 				    <div style="width:75%;"> -->
+<%-- 				        <canvas id="canvas"></canvas> --%>
+<!-- 				    </div> -->
+<!--                 <div class="clearfix"></div> -->
+<!--               </div> -->
+<!--             </div> -->
 
-          </div>
-          <br />
+<!--           </div> -->
+<!--           <br /> -->
 
           <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
@@ -311,7 +316,7 @@
                           <th>예매일</th>
                           <th>상영일시</th>
                           <th>취소일</th>
-                          <th>예매상태</th>
+<!--                           <th>예매상태</th> -->
                         </tr>
                       </thead>
                       <tbody id="tbody">
@@ -324,19 +329,19 @@
 	                          <th>${reservationDTO.paidAmount}</th>
 	                          <th>${reservationDTO.payTime}</th>
 	                          <th>${reservationDTO.date} ${reservationDTO.sTime}~${reservationDTO.schEtime}</th>
-	                          <th>취소일</th>
-	                          <th>
-	                          	<select name="bookSelect">
-	                          	<c:if test="${reservationDTO.success eq true }">
-									<option value="true" selected>Y</option>
-									<option value="false">N</option>
-	                          	</c:if>
-	                          	<c:if test="${reservationDTO.success ne true }">
-									<option value="true">Y</option>
-									<option value="false" selected>N</option>
-	                          	</c:if>
-								</select>
-	                          </th>
+	                          <th>${reservationDTO.refundTime}</th>
+<!-- 	                          <th> -->
+<!-- 	                          	<select name="bookSelect"> -->
+<%-- 	                          	<c:if test="${reservationDTO.success eq true }"> --%>
+<!-- 									<option value="true" selected>Y</option> -->
+<!-- 									<option value="false">N</option> -->
+<%-- 	                          	</c:if> --%>
+<%-- 	                          	<c:if test="${reservationDTO.success ne true }"> --%>
+<!-- 									<option value="true">Y</option> -->
+<!-- 									<option value="false" selected>N</option> -->
+<%-- 	                          	</c:if> --%>
+<!-- 								</select> -->
+<!-- 	                          </th> -->
                       		</tr>
                       	</c:forEach>
                       </tbody>

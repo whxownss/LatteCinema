@@ -12,6 +12,10 @@
 	<link rel="stylesheet" href="_assets/css/res_1.css">
 <%@include file="../_common/commonHeaderEnd.jsp"%>
 
+<c:if test="${sessionScope.sId == null}">
+	<c:redirect url="login.me" />
+</c:if>
+
 <c:set var="locationList" value="${requestScope.locationList}" />
 <c:set var="cinemaListJson" value="${requestScope.cinemaListJson}" />
 
@@ -133,13 +137,13 @@
 									<div class="col p-2 bg-black text-white" id="selectedMovie">영화</div>
 								</div>
 								<div class="row hErrorC" style="">
-									<div class="col p-0 bg-body-secondary">
+									<div class="col-4 p-0 bg-body-secondary">
 										<ul class="list-group text-start mb-0 ps-0 rounded-0">
 											<li class="list-group-item border border-0 bg-body-secondary myMovie myMouse" id="OLD">옛날영화</li>
 											<li class="list-group-item border border-0 bg-body-secondary myMovie myMouse" id="NOW">최신영화</li>
 										</ul>
 									</div>
-									<div class="col p-0">
+									<div class="col-8 p-0">
 										<ul class="list-group border border-0 text-start mb-0 ps-0 rounded-0 showMovies scrollable" style="height: 450px; overflow: auto;">
 										</ul>
 									</div>
@@ -163,13 +167,8 @@
 							</div>
 						</div>
 					</div>
-					
-					
 				</div>
 			</div>
-			<div><button id="forTest" style="margin-left: 100%;">TEST</button></div>
-			<div ><a href="res2.re" style="margin-left: 100%;"><button>res2 이동</button></a></div>
-
 		</div>
 	</section>
 

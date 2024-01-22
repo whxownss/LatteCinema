@@ -12,6 +12,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.LocationDTO;
+import com.itwillbs.domain.MemberDTO;
+import com.itwillbs.domain.PointDTO;
 import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.domain.ScheduleDTO;
 import com.itwillbs.domain.ScreenDTO;
@@ -148,10 +150,10 @@ public class ResDAO {
 		return deleteCnt > 0 ? "true" : "";
 	}
 
-	// 관리자꺼
+	// 관리자꺼 
 	public List<ScreenDTO> getScreen(Map<String, String> map) {
 		SqlSession session = sqlSessionFactory.openSession();
-		List<ScreenDTO> screenList = session.selectList("Screen.select", map);
+		List<ScreenDTO> screenList = session.selectList("Screen.select", map); // res 와서 다른쪽 sql하는게 맞나?
 		session.close();
 		
 		return screenList;
@@ -164,4 +166,35 @@ public class ResDAO {
 		
 		return allSchedules;
 	}
+
+	
+	// 이거 쿼리 구문 질문하기 (안되면 합치기)
+	public void refundPoint(String sId, String mid) {
+		SqlSession session = sqlSessionFactory.openSession();
+		String pointPlus = session.selectOne("Member.selectPointPlus", mid);
+		String pointMinus = session.selectOne("Member.selectPointMinus", mid);
+		if(pointMinus == null) {
+			pointMinus = "0";
+		}
+		
+		
+		int memPoint = Integer.parseInt(pointMinus) - Integer.parseInt(pointPlus);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setMemPoint(memPoint + "");
+		memberDTO.setMemId(sId);
+		session.update("Member.setPoint", memberDTO);
+		
+		PointDTO pointDTO = new PointDTO();
+		pointDTO.setMemId(sId);
+		System.out.println("sid :" + sId);
+		pointDTO.setPointPlus(pointMinus);
+		pointDTO.setPointMinus(pointPlus);
+		pointDTO.setPointDetail("환불");
+		session.insert("Member.setPointInfo", pointDTO);
+		
+		session.commit();
+		session.close();
+	}
+
+	
 }

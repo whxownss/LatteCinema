@@ -20,9 +20,9 @@ $(function(){
 	$(".p1").text(schDTO["p1"]);
 	$(".p2").text(schDTO["p2"]);
 	$(".p3").text(schDTO["p3"]);
-	$("#pTP1").text(schDTO["p1"] * 12000);
-	$("#pTP2").text(schDTO["p2"] * 7000);
-	$("#pTP3").text(schDTO["p3"] * 5000);
+	$("#pTP1").text(schDTO["p1"] * 15000);
+	$("#pTP2").text(schDTO["p2"] * 12000);
+	$("#pTP3").text(schDTO["p3"] * 9000);
 	$(".poster").attr("src", schDTO.poster);
 	
 	
@@ -33,6 +33,7 @@ $(function(){
 	// 처음에 총 금액
 	$("#salePrice").text(0);
 	$("#rsPrice").text($("#sumPrice").text());
+	$("#accPoint").text( (parseInt($("#rsPrice").text().replace(/[^\d]+/g, "")) * 0.1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
 	
 	// 호버시 마우서 커서 모양 변경
 	$(".myMouse").css({
@@ -61,7 +62,10 @@ $(function(){
 		iTmp = parseInt(tmp.replace(/[^\d]+/g, ""));
 		var nTmp = parseInt($("#nowPoint").text().replace(/[^\d]+/g, ""));
 
-		$("#resultPoint").text("사용하실 포인트를 다시 입력해주세요.");
+		$("#resultPoint").text("포인트를 다시 입력해주세요.");
+		$("#salePrice").text("0");
+		$("#rsPrice").text($("#sumPrice").text());
+		$("#accPoint").text( (parseInt($("#rsPrice").text().replace(/[^\d]+/g, "")) * 0.1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
 		
 		if(isNaN(iTmp)) iTmp = 0;
 		
@@ -75,6 +79,14 @@ $(function(){
 		// 총금액 합
 		var sP = sumP - iTmp; 
 		$("#rsPrice").text(sP.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		$("#accPoint").text( (parseInt($("#rsPrice").text().replace(/[^\d]+/g, "")) * 0.1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
+		
+		// 결제 금액보다 포인트를 많이 쓴 경우
+		if(! $("#rsPrice").text().startsWith("-")) return;
+		$("#salePrice").text("0");
+		$("#rsPrice").text($("#sumPrice").text());
+		$("#accPoint").text( (parseInt($("#rsPrice").text().replace(/[^\d]+/g, "")) * 0.1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
+		$("#resultPoint").text("상품 금액보다 적게 입력해주세요.");
 	});
 	$("#inputPoint").on("focus", function(){
 		$("#inputPoint").val($("#inputPoint").val().replace(/[^\d]+/g, ""));

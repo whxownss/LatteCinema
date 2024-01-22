@@ -5,6 +5,10 @@
 	<link rel="stylesheet" href="_assets/css/res_1.css">
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
+<c:if test="${sessionScope.sId == null}">
+	<c:redirect url="login.me" />
+</c:if>
+
 	<main id="main">
 		<section class="category-section">
 			<div class="container" data-aos="fade-up">
@@ -39,7 +43,7 @@
 						
 						<div class="row text-center pt-3">
 							<img src="_assets/img/payOK.png" class="" style="width:120px; height:100px; margin: 0 auto;"> 
-							<div class="pt-3"><span class="buyerName"></span> 회원님, 결제가 성공적으로 완료되었습니다.</div>
+							<div class="pt-3"><span class="buyerName">${sessionScope.sName}</span> 회원님, 결제가 성공적으로 완료되었습니다.</div>
 						</div>
 						
 						
@@ -102,20 +106,12 @@
 						</div>
 						
 						<div class="mt-5 mb-3">
-							<button type="button" class="btn btn-light me-2 btn-outline-dark" style="width:200px; height:50px;">결제내역</button>
-							<button type="button" class="btn btn-danger ms-2" style="width:200px; height:50px;">홈으로 바로가기</button>
+							<button type="button" id="goBL" class="btn btn-light me-2 btn-outline-dark" style="width:200px; height:50px;">결제내역</button>
+							<button type="button" id="goMain" class="btn btn-danger ms-2" style="width:200px; height:50px;">홈으로 바로가기</button>
 						</div>
-						
 					</div>
-						
-						
-						
 					</div>
-					
 				</div>
-
-			<div ><button id="payInfo">결제정보</button></div>
-			<div ><button id="refund">환불하기</button></div>
 			</div>
 		</section>
 	</main>

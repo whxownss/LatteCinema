@@ -3,6 +3,7 @@
 <%@page import="com.itwillbs.domain.MemberDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -16,9 +17,11 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 </head>
 <body>
-
 <jsp:include page="../_common/header.jsp"></jsp:include>
 <main id="main">
+<c:if test="${sessionScope.sId == null}">
+   <c:redirect url="login.me" />
+</c:if>
   <section class="category-section">
     <div class="container has-lnb" data-aos="fade-up">
       <!-- 이곳에 코드작성 -->
@@ -173,7 +176,7 @@
 								<tbody>
 								<c:forEach var="reservationDTO" items="${resRefundList}">
 									<tr>
-										<td>취소날짜들어갈곳</td>
+										<td>${reservationDTO.refundTime }</td>
 										<td>${reservationDTO.title}</td>
 										<td>${reservationDTO.cinema} ${reservationDTO.scrIdx }</td>
 										<td>${reservationDTO.date} ${reservationDTO.sTime}~${reservationDTO.schEtime}</td>
@@ -182,31 +185,7 @@
 								</c:forEach>
 								</tbody>
 							</table>
-							
-							<!-- 페이징 처리 -->
-<!-- 							<section class="category-section" id=""> -->
-<!-- 							<div class="container" data-aos="fade-up"> -->
-<!-- 								<div class="pagination-container d-flex justify-content-center"> -->
-<!-- 								  <ul class="pagination" id="searchPaging"> -->
-<%-- 									<c:if test="${pageDTO.startPage > pageDTO.pageBlock}"> --%>
-<!-- 									    <li class="page-item "> -->
-<%-- 									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${pageDTO.startPage - pageDTO.pageBlock }" tabindex="-1" aria-disabled="true">이전</a> --%>
-<!-- 									    </li> -->
-<%-- 								    </c:if>	 --%>
-<%-- 								    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1"> --%>
-<!-- 									    <li class="page-item" aria-current="page"> -->
-<%-- 									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${i }">${i }</a> --%>
-<!-- 									    </li> -->
-<%-- 								    </c:forEach> --%>
-<%-- 						    		<c:if test="${pageDTO.endPage < pageDTO.pageCount}"> --%>
-<!-- 									    <li class="page-item"> -->
-<%-- 									      <a class="page-link text-secondary" href="bookinglist.me?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">다음</a> --%>
-<!-- 									    </li> -->
-<%-- 								    </c:if>	 --%>
-<!-- 								  </ul> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</section> -->
+
 		
 						</div>
 			
@@ -284,6 +263,7 @@ $("#tbody").on("click","button",function() {
 			.done(function(data){
 				debugger;
 				if(data == "환불 성공"){
+					window.location.href="bookinglist.me";
 //	 				$.ajax({
 //	 					type: "POST",
 //	 					url: "res4ProRF.re",

@@ -483,6 +483,37 @@
 		    GROUP BY RECO_USER
 		  )
 	</update>
+	<!-- 임시추가 -->
+	<select id="searchRecodUser" parameterType="String" resultType="RecommendDTO">
+		SELECT RECOMMENDIDX, RECO_USER
+		  FROM RECODUPLICHK2
+		 WHERE RECO_USER = #{recoUser}
+	</select>
+	<insert id="insertRecodTable" parameterType="map">
+		INSERT INTO RECODUPLICHK2
+		VALUES
+		(#{recoUser}
+		,#{recommendIdx}
+		,SYSDATE()
+		)
+	</insert>
+	<update id="updateRecodTable" parameterType="map">
+		UPDATE RECODUPLICHK2
+		   SET RECOMMENDIDX = #{recommendIdx}
+		      ,RECO_DATE = SYSDATE()
+		 WHERE RECO_USER = #{recoUser};
+	</update>
+	<update id="plusRecoCount2" parameterType="map">
+		UPDATE RECOMMENDBOARD
+		   SET COUNTRECO = COUNTRECO + 1
+		 WHERE RECOMMENDIDX = #{recommendIdx}
+	</update>
+	<update id="minusRecoCount" parameterType="map">
+		UPDATE RECOMMENDBOARD
+		   SET COUNTRECO = COUNTRECO - 1
+		 WHERE RECOMMENDIDX = #{idx}
+	</update>
+	<!-- 임시추가 끝 -->
 	<insert id="insertRecoUser" parameterType="map">
 		INSERT INTO RECODUPLICHK(RECOMMENDIDX,RECO_USER,RECO_DATE)
 		SELECT #{recommendIdx},#{recoUser},SYSDATE()
@@ -497,6 +528,10 @@
 	</insert>
 	<delete id="deleteRecoData" parameterType="int">
 		DELETE FROM RECOMMENDBOARD
+ 		 WHERE RECOMMENDIDX = #{recommendIdx}
+	</delete>
+	<delete id="deleteRecoDupli" parameterType="int">
+		DELETE FROM RECODUPLICHK2
  		 WHERE RECOMMENDIDX = #{recommendIdx}
 	</delete>
 	<select id="getRecoBoardCount" resultType="int">
@@ -597,7 +632,7 @@
 		 WHERE R.MEM_ID = #{memId} AND R.SUCCESS = 'TRUE'
 	</select>
 	<select id="getResRefundList" resultType="ReservationDTO" parameterType="String">
-		SELECT R.MERCHANT_UID, R.PAY_TIME, R.TITLE, R.CINEMA, R.SCR_IDX,R.P1,R.P2,R.P3,R.SEAT,DATE_FORMAT(R.DATE,'%y-%m-%d') AS 'DATE',R.S_TIME,DATE_FORMAT(S.SCH_ETIME,'%H:%i') AS SCH_ETIME,R.PAID_AMOUNT
+		SELECT R.MERCHANT_UID, R.PAY_TIME, R.TITLE, R.CINEMA, R.SCR_IDX,R.P1,R.P2,R.P3,R.SEAT,DATE_FORMAT(R.DATE,'%y-%m-%d') AS 'DATE',R.S_TIME,DATE_FORMAT(S.SCH_ETIME,'%H:%i') AS SCH_ETIME,R.PAID_AMOUNT,R.REFUND_TIME
 		  FROM RESERVATION R JOIN SCHEDULE S
 		    ON R.LO_IDX = S.LO_IDX AND R.CI_IDX = S.CI_IDX AND R.SCH_IDX = S.SCH_IDX AND LEFT(R.SCR_IDX,1) = S.SCR_IDX AND R.MOV_TYPE = S.SCH_MOV_TYPE
 		 WHERE R.MEM_ID = #{memId} AND R.SUCCESS = 'FALSE'
@@ -617,7 +652,7 @@
 	</select>
 	
 	<select id="admResBoardList" resultType="ReservationDTO">
-		SELECT R.MERCHANT_UID, R.MEM_ID, R.PAY_TIME, R.TITLE, R.CINEMA, R.SCR_IDX,R.P1,R.P2,R.P3,R.SEAT,DATE_FORMAT(R.DATE,'%y-%m-%d') AS 'DATE',R.S_TIME,DATE_FORMAT(S.SCH_ETIME,'%H:%i') AS SCH_ETIME,R.PAID_AMOUNT,R.SUCCESS
+		SELECT R.MERCHANT_UID, R.MEM_ID, R.PAY_TIME, R.TITLE, R.CINEMA, R.SCR_IDX,R.P1,R.P2,R.P3,R.SEAT,DATE_FORMAT(R.DATE,'%y-%m-%d') AS 'DATE',R.S_TIME,DATE_FORMAT(S.SCH_ETIME,'%H:%i') AS SCH_ETIME,R.PAID_AMOUNT,R.SUCCESS,R.REFUND_TIME
 		  FROM RESERVATION R JOIN SCHEDULE S
 		    ON R.LO_IDX = S.LO_IDX AND R.CI_IDX = S.CI_IDX AND R.SCH_IDX = S.SCH_IDX AND LEFT(R.SCR_IDX,1) = S.SCR_IDX AND R.MOV_TYPE = S.SCH_MOV_TYPE
 	</select>

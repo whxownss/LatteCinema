@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,12 +37,15 @@
 ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("memberList");
 %>
   <body class="nav-md">
+<c:if test="${sessionScope.sId == null || ! fn:startsWith(sessionScope.sId, 'admin')}">
+   <c:redirect url="login.me" />
+</c:if>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="adm_home.ad" class="site_title"><i class="fa fa-film"></i> <span>Latte Cinema!</span></a>
+              <a href="main.me" class="site_title"><i class="fa fa-film"></i> <span>Latte Cinema!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -65,11 +69,12 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="adm_home.ad"><i class="fa fa-home"></i> Home</a></li>
-                  <li><a href="adm_member.ad"><i class="fa fa-user"></i> 회원관리</a></li>
+                  <li><a href="adm_home.ad"><i class="fa fa-home"></i>Home</a></li>
+                  <li><a href="adm_member.ad"><i class="fa fa-user"></i>회원관리</a></li>
                   <li><a href="adm_mv_inout.ad"><i class="fa fa-edit"></i>영화 통합 추가/제거</a></li>
                   <li><a href="adm_store.ad"><i class="fa fa-beer"></i>스토어 관리</a></li>
-                  <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
+                  <li><a href="adm_location.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
+                  <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>스케줄 관리</a></li>
                 </ul>
               </div>
               <div class="menu_section">
@@ -104,17 +109,17 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
           </div>
         </div>
 
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-            </nav>
-          </div>
+      <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle" style="padding-top: 8px; padding-bottom: 8px">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+          </nav>
         </div>
-        <!-- /top navigation -->
+      </div>
+      <!-- /top navigation -->
 
         <!-- page content -->
         <div class="right_col" role="main">
@@ -122,6 +127,7 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
           
             <div class="page-title">
               <div class="title_left">
+              	<h3>회원 관리</h3>
               </div>
             </div>
 
@@ -130,7 +136,7 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Member Management</h2>
+                    <h2>회원 목록</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -153,6 +159,7 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
                           <th>E-mail</th>
                           <th>정지여부</th>
                           <th>정지일</th>
+                          <th>탈퇴일</th>
                         </tr>
                       </thead>
                       <tbody id="tbody">
@@ -166,24 +173,30 @@ ArrayList<MemberDTO> memberList = (ArrayList<MemberDTO>)request.getAttribute("me
                       		<td>${memberDTO.memPhone }</td>
                       		<td>${memberDTO.memEmail }</td>
 	                          <td>
-<!-- 								<select> -->
-<%-- 									<c:if test="${memberDTO.memStatus eq 0 }"> --%>
-<!-- 										<option value="0" selected>N</option> -->
-<!-- 										<option value="1">Y</option> -->
-<%-- 									</c:if> --%>
-<%-- 									<c:if test="${memberDTO.memStatus eq 1 }"> --%>
-<!-- 										<option value="0">N</option> -->
-<!-- 										<option value="1" selected>Y</option> -->
-<%-- 									</c:if> --%>
-<!-- 								</select> -->
+	                          <c:if test="${empty memberDTO.memDeleteD }">
+								<select>
 									<c:if test="${memberDTO.memStatus eq 0 }">
-										<a>No</a>
+										<option value="No" selected>No</option>
+										<option value="Yes">Yes</option>
 									</c:if>
 									<c:if test="${memberDTO.memStatus eq 1 }">
-										<a>Yes</a>
+										<option value="No">No</option>
+										<option value="Yes" selected>Yes</option>
 									</c:if>
+								</select>
+								</c:if>
+								<c:if test="${!empty memberDTO.memDeleteD }">
+									
+								</c:if>
+<%-- 									<c:if test="${memberDTO.memStatus eq 0 }"> --%>
+<!-- 										<a>No</a> -->
+<%-- 									</c:if> --%>
+<%-- 									<c:if test="${memberDTO.memStatus eq 1 }"> --%>
+<!-- 										<a>Yes</a> -->
+<%-- 									</c:if> --%>
 							  </td>
 							  <td>${memberDTO.memStopD }</td>
+							  <td>${memberDTO.memDeleteD }</td>
 						</tr>	  
                       	</c:forEach>
                         

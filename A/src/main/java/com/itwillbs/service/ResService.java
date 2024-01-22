@@ -96,12 +96,14 @@ public class ResService {
 		return movieListJson;
 	}
 
-	public String setResInfo(String rsp) {
+	public String setResInfo(String rsp, String sId, String sName) {
 		resDAO = new ResDAO();
 		
 //		Gson gson = new Gson();
 		Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 		ReservationDTO reservationDTO = gson.fromJson(rsp, ReservationDTO.class);
+		reservationDTO.setMemId(sId);
+		reservationDTO.setBuyerName(sName);
 		System.out.println("@@@@@@@@@@@@@@@");
 		System.out.println(rsp);
 		System.out.println(reservationDTO);
@@ -144,10 +146,11 @@ public class ResService {
 		return resDAO.isSameSeat(seatDTO);
 	}
 
-	public String setSeatInfo(String schDTO) {
+	public String setSeatInfo(String schDTO, String sId) {
 		resDAO = new ResDAO();
 		Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 		SeatDTO seatDTO = gson.fromJson(schDTO, SeatDTO.class);
+		seatDTO.setMemId(sId);
 		 
 		return resDAO.setSeatInfo(seatDTO);
 	}
@@ -202,5 +205,11 @@ public class ResService {
 		
 		return resDAO.getAllSchedules();
 	}
+
+	public void refundPoint(String sId, String mid) {
+		resDAO = new ResDAO();
+		resDAO.refundPoint(sId, mid);
+	}
+
 
 }

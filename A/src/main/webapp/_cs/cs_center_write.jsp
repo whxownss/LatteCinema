@@ -3,10 +3,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
+<c:if test="${sessionScope.sId == null || ! fn:startsWith(sessionScope.sId, 'admin')}">
+   <c:redirect url="login.me" />
+</c:if>
 <%
 ArrayList<LocationDTO> regionList = (ArrayList<LocationDTO>)request.getAttribute("regionList");
 %>	

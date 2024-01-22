@@ -53,11 +53,12 @@ $(function(){
 		// 목록 나타내기
 		$(".showMovies").empty();
 		var id = $(this).attr("id")
+		debugger;
 		$.each(movieList, (i, e) => {
 			if(e.schMovType != id) return;
 				$(".showMovies").append("<li class='list-group-item border border-0 myMouse' id='" 
-										+ id + "movie" + (i+1) + "'>" 
-										+ "<img src='_assets/img/grade_" + e.rating + ".png' class='pb-1'/>"
+										+ id + "movie" + (e.movieCode) + "'>"
+										+ "<img src='_assets/img/grade_" + e.rating + ".png' class='pb-1 pe-1'/>"
 										+ e.title + "</li>");
 		});			
 		
@@ -71,9 +72,11 @@ $(function(){
 		var id = (tmp.startsWith("c")) ? "selectedCinema" : "selectedMovie";
 		$("#" + id).text(this.textContent);
 		
+		debugger;
 		if(id == "selectedCinema") selectMovieList();				
-		
-		letsGoSchedule(this);
+		debugger;
+		letsGoSchedule(this);			
+		debugger;
 		
 		//////////////////////////////선택시 체크표시	
 		var id2 = (tmp.startsWith("c")) ? "[id*=cinema]" : "[id*=movie]";
@@ -112,6 +115,7 @@ $(function(){
 		writeDate(date);
 		
 		cleanMyMovies();
+		debugger;
 		selectMovieList();
 		
 		// 영화관 선택도 없이 날짜 변경 할 때
@@ -198,7 +202,6 @@ $(function(){
 		$('#staticBackdrop').modal('show');
 	});
 	
-	
 	// res2 페이지 이동
 	$(".goRes2Btn").on("click", function(){
 		localStorage.setItem('schDTO', $("#schDTO").val());
@@ -211,4 +214,39 @@ $(function(){
 	$(document).on("mouseover", ".myMouse", function(e){
 		$(".myMouse").css("cursor","pointer");
 	});
+	
+	
+	
+	// 영화코드 들고 페이지 왔을 때
+	var movieCode = new URL(window.location.href).searchParams.get('movieCode');
+	if(movieCode == null) return;
+		
+	$("#lo6").trigger("click");
+	$("#cinema7").trigger("click");
+	debugger;
+	
+	$.ajax({
+		type: "GET",
+		url: "res1ProGM.re",
+		data: {movieCode: movieCode},
+		dataType: "json",
+	})
+	.done(function(data){
+		debugger;
+		
+		var movieType = "NOW";
+		if(data.movieCategory == "OLD")
+			movieType = "OLD";
+		
+		$("#" + movieType).trigger("click");
+		if($("#" + movieType + "movie" + movieCode).length == 0){
+			alert("금일 상영하지 않는 영화입니다.\n다른 날짜를 선택해주세요.");
+			return;
+		}
+		$("#" + movieType + "movie" + movieCode).trigger("click");
+		
+	})
+	.fail(function(){});
+	// 영화코드 들고 페이지 왔을 때	
+	
 });

@@ -2,6 +2,7 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,12 +26,14 @@ import com.itwillbs.domain.MovieDTO;
 import com.itwillbs.email.SendGmail;
 import com.itwillbs.email.EmailCode;
 import com.itwillbs.domain.PageDTO;
+import com.itwillbs.domain.PointDTO;
 import com.itwillbs.domain.QnaBoardDTO;
 import com.itwillbs.domain.ReservationDTO;
 import com.itwillbs.domain.StorePayDTO;
 import com.itwillbs.service.CSBoardService;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.MovieService;
+import com.itwillbs.service.StoreService;
 import com.itwillbs.sms.SendSms;
 
 
@@ -50,7 +53,7 @@ public class MemberController extends HttpServlet {
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String sPath = request.getServletPath();
-	
+		
 		// 메인 페이지 이동
 		if(sPath.equals("/main.me")) {
 			// 메인화면 최근글 3개 가져오기
@@ -97,7 +100,6 @@ public class MemberController extends HttpServlet {
 			request.setAttribute("moviePoster", posterList.get(moviePosterNum).getPoster());
 			request.setAttribute("movieCode", posterList.get(moviePosterNum).getMovieCode());
 			System.out.println(posterList.get(moviePosterNum).getMovieCode());
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@");
 //			System.out.println(posterList.get(1).getPoster());
 //			System.out.println(posterList.get(2));
 //			System.out.println(posterList.get(3));
@@ -176,6 +178,16 @@ public class MemberController extends HttpServlet {
 
 		}//
 		
+		// 회원가입 연락처 중복체크 checkPhone.me
+		if(sPath.equals("/checkPhone.me")) {
+			memberService = new MemberService();
+			
+			int result = memberService.checkPhone(request);
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result + "");
+		}//
+		
 		// 회원가입 이메일 인증번호 보내기 checkemail.me
 		if(sPath.equals("/emailCode.me")) {
 			response.setCharacterEncoding("utf-8");
@@ -200,6 +212,7 @@ public class MemberController extends HttpServlet {
 			memberService = new MemberService();
 			MemberDTO memberDTO = memberService.userCheck(request);
 			
+			// 회원 정지
 			if(memberDTO != null && memberDTO.getMemStatus().equals("1")) {
 				String memStopD = memberDTO.getMemStopD();
 				System.out.println("정지된날: "+memStopD);
@@ -208,6 +221,21 @@ public class MemberController extends HttpServlet {
 				dispatcher.forward(request, response);
 				return;
 			}
+			
+			// 회원 탈퇴
+			if(memberDTO != null) {
+			    String memDeleteD = memberDTO.getMemDeleteD();
+			    if(memDeleteD != null) {
+			        System.out.println("탈퇴한날: " + memDeleteD);
+			        request.setAttribute("memDeleteD", memDeleteD);
+			        dispatcher = request.getRequestDispatcher("_member/msg3.jsp");
+			        dispatcher.forward(request, response);
+			        return;
+			    } else {
+			    	memDeleteD = "";
+			    }
+			}
+
 			//리턴받은 값이 null 아니면 => 아이디 비밀번호 일치
 			//리턴받은 값이 null 이면 => 아이디 비밀번호 틀림
 			if(memberDTO != null) {
@@ -318,6 +346,23 @@ public class MemberController extends HttpServlet {
 		
 		// 마이페이지 (마이페이지 기본메인화면) 이동
 		if(sPath.equals("/myPage.me")) {
+			StoreService storeService = new StoreService();
+			HttpSession session = request.getSession();
+			
+			String sId = (String)session.getAttribute("sId");
+			System.out.println(sId);
+			
+			ArrayList<StorePayDTO> storeGiftList = storeService.getstoreGiftList(sId);
+			request.setAttribute("storeGiftList",storeGiftList);
+			
+			memberService = new MemberService();
+			List<PointDTO> pointList = memberService.getPointList(sId);
+			request.setAttribute("pointList",pointList);
+			
+			String memPoint =  memberService.getMemPoint(sId);
+			request.setAttribute("memPoint",memPoint);
+			
+			
 			dispatcher = request.getRequestDispatcher("_mypage/myPage.jsp");
 			dispatcher.forward(request, response);
 		}//
@@ -440,6 +485,18 @@ public class MemberController extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("_mypage/changepw.jsp");
 			dispatcher.forward(request, response);
 		}//
+		
+		// 현재 비밀번호 확인작업 changePassCheck.me
+		if(sPath.equals("/changePassCheck.me")) {
+			memberService =  new MemberService();
+			
+			int result = memberService.changePassCheck(request);
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result + "");
+			
+		}
+		
 		
 		// 비밀번호 변경 changepwPro
 		if(sPath.equals("/changepwPro.me")) {
@@ -846,7 +903,6 @@ public class MemberController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}//
 		
-
 		
 	}
 }

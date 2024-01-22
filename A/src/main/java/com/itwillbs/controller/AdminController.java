@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.itwillbs.domain.CenterBoardDTO;
+import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ExqBoardDTO;
 import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.LostBoardDTO;
@@ -52,17 +53,17 @@ public class AdminController extends HttpServlet {
 		if(sPath.equals("/adm_home.ad")) {
 			System.out.println("주소비교 /adm_home.ad 일치");
 			
-			HttpSession session = request.getSession();
-			String memId = (String) session.getAttribute("sId");
-			if(memId == null) {
-				response.sendRedirect("login.me");
-				return;
-			}
-			boolean containsAdmin = memId.startsWith("admin");
-			if(!containsAdmin) {
-				response.sendRedirect("main.me");
-				return;
-			}
+//			HttpSession session = request.getSession();
+//			String memId = (String) session.getAttribute("sId");
+//			if(memId == null) {
+//				response.sendRedirect("login.me");
+//				return;
+//			}
+//			boolean containsAdmin = memId.startsWith("admin");
+//			if(!containsAdmin) {
+//				response.sendRedirect("main.me");
+//				return;
+//			}
 			
 			request.setCharacterEncoding("utf-8");
 			CSBoardService csBoardService = new CSBoardService();
@@ -81,17 +82,17 @@ public class AdminController extends HttpServlet {
 		if(sPath.equals("/adm_member.ad")) {
 			System.out.println("주소비교 /adm_member.ad 일치");
 			
-			HttpSession session = request.getSession();
-			String memId = (String) session.getAttribute("sId");
-			if(memId == null) {
-				response.sendRedirect("login.me");
-				return;
-			}
-			boolean containsAdmin = memId.startsWith("admin");
-			if(!containsAdmin) {
-				response.sendRedirect("main.me");
-				return;
-			}
+//			HttpSession session = request.getSession();
+//			String memId = (String) session.getAttribute("sId");
+//			if(memId == null) {
+//				response.sendRedirect("login.me");
+//				return;
+//			}
+//			boolean containsAdmin = memId.startsWith("admin");
+//			if(!containsAdmin) {
+//				response.sendRedirect("main.me");
+//				return;
+//			}
 			
 			request.setCharacterEncoding("utf-8");
 			CSBoardService csBoardService = new CSBoardService();
@@ -182,17 +183,17 @@ public class AdminController extends HttpServlet {
 		// 관리자 공지사항 페이지 이동
 		if(sPath.equals("/adm_cs_center.ad")) {
 			
-			HttpSession session = request.getSession();
-			String memId = (String) session.getAttribute("sId");
-			if(memId == null) {
-				response.sendRedirect("login.me");
-				return;
-			}
-			boolean containsAdmin = memId.startsWith("admin");
-			if(!containsAdmin) {
-				response.sendRedirect("main.me");
-				return;
-			}
+//			HttpSession session = request.getSession();
+//			String memId = (String) session.getAttribute("sId");
+//			if(memId == null) {
+//				response.sendRedirect("login.me");
+//				return;
+//			}
+//			boolean containsAdmin = memId.startsWith("admin");
+//			if(!containsAdmin) {
+//				response.sendRedirect("main.me");
+//				return;
+//			}
 			
 			CSBoardService csBoardService = new CSBoardService();
 			ArrayList<CenterBoardDTO> centerBoardList = csBoardService.getCenterBoardList();
@@ -205,17 +206,17 @@ public class AdminController extends HttpServlet {
 		// 관리자 자주찾는질문 페이지 이동
 		if(sPath.equals("/adm_cs_exque.ad")) {
 			
-			HttpSession session = request.getSession();
-			String memId = (String) session.getAttribute("sId");
-			if(memId == null) {
-				response.sendRedirect("login.me");
-				return;
-			}
-			boolean containsAdmin = memId.startsWith("admin");
-			if(!containsAdmin) {
-				response.sendRedirect("main.me");
-				return;
-			}
+//			HttpSession session = request.getSession();
+//			String memId = (String) session.getAttribute("sId");
+//			if(memId == null) {
+//				response.sendRedirect("login.me");
+//				return;
+//			}
+//			boolean containsAdmin = memId.startsWith("admin");
+//			if(!containsAdmin) {
+//				response.sendRedirect("main.me");
+//				return;
+//			}
 			
 			CSBoardService csBoardService = new CSBoardService();
 			ArrayList<ExqBoardDTO> exqBoardList = csBoardService.getExqBoardList();
@@ -228,17 +229,17 @@ public class AdminController extends HttpServlet {
 		// 관리자 1:1문의 페이지 이동
 		if(sPath.equals("/adm_cs_qna.ad")) {
 			
-			HttpSession session = request.getSession();
-			String memId = (String) session.getAttribute("sId");
-			if(memId == null) {
-				response.sendRedirect("login.me");
-				return;
-			}
-			boolean containsAdmin = memId.startsWith("admin");
-			if(!containsAdmin) {
-				response.sendRedirect("main.me");
-				return;
-			}
+//			HttpSession session = request.getSession();
+//			String memId = (String) session.getAttribute("sId");
+//			if(memId == null) {
+//				response.sendRedirect("login.me");
+//				return;
+//			}
+//			boolean containsAdmin = memId.startsWith("admin");
+//			if(!containsAdmin) {
+//				response.sendRedirect("main.me");
+//				return;
+//			}
 			
 			CSBoardService csBoardService = new CSBoardService();
 			ArrayList<QnaBoardDTO> qnaBoardList = csBoardService.getQnaBoardList();
@@ -251,17 +252,17 @@ public class AdminController extends HttpServlet {
 		// 관리자 분실물 페이지 이동
 		if(sPath.equals("/adm_cs_lost.ad")) {
 			
-			HttpSession session = request.getSession();
-			String memId = (String) session.getAttribute("sId");
-			if(memId == null) {
-				response.sendRedirect("login.me");
-				return;
-			}
-			boolean containsAdmin = memId.startsWith("admin");
-			if(!containsAdmin) {
-				response.sendRedirect("main.me");
-				return;
-			}
+//			HttpSession session = request.getSession();
+//			String memId = (String) session.getAttribute("sId");
+//			if(memId == null) {
+//				response.sendRedirect("login.me");
+//				return;
+//			}
+//			boolean containsAdmin = memId.startsWith("admin");
+//			if(!containsAdmin) {
+//				response.sendRedirect("main.me");
+//				return;
+//			}
 			
 			CSBoardService csBoardService = new CSBoardService();
 			ArrayList<LostBoardDTO> lostBoardList = csBoardService.getLostBoardList();
@@ -271,18 +272,18 @@ public class AdminController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}	
 		
-		// 관리자 영화관 관리 페이지 이동
+		// 관리자 스케줄 관리 페이지 이동
 		if(sPath.equals("/adm_cinema.ad")) {
 			ResService resService = new ResService();
 			MovieService movieServie = new MovieService();
 			
 			List<LocationDTO> locationList = resService.getLocations();
-			String cinemaListJson = resService.getCinemas();
+//			String cinemaListJson = resService.getCinemas();
 			List<ScheduleDTO> allSchedules = resService.getAllSchedules();
 			ArrayList<MovieDTO> movieList = movieServie.getMovieList();
 			
 			request.setAttribute("locationList", locationList);
-			request.setAttribute("cinemaListJson", cinemaListJson);
+//			request.setAttribute("cinemaListJson", cinemaListJson);
 			request.setAttribute("allSchedules", allSchedules);
 			request.setAttribute("movieList", movieList);
 			
@@ -310,6 +311,18 @@ public class AdminController extends HttpServlet {
 			
 			response.setCharacterEncoding("utf-8");
 		    response.getWriter().write(result);
-		}		
+		}	
+		
+		
+		// 관리자 영화관 관리 페이지 이동
+		if(sPath.equals("/adm_location.ad")) {
+			AdminService adminService = new AdminService();
+			List<CinemaDTO> cinemaList = adminService.getAllCinema();
+			
+			request.setAttribute("cinemaList", cinemaList);
+			
+			dispatcher = request.getRequestDispatcher("_admin/production/adm_location.jsp");
+			dispatcher.forward(request, response);
+		}
 	}//doProcess()	
 }//클래스 끝

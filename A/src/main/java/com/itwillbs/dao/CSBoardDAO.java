@@ -724,18 +724,69 @@ public class CSBoardDAO {
 		return recommendList;
 	}//getRecommendList()
 
+//	public int plusRecoCount(String createUser,String recommendIdx,String recoUser) {
+//		System.out.println("CSBoardDAO plusRecoCount()");
+//		int updateSuccess = 0;
+//		try {
+//			session = sqlSessionFactory.openSession();
+//			Map<String, Object> params = new HashMap<>();
+//	        params.put("createUser", createUser);
+//	        params.put("recommendIdx", recommendIdx);
+//	        params.put("recoUser", recoUser);
+//			updateSuccess = session.update("CsAdmin.plusRecoCount",params);
+//			session.insert("CsAdmin.insertRecoUser",params);
+//			
+//			session.commit();
+//		} catch (Exception e) {
+//			session.rollback();
+//			e.printStackTrace();
+//		} finally {
+//			if (session != null) {
+//	            session.close();
+//	        }
+//		}
+//		return updateSuccess;
+//	}
+	// 임시
 	public int plusRecoCount(String createUser,String recommendIdx,String recoUser) {
 		System.out.println("CSBoardDAO plusRecoCount()");
-		int updateSuccess = 0;
+		int success = 0;
+		RecommendDTO recommendDTO = null;
+		String idx = "";
+		String user = "";
 		try {
 			session = sqlSessionFactory.openSession();
+			ArrayList<RecommendDTO> list = null;
+			list = new ArrayList<RecommendDTO>(session.selectList("CsAdmin.searchRecodUser", recoUser));
+			//String user = session.selectOne("CsAdmin.searchRecodUser", recoUser);
+			if (!list.isEmpty()) {
+			    recommendDTO = list.get(0);
+			}
+			if(recommendDTO != null) {
+				
+				idx = recommendDTO.getRecommendIdx();
+				user = recommendDTO.getRecoUser();
+				System.out.println(idx+" "+user);
+	
+				if(user == null) {
+					user = "";
+				}
+			}
+			
 			Map<String, Object> params = new HashMap<>();
 	        params.put("createUser", createUser);
 	        params.put("recommendIdx", recommendIdx);
 	        params.put("recoUser", recoUser);
-			updateSuccess = session.update("CsAdmin.plusRecoCount",params);
-			session.insert("CsAdmin.insertRecoUser",params);
-			
+	        params.put("idx", idx);
+	        if(user.equals("")) {
+	        	//insert
+	        	success = session.insert("CsAdmin.insertRecodTable",params);
+	        } else {
+	        	//update
+	        	success = session.update("CsAdmin.updateRecodTable",params);
+	        	session.update("CsAdmin.minusRecoCount",params);
+	        }
+	        session.update("CsAdmin.plusRecoCount2",params);
 			session.commit();
 		} catch (Exception e) {
 			session.rollback();
@@ -745,8 +796,8 @@ public class CSBoardDAO {
 	            session.close();
 	        }
 		}
-		return updateSuccess;
-	}
+		return success;
+	}//임시끝
 
 	public int deleteRecoData(int recommendIdx) {
 		System.out.println("CSBoardDAO deleteRecoData()");
@@ -754,6 +805,7 @@ public class CSBoardDAO {
 		try {
 			session = sqlSessionFactory.openSession();
 			deleteSuccess = session.delete("CsAdmin.deleteRecoData", recommendIdx);
+			session.delete("CsAdmin.deleteRecoDupli", recommendIdx);
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
