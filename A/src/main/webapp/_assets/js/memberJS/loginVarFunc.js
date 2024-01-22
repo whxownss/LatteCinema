@@ -110,12 +110,16 @@ function checkSubmit() {
 	
 	return ((flag == 0) ? false : true);
 }	
+//http://c2d2309t2.itwillbs.com/A/login.me
+//ChGI_ZlTbCS_3gIpvFOZ
 
+//http://localhost:8080/A/login.me
+//IeY1eBbgIyceSk3XnoEy
 
 // 네이버 로그인 api
 var naverLogin = new naver.LoginWithNaverId({
-	clientId: "IeY1eBbgIyceSk3XnoEy",
-	callbackUrl: "http://localhost:8080/A/login.me",
+	clientId: "ChGI_ZlTbCS_3gIpvFOZ",
+	callbackUrl: "http://c2d2309t2.itwillbs.com/A/login.me",
 	isPopup: false, /* 팝업을 통한 연동처리 여부 */
     callbackHandle: true
 });

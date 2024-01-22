@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.itwillbs.domain.CenterBoardDTO;
@@ -155,6 +156,12 @@ public class CSController extends HttpServlet  {
 		// 공지사항 글쓰기 페이지 이동
 		if(sPath.equals("/cs_center_write.cs")) {
 			System.out.println("주소비교 /cs_center_write.cs 일치");
+//			HttpSession session = request.getSession();
+//			String memId = (String) session.getAttribute("sId");
+//			if(memId == null) {
+//				response.sendRedirect("main.me");
+//				return;
+//			}
 			dispatcher = request.getRequestDispatcher("_cs/cs_center_write.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -406,13 +413,18 @@ public class CSController extends HttpServlet  {
 			if(qnaCategory == null) {
 				qnaCategory = "";
 			}
-			
-			int count = csBoardService.getQnaBoardCount();
-			ArrayList<QnaBoardDTO> qnaBoardList = csBoardService.getQnaBoardList(pageDTO);
+			int count = 0;
+			ArrayList<QnaBoardDTO> qnaBoardList = null;
+			//int count = csBoardService.getQnaBoardCount();
+			//ArrayList<QnaBoardDTO> qnaBoardList = csBoardService.getQnaBoardList(pageDTO);
+			//select 2번 안하려고 if else로 한다.
 			if(!qnaCategory.equals("")) {
 				System.out.println("@@@@@@@@@@ cs_qna서치페이징");
 				qnaBoardList = csBoardService.getQnaBoardList(pageDTO,qnaCategory);
 				count = csBoardService.getQnaBoardCount(qnaCategory);
+			} else {
+				count = csBoardService.getQnaBoardCount();
+				qnaBoardList = csBoardService.getQnaBoardList(pageDTO);
 			}
 			//추가한 부분
 
@@ -547,6 +559,18 @@ public class CSController extends HttpServlet  {
 			String createUser = request.getParameter("createUser");
 			String createDate = request.getParameter("createDate");
 			
+//			HttpSession session = request.getSession();
+//			String memId = (String) session.getAttribute("sId");
+//			if(memId == null) {
+//				memId = "";
+//			}
+//			if(!memId.equalsIgnoreCase("admin")) {
+//				if(!memId.equalsIgnoreCase(createUser)) {
+//					response.sendRedirect("login.me");
+//					return;
+//				}
+//			}
+			
 			csBoardService = new CSBoardService();
 			QnaBoardDTO qnaBoardDTO = csBoardService.getQnaBoard(createUser,createDate);
 			request.setAttribute("qnaBoardDTO", qnaBoardDTO);
@@ -582,6 +606,14 @@ public class CSController extends HttpServlet  {
 		// 1:1문의 글쓰기 페이지 이동
 		if(sPath.equals("/cs_qna_write.cs")) {
 			System.out.println("주소비교 /cs_qna_write.cs 일치");
+			
+//			HttpSession session = request.getSession();
+//			String memId = (String) session.getAttribute("sId");
+//			if(memId == null) {
+//				response.sendRedirect("main.me");
+//				return;
+//			}
+			
 			dispatcher = request.getRequestDispatcher("_cs/cs_qna_write.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -673,6 +705,14 @@ public class CSController extends HttpServlet  {
 		// 분실물 글쓰기 페이지 이동
 		if(sPath.equals("/cs_lost_write.cs")) {
 			System.out.println("주소비교 /cs_lost_write.cs 일치");
+			
+//			HttpSession session = request.getSession();
+//			String memId = (String) session.getAttribute("sId");
+//			if(memId == null) {
+//				response.sendRedirect("main.me");
+//				return;
+//			}
+			
 			dispatcher = request.getRequestDispatcher("_cs/cs_lost_write.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -815,7 +855,7 @@ public class CSController extends HttpServlet  {
 			System.out.println(msg);
 			//response.sendRedirect("cs_center.cs");
 			response.sendRedirect("adm_cs_lost.ad");
-		}//
+		}//  
 		
 		// 추천 게시판
 		if(sPath.equals("/cs_recommend.cs")) {
@@ -880,6 +920,12 @@ public class CSController extends HttpServlet  {
 		}
 		// 추천 게시판 영화 신청 페이지로 가기
 		if(sPath.equals("/cs_recoSubscribe.cs")) {
+//			HttpSession session = request.getSession();
+//			String memId = (String) session.getAttribute("sId");
+//			if(memId == null) {
+//				response.sendRedirect("main.me");
+//				return;
+//			}
 			dispatcher = request.getRequestDispatcher("_cs/cs_recoSubscribe.jsp");
 			dispatcher.forward(request, response);
 		}

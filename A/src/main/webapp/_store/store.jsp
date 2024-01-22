@@ -6,14 +6,13 @@
 <!-- 상단 이미지 -->
 <c:set var="storeItemListB" value="${requestScope.storeItemListB}" />
 <c:set var="storeItemListS" value="${requestScope.storeItemListS}" />
-<c:set var="storeItemListT" value="${requestScope.storeItemListT}" />
+<c:set var="storeItemListC" value="${requestScope.storeItemListC}" />
 
 <main id="main">
 
 	<!-- 상단 이미지 -->
 	
-	<div id="visual_top" class="visual_top visual_mall"
-		style="margin-top: 40px; margin-bottom: 40px;">
+	<div id="visual_top" class="visual_top visual_mall">
 		<div class="inner">
 			<img
 				src="https://cf.lottecinema.co.kr//Media/WebAdmin/f04df114813f45b18e63e06308211d0f.jpg"
@@ -35,8 +34,8 @@
 						width="50" height="60"> <a href="#store2" class="more fs-1">스낵음료</a>
 				</div>
 				<div class="col coll">
-					<img src="assets/img/free-icon-ticket-432312.png" alt="ticket"
-						width="50" height="70"> <a href="#store3" class="more fs-1">관람권</a>
+					<img src="assets/img/free-icon-coffee-5497772.png" alt="coffee"
+						width="50" height="60"> <a href="#store3" class="more fs-1">커피</a>
 				</div>
 			</div>
 		</div>
@@ -88,6 +87,7 @@
 								</c:choose>
 							</div>
 							<div class="itm_tit">
+								<h1 class="text-danger"><i>BEST</i></h1>
 								<h4>${itemB.itemName}</h4>
 								<p>${itemB.itemDetail}</p>
 							</div>
@@ -152,32 +152,32 @@
 				style="display: block; height: 20px; margin-top: 20px; visibility: hidden;"></span>
 			<div
 				class="section-header d-flex justify-content-between align-items-center mb-5">
-				<h2>관람권</h2>
+				<h2>커피</h2>
 			</div>
 
 			<div class="row g-5">
-				<c:forEach var="itemT" items="${storeItemListT}" varStatus="status">
+				<c:forEach var="itemC" items="${storeItemListC}" varStatus="status">
 					<div class="col-lg-4">
-						<a href="storeList.st?itemIdx=${itemT.itemIdx}" class="text-center">
+						<a href="storeList.st?itemIdx=${itemC.itemIdx}" class="text-center">
 							<div class="itm_img">
 								<c:choose>
-									<c:when test="${fn:startsWith(itemT.itemImage, 'https://')}">
-										<img src="${itemT.itemImage}" alt="${itemT.itemName}">
+									<c:when test="${fn:startsWith(itemC.itemImage, 'https://')}">
+										<img src="${itemC.itemImage}" alt="${itemC.itemName}">
 									</c:when>
 									
 									<c:otherwise>
-										<img src="_assets/img/${itemT.itemImage}" alt="${itemT.itemName}"
+										<img src="_assets/img/${itemC.itemImage}" alt="${itemC.itemName}"
 										style="width: 280px; height: 250px; margin: 20px;">
 									</c:otherwise>
 								</c:choose>
 							</div>
 							<div class="itm_tit">
-								<h4>${itemT.itemName}</h4>
-								<p>${itemT.itemDetail}</p>
+								<h4>${itemC.itemName}</h4>
+								<p>${itemC.itemDetail}</p>
 							</div>
 							<div class="txt_price_wrap">
 								<span class="txt_price"
-									style="font-weight: bold; color: #FF243E;"> <i>${itemT.itemPrice}원</i></span>
+									style="font-weight: bold; color: #FF243E;"> <i>${itemC.itemPrice}원</i></span>
 							</div>
 						</a>
 					</div>

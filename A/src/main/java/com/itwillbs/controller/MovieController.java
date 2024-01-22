@@ -113,6 +113,15 @@ public class MovieController extends HttpServlet {
 			ArrayList<ReviewDTO> reviewList = movieService.getReview(movieCode);
 			request.setAttribute("reviewList", reviewList);
 			
+			// 내가 해당 영화에 한줄평 가져오기
+			ReviewDTO myReview = new ReviewDTO();
+			myReview = movieService.myReview(request);
+			request.setAttribute("myReview", myReview);
+			System.out.println("@@@@@@@@@@@@@@@@");
+			System.out.println(myReview);
+			System.out.println("@@@@@@@@@@@@@@@@");
+			
+			
 			dispatcher = request.getRequestDispatcher("_movie/movie_view.jsp");
 			dispatcher.forward(request, response);	
 			
@@ -208,7 +217,27 @@ public class MovieController extends HttpServlet {
 			int result = movieService.reviewInsert(request);
 			
 		}//
+		
+		// 한줄평 수정하기
+		if(sPath.equals("/reviewUpdate.mo")) {
+			ReviewDTO reviewDTO = new ReviewDTO();
+			movieService = new MovieService();
+			String result = movieService.reviewUpdate(request);
+
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result + "");
+		}
+		
+		// 한줄평 삭제하기
+		if(sPath.equals("/reviewDelete.mo")) {
+			ReviewDTO reviewDTO = new ReviewDTO();
+			movieService = new MovieService();
+			String result = movieService.reviewDelete(request);
 			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(result + "");
+			
+		}
 	
 		
 	}	

@@ -1,8 +1,10 @@
+<%@page import="com.itwillbs.domain.ReservationDTO"%>
 <%@page import="com.itwillbs.domain.ResponseDataDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%> 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -56,9 +58,13 @@
 	int monthlyAudi = 120;
 	
 	ArrayList<ResponseDataDTO> responseList = (ArrayList<ResponseDataDTO>)request.getAttribute("responseList");
+	ArrayList<ReservationDTO> resBoardList = (ArrayList<ReservationDTO>)request.getAttribute("resBoardList");
 %>
 
   <body class="nav-md">
+<c:if test="${sessionScope.sId == null || ! fn:startsWith(sessionScope.sId, 'admin')}">
+   <c:redirect url="login.me" />
+</c:if>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -89,14 +95,14 @@
                 <h3>General</h3>
                 <ul class="nav side-menu">
                   	
-                  <li><a href="adm_home.ad"><i class="fa fa-home"></i> Home</a>
+                  <li><a href="adm_home.ad"><i class="fa fa-home"></i>Home</a>
 <!--                     <ul class="nav child_menu"> -->
 <!--                       <li><a href="index.html">Dashboard</a></li> -->
 <!--                       <li><a href="index2.html">Dashboard2</a></li> -->
 <!--                       <li><a href="index3.html">Dashboard3</a></li> -->
 <!--                     </ul> -->
                   </li>
-                  <li><a href="adm_member.ad"><i class="fa fa-user"></i> 회원관리</a></li>
+                  <li><a href="adm_member.ad"><i class="fa fa-user"></i>회원관리</a></li>
                   <li><a href="adm_mv_inout.ad"><i class="fa fa-edit"></i>영화 통합 추가/제거</a>
 <!--                     <ul class="nav child_menu"> -->
 <!--                       <li><a href="form.html">General Form</a></li> -->
@@ -121,7 +127,8 @@
 <!--                     </ul> -->
                   </li>
                   
-                   <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
+				   <li><a href="adm_location.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
+                   <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>스케줄 관리</a></li>
                  
                 </ul>
               </div>
@@ -193,17 +200,17 @@
           </div>
         </div>
 
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-            </nav>
-          </div>
+       <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle" style="padding-top: 8px; padding-bottom: 8px">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+          </nav>
         </div>
-        <!-- /top navigation -->
+      </div>
+      <!-- /top navigation -->
 
         <!-- page content -->
         <div class="right_col" role="main">
@@ -242,34 +249,34 @@
           </div>
           <!-- /top tiles -->
 
-          <div class="row">
-            <div class="col-md-8 col-sm-8 col-xs-8">
-              <div class="dashboard_graph">
+<!--           <div class="row"> -->
+<!--             <div class="col-md-8 col-sm-8 col-xs-8"> -->
+<!--               <div class="dashboard_graph"> -->
 
-<!--                 <div class="row x_title"> -->
-<!--                   <div class="col-md-6"> -->
-<!--                     <h3>Network Activities <small>Graph title sub-title</small></h3> -->
-<!--                   </div> -->
-<!--                   <div class="col-md-6"> -->
-<!--                     <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc"> -->
-<!--                       <i class="glyphicon glyphicon-calendar fa fa-calendar"></i> -->
-<!--                       <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b> -->
-<!--                     </div> -->
-<!--                   </div> -->
-<!--                 </div> -->
+<!-- <!--                 <div class="row x_title"> --> 
+<!-- <!--                   <div class="col-md-6"> --> 
+<!-- <!--                     <h3>Network Activities <small>Graph title sub-title</small></h3> --> 
+<!-- <!--                   </div> --> 
+<!-- <!--                   <div class="col-md-6"> --> 
+<!-- <!--                     <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc"> --> 
+<!-- <!--                       <i class="glyphicon glyphicon-calendar fa fa-calendar"></i> --> 
+<!-- <!--                       <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b> --> 
+<!-- <!--                     </div> --> 
+<!-- <!--                   </div> --> 
+<!-- <!--                 </div> --> 
 
-<!--                 <div class="col-md-9 col-sm-9 col-xs-12"> -->
-<!--                   <div id="chart_plot_01" class="demo-placeholder"></div> -->
-<!--                 </div> -->
-				    <div style="width:75%;">
-				        <canvas id="canvas"></canvas>
-				    </div>
-                <div class="clearfix"></div>
-              </div>
-            </div>
+<!-- <!--                 <div class="col-md-9 col-sm-9 col-xs-12"> --> 
+<!-- <!--                   <div id="chart_plot_01" class="demo-placeholder"></div> --> 
+<!-- <!--                 </div> --> 
+<!-- 				    <div style="width:75%;"> -->
+<%-- 				        <canvas id="canvas"></canvas> --%>
+<!-- 				    </div> -->
+<!--                 <div class="clearfix"></div> -->
+<!--               </div> -->
+<!--             </div> -->
 
-          </div>
-          <br />
+<!--           </div> -->
+<!--           <br /> -->
 
           <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
@@ -303,576 +310,40 @@
                         <tr>
                           <th>예매번호</th>	
                           <th>회원명</th>
-                          <th>지역</th>
                           <th>영화관</th>
                           <th>영화명</th>
                           <th>가격</th>
                           <th>예매일</th>
+                          <th>상영일시</th>
                           <th>취소일</th>
-                          <th>핸드폰 번호</th>
-                          <th>E-mail</th>
-                          <th>예매상태</th>
+<!--                           <th>예매상태</th> -->
                         </tr>
                       </thead>
-                      <tbody>
-                      	<tr>
-                      		<td>1</td>
-                      		<td>강동원</td>
-                      		<td>부산</td>
-                          	<td>서면점</td>
-                      		<td>부산의봄</td>
-                      		<td>20000</td>
-                      		<td>2023/04/25</td>
-                      		<td></td>
-                      		<td>010 1111 1111</td>
-                      		<td>won@itwillbs.co.kr</td>
-                      		<td>
-								<select name="bookSelect">
-									<option value="Y">Y</option>
-									<option value="N">N</option>
-								</select>
-							</td>
-                      	</tr>
-                        <tr>
-                      		<td>2</td>
-                      		<td>홍길동</td>
-                      		<td>부산</td>
-                          	<td>서면점</td>
-                      		<td>부산의봄</td>
-                      		<td>25000</td>
-                      		<td>2023/05/25</td>
-                      		<td>2023/05/26</td>
-                      		<td>010 2222 2222</td>
-                      		<td>dong@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option selected>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>3</td>
-                      		<td>김길동</td>
-            		        <td>부산</td>
-                          	<td>서면점</td>
-                      		<td>부산의봄</td>
-                      		<td>10000</td>
-                      		<td>2023/06/25</td>
-                      		<td></td>
-                      		<td>010 3333 3333</td>
-                      		<td>dong3@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>4</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>부산의봄</td>
-                      		<td>10000</td>
-                      		<td>2023/07/25</td>
-                      		<td></td>
-                      		<td>010 3334 3333</td>
-                      		<td>dong3@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
-                      	<tr>
-                      		<td>5</td>
-                      		<td>이길동</td>
-                      		<td>부산</td>
-                      		<td>부산대점</td>
-                      		<td>라이언킹</td>
-                      		<td>10000</td>
-                      		<td>2023/08/25</td>
-                      		<td></td>
-                      		<td>010 3353 3333</td>
-                      		<td>dong5@itwillbs.co.kr</td>
-                      		<td>
-								<select>
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-                      	</tr>
+                      <tbody id="tbody">
+                      	<c:forEach var="reservationDTO" items="${resBoardList }">
+                      		<tr>
+                   			  <th>${reservationDTO.merchantUid }</th>	
+	                          <th>${reservationDTO.memId }</th>
+	                          <th>${reservationDTO.cinema} ${reservationDTO.scrIdx }</th>
+	                          <th>${reservationDTO.title}</th>
+	                          <th>${reservationDTO.paidAmount}</th>
+	                          <th>${reservationDTO.payTime}</th>
+	                          <th>${reservationDTO.date} ${reservationDTO.sTime}~${reservationDTO.schEtime}</th>
+	                          <th>${reservationDTO.refundTime}</th>
+<!-- 	                          <th> -->
+<!-- 	                          	<select name="bookSelect"> -->
+<%-- 	                          	<c:if test="${reservationDTO.success eq true }"> --%>
+<!-- 									<option value="true" selected>Y</option> -->
+<!-- 									<option value="false">N</option> -->
+<%-- 	                          	</c:if> --%>
+<%-- 	                          	<c:if test="${reservationDTO.success ne true }"> --%>
+<!-- 									<option value="true">Y</option> -->
+<!-- 									<option value="false" selected>N</option> -->
+<%-- 	                          	</c:if> --%>
+<!-- 								</select> -->
+<!-- 	                          </th> -->
+                      		</tr>
+                      	</c:forEach>
                       </tbody>
                     </table>
 				</form>
@@ -920,12 +391,13 @@
                       <tbody>
                       <c:forEach var="responseDataDTO" items="${responseList }">
                       <tr>
-                      	  <c:if test="${empty responseDataDTO.qnaIdx }">
-                      	  <th>분실물</th>	
-                      	  </c:if>
-                      	  <c:if test="${empty responseDataDTO.lostIdx }">
-                      	  <th>1:1문의</th>	
-                      	  </c:if>
+<%--                       	  <c:if test="${empty responseDataDTO.qnaIdx }"> --%>
+<!--                       	  	<th>분실물</th>	 -->
+<%--                       	  </c:if> --%>
+<%--                       	  <c:if test="${empty responseDataDTO.lostIdx }"> --%>
+<!--                       	  	<th>1:1문의</th>	 -->
+<%--                       	  </c:if> --%>
+                      	  <th>${responseDataDTO.boardGB}</th>
                           <th>${responseDataDTO.createUser }</th>
                           <th>${responseDataDTO.createDate }</th>
                           <th>${responseDataDTO.subject }</th>
@@ -1125,9 +597,14 @@
 		// 데이터 변경, 데이터셋 추가/삭제 등 다른 버튼 클릭 이벤트 핸들러들은 여기에 작성됩니다...
 		$(document).ready(function() {
 		  // 셀렉트박스의 onchange 이벤트 핸들러
-		  $('select[name="bookSelect"]').on('change', function() {
-			 console.log("이벤트 연결");
-		    $('#bookStatus').submit(); // 폼 제출
+// 		  $('select[name="bookSelect"]').on('change', function() {
+// 			 console.log("이벤트 연결");
+// 		    $('#bookStatus').submit(); // 폼 제출
+// 		  });
+		  $('#tbody').on('change','select',function(){
+			var $row = $(this).closest("tr");
+			var mid = $row.find("th:first-child").text();
+			alert('이벤트연결' + mid);
 		  });
 		});
         

@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,12 +37,15 @@
 ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.getAttribute("centerBoardList");
 %>
   <body class="nav-md">
+<c:if test="${sessionScope.sId == null || ! fn:startsWith(sessionScope.sId, 'admin')}">
+   <c:redirect url="login.me" />
+</c:if>   
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="adm_home.ad" class="site_title"><i class="fa fa-film"></i> <span>Latte Cinema!</span></a>
+              <a href="main.me" class="site_title"><i class="fa fa-film"></i> <span>Latte Cinema!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -65,11 +69,12 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="adm_home.ad"><i class="fa fa-home"></i> Home</a></li>
-                  <li><a href="adm_member.ad"><i class="fa fa-user"></i> 회원관리</a></li>
+                  <li><a href="adm_home.ad"><i class="fa fa-home"></i>Home</a></li>
+                  <li><a href="adm_member.ad"><i class="fa fa-user"></i>회원관리</a></li>
                   <li><a href="adm_mv_inout.ad"><i class="fa fa-edit"></i>영화 통합 추가/제거</a></li>
                   <li><a href="adm_store.ad"><i class="fa fa-beer"></i>스토어 관리</a></li>
-                  <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
+                  <li><a href="adm_location.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
+                  <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>스케줄 관리</a></li>
                 </ul>
               </div>
               <div class="menu_section">
@@ -104,17 +109,17 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
           </div>
         </div>
 
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-            </nav>
-          </div>
+      <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle" style="padding-top: 8px; padding-bottom: 8px;" >
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+          </nav>
         </div>
-        <!-- /top navigation -->
+      </div>
+      <!-- /top navigation -->
 
         <!-- page content -->
         <div class="right_col" role="main">
@@ -122,6 +127,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
           
             <div class="page-title">
               <div class="title_left">
+              	<h3>공지사항</h3>
               </div>
             </div>
 						  <!-- Modal -->
@@ -166,7 +172,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>공지사항<small><button type="button" class="btn btn-secondary" id="insertCenterBoard">추가</button></small></h2>
+                    <h2>글 목록<small><button type="button" class="btn btn-secondary" id="insertCenterBoard">추가</button></small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -226,98 +232,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
       </div>
     </div>
 
-    <!-- jQuery -->
-    <script src="_admin/vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="_admin/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="_admin/vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="_admin/vendors/nprogress/nprogress.js"></script>
-    <!-- iCheck -->
-    <script src="_admin/vendors/iCheck/icheck.min.js"></script>
-    <!-- Datatables -->
-    <script src="_admin/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="_admin/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="_admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="_admin/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="_admin/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="_admin/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="_admin/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="_admin/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="_admin/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="_admin/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="_admin/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="_admin/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="_admin/vendors/jszip/dist/jszip.min.js"></script>
-    <script src="_admin/vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="_admin/vendors/pdfmake/build/vfs_fonts.js"></script>
-
-    <!-- Custom Theme Scripts -->
-    <script src="_admin/build/js/custom.min.js"></script>
-	<script type="text/javascript">
-	$("tr a[data-toggle='modal']").on("click", function () {
-		debugger; // 문제점은 공지사항 내용쪽 텍스트가 공백이 너무 많아서 터져버림.
-	    // data-info 속성에서 JSON 데이터 가져오기
-	    var infoData = $(this).data("info");
-	    console.log(typeof infoData); //1번째 글은 Object타입, 서면입력글은 string으로 잡힘.
-	    
-	    //Object면 String으로 바꾸고 String이면 그냥 통과해서 replaceAll 가능하게 함.
-	    if(typeof infoData != 'string'){
-	    	infoData = JSON.stringify(infoData);	
-	    }
-		
-	    if (infoData.includes("\n")) {
-	        // \n이 포함되어 있다면, replaceAll을 사용하여 모두 제거
-	        infoData = infoData.replaceAll("\n", "");
-	    }
-	    if (infoData.includes("\t")) {
-	    	infoData = infoData.replaceAll("\t", "");
-	    }
-// 	    infoData = infoData.replaceAll("\n", "");
-// 	    infoData = infoData.replaceAll("\t", "");
-	    infoData = JSON.parse(infoData);
-	
-	    // 필요한 정보 추출
-	    var key1 = infoData.key1;
-	    var key2 = infoData.key2;
-	    var key3 = infoData.key3;
-	    var key4 = infoData.key4;
-	    var key5 = infoData.key5;
-	
-	    // 추출한 정보를 출력하거나 다른 작업 수행
-	    console.log("Key1:", key1);
-	    console.log("Key2:", key2);
-	    console.log("Key3:", key3);
-	    console.log("Key4:", key4);
-	    console.log("Key5:", key5);
-	
-        if (infoData) {
-            // 필요한 정보 추출
-            $("#centerName").val(infoData.key3); // 
-            $("#recipient-name").val(infoData.key1); // a 태그에서 가져온 정보
-            $("#message-text").text(infoData.key2); // a 태그에서 가져온 정보
-            $("#centerUser").val(infoData.key4);
-            $("#centerDate").val(infoData.key5);
-        } else {
-            console.log("data-info not found");
-        }
-	    // 또는 다른 작업을 수행
-	    // 예를 들어, 모달을 열거나 다른 페이지로 이동
-	});//tr 누르면 모달 토글
-	$("#insertCenterBoard").on("click",function(){
-		window.location.href = "cs_center_write.cs";
-	});
-	$("#deleteCenterBoard").on("click",function(){
-		alert('삭제 버튼 이벤트 연결확인');
- 		
- 		if(confirm("삭제하시겠습니까?")){
- 			alert("정상적으로 삭제되었습니다.");
- 			window.location.href = 'deleteCenterContent.cs?createUser=' + $("#centerUser").val() + '&createDate=' + $("#centerDate").val();
- 		}else{
- 			alert("삭제가 취소되었습니다.");
- 		}
-	});
-	</script>
+    <script type="text/javascript" src="${pageContext.servletContext.contextPath}/jQuery/jquery-3.6.0.js"></script>
+	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/_assets/js/admJS/adm_cs_center.js"></script>
   </body>
 </html>

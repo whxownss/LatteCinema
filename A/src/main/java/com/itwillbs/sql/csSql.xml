@@ -118,10 +118,11 @@
 		)
 	</insert>
 	
+	<!-- cs_qna.jsp > qnaBoardList -->
 	<select id="getQnaBoardList" resultType="QnaBoardDTO" parameterType="PageDTO">
 		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
 	  	  FROM QNABOARD
- 		 ORDER BY CREATE_DATE  DESC 
+ 		 ORDER BY CREATE_DATE  DESC
  		 LIMIT #{startRow}, #{pageSize}
 	</select>
 	<select id="getQnaBoardCount" resultType="int">
@@ -147,14 +148,16 @@
 	</select>
 	<update id="updateQnaBoard" parameterType="QnaBoardDTO">
 		UPDATE QNABOARD
-		   SET QNARESPONSE = #{qnaResponse}, RESPONSE_USER = #{responseUser}, RESPONSE_DATE = SYSDATE()
+		   SET QNARESPONSE = #{qnaResponse}
+		     , RESPONSE_USER = #{responseUser}
+		     , RESPONSE_DATE = SYSDATE()
 		 WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
 	</update>
 	<insert id="qnaBoardInsert" parameterType="QnaBoardDTO">
 		INSERT INTO QNABOARD
 		VALUES ((SELECT *
-		   FROM (SELECT IFNULL(MAX(CAST(QNAIDX as unsigned)), 0) + 1
-				   FROM QNABOARD) Q)
+				   FROM (SELECT IFNULL(MAX(CAST(QNAIDX as unsigned)), 0) + 1
+						   FROM QNABOARD) Q)
 		,#{qnaCategory}
 		,#{qnaSubject}
 		,#{qnaContent}
@@ -190,13 +193,13 @@
 	<select id="myQnaStatusList" parameterType="map" resultType="QnaBoardDTO">
 		SELECT *, ROW_NUMBER() OVER (ORDER BY CREATE_DATE) AS RN
 	  	  FROM QNABOARD
-	  	 WHERE CREATE_USER = #{createUser} AND
+	  	 WHERE CREATE_USER = #{createUser} 
 	  	 <choose>
 		    <when test="qnaResponse == 0">
-		        QNARESPONSE IS NULL
+		   AND QNARESPONSE IS NULL
 		    </when>
 		    <otherwise>
-		        QNARESPONSE IS NOT NULL
+		   AND QNARESPONSE IS NOT NULL
 		    </otherwise>
 		</choose>
  		 ORDER BY CREATE_DATE  DESC 
@@ -253,10 +256,8 @@
 		    LOSTRESPONSE = #{lostResponse},
 		    RESPONSE_USER = #{responseUser},
 		    RESPONSE_DATE = SYSDATE(),
-		    LOSTSTATUS = CASE
-		        WHEN LOSTRESPONSE IS NULL THEN 0
-		        ELSE 1
-		    END
+		    LOSTSTATUS = CASE WHEN LOSTRESPONSE IS NULL THEN 0
+		        			  ELSE 1 END
 		WHERE
 		    CREATE_USER = #{createUser}
 		    AND CREATE_DATE = #{createDate}
@@ -399,13 +400,30 @@
 	    WHERE CREATE_USER = #{createUser} AND CREATE_DATE = #{createDate}
 	</insert>
 	<select id="getResponseList" resultType="ResponseDataDTO">
-		SELECT R.RESDATAIDX,Q.QNAIDX,NULL AS LOSTIDX, Q.CREATE_USER, Q.CREATE_DATE, R.SUBJECT,R.RESPONSE, R.RESPONSE_USER, R.RESPONSE_DATE
-		  FROM QNABOARD Q JOIN RESPONSEDATA R
-		    ON Q.QNAIDX = R.QNAIDX
-		UNION ALL
-		SELECT R.RESDATAIDX,NULL AS QNAIDX,L.LOSTIDX, L.CREATE_USER, L.CREATE_DATE, R.SUBJECT,R.RESPONSE, R.RESPONSE_USER, R.RESPONSE_DATE
-		  FROM LOSTBOARD L JOIN RESPONSEDATA R    
-		    ON L.LOSTIDX = R.LOSTIDX
+		SELECT R.RESDATAIDX
+			  , '1:1 문의' as BOARDGB
+			  , Q.QNAIDX
+		      , NULL AS LOSTIDX
+		      , Q.CREATE_USER
+		      , Q.CREATE_DATE
+		      , R.SUBJECT
+		      , R.RESPONSE
+		      , R.RESPONSE_USER
+		      , R.RESPONSE_DATE
+				  FROM QNABOARD Q JOIN RESPONSEDATA R
+				    ON Q.QNAIDX = R.QNAIDX
+		 UNION ALL
+		 SELECT R.RESDATAIDX
+			  , '분실물' as BOARDGB
+			  , NULL AS QNAIDX
+		      , L.LOSTIDX
+		      , L.CREATE_USER
+		      , L.CREATE_DATE
+		      , R.SUBJECT,R.RESPONSE
+		      , R.RESPONSE_USER
+		      , R.RESPONSE_DATE
+				  FROM LOSTBOARD L JOIN RESPONSEDATA R    
+				    ON L.LOSTIDX = R.LOSTIDX
 	</select>
 	
 	<insert id="insertRecommend" parameterType="RecommendDTO">
@@ -423,33 +441,36 @@
 		);
 	</insert>
 	<select id="getRecommendList" parameterType="PageDTO" resultType="RecommendDTO">
-SELECT *
-  FROM RECOMMENDBOARD
- WHERE 
-  YEAR(CREATE_DATE) = YEAR(CURRENT_TIMESTAMP) AND
-  (
-    (MONTH(CREATE_DATE) BETWEEN 1 AND 2 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-03-01')) OR
-    (MONTH(CREATE_DATE) BETWEEN 3 AND 4 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-05-01')) OR
-    (MONTH(CREATE_DATE) BETWEEN 5 AND 6 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-07-01')) OR
-    (MONTH(CREATE_DATE) BETWEEN 7 AND 8 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-09-01')) OR
-    (MONTH(CREATE_DATE) BETWEEN 9 AND 10 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-11-01'))
-  )
-  OR
-  (
-    MONTH(CREATE_DATE) BETWEEN 11 AND 12 AND 
-    YEAR(CREATE_DATE) = YEAR(CURRENT_TIMESTAMP) + 1 AND 
-    CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP) + 1, '-01-01')
-  )
-<choose>
-    <when test="search == 'arrange'">
-        ORDER BY COUNTRECO DESC
-    </when>
-    <otherwise>
-        ORDER BY CREATE_DATE DESC
-    </otherwise>
-</choose>
-LIMIT #{startRow}, #{pageSize}
+		SELECT *
+		  FROM RECOMMENDBOARD
+		 WHERE 
+		  YEAR(CREATE_DATE) = YEAR(CURRENT_TIMESTAMP) AND
+		  <![CDATA[
+		  (
+		    (MONTH(CREATE_DATE) BETWEEN 1 AND 2 AND CREATE_DATE < CONCAT(YEAR(CURRENT_TIMESTAMP), '-03-01')) OR
+		    (MONTH(CREATE_DATE) BETWEEN 3 AND 4 AND CREATE_DATE < CONCAT(YEAR(CURRENT_TIMESTAMP), '-05-01')) OR
+		    (MONTH(CREATE_DATE) BETWEEN 5 AND 6 AND CREATE_DATE < CONCAT(YEAR(CURRENT_TIMESTAMP), '-07-01')) OR
+		    (MONTH(CREATE_DATE) BETWEEN 7 AND 8 AND CREATE_DATE < CONCAT(YEAR(CURRENT_TIMESTAMP), '-09-01')) OR
+		    (MONTH(CREATE_DATE) BETWEEN 9 AND 10 AND CREATE_DATE < CONCAT(YEAR(CURRENT_TIMESTAMP), '-11-01'))
+		  )
+		  OR
+		  (
+		    MONTH(CREATE_DATE) BETWEEN 11 AND 12 AND 
+		    YEAR(CREATE_DATE) = YEAR(CURRENT_TIMESTAMP) + 1 AND 
+		    CREATE_DATE < CONCAT(YEAR(CURRENT_TIMESTAMP) + 1, '-01-01')
+		  )
+		  ]]>
+		<choose>
+		    <when test="search == 'arrange'">
+		        ORDER BY COUNTRECO DESC
+		    </when>
+		    <otherwise>
+		        ORDER BY CREATE_DATE DESC
+		    </otherwise>
+		</choose>
+		LIMIT #{startRow}, #{pageSize}
 	</select>
+	
 	<update id="plusRecoCount" parameterType="map">
 		UPDATE RECOMMENDBOARD
 		SET COUNTRECO = COUNTRECO + 1
@@ -462,6 +483,37 @@ LIMIT #{startRow}, #{pageSize}
 		    GROUP BY RECO_USER
 		  )
 	</update>
+	<!-- 임시추가 -->
+	<select id="searchRecodUser" parameterType="String" resultType="RecommendDTO">
+		SELECT RECOMMENDIDX, RECO_USER
+		  FROM RECODUPLICHK2
+		 WHERE RECO_USER = #{recoUser}
+	</select>
+	<insert id="insertRecodTable" parameterType="map">
+		INSERT INTO RECODUPLICHK2
+		VALUES
+		(#{recoUser}
+		,#{recommendIdx}
+		,SYSDATE()
+		)
+	</insert>
+	<update id="updateRecodTable" parameterType="map">
+		UPDATE RECODUPLICHK2
+		   SET RECOMMENDIDX = #{recommendIdx}
+		      ,RECO_DATE = SYSDATE()
+		 WHERE RECO_USER = #{recoUser};
+	</update>
+	<update id="plusRecoCount2" parameterType="map">
+		UPDATE RECOMMENDBOARD
+		   SET COUNTRECO = COUNTRECO + 1
+		 WHERE RECOMMENDIDX = #{recommendIdx}
+	</update>
+	<update id="minusRecoCount" parameterType="map">
+		UPDATE RECOMMENDBOARD
+		   SET COUNTRECO = COUNTRECO - 1
+		 WHERE RECOMMENDIDX = #{idx}
+	</update>
+	<!-- 임시추가 끝 -->
 	<insert id="insertRecoUser" parameterType="map">
 		INSERT INTO RECODUPLICHK(RECOMMENDIDX,RECO_USER,RECO_DATE)
 		SELECT #{recommendIdx},#{recoUser},SYSDATE()
@@ -478,9 +530,30 @@ LIMIT #{startRow}, #{pageSize}
 		DELETE FROM RECOMMENDBOARD
  		 WHERE RECOMMENDIDX = #{recommendIdx}
 	</delete>
+	<delete id="deleteRecoDupli" parameterType="int">
+		DELETE FROM RECODUPLICHK2
+ 		 WHERE RECOMMENDIDX = #{recommendIdx}
+	</delete>
 	<select id="getRecoBoardCount" resultType="int">
 		SELECT COUNT(*) 
 		  FROM RECOMMENDBOARD
+		 WHERE 
+		  YEAR(CREATE_DATE) = YEAR(CURRENT_TIMESTAMP) AND
+		  <![CDATA[
+		  (
+		    (MONTH(CREATE_DATE) BETWEEN 1 AND 2 AND CREATE_DATE < CONCAT(YEAR(CURRENT_TIMESTAMP), '-03-01')) OR
+		    (MONTH(CREATE_DATE) BETWEEN 3 AND 4 AND CREATE_DATE < CONCAT(YEAR(CURRENT_TIMESTAMP), '-05-01')) OR
+		    (MONTH(CREATE_DATE) BETWEEN 5 AND 6 AND CREATE_DATE < CONCAT(YEAR(CURRENT_TIMESTAMP), '-07-01')) OR
+		    (MONTH(CREATE_DATE) BETWEEN 7 AND 8 AND CREATE_DATE < CONCAT(YEAR(CURRENT_TIMESTAMP), '-09-01')) OR
+		    (MONTH(CREATE_DATE) BETWEEN 9 AND 10 AND CREATE_DATE < CONCAT(YEAR(CURRENT_TIMESTAMP), '-11-01'))
+		  )
+		  OR
+		  (
+		    MONTH(CREATE_DATE) BETWEEN 11 AND 12 AND 
+		    YEAR(CREATE_DATE) = YEAR(CURRENT_TIMESTAMP) + 1 AND 
+		    CREATE_DATE < CONCAT(YEAR(CURRENT_TIMESTAMP) + 1, '-01-01')
+		  )
+		  ]]>
 	</select>
 	<select id="searchRecoList" parameterType="map" resultType="RecommendDTO">
 		SELECT *
@@ -508,7 +581,23 @@ LIMIT #{startRow}, #{pageSize}
 	<select id="getRecoSrchCount" parameterType="String" resultType="int">
 		SELECT COUNT(*) 
 		  FROM RECOMMENDBOARD
-		 WHERE MOVIENAME LIKE '%${movieName}%' 
+		 WHERE 
+		  (YEAR(CREATE_DATE) = YEAR(CURRENT_TIMESTAMP) AND
+		  (
+		    (MONTH(CREATE_DATE) BETWEEN 1 AND 2 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-03-01')) OR
+		    (MONTH(CREATE_DATE) BETWEEN 3 AND 4 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-05-01')) OR
+		    (MONTH(CREATE_DATE) BETWEEN 5 AND 6 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-07-01')) OR
+		    (MONTH(CREATE_DATE) BETWEEN 7 AND 8 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-09-01')) OR
+		    (MONTH(CREATE_DATE) BETWEEN 9 AND 10 AND CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP), '-11-01'))
+		  )
+		  OR
+		  (
+		    MONTH(CREATE_DATE) BETWEEN 11 AND 12 AND 
+		    YEAR(CREATE_DATE) = YEAR(CURRENT_TIMESTAMP) + 1 AND 
+		    CREATE_DATE &lt; CONCAT(YEAR(CURRENT_TIMESTAMP) + 1, '-01-01')
+		  )
+		  )
+		  AND MOVIENAME LIKE '%${movieName}%' 
 	</select>
 	
 	<update id="updateMemStatus" parameterType="memberDTO">
@@ -530,12 +619,42 @@ LIMIT #{startRow}, #{pageSize}
 		  FROM RESERVATION R JOIN SCHEDULE S
 		    ON R.LO_IDX = S.LO_IDX AND R.CI_IDX = S.CI_IDX AND R.SCH_IDX = S.SCH_IDX AND LEFT(R.SCR_IDX,1) = S.SCR_IDX AND R.MOV_TYPE = S.SCH_MOV_TYPE
 		 WHERE R.MEM_ID = #{memId} AND R.SUCCESS = 'TRUE'
+		 LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
 	</select>
 	<select id="getResBoardCount" parameterType="String" resultType="int">
 		SELECT COUNT(*)
 		  FROM RESERVATION R JOIN SCHEDULE S
-		    ON R.LO_IDX = S.LO_IDX AND R.CI_IDX = S.CI_IDX AND R.SCH_IDX = S.SCH_IDX AND LEFT(R.SCR_IDX,1) = S.SCR_IDX AND R.MOV_TYPE = S.SCH_MOV_TYPE
+		    ON R.LO_IDX = S.LO_IDX 
+		   AND R.CI_IDX = S.CI_IDX 
+		   AND R.SCH_IDX = S.SCH_IDX 
+		   AND LEFT(R.SCR_IDX,1) = S.SCR_IDX 
+		   AND R.MOV_TYPE = S.SCH_MOV_TYPE
 		 WHERE R.MEM_ID = #{memId} AND R.SUCCESS = 'TRUE'
+	</select>
+	<select id="getResRefundList" resultType="ReservationDTO" parameterType="String">
+		SELECT R.MERCHANT_UID, R.PAY_TIME, R.TITLE, R.CINEMA, R.SCR_IDX,R.P1,R.P2,R.P3,R.SEAT,DATE_FORMAT(R.DATE,'%y-%m-%d') AS 'DATE',R.S_TIME,DATE_FORMAT(S.SCH_ETIME,'%H:%i') AS SCH_ETIME,R.PAID_AMOUNT,R.REFUND_TIME
+		  FROM RESERVATION R JOIN SCHEDULE S
+		    ON R.LO_IDX = S.LO_IDX AND R.CI_IDX = S.CI_IDX AND R.SCH_IDX = S.SCH_IDX AND LEFT(R.SCR_IDX,1) = S.SCR_IDX AND R.MOV_TYPE = S.SCH_MOV_TYPE
+		 WHERE R.MEM_ID = #{memId} AND R.SUCCESS = 'FALSE'
+	</select>
+	
+	<select id="getStoreBoardList" parameterType="map" resultType="StorePayDTO">
+		SELECT S.MERCHANT_UID,S.PAY_TIME,S.NAME,S.PAID_AMOUNT,S.GIFT_TEL,M.MEM_NAME
+		  FROM STORE_PAY S LEFT JOIN MEMBERS M
+		    ON S.GIFT_TEL = M.MEM_PHONE
+		 WHERE S.MEM_ID = #{memId}
+		 LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
+	</select>
+	<select id="getStoreBoardCount" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		  FROM STORE_PAY
+		 WHERE MEM_ID = #{memId}
+	</select>
+	
+	<select id="admResBoardList" resultType="ReservationDTO">
+		SELECT R.MERCHANT_UID, R.MEM_ID, R.PAY_TIME, R.TITLE, R.CINEMA, R.SCR_IDX,R.P1,R.P2,R.P3,R.SEAT,DATE_FORMAT(R.DATE,'%y-%m-%d') AS 'DATE',R.S_TIME,DATE_FORMAT(S.SCH_ETIME,'%H:%i') AS SCH_ETIME,R.PAID_AMOUNT,R.SUCCESS,R.REFUND_TIME
+		  FROM RESERVATION R JOIN SCHEDULE S
+		    ON R.LO_IDX = S.LO_IDX AND R.CI_IDX = S.CI_IDX AND R.SCH_IDX = S.SCH_IDX AND LEFT(R.SCR_IDX,1) = S.SCR_IDX AND R.MOV_TYPE = S.SCH_MOV_TYPE
 	</select>
 	
 	<select id="getRecommendListOrdered" resultType="RecommendDTO">

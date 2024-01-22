@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 <%@include file ="../_common/commonHeaderStart.jsp" %>
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
 	<main id="main">
-<%
-String createUser = "MEMBER2477";
-%>			
+<c:if test="${sessionScope.sId == null}">
+   <c:redirect url="login.me" />
+</c:if>		
 		<section class="category-section" id="">
 			<div class="container" data-aos="fade-up">
 				<!-- 이곳에 코드작성 -->
@@ -82,25 +82,6 @@ String createUser = "MEMBER2477";
 	</main>
 	
 <%@include file="../_common/commonFooterStart.jsp"%>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	$('#qnaSecretChk').change(function(){
-        if($(this).is(':checked')){
-            $('#qnaSecret').val('1');
-        } else {
-            $('#qnaSecret').val('0');
-        }
-    });
-	$("#insertForm").on("submit", function (e) { 
-// 		alert("qnaSecret: "+$('#qnaSecret').val())
-// 		e.preventDefault();
-		  if($("#qnaCategory").val() == '카테고리'){
-		    e.preventDefault();
-		    alert('카테고리를 선택해주세요.')
-		  }
-	});
-});
-
-</script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath}/jQuery/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath}/_assets/js/csJS/cs_qna_write.js"></script>
 <%@include file="../_common/commonFooterEnd.jsp"%>

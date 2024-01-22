@@ -68,8 +68,8 @@
 		 where ITEM_IDX LIKE 'S%'
 	</select>
 	
-	<!-- DB TICKET -->
-	<select resultType="StoreItemDTO" id="selectStoreItemT">
+	<!-- DB COFFEE -->
+	<select resultType="StoreItemDTO" id="selectStoreItemC">
 		select ITEM_IDX
 			 , ITEM_NAME
 			 , ITEM_DETAIL
@@ -77,7 +77,7 @@
 			 , ITEM_IMAGE, CREATE_USER
 			 , CREATE_DATE
 		  from STORE_ITEM
-		 where ITEM_IDX LIKE 'T%'
+		 where ITEM_IDX LIKE 'C%'
 	</select>
 	
 	<!-- STORELIST -->
@@ -165,8 +165,7 @@
 	
 	<!-- 삭제할 스토어 제품이름 리스트 보기 -->
 	<select id="itemNameList" resultType="StoreItemDTO">
-		SELECT ITEM_IDX
-			 , ITEM_NAME
+		SELECT ITEM_NAME
 		  FROM STORE_ITEM
 	</select>
 	
@@ -187,4 +186,15 @@
 			 , BUYER_TEL
 		  from STORE_PAY
 	</select>
+	
+	<!-- 내가 받은 선물 리스트 내역 -->
+	<select id="getstoreGiftList" parameterType="String" resultType="StorePayDTO">
+		SELECT *
+		  FROM STORE_PAY S 
+		  JOIN MEMBERS M
+		    ON S.GIFT_TEL = M.MEM_PHONE
+		 WHERE S.GIFT_TEL IS NOT NULL
+		   AND M.MEM_ID = #{value}
+	</select>
+	
 </mapper>

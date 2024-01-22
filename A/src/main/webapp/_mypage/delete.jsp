@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 
 <jsp:include page="../_common/header.jsp"></jsp:include>

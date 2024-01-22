@@ -5,7 +5,9 @@
 
 
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
-
+<c:if test="${sessionScope.sId != null }">
+<c:redirect url="main.me"/>
+</c:if>
 	<main id="main">
 			
 		<section class="category-section">

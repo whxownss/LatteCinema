@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <jsp:include page="../_common/meta.jsp"></jsp:include>
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <jsp:include page="../_common/header.jsp"></jsp:include>
-
+<c:if test="${sessionScope.sId == null }">
+<c:redirect url="main.me"/>
+</c:if>
 
 	<main id="main">
 		<section class="category-section">
@@ -43,7 +46,7 @@
                     </div>
                   </div>
                   <div class="btn-group">
-                    <button class="button large" id="cancelBtn" title="취소">취소</button>
+                    <button class="button large" id="cancelBtn" title="취소" type="button">취소</button>
                     <button class="button large purple" id="ckBtn" title="확인" name="pass" >확인</button>
                   </div>
                     
@@ -56,4 +59,6 @@
 	</main>
 <%@include file ="../_common/commonFooterStart.jsp" %>
 <!-- <link href="_assets/js/myInfo.js"> -->
+<script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath}/_assets/js/mypageJS/myInfo.js"></script>
 <%@include file ="../_common/commonFooterEnd.jsp" %>

@@ -1,5 +1,6 @@
 <%@page import="com.itwillbs.domain.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -7,9 +8,12 @@
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
 </head>
-<body>
-
+<body class="d-flex flex-column min-vh-100">
 <jsp:include page="../_common/header.jsp"></jsp:include>
+
+<c:if test="${sessionScope.sId == null }">
+<c:redirect url="main.me"/>
+</c:if>
 <main id="main">
   <section class="category-section">
     <div class="container has-lnb" data-aos="fade-up">
@@ -36,7 +40,8 @@
 							<tr>
 								<th scope="row"><label for="pass">현재 비밀번호</label></th>
 								<td>
-									<input type="password" name="pass" class="input-text w150px" >
+									<input type="password" name="pass" id="pass" class="input-text w150px"  >
+									<span id="checkNowPass"></span><br>
 								</td>
 							</tr>
 							<tr>
@@ -68,7 +73,7 @@
 				</ul>
 			
 				<div class="btn-group pt40">
-					<button class="button large" id="cancelBtn" onclick="history.back()">취소</button>
+					<button class="button large" id="cancelBtn" type="button">취소</button>
 					<button class="button purple large" type="submit" id="updateBtn">수정</button>
 				</div>
 			</div>

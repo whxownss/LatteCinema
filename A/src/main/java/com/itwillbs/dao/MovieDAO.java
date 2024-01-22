@@ -135,6 +135,39 @@ public class MovieDAO {
 		
 		return reviewList;
 	}
+
+	// 내가 해당영화에 쓴 댓글 가져오기
+	public ReviewDTO myReview(ReviewDTO reviewDTO) {
+		System.out.println("MovieDAO.myReview()");
+		SqlSession session = sqlSessionFactory.openSession();
+		// reviewDTO = 	
+		reviewDTO = session.selectOne("Movie.myReview", reviewDTO);
+		session.close();
+		System.out.println("12312312asdsd");
+		System.out.println(reviewDTO);
+		
+		return reviewDTO;
+	}
+
+	// 한줄평 수정하기
+	public String reviewUpdate(ReviewDTO reviewDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int updateCnt = session.update("Movie.reviewUpdate", reviewDTO);
+		session.commit();
+		session.close();
+		
+		return updateCnt > 0 ? "true" : "false";
+	}
+
+	// 한줄평 삭제하기
+	public String reviewDelete(ReviewDTO reviewDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int deleteCnt = session.delete("Movie.reviewDelete", reviewDTO);
+		session.commit();
+		session.close();
+		
+		return deleteCnt > 0 ? "true" : "fasle" ;
+	}
 	 
 }
 

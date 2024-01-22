@@ -30,7 +30,10 @@
 			  (
 			  	SELECT *
 		   		  FROM (SELECT IFNULL(MAX(CAST(MOVIE_IDX as unsigned)), 0) + 1
-				   		  FROM MOVIE) M)	
+				   		  FROM MOVIE
+				   		 WHERE MOVIE_CATEGORY = #{movieCategory}) M
+			  )	
+
 			, #{movieCode}
 		  	, #{title}
 		  	, #{actor}
@@ -125,7 +128,10 @@
    		 WHERE R.MEM_ID = #{memId}
    		   AND R.MOV_IDX = #{movIdx}
    		   AND R.MOV_TYPE = #{movType}
-	   	   AND NOW() > CONCAT(DATE_FORMAT(R.DATE, '%Y-%m-%d'), ' ', S.SCH_ETIME)
+	   	   AND NOW() >  (CASE WHEN S.SCH_ETIME >= "24:00"
+						THEN  CONCAT(DATE_FORMAT(DATE_ADD(R.DATE, INTERVAL 1 DAY), '%Y-%m-%d'), ' ', DATE_FORMAT(S.SCH_ETIME, "%h:%i"))
+						ELSE CONCAT(DATE_FORMAT(R.DATE, '%Y-%m-%d'), ' ', S.SCH_ETIME) END)
+		   AND R.SUCCESS != "false"
 	</select> 
 	
 	<!--한줄평 담기  -->
@@ -158,11 +164,18 @@
 	<select id="getReview" resultType="ReviewDTO" parameterType="String">
 		SELECT*
 		 FROM REVIEWS
-		 WHERE MOV_CODE = ${movCode}
+		 WHERE MOV_CODE = #{movCode}
 		 ORDER BY REV_NUM DESC;
 	
 	</select>
-
+	
+	<!-- 내가 해당영화에 쓴 댓글 가져오기  -->
+	<select id="myReview" resultType="ReviewDTO" parameterType="ReviewDTO">
+		SELECT REV_COMMENT
+		 FROM REVIEWS
+		 WHERE MEM_ID = #{memId}
+		 AND MOV_CODE = #{movCode}
+	</select>
 	<update id="updateMovie">
 	  UPDATE MOVIE
 	    SET
@@ -187,17 +200,31 @@
 
 
 	<delete id="deleteMovie">
-	
 	  DELETE 
 	  FROM MOVIE
 	  WHERE MOVIE_CODE = #{movieCode}
-
-	  
 	</delete>
 	
 	
 	
-
+		<!-- 한줄평 수정하기  -->
+	<update id="reviewUpdate" parameterType="ReviewDTO">
+		UPDATE REVIEWS
+		   SET REV_COMMENT = #{revComment}
+		 WHERE 1 = 1
+		   AND MEM_ID = #{memId}
+		   AND MOV_CODE = #{movCode} 
+	</update>
+	
+	
+	<!-- 한줄평 수정하기  -->
+	<delete id="reviewDelete" parameterType="ReviewDTO">
+		DELETE 
+		 FROM REVIEWS
+		WHERE 1=1
+		 AND MEM_ID = #{memId}
+	
+	</delete>
 	
 	
 </mapper>
