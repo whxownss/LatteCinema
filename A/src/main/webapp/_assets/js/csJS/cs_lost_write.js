@@ -23,7 +23,7 @@ $(document).ready(function(){
 	    }
 	});
     
-    $('#lostSubmit').on('click',function(e){
+    $('#lostSubmit').on('click',function(e){ 
     	if($('#locationSelect').val() === '' || $('#cinemaSelect').val() === ''){
     		e.preventDefault();
 		    alert('지역 및 영화관을 선택해주세요.');
