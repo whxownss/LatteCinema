@@ -21,7 +21,16 @@ public class StorePayDTO {
 	//마이페이지 구매내역을 위한 추가 작업
 	private String payTime;
 	private String memName;
+	private String refundTime;
 	
+
+	
+	public String getRefundTime() {
+		return refundTime;
+	}
+	public void setRefundTime(String refundTime) {
+		this.refundTime = refundTime;
+	}
 	public String getMemId() {
 		return memId;
 	}
@@ -130,8 +139,9 @@ public class StorePayDTO {
 				+ payMethod + ", cardName=" + cardName + ", cardNumber=" + cardNumber + ", buyerTel=" + buyerTel
 				+ ", success=" + success + ", status=" + status + ", buyerName=" + buyerName + ", merchantUid="
 				+ merchantUid + ", itemCnt=" + itemCnt + ", name=" + name + ", giftMsg=" + giftMsg + ", giftTel="
-				+ giftTel + ", payTime=" + payTime + ", memName=" + memName + "]";
+				+ giftTel + ", payTime=" + payTime + ", memName=" + memName + ", refundTime=" + refundTime + "]";
 	}
+	
 	
 		
 	

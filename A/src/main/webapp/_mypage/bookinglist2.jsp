@@ -71,6 +71,8 @@
 		<%
 		ArrayList<StorePayDTO> storeBoardList = (ArrayList<StorePayDTO>)request.getAttribute("storeBoardList");
 		PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
+		ArrayList<StorePayDTO> storeRefundList = (ArrayList<StorePayDTO>)request.getAttribute("storeRefundList");
+													
 		%>
 						
 						<!-- 예매 영화 목록 -->
@@ -121,7 +123,7 @@
 										<td scope="row" class="text-center align-middle">${storePayDTO.memName }</td>
 										<td scope="row" class="text-center align-middle">${storePayDTO.paidAmount}</td>
 										<c:if test="${ empty storePayDTO.giftTel }">
-											<td scope="row" class="text-center align-middle"><button class="btn btn-dark" type="button">환불</button></td>
+											<td scope="row" class="text-center align-middle"><button class="btn btn-dark refund" type="button">환불</button></td>
 										</c:if>
 										<c:if test="${ !empty storePayDTO.giftTel }">
 											<td scope="row" class="text-center align-middle">환불 불가</td>
@@ -167,33 +169,23 @@
 						<!-- 취소한 예매 영화 목록 -->
 						<div class="table-wrap mt10">
 							<table class="board-list" summary="취소일시, 영화명, 극장, 상영일시, 취소금액 항목을 가진 취소내역 목록 표" id="refundItem">
-								<caption>취소일시, 영화명, 극장, 상영일시, 취소금액 항목을 가진 취소내역 목록 표</caption>
-								<colgroup>
-									<col style="width:160px;">
-									<col>
-									<col style="width:130px;">
-									<col style="width:188px;">
-									<col style="width:105px;">
-								</colgroup>
 								<thead>
 									<tr>
-										<th scope="col">취소일시</th>
-										<th scope="col">영화/상품명</th>
-										<th scope="col">극장</th>
-										<th scope="col">상영/구매 일시</th>
-										<th scope="col">취소금액</th>
+										<th scope="col" class="text-center">취소일시</th>
+										<th scope="col" class="text-center">상품명</th>
+										<th scope="col" class="text-center">구매일시</th>
+										<th scope="col" class="text-center">취소금액</th>
 									</tr>
 								</thead>
 								<tbody>
-<%-- 								<c:forEach var="boardList" items="${boardList}"> --%>
-<!-- 									<tr> -->
-<%-- 										<td>${boardList.memId}</td> --%>
-<%-- 										<th scope="row">${boardList.memId}</th> --%>
-<%-- 										<td scope="row" style="text-align: left;">${boardList.memId}</td> --%>
-<%-- 										<td scope="row" style="text-align: left;">${boardList.memId}</td> --%>
-<%-- 										<td><span class="font-red">${boardList.memId}</span></td> --%>
-<!-- 									</tr> -->
-<%-- 								</c:forEach> --%>
+								<c:forEach var="storeRefund" items="${storeRefundList}">
+									<tr>
+										<td class="text-center">${storeRefund.refundTime}</td>
+										<td class="text-center">${storeRefund.name}</td>
+										<td class="text-center">${storeRefund.payTime}</td>
+										<td class="text-center">${storeRefund.paidAmount}</td>
+									</tr>
+								</c:forEach>
 								</tbody>
 							</table>
 							
@@ -255,22 +247,53 @@ $(function(){
 	$('#refundItem').DataTable({
 		pagingType: 'full_numbers'
 	});
+	
+	$("#tbody").on("click","button",function() {
+		debugger;
+		 var $row = $(this).closest("tr");
+	    // 해당 행 안에 있는 'merchantUid' 셀의 텍스트 내용
+	    var mid = $row.find("td:first-child").text();
+		if(confirm('정말 취소하시겠습니까?')){
+			
+			$.ajax({
+				type: "POST",
+				url: "storeRefund.st",
+				data: {mid: mid},
+				dataType: "text"
+			})
+			.done(function(data){
+				debugger;
+				if(data == "환불 성공"){
+					window.location.href="bookinglist2.me";
+//	 				$.ajax({
+//	 					type: "POST",
+//	 					url: "res4ProRF.re",
+//	 					data: {mid: rsp.merchant_uid},
+//	 					datType: "text"
+//	 				})
+//	 				.done(function(data){
+						
+//	 				})
+//	 				.fail(function(){})
+				}
+			})
+			.fail(function(){})
+			
+			
+			//window.location.href="";//여기서 res로 가도 되나?
+		}else {
+			
+		}
+		
+		
+	    
+	});
+	
+	$("#radBokd01").on("click",function(){
+		window.location.href="bookinglist.me";
+	});
+	
 });//document ready
-$("#tbody").on("click","button",function() {
-	 var $row = $(this).closest("tr");
-    // 해당 행 안에 있는 'merchantUid' 셀의 텍스트 내용
-    var merchantUid = $row.find("td:first-child").text();
-	alert('이벤트연결' + mid);
-	if(confirm('정말 취소하시겠습니까?')){
-		alert('취소하러가자')
-		//window.location.href="";//여기서 res로 가도 되나?
-	}else {
-		alert('취소 싫어')
-	}
-    
-});
-$("#radBokd01").on("click",function(){
-	window.location.href="bookinglist.me";
-});
+
 </script>
 <%@include file ="../_common/commonFooterEnd.jsp" %>

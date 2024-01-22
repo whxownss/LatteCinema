@@ -141,4 +141,14 @@ public class StoreDAO {
 		return storeGift;
 	}
 
+	public String refund(String mid) {
+		session = sqlSessionFactory.openSession();
+		int updateCnt = session.update("StoreItem.refund", mid);
+		
+		session.commit();
+		session.close();
+		
+		return updateCnt > 0 ? "true" : "";
+	}
+
 }//StoreDAO
