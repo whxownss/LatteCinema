@@ -31,15 +31,63 @@
 							</a>
 						</div>
 
-						<div class="swiper-slide">
+
+					<div class="swiper-slide">
 							<a href="#" class="img-bg d-flex align-items-end"
 								style="background-image: url('assets/img/mainSlide3.jpg'); height:800px !important;">
 								<div class="img-bg-inner">
-									<!--                      <h2>13 Amazing Poems from Shel Silverstein with Valuable Life Lessons</h2>-->
+									<!--                      <h2>17 Pictures of Medium Length Hair in Layers That Will Inspire Your New Haircut</h2>-->
 									<!--                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>-->
 								</div>
 							</a>
 						</div>
+						
+						
+						
+						<div class="swiper-slide">
+							<a href="#" class="img-bg d-flex align-items-end"
+								style="background-image: url('assets/img/mainSlide4.jpg'); height:800px !important;">
+								<div class="img-bg-inner">
+									<!--                      <h2>17 Pictures of Medium Length Hair in Layers That Will Inspire Your New Haircut</h2>-->
+									<!--                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>-->
+								</div>
+							</a>
+						</div>
+						
+						
+						<div class="swiper-slide">
+							<a href="#" class="img-bg d-flex align-items-end"
+								style="background-image: url('assets/img/mainSlide5.jpg'); height:800px !important;">
+								<div class="img-bg-inner">
+									<!--                      <h2>17 Pictures of Medium Length Hair in Layers That Will Inspire Your New Haircut</h2>-->
+									<!--                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>-->
+								</div>
+							</a>
+						</div>
+
+
+						<div class="swiper-slide">
+							<a href="#" class="img-bg d-flex align-items-end"
+								style="background-image: url('assets/img/mainSlide6.jpg'); height:800px !important;">
+								<div class="img-bg-inner">
+									<!--                      <h2>17 Pictures of Medium Length Hair in Layers That Will Inspire Your New Haircut</h2>-->
+									<!--                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>-->
+								</div>
+							</a>
+						</div>
+
+
+
+<!-- 						<div class="swiper-slide"> -->
+<!-- 							<a href="#" class="img-bg d-flex align-items-end" -->
+<!-- 								style="background-image: url('assets/img/mainSlide7.jpg'); height:800px !important;"> -->
+<!-- 								<div class="img-bg-inner"> -->
+<!-- 									                     <h2>13 Amazing Poems from Shel Silverstein with Valuable Life Lessons</h2> -->
+<!-- 									                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p> -->
+<!-- 								</div> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+					
 					</div>
 					<div class="custom-swiper-button-next">
 						<span class="bi-chevron-right"></span>
