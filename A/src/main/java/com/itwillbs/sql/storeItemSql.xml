@@ -185,6 +185,7 @@
 			 , PAY_TIME
 			 , BUYER_TEL
 		  from STORE_PAY
+	  order by PAY_TIME DESC
 	</select>
 	
 	<!-- 내가 받은 선물 리스트 내역 -->
@@ -195,6 +196,7 @@
 		    ON S.GIFT_TEL = M.MEM_PHONE
 		 WHERE S.GIFT_TEL IS NOT NULL
 		   AND M.MEM_ID = #{value}
+	  ORDER BY PAY_TIME DESC
 	</select>
 	
 	<!-- 환불 -->

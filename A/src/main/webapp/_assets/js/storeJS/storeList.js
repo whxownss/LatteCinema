@@ -1,7 +1,7 @@
 document.write('<script type="text/javascript" '+ 
 						'src="/' + window.location.pathname.split("/")[1] + '/_assets/js/storeJS/storeListVarFunc.js"></script>');
 
-	  // 수량 옵션 
+	  // 이미지파일 형식 
       $(function(){
 		  
 		 var storeItem;
@@ -23,7 +23,7 @@ document.write('<script type="text/javascript" '+
 			$("#itemImage").attr("src", "_assets/img/" + storeItem.itemImage);
 		}
 		
- 		
+ 		// 수량 옵션 
  		$("#itemName").text(storeItem .itemName);
  		$("#price").text(storeItem.itemPrice);
  		$("#detail").text(storeItem.itemDetail);
