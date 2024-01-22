@@ -33,6 +33,7 @@
 				   		  FROM MOVIE
 				   		 WHERE MOVIE_CATEGORY = #{movieCategory}) M
 			  )	
+
 			, #{movieCode}
 		  	, #{title}
 		  	, #{actor}

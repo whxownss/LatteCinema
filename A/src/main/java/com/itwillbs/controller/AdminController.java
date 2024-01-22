@@ -278,12 +278,12 @@ public class AdminController extends HttpServlet {
 			MovieService movieServie = new MovieService();
 			
 			List<LocationDTO> locationList = resService.getLocations();
-			String cinemaListJson = resService.getCinemas();
+//			String cinemaListJson = resService.getCinemas();
 			List<ScheduleDTO> allSchedules = resService.getAllSchedules();
 			ArrayList<MovieDTO> movieList = movieServie.getMovieList();
 			
 			request.setAttribute("locationList", locationList);
-			request.setAttribute("cinemaListJson", cinemaListJson);
+//			request.setAttribute("cinemaListJson", cinemaListJson);
 			request.setAttribute("allSchedules", allSchedules);
 			request.setAttribute("movieList", movieList);
 			

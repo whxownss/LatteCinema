@@ -73,6 +73,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
                   <li><a href="adm_member.ad"><i class="fa fa-user"></i>회원관리</a></li>
                   <li><a href="adm_mv_inout.ad"><i class="fa fa-edit"></i>영화 통합 추가/제거</a></li>
                   <li><a href="adm_store.ad"><i class="fa fa-beer"></i>스토어 관리</a></li>
+                  <li><a href="adm_location.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
                   <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>스케줄 관리</a></li>
                 </ul>
               </div>
@@ -112,7 +113,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
       <div class="top_nav">
         <div class="nav_menu">
           <nav>
-            <div class="nav toggle" style="padding-top: 8px; padding-bottom: 8px">
+            <div class="nav toggle" style="padding-top: 8px; padding-bottom: 8px;" >
               <a id="menu_toggle"><i class="fa fa-bars"></i></a>
             </div>
           </nav>
@@ -126,6 +127,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
           
             <div class="page-title">
               <div class="title_left">
+              	<h3>공지사항</h3>
               </div>
             </div>
 						  <!-- Modal -->
@@ -170,7 +172,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>공지사항<small><button type="button" class="btn btn-secondary" id="insertCenterBoard">추가</button></small></h2>
+                    <h2>글 목록<small><button type="button" class="btn btn-secondary" id="insertCenterBoard">추가</button></small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>

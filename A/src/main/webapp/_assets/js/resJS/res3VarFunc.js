@@ -13,6 +13,7 @@ var hours = today.getHours();
 var minutes = today.getMinutes();
 var seconds = today.getSeconds();
 var milliseconds = String(today.getMilliseconds()).slice(0, 1);
+milliseconds = milliseconds.length != 10 ? milliseconds.padEnd(10, "L") : milliseconds;
 var makeMerchantUid = "" + hours + minutes + seconds + milliseconds;
 
 function kakaoPay(useremail, username) {

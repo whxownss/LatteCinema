@@ -73,6 +73,7 @@ ArrayList<QnaBoardDTO> qnaBoardList = (ArrayList<QnaBoardDTO>)request.getAttribu
                   <li><a href="adm_member.ad"><i class="fa fa-user"></i>회원관리</a></li>
                   <li><a href="adm_mv_inout.ad"><i class="fa fa-edit"></i>영화 통합 추가/제거</a></li>
                   <li><a href="adm_store.ad"><i class="fa fa-beer"></i>스토어 관리</a></li>
+                  <li><a href="adm_location.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
                   <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>스케줄 관리</a></li>
                 </ul>
               </div>
@@ -126,6 +127,7 @@ ArrayList<QnaBoardDTO> qnaBoardList = (ArrayList<QnaBoardDTO>)request.getAttribu
           
             <div class="page-title">
               <div class="title_left">
+              		<h3>1:1 문의</h3>
               </div>
             </div>
 
@@ -176,7 +178,7 @@ ArrayList<QnaBoardDTO> qnaBoardList = (ArrayList<QnaBoardDTO>)request.getAttribu
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>1:1문의 목록</h2>
+                    <h2>글 목록</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
