@@ -50,7 +50,8 @@
 			 , ITEM_NAME
 			 , ITEM_DETAIL
 			 , format(ITEM_PRICE, 0) "ITEM_PRICE"
-			 , ITEM_IMAGE, CREATE_USER
+			 , ITEM_IMAGE
+			 , CREATE_USER
 			 , CREATE_DATE
 		  from STORE_ITEM
 		 where ITEM_IDX LIKE 'B%'
@@ -62,7 +63,8 @@
 			 , ITEM_NAME
 			 , ITEM_DETAIL
 			 , format(ITEM_PRICE, 0) "ITEM_PRICE"
-			 , ITEM_IMAGE, CREATE_USER
+			 , ITEM_IMAGE
+			 , CREATE_USER
 			 , CREATE_DATE
 		  from STORE_ITEM
 		 where ITEM_IDX LIKE 'S%'
@@ -74,7 +76,8 @@
 			 , ITEM_NAME
 			 , ITEM_DETAIL
 			 , format(ITEM_PRICE, 0) "ITEM_PRICE"
-			 , ITEM_IMAGE, CREATE_USER
+			 , ITEM_IMAGE
+			 , CREATE_USER
 			 , CREATE_DATE
 		  from STORE_ITEM
 		 where ITEM_IDX LIKE 'C%'
