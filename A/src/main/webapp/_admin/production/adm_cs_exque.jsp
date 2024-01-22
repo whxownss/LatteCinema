@@ -53,7 +53,7 @@ ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribu
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="adm_home.ad" class="site_title"><i class="fa fa-film"></i> <span>Latte Cinema!</span></a>
+              <a href="main.me" class="site_title"><i class="fa fa-film"></i> <span>Latte Cinema!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -77,10 +77,11 @@ ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribu
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="adm_home.ad"><i class="fa fa-home"></i> Home</a></li>
-                  <li><a href="adm_member.ad"><i class="fa fa-user"></i> 회원관리</a></li>
+                  <li><a href="adm_home.ad"><i class="fa fa-home"></i>Home</a></li>
+                  <li><a href="adm_member.ad"><i class="fa fa-user"></i>회원관리</a></li>
                   <li><a href="adm_mv_inout.ad"><i class="fa fa-edit"></i>영화 통합 추가/제거</a></li>
                   <li><a href="adm_store.ad"><i class="fa fa-beer"></i>스토어 관리</a></li>
+                  <li><a href="adm_location.ad"><i class="fa fa-beer"></i>영화관 관리</a></li>
                   <li><a href="adm_cinema.ad"><i class="fa fa-beer"></i>스케줄 관리</a></li>
                   </li>
                 </ul>
@@ -135,6 +136,13 @@ ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribu
         <div class="right_col" role="main">
           <div class="">
           	<!-- 임시  -->
+          	<!-- //임시  -->          	
+            <div class="page-title">
+              <div class="title_left">
+              	<h3>자주찾는질문</h3>
+              </div>
+            </div>
+            
 			<div class="container">
 			  <!-- Modal -->
 			 <form action="cs_exqueUpdate.cs" method="get" name="frChange"> 
@@ -223,18 +231,14 @@ ArrayList<ExqBoardDTO> exqBoardList = (ArrayList<ExqBoardDTO>)request.getAttribu
 			  
 			</div>
 		</form>
-          	<!-- //임시  -->          	
-            <div class="page-title">
-              <div class="title_left">
-              </div>
-            </div>
-
+          	
+<!-- 			//  !@#!@ -->
             <div class="clearfix"></div>
 
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>자주 찾는 질문<small><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal2">추가</button></small></h2>
+                    <h2>글 목록<small><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal2">추가</button></small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>

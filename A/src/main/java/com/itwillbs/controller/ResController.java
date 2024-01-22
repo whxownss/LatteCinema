@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.itwillbs.domain.LocationDTO;
+import com.itwillbs.domain.MovieDTO;
 import com.itwillbs.service.MemberService;
+import com.itwillbs.service.MovieService;
 import com.itwillbs.service.ResService;
 import com.itwillbs.utill.Pay;
 import com.itwillbs.utill.Token;
@@ -92,8 +95,20 @@ public class ResController extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(movieListJson);
 		}
-
-		
+		// movieCode 들고왔을 때 정보 가져오기
+		if(sPath.equals("/res1ProGM.re")) {
+			MovieService movieService = new MovieService();
+			MovieDTO detail = movieService.getMovieDetail(request);
+			// 어쩔 수 없이 데이터 작업 여기서 해야됨
+			Gson gson = new Gson();
+			String detailJson = gson.toJson(detail);
+			
+			System.out.println(detail);
+			
+			response.setContentType("application/json");
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(detailJson);
+		}
 		
 		
 		

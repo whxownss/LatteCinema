@@ -117,14 +117,21 @@
 			                      		<td scope="row" class="text-center align-middle">${storeGiftList.itemCnt }</td>
 			                      		<td scope="row" class="text-center align-middle">${storeGiftList.payTime }</td>
 			                      		<td scope="row" class="text-center align-middle">
-											<div class="dropdown">
-											  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-											    메시지보기
-											  </button>
-											  <ul class="dropdown-menu">
-											    <li><p class="dropdown-item text-center"> ${storeGiftList.giftMsg }</p></li>
-											  </ul>
-											</div>  
+										  <button button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+										    메시지보기
+										  </button>
+										  
+										  <!-- 오프캔버스 -->
+										  <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+											  <div class="offcanvas-header">
+											    <h1 class="offcanvas-title" id="offcanvasScrollingLabel">받은 메시지</h1>
+											    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+											  </div>
+											  <div class="offcanvas-body">
+											    <p>${storeGiftList.giftMsg }</p>
+											  </div>
+											</div>
+											
 			                      		</td>
 			                      	</tr>
 			                      </c:forEach>

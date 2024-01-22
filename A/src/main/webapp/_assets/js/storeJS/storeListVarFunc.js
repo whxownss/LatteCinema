@@ -47,7 +47,6 @@ var IMP = window.IMP;
 // 포트원 api
   function requestPay(sId, param) {
 	debugger;
-	
 	if(sId == null || sId == ''){
 		location.href="login.me";
 		return;

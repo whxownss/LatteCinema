@@ -25,7 +25,7 @@ public class ScheduleDTO {
 	private String loName;
 	private String ciName;
 	
-	
+	private String movieCode;
 	
 	
 	
@@ -141,14 +141,22 @@ public class ScheduleDTO {
 	public void setCiName(String ciName) {
 		this.ciName = ciName;
 	}
+	
+	public String getMovieCode() {
+		return movieCode;
+	}
+	public void setMovieCode(String movieCode) {
+		this.movieCode = movieCode;
+	}
 	@Override
 	public String toString() {
 		return "ScheduleDTO [loIdx=" + loIdx + ", ciIdx=" + ciIdx + ", schIdx=" + schIdx + ", schDate=" + schDate
 				+ ", schMovType=" + schMovType + ", schMovIdx=" + schMovIdx + ", schStime=" + schStime + ", schRun="
 				+ schRun + ", schEtime=" + schEtime + ", scrIdx=" + scrIdx + ", scrSeatAvail=" + scrSeatAvail
 				+ ", title=" + title + ", scrSeat=" + scrSeat + ", rating=" + rating + ", poster=" + poster + ", pSum="
-				+ pSum + ", loName=" + loName + ", ciName=" + ciName + "]";
+				+ pSum + ", loName=" + loName + ", ciName=" + ciName + ", movieCode=" + movieCode + "]";
 	}
+	
 	
 	
 	

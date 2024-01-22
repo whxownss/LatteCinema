@@ -32,7 +32,8 @@ var check = function(type, value){
 	}
 }
 //상영 시간표 출력
-var showSchedule = function(param, date){
+var showSchedule = function(param, date){	
+		debugger;
 	$("#showTimeTable").empty();
 	$.ajax({
 		type: "GET",
@@ -40,7 +41,8 @@ var showSchedule = function(param, date){
 		data: {cinema: $("#selectedCinema").text(),
 			   param: param,
 			   date: $("#myCalendar").val()},
-		dataType: "json"  // fail 기준 질문하기. 결과값 [] 여도 done -> 왜??
+			   dataType: "json"  // fail 기준 질문하기. 결과값 [] 여도 done -> 왜??
+			   ,async: false  //  무비코드 들고 들어 올때 이부분 꼭 있어야함
 	})
 	.done(function(data){
 		$.each(data, function(index, value){
@@ -129,6 +131,7 @@ var changeBgColor = function(param){
 	$(param).css("background", "white");
 }
 var selectMovieList = function(){
+	debugger;
 	var cinema = $("#selectedCinema").text();
 	if(!($("#selectedCinema").text() == "지역 및 영화관" || $("#selectedCinema").text().includes("(준비중)"))){
 		$.ajax({
@@ -136,16 +139,20 @@ var selectMovieList = function(){
 			url: "res1ProML.re",
 			data: {cinema: cinema,
 				   date: $("#myCalendar").val()},
-			dataType: "json"  
+			dataType: "json",
+			async: false 
 		})
 		.done(function(data){
+			debugger;
 			movieList = data;
 		})
 		.fail(function(){
+			debugger;
 		})
 	}
 }
-var letsGoSchedule = function(p){
+var letsGoSchedule = function(p){			
+	debugger;
 	// showSchedule()
 	if($("#selectedMovie").text() != "영화" && $("#selectedCinema").text() == "지역 및 영화관") return;
 	// 특정 영화의 시간표만 보여주기 위함

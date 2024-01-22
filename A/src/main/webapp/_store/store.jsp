@@ -12,8 +12,7 @@
 
 	<!-- 상단 이미지 -->
 	
-	<div id="visual_top" class="visual_top visual_mall"
-		style="margin-top: 20px; margin-bottom: 10px;">
+	<div id="visual_top" class="visual_top visual_mall">
 		<div class="inner">
 			<img
 				src="https://cf.lottecinema.co.kr//Media/WebAdmin/f04df114813f45b18e63e06308211d0f.jpg"
