@@ -30,12 +30,12 @@
 						width="50" height="60"> <a href="#store1" class="more fs-1">베스트</a>
 				</div>
 				<div class="col coll">
-					<img src="assets/img/free-icon-popcorn-864818.png" alt="popcorn"
-						width="50" height="60"> <a href="#store2" class="more fs-1">스낵음료</a>
+					<img src="assets/img/free-icon-snacks-7057839.png" alt="popcorn"
+						width="50" height="60"> <a href="#store2" class="more fs-1">스낵</a>
 				</div>
 				<div class="col coll">
-					<img src="assets/img/free-icon-coffee-5497772.png" alt="coffee"
-						width="50" height="60"> <a href="#store3" class="more fs-1">커피</a>
+					<img src="assets/img/free-icon-soda-9352784.png" alt="coffee"
+						width="60" height="60"> <a href="#store3" class="more fs-1">음료</a>
 				</div>
 			</div>
 		</div>
@@ -64,10 +64,10 @@
 	<section class="category-section fs-5" id="store1">
 		<div class="container" data-aos="fade-up">
 			<span class="anchor"
-				style="display: block; height: 20px; margin-top: 20px; visibility: hidden;"></span>
+				style="display: block; height: 20px; margin-top: 15px; visibility: hidden;"></span>
 			<div
 				class="section-header d-flex justify-content-between align-items-center mb-5">
-				<h2>베스트</h2>
+				<h1>베스트</h1>
 			</div>
 
 			<div class="row g-5">
@@ -89,7 +89,6 @@
 							<div class="itm_tit">
 								<h1 class="text-danger"><i>BEST</i></h1>
 								<h4>${itemB.itemName}</h4>
-								<p>${itemB.itemDetail}</p>
 							</div>
 							<div class="txt_price_wrap">
 								<span class="txt_price"
@@ -107,10 +106,10 @@
 	<section class="category-section fs-5" id="store2">
 		<div class="container" data-aos="fade-up">
 			<span class="anchor"
-				style="display: block; height: 20px; margin-top: 20px; visibility: hidden;"></span>
+				style="display: block; height: 20px; margin-top: 15px; visibility: hidden;"></span>
 			<div
 				class="section-header d-flex justify-content-between align-items-center mb-5">
-				<h2>스낵음료</h2>
+				<h1>스낵</h1>
 			</div>
 
 			<div class="row g-5">
@@ -131,7 +130,6 @@
 							</div>
 							<div class="itm_tit">
 								<h4>${itemS.itemName}</h4>
-								<p>${itemS.itemDetail}</p>
 							</div>
 							<div class="txt_price_wrap">
 								<span class="txt_price"
@@ -149,10 +147,10 @@
 	<section class="category-section fs-5" id="store3">
 		<div class="container" data-aos="fade-up">
 			<span class="anchor"
-				style="display: block; height: 20px; margin-top: 20px; visibility: hidden;"></span>
+				style="display: block; height: 20px; margin-top: 15px; visibility: hidden;"></span>
 			<div
 				class="section-header d-flex justify-content-between align-items-center mb-5">
-				<h2>커피</h2>
+				<h1>음료</h1>
 			</div>
 
 			<div class="row g-5">
@@ -173,7 +171,6 @@
 							</div>
 							<div class="itm_tit">
 								<h4>${itemC.itemName}</h4>
-								<p>${itemC.itemDetail}</p>
 							</div>
 							<div class="txt_price_wrap">
 								<span class="txt_price"

@@ -127,8 +127,8 @@
           <li class="dropdown"><a href="store.st"><span>스토어</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="store.st#store1">베스트</a></li>
-              <li><a href="store.st#store2">스낵음료</a></li>
-              <li><a href="store.st#store3">커피</a></li>
+              <li><a href="store.st#store2">스낵</a></li>
+              <li><a href="store.st#store3">음료</a></li>
             </ul>
           </li>
           
