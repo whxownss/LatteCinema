@@ -88,7 +88,7 @@ document.write('<script src="_admin/build/js/custom.min.js"></script>');
 // 	    });
 	 	//수정 모달 수정 버튼 클릭
 	 	$("#modalRewrite").on("click",function(){
-	 		alert("이벤트 연결 성공");
+	 		//alert("이벤트 연결 성공");
 // 	 	// 실제 값으로 subject, content, select 값을 대체하세요
 // 	 	    // anchorString을 생성합니다.
 // // 	 	    var anchorString = '<a data-toggle="modal" data-target="#myModal" data-info=\'{"key1": "' + subject + '", "key2": "' + content + '", "key3": "' + select + '"}\'>';

@@ -16,9 +16,10 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
  <jsp:include page="../_common/header.jsp"></jsp:include>
- <% int count1 = 1;
-   int count2 = 1;
-   int count3 = 1;
+ <% 
+ 	int count1 = 1;
+    int count2 = 1;
+    int count3 = 1;
  %>
 	<main id="main">
 <c:if test="${sessionScope.sId == null}">

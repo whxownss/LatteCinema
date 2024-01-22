@@ -23,7 +23,7 @@ $(document).ready(function(){
 	    }
 	});
     
-    $('#lostSubmit').on('click',function(e){
+    $('#lostSubmit').on('click',function(e){ 
     	if($('#locationSelect').val() === '' || $('#cinemaSelect').val() === ''){
     		e.preventDefault();
 		    alert('지역 및 영화관을 선택해주세요.');
@@ -57,7 +57,7 @@ $('#locationSelect').change(function() {
  	        // 서버로부터 응답을 성공적으로 받았을 때 실행될 코드
  	        // 예: 받은 데이터를 페이지에 표시
  	        var cinemas = response;
-//  	        $('#cinemaSelect').empty();
+  	        $('#cinemaSelect').empty();
 //  	        $('#cinemaSelect').append($('<option>전체</option>'));
  	        cinemas.forEach(function(cinema) {
 //  	        	debugger;

@@ -204,7 +204,7 @@ function checkName() {
 	$("#CheckName").text(text).css("color",color);
 }
 
-// 연락처 정규식 유효성
+// 연락처 정규식 유효성 중복체크
 function checkPhone() {
 	var phone = $("#phone").val();
 	var text = "** 연락처 입력 필수! **"
