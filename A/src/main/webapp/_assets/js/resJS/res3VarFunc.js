@@ -13,8 +13,8 @@ var hours = today.getHours();
 var minutes = today.getMinutes();
 var seconds = today.getSeconds();
 var milliseconds = String(today.getMilliseconds()).slice(0, 1);
-milliseconds = milliseconds.length != 10 ? milliseconds.padEnd(10, "L") : milliseconds;
 var makeMerchantUid = "" + hours + minutes + seconds + milliseconds;
+makeMerchantUid = makeMerchantUid.length != 7 ? makeMerchantUid.padEnd(7, "L") : makeMerchantUid;
 
 function kakaoPay(useremail, username) {
 	var isTimeOver = false;
@@ -30,6 +30,7 @@ function kakaoPay(useremail, username) {
 		if(data == "true") {
 			isTimeOver = true;
 			alert('시간이 만료되었습니다.');
+			location.href = "res1.re";
 		}
 	})
 	.fail(function(){

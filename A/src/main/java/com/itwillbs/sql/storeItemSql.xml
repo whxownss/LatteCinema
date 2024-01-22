@@ -197,7 +197,7 @@
 		   AND M.MEM_ID = #{value}
 	</select>
 	
-<!-- 	환불 -->
+	<!-- 환불 -->
 	<update id="refund" parameterType="String">
 		UPDATE STORE_PAY
 		   SET SUCCESS = 'false'
