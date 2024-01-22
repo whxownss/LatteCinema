@@ -277,7 +277,21 @@ public class MemberDAO {
 		session.close();
 	}
 
-	
+	public ArrayList<StorePayDTO> getStoreRefundList(String memId) {
+		System.out.println("MemberDAO getStoreRefundList()");
+		ArrayList<StorePayDTO> storeRefundList = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			storeRefundList = new ArrayList<StorePayDTO>(session.selectList("CsAdmin.getStoreRefundList",memId));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return storeRefundList;
+	}
 }
 
 

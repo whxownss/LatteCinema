@@ -219,6 +219,7 @@ $(function(){
 	
 	// 영화코드 들고 페이지 왔을 때
 	var movieCode = new URL(window.location.href).searchParams.get('movieCode');
+	debugger;
 	if(movieCode == null) return;
 		
 	$("#lo6").trigger("click");

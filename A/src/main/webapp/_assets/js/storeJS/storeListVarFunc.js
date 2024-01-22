@@ -79,20 +79,17 @@ var IMP = window.IMP;
 	var price = parseInt($("#sPrice").text().replace(",", "")); 
 	
 	// 결제 및 정보
-	IMP.init("imp20121707"); 
+	IMP.init("imp16802722"); 
       IMP.request_pay({ 
           pg: "html5_inicis.INIpayTest",	// PG사
           pay_method: "card",	// 지불수단
           merchant_uid: "STO" + merchant_uid,   // 주문번호
           name: itemName,	// 상품명
           amount: 100,    // 가격		price
-          buyer_email: "duqdlduq2@naver.com",	// 구매자 이메일
-          buyer_name: "김성엽",	// 구매자 이름
-          buyer_tel: "010-5125-1365",	// 구매자 연락처
+          buyer_name: "서비스 단에서 세션 이름 줄거임",	// 구매자 이름
       }, function (rsp) { // callback
     	  console.log(rsp);
     	  if (rsp.success) {	// 결제성공
-    		  rsp["mem_id"] = 'asd';   
     	  	  rsp["item_cnt"] = $(".inpp").text();
     	  	  
     	  	  if(param == 'gift'){
