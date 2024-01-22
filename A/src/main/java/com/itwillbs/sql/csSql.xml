@@ -642,13 +642,18 @@
 		SELECT S.MERCHANT_UID,S.PAY_TIME,S.NAME,S.PAID_AMOUNT,S.GIFT_TEL,M.MEM_NAME
 		  FROM STORE_PAY S LEFT JOIN MEMBERS M
 		    ON S.GIFT_TEL = M.MEM_PHONE
-		 WHERE S.MEM_ID = #{memId}
+		 WHERE S.MEM_ID = #{memId} AND S.SUCCESS = 'TRUE'
 		 LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
 	</select>
 	<select id="getStoreBoardCount" parameterType="String" resultType="int">
 		SELECT COUNT(*)
 		  FROM STORE_PAY
 		 WHERE MEM_ID = #{memId}
+	</select>
+	<select id="getStoreRefundList" resultType="StorePayDTO" parameterType="String">
+		SELECT REFUND_TIME, PAY_TIME, NAME, PAID_AMOUNT
+		  FROM STORE_PAY
+		 WHERE MEM_ID = #{memId} AND SUCCESS = 'FALSE'
 	</select>
 	
 	<select id="admResBoardList" resultType="ReservationDTO">

@@ -19,6 +19,7 @@ import com.itwillbs.domain.StorePayDTO;
 import com.itwillbs.service.CSBoardService;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.StoreService;
+import com.itwillbs.utill.Pay;
 
 public class StoreController extends HttpServlet{
 	RequestDispatcher dispatcher = null;
@@ -83,11 +84,14 @@ public class StoreController extends HttpServlet{
 		// 결제완료
 		if(sPath.equals("/storeListPro.st")){
 			
+			HttpSession session = request.getSession();
+			String sId = (String)session.getAttribute("sId");
+			String sName = (String)session.getAttribute("sName");
 			String rsp = request.getParameter("rsp");
 			
 			storeService = new StoreService();
 			
-			String buyerInfo = storeService.buyerInfo(rsp);
+			String buyerInfo = storeService.buyerInfo(rsp, sId, sName);
 			
 			request.setAttribute("buyerInfo", buyerInfo);
 			
@@ -95,6 +99,27 @@ public class StoreController extends HttpServlet{
 			response.getWriter().write(buyerInfo);
 			
 		}//
+		
+		// 결제 환불
+		if(sPath.equals("/storeRefund.st")) {
+			storeService = new StoreService();
+			String mid = request.getParameter("mid");
+			String result = storeService.refund(mid);
+			
+			String msg = "";
+			
+			if(result.equals("true")) {
+				msg = "환불 성공";
+				Pay pay = new Pay();
+				String token = pay.getImportToken();  
+				
+				int result_delete = pay.cancelPay(token, mid);  // 포트원 환불
+				if(result_delete == -1) msg = "환불 실패";
+			}
+			
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(msg);
+		}
 		
 		// 마이페이지 선물내역 MemberController에서 시작 321
 		
