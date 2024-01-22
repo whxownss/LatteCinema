@@ -173,6 +173,7 @@ window.addEventListener('load', function () {
 	});
 });
 
+// 05bf1f3ffc1ab1c242259dc756e285cb //서버최종테스트
 //	298f4267dbcfe84b0fe1ea7009ad8d45 //서버
 // 44bd94c9c9fc31fcac5bd17dd86e5cba //로컬
 // 카카오로그인 api
