@@ -29,7 +29,7 @@
     <div class="inner">
       <div class="info-box">
         <div class="btns only-pc">
-          <a href="javascript:goLink('/totalView/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기</a>
+          <a href="${pageContext.servletContext.contextPath}/res1.re?movieCode=${movie.movieCode}" class="btn-type0">예매하기</a>
           <!-- <a href="#" class="btn-type1 movie-open" data-poster="https://img.dtryx.com/poster/2023/12/D3ED4691-3003-4A40-BA15-E029AC980BEF.small.jpg" data-source="https://img.dtryx.com/video/2023/12/45030FA5-DC2D-4702-A4B8-731108559CBA.mp4">예고편 보기</a> -->
           </div>
         <div class="poster">
@@ -53,7 +53,7 @@
           누적 관객 수<strong> <%=totalView %> </strong>
         </div>--%>
         <div class="btns only-m">
-          <a href="javascript:goLink('/totalView/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기</a>
+          <a href="${pageContext.servletContext.contextPath}/res1.re?movieCode=${movie.movieCode}" class="btn-type0">예매하기</a>
           </div>
       </div>
       
@@ -65,7 +65,7 @@
             <h3 class="h3">${detail.title}</h3>
             <%-- <h4 class="h4"><%=movieEngName %></h4> --%>
             <div class="btns">
-              <a href="javascript:goLink('/totalView/movie.do', 'MovieCd=023901');" class="btn-type0">예매하기</a>
+              <a href="${pageContext.servletContext.contextPath}/res1.re?movieCode=${movie.movieCode}" class="btn-type0">예매하기</a>
               <!-- <a href="#" class="btn-type1 movie-open" data-poster="https://img.dtryx.com/poster/2023/12/D3ED4691-3003-4A40-BA15-E029AC980BEF.small.jpg" data-source="https://img.dtryx.com/video/2023/12/45030FA5-DC2D-4702-A4B8-731108559CBA.mp4">예고편 보기</a> -->
             </div>
           </div>
