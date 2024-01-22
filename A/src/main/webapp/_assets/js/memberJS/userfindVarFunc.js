@@ -8,7 +8,7 @@
 	});
 	
 	/* 생년월일 입력 */
-	$("#birth").on("blur", function(e){
+	$("#birth").on("keyup", function(e){
 		var partton = /[^0-9]/g;
 		$('#schIdBirthDe-error-text').text('');
 		if($("#birth").val() == ""){
@@ -16,7 +16,8 @@
 			return false;
 		}
 		if(partton.test($(this).val())){
-			var value = $(this).val($(this).val().replace(/[^0-9]/g,""));
+//			var value = $(this).val($(this).val().replace(/[^0-9]/g,""));
+			var value = $(this).val().replace(/[^0-9]/g,"");
 			$('#schIdBirthDe-error-text').text('');
 			$("#birth").val(value);
 		}
@@ -24,7 +25,7 @@
 	});
 	
 	/* 연락처 입력 */
-	$("#phone").on("blur", function(e){
+	$("#phone").on("keyup", function(e){
 		var partton = /[^0-9]/g;
 		$('#schIdMblpNo-error-text').text('');
 		if($("#phone").val() == ""){
@@ -32,7 +33,8 @@
 			return false;
 		}
 		if(partton.test($(this).val())){
-			var value = $(this).val($(this).val().replace(/[^0-9]/g,""));
+//			var value = $(this).val($(this).val().replace(/[^0-9]/g,""));
+			var value = $(this).val().replace(/[^0-9]/g,"");
 			$('#schIdMblpNo-error-text').text('');
 			$("#phone").val(value);
 		}
