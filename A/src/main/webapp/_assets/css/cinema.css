@@ -144,7 +144,7 @@ a:link {
     border-radius: 4px;
     font-family: EB+Garamond;
     text-decoration: none;
-    border: 1px solid #503396;
+    border: 1px solid #503396; 
     vertical-align: middle;
     background-color: #fff;
     cursor: pointer;
@@ -230,4 +230,33 @@ body, input, button, select, textarea {
 
 .contents_theater_detail .theater_top_wrap .info_wrap .theater_info {
     margin-bottom: 15px;
+}
+
+
+/*
+추가중인 css 문제 생기면 지우기 
+*/
+
+
+.contents_theater_detail .theater_top_wrap .theater_tit .tit {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 32px;
+    vertical-align: middle;
+}
+
+
+.contents_theater_detail .theater_top_wrap {
+    position: relative;
+    margin: 18px 0 0 22px;
+}
+
+.contents_theater_detail .theater_top_wrap .info_wrap .pop_wrap {
+    margin: 46px 0 38px;
+}
+
+.contents_theater_detail .theater_top_wrap .info_wrap .pop_wrap>li a {
+    display: block;
+    text-align: center;
+    vertical-align: middle;
 }
