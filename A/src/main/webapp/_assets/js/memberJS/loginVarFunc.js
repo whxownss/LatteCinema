@@ -130,7 +130,7 @@ window.addEventListener('load', function () {
 	naverLogin.getLoginStatus(function(status) {
 		if (status) {
 			debugger;
-			var naverid = naverLogin.user.getId();
+//			var naverid = naverLogin.user.getId();
 			var naveremail = naverLogin.user.getEmail();
 			var navername = naverLogin.user.getName();
 			var naverday = naverLogin.user.getBirthday().replaceAll("-","").trim();
@@ -173,6 +173,7 @@ window.addEventListener('load', function () {
 	});
 });
 
+//	298f4267dbcfe84b0fe1ea7009ad8d45
 
 // 카카오로그인 api
 Kakao.init('44bd94c9c9fc31fcac5bd17dd86e5cba'); // 여기에 애플리케이션에서 발급받은 키를 넣어주세요.
@@ -186,7 +187,7 @@ console.log(Kakao.isInitialized()); // sdk초기화여부판단
                     success: function (response) {
 //                         alert(JSON.stringify(response))
                         console.log(response)
-                        var kakaoid = response.id;
+//                        var kakaoid = response.id;
 						var kakaoemail = response.kakao_account.email;
                         var kakaoname = response.kakao_account.name;
                         var kakaobirthyear = response.kakao_account.birthyear;

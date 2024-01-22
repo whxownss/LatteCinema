@@ -241,9 +241,6 @@ public class ResController extends HttpServlet {
 				HttpSession session = request.getSession();
 				String sId = (String)session.getAttribute("sId");
 				resService.refundPoint(sId, mid);
-				
-				
-				
 			}
 	        
 			response.setCharacterEncoding("utf-8");
