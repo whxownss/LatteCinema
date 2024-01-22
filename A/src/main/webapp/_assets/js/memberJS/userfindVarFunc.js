@@ -74,6 +74,7 @@
 					msg = '회원님이 가입하신 아이디는 ' + data + ' 입니다.';
 				
 					alert(msg);
+					location.reload();
 			},
 			error : function() {
 				

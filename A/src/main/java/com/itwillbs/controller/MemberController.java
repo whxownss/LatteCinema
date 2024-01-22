@@ -235,7 +235,7 @@ public class MemberController extends HttpServlet {
 			    	memDeleteD = "";
 			    }
 			}
-
+  
 			//리턴받은 값이 null 아니면 => 아이디 비밀번호 일치
 			//리턴받은 값이 null 이면 => 아이디 비밀번호 틀림
 			if(memberDTO != null) {
