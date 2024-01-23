@@ -22,6 +22,10 @@
  
   
 <main>
+<INPUT Type="hidden" value="${detail.title }" id="detailTitle">
+<INPUT Type="hidden" value="${detail.movieIdx }" id="detailMovieIdx">
+<INPUT Type="hidden" value="${detail.movieCategory}" id="detailMovieCategory">
+<input type="hidden" value="${sessionScope.sId }" id="sId">
 
 <!-- // 영화관찾기 레이어 -->
 <div class="mv-info-wrap" style="margin-top:70px;">
@@ -42,6 +46,8 @@
         <i class="age${detail.rating}"></i> 
     
         <h3 class="h3">${detail.title}</h3>
+        
+       
         <%-- <h4 class="h4"><%=movieEngName %></h4> --%>
         <div class="etc">
           <span>${detail.title}</span>

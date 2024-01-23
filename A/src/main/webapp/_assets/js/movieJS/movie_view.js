@@ -2,7 +2,7 @@
 						'src="/' + window.location.pathname.split("/")[1] + '/_assets/js/movieJS/movie_viewVarFunc.js"></script>');
  
  $(function() {
-	 			var sessionId = '<%=(String)session.getAttribute("sId")%>' 
+	 var sessionId = $("#sId").val();
 	  // 한줄평 수정
 	  if($("#viewComment").val() != ''){
 		  $("button[name=revbtn]").attr('id','update')
@@ -14,9 +14,9 @@
 				var viewcomment = $("#viewComment").val()
 				// 세션값 
 // 				var sessionId = "test1" 
-				var title = "${detail.title}";
-				var movIdx = ${detail.movieIdx};
-				var movType = "${detail.movieCategory}";
+			var title = $("#detailTitle").val();
+			var movIdx = $("#detailMovieIdx").val(); 
+			var movType = $("#detailMovieCategory").val();
 			  	
 				$.ajax({
 					type: "post",
@@ -72,13 +72,13 @@
 		// 한줄평 작성가능 유무 판단
 		$("#write").on("click", function(){
 			debugger;
-			var viewcomment = $("#viewComment").val()
+			var viewcomment = $("#viewComment").val();
 			// 세션값 
-			var sessionId = '<%=(String)session.getAttribute("sId")%>' 
+			var sessionId = $("#sId").val();
 // 			var sessionId = "test1" 
-			var title = "${detail.title}";
-			var movIdx = ${detail.movieIdx};
-			var movType = "${detail.movieCategory}";
+			var title = $("#detailTitle").val();
+			var movIdx = $("#detailMovieIdx").val(); 
+			var movType = $("#detailMovieCategory").val();
 			if(sessionId == 'null'){
 				alert('로그인 후 작성 가능합니다.');
 				return;
@@ -99,6 +99,7 @@
 				//한줄평 데이터 넣기
 				debugger;
 				if(data != '0'){
+					debugger;
 					$.ajax({
 						type: "post",
 						url: "reviewInsert.mo",
