@@ -64,13 +64,12 @@ var IMP = window.IMP;
 	//주문번호 만들기
 	const make_merchant_uid = () => {
         const current_time = new Date();
-        const year = current_time.getFullYear().toString();
-        const month = (current_time.getMonth()+1).toString();
-        const day = current_time.getDate().toString();
         const hour = current_time.getHours().toString();
         const minute = current_time.getMinutes().toString();
         const second = current_time.getSeconds().toString();
-        const merchant_uid = hour + minute + second;
+		const milliseconds = String(current_time.getMilliseconds()).slice(0, 1);
+        const merchant_uid = "" + hour + minute + second + milliseconds;
+        makeMerchantUid = makeMerchantUid.length != 7 ? makeMerchantUid.padEnd(7, "L") : makeMerchantUid;
         return merchant_uid;
     };
     const merchant_uid = make_merchant_uid()

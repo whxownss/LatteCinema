@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/find.css">
   <jsp:include page="../_common/header.jsp"></jsp:include>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 				<c:if test="${sessionScope.sId != null }">
 				<c:redirect url="main.me"/>
 				</c:if>
