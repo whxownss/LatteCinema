@@ -148,7 +148,8 @@
 		VALUES (
 			(SELECT *
 				FROM (SELECT IFNULL(MAX(CAST(REV_NUM AS UNSIGNED)), 0) +1
-						FROM REVIEWS) A)		
+						FROM REVIEWS
+					   WHERE MOV_CODE = #{movCode}) A)		
 			, #{revComment}
 			, #{revDate}
 			, #{title}
