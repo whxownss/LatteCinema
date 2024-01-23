@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ScheduleDTO;
+import com.itwillbs.domain.ScreenDTO;
 import com.itwillbs.sql.SqlMapClient;
 
 public class AdminDAO {
@@ -34,6 +35,22 @@ public class AdminDAO {
 		session.close();
 		
 		return cinemaList;
+	}
+
+	public String getSeatNum(ScreenDTO screenDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		String seatNum = session.selectOne("Screen.getSeatNum", screenDTO);
+		session.close();
+		return seatNum;
+	}
+
+	public String updateSeat(ScreenDTO screenDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int updateCnt = session.update("Screen.updateSeat", screenDTO);
+		session.commit();
+		session.close();
+		
+		return updateCnt > 0 ? "true" : "false";
 	}
 
 }

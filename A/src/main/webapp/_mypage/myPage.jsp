@@ -94,7 +94,7 @@
             		
                     <div class="myInq">
                       <div class="tit-util mt70">
-                        <h2 class="tit small"><b>선물내역</b></h2>
+                        <h2 class="tit small"><b>선물함</b></h2>
                       </div>
                       <div class="brd-list">
                       <div class="table-relative mt10">

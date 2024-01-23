@@ -278,10 +278,10 @@ public class AdminController extends HttpServlet {
 			MovieService movieServie = new MovieService();
 			
 			List<LocationDTO> locationList = resService.getLocations();
-//			String cinemaListJson = resService.getCinemas();
 			List<ScheduleDTO> allSchedules = resService.getAllSchedules();
 			ArrayList<MovieDTO> movieList = movieServie.getMovieList();
-			
+
+
 			request.setAttribute("locationList", locationList);
 //			request.setAttribute("cinemaListJson", cinemaListJson);
 			request.setAttribute("allSchedules", allSchedules);
@@ -318,11 +318,31 @@ public class AdminController extends HttpServlet {
 		if(sPath.equals("/adm_location.ad")) {
 			AdminService adminService = new AdminService();
 			List<CinemaDTO> cinemaList = adminService.getAllCinema();
-			
 			request.setAttribute("cinemaList", cinemaList);
+			
+			ResService  resService = new ResService();
+			List<LocationDTO> locationList = resService.getLocations();
+			request.setAttribute("locationList", locationList);
+			
 			
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_location.jsp");
 			dispatcher.forward(request, response);
+		}
+		// 관리자 영화관 관리 페이지 상영관 선택
+		if(sPath.equals("/adm_locationPro.ad")) {
+			AdminService adminService = new AdminService();
+			String seatNum = adminService.getSeatNum(request);
+			
+			response.setCharacterEncoding("utf-8");
+		    response.getWriter().write(seatNum);
+		}
+		// 관리자 영화관 관리 페이지 상영관 자릿 수 변경
+		if(sPath.equals("/adm_locationProUS.ad")) {
+			AdminService adminService = new AdminService();
+			String result = adminService.updateSeat(request);
+			
+			response.setCharacterEncoding("utf-8");
+		    response.getWriter().write(result);
 		}
 	}//doProcess()	
 }//클래스 끝

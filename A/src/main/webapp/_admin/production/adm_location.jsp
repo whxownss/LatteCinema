@@ -135,8 +135,110 @@
               </div>
             </div>
 
-            <div class="clearfix"></div>
 
+
+
+
+
+
+
+
+
+
+
+					<div class="clearfix"></div>
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>영화관 수정</h2>
+									<ul class="nav navbar-right panel_toolbox">
+										<li><a class="collapse-link"><i
+												class="fa fa-chevron-up"></i></a></li>
+										<li class="dropdown"></li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+									<br />
+									<form id="demo-form2" data-parsley-validate
+										class="form-horizontal form-label-left"
+										action="adm_cinemaProIS.ad">
+
+
+
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12"
+												for="area">지역<span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<select id="location" name="location" class="form-control"
+													required>
+													<option value="0">지역을 선택해 주세요</option>
+													<c:forEach var="location" items="${locationList}" varStatus="status">
+														<option value="${status.index + 1}">${location.loName}</option>
+													</c:forEach>
+												</select>
+											</div>
+										</div>
+
+
+
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12"
+												for="area">영화관<span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<select id="cinema" name="cinema" class="form-control"
+													required>
+													<option value="ci0">지역을 먼저 선택해 주세요</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12"
+												for="area-detail">상영관<span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<select id="screen" name="screen" class="form-control"
+													required>
+													<option value="0">영화관을 먼저 선택해 주세요</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12"
+												for="area-detail">좌석수<span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<input type="number" id="seatNum" class="form-control">
+											</div>
+										</div>
+
+						  
+
+										<div class="ln_solid"></div>
+										<div class="form-group">
+											<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+												<button class="btn btn-primary" type="button">취소</button>
+												<button class="btn btn-primary" type="reset">초기화</button>
+												<button class="btn btn-success" type="submit" id="insertSchBtn">등록</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+            <div class="clearfix"></div>
+			<div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
@@ -156,8 +258,10 @@
                         <tr>
                           <th>지역</th>
                           <th>영화관</th>
-                          <th>상영관 수</th>
                           <th>오픈 여부</th>
+                          <th>상영관 수</th>
+                          <th>상영관</th>
+                          <th>좌석 수</th>
                         </tr>
                       </thead>
                       <tbody id="tbody">
@@ -165,8 +269,7 @@
                       	<tr>
                       		<td>${cinema.loName }</td>
                       		<td>${cinema.ciName }</td>
-                      		<td>${cinema.ciSNum }</td>
-	                          <td>
+	                        <td>
 								<select>
 									<c:if test="${cinema.ciOc == 'N' }">
 										<option value="N" selected>N</option>
@@ -177,7 +280,22 @@
 										<option value="Y" selected>Y</option>
 									</c:if>
 								</select>
-							  </td>
+							</td>
+                      		<td>${cinema.ciSNum}</td>
+                      		<td>
+                      			<select class="screen">
+                      				<option value="0">상영관을 선택하세요</option>
+                      				<c:forEach var="i" begin="1" end="${cinema.ciSNum}" step="1">
+                      					<option value="${i}">${i}관</option>
+                      				</c:forEach>
+                      			</select>
+                      			<span class="loIdx" hidden="true">${cinema.loIdx}</span>
+                      			<span class="ciIdx" hidden="true">${cinema.ciIdx}</span>
+                      		</td>
+                      		<td>
+                      			<input type="number" class="seatNum" min="0" max="100" step="10" readonly>
+                      			<button class="btn btn-success" type="button" id="updateBtn" disabled>수정</button>
+                      		</td>
 						</tr>	  
                       	</c:forEach>
                         
@@ -187,6 +305,7 @@
 					
                   </div>
                 </div>
+              </div>
               </div>
             </div>
           </div>
@@ -247,108 +366,7 @@
 	<script src="_admin/vendors/pdfmake/build/vfs_fonts.js"></script>
 
 	<!-- Custom Theme Scripts -->
-
 <script src="_admin/build/js/custom.min.js"></script>
-<script type="text/javascript">
-var cinemaList = ${cinemaListJson};
-
-$(function(){
-	//
-// 	$("#location option:eq(6)").prop("selected", true);
-	
-	//
-	
-	$("#location").on("change", function(e){
-		var loIdx = e.currentTarget.selectedIndex;
-		$("#cinema").empty();
-		// 지역 선택하면 영화관 뿌려주기
-		if(loIdx == 0) {
-			$("#cinema").append("<option value='0'>지역을 먼저 선택해 주세요</option>");
-			$("#screen").empty();
-			$("#screen").append("<option value='0'>영화관을 먼저 선택해 주세요</option>");
-			return;
-		}
-		$("#cinema").append("<option value='0'>영화관을 선택해 주세요</option>");
-		$.each(cinemaList, (i, e) => {
-			if(loIdx != e.loIdx) return;
-			$("#cinema").append("<option value='" + e.ciIdx + "'>" + e.ciName + " (" + e.ciOc + ")</option>");
-		});
-	});
-	
-	// 영화관 선택하면 상영관 뿌려주기
-	$("#cinema").on("change", function(e){
-		var ciIdx = e.currentTarget.selectedIndex;
-		$("#screen").empty()
-		if(ciIdx == 0){
-			$("#screen").append("<option value='0'>영화관을 먼저 선택해 주세요</option>");
-			return;
-		}
-		$.ajax({
-			type: "GET",
-			url: "adm_cinemaPro.ad",
-			data: {location: $("#location option:selected").val(),
-				   cinema: $("#cinema option:selected").val()},
-			dataType: "json"
-		})
-		.done(function(data){
-			$("#screen").append("<option value='0'>상영관을 선택해 주세요</option>");
-			$.each(data, function(i, e){
-				$("#screen").append("<option value='" + e.scrIdx + "'>" + e.scrIdx + "관</option>");
-			});
-		})
-		.fail(function(){})
-	});
-	
-	// 영화변경시 시간 초기화 (영화별로 런타임이 달라 종료시간도 달라지기 때문)
-	$("#movie").on("change", function(){
-		$("#movie-startTime").val('');
-		$("#movie-endTime").val('');
-	})
-	
-	// 종료시간 표시
-	$("#movie-startTime").on("change", function(){
-		var h = parseInt($("#movie-startTime").val().substr(0,2));
-		var m = parseInt($("#movie-startTime").val().substr(3,2));
-		var date = new Date();
-		date.setHours(h);
-		date.setMinutes(m);
-		var runTime = parseInt($("#movie").val().split("/")[1]);
-		date.setMinutes(date.getMinutes() + runTime); 
-		$("#movie-endTime").val((date.getHours()+"").padStart(2, 0) + ":" + (date.getMinutes()+"").padStart(2, 0));
-	})
-	
-	// 스케줄 등록 (유효성 체크해야됨)
-	$(".deleteSchBtn").on("click", function(){
-		debugger;	
-		var loIdx = $(this).parent().parent().find("[class^='lo']").attr('class').split(" ")[0].substr(2);
-		var ciIdx = $(this).parent().parent().find("[class^='ci']").attr('class').substr(2);
-		var schIdx = $(this).parent().parent().find(".schIdx").text();
-		var movType = $(this).parent().parent().find(".movType").text();
-		debugger;	
-		
-		$.ajax({
-			type: "POST",
-			url: "adm_cinemaProDS.ad",
-			data: {
-				loIdx: loIdx,
-				ciIdx: ciIdx,
-				schIdx: schIdx,
-				movType: movType
-			},
-			dataType: "text"
-		})
-		.done(function(data){
-			if(data == "false"){
-				alert("스케줄 삭제에 오류가 발생했습니다.");
-				return;
-			}
-			location.reload();	
-			
-		})
-		.fail(function(){})
-	})
-});
-</script>
-
+<script type="text/javascript" src="${pageContext.servletContext.contextPath}/_assets/js/admJS/adm_location.js"></script>
 </body>
 </html>
