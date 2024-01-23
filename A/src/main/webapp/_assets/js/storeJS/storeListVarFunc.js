@@ -46,13 +46,11 @@ var IMP = window.IMP;
 
 // 포트원 api
   function requestPay(sId, param) {
-	debugger;
+	  
 	if(sId == null || sId == ''){
 		location.href="login.me";
 		return;
 	}
-	
-	debugger;
 	
 	// 선물하기 모달창 전화번호 없이 결제불가
 	var checkPhone = document.getElementById('checkPhone');
@@ -68,8 +66,8 @@ var IMP = window.IMP;
         const minute = current_time.getMinutes().toString();
         const second = current_time.getSeconds().toString();
 		const milliseconds = String(current_time.getMilliseconds()).slice(0, 1);
-        const merchant_uid = "" + hour + minute + second + milliseconds;
-        makeMerchantUid = makeMerchantUid.length != 7 ? makeMerchantUid.padEnd(7, "L") : makeMerchantUid;
+        var merchant_uid = "" + hour + minute + second + milliseconds;
+        merchant_uid = merchant_uid.length != 7 ? merchant_uid.padEnd(7, "L") : merchant_uid;
         return merchant_uid;
     };
     const merchant_uid = make_merchant_uid()
