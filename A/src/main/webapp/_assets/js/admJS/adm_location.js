@@ -56,29 +56,17 @@ $(function(){
 	});
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	$(document).on("change", ".screen", function(){
+	// 상영관 선택시 아래에 좌석 수 표시
+	$(document).on("change", "#screen", function(){
 		if($(this).val() == "0"){
+			$("#seatNum").val("");
 			debugger;
-			$(this).parent().parent().find(".seatNum").val("");
-			$(this).parent().parent().find(".seatNum").attr("readonly", true);
-			$(this).parent().parent().find("#updateBtn").attr("disabled", true);
 			return;
 		}
 		
-		debugger;
-		var loIdx = $(this).parent().find("[class^='lo']").text();
-		var ciIdx = $(this).parent().find("[class^='ci']").text();
-		var scrIdx = $(this).val();
-		
-		var me = this;
-		debugger;
+		var loIdx = $("#location").val();
+		var ciIdx = $("#cinema").val();
+		var scrIdx = $("#screen").val();
 		
 		$.ajax({
 			type: "GET",
@@ -92,21 +80,34 @@ $(function(){
 		})
 		.done(function(data){
 			debugger;
-			$(me).parent().parent().find(".seatNum").val(data);
-			$(me).parent().parent().find(".seatNum").attr("readonly", false);
-			$(me).parent().parent().find("#updateBtn").attr("disabled", false);
+			$("#seatNum").val(data);
 		})
 		.fail(function(){})
 	})
 	
-	$(document).on("click", "#updateBtn", function(){
-		debugger;
+	
+	// 좌석 수정 db 작업
+	$(document).on("click", "#updateScrBtn", function(){
 		
-		var loIdx = $(this).parent().parent().find("[class^='lo']").text();
-		var ciIdx = $(this).parent().parent().find("[class^='ci']").text();
-		var scrIdx = $(this).parent().parent().find(".screen").val();
-		var scrSeat = $(this).parent().find(".seatNum").val();
-		debugger;
+		var inputVal = parseInt($("#seatNum").val());
+		
+		if(inputVal > 234) {
+			alert("좌석은 최대 234개까지만 가능합니다.");
+			return;
+		}
+		if(inputVal % 18 != 0) {
+			alert("좌석은 18개 단위로만 가능합니다.");
+			inputVal -= inputVal % 18;
+			$("#seatNum").val(inputVal);
+			return;
+		}
+		
+		var loIdx = $("#location").val();
+		var ciIdx = $("#cinema").val();
+		var scrIdx = $("#screen").val();
+		var scrSeat = $("#seatNum").val();
+
+		if(scrIdx == "0") return;
 		
 		$.ajax({
 			type: "POST",
@@ -121,10 +122,142 @@ $(function(){
 		})
 		.done(function(data){
 			debugger;
+			location.reload();
+			
 		})
 		.fail(function(){
 			debugger;
 		})
 	})
+	
+	// 상영관 추가
+	$(document).on("click", ".addScrBtn", function(){
+		debugger;
+		
+		if($(this).val() == "0"){
+			debugger;
+			return;
+		}
+		var loIdx = $(this).parent().parent().find("[class^='lo']").text();
+		var ciIdx = $(this).parent().parent().find("[class^='ci']").text();
+		
+		debugger;
+		
+		$.ajax({
+			type: "POST",
+			url: "adm_locationProAS.ad",
+			data: {
+				loIdx: loIdx,
+				ciIdx: ciIdx,
+			},
+			dateType: "text"
+		})
+		.done(function(data){
+			debugger;
+			location.reload();
+		})
+		.fail(function(){})	
+	})
+	
+	
+	// 상영관 삭제
+	$(document).on("click", ".deleteScrBtn", function(){
+		debugger;
+		if($(this).parent().find(".screen").val() == "0"){
+			debugger;
+			
+			return;
+		}
+		var loIdx = $(this).parent().parent().find("[class^='lo']").text();
+		var ciIdx = $(this).parent().parent().find("[class^='ci']").text();
+		var scrIdx = $(this).parent().find(".screen").val();
+		debugger;
+		$.ajax({
+			type: "POST",
+			url: "adm_locationProDS.ad",
+			data: {
+				loIdx: loIdx,
+				ciIdx: ciIdx,
+				scrIdx: scrIdx
+			},
+			dateType: "text"
+		})
+		.done(function(data){
+			debugger;
+			location.reload();
+		})
+		.fail(function(){})	
+	})
+	
+	
+	// 영화관 오픈 클로즈
+	$(document).on("change", ".OC", function(){
+		debugger;
+		
+		var loIdx = $(this).parent().parent().find("[class^='lo']").text();
+		var ciIdx = $(this).parent().parent().find("[class^='ci']").text();
+		var ciOC = $(this).val();
+		debugger;
+		
+		$.ajax({
+			type: "POST",
+			url: "adm_locationProOC.ad",
+			data: {
+				loIdx: loIdx,
+				ciIdx: ciIdx,
+				ciOC: ciOC
+			},
+			dateType: "text"
+		})
+		.done(function(data){
+			debugger;
+			location.reload();
+		})
+		.fail(function(){})
+	})
+	
+	
+	
+	
+	
+	
+	
+//	$(document).on("change", ".screen", function(){
+//		if($(this).val() == "0"){
+//			debugger;
+//			$(this).parent().parent().find(".seatNum").val("");
+//			$(this).parent().parent().find(".seatNum").attr("readonly", true);
+//			$(this).parent().parent().find("#updateBtn").attr("disabled", true);
+//			return;
+//		}
+//		
+//		debugger;
+//		var loIdx = $(this).parent().find("[class^='lo']").text();
+//		var ciIdx = $(this).parent().find("[class^='ci']").text();
+//		var scrIdx = $(this).val();
+//		
+//		var me = this;
+//		debugger;
+//		
+//		$.ajax({
+//			type: "GET",
+//			url: "adm_locationPro.ad",
+//			data: {
+//				loIdx: loIdx,
+//				ciIdx: ciIdx,
+//				scrIdx: scrIdx
+//			},
+//			dateType: "text"
+//		})
+//		.done(function(data){
+//			debugger;
+//			$(me).parent().parent().find(".seatNum").val(data);
+//			$(me).parent().parent().find(".seatNum").attr("readonly", false);
+//			$(me).parent().parent().find("#updateBtn").attr("disabled", false);
+//		})
+//		.fail(function(){})
+//	})
+	
+	
 	
 });

@@ -344,5 +344,34 @@ public class AdminController extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 		    response.getWriter().write(result);
 		}
+		// 관리자 영화관 관리 페이지 상영관 추가
+		if(sPath.equals("/adm_locationProAS.ad")) {
+			AdminService adminService = new AdminService();
+			String result = adminService.insertScreen(request);
+			
+			response.setCharacterEncoding("utf-8");
+		    response.getWriter().write(result);
+		}
+		// 관리자 영화관 관리 페이지 사영관 삭제 
+		if(sPath.equals("/adm_locationProDS.ad")) {
+			AdminService adminService = new AdminService();
+			String result = adminService.deleteScreen(request);
+			
+			System.out.println("컨트롤러");
+			System.out.println(result);
+			System.out.println("컨트롤러");
+			
+			
+			response.setCharacterEncoding("utf-8");
+		    response.getWriter().write(result);
+		}
+		// 관리자 영화관 관리 영화관 오픈 클로즈
+		if(sPath.equals("/adm_locationProOC.ad")) {
+			AdminService adminService = new AdminService();
+			String result = adminService.updateOC(request);
+			
+			response.setCharacterEncoding("utf-8");
+		    response.getWriter().write(result);
+		}
 	}//doProcess()	
 }//클래스 끝

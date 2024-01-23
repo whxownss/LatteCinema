@@ -1,3 +1,7 @@
+// 들어온 시간
+var enterTime = new Date();
+
+
 //구매자 정보
 const user_email =  "whxownss@gmail.com" //response.req_user_email
 const username = "홍홍길똥" //response.req_username
@@ -17,32 +21,22 @@ var makeMerchantUid = "" + hours + minutes + seconds + milliseconds;
 makeMerchantUid = makeMerchantUid.length != 7 ? makeMerchantUid.padEnd(7, "L") : makeMerchantUid;
 
 function kakaoPay(useremail, username) {
-	var isTimeOver = false;
-	// 내가 결제중에 SEAT테이블에 정보가 사라질 때 ******************************
-	$.ajax({
-		type: "GET",
-		url: "res3ProSE.re",
-		data: {schDTO: JSON.stringify(schDTO)},
-		dataType: "text",
-		async: false
-	})
-	.done(function(data){
-		if(data == "true") {
-			isTimeOver = true;
-			alert('시간이 만료되었습니다.');
-			location.href = "res1.re";
-		}
-	})
-	.fail(function(){
-	})
-	if(isTimeOver) return;
+	debugger;
+
 	
-	if (confirm("구매 하시겠습니까?")) { // 구매 클릭시 한번 더 확인하기
-    if (1 == 1) { // 회원만 결제 가능
+if (confirm("구매 하시겠습니까?")) { // 구매 클릭시 한번 더 확인하기
+	
+		
+	// res3에 들어오고 이때까지 몇분 지났는지 확인
+	//	var payTime = new Date();
+	//	var canPayTime = (payTime.getTime() - enterTime.getTime()) / (60 * 60 * 1000);
+	//	debugger;
+	
+	if (1 == 1) { // 회원만 결제 가능
 //          const emoticonName = document.getElementById('title').innerText
 
-         IMP.init("imp16802722"); // 가맹점 식별코드
-         IMP.request_pay({
+		IMP.init("imp16802722"); // 가맹점 식별코드
+     	IMP.request_pay({
              pg: 'html5_inicis.INIpayTest', // PG사 코드표에서 선택
              pay_method: 'card', // 결제 방식
              merchant_uid: "MOV" + makeMerchantUid, // 결제 고유 번호
@@ -54,13 +48,39 @@ function kakaoPay(useremail, username) {
              // buyer_tel : '010-1234-5678',
              // buyer_addr : '서울특별시 강남구 삼성동',
              // buyer_postcode : '123-456'
-         }, async function (rsp) { // callback
+    	}, async function (rsp) { // callback
+    	debugger;
              if (rsp.success) { //결제 성공시
+             
+             
+             
+             
+			    // 내가 결제중에 SEAT테이블에 정보가 사라질 때 ******************************
+				var isTimeOver = false;
+				$.ajax({
+					type: "GET",
+					url: "res3ProSE.re",
+					data: {schDTO: JSON.stringify(schDTO)},
+					dataType: "text",
+					async: false
+				})
+				.done(function(data){
+					if(data == "true") {
+						isTimeOver = true;
+						alert('시간이 만료되었습니다.');
+						location.href = "res3ProRF.re?mid=" + rsp.merchant_uid; // 포트원 환불
+					}
+				})
+				.fail(function(){
+				})
+				if(isTimeOver) return;
+				// 내가 결제중에 SEAT테이블에 정보가 사라질 때 ******************************	
+             
+             
 //                  console.log(rsp);
 //                  localStorage.setItem('rsp', JSON.stringify(rsp));
 //          		 localStorage.setItem('schDTO', JSON.stringify(schDTO));
 //          		 window.location = "res4.re";
-
 				$.each(schDTO, (k, v) => {
 					if(k == "seat"){
 						v = v.join(", ");
@@ -109,7 +129,8 @@ function kakaoPay(useremail, username) {
 	//                      alert(`error:[${response.status}]\n결제요청이 승인된 경우 관리자에게 문의바랍니다.`);
 	//                      // DB저장 실패시 status에 따라 추가적인 작업 가능성
 	//                  }
-             } else if (rsp.success == false) { // 결제 실패시
+             } else if (rsp.success == false) { // 결제 실패시  (결제창 닫을때)
+             	debugger;
                  alert(rsp.error_msg)
              }
          });
@@ -118,6 +139,7 @@ function kakaoPay(useremail, username) {
          alert('로그인이 필요합니다!')
      }
  } else { // 구매 확인 알림창 취소 클릭시 돌아가기
+// 	location.href = "res2.re";  포인트 내역 변경등의 이유도 ㅇ있을 수 있으니 좀 이상함 이건
      return false;
  }
 }

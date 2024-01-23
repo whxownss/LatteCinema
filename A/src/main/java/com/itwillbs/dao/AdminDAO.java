@@ -53,4 +53,39 @@ public class AdminDAO {
 		return updateCnt > 0 ? "true" : "false";
 	}
 
+	public String insertScreen(ScreenDTO screenDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int insertCnt = session.insert("Screen.insertScreen", screenDTO);
+		
+		int updateCnt = session.update("Cinema.updateCiSNum", screenDTO);
+		
+		session.commit();
+		session.close();
+		
+		return insertCnt + updateCnt > 1 ? "true" : "false";
+	}
+
+	public String deleteScreen(ScreenDTO screenDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int deleteCnt = session.delete("Screen.deleteScreen", screenDTO);
+		screenDTO.setScrIdx("forDelete");
+		int updateCnt = session.update("Cinema.updateCiSNum", screenDTO);
+
+		
+		session.commit();
+		session.close();
+		
+		return deleteCnt + updateCnt > 1 ? "true" : "false";
+	}
+
+	public String updateOC(CinemaDTO cinemaDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int updateCnt = session.update("Cinema.updateOC", cinemaDTO);
+		session.commit();
+		session.close();
+		
+		return updateCnt > 0 ? "true" : "false";
+		
+	}
+
 }

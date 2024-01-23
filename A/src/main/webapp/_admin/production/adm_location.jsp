@@ -213,7 +213,8 @@
 												for="area-detail">좌석수<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 col-xs-12">
-												<input type="number" id="seatNum" class="form-control">
+												<input type="number" id="seatNum" class="form-control" 
+														min="0" max="234" step="18" required>
 											</div>
 										</div>
 
@@ -222,9 +223,7 @@
 										<div class="ln_solid"></div>
 										<div class="form-group">
 											<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-												<button class="btn btn-primary" type="button">취소</button>
-												<button class="btn btn-primary" type="reset">초기화</button>
-												<button class="btn btn-success" type="submit" id="insertSchBtn">등록</button>
+												<button class="btn btn-success" type="button" id="updateScrBtn">수정</button>
 											</div>
 										</div>
 									</form>
@@ -260,8 +259,8 @@
                           <th>영화관</th>
                           <th>오픈 여부</th>
                           <th>상영관 수</th>
-                          <th>상영관</th>
-                          <th>좌석 수</th>
+                          <th>상영관 삭제</th>
+                          <th>상영관 추가</th>
                         </tr>
                       </thead>
                       <tbody id="tbody">
@@ -270,7 +269,7 @@
                       		<td>${cinema.loName }</td>
                       		<td>${cinema.ciName }</td>
 	                        <td>
-								<select>
+								<select class="OC">
 									<c:if test="${cinema.ciOc == 'N' }">
 										<option value="N" selected>N</option>
 										<option value="Y">Y</option>
@@ -289,12 +288,25 @@
                       					<option value="${i}">${i}관</option>
                       				</c:forEach>
                       			</select>
-                      			<span class="loIdx" hidden="true">${cinema.loIdx}</span>
-                      			<span class="ciIdx" hidden="true">${cinema.ciIdx}</span>
+                      			<c:if test="${cinema.ciOc == 'N' }">
+									<button class="btn btn-success" type="button" disabled>삭제</button>
+                      				<span class="loIdx" hidden="true">${cinema.loIdx}</span>
+                      				<span class="ciIdx" hidden="true">${cinema.ciIdx}</span>
+								</c:if>
+								<c:if test="${cinema.ciOc == 'Y' }">
+									<button class="btn btn-success deleteScrBtn" type="button">삭제</button>
+                      				<span class="loIdx" hidden="true">${cinema.loIdx}</span>
+                      				<span class="ciIdx" hidden="true">${cinema.ciIdx}</span>
+								</c:if>
                       		</td>
                       		<td>
-                      			<input type="number" class="seatNum" min="0" max="100" step="10" readonly>
-                      			<button class="btn btn-success" type="button" id="updateBtn" disabled>수정</button>
+                      			<c:if test="${cinema.ciOc == 'N' }">
+									<button class="btn btn-success" type="button" disabled>상영관 추가</button>
+								</c:if>
+								<c:if test="${cinema.ciOc == 'Y' }">
+									<button class="btn btn-success addScrBtn" type="button" >상영관 추가</button>
+								</c:if>
+                      			
                       		</td>
 						</tr>	  
                       	</c:forEach>
