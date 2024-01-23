@@ -247,7 +247,7 @@
 <!--               <div class="count">7,325</div> -->
 <!--               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Month</span> -->
             </div>
-          </div>
+          </div>  
           <!-- /top tiles -->
 
 <!--           <div class="row"> -->
