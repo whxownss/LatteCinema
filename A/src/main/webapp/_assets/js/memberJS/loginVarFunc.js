@@ -173,10 +173,11 @@ window.addEventListener('load', function () {
 	});
 });
 
-//	298f4267dbcfe84b0fe1ea7009ad8d45
-
+// 05bf1f3ffc1ab1c242259dc756e285cb //서버최종테스트
+//	298f4267dbcfe84b0fe1ea7009ad8d45 //서버
+// 44bd94c9c9fc31fcac5bd17dd86e5cba //로컬
 // 카카오로그인 api
-Kakao.init('44bd94c9c9fc31fcac5bd17dd86e5cba'); // 여기에 애플리케이션에서 발급받은 키를 넣어주세요.
+Kakao.init('298f4267dbcfe84b0fe1ea7009ad8d45'); // 여기에 애플리케이션에서 발급받은 키를 넣어주세요.
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
 
     function kakaoLogin() {
