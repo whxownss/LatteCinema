@@ -1,5 +1,5 @@
 //구매자 정보
-const user_email =  "whxownss@gmail.com" //response.req_user_email
+const user_email =  "" //response.req_user_email
 const username = "홍홍길똥" //response.req_username
 
 //결제창 함수 넣어주기
@@ -50,7 +50,7 @@ function kakaoPay(useremail, username) {
              amount: 100, // 가격  parseInt($("#rsPrice").text().replace("," , ""))
              //구매자 정보 ↓
              buyer_email: `${useremail}`,
-             buyer_name: "서비스 단에서 세션 이름 줄거임"
+             buyer_name: $("#sName").val()
              // buyer_tel : '010-1234-5678',
              // buyer_addr : '서울특별시 강남구 삼성동',
              // buyer_postcode : '123-456'
