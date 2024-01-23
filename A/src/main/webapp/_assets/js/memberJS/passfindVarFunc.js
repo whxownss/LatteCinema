@@ -1,3 +1,42 @@
+// 
+var checkCode;
+// 이메일 인증번호 발송 및 인증
+function emailAuthentication() {
+// 	debugger;
+	
+	var email = $("#email").val()
+	$.ajax({
+		type : "post",
+		url : "emailCode.me",
+		dataType : "text",
+		data : {email : email},
+		success:function(data){
+ 			debugger;
+			alert("인증번호 보내기 성공");
+			checkCode = data;
+			
+		},
+		error: function () {
+			
+		}
+	});
+}
+
+// 이메일 인증 번호 확인하기 버튼 => 2. 이메일 인증 확인 인증성공시 새비밀번호 입력창 display-block
+function authCodeCheck() {
+	if($("#emailCheck").val() == checkCode){
+// 		debugger;
+		alert('인증 성공');
+		$("#changeNewPass").css("display", 'block');
+		$("#btnFindPass").attr("disabled" , false);
+// 		$("#id").attr("readonly" true);
+	} else{
+		alert('인증 실패');
+	}
+	
+}
+
+
 //새비밀번호 정규식
 var lengthRegexPass = /^[A-Za-z0-9!@#$%]{8,16}$/; // 영문 대소문자 숫자 특수문자 8~16자 규칙(패스워드)
 var engUpperRegex = /[A-Z]/; //대문자 규칙 (비밀번호)
@@ -51,16 +90,13 @@ function checkConfirmPasswd() {
 	if( passwd == passwd2 && passwd != ""){
 		text='**비밀번호 일치**';
 		color='green';
-		
 	}
 	$("#checknewpasswd2").text(text).css("color", color);
 }		
 
 //유효성 체크 후 submit
 function checkSubmit() {
-	
 	var color = $('#fr span');
-	
 	var flag = 1;
 	
 	$.each(color, function(i, v){
@@ -74,40 +110,3 @@ function checkSubmit() {
 	return ((flag == 0) ? false : true);
 }	
 
-var checkCode;
-// 이메일 인증번호 발송 및 인증
-function emailAuthentication() {
-// 	debugger;
-	
-	var email = $("#email").val()
-	$.ajax({
-		type : "post",
-		url : "emailCode.me",
-		dataType : "text",
-		data : {email : email},
-		success:function(data){
- 			debugger;
-			alert("인증번호 보내기 성공");
-			checkCode = data;
-			
-		},
-		error: function () {
-			
-		}
-	});
-}
-
-// 이메일 인증 번호 확인하기 버튼
-function authCodeCheck() {
-// 	debugger;
-	if($("#emailCheck").val() == checkCode){
-// 		debugger;
-		alert('인증 성공');
-		$("#changeNewPass").css("display", 'block');
-		$("#btnFindPass").attr("disabled" , false);
-// 		$("#id").attr("readonly" true);
-	} else{
-		alert('인증 실패');
-	}
-	
-}
