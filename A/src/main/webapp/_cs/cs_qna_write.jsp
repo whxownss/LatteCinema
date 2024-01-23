@@ -69,7 +69,7 @@
 							  <button type="submit" id="insertQnaBoard" class="btn btn-primary">작성</button>
 						  </div>
 						   <div class="form-group mb-3 d-flex justify-content-center">
-							  <button type="reset" class="btn btn-outline-secondary">취소</button>
+							  <button type="reset" class="btn btn-outline-secondary">초기화</button>
 						  </div>
 			          </div>	
 

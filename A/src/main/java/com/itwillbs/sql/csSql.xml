@@ -691,6 +691,19 @@
 		LIMIT 5
 	</select>  
 	
-	
+	<select id="getReserCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM RESERVATION
+		 WHERE SUCCESS = 'TRUE'
+		   AND MONTH(PAY_TIME) = MONTH(CURDATE())
+		   AND YEAR(PAY_TIME) = YEAR(CURDATE())
+	</select>
+	<select id="getReserSum" resultType="int">
+		SELECT SUM(PAID_AMOUNT)
+		  FROM RESERVATION
+		 WHERE SUCCESS = 'TRUE'
+		   AND MONTH(PAY_TIME) = MONTH(CURDATE())
+		   AND YEAR(PAY_TIME) = YEAR(CURDATE())
+	</select>
 	
 </mapper>

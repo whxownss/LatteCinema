@@ -70,10 +70,14 @@ public class AdminController extends HttpServlet {
 			ArrayList<ResponseDataDTO> responseList = csBoardService.getResponseList();
 			ArrayList<ReservationDTO> resBoardList = csBoardService.getResBoardList();
 			int memCount = csBoardService.getMemCount();
+			int monthlyAudi = csBoardService.getReserCount();
+			int monthlySum = csBoardService.getReserSum();
 			
 			request.setAttribute("responseList", responseList);
 			request.setAttribute("resBoardList", resBoardList);
 			request.setAttribute("memCount", memCount);
+			request.setAttribute("monthlyAudi", monthlyAudi);
+			request.setAttribute("monthlySum", monthlySum);
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_home.jsp");
 			dispatcher.forward(request, response);
 		}
