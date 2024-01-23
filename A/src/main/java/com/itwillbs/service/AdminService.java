@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.itwillbs.dao.AdminDAO;
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ScheduleDTO;
+import com.itwillbs.domain.ScreenDTO;
 
 public class AdminService {
 
@@ -56,6 +57,29 @@ public class AdminService {
 		AdminDAO adminDAO = new AdminDAO();
 		
 		return  adminDAO.getAllCinema();
+	}
+
+	public String getSeatNum(HttpServletRequest request) {
+		AdminDAO adminDAO = new AdminDAO();
+		
+		ScreenDTO screenDTO = new ScreenDTO();
+		screenDTO.setLoIdx(request.getParameter("loIdx"));
+		screenDTO.setCiIdx(request.getParameter("ciIdx"));
+		screenDTO.setScrIdx(request.getParameter("scrIdx"));
+		
+		return adminDAO.getSeatNum(screenDTO);
+	}
+
+	public String updateSeat(HttpServletRequest request) {
+		AdminDAO adminDAO = new AdminDAO();
+		
+		ScreenDTO screenDTO = new ScreenDTO();
+		screenDTO.setLoIdx(request.getParameter("loIdx"));
+		screenDTO.setCiIdx(request.getParameter("ciIdx"));
+		screenDTO.setScrIdx(request.getParameter("scrIdx"));
+		screenDTO.setScrSeat(request.getParameter("scrSeat"));
+		
+		return adminDAO.updateSeat(screenDTO);
 	}
 
 }
