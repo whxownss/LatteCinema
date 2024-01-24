@@ -57,7 +57,7 @@ public class SendGmail {
 			mailMessage.addRecipient(RecipientType.TO, receiver_address);
 			mailMessage.setSubject(title);
 			
-			mailMessage.setContent(content, "text/html; charset=UTF-8");	
+			mailMessage.setContent("인증번호 : " + content, "text/html; charset=UTF-8");	
 			mailMessage.setSentDate(new Date());
 			
 			
