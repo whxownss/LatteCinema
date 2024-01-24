@@ -9,6 +9,7 @@ public class SeatDTO {
 	private String seatC;
 	private String dateC;
 	private String insertTime;
+	private String check;
 	
 	public String getMemId() {
 		return memId;
@@ -66,11 +67,20 @@ public class SeatDTO {
 	public void setInsertTime(String insertTime) {
 		this.insertTime = insertTime;
 	}
+	
+	public String getCheck() {
+		return check;
+	}
+	public void setCheck(String check) {
+		this.check = check;
+	}
 	@Override
 	public String toString() {
 		return "SeatDTO [memId=" + memId + ", loIdx=" + loIdx + ", ciIdx=" + ciIdx + ", movType=" + movType
-				+ ", schIdx=" + schIdx + ", seatC=" + seatC + ", dateC=" + dateC + ", insertTime=" + insertTime + "]";
+				+ ", schIdx=" + schIdx + ", seatC=" + seatC + ", dateC=" + dateC + ", insertTime=" + insertTime
+				+ ", check=" + check + "]";
 	}
+	
 	
 	
 	

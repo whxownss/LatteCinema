@@ -81,8 +81,15 @@
 		   AND DATE_FORMAT(DATE_C, '%Y-%m-%d') = #{dateC}
 	</select>
 	
-	<select id="selectSameSeat" parameterType="SeatDTO" resultType="Integer">
-		SELECT COUNT(*)
+	<select id="selectSameSeat" parameterType="SeatDTO" resultType="String">
+		SELECT 
+		<if test='check != "check"'>
+			   CAST(COUNT(*) AS CHAR(10))  -- 리턴타입 String으로 바뀌면서 이렇게 해줌
+		</if>
+		<if test='check == "check"'>
+			   INSERT_TIME
+		</if>
+		
 		  FROM SEAT
 		 WHERE 1 = 1
 		   AND LO_IDX = #{loIdx}
@@ -90,11 +97,16 @@
 		   AND MOV_TYPE = #{movType}
 		   AND SCH_IDX = #{schIdx}
 		   AND DATE_C = #{dateC}
+		<if test='check != "check"'>
 		   AND (
 		   <foreach collection="seatC.split(',')" item="seat" index="i" separator="OR">
 		   	   FIND_IN_SET(#{seat}, REPLACE(SEAT_C, ' ', '')) > 0
 		   </foreach>
-		   	   )
+		   	    )  
+		</if>
+		<if test='check == "check"'>
+		   AND SEAT_C = #{seatC}
+		</if>
 	</select>
 	
 	<insert id="insertSeatInfo" parameterType="SeatDTO">
@@ -117,7 +129,7 @@
 			 , #{schIdx}
 			 , REPLACE(#{seatC}, ',', ', ')
 			 , #{dateC}
-			 , NOW()
+			 , NOW(6)
 			 )	 
 	</insert>
 	

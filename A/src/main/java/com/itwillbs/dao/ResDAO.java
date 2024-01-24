@@ -85,15 +85,27 @@ public class ResDAO {
 
 	public String isSameSeat(SeatDTO seatDTO) {
 		SqlSession session = sqlSessionFactory.openSession();
-		int seatCnt = session.selectOne("Reservation.selectSameSeat", seatDTO);
+		String a = session.selectOne("Reservation.selectSameSeat", seatDTO);
+		System.out.println(a);
+		int seatCnt = Integer.parseInt(a);
 		session.close();
-		
+		System.out.println("SSSSSSSSSSSSSSSSSSSSSSSS");
+		System.out.println(seatCnt);
+		System.out.println("SSSSSSSSSSSSSSSSSSSSSSSS");
 		return seatCnt > 0 ? null : "noSameSeat";
 	}
 
+	// 동시에 좌석 선택하고 넘어가는 경우
 	public String setSeatInfo(SeatDTO seatDTO) {
 		SqlSession session = sqlSessionFactory.openSession();
 		int insertCnt = session.insert("Reservation.insertSeatInfo", seatDTO);
+		seatDTO.setCheck("check");
+		String insertTime = session.selectOne("Reservation.selectSameSeat", seatDTO);
+		System.out.println("ㅈㅂㅈㅂㅈㅂㅈㅂㅈㅂ");
+		System.out.println(insertTime);
+		System.out.println("ㅈㅂㅈㅂㅈㅂㅈㅂㅈㅂ");
+		
+		
 		session.commit();
 		session.close();
 		
