@@ -38,7 +38,26 @@
     		ON L.LO_IDX = C.LO_IDX
 	</select>
 	
+	<update id="updateCiSNum" parameterType="ScreenDTO">
+		UPDATE CINEMA
+		   SET CI_S_NUM = IFNULL(CAST(CI_S_NUM as unsigned), 0) 
+								   <if test='scrIdx == "forDelete"'>
+								   		-1
+								   </if>
+								   <if test='scrIdx != "forDelete"'>
+								   		+1
+								   </if>
+		 WHERE 1 = 1 
+		   AND LO_IDX = #{loIdx}
+		   AND CI_IDX = #{ciIdx}
+	</update>
 	
-	
+	<update id="updateOC" parameterType="CinemaDTO">
+		UPDATE CINEMA
+		   SET CI_OC = #{ciOc}
+		 WHERE 1 = 1
+		   AND LO_IDX = #{loIdx}
+		   AND CI_IDX = #{ciIdx}
+	</update>
 	
 </mapper>

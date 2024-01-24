@@ -34,6 +34,7 @@ $(function(){
 				})
 				.done(function(data){
 					debugger;
+					alert(data);
 					if(data == "환불 성공"){
 						window.location.href="bookinglist.me";
 //		 				$.ajax({

@@ -142,8 +142,18 @@ public class ResDAO {
 	}
 
 	public String refund(String mid) {
+		System.out.println("??????????222222222");
 		SqlSession session = sqlSessionFactory.openSession();
 		int deleteCnt = session.update("Reservation.refundRes", mid);
+		System.out.println(deleteCnt);
+		// 환불하고도 다른 사용자가 res2에서 그 자리 계속 남아 잇는거.
+		System.out.println("??????????33333333333");
+		if(deleteCnt > 0) {
+			System.out.println("`3`3`3`3`3``3");
+			session.delete("Reservation.deleteSeatInfo", mid);
+			System.out.println("??????????44444444");
+		}
+		System.out.println("??????????55555555555555");
 		session.commit();
 		session.close();
 		
