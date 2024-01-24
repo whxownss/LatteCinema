@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Admin">
+
+	<select id="getAdmTool" resultType="AdmToolDTO">
+		SELECT CANCEL_TIME
+			 , REFUND_TIME
+			 , P1_PRICE
+			 , P2_PRICE
+			 , P3_PRICE
+		  FROM ADM_TOOL
+	</select>
+
+	<update id="updateAdmTool" parameterType="AdmToolDTO">
+		UPDATE ADM_TOOL
+		   SET CANCEL_TIME = #{cancelTime}
+		   	 , REFUND_TIME = #{refundTime}
+		   	 , P1_PRICE = #{p1Price}
+		   	 , P2_PRICE = #{p2Price}
+		   	 , P3_PRICE = #{p3Price}
+	</update>
+	
+</mapper>

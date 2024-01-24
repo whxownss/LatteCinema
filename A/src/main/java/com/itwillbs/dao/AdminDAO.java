@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.itwillbs.domain.AdmToolDTO;
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ScheduleDTO;
 import com.itwillbs.domain.ScreenDTO;
@@ -86,6 +87,23 @@ public class AdminDAO {
 		
 		return updateCnt > 0 ? "true" : "false";
 		
+	}
+
+	public AdmToolDTO getAdmTool() {
+		SqlSession session = sqlSessionFactory.openSession();
+		AdmToolDTO admToolDTO = session.selectOne("Admin.getAdmTool");
+		session.close();
+		
+		return admToolDTO;
+	}
+
+	public String updateAdmTool(AdmToolDTO admToolDTO) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int updateCnt = session.update("Admin.updateAdmTool", admToolDTO);
+		session.commit();
+		session.close();
+		
+		return updateCnt > 0 ? "true" : "false";
 	}
 
 }

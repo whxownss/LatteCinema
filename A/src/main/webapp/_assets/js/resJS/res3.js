@@ -20,9 +20,9 @@ $(function(){
 	$(".p1").text(schDTO["p1"]);
 	$(".p2").text(schDTO["p2"]);
 	$(".p3").text(schDTO["p3"]);
-	$("#pTP1").text(schDTO["p1"] * 15000);
-	$("#pTP2").text(schDTO["p2"] * 12000);
-	$("#pTP3").text(schDTO["p3"] * 9000);
+	$("#pTP1").text(schDTO["p1"] * p1Price);
+	$("#pTP2").text(schDTO["p2"] * p2Price);
+	$("#pTP3").text(schDTO["p3"] * p3Price);
 	$(".poster").attr("src", schDTO.poster);
 	
 	
