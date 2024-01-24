@@ -39,6 +39,7 @@ function checkId() {
 		
 		$.ajax({
 			type : "post",
+			// get or post
 			
 			data : {memId : id}, //입력한 값 변수에 담기
 			url : "checkjoin.me", 
