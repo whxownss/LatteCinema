@@ -110,6 +110,10 @@ function checkSubmit() {
 	
 	return ((flag == 0) ? false : true);
 }	
+
+//최종테스트시 쓸 url
+// DDVbYF6ooJQNGc8kCVSP
+
 //http://c2d2309t2.itwillbs.com/A/login.me
 //ChGI_ZlTbCS_3gIpvFOZ
 
