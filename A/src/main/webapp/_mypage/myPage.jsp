@@ -186,7 +186,8 @@
 <script type="text/javascript">
 $(function(){
 	$('#pointTable').DataTable({
-		pagingType: 'full_numbers'
+		pagingType: 'full_numbers',
+		order: [[0, 'desc']]
 	});
 });//document ready
 </script>

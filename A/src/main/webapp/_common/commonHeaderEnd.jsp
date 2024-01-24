@@ -143,7 +143,7 @@
         	<c:if test="${sessionScope.sId ne 'admin' }">
         		<a href="myPage.me" class="mx-2">마이페이지</a>
         	</c:if>
-        	<c:if test="${empty sessionScope.sIdx}">
+        	<c:if test="${sessionScope.sId eq 'admin'}">
         		<a href="adm_home.ad" class="mx-2">관리자</a>
         	</c:if>
         </c:if>

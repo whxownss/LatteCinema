@@ -75,7 +75,7 @@ $('#movieName').on("change", function() {
             type: 'GET',
             dataType: 'json',
             success: function(response) {
-            	//debugger;
+//            	debugger;
                 response.Data[0].Result.forEach(function(movie) {
                     // 감독 이름 추출
                     var directorNames = movie.directors.director.map(function(director) {
@@ -141,13 +141,14 @@ $('#movieYear').on("change",function(){
 
     function fetchMoviesByReleaseYear(page) {
         var startCount = (page - 1) * listCount;
-        var parameters = "?collection=kmdb_new2&detail=N&ServiceKey=" + serviceKey + "&releaseDts=" + releaseStart + "&releaseDte=" + releaseEnd + "&listCount=" + listCount + "&startCount=" + startCount;
+        var parameters = "?collection=kmdb_new2&detail=N&ServiceKey=" + serviceKey + "&releaseDts=" + releaseStart + "&releaseDte=" + releaseEnd + "&listCount=" + listCount + "&startCount=" + startCount + "&genre!=" + "에로";
         $.ajax({
             url: base_url + parameters,
             type: 'GET',
             dataType: 'json',
             success: function(response) {
 				//debugger;
+				console.log(base_url + parameters);
                 response.Data[0].Result.forEach(function(item) {
                     var title = item.title;
                     $('#movieList').append($('<option>').text(title));
