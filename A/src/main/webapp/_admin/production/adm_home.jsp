@@ -23,7 +23,7 @@
     <link href="_admin/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="_admin/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
+    <!-- iCheck --> 
     <link href="_admin/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
 	
     <!-- bootstrap-progressbar -->
