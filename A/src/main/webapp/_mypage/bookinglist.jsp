@@ -110,7 +110,9 @@
 										<td scope="row" class="text-center align-middle">${reservationDTO.payTime}</td>
 										<td scope="row" class="text-center align-middle">${reservationDTO.title}</td>
 										<td scope="row" class="text-center align-middle">${reservationDTO.cinema} ${reservationDTO.scrIdx }</td>
-										<td scope="row" class="text-center align-middle">성인${reservationDTO.p1}명 청소년${reservationDTO.p2}명 경로${reservationDTO.p3}명</td>
+										<td scope="row" class="text-center align-middle">
+											<c:if test="${reservationDTO.p1 ne '0'}">성인${reservationDTO.p1}명 </c:if> <c:if test="${reservationDTO.p2 ne '0'}">청소년${reservationDTO.p2}명 </c:if><c:if test="${reservationDTO.p3 ne '0'}">경로${reservationDTO.p3}명 </c:if>
+										</td>
 										<td scope="row" class="text-center align-middle">${reservationDTO.seat}</td>
 										<td scope="row" class="text-center align-middle">${reservationDTO.date} ${reservationDTO.sTime}~${reservationDTO.schEtime}</td>
 										<td scope="row" class="text-center align-middle">${reservationDTO.paidAmount}</td>

@@ -3,7 +3,8 @@
  */
 $(function(){
 	$('#refundItem').DataTable({
-		pagingType: 'full_numbers'
+		pagingType: 'full_numbers',
+		order: [[0, 'desc']]
 	});
 	
 	$("#tbody").on("click","button",function() {

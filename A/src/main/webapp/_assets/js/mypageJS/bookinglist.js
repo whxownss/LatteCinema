@@ -3,7 +3,8 @@
  */
 $(function(){
 	$('#refundTable').DataTable({
-		pagingType: 'full_numbers'
+		pagingType: 'full_numbers',
+		order: [[0, 'desc']]
 	});
 	
 	$("#tbody").on("click","button",function() {
@@ -51,7 +52,7 @@ $(function(){
 				})
 				.fail(function(){})
 		}else {
-			alert('취소 싫어')
+			alert('환불 취소')
 		}
 	    
 	});
