@@ -167,7 +167,7 @@ public class MemberController extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 			String receiver = request.getParameter("email");
 			
-			// 이메일 인증난수 생성 객체생성
+			// 이메일 인증난수 생성 객체생성(StringBuffer)
 			EmailCode emailcode = new EmailCode();
 			// 난수생성메서드randomizeCode()호출 content에 저장
 			String content = emailcode.randomizeCode();
