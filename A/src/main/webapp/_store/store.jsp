@@ -3,7 +3,6 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@include file="../_common/commonHeaderStart.jsp"%>
 <%@include file="../_common/commonHeaderEnd.jsp"%>
-<!-- 상단 이미지 -->
 <c:set var="storeItemListB" value="${requestScope.storeItemListB}" />
 <c:set var="storeItemListS" value="${requestScope.storeItemListS}" />
 <c:set var="storeItemListC" value="${requestScope.storeItemListC}" />
