@@ -78,6 +78,23 @@
 </div>
 <!-- Modal2 -->
 
+<!-- Modal3 -->
+<div class="modal fade" id="timeOver" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+<!--       <div class="modal-header"> -->
+<!--         <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1> -->
+<!--       </div> -->
+      <div class="modal-body">
+        <div class="text-center mt-5 mb-5 fw-bold">상영 시작 30분 전부터는 환불할 수 없습니다.</div>
+      </div>
+      <div class="modal-footer ps-0 pe-0 pt-0 pb-0">
+        <button type="button" class="btn btn-light w-100 ms-0 me-0 mt-0 mb-0" id="timeOverBtn" data-bs-dismiss="modal">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal3 -->
 
 
 <main id="main">

@@ -121,6 +121,17 @@
 			 )	 
 	</insert>
 	
+	<delete id="deleteSeatInfo" parameterType="String">
+		DELETE S
+		  FROM SEAT S
+		  JOIN RESERVATION R
+		    ON S.LO_IDX = R.LO_IDX
+		   AND S.CI_IDX = R.CI_IDX
+		   AND S.MOV_TYPE = R.MOV_TYPE
+		   AND S.SCH_IDX = R.SCH_IDX
+		 WHERE R.MERCHANT_UID = #{mid}
+	</delete>
+	
 	<delete id="delete" parameterType="String">
 		DELETE S
 		  FROM SEAT S
@@ -161,9 +172,9 @@
 		     , REFUND_TIME = NOW()
 		 WHERE 1 = 1 
 		   AND MERCHANT_UID = #{mid}
-<!-- 		   AND TIMESTAMPDIFF -->
-<!-- 		   	   (MINUTE, NOW() -->
-<!-- 		   	    , STR_TO_DATE(CONCAT_WS(' ', DATE_FORMAT(DATE, '%Y-%m-%d'), S_TIME), '%Y-%m-%d %H:%i')) > 810 -->
+		   AND TIMESTAMPDIFF
+		   	   (MINUTE, NOW()
+		   	    , STR_TO_DATE(CONCAT_WS(' ', DATE_FORMAT(DATE, '%Y-%m-%d'), S_TIME), '%Y-%m-%d %H:%i')) > 30  -- 환불 가능 시간 설정
 	</update>
 	
 	

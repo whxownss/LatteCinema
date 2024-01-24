@@ -8,19 +8,13 @@
     </a>
     <nav id="navbar" class="navbar">
       <ul>
-        <li class="dropdown"><a href="res1.re"><span>예매</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-          <ul>
-            <li><a href="res1.re">예매하기</a></li>
-            <li><a href="res2.re">상영시간표</a></li>
-            <li><a href="res3.re">할인안내</a></li>
-          </ul>
+        <li class="dropdown"><a href="res1.re"><span>예매</span> <i class=""></i></a>
         </li>
         <li class="dropdown"><a href="movie_home.mo"><span>영화</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
           <ul>
-            <li><a href="movie_home.mo">홈</a></li>
             <li><a href="movie_now.mo">현재상영작</a></li>
-            <li><a href="movie_will.mo">상영예정작</a></li>
-            <li><a href="movie_latte.mo">옛날영화</a></li>
+              <li><a href="movie_latte.mo">옛날영화</a></li>
+              <li><a href="cs_recommend.cs">옛날영화 추천</a></li>
           </ul>
         </li>
         <li class="dropdown"><a href="#"><span>영화관</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -113,16 +107,11 @@
         <li class="dropdown"><a href="store.st"><span>스토어</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
           <ul>
             <li><a href="store.st#store1">베스트</a></li>
-            <li><a href="store.st#store2">관람권</a></li>
-            <li><a href="store.st#store3">스낵음료</a></li>
+            <li><a href="store.st#store2">스낵</a></li>
+            <li><a href="store.st#store3">음료</a></li>
           </ul>
         </li>
-        <li class="dropdown"><a href="#"><span>고객지원</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-          <ul>
-            <li><a href="cs_member.cs">멤버십</a></li>
-            <li><a href="cs_center.cs">고객센터</a></li>
-            <li><a href="cs_rent.cs">단체관람/대관문의</a></li>
-          </ul>
+        <li class="dropdown"><a href="cs_center.cs"><span>고객지원</span> <i class=""></i></a>
         </li>
       </ul>
     </nav><!-- .navbar -->
