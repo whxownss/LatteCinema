@@ -1,5 +1,6 @@
 package com.itwillbs.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -10,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.itwillbs.domain.AdmToolDTO;
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.MemberDTO;
@@ -85,13 +87,9 @@ public class ResDAO {
 
 	public String isSameSeat(SeatDTO seatDTO) {
 		SqlSession session = sqlSessionFactory.openSession();
-		String a = session.selectOne("Reservation.selectSameSeat", seatDTO);
-		System.out.println(a);
-		int seatCnt = Integer.parseInt(a);
+		int seatCnt = session.selectOne("Reservation.selectSameSeat", seatDTO);
 		session.close();
-		System.out.println("SSSSSSSSSSSSSSSSSSSSSSSS");
-		System.out.println(seatCnt);
-		System.out.println("SSSSSSSSSSSSSSSSSSSSSSSS");
+		
 		return seatCnt > 0 ? null : "noSameSeat";
 	}
 
@@ -99,12 +97,6 @@ public class ResDAO {
 	public String setSeatInfo(SeatDTO seatDTO) {
 		SqlSession session = sqlSessionFactory.openSession();
 		int insertCnt = session.insert("Reservation.insertSeatInfo", seatDTO);
-		seatDTO.setCheck("check");
-		String insertTime = session.selectOne("Reservation.selectSameSeat", seatDTO);
-		System.out.println("ㅈㅂㅈㅂㅈㅂㅈㅂㅈㅂ");
-		System.out.println(insertTime);
-		System.out.println("ㅈㅂㅈㅂㅈㅂㅈㅂㅈㅂ");
-		
 		
 		session.commit();
 		session.close();
@@ -114,7 +106,11 @@ public class ResDAO {
 
 	public String deleteNonePaidSeat(String memId) {
 		SqlSession session = sqlSessionFactory.openSession();
-		int deleteCnt = session.delete("Reservation.delete", memId);
+		Map<String, String> map = new HashMap<String, String>();
+		AdmToolDTO admToolDTO = session.selectOne("Admin.getAdmTool");
+		map.put("memId", memId);
+		map.put("cancelTime", admToolDTO.getCancelTime());
+		int deleteCnt = session.delete("Reservation.delete", map);
 		session.commit();
 		session.close();
 		
@@ -123,6 +119,9 @@ public class ResDAO {
 
 	public void startPayTimer() {
 		SqlSession session = sqlSessionFactory.openSession();
+		
+		AdmToolDTO admToolDTO = session.selectOne("Admin.getAdmTool");
+		int minutes = Integer.parseInt(admToolDTO.getCancelTime());
 		
 		String memId = null;
 		scheduler = Executors.newScheduledThreadPool(1);
@@ -133,7 +132,7 @@ public class ResDAO {
 			session.commit();
 			session.close();
 			System.out.println("DB 작업 종료");
-		}, 50, TimeUnit.SECONDS);
+		}, minutes, TimeUnit.MINUTES);
 		System.out.println("널인지 확인1111 : " + scheduledFuture);
 		scheduler.shutdown();
 	}
@@ -156,7 +155,11 @@ public class ResDAO {
 	public String refund(String mid) {
 		System.out.println("??????????222222222");
 		SqlSession session = sqlSessionFactory.openSession();
-		int deleteCnt = session.update("Reservation.refundRes", mid);
+		Map<String, String> map = new HashMap<String, String>();
+		AdmToolDTO admToolDTO = session.selectOne("Admin.getAdmTool");
+		map.put("mid", mid);
+		map.put("refundTime", admToolDTO.getRefundTime());
+		int deleteCnt = session.update("Reservation.refundRes", map);
 		System.out.println(deleteCnt);
 		// 환불하고도 다른 사용자가 res2에서 그 자리 계속 남아 잇는거.
 		System.out.println("??????????33333333333");

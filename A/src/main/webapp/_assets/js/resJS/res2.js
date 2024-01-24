@@ -161,7 +161,7 @@ $(function(){
 			var p1 = parseInt($("#pCase1").text());
 			var p2 = parseInt($("#pCase2").text());
 			var p3 = parseInt($("#pCase3").text());
-			var sum = p1 * 15000 + p2 * 12000 + p3 * 9000;
+			var sum = p1 * p1Price + p2 * p2Price + p3 * p3Price;
 			
 			$("#mPrice").text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		} else{

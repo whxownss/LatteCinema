@@ -81,15 +81,8 @@
 		   AND DATE_FORMAT(DATE_C, '%Y-%m-%d') = #{dateC}
 	</select>
 	
-	<select id="selectSameSeat" parameterType="SeatDTO" resultType="String">
-		SELECT 
-		<if test='check != "check"'>
-			   CAST(COUNT(*) AS CHAR(10))  -- 리턴타입 String으로 바뀌면서 이렇게 해줌
-		</if>
-		<if test='check == "check"'>
-			   INSERT_TIME
-		</if>
-		
+	<select id="selectSameSeat" parameterType="SeatDTO" resultType="Integer">
+		SELECT COUNT(*)
 		  FROM SEAT
 		 WHERE 1 = 1
 		   AND LO_IDX = #{loIdx}
@@ -97,16 +90,11 @@
 		   AND MOV_TYPE = #{movType}
 		   AND SCH_IDX = #{schIdx}
 		   AND DATE_C = #{dateC}
-		<if test='check != "check"'>
 		   AND (
 		   <foreach collection="seatC.split(',')" item="seat" index="i" separator="OR">
 		   	   FIND_IN_SET(#{seat}, REPLACE(SEAT_C, ' ', '')) > 0
 		   </foreach>
 		   	    )  
-		</if>
-		<if test='check == "check"'>
-		   AND SEAT_C = #{seatC}
-		</if>
 	</select>
 	
 	<insert id="insertSeatInfo" parameterType="SeatDTO">
@@ -144,9 +132,9 @@
 		 WHERE R.MERCHANT_UID = #{mid}
 	</delete>
 	
-	<delete id="delete" parameterType="String">
+	<delete id="delete" parameterType="map"> 
 		DELETE S
-		  FROM SEAT S
+		  FROM SEAT S					-- 이거 없어도 되지 않나?
 		  LEFT
 		  JOIN (SELECT *				<!-- 환불 del -> upd 변경후 -->
 				  FROM RESERVATION
@@ -163,7 +151,7 @@
 		   AND S.MEM_ID = #{memId}
 		 </if>
 		 <if test="memId == null">
-		   AND TIMESTAMPDIFF(SECOND, S.INSERT_TIME, NOW()) >= 45
+		   AND TIMESTAMPDIFF(MINUTE, S.INSERT_TIME, NOW()) >= #{cancelTime}
 		 </if>
 	</delete>
 	
@@ -178,7 +166,7 @@
 		   AND SEAT_C = REPLACE(#{seatC}, ',', ', ')
 	</select>
 	
-	<update id="refundRes" parameterType="String">
+	<update id="refundRes" parameterType="map">
 		UPDATE RESERVATION
 		   SET SUCCESS = 'false'
 		     , REFUND_TIME = NOW()
@@ -186,7 +174,7 @@
 		   AND MERCHANT_UID = #{mid}
 		   AND TIMESTAMPDIFF
 		   	   (MINUTE, NOW()
-		   	    , STR_TO_DATE(CONCAT_WS(' ', DATE_FORMAT(DATE, '%Y-%m-%d'), S_TIME), '%Y-%m-%d %H:%i')) > 30  -- 환불 가능 시간 설정
+		   	    , STR_TO_DATE(CONCAT_WS(' ', DATE_FORMAT(DATE, '%Y-%m-%d'), S_TIME), '%Y-%m-%d %H:%i')) > #{refund}  -- 환불 가능 시간 설정
 	</update>
 	
 	

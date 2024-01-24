@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.itwillbs.domain.AdmToolDTO;
 import com.itwillbs.domain.LocationDTO;
 import com.itwillbs.domain.MovieDTO;
+import com.itwillbs.service.AdminService;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.MovieService;
 import com.itwillbs.service.ResService;
@@ -41,10 +43,12 @@ public class ResController extends HttpServlet {
 			resService = new ResService();
 			List<LocationDTO> locationList = resService.getLocations();
 			String cinemaListJson = resService.getCinemas();
+			String refundTime = new AdminService().getAdmTool().getRefundTime();
 //			String scheduleListJson = resService.getSchedules();
 			
 			request.setAttribute("locationList", locationList);
 			request.setAttribute("cinemaListJson", cinemaListJson);
+			request.setAttribute("refundTime", refundTime);
 //			request.setAttribute("scheduleListJson", scheduleListJson);
 			
 			dispatcher = request.getRequestDispatcher("_reservation/res1.jsp");
@@ -116,6 +120,12 @@ public class ResController extends HttpServlet {
 		
 		// 예약2 페이지 이동
 		if(sPath.equals("/res2.re")) {
+			
+			AdminService adminService = new AdminService();
+			AdmToolDTO admToolDTO = adminService.getAdmTool();
+			
+			request.setAttribute("admToolDTO", admToolDTO);
+			
 			dispatcher = request.getRequestDispatcher("_reservation/res2.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -178,6 +188,10 @@ public class ResController extends HttpServlet {
 			MemberService memberService = new MemberService();
 			String memPoint = memberService.getMemPoint((String)session.getAttribute("sId"));
 			
+			AdminService adminService = new AdminService();
+			AdmToolDTO admToolDTO = adminService.getAdmTool();
+			request.setAttribute("admToolDTO", admToolDTO);
+			
 			request.setAttribute("memPoint", memPoint);
 			
 			dispatcher = request.getRequestDispatcher("_reservation/res3.jsp");
@@ -226,9 +240,15 @@ public class ResController extends HttpServlet {
 			resService = new ResService();
 			String mid = request.getParameter("mid"); 
 			String result = resService.refund(mid);   // 환불 시간 지났는지 확인후 db 작업
+			
+			AdminService adminService = new AdminService();
+			AdmToolDTO admToolDTO =	adminService.getAdmTool();
+			String refundTime = admToolDTO.getRefundTime();
+			
+			
 			System.out.println("6666666666666");
 			System.out.println(result);
-			String msg = "상영 시간 30분 전까지만 환불이 가능합니다.";
+			String msg = "상영 시간 " + refundTime + "분 전까지만 환불이 가능합니다.";
 			if(result.equals("true")) {
 				msg = "환불 성공";
 				Pay pay = new Pay();
