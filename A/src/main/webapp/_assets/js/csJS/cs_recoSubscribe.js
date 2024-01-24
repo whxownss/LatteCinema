@@ -163,7 +163,7 @@ $('#movieYear').on("change",function(){
         for (var page = 1; page <= totalPages; page++) {
             fetchMoviesByReleaseYear(page);
         }
-    });
+    }); 
     /*
     코드에서 사용된 callback 함수는 JavaScript의 비동기 프로그래밍 패턴에서 자주 사용되는 개념
     callback 함수는 다른 함수에 인자로 전달되는 함수로, 주로 비동기적인 작업(예를 들어, 네트워크 요청)이 완료된 후 실행되어야 하는 로직을 포함
