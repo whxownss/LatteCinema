@@ -41,7 +41,7 @@ if (confirm("구매 하시겠습니까?")) { // 구매 클릭시 한번 더 확�
              pay_method: 'card', // 결제 방식
              merchant_uid: "MOV" + makeMerchantUid, // 결제 고유 번호
              name: '라떼시네마', // 제품명
-             amount: 100, // 가격  parseInt($("#rsPrice").text().replace("," , ""))
+             amount: parseInt($("#rsPrice").text().replace("," , "")),
              //구매자 정보 ↓
              buyer_email: `${useremail}`,
              buyer_name: $("#sName").val()

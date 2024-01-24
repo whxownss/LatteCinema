@@ -82,7 +82,7 @@ var IMP = window.IMP;
           pay_method: "card",	// 지불수단
           merchant_uid: "STO" + merchant_uid,   // 주문번호
           name: itemName,	// 상품명
-          amount: 100,    // 가격		price
+          amount: price,    // 가격		price
           buyer_name: "서비스 단에서 세션 이름 줄거임",	// 구매자 이름
       }, function (rsp) { // callback
     	  console.log(rsp);
