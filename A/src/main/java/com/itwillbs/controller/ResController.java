@@ -222,10 +222,12 @@ public class ResController extends HttpServlet {
 		}
 		// 환불 (포트원 작업가기전에 DB에서 시간 먼저 확인 후 DELETE -> 포트원에서 실제 환불)
 		if(sPath.equals("/res4Pro.re")) {
+			System.out.println("??????????1111");
 			resService = new ResService();
 			String mid = request.getParameter("mid"); 
 			String result = resService.refund(mid);   // 환불 시간 지났는지 확인후 db 작업
-			
+			System.out.println("6666666666666");
+			System.out.println(result);
 			String msg = "상영 시간 30분 전까지만 환불이 가능합니다.";
 			if(result.equals("true")) {
 				msg = "환불 성공";
@@ -246,15 +248,20 @@ public class ResController extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(msg);
 		}
-		// 환불 DB 
-//		if(sPath.equals("/res4ProRF.re")) {
-//			resService = new ResService();
-//			String mid = request.getParameter("mid");
-//			resService.refund(mid);
-//	        
-//			response.setCharacterEncoding("utf-8");
-//			response.getWriter().write(msg);
-//		}
+		
+		
+		// 포트원만 환불 (결제 페이지에서 결제 후 시간 지났을 때) 
+		if(sPath.equals("/res3ProRF.re")) {
+			resService = new ResService();
+			String mid = request.getParameter("mid");
+
+			Pay pay = new Pay();
+			String token = pay.getImportToken();  
+			
+			pay.cancelPay(token, mid);  // 포트원 환불
+	        
+			response.sendRedirect("res1.re");
+		}
 		
 	}
 }

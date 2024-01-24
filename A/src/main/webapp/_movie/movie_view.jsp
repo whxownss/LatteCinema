@@ -6,17 +6,9 @@
 <c:set var="stillcutArray" value="${fn:split(detail.stillcut, '|')}" />
 <!DOCTYPE html>
 <html lang="ko">
-
 <%@include file ="../_common/commonHeaderStart.jsp" %>
-<link href="${pageContext.servletContext.contextPath }/_assets/css/view.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
-<!-- <script type="text/javascript" src="../_assets/js/jquery.number.min.js"></script> -->
-<!-- <script type="text/javascript" src="../_assets/js/jquery.cookie.min.js"></script> -->
-<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/scrollbar.js"></script>
-<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/swiper.min.js"></script>
-<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/front.js"></script>
-<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/app.js"></script>
+<link href="${pageContext.servletContext.contextPath }/_assets/css/view.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
  
@@ -280,8 +272,16 @@
 </main>
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+
 <script type="text/javascript" src="${pageContext.servletContext.contextPath}/_assets/js/movieJS/movie_view.js"></script>
-	
+
+<script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/scrollbar.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/swiper.min.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/front.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/app.js"></script>
+
+
 <%@include file ="../_common/commonFooter.jsp" %>
 
 </html> 

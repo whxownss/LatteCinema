@@ -65,7 +65,7 @@ $(function(){
 		$("#resultPoint").text("포인트를 다시 입력해주세요.");
 		$("#salePrice").text("0");
 		$("#rsPrice").text($("#sumPrice").text());
-		$("#accPoint").text( (parseInt($("#rsPrice").text().replace(/[^\d]+/g, "")) * 0.1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
+		$("#accPoint").text( (Math.floor((parseInt($("#rsPrice").text().replace(/[^\d]+/g, "")) * 0.1) / 10) * 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
 		
 		if(isNaN(iTmp)) iTmp = 0;
 		
@@ -79,13 +79,13 @@ $(function(){
 		// 총금액 합
 		var sP = sumP - iTmp; 
 		$("#rsPrice").text(sP.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-		$("#accPoint").text( (parseInt($("#rsPrice").text().replace(/[^\d]+/g, "")) * 0.1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
+		$("#accPoint").text( (Math.floor((parseInt($("#rsPrice").text().replace(/[^\d]+/g, "")) * 0.1) / 10) * 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
 		
 		// 결제 금액보다 포인트를 많이 쓴 경우
 		if(! $("#rsPrice").text().startsWith("-")) return;
 		$("#salePrice").text("0");
 		$("#rsPrice").text($("#sumPrice").text());
-		$("#accPoint").text( (parseInt($("#rsPrice").text().replace(/[^\d]+/g, "")) * 0.1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
+		$("#accPoint").text( (Math.floor((parseInt($("#rsPrice").text().replace(/[^\d]+/g, "")) * 0.1) / 10) * 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
 		$("#resultPoint").text("상품 금액보다 적게 입력해주세요.");
 	});
 	$("#inputPoint").on("focus", function(){
