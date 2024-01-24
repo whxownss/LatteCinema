@@ -271,15 +271,13 @@
 
 </main>
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-
-<script type="text/javascript" src="${pageContext.servletContext.contextPath}/_assets/js/movieJS/movie_view.js"></script>
-
 <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/scrollbar.js"></script>
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/swiper.min.js"></script>
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/front.js"></script>
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/app.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath}/_assets/js/movieJS/movie_view.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 
 
 <%@include file ="../_common/commonFooter.jsp" %>
