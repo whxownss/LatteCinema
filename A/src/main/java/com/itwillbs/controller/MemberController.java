@@ -237,6 +237,16 @@ public class MemberController extends HttpServlet {
 			System.out.println("/simplelogin.me/ controller");
 			memberService = new MemberService();
 			//임시 추가 정지된 회원인지 판단하기.
+			// 회원 정지
+			MemberDTO memberDTO = memberService.userCheck(request);
+			if(memberDTO != null && memberDTO.getMemStatus().equals("1")) {
+				String memStopD = memberDTO.getMemStopD();
+				System.out.println("정지된날: "+memStopD);
+				request.setAttribute("memStopD", memStopD);
+				dispatcher = request.getRequestDispatcher("_member/msg2.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
 			//이메일 중복체크?
 			int result = memberService.checkEmail(request);
 			System.out.println(result);
