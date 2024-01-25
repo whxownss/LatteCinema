@@ -261,7 +261,7 @@ public class MemberController extends HttpServlet {
 			
 			
 			
-			response.setCharacterEncoding("utf-8");
+			response.setCharacterEncoding("utf-8");  
 			response.getWriter().write(result + "");
 				
 		}//
