@@ -6,7 +6,7 @@
 		var sessionId = $('#sessionId').val();
 		var fullName = $('#userName').text(); // '김철수'라고 가정
 		if(qnaSecret == '1'){
-			debugger;
+			//debugger;
 			if(sessionId != fullName && sessionId != "admin"){
 				window.location.href = "login.me";
 			}

@@ -34,7 +34,7 @@ $(function(){
 					dataType: "text"
 				})
 				.done(function(data){
-					debugger;
+					//debugger;
 					alert(data);
 					if(data == "환불 성공"){
 						window.location.href="bookinglist.me";

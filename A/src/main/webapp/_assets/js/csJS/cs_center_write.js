@@ -48,7 +48,7 @@ $(document).ready(function() {
 	  	});
 	});
 	$('#cinemaSelect').change(function(){
-		debugger;
+		//debugger;
 		var cinemaName = $('#cinemaSelect').find('option:selected').text();
 		$('#textSpan').text(cinemaName);
 	});

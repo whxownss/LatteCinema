@@ -21,7 +21,7 @@ $(function(){
 				dataType: "text"
 			})
 			.done(function(data){
-				//debugger;
+				//debugger;  
 				if(data == "환불 성공"){
 					window.location.href="bookinglist2.me";
 //	 				$.ajax({
