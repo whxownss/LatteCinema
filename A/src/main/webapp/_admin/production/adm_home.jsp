@@ -260,18 +260,18 @@
             
             
             <div class="col-md-1 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> P1 가격 (원)</span>
+              <span class="count_top"><i class="fa fa-user"></i> 성인 가격 (원)</span>
               <div class="count"><input type="number" step="1000" class="admTool" id="p1Price" value="${admToolDTO.p1Price}"></div>
             </div>
             
             
             <div class="col-md-1 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> P2 가격 (원)</span>
+              <span class="count_top"><i class="fa fa-user"></i> 청소년 가격 (원)</span>
               <div class="count"><input type="number" step="1000" class="admTool" id="p2Price" value="${admToolDTO.p2Price}"></div>
             </div>
             
             <div class="col-md-1 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> P3 가격 (원)</span>
+              <span class="count_top"><i class="fa fa-user"></i> 경로 가격 (원)</span>
               <div class="count"><input type="number" step="1000" class="admTool" id="p3Price" value="${admToolDTO.p3Price}"></div>
             </div>
             
