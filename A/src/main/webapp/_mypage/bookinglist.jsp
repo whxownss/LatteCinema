@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/_assets/css/mypage.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 </head>
-<body>
+<body >
 <jsp:include page="../_common/header.jsp"></jsp:include>
 <main id="main">
 <c:if test="${sessionScope.sId == null}">

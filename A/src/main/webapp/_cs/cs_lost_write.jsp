@@ -71,7 +71,7 @@
 						    <button type="submit" class="btn btn-primary" id="lostSubmit">작성</button>
 						  </div>
 						  <div class="form-group mb-3 ml-auto">
-						    <button type="reset" class="btn btn-outline-secondary">취소</button>
+						    <button type="reset" class="btn btn-outline-secondary">초기화</button>
 						  </div>
 					</div>
 				</form>

@@ -6,22 +6,18 @@
 <c:set var="stillcutArray" value="${fn:split(detail.stillcut, '|')}" />
 <!DOCTYPE html>
 <html lang="ko">
-
 <%@include file ="../_common/commonHeaderStart.jsp" %>
-<link href="${pageContext.servletContext.contextPath }/_assets/css/view.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
-<!-- <script type="text/javascript" src="../_assets/js/jquery.number.min.js"></script> -->
-<!-- <script type="text/javascript" src="../_assets/js/jquery.cookie.min.js"></script> -->
-<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/scrollbar.js"></script>
-<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/swiper.min.js"></script>
-<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/front.js"></script>
-<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/app.js"></script>
+<link href="${pageContext.servletContext.contextPath }/_assets/css/view.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
  
   
 <main>
+<INPUT Type="hidden" value="${detail.title }" id="detailTitle">
+<INPUT Type="hidden" value="${detail.movieIdx }" id="detailMovieIdx">
+<INPUT Type="hidden" value="${detail.movieCategory}" id="detailMovieCategory">
+<input type="hidden" value="${sessionScope.sId }" id="sId">
 
 <!-- // 영화관찾기 레이어 -->
 <div class="mv-info-wrap" style="margin-top:70px;">
@@ -42,6 +38,8 @@
         <i class="age${detail.rating}"></i> 
     
         <h3 class="h3">${detail.title}</h3>
+        
+       
         <%-- <h4 class="h4"><%=movieEngName %></h4> --%>
         <div class="etc">
           <span>${detail.title}</span>
@@ -273,223 +271,13 @@
 
 </main>
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/scrollbar.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/swiper.min.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/front.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/_assets/js/app.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath}/_assets/js/movieJS/movie_view.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-<script type="text/javascript">
-  var galleryThumbs = new Swiper(".gallery-thumbs .swiper-container", {
-    spaceBetween: 10,
-    slidesPerView: 6,
-    freeMode: true,
-    watchSlidesVisibility: true,
-    watchSlidesProgress: true,
-    observer: true,
-    observeParents: true,
-  });
-    
-  var galleryTop = new Swiper(".gallery-top", {
-    spaceBetween: 0,
-    observer: true,
-    observeParents: true,
-    navigation: {
-      nextEl: ".gallery-thumbs .swiper-button-next",
-      prevEl: ".gallery-thumbs .swiper-button-prev",
-    },
-    thumbs: {
-      swiper: galleryThumbs
-    }
-  });
-  
-  var stillcutSwiper = new Swiper(".stillcut-fixed .swiper-container", {
-    navigation: {
-      nextEl: ".stillcut-fixed .swiper-button-next",
-      prevEl: ".stillcut-fixed .swiper-button-prev",
-    },
-    pagination: {
-      el: ".stillcut-fixed .swiper-pagination",
-      type: "fraction",
-    },
-    observer: true,
-    observeParents: true,
-  });
-  
-  if ($(".thums .swiper-slide").length > 3) {
-    $(".thums").removeClass("if");
-    var previewMovieSwiper = new Swiper(".thums .swiper-container", {
-      navigation: {
-        nextEl: ".thums .swiper-button-next",
-        prevEl: ".thums .swiper-button-prev",
-      },
-      slidesPerView: "2",
-      spaceBetween: 5,
-      observer: true,
-      observeParents: true,
-      breakpoints: {
-        1023: {
-          slidesPerView: "3",
-          spaceBetween: 16,
-        }
-      }
-    });
-  }
-  
-  $(function() {
-	 			var sessionId = '<%=(String)session.getAttribute("sId")%>' 
-	  // 한줄평 수정
-	  if($("#viewComment").val() != ''){
-		  $("button[name=revbtn]").attr('id','update')
-		  $("button[name=revbtn]").text("수정");
-		  $("#revDelete").attr("disabled" , false)
-		  // 한줄평 수정
-		  $("#update").on("click", function(){
-				var viewcomment = $("#viewComment").val()
-				// 세션값 
-// 				var sessionId = "test1" 
-				var title = "${detail.title}";
-				var movIdx = ${detail.movieIdx};
-				var movType = "${detail.movieCategory}";
-			  	
-				$.ajax({
-					type: "post",
-					url: "reviewUpdate.mo",
-					data:{
-						reComment : viewcomment,
-						memId : sessionId,
-						movCode: new URL(window.location.href).searchParams.get('movieCode')
-					},
-					dataType: "text"
-				})
-				.done(function(data){
-					if(data == 'false'){
-						alert('한줄평 수정 오류발생')
-						return
-					}
-					location.reload();
-				})
-
-		  })
-		
-		  //한줄평 삭제
-		  $("#revDelete").on("click", function(){
-			  $.ajax({
-				  type: "post",
-				  url: "reviewDelete.mo",
-				  data:{
-					  memId : sessionId
-				  },
-				  dateType: "text"
-			  })
-			  .done(function(data){
-				  if(data == 'false'){
-					  alert('한줄평 삭제 오류발생')
-					  return
-				  }
-				  location.reload();
-			  })
-		  })
-		  
-	  }
-		// 관람평=====================================================================
-		
-		// 페이징처리작업
-		$('#revTable').DataTable({
-			pagingType: 'full_numbers',
-			order: [[0, 'desc']]
-		});	
-		
-		// 한줄평 작성가능 유무 판단
-		$("#write").on("click", function(){
-			var viewcomment = $("#viewComment").val()
-			// 세션값 
-			var sessionId = '<%=(String)session.getAttribute("sId")%>' 
-// 			var sessionId = "test1" 
-			var title = "${detail.title}";
-			var movIdx = ${detail.movieIdx};
-			var movType = "${detail.movieCategory}";
-			if(sessionId == 'null'){
-				alert('로그인 후 작성 가능합니다.');
-				return;
-			}
-			
-			$.ajax({
-				type: "GET",
-				url: "checkWrite.mo",
-				data: {
-					movIdx: movIdx,
-					movType: movType,
-					memId: sessionId
-				},
-				dateType: "text"
-			})
-			.done(function(data){
-				//한줄평 데이터 넣기
-				if(data != '0'){
-					$.ajax({
-						type: "post",
-						url: "reviewInsert.mo",
-						data: {
-							revComment : viewcomment,
-							memId : sessionId,
-							movType: movType,
-							movIdx: movIdx,
-							title : title,
-							movCode: new URL(window.location.href).searchParams.get('movieCode')
-						},
-						dataType: "text"
-					})
-					
-					.done(function(data){
-						if(data == '0'){
-							alert('한줄평 작성 오류발생')
-							return
-						}
-						location.reload();
-					})
-					
-				}else{
-					alert('관람내역이 없습니다 실관람 이후 작성가능합니다.')
-				}
-			})
-			.fail(function(){
-			})
-			
-			// 한줄평 수정 및 삭제
-			
-		});  
-		// 한줄평=====================================================================	  
-	  
-    $(".btn-prev").on("click", function(e) {
-      history.back();
-    });
-    
-    $(".sticky").sticky({topSpacing: 20});
-    
-    // 메인배너 클릭시 영상 팝업
-    $(".movie-open").on("click", function(e) {
-      e.preventDefault();
-      $("#videoMainTagSrc").attr("src", $(this).data("source"));
-      $("#videoMainTag").attr("poster", $(this).data("poster"));
-      $("#videoMainTag").get(0).load();
-      $(".movie-popup").fadeIn(300);
-      $("#videoMainTag").get(0).play();
-    });
-    $(".movie-popup .btn-close, .movie-popup .bg").on("click", function(e) {
-      e.preventDefault();
-      $("#videoMainTag").get(0).pause();
-      $(".movie-popup").fadeOut(300);
-    });
-    
-    $(".still-cut a").on("click", function(e) {
-      e.preventDefault();
-      var idx = $(".still-cut a").index(this);
-      stillcutSwiper.slideTo(idx);
-      $(".stillcut-fixed").fadeIn(300);
-    });
-    $(".stillcut-fixed .btn-close, .stillcut-fixed .bg").on("click", function(e) {
-      e.preventDefault();
-      $(".stillcut-fixed").fadeOut(300);
-    });
-  });
-</script>
-	
 <%@include file ="../_common/commonFooter.jsp" %>
 
 </html> 

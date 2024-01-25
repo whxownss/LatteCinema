@@ -1,7 +1,10 @@
 document.write('<script type="text/javascript" '+ 
 						'src="/' + window.location.pathname.split("/")[1] + '/_assets/js/resJS/res1VarFunc.js"></script>');
+						
+
 
 $(function(){
+
 	// 지역 선택
 	$(".myLocation").click(function(e){
 		// 배경색 변경
@@ -132,17 +135,6 @@ $(function(){
 		var selector = ($(this).parents("#nowSch").length == 0) ? "#OLD" : "#NOW";
 		$(selector).trigger("click");
 		
-		// 시작 시간 30분 남은거는 선택 안되게끔  *******************************나중에 꼭 풀것
-// 		var nowDate = new Date();
-// 		var movDate = new Date($("#myCalendar").val() + " " + $(this).find(".startTime").text());
-// 		if(new Date(nowDate .getTime() - (nowDate .getTimezoneOffset() * 60000)).toISOString().substring(0, 10) == $("#myCalendar").val()
-// 				&& (movDate.getTime() - nowDate.getTime()) / (60 * 1000) < 120 ) {
-// 			alert('상영 시작 30분 전부터는 현장에서만 구매 가능합니다.');
-// // 			$('#staticBackdrop').modal('hide');
-// 			return;
-// 		}
-		// 시작 시간 30분 남은거는 선택 안되게끔
-		
 		var sTime = $(this).find(".startTime").text();				   // 시작 시간
 		var cSeat = $(this).find(".cSeat").text();					   // 남은 자리
 		var aSeat = $(this).find(".aSeat").text();					   // 모든 자리
@@ -198,6 +190,21 @@ $(function(){
 		$(".ratingText").text(ratingText);
 		$(".ratingText").css("text-decoration","underline").css("color", ratingColor);
 		$(".subText").text(subTitle);
+		
+//		시작 시간 30분 남은거는 선택 안되게끔  *******************************나중에 꼭 풀것
+ 		var nowDate = new Date();
+ 		var movDate = new Date($("#myCalendar").val() + " " + $(this).find(".startTime").text());
+ 		if(new Date(nowDate .getTime() - (nowDate .getTimezoneOffset() * 60000)).toISOString().substring(0, 10) == $("#myCalendar").val()
+ 				&& (movDate.getTime() - nowDate.getTime()) / (60 * 1000) < 30 ) {
+			$("#timeOver").modal('show');
+//  			$('#staticBackdrop').modal('hide');
+
+			$("#timeOverBtn").on("click", function(){
+				$('#staticBackdrop').modal('show');
+			})			
+			return;
+ 		}
+//		시작 시간 30분 남은거는 선택 안되게끔
 		
 		$('#staticBackdrop').modal('show');
 	});

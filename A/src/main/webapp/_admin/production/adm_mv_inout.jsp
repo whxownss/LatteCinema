@@ -10,7 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	  
-    <title>Latte Cinema</title>
+    <title>라떼시네마</title>
+	<link href="_assets/img/common/favicon2.png" rel="icon">
     <link href="_admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="_admin/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="_admin/vendors/nprogress/nprogress.css" rel="stylesheet">

@@ -128,7 +128,7 @@ public class MovieService {
 			map.put("movIdx", request.getParameter("movIdx"));
 			map.put("memId", request.getParameter("memId"));
 			map.put("movType", request.getParameter("movType"));
-			
+			System.out.println(map);
 			int result = 0;
 			
 			movieDAO = new MovieDAO();

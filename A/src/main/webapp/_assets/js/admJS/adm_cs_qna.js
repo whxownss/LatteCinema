@@ -26,8 +26,6 @@ document.write('<script src="_admin/vendors/pdfmake/build/pdfmake.min.js"></scri
 document.write('<script src="_admin/vendors/pdfmake/build/vfs_fonts.js"></script>');	
 document.write('<script src="_admin/build/js/custom.min.js"></script>');	
 
-
-
 	$("tr a[data-toggle='modal']").on("click", function () {
 // 		debugger; // 문제점은 공지사항 내용쪽 텍스트가 공백이 너무 많아서 터져버림.
 	    // data-info 속성에서 JSON 데이터 가져오기
@@ -39,6 +37,7 @@ document.write('<script src="_admin/build/js/custom.min.js"></script>');
 	    	infoData = JSON.stringify(infoData);	
 	    }
 		
+		console.log(infoData);
 	    if (infoData.includes("\n")) {
 	        // \n이 포함되어 있다면, replaceAll을 사용하여 모두 제거
 	        infoData = infoData.replaceAll("\n", "");

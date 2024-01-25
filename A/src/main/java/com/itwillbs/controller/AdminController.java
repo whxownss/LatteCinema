@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.itwillbs.domain.AdmToolDTO;
 import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ExqBoardDTO;
@@ -70,13 +71,36 @@ public class AdminController extends HttpServlet {
 			ArrayList<ResponseDataDTO> responseList = csBoardService.getResponseList();
 			ArrayList<ReservationDTO> resBoardList = csBoardService.getResBoardList();
 			int memCount = csBoardService.getMemCount();
+			int monthlyAudi = csBoardService.getReserCount();
+			int monthlySum = csBoardService.getReserSum();
+			
+			
+			AdminService adminService = new AdminService();
+			AdmToolDTO admToolDTO = adminService.getAdmTool();
+			request.setAttribute("admToolDTO", admToolDTO);
+			System.out.println("admadmadmadm");
+			System.out.println(admToolDTO);
+			System.out.println("admadmadmadm");
 			
 			request.setAttribute("responseList", responseList);
 			request.setAttribute("resBoardList", resBoardList);
 			request.setAttribute("memCount", memCount);
+			request.setAttribute("monthlyAudi", monthlyAudi);
+			request.setAttribute("monthlySum", monthlySum);
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_home.jsp");
 			dispatcher.forward(request, response);
 		}
+		// adm tool
+		if(sPath.equals("/adm_homePro.ad")) {
+			AdminService adminService = new AdminService();
+			String result = adminService.updateAdmTool(request);
+			
+			response.setCharacterEncoding("utf-8");
+		    response.getWriter().write(result);
+			
+		}
+		
+		
 		
 		// 관리자 회원관리 페이지 이동
 		if(sPath.equals("/adm_member.ad")) {
@@ -278,10 +302,10 @@ public class AdminController extends HttpServlet {
 			MovieService movieServie = new MovieService();
 			
 			List<LocationDTO> locationList = resService.getLocations();
-//			String cinemaListJson = resService.getCinemas();
 			List<ScheduleDTO> allSchedules = resService.getAllSchedules();
 			ArrayList<MovieDTO> movieList = movieServie.getMovieList();
-			
+
+
 			request.setAttribute("locationList", locationList);
 //			request.setAttribute("cinemaListJson", cinemaListJson);
 			request.setAttribute("allSchedules", allSchedules);
@@ -318,11 +342,60 @@ public class AdminController extends HttpServlet {
 		if(sPath.equals("/adm_location.ad")) {
 			AdminService adminService = new AdminService();
 			List<CinemaDTO> cinemaList = adminService.getAllCinema();
-			
 			request.setAttribute("cinemaList", cinemaList);
+			
+			ResService  resService = new ResService();
+			List<LocationDTO> locationList = resService.getLocations();
+			request.setAttribute("locationList", locationList);
+			
 			
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_location.jsp");
 			dispatcher.forward(request, response);
+		}
+		// 관리자 영화관 관리 페이지 상영관 선택
+		if(sPath.equals("/adm_locationPro.ad")) {
+			AdminService adminService = new AdminService();
+			String seatNum = adminService.getSeatNum(request);
+			
+			response.setCharacterEncoding("utf-8");
+		    response.getWriter().write(seatNum);
+		}
+		// 관리자 영화관 관리 페이지 상영관 자릿 수 변경
+		if(sPath.equals("/adm_locationProUS.ad")) {
+			AdminService adminService = new AdminService();
+			String result = adminService.updateSeat(request);
+			
+			response.setCharacterEncoding("utf-8");
+		    response.getWriter().write(result);
+		}
+		// 관리자 영화관 관리 페이지 상영관 추가
+		if(sPath.equals("/adm_locationProAS.ad")) {
+			AdminService adminService = new AdminService();
+			String result = adminService.insertScreen(request);
+			
+			response.setCharacterEncoding("utf-8");
+		    response.getWriter().write(result);
+		}
+		// 관리자 영화관 관리 페이지 사영관 삭제 
+		if(sPath.equals("/adm_locationProDS.ad")) {
+			AdminService adminService = new AdminService();
+			String result = adminService.deleteScreen(request);
+			
+			System.out.println("컨트롤러");
+			System.out.println(result);
+			System.out.println("컨트롤러");
+			
+			
+			response.setCharacterEncoding("utf-8");
+		    response.getWriter().write(result);
+		}
+		// 관리자 영화관 관리 영화관 오픈 클로즈
+		if(sPath.equals("/adm_locationProOC.ad")) {
+			AdminService adminService = new AdminService();
+			String result = adminService.updateOC(request);
+			
+			response.setCharacterEncoding("utf-8");
+		    response.getWriter().write(result);
 		}
 	}//doProcess()	
 }//클래스 끝

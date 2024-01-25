@@ -1,3 +1,4 @@
+<%@page import="com.itwillbs.domain.AdmToolDTO"%>
 <%@page import="com.itwillbs.domain.ReservationDTO"%>
 <%@page import="com.itwillbs.domain.ResponseDataDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -14,7 +15,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Latte Cinema</title>
+    <title>라떼시네마</title>
+	<link href="_assets/img/common/favicon2.png" rel="icon">
   
     <!-- Bootstrap -->
     <link href="_admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -22,7 +24,7 @@
     <link href="_admin/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="_admin/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
+    <!-- iCheck --> 
     <link href="_admin/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
 	
     <!-- bootstrap-progressbar -->
@@ -37,6 +39,7 @@
     <link href="_admin/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="_admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="_admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.servletContext.contextPath }/_assets/css/adm_home.css" rel="stylesheet">
 
 	<!-- Chart.js 및 jQuery 스크립트 불러오기 -->
     <script src="_admin/vendors/Chart.js/dist/Chart.bundle.js"></script>
@@ -55,10 +58,11 @@
   </head>
 <%
 	int memCount = (int)request.getAttribute("memCount");
-	int monthlyAudi = 120;
-	
+	int monthlyAudi = (int)request.getAttribute("monthlyAudi");
+	int monthlySum = (int)request.getAttribute("monthlySum");
 	ArrayList<ResponseDataDTO> responseList = (ArrayList<ResponseDataDTO>)request.getAttribute("responseList");
 	ArrayList<ReservationDTO> resBoardList = (ArrayList<ReservationDTO>)request.getAttribute("resBoardList");
+	AdmToolDTO admToolDTO = (AdmToolDTO)request.getAttribute("admToolDTO");
 %>
 
   <body class="nav-md">
@@ -216,14 +220,14 @@
         <div class="right_col" role="main">
           <!-- top tiles -->
           <div class="row tile_count">
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <div class="col-md-1 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> 총 회원수</span>
               <div class="count">${memCount }</div>
 <!--               <span class="count_bottom"><i class="green">4% </i> From last Month</span> -->
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <div class="col-md-1 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> 월별 관객수</span>
-              <div class="count"><%=monthlyAudi %></div>
+              <div class="count">${monthlyAudi }</div>
 <!--               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Month</span> -->
             </div>
 <!--             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count"> -->
@@ -236,17 +240,51 @@
 <!--               <div class="count">4,567</div> -->
 <!--               <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Month</span> -->
 <!--             </div> -->
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <div class="col-md-1 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> 월별 매출</span>
-              <div class="count">2,315</div>
+              <div class="count">${monthlySum }</div>
 <!--               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Month</span> -->
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            
+<!--             여기서부터임 여기서부터임여기서부터임여기서부터임여기서부터임여기서부터임여기서부터임여기서부터임여기서부터임여기서부터임여기서부터임여기서부터임여기서부터임여기서부터임여기서부터임여기서부터임여기서부터임-->
+            <div class="col-md-1 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> 결제 취소 시간 (분)</span>
+              <div class="count"><input type="number" step="1" class="admTool" id="cancelTime" value="${admToolDTO.cancelTime}"></div>
+            </div>
+            
+            
+            <div class="col-md-1 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> 환불 불가 시간 (분)</span>
+              <div class="count"><input type="number" step="10" class="admTool" id="refundTime" value="${admToolDTO.refundTime}"></div>
+            </div>
+            
+            
+            <div class="col-md-1 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> P1 가격 (원)</span>
+              <div class="count"><input type="number" step="1000" class="admTool" id="p1Price" value="${admToolDTO.p1Price}"></div>
+            </div>
+            
+            
+            <div class="col-md-1 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> P2 가격 (원)</span>
+              <div class="count"><input type="number" step="1000" class="admTool" id="p2Price" value="${admToolDTO.p2Price}"></div>
+            </div>
+            
+            <div class="col-md-1 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> P3 가격 (원)</span>
+              <div class="count"><input type="number" step="1000" class="admTool" id="p3Price" value="${admToolDTO.p3Price}"></div>
+            </div>
+            
+            <div class="col-md-1 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i></span>
+              <div class="count"><button type="button" id="admToolBtn" disabled>수정</button></div>
+            </div>
+<!--             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count"> -->
 <!--               <span class="count_top"><i class="fa fa-user"></i> Total Connections</span> -->
 <!--               <div class="count">7,325</div> -->
 <!--               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Month</span> -->
-            </div>
-          </div>
+<!--             </div> -->
+          </div>  
           <!-- /top tiles -->
 
 <!--           <div class="row"> -->
@@ -576,23 +614,23 @@
 		}); */
 		
 		// 창이 로드될 때 차트 초기화
-		window.onload = function() {
-		    var ctx = document.getElementById("canvas").getContext("2d");
-		    window.myLine = new Chart(ctx, config);
-		};
+// 		window.onload = function() {
+// 		    var ctx = document.getElementById("canvas").getContext("2d");
+// 		    window.myLine = new Chart(ctx, config);
+// 		};
 		
 		// 차트와 상호작용을 위한 버튼 클릭 이벤트 핸들러들
-		$('#randomizeData').click(function() {
-		    // 모든 데이터셋에 대해 데이터 랜덤화
-		    $.each(config.data.datasets, function(i, dataset) {
-		        dataset.data = dataset.data.map(function() {
-		            return randomScalingFactor();
-		        });
-		    });
+// 		$('#randomizeData').click(function() {
+// 		    // 모든 데이터셋에 대해 데이터 랜덤화
+// 		    $.each(config.data.datasets, function(i, dataset) {
+// 		        dataset.data = dataset.data.map(function() {
+// 		            return randomScalingFactor();
+// 		        });
+// 		    });
 		
-		    // 차트 업데이트
-		    window.myLine.update();
-		});
+// 		    // 차트 업데이트
+// 		    window.myLine.update();
+// 		});
 		
 		// 데이터 변경, 데이터셋 추가/삭제 등 다른 버튼 클릭 이벤트 핸들러들은 여기에 작성됩니다...
 		$(document).ready(function() {
@@ -606,6 +644,41 @@
 			var mid = $row.find("th:first-child").text();
 			alert('이벤트연결' + mid);
 		  });
+		  
+		  
+		  
+		  
+		  // 수치 변경
+		  $(document).on("change", ".admTool", function(){
+			  debugger;
+			  $("#admToolBtn").attr("disabled", false);
+		  })
+		  
+		  $("#admToolBtn").on("click", function(){
+			  debugger;
+			  $.ajax({
+				  type: "POST",
+				  url: "adm_homePro.ad",
+				  data: {
+					  cancelTime: $("#cancelTime").val(),
+			  		  refundTime: $("#refundTime").val(),
+			  		  p1Price: $("#p1Price").val(),
+			  		  p2Price: $("#p2Price").val(),
+			  		  p3Price: $("#p3Price").val()
+				  },
+				  dataType: "text"
+			  })
+			  .done(function(data){
+				  debugger;
+				  location.reload();
+			  })
+		  })
+		  
+		  
+		  
+		  
+		  
+		  
 		});
         
     </script>

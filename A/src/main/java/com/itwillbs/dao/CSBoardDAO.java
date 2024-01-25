@@ -1087,6 +1087,40 @@ public class CSBoardDAO {
 		}
 		return recommendList;
 	}
+
+	public int getReserCount() {
+		System.out.println("CSBoardDAO getReserCount()");
+		int count = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			count = session.selectOne("CsAdmin.getReserCount");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return count;
+	}//getReserCount()
+
+	public int getReserSum() {
+		System.out.println("CSBoardDAO getReserSum()");
+		int sum = 0;
+		try {
+			session = sqlSessionFactory.openSession();
+			sum = session.selectOne("CsAdmin.getReserSum");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+	            session.close();
+	        }
+		}
+		return sum;
+	}//getReserSum()
+
+	
 	
 	
 }//클래스

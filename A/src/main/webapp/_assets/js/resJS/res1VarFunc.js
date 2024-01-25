@@ -60,12 +60,12 @@ var showSchedule = function(param, date){
 			}
 			$("#" + id).find(".list-time")
 			   		   .append("<a class='btn btn-light ms-1 me-1 mt-1 mb-1 pt-0 pb-0 border border-dark-subtle modalBtn'" 
-					    	   + "href='#' role='button' style='width: 100px;'>" 
+					    	   + "href='#' role='button' style='width: 100px;' data-bs-toggle='tooltip' data-bs-title='종료 " + value.schEtime + "'>" 
 // 					    	   + "data-bs-toggle='modal' data-bs-target='#staticBackdrop'>" // 모달모달모달모달모달모달모달모달모달모달모달모달모달모달 
 					   		   + "<span class='fs-5 startTime'>" + value.schStime + "</span>" + "<br>" 
 					   		   + "<span class='seat' style='font-size: small'><span class='cSeat'>" 
 					   		   + value.scrSeatAvail + "</span>/<span class='aSeat'>" 
-					   		   + value.scrSeat + "</span></span>&nbsp;&nbsp;&nbsp;&nbsp;" 
+					   		   + value.scrSeat + "</span></span>&nbsp;&nbsp;&nbsp;" 
 					   		   + "<span class='scrIdx' style='font-size: small'>" + value.scrIdx + "관</span>" 
 					   		   + "<input type='hidden' class='endTime'  value='" + value.schEtime + "'>"
 					   		   + "<input type='hidden' class='rating'  value='" + value.rating + "'>"
@@ -101,6 +101,10 @@ var showSchedule = function(param, date){
 			alert("현재 모든 지점 오픈 준비 중입니다.");
 		})
 	})
+	
+	// 툴팁
+	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 	
 };
 var cleanMyMovies = function(){

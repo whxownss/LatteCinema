@@ -1,3 +1,4 @@
+// 이름,생년월일,연락처 각 정규식형식과 일치하지 않으면 입력한 val()값 리셋됨	
 	/* 이름 입력 */
 	$("#name").on("keyup", function () {
 		var partton = /[^가-힣\s]{2,5}$/g; 
@@ -8,7 +9,7 @@
 	});
 	
 	/* 생년월일 입력 */
-	$("#birth").on("blur", function(e){
+	$("#birth").on("keyup", function(e){
 		var partton = /[^0-9]/g;
 		$('#schIdBirthDe-error-text').text('');
 		if($("#birth").val() == ""){
@@ -16,7 +17,8 @@
 			return false;
 		}
 		if(partton.test($(this).val())){
-			var value = $(this).val($(this).val().replace(/[^0-9]/g,""));
+//			var value = $(this).val($(this).val().replace(/[^0-9]/g,""));
+			var value = $(this).val().replace(/[^0-9]/g,"");
 			$('#schIdBirthDe-error-text').text('');
 			$("#birth").val(value);
 		}
@@ -24,7 +26,7 @@
 	});
 	
 	/* 연락처 입력 */
-	$("#phone").on("blur", function(e){
+	$("#phone").on("keyup", function(e){
 		var partton = /[^0-9]/g;
 		$('#schIdMblpNo-error-text').text('');
 		if($("#phone").val() == ""){
@@ -32,7 +34,8 @@
 			return false;
 		}
 		if(partton.test($(this).val())){
-			var value = $(this).val($(this).val().replace(/[^0-9]/g,""));
+//			var value = $(this).val($(this).val().replace(/[^0-9]/g,""));
+			var value = $(this).val().replace(/[^0-9]/g,"");
 			$('#schIdMblpNo-error-text').text('');
 			$("#phone").val(value);
 		}

@@ -43,21 +43,28 @@ $(function(){
 	
 	// 좌석 그리기
 	var aSeat = parseInt(schDTO.aSeat);
-	var col = 10;
-	var row = aSeat / col;
+	var col = 18;
+	var row = Math.ceil(aSeat / col);
+	var bool = row != aSeat / col;
+	var cut = 4;
 	for(var i = 0; i < row; i++){
+		debugger;
+		if(bool && i == row - 1){
+			debugger;
+			col = aSeat % col;
+		}
 		var seatRow = String.fromCharCode(65 + i);
 		$(".drawSeat").append("<div class='mb-1  d-flex justify-content-between'>"
-				               + "<div class='text-end vca' style='width:300px'>" + seatRow + "</div>"
+				               + "<div class='text-end vca' style='width:100px'>" + seatRow + "</div>"
 				               + "<div class='" + seatRow + "'>"
 							   + "</div>"
-							   + "<div style='width:300px'></div>"
+							   + "<div style='width:100px'></div>"
 							   +"</div>");
 		for(var j = 1; j <= col; j++){
 			$("." + seatRow).append("<button type='button' id='seatNum" + (seatRow + "" + j) + "' class='btn btn-light seat' style='width:40px'>"
 								   +	"<span class='mca'>" + j + "</span>"
 								   +"</button> ");
-			if(j == col/2) 
+			if(j == cut || j == (col-1) - cut) 
 				$("." + seatRow).append("<span class='me-5'></span> ");
 		}
 	}
@@ -154,7 +161,7 @@ $(function(){
 			var p1 = parseInt($("#pCase1").text());
 			var p2 = parseInt($("#pCase2").text());
 			var p3 = parseInt($("#pCase3").text());
-			var sum = p1 * 15000 + p2 * 12000 + p3 * 9000;
+			var sum = p1 * p1Price + p2 * p2Price + p3 * p3Price;
 			
 			$("#mPrice").text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		} else{

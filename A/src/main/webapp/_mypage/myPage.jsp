@@ -94,7 +94,7 @@
             		
                     <div class="myInq">
                       <div class="tit-util mt70">
-                        <h2 class="tit small"><b>선물내역</b></h2>
+                        <h2 class="tit small"><b>선물함</b></h2>
                       </div>
                       <div class="brd-list">
                       <div class="table-relative mt10">
@@ -110,7 +110,7 @@
 									</tr>
 								</thead>
 								<tbody id="tbody">
-								<c:forEach var="storeGiftList" items="${storeGiftList }">
+								<c:forEach var="storeGiftList" items="${storeGiftList }" varStatus="s">
 			                      	<tr>
 			                      		<td scope="row" class="text-center align-middle">${storeGiftList.buyerName }</td>
 			                      		<td scope="row" class="text-center align-middle">${storeGiftList.merchantUid }</td>
@@ -118,12 +118,12 @@
 			                      		<td scope="row" class="text-center align-middle">${storeGiftList.itemCnt }</td>
 			                      		<td scope="row" class="text-center align-middle">${storeGiftList.payTime }</td>
 			                      		<td scope="row" class="text-center align-middle">
-										  <button button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+										  <button button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop${s.index }" aria-controls="offcanvasTop">
 										    메시지보기
 										  </button>
 										  
 										  <!-- 오프캔버스 -->
-										  <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+										  <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop${s.index }" aria-labelledby="offcanvasTopLabel">
 											  <div class="offcanvas-header">
 											    <h1 class="offcanvas-title" id="offcanvasScrollingLabel">받은 메시지</h1>
 											    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -132,7 +132,6 @@
 											    <p>${storeGiftList.giftMsg }</p>
 											  </div>
 											</div>
-											
 			                      		</td>
 			                      	</tr>
 			                      </c:forEach>

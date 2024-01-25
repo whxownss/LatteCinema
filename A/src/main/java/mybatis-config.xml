@@ -29,6 +29,7 @@
         <typeAlias type="com.itwillbs.domain.StorePayDTO" alias="StorePayDTO"/>
         <typeAlias type="com.itwillbs.domain.ReviewDTO" alias="ReviewDTO"/>
         <typeAlias type="com.itwillbs.domain.PointDTO" alias="PointDTO"/>
+        <typeAlias type="com.itwillbs.domain.AdmToolDTO" alias="AdmToolDTO"/>
     </typeAliases>
 
 	<environments default="development">
@@ -53,6 +54,7 @@
 		<mapper resource="com/itwillbs/sql/scheduleSql.xml"/>
 		<mapper resource="com/itwillbs/sql/movieSql.xml"/>
 		<mapper resource="com/itwillbs/sql/screenSql.xml"/>
+		<mapper resource="com/itwillbs/sql/adminSql.xml"/>
 	</mappers>
 
     

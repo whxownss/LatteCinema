@@ -61,7 +61,10 @@ $('.btn').on("click",function(){
 	                lastClickedReco.countReco--;
 	                lastClickedReco.countRecoCell.text(lastClickedReco.countReco);
 	            }
-	        }
+	        } else if(lastClickedReco && lastClickedReco.recommendIdx === currentClickedReco.recommendIdx){
+				alert('같은 곳 추천 그만해주세요!');
+				return;
+			}
 			
 	        $.ajax({
 		            url: 'doRecommend.cs',

@@ -42,7 +42,7 @@
 		   								 FROM CINEMA
 		   								WHERE CI_NAME = #{CINEMA})
 		   AND S.SCH_DATE = #{DATE}
-		    								
+		   AND DATE_FORMAT(NOW(), "%H:%i") <![CDATA[<]]> DATE_FORMAT(S.SCH_STIME, "%H:%i")  -- 시작 영화는 안보임
 <!-- 		   <![CDATA[ -->
 <!-- 		   AND M.START_DATE <= #{DATE} -->
 <!-- 		   AND M.END_DATE > #{DATE} -->
@@ -50,7 +50,7 @@
 		<if test="!PARAM.equals('all')">
 		   AND M.TITLE = #{PARAM} 
 		</if>
-		 ORDER BY DATE_FORMAT(S.SCH_STIME, "%H:%i")
+		 ORDER BY S.SCH_MOV_TYPE DESC, DATE_FORMAT(S.SCH_STIME, "%H:%i")
 	</select>
 	
 	
@@ -72,6 +72,7 @@
 <!-- 		   AND M.END_DATE > #{DATE} -->
 <!-- 		   ]]> -->
 		   AND C.CI_NAME = #{CINEMA}
+		   AND DATE_FORMAT(NOW(), "%H:%i") <![CDATA[<]]> DATE_FORMAT(S.SCH_STIME, "%H:%i")  -- 시작 영화는 안보임
 	</select>
 	
 	

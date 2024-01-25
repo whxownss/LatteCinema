@@ -1082,5 +1082,29 @@ public class CSBoardService {
 		}
 		return recommendList;
 	}
+
+	public int getReserCount() {
+		System.out.println("CSBoardService getReserCount()");
+		int count = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			count = csBoardDAO.getReserCount();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}// getReserCount()
+
+	public int getReserSum() {
+		System.out.println("CSBoardService getReserSum()");
+		int sum = 0;
+		try {
+			csBoardDAO = new CSBoardDAO();
+			sum = csBoardDAO.getReserSum();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sum;
+	}//getReserSum()
 	
 }//클래스

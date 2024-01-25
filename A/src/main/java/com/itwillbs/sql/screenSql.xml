@@ -15,6 +15,56 @@
 		   AND CI_IDX = #{cinema}
 	</select>
 
+	<select id="getSeatNum" parameterType="ScreenDTO" resultType="String">
+		SELECT SCR_SEAT
+		  FROM SCREEN
+		 WHERE 1 = 1
+		   AND LO_IDX = #{loIdx}
+		   AND CI_IDX = #{ciIdx}
+		   AND SCR_IDX = #{scrIdx}
+	</select>
 
 
+	<update id="updateSeat" parameterType="ScreenDTO">
+		UPDATE SCREEN
+		   SET SCR_SEAT = #{scrSeat}
+		 WHERE 1 = 1
+		   AND LO_IDX = #{loIdx}
+		   AND CI_IDX = #{ciIdx}
+		   AND SCR_IDX = #{scrIdx}
+	</update>
+
+	<insert id="insertScreen" parameterType="ScreenDTO">
+	
+		INSERT 
+		  INTO SCREEN
+		     (
+		       LO_IDX
+		     , CI_IDX
+		     , SCR_IDX
+		     , SCR_SEAT
+		     ) 
+		VALUES
+			 (
+			   #{loIdx}
+			 , #{ciIdx}
+			 , (SELECT *
+				  FROM (SELECT IFNULL(MAX(CAST(SCR_IDX as unsigned)), 0) + 1
+						  FROM SCREEN
+						 WHERE 1 = 1 
+						   AND LO_IDX = #{loIdx}
+				 	       AND CI_IDX = #{ciIdx}) S
+			   )
+			 , '0'
+			 )
+	</insert>
+	
+	<delete id="deleteScreen" parameterType="ScreenDTO">
+		DELETE 
+		  FROM SCREEN
+		 WHERE 1 = 1
+		   AND LO_IDX = #{loIdx}
+		   AND CI_IDX = #{ciIdx}
+		   AND SCR_IDX = #{scrIdx}
+	</delete>
 </mapper>

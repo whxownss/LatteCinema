@@ -5,6 +5,11 @@
 	<link rel="stylesheet" href="_assets/css/res_1.css">
 <%@include file ="../_common/commonHeaderEnd.jsp" %>
 
+<c:set var="admToolDTO" value="${requestScope.admToolDTO}" />
+<input type="hidden" id="p1Price" value="${admToolDTO.p1Price}">
+<input type="hidden" id="p2Price" value="${admToolDTO.p2Price}">
+<input type="hidden" id="p3Price" value="${admToolDTO.p3Price}">
+
 <c:if test="${sessionScope.sId == null}">
 	<c:redirect url="login.me" />
 </c:if>

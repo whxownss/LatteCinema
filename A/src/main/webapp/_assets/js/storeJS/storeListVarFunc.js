@@ -46,13 +46,11 @@ var IMP = window.IMP;
 
 // 포트원 api
   function requestPay(sId, param) {
-	debugger;
+	  
 	if(sId == null || sId == ''){
 		location.href="login.me";
 		return;
 	}
-	
-	debugger;
 	
 	// 선물하기 모달창 전화번호 없이 결제불가
 	var checkPhone = document.getElementById('checkPhone');
@@ -64,13 +62,12 @@ var IMP = window.IMP;
 	//주문번호 만들기
 	const make_merchant_uid = () => {
         const current_time = new Date();
-        const year = current_time.getFullYear().toString();
-        const month = (current_time.getMonth()+1).toString();
-        const day = current_time.getDate().toString();
         const hour = current_time.getHours().toString();
         const minute = current_time.getMinutes().toString();
         const second = current_time.getSeconds().toString();
-        const merchant_uid = hour + minute + second;
+		const milliseconds = String(current_time.getMilliseconds()).slice(0, 1);
+        var merchant_uid = "" + hour + minute + second + milliseconds;
+        merchant_uid = merchant_uid.length != 7 ? merchant_uid.padEnd(7, "L") : merchant_uid;
         return merchant_uid;
     };
     const merchant_uid = make_merchant_uid()
@@ -85,7 +82,7 @@ var IMP = window.IMP;
           pay_method: "card",	// 지불수단
           merchant_uid: "STO" + merchant_uid,   // 주문번호
           name: itemName,	// 상품명
-          amount: 100,    // 가격		price
+          amount: price,    // 가격		price
           buyer_name: "서비스 단에서 세션 이름 줄거임",	// 구매자 이름
       }, function (rsp) { // callback
     	  console.log(rsp);
