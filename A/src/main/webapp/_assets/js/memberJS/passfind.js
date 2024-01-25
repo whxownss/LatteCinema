@@ -4,7 +4,7 @@ document.write('<script type="text/javascript" '+
 // 1.아이디,이름,이메일과 일치하는 정보가 있을 때 이메일인증번호 발송버튼 활성화
 $(function () {
 	// 입력확인 및 버튼 활성화 
-	$('.findInput').on('keyup', function () {
+	$('.findInput').on('blur', function () {
 // 		debugger;
 		var id = $("#id").val()
 		var name = $("#name").val()
