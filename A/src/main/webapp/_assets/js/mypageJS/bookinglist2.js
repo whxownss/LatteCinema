@@ -8,7 +8,7 @@ $(function(){
 	});
 	
 	$("#tbody").on("click","button",function() {
-		debugger;
+		//debugger;
 		 var $row = $(this).closest("tr");
 	    // 해당 행 안에 있는 'merchantUid' 셀의 텍스트 내용
 	    var mid = $row.find("td:first-child").text();
@@ -21,7 +21,7 @@ $(function(){
 				dataType: "text"
 			})
 			.done(function(data){
-				debugger;
+				//debugger;
 				if(data == "환불 성공"){
 					window.location.href="bookinglist2.me";
 //	 				$.ajax({
