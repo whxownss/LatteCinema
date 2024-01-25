@@ -86,6 +86,7 @@ var IMP = window.IMP;
           buyer_name: "서비스 단에서 세션 이름 줄거임",	// 구매자 이름
       }, function (rsp) { // callback
     	  console.log(rsp);
+    	  alert("결제가 완료되었습니다.")
     	  if (rsp.success) {	// 결제성공
     	  	  rsp["item_cnt"] = $(".inpp").text();
     	  	  
@@ -104,7 +105,6 @@ var IMP = window.IMP;
     		  .done(function(data){
     			  
     			  if(data == "true"){
-    				  alert("결제가 완료되었습니다.")
     				  $('#checkPhone').text('');
     				  $('#phone').val('');
             		  $('#msg').val('');
