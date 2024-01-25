@@ -51,7 +51,7 @@ $(function(){
 	    }).open();
 	});
 	
-	//로그인 
+	//로그인  
 	$("#login").submit(function() {
 	if($("#id").val() == ""){
 		if(!$("#idCheck").length){
@@ -65,12 +65,12 @@ $(function(){
 	if ($("#pwd").val() == "") {
 		if(!$("#pwdCheck").length){
 			$("#idCheck").remove();
-			$("#formCheck").append("<span id='pwdCheck'>비밀번호를 입력하세오.</span>");
+			$("#formCheck").append("<span id='pwdCheck'>비밀번호를 입력하세요.</span>");
 			$("#pwdCheck").css("color","red");
 		}
 		return false;
 	}
-	
+	 
 	return true;
 	})
 });
