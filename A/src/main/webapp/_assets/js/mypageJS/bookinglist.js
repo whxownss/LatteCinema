@@ -3,7 +3,8 @@
  */
 $(function(){
 	$('#refundTable').DataTable({
-		pagingType: 'full_numbers'
+		pagingType: 'full_numbers',
+		order: [[0, 'desc']]
 	});
 	
 	$("#tbody").on("click","button",function() {
@@ -33,7 +34,7 @@ $(function(){
 					dataType: "text"
 				})
 				.done(function(data){
-					debugger;
+					//debugger;
 					alert(data);
 					if(data == "환불 성공"){
 						window.location.href="bookinglist.me";
@@ -51,7 +52,7 @@ $(function(){
 				})
 				.fail(function(){})
 		}else {
-			alert('취소 싫어')
+			alert('환불 취소')
 		}
 	    
 	});

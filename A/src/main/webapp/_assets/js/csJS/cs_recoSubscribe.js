@@ -75,7 +75,7 @@ $('#movieName').on("change", function() {
             type: 'GET',
             dataType: 'json',
             success: function(response) {
-            	//debugger;
+//            	debugger;
                 response.Data[0].Result.forEach(function(movie) {
                     // 감독 이름 추출
                     var directorNames = movie.directors.director.map(function(director) {
@@ -141,13 +141,14 @@ $('#movieYear').on("change",function(){
 
     function fetchMoviesByReleaseYear(page) {
         var startCount = (page - 1) * listCount;
-        var parameters = "?collection=kmdb_new2&detail=N&ServiceKey=" + serviceKey + "&releaseDts=" + releaseStart + "&releaseDte=" + releaseEnd + "&listCount=" + listCount + "&startCount=" + startCount;
+        var parameters = "?collection=kmdb_new2&detail=N&ServiceKey=" + serviceKey + "&releaseDts=" + releaseStart + "&releaseDte=" + releaseEnd + "&listCount=" + listCount + "&startCount=" + startCount + "&genre!=" + "에로";
         $.ajax({
             url: base_url + parameters,
             type: 'GET',
             dataType: 'json',
             success: function(response) {
 				//debugger;
+				console.log(base_url + parameters);
                 response.Data[0].Result.forEach(function(item) {
                     var title = item.title;
                     $('#movieList').append($('<option>').text(title));
@@ -163,7 +164,7 @@ $('#movieYear').on("change",function(){
         for (var page = 1; page <= totalPages; page++) {
             fetchMoviesByReleaseYear(page);
         }
-    });
+    }); 
     /*
     코드에서 사용된 callback 함수는 JavaScript의 비동기 프로그래밍 패턴에서 자주 사용되는 개념
     callback 함수는 다른 함수에 인자로 전달되는 함수로, 주로 비동기적인 작업(예를 들어, 네트워크 요청)이 완료된 후 실행되어야 하는 로직을 포함
