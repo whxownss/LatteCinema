@@ -61,7 +61,7 @@
 							<label for="address1">주소</label>
 						</div>	
 						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="address2" placeholder="상세주소 입력" required name="address2">
+							<input type="text" class="form-control" id="address2" placeholder="상세주소 입력" name="address2">
 							<label for="address2">상세주소 입력</label>
 						</div>	
 						<div class="form-floating mb-3">
