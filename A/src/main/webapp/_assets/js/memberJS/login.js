@@ -51,7 +51,7 @@ $(function(){
 	    }).open();
 	});
 	
-	//로그인 
+	//로그인  
 	$("#login").submit(function() {
 	if($("#id").val() == ""){
 		if(!$("#idCheck").length){
@@ -70,7 +70,7 @@ $(function(){
 		}
 		return false;
 	}
-	
+	 
 	return true;
 	})
 });
