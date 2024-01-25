@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.google.gson.Gson;
 import com.itwillbs.dao.AdminDAO;
+import com.itwillbs.domain.AdmToolDTO;
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ScheduleDTO;
 import com.itwillbs.domain.ScreenDTO;
@@ -112,6 +113,36 @@ public class AdminService {
 		cinemaDTO.setCiOc(request.getParameter("ciOC"));
 		
 		return adminDAO.updateOC(cinemaDTO);
+	}
+
+	public AdmToolDTO getAdmTool() {
+		AdminDAO adminDAO = new AdminDAO();
+		return adminDAO.getAdmTool();
+	}
+
+	public String updateAdmTool(HttpServletRequest request) {
+		AdmToolDTO admToolDTO = new AdmToolDTO();
+		
+		System.out.println("===========================");
+		System.out.println(request.getParameter("cancelTime"));
+		System.out.println(request.getParameter("refundTime"));
+		System.out.println(request.getParameter("p1Price"));
+		System.out.println(request.getParameter("p2Price"));
+		System.out.println(request.getParameter("p3Price"));
+		System.out.println("===========================");
+		
+		
+		admToolDTO.setCancelTime(request.getParameter("cancelTime"));
+		admToolDTO.setRefundTime(request.getParameter("refundTime"));
+		admToolDTO.setP1Price(request.getParameter("p1Price"));
+		admToolDTO.setP2Price(request.getParameter("p2Price"));
+		admToolDTO.setP3Price(request.getParameter("p3Price"));
+		
+		System.out.println(admToolDTO);
+		
+		AdminDAO adminDAO = new AdminDAO();
+		
+		return adminDAO.updateAdmTool(admToolDTO);
 	}
 
 }

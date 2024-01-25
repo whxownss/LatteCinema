@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.itwillbs.domain.AdmToolDTO;
 import com.itwillbs.domain.CenterBoardDTO;
 import com.itwillbs.domain.CinemaDTO;
 import com.itwillbs.domain.ExqBoardDTO;
@@ -73,6 +74,14 @@ public class AdminController extends HttpServlet {
 			int monthlyAudi = csBoardService.getReserCount();
 			int monthlySum = csBoardService.getReserSum();
 			
+			
+			AdminService adminService = new AdminService();
+			AdmToolDTO admToolDTO = adminService.getAdmTool();
+			request.setAttribute("admToolDTO", admToolDTO);
+			System.out.println("admadmadmadm");
+			System.out.println(admToolDTO);
+			System.out.println("admadmadmadm");
+			
 			request.setAttribute("responseList", responseList);
 			request.setAttribute("resBoardList", resBoardList);
 			request.setAttribute("memCount", memCount);
@@ -81,6 +90,17 @@ public class AdminController extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("_admin/production/adm_home.jsp");
 			dispatcher.forward(request, response);
 		}
+		// adm tool
+		if(sPath.equals("/adm_homePro.ad")) {
+			AdminService adminService = new AdminService();
+			String result = adminService.updateAdmTool(request);
+			
+			response.setCharacterEncoding("utf-8");
+		    response.getWriter().write(result);
+			
+		}
+		
+		
 		
 		// 관리자 회원관리 페이지 이동
 		if(sPath.equals("/adm_member.ad")) {

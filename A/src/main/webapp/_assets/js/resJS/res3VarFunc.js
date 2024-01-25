@@ -1,3 +1,7 @@
+var p1Price = $("#p1Price").val();
+var p2Price = $("#p2Price").val();
+var p3Price = $("#p3Price").val();
+
 // 들어온 시간
 var enterTime = new Date();
 
