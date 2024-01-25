@@ -110,6 +110,7 @@ public class ResDAO {
 		AdmToolDTO admToolDTO = session.selectOne("Admin.getAdmTool");
 		map.put("memId", memId);
 		map.put("cancelTime", admToolDTO.getCancelTime());
+		System.out.println("취소시간 :!@#!@#!$!@! " + admToolDTO.getCancelTime());
 		int deleteCnt = session.delete("Reservation.delete", map);
 		session.commit();
 		session.close();
@@ -121,18 +122,22 @@ public class ResDAO {
 		SqlSession session = sqlSessionFactory.openSession();
 		
 		AdmToolDTO admToolDTO = session.selectOne("Admin.getAdmTool");
-		int minutes = Integer.parseInt(admToolDTO.getCancelTime());
-		
+		int cancelTime = Integer.parseInt(admToolDTO.getCancelTime());
+
 		String memId = null;
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("memId", memId);
+		map.put("cancelTime", admToolDTO.getCancelTime());
+		
 		scheduler = Executors.newScheduledThreadPool(1);
 		System.out.println("이부분 오기는하나?이부분 오기는하나?이부분 오기는하나?이부분 오기는하나?");
 		scheduledFuture = scheduler.schedule(() -> {
 			System.out.println("DB 작업 실행");
-			session.delete("Reservation.delete", memId);
+			session.delete("Reservation.delete", map);
 			session.commit();
 			session.close();
 			System.out.println("DB 작업 종료");
-		}, minutes, TimeUnit.MINUTES);
+		}, cancelTime, TimeUnit.MINUTES);
 		System.out.println("널인지 확인1111 : " + scheduledFuture);
 		scheduler.shutdown();
 	}

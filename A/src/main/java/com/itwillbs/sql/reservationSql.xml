@@ -117,7 +117,7 @@
 			 , #{schIdx}
 			 , REPLACE(#{seatC}, ',', ', ')
 			 , #{dateC}
-			 , NOW(6)
+			 , NOW()
 			 )	 
 	</insert>
 	
@@ -134,7 +134,7 @@
 	
 	<delete id="delete" parameterType="map"> 
 		DELETE S
-		  FROM SEAT S					-- 이거 없어도 되지 않나?
+		  FROM SEAT S					
 		  LEFT
 		  JOIN (SELECT *				<!-- 환불 del -> upd 변경후 -->
 				  FROM RESERVATION
@@ -174,7 +174,7 @@
 		   AND MERCHANT_UID = #{mid}
 		   AND TIMESTAMPDIFF
 		   	   (MINUTE, NOW()
-		   	    , STR_TO_DATE(CONCAT_WS(' ', DATE_FORMAT(DATE, '%Y-%m-%d'), S_TIME), '%Y-%m-%d %H:%i')) > #{refund}  -- 환불 가능 시간 설정
+		   	    , STR_TO_DATE(CONCAT_WS(' ', DATE_FORMAT(DATE, '%Y-%m-%d'), S_TIME), '%Y-%m-%d %H:%i')) > #{refundTime}  
 	</update>
 	
 	

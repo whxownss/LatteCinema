@@ -80,7 +80,7 @@ $(function(){
 	$(document).on("click", ".deleteSchBtn", function(){
 		debugger;	
 		var loIdx = $(this).parent().parent().find("[class^='lo']").attr('class').split(" ")[0].substr(2);
-		var ciIdx = $(this).parent().parent().find("[class^='ci']").attr('class').substr(2);
+		var ciIdx = $(this).parent().parent().find("[class^='ci']").attr('class').split(" ")[0].substr(2);
 		var schIdx = $(this).parent().parent().find(".schIdx").text();
 		var movType = $(this).parent().parent().find(".movType").text();
 		debugger;	
