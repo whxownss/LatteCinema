@@ -236,6 +236,7 @@ public class MemberController extends HttpServlet {
 		if(sPath.equals("/simplelogin.me")) {
 			System.out.println("/simplelogin.me/ controller");
 			memberService = new MemberService();
+			//임시 추가 정지된 회원인지 판단하기.
 			//이메일 중복체크?
 			int result = memberService.checkEmail(request);
 			System.out.println(result);
