@@ -122,8 +122,8 @@ function checkSubmit() {
 
 // 네이버 로그인 api
 var naverLogin = new naver.LoginWithNaverId({
-	clientId: "IeY1eBbgIyceSk3XnoEy",
-	callbackUrl: "http://localhost:8080/A/login.me",
+	clientId: "DDVbYF6ooJQNGc8kCVSP",
+	callbackUrl: "http://c2d2309t2.itwillbs.com/A/login.me",
 	isPopup: false, /* 팝업을 통한 연동처리 여부 */
     callbackHandle: true
 });
@@ -181,7 +181,7 @@ window.addEventListener('load', function () {
 //	298f4267dbcfe84b0fe1ea7009ad8d45 //서버
 // 44bd94c9c9fc31fcac5bd17dd86e5cba //로컬
 // 카카오로그인 api
-Kakao.init('44bd94c9c9fc31fcac5bd17dd86e5cba'); // 여기에 애플리케이션에서 발급받은 키를 넣어주세요.
+Kakao.init('ec65128c288f00e98cd846130e490ee5'); // 여기에 애플리케이션에서 발급받은 키를 넣어주세요.
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
 
     function kakaoLogin() {
