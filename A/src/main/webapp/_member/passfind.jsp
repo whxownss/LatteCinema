@@ -29,7 +29,7 @@
 					</ul>
 				</div>
 
-				<h2 class="tit mt40">간편찾기<!--간편찾기--></h2>
+				<h2 class="tit mt40"><!--간편찾기--></h2>
 			<form id="passFindForm" action="passfindPro.me" method="post" name="fr"  onsubmit="return checkSubmit()">
 				<div class="table-wrap">
 					<table class="board-form">

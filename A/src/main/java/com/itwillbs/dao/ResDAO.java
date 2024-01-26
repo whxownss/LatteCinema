@@ -26,7 +26,7 @@ public class ResDAO {
 	private SqlSessionFactory sqlSessionFactory = SqlMapClient.getSqlSession();
 	private ScheduledExecutorService scheduler = null;
 	private static ScheduledFuture<?> scheduledFuture = null;
-
+	
 	public List<LocationDTO> selectLocation() {
 		SqlSession session = sqlSessionFactory.openSession();
 		List<LocationDTO> locationList = session.selectList("Location.select");
@@ -118,41 +118,37 @@ public class ResDAO {
 		return deleteCnt > 0 ? "true" : "";
 	}
 
+	
+	// startPayTimer
 	public void startPayTimer() {
 		SqlSession session = sqlSessionFactory.openSession();
 		
 		AdmToolDTO admToolDTO = session.selectOne("Admin.getAdmTool");
-		int cancelTime = Integer.parseInt(admToolDTO.getCancelTime());
+		String _cancelTime = admToolDTO.getCancelTime();
+		int cancelTime = Integer.parseInt(_cancelTime);
 
 		String memId = null;
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("memId", memId);
-		map.put("cancelTime", admToolDTO.getCancelTime());
+		map.put("cancelTime", _cancelTime);
 		
 		scheduler = Executors.newScheduledThreadPool(1);
-		System.out.println("이부분 오기는하나?이부분 오기는하나?이부분 오기는하나?이부분 오기는하나?");
 		scheduledFuture = scheduler.schedule(() -> {
-			System.out.println("DB 작업 실행");
 			session.delete("Reservation.delete", map);
 			session.commit();
 			session.close();
-			System.out.println("DB 작업 종료");
 		}, cancelTime, TimeUnit.MINUTES);
-		System.out.println("널인지 확인1111 : " + scheduledFuture);
 		scheduler.shutdown();
 	}
 
+	// isTimeOver
 	public String isTimeOver(SeatDTO seatDTO) {
-		System.out.println("+++++++++++++++++++++");
 		SqlSession session = sqlSessionFactory.openSession();
+		
 		int seatCnt = session.selectOne("Reservation.selectTimeOverSeat", seatDTO);
 		session.close();
-		System.out.println("+++++++++++" + seatCnt + "++++++++++");
-		if(seatCnt > 0) {
-			System.out.println("작업취소부분작업취소부분작업취소부분작업취소부분");
-			System.out.println("널인지 확인22222 : " + scheduledFuture);
-			scheduledFuture.cancel(true);
-		}
+		
+		if(seatCnt > 0) scheduledFuture.cancel(true);
 		
 		return seatCnt > 0 ? "false" : "true";
 	}

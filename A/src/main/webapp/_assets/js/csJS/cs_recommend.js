@@ -62,7 +62,7 @@ $('.btn').on("click",function(){
 	                lastClickedReco.countRecoCell.text(lastClickedReco.countReco);
 	            }
 	        } else if(lastClickedReco && lastClickedReco.recommendIdx === currentClickedReco.recommendIdx){
-				alert('같은 곳 추천 그만해주세요!');
+				alert('중복 추천 불가');
 				return;
 			}
 			
