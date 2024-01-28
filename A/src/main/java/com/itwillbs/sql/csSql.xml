@@ -649,7 +649,7 @@
 		   AND LEFT(R.SCR_IDX,1) = S.SCR_IDX 
 		   AND R.MOV_TYPE = S.SCH_MOV_TYPE
 		 WHERE R.MEM_ID = #{memId} AND R.SUCCESS = 'TRUE'
-	</select>
+	</select>  
 	<select id="getResRefundList" resultType="ReservationDTO" parameterType="String">
 		SELECT R.MERCHANT_UID, R.PAY_TIME, R.TITLE, R.CINEMA, R.SCR_IDX,R.P1,R.P2,R.P3,R.SEAT,DATE_FORMAT(R.DATE,'%y-%m-%d') AS 'DATE',R.S_TIME,DATE_FORMAT(S.SCH_ETIME,'%H:%i') AS SCH_ETIME,R.PAID_AMOUNT,R.REFUND_TIME
 		  FROM RESERVATION R JOIN SCHEDULE S
