@@ -309,7 +309,14 @@
 	</select>
 	
 	
-	
+	<!-- TEST -->
+	<select id="example_call_proc" statementType="CALLABLE" parameterType="map" resultType="map">
+    {call proc_test(
+            #{NAME, mode=IN, jdbcType=VARCHAR},
+            #{IDX, mode=IN, jdbcType=INTEGER}
+        )
+    }
+</select>
 	
 	
 	

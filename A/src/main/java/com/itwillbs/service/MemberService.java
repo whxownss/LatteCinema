@@ -487,6 +487,12 @@ public class MemberService {
 		}
 		return storeRefundList;
 	}
+	
+	// TEST
+	public List<Map<String, String>> test(Map<String, String> param){
+		memberDAO = new MemberDAO();
+		return memberDAO.test(param);
+	}
 
 
 

@@ -31,6 +31,7 @@
         <typeAlias type="com.itwillbs.domain.PointDTO" alias="PointDTO"/>
         <typeAlias type="com.itwillbs.domain.AdmToolDTO" alias="AdmToolDTO"/>
     </typeAliases>
+    
 
 	<environments default="development">
 		<environment id="development">

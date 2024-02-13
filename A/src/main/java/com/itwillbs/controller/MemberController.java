@@ -881,6 +881,24 @@ public class MemberController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}//
 		
+		// TEST
+		if(sPath.equals("/test.me")) {
+			
+			Map<String, String> param = new HashMap<String, String>();
+			param.put("NAME", "ㅎㅇㅎㅇ");
+			param.put("IDX", "543");
+			
+			memberService = new MemberService();
+			List<Map<String, String>> responseData = memberService.test(param);
+			
+			String json = new Gson().toJson(responseData);
+
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("utf-8");
+		    
+		    response.getWriter().write(json);
+		}
+		
 		
 	}
 }

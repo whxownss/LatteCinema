@@ -292,6 +292,14 @@ public class MemberDAO {
 		}
 		return storeRefundList;
 	}
+	
+	// TEST
+	public List<Map<String, String>> test(Map<String, String> param){
+		SqlSession session = sqlSessionFactory.openSession();
+		return session.selectList("Member.example_call_proc", param);
+		
+		
+	}
 }
 
 

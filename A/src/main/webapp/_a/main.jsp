@@ -12,7 +12,8 @@
 ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.getAttribute("centerBoardList");
 %>	
 	
-		 
+	<button type="button" id="btnbtn">버튼</button>
+		  
 	 <section class="category-section">
 	  <div class="container" data-aos="fade-up">		     
 		<div class="section-header d-flex justify-content-between align-items-center mb-5">
