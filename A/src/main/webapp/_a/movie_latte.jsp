@@ -23,7 +23,7 @@
       <c:forEach var="recommend" items="${recommendList}" varStatus="status">
         <div class="col-lg">
           <div class="post-entry-1 lg">
-            <label for="vote-1"><img src="${recommend.poster }" class="img-fluid" style="width: 100%;"></label>
+            <label for="vote-1"><img src="${recommend.poster }" class="img-fluid" style="width: 220px; height: 315px;"></label>
             <div>
 	            <div>${recommend.movieName }</div> 
 	            <div> 추천 수: ${recommend.countReco }</div>

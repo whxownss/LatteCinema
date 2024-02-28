@@ -12,8 +12,6 @@
 ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.getAttribute("centerBoardList");
 %>	
 	
-	<button type="button" id="btnbtn">버튼</button>
-		  
 	 <section class="category-section">
 	  <div class="container" data-aos="fade-up">		     
 		<div class="section-header d-flex justify-content-between align-items-center mb-5">
@@ -53,7 +51,7 @@ ArrayList<CenterBoardDTO> centerBoardList = (ArrayList<CenterBoardDTO>)request.g
 			<div class="owl-carousel owl-theme">
 				<c:forEach var="movie" items="${posterNowList}" varStatus="status">
 		        <div class="item position-relative" id="wrap">
-		          <img src="<c:out value="${movie.poster}" />" >
+		          <img src="<c:out value="${movie.poster}" />" style="width:203px; height: 290px;" >
 		        <%--   <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">${status.index + 1}</em>  --%>
 		          <!-- <em class="fs-1 fst-italic text-white ps-2  position-absolute bottom-0 start-0">1</em> -->
 		          <!-- 순위 매일 변동인데, 매일 뿌릴 방법이 없음 -->

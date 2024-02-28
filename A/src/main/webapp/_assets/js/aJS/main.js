@@ -7,17 +7,6 @@ $(document).ready(function() {
 //      error : opts.error,
 //      success : opts.success
 	
-	$('#btnbtn').on('click', function(){
-		$.ajax({
-			method : 'GET',
-			url: 'test.me',
-			success: function(data){
-				debugger;
-			}
-		});
-	});
-	
-	
   var owl = $('.owl-carousel');
   owl.owlCarousel({
     loop: true,

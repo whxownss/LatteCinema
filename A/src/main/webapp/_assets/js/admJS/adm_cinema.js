@@ -107,4 +107,19 @@ $(function(){
 		})
 		.fail(function(){})
 	})
+	
+	// 위험
+	$(document).on("click", "#forWhat", function(){
+		debugger;
+		$.ajax({
+			type: "POST",
+			url: "insertAllSch.ad",
+			dataType: "text"
+		})
+		.done(function(data){
+			debugger;
+			
+		})
+		.fail(function(){})
+	})
 });

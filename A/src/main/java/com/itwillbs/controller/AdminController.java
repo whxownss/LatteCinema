@@ -397,5 +397,13 @@ public class AdminController extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 		    response.getWriter().write(result);
 		}
+		
+		// 위험
+		if(sPath.equals("/insertAllSch.ad")) {
+			AdminService adminService = new AdminService();
+			adminService.insertAllSchedule(request);
+			
+			response.sendRedirect("adm_cinema.ad");
+		}
 	}//doProcess()	
 }//클래스 끝

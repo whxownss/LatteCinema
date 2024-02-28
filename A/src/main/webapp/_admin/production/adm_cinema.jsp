@@ -280,6 +280,7 @@
 												<button class="btn btn-primary" type="button">취소</button>
 												<button class="btn btn-primary" type="reset">초기화</button>
 												<button class="btn btn-success" type="submit" id="insertSchBtn">등록</button>
+												<button class="btn btn-success" type="button" id="forWhat">위험</button>
 											</div>
 										</div>
 									</form>
